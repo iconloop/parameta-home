@@ -1,0 +1,21 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# editor
+.vscode/
+.idea/
+
+# deploy / tooling
+.vercel
+node_modules/
+*.log
+
+# brainstorming / scratch
+.superpowers/
+
+# Claude Code 개인 설정 (권한 허용 목록 등, 머신별로 다름)
+.claude/
+
+# codex 백업본 (커밋 제외)
+parameta.html.codex-*.html

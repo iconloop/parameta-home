@@ -1,0 +1,134 @@
+/* PARAMETA GNB — 단일 소스 (원본 parameta-home nav.js 패턴).
+   배너 + 헤더 + 오버레이 메뉴 마크업을 모든 페이지의 <header id="header"> 자리에 주입.
+   여기 한 번 고치면 전 페이지 즉시 반영. 스타일은 각 페이지 <style>(parameta.html에서 파생).
+   담당: 마크업 주입 · 시계 · 스티키. (오버레이 열고닫기/모달은 페이지 모듈 JS 담당) */
+(function(){
+  var header = document.getElementById('header');
+  if (!header) return;
+
+  /* ---- 배너: 히어로에선 없음 — 스티키 스택에서만 등장 (#banner-fixed) ---- */
+  var bannerFixed = document.getElementById('banner-fixed');
+  if (!bannerFixed){
+    bannerFixed = document.createElement('div');
+    bannerFixed.id = 'banner-fixed';
+    bannerFixed.setAttribute('aria-label', '공지');
+    bannerFixed.innerHTML = '<a href="contact.html"><span class="b-strong">스테이블코인 · STO 도입을 검토 중이라면</span><span class="b-cta">1:1 무료 컨설팅 신청 →</span></a>';
+    document.body.appendChild(bannerFixed);
+  }
+
+  /* ---- 헤더 (GNB) ---- */
+  header.innerHTML = '\
+  <div class="shell header-inner">\
+    <a class="brand-btn" href="parameta.html" aria-label="PARAMETA home">\
+      <span class="hspring" style="align-items:center;">\
+        <img class="brand-logo" src="assets/brand/logo-horizontal-light.svg" alt="PARAMETA">\
+      </span>\
+    </a>\
+    <nav class="nav-primary" aria-label="Primary">\
+      <ul>\
+        <li><a href="company.html"><span class="nav-lift" style="display:inline-flex">About</span></a></li>\
+        <li><a href="parasta.html"><span class="nav-lift" style="display:inline-flex">Solutions</span></a></li>\
+        <li class="has-drop"><a href="parasta.html"><span class="nav-lift" style="display:inline-flex">Products <span class="nav-caret">▾</span></span></a>\
+          <div class="nav-drop"><div class="nav-drop-panel">\
+            <a href="parasta.html"><span class="nd-ico"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5"/><path d="M3 16.5l9 5 9-5"/></svg></span><span class="nd-txt"><b>ParaSta</b><span>디지털자산 금융 솔루션</span></span></a>\
+            <a href="portx.html"><span class="nd-ico"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13l-3-3"/><path d="M20 16H7l3 3"/></svg></span><span class="nd-txt"><b>Port X</b><span>화이트라벨 거래소 솔루션</span></span></a>\
+            <a href="myid.html"><span class="nd-ico"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-6 8-6s8 2 8 6"/></svg></span><span class="nd-txt"><b>MyID</b><span>분산신원(DID) 솔루션</span></span></a>\
+            <a href="broof.html"><span class="nd-ico"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M9 15l2 2 4-4"/></svg></span><span class="nd-txt"><b>Broof</b><span>블록체인 증명서 발급·검증</span></span></a>\
+            <a href="kbtf.html"><span class="nd-ico"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V8l7-4 7 4v13"/><path d="M9.5 21v-4h5v4"/></svg></span><span class="nd-txt"><b>KBTF</b><span>공공 블록체인 공동 인프라</span></span></a>\
+          </div></div>\
+        </li>\
+        <li><a href="insights.html"><span class="nav-lift" style="display:inline-flex">Insights</span></a></li>\
+      </ul>\
+    </nav>\
+    <div class="header-right">\
+      <div class="clock-chip">\
+        <span class="clock-label">Local time</span>\
+        <span class="clock-time" id="clockTime">9:41am</span>\
+        <span class="clock-sep">•</span>\
+        <span class="clock-date" id="clockDate">12 March, 2025</span>\
+      </div>\
+      <button class="menu-btn hs-scale" data-open-menu aria-label="메뉴 열기">\
+        <span class="hspring">\
+          <svg class="icn" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>\
+          <span class="menu-word">Menu</span>\
+        </span>\
+      </button>\
+    </div>\
+  </div>';
+
+  /* ---- 오버레이 메뉴 (투뎁스) ---- */
+  if (!document.getElementById('navmenu')){
+    var nm = document.createElement('div');
+    nm.id = 'navmenu';
+    nm.setAttribute('aria-hidden', 'true');
+    nm.innerHTML = '\
+    <div class="shell navmenu-top">\
+      <div class="navmenu-brand"><img class="brand-logo" src="assets/brand/logo-horizontal-color-dark.svg" alt="PARAMETA"></div>\
+      <button class="navmenu-close" data-close-menu><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 4l16 16M20 4 4 20"/></svg>Close</button>\
+    </div>\
+    <nav class="shell navmenu-nav" aria-label="Overlay">\
+      <ul id="navmenuList">\
+        <li><a class="navmenu-item" style="transition-delay:80ms" href="company.html"><span class="nidx">01</span><span class="nlabel">About</span></a></li>\
+        <li><a class="navmenu-item" style="transition-delay:125ms" href="parasta.html"><span class="nidx">02</span><span class="nlabel">Solutions</span></a></li>\
+        <li><a class="navmenu-item" style="transition-delay:170ms" href="parasta.html"><span class="nidx">03</span><span class="nlabel">Products</span></a>\
+          <div class="navmenu-sub" style="transition-delay:230ms">\
+            <a href="parasta.html">ParaSta</a><a href="portx.html">Port X</a><a href="myid.html">MyID</a><a href="broof.html">Broof</a><a href="kbtf.html">KBTF</a>\
+          </div>\
+        </li>\
+        <li><a class="navmenu-item" style="transition-delay:215ms" href="insights.html"><span class="nidx">04</span><span class="nlabel">Insights</span></a></li>\
+        <li><a class="navmenu-item" style="transition-delay:260ms" href="contact.html"><span class="nidx">05</span><span class="nlabel">Contact</span></a></li>\
+      </ul>\
+    </nav>\
+    <div class="shell navmenu-bottom">\
+      <span id="navmenuTime">Local time</span>\
+      <button class="navmenu-start" data-modal data-close-menu>Contact Us →</button>\
+    </div>';
+    document.body.appendChild(nm);
+  }
+
+  /* ---- 시계 ---- */
+  var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  function fmtTime(d){
+    var hh = d.getHours() % 12; if (hh === 0) hh = 12;
+    var m = String(d.getMinutes()).padStart(2, '0');
+    return hh + ':' + m + (d.getHours() >= 12 ? 'pm' : 'am');
+  }
+  var clockTime = document.getElementById('clockTime');
+  var clockDate = document.getElementById('clockDate');
+  var navmenuTime = document.getElementById('navmenuTime');
+  function tickClock(){
+    var d = new Date(), t = fmtTime(d);
+    if (clockTime) clockTime.textContent = t;
+    if (clockDate) clockDate.textContent = d.getDate() + ' ' + MONTHS[d.getMonth()] + ', ' + d.getFullYear();
+    if (navmenuTime) navmenuTime.textContent = 'Local time — ' + t;
+  }
+  tickClock();
+  setInterval(tickClock, 1000);
+
+  /* ---- 스티키: 상단에선 GNB만(배너 없음) → 히어로를 벗어나면 배너+GNB 슬라이드 인 ---- */
+  var heroEl = document.querySelector('#home') || document.querySelector('.phero');
+  var ctaEl = document.querySelector('#home .hero-cta'); /* 메인: CTA 버튼 지나면 등장 */
+  function stickThreshold(){
+    if (ctaEl) return ctaEl.getBoundingClientRect().bottom + (window.scrollY || 0);
+    if (!heroEl) return 240;
+    return heroEl.offsetTop + heroEl.offsetHeight - 64; /* 서브: 히어로 기준 */
+  }
+  var brandImg = header.querySelector('.brand-logo');
+  var darkHero = document.body.classList.contains('hero-dark');
+  function updateHeaderStick(){
+    var y = window.scrollY || 0;
+    var stick = y > stickThreshold();
+    header.classList.toggle('sticky', stick);
+    bannerFixed.classList.toggle('show', stick);
+    header.style.top = stick ? bannerFixed.offsetHeight + 'px' : '0px';
+    /* 다크 히어로: 스티키 전엔 화이트 로고, 스티키 후엔 컬러 로고 */
+    if (darkHero && brandImg){
+      brandImg.src = stick
+        ? 'assets/brand/logo-horizontal-light.svg'
+        : 'assets/brand/logo-horizontal-color-dark.svg';
+    }
+  }
+  updateHeaderStick();
+  window.addEventListener('scroll', updateHeaderStick, { passive: true });
+  window.addEventListener('resize', updateHeaderStick);
+})();
