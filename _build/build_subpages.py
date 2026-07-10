@@ -85,21 +85,66 @@ body.hero-dark .phero-visual{ grid-column:7 / 13; display:block; align-self:stre
   .whatis-grid{ grid-template-columns:repeat(12,1fr); column-gap:var(--grid-gap) }
   .whatis-grid .ps-flow{ grid-column:1 / 7 }
   .whatis-grid .whatis-text{ grid-column:8 / 13 } }
-.whatis-text .sec-h2{ margin-top:1rem }
+.whatis-text .phero-lead{ font-size:var(--text-18) }
+.whatis-text .sec-h2{ margin-top:1rem; margin-bottom:2rem; font-size:var(--text-32) }
+@media (min-width:640px){ .whatis-text .sec-h2{ font-size:var(--text-48) } }
 /* 라이트 카드 톤으로 감싸고 보라 코어만 포인트 */
-.ps-flow{ display:flex; flex-direction:column; gap:1rem; border-radius:var(--radius-card);
-  background:rgba(var(--surface-rgb),.5); padding:2rem; text-align:center }
-.ps-flow-band{ border-radius:var(--radius-card-sm); padding:1.25rem 1.5rem;
-  background:var(--white); border:1px solid var(--line) }
+.ps-flow{ display:flex; flex-direction:column; align-items:center; gap:0; border-radius:var(--radius-card);
+  background-color:rgba(var(--ink-rgb),.06);
+  background-image:radial-gradient(rgba(var(--ink-rgb),.06) 1px, transparent 1.5px);
+  background-size:20px 20px; padding:4rem 2rem; text-align:center; --rvl-y:0px }
+.ps-flow-band{ position:relative; width:82%; border-radius:var(--radius-card-sm); padding:1.75rem 1.5rem;
+  background:var(--white); border:1px solid rgba(var(--ink-rgb),.22);
+  box-shadow:0 8px 24px rgba(var(--ink-rgb),.06);
+  opacity:0; transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s cubic-bezier(.2,.8,.2,1) }
+.ps-flow-core{ width:92% }
+.ps-flow .chip{ border-width:1px; border-color:rgba(var(--ink-rgb),.22) }
+/* 연결부 노드: 흰 채움 + 연한 보라 링 (선이 카드에 닿는 지점) */
+.ps-flow-band::before,.ps-flow-band::after{ content:''; position:absolute; left:50%; z-index:2;
+  width:6px; height:6px; border-radius:50%; background:var(--white);
+  border:2px solid rgba(var(--purple-300-rgb),.85); transform:translateX(-50%); display:none }
+.ps-flow-band::before{ top:-5px }
+.ps-flow-band::after{ bottom:-5px }
+.ps-flow-band:nth-child(3)::before,.ps-flow-band:nth-child(3)::after{ display:block }
+.ps-core-head{ display:flex; align-items:center; justify-content:flex-start; gap:.875rem; text-align:left; margin-bottom:1rem }
+.ps-flow-core .ps-core-head .core-sub{ margin:.125rem 0 0 }
+.ps-flow-logo{ display:block; width:40px; height:40px; flex-shrink:0 }
+/* 태그: 알약 대신 그레이 상자 안에 텍스트를 닷으로 연결 */
+.ps-tags{ display:flex; width:100%; box-sizing:border-box; flex-wrap:wrap; justify-content:center; align-items:center;
+  background:rgba(var(--ink-rgb),.05); border-radius:var(--radius-control); padding:.75rem 1.125rem }
+.ps-tag{ display:inline-flex; align-items:center; font-size:var(--text-16); font-weight:500; color:rgba(var(--ink-rgb),.7) }
+.ps-tag:not(:first-child)::before{ content:''; display:inline-block; width:4px; height:4px; border-radius:50%;
+  background:rgba(var(--ink-rgb),.3); margin:0 .5rem }
+/* 리빌: 밴드 위→아래 순차 등장 후 커넥터가 그어짐 */
+.ps-flow.is-in .ps-flow-band{ opacity:1; animation:psBandIn .7s cubic-bezier(.16,1,.3,1) backwards }
+.ps-flow.is-in .ps-flow-band:nth-child(3){ animation-delay:120ms }
+@keyframes psBandIn{ from{ opacity:0; transform:translateY(14px) } }
+/* 외곽 카드: 선이 닿는 순간 호버 크기(1.03)만큼 살짝 커졌다 원래 크기로 (호버와 동일 이징) */
+.ps-flow.is-in .ps-flow-band:nth-child(1){
+  animation:psBandIn .7s cubic-bezier(.16,1,.3,1) 0ms backwards,
+            psBump .9s cubic-bezier(.37,0,.63,1) 1s }
+.ps-flow.is-in .ps-flow-band:nth-child(5){
+  animation:psBandIn .7s cubic-bezier(.16,1,.3,1) 240ms backwards,
+            psBump .9s cubic-bezier(.37,0,.63,1) 1s }
+@keyframes psBump{ 0%{ transform:scale(1) } 45%{ transform:scale(1.025) } 100%{ transform:scale(1) } }
+.ps-flow.is-in .ps-flow-band:hover{ transform:scale(1.03); box-shadow:0 16px 40px rgba(var(--ink-rgb),.1) }
 .ps-flow .chip-row{ justify-content:center }
-.ps-flow-band .lbl{ font-size:var(--text-14); text-transform:uppercase; letter-spacing:.025em;
-  color:rgba(var(--ink-rgb),.45); margin-bottom:.875rem }
-.ps-flow-core{ border-color:transparent; background:linear-gradient(135deg, var(--purple-500), var(--purple-600));
-  color:var(--white); box-shadow:0 12px 32px rgba(var(--accent-rgb),.25) }
-.ps-flow-core .core-title{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em }
-.ps-flow-core .core-sub{ font-size:var(--text-14); color:rgba(var(--white-rgb),.7); margin:.25rem 0 1rem }
-.ps-flow-core .chip{ border-color:rgba(var(--white-rgb),.3); color:var(--white); background:rgba(var(--white-rgb),.08) }
-.ps-flow-arrow{ display:flex; justify-content:center; color:rgba(var(--ink-rgb),.3); font-size:var(--text-16); line-height:1 }
+.ps-flow-band .lbl{ font-size:var(--text-20); font-weight:600; text-transform:uppercase; letter-spacing:.025em;
+  color:rgba(var(--ink-rgb),.8); margin-bottom:.875rem }
+/* 외곽 카드 헤더: 아이콘 + 라벨 좌측정렬 (ParaSta 카드와 동일 결) */
+.ps-band-head{ display:flex; align-items:center; gap:.5rem; text-align:left; margin-bottom:.625rem }
+.ps-band-head .lbl{ margin-bottom:0 }
+.ps-band-icon{ display:inline-flex; flex-shrink:0; width:26px; height:26px; align-items:center; justify-content:center;
+  color:rgba(var(--ink-rgb),.75) }
+.ps-band-icon svg{ width:100%; height:100% }
+.ps-flow-core .core-title{ font-size:var(--text-24); font-weight:600; letter-spacing:-.01em; color:var(--ink) }
+.ps-flow-core .core-sub{ font-size:var(--text-16); color:rgba(var(--ink-rgb),.55); margin:.25rem 0 1rem }
+.ps-flow-link{ width:0; height:2.5rem; margin:0 auto; border-left:2px dashed rgba(var(--purple-300-rgb),.85);
+  transform:scaleY(0); transition:transform .45s cubic-bezier(.16,1,.3,1) }
+/* 파라스타(가운데)에서 위·아래로 동시에 뻗어나감 */
+.ps-flow-link:nth-child(2){ transform-origin:bottom }
+.ps-flow-link:nth-child(4){ transform-origin:top }
+.ps-flow.is-in .ps-flow-link{ transform:scaleY(1); transition-delay:420ms }
 /* ============ SUBPAGE UTILITIES ============ */
 .sec{ padding:5rem 1.25rem }
 @media (min-width:640px){ .sec{ padding-left:2rem; padding-right:2rem } }
@@ -756,19 +801,30 @@ PAGES['parasta.html'] = dict(
   <div class="whatis-grid">
     <div class="ps-flow rvl">
       <div class="ps-flow-band">
-        <div class="lbl">디지털 자산</div>
-        <div class="chip-row"><span class="chip">스테이블코인</span><span class="chip">은행 예금토큰</span><span class="chip">토큰증권</span></div>
+        <div class="ps-band-head">
+          <span class="ps-band-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.66 3.13 3 7 3s7-1.34 7-3"/><path d="M5 12v6c0 1.66 3.13 3 7 3s7-1.34 7-3v-6"/></svg></span>
+          <div class="lbl">디지털 자산</div>
+        </div>
+        <div class="ps-tags"><span class="ps-tag">스테이블코인</span><span class="ps-tag">은행 예금토큰</span><span class="ps-tag">토큰증권</span></div>
       </div>
-      <div class="ps-flow-arrow" aria-hidden="true">↕</div>
+      <div class="ps-flow-link" aria-hidden="true"></div>
       <div class="ps-flow-band ps-flow-core">
-        <div class="core-title">ParaSta</div>
-        <div class="core-sub">발행 이후 운영을 하나로</div>
-        <div class="chip-row"><span class="chip">발행</span><span class="chip">지갑</span><span class="chip">온체인 KYC</span><span class="chip">오케스트레이션</span><span class="chip">통합관제</span></div>
+        <div class="ps-core-head">
+          <img class="ps-flow-logo" src="assets/brand/parasta-logo.svg" alt="ParaSta" width="40" height="40">
+          <div class="ps-core-text">
+            <div class="core-title">ParaSta</div>
+            <div class="core-sub">발행부터 운영까지 ParaSta 하나로</div>
+          </div>
+        </div>
+        <div class="ps-tags"><span class="ps-tag">토큰발행</span><span class="ps-tag">가상자산 지갑</span><span class="ps-tag">온체인 KYC</span><span class="ps-tag">오케스트레이션</span><span class="ps-tag">어드민</span></div>
       </div>
-      <div class="ps-flow-arrow" aria-hidden="true">↕</div>
+      <div class="ps-flow-link" aria-hidden="true"></div>
       <div class="ps-flow-band">
-        <div class="lbl">은행 및 결제망 연결</div>
-        <div class="chip-row"><span class="chip">은행 예금원장</span><span class="chip">펌뱅킹</span><span class="chip">카드 · PG</span><span class="chip">은행간 정산망</span></div>
+        <div class="ps-band-head">
+          <span class="ps-band-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-5 9 5"/><path d="M4 9.5V18"/><path d="M20 9.5V18"/><path d="M8 9.5V18"/><path d="M12 9.5V18"/><path d="M16 9.5V18"/><path d="M2.5 18h19"/></svg></span>
+          <div class="lbl">은행 및 결제망 연결</div>
+        </div>
+        <div class="ps-tags"><span class="ps-tag">은행 예금원장</span><span class="ps-tag">펌뱅킹</span><span class="ps-tag">결제 인프라</span><span class="ps-tag">은행간 정산망</span></div>
       </div>
     </div>
     <div class="whatis-text rvl" style="--rvl-delay:120ms">
