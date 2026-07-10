@@ -530,9 +530,9 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 @keyframes caretBlink{ 50%{ opacity:0 } }
 .pc-panel{ position:fixed; top:0; right:0; bottom:0; z-index:105; width:26rem;
   display:flex; flex-direction:column; overflow:hidden; background:var(--white);
-  border-left:1px solid var(--line); box-shadow:-24px 0 64px rgba(var(--ink-rgb),.12);
+  border-left:1px solid var(--line);
   transform:translateX(100%); transition:transform .45s cubic-bezier(.22,1,.36,1) }
-.pc-panel.open{ transform:translateX(0) }
+.pc-panel.open{ transform:translateX(0); box-shadow:-24px 0 64px rgba(var(--ink-rgb),.12) }
 html{ transition:padding-right .45s cubic-bezier(.22,1,.36,1) }
 html.chat-open{ padding-right:26rem }
 html.chat-open #header{ right:26rem }
@@ -848,49 +848,49 @@ body.hero-dark .phero-visual{ grid-column:7 / 13; display:block; align-self:stre
 /* ============ CONTENT-PORT ADDITIONS (우리 토큰 유지) ============ */
 /* 비교표 */
 /* Why ParaSta: 타이틀셋(4칼럼) 좌 / 표(8칼럼) 우 */
-.why-grid{ display:grid; grid-template-columns:1fr; gap:2.5rem; align-items:start }
-@media (min-width:900px){ .why-grid{ grid-template-columns:repeat(12,1fr); column-gap:var(--grid-gap); align-items:start }
-  .why-head{ grid-column:1 / 5 } .why-table{ grid-column:5 / 13; min-width:0 } }
+.why-grid{ display:flex; flex-direction:column; gap:2.5rem }
+.why-table{ min-width:0 }
 .why-head .sec-h2{ margin-top:1rem; margin-bottom:1.5rem }
 .why-head .phero-lead{ font-size:var(--text-18) }
 .mkv{ width:.8em; height:.8em; display:inline-block; vertical-align:-.1em }
 .why-legend{ display:inline-flex; flex-wrap:wrap; gap:.75rem 1.25rem; margin-top:1.75rem;
   background:rgba(var(--ink-rgb),.05); border-radius:var(--radius-control); padding:.75rem 1.125rem;
   font-size:var(--text-14); color:rgba(var(--ink-rgb),.55) }
-.why-legend .lg{ display:inline-flex; align-items:center; gap:.25rem }
+.why-legend .lg{ display:inline-flex; align-items:center; gap:.35rem }
+.why-legend .mkv{ width:16px; height:16px }
 .why-legend .mk{ display:inline-flex; margin-right:0 }
 .why-legend .mk.on{ color:var(--accent) }
-.why-legend .mk.mid{ color:rgba(var(--ink-rgb),.35) }
+.why-legend .mk.mid{ color:rgba(var(--ink-rgb),.45) }
 .why-legend .mk.off{ color:rgba(var(--ink-rgb),.3) }
 .cmp-wrap{ overflow-x:auto; -webkit-overflow-scrolling:touch }
-/* 표는 블록 페이드 대신 행별 순차 등장으로 리빌 */
-.cmp-wrap.rvl{ opacity:1; transform:none }
-table.cmp tbody tr{ opacity:0; transform:translateY(12px);
-  transition:opacity .5s cubic-bezier(.16,1,.3,1), transform .5s cubic-bezier(.16,1,.3,1) }
-.cmp-wrap.is-in table.cmp tbody tr{ opacity:1; transform:none }
-.cmp-wrap.is-in table.cmp tbody tr:nth-child(1){ transition-delay:.05s }
-.cmp-wrap.is-in table.cmp tbody tr:nth-child(2){ transition-delay:.12s }
-.cmp-wrap.is-in table.cmp tbody tr:nth-child(3){ transition-delay:.19s }
-.cmp-wrap.is-in table.cmp tbody tr:nth-child(4){ transition-delay:.26s }
-.cmp-wrap.is-in table.cmp tbody tr:nth-child(5){ transition-delay:.33s }
+/* 데스크톱: 호버 확대가 스크롤바를 만들지 않도록 오버플로우 개방 */
+@media (min-width:1024px){ .why-table .cmp-wrap{ overflow:visible } }
+/* 표는 전체가 하나의 블록으로 리빌 (.cmp-wrap.rvl → 기본 .rvl 동작) */
 .cmp-legend{ margin-bottom:1rem; font-size:var(--text-14); color:rgba(var(--ink-rgb),.5) }
 table.cmp{ width:100%; min-width:46rem; border-collapse:separate; border-spacing:0; font-size:var(--text-16) }
-table.cmp th, table.cmp td{ padding:1rem 1.125rem; text-align:left; vertical-align:top; border-bottom:1px solid var(--line) }
-table.cmp thead th{ font-weight:600; font-size:var(--text-16); text-transform:uppercase; letter-spacing:.03em;
-  text-align:center; color:rgba(var(--ink-rgb),.55); border-bottom:1px solid rgba(var(--ink-rgb),.18) }
+table.cmp th, table.cmp td{ padding:1.25rem 1.125rem; text-align:left; vertical-align:top; border-bottom:1px solid var(--line) }
+table.cmp thead th{ font-weight:600; font-size:var(--text-18); letter-spacing:.01em; padding-top:1.75rem;
+  text-align:center; color:rgba(var(--ink-rgb),.55); border-bottom:1px solid var(--line) }
 table.cmp thead th.hl{ color:var(--accent) }
-table.cmp thead th.hl, table.cmp td.hl{ background:rgba(var(--purple-300-rgb),.2) }
-table.cmp thead th.hl{ border-top-left-radius:var(--radius-card-sm); border-top-right-radius:var(--radius-card-sm) }
-table.cmp tbody tr:last-child td.hl{ border-bottom-left-radius:var(--radius-card-sm); border-bottom-right-radius:var(--radius-card-sm) }
-table.cmp tbody tr:last-child td, table.cmp tbody tr:last-child th{ border-bottom:none }
-table.cmp tbody th{ font-weight:500; color:rgba(var(--ink-rgb),.65); white-space:nowrap; padding-left:0; vertical-align:middle }
+table.cmp thead th.hl, table.cmp td.hl{ background:color-mix(in srgb, var(--purple-300) 22%, var(--white)) }
+table.cmp thead th.hl, table.cmp td.hl{ border-bottom-color:rgba(var(--ink-rgb),.16) }
+table.cmp thead th.hl{ border-top-left-radius:var(--radius-control); border-top-right-radius:var(--radius-control) }
+table.cmp tbody tr:last-child td.hl{ border-bottom-left-radius:var(--radius-control); border-bottom-right-radius:var(--radius-control) }
+table.cmp tbody tr:last-child td, table.cmp tbody tr:last-child th{ border-bottom:none; padding-bottom:1.75rem }
+table.cmp tbody th{ font-weight:600; font-size:var(--text-18); color:rgba(var(--ink-rgb),.65); white-space:nowrap; padding-left:0; vertical-align:middle }
 table.cmp td{ color:rgba(var(--ink-rgb),.7); line-height:1.5; text-align:center; vertical-align:middle }
-table.cmp td .mk{ display:block; margin:0 auto .5rem }
+table.cmp td .mk{ display:block; margin:0 auto .125rem }
+table.cmp td .mkv{ width:22px; height:22px }
+table.cmp td .mkv circle{ stroke-width:.8 }
+.why-legend .mkv circle{ stroke-width:1.4 }
 table.cmp td .cell-txt{ display:block; font-size:var(--text-14) }
 table.cmp td.hl{ font-weight:500; color:var(--ink) }
+/* ParaSta 열: 호버 시 열 전체가 버튼처럼 함께 살짝 커짐(그림자 없음) — JS가 hl-hover 동기화 */
+table.cmp th.hl, table.cmp td.hl{ position:relative; transition:transform .4s cubic-bezier(.2,.8,.2,1) }
+table.cmp th.hl.hl-hover, table.cmp td.hl.hl-hover{ transform:scale(1.03); z-index:1 }
 table.cmp .mk{ font-weight:700; margin-right:.375rem }
 table.cmp .mk.on{ color:var(--accent) }
-table.cmp .mk.mid{ color:rgba(var(--ink-rgb),.35) }
+table.cmp .mk.mid{ color:rgba(var(--ink-rgb),.45) }
 table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 /* 간단 가로 바 */
 .barc{ display:flex; flex-direction:column; gap:1rem; max-width:46rem }
@@ -1131,6 +1131,23 @@ const lineObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.2 });
 document.querySelectorAll('[data-line-reveal]').forEach(el => { initLineReveal(el); lineObserver.observe(el); });
+
+/* ParaSta 비교표 강조열: 열 전체가 하나의 블록처럼 커지도록 */
+const hlCells = document.querySelectorAll('.why-table table.cmp .hl');
+function setHlOrigins(){
+  if(!hlCells.length) return;
+  let top = Infinity, bottom = -Infinity;
+  hlCells.forEach(c => { const r = c.getBoundingClientRect(); top = Math.min(top, r.top); bottom = Math.max(bottom, r.bottom); });
+  const centerY = (top + bottom) / 2;
+  hlCells.forEach(c => { c.style.transformOrigin = 'center ' + (centerY - c.getBoundingClientRect().top) + 'px'; });
+}
+setHlOrigins();
+addEventListener('resize', setHlOrigins);
+addEventListener('load', setHlOrigins);
+hlCells.forEach(c => {
+  c.addEventListener('mouseenter', () => hlCells.forEach(x => x.classList.add('hl-hover')));
+  c.addEventListener('mouseleave', () => hlCells.forEach(x => x.classList.remove('hl-hover')));
+});
 
 /* page hero h1 reveals immediately */
 const pheroH1 = document.querySelector('.phero-h1');

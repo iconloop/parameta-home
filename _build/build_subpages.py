@@ -183,49 +183,49 @@ body.hero-dark .phero-visual{ grid-column:7 / 13; display:block; align-self:stre
 /* ============ CONTENT-PORT ADDITIONS (우리 토큰 유지) ============ */
 /* 비교표 */
 /* Why ParaSta: 타이틀셋(4칼럼) 좌 / 표(8칼럼) 우 */
-.why-grid{ display:grid; grid-template-columns:1fr; gap:2.5rem; align-items:start }
-@media (min-width:900px){ .why-grid{ grid-template-columns:repeat(12,1fr); column-gap:var(--grid-gap); align-items:start }
-  .why-head{ grid-column:1 / 5 } .why-table{ grid-column:5 / 13; min-width:0 } }
+.why-grid{ display:flex; flex-direction:column; gap:2.5rem }
+.why-table{ min-width:0 }
 .why-head .sec-h2{ margin-top:1rem; margin-bottom:1.5rem }
 .why-head .phero-lead{ font-size:var(--text-18) }
 .mkv{ width:.8em; height:.8em; display:inline-block; vertical-align:-.1em }
 .why-legend{ display:inline-flex; flex-wrap:wrap; gap:.75rem 1.25rem; margin-top:1.75rem;
   background:rgba(var(--ink-rgb),.05); border-radius:var(--radius-control); padding:.75rem 1.125rem;
   font-size:var(--text-14); color:rgba(var(--ink-rgb),.55) }
-.why-legend .lg{ display:inline-flex; align-items:center; gap:.25rem }
+.why-legend .lg{ display:inline-flex; align-items:center; gap:.35rem }
+.why-legend .mkv{ width:16px; height:16px }
 .why-legend .mk{ display:inline-flex; margin-right:0 }
 .why-legend .mk.on{ color:var(--accent) }
-.why-legend .mk.mid{ color:rgba(var(--ink-rgb),.35) }
+.why-legend .mk.mid{ color:rgba(var(--ink-rgb),.45) }
 .why-legend .mk.off{ color:rgba(var(--ink-rgb),.3) }
 .cmp-wrap{ overflow-x:auto; -webkit-overflow-scrolling:touch }
-/* 표는 블록 페이드 대신 행별 순차 등장으로 리빌 */
-.cmp-wrap.rvl{ opacity:1; transform:none }
-table.cmp tbody tr{ opacity:0; transform:translateY(12px);
-  transition:opacity .5s cubic-bezier(.16,1,.3,1), transform .5s cubic-bezier(.16,1,.3,1) }
-.cmp-wrap.is-in table.cmp tbody tr{ opacity:1; transform:none }
-.cmp-wrap.is-in table.cmp tbody tr:nth-child(1){ transition-delay:.05s }
-.cmp-wrap.is-in table.cmp tbody tr:nth-child(2){ transition-delay:.12s }
-.cmp-wrap.is-in table.cmp tbody tr:nth-child(3){ transition-delay:.19s }
-.cmp-wrap.is-in table.cmp tbody tr:nth-child(4){ transition-delay:.26s }
-.cmp-wrap.is-in table.cmp tbody tr:nth-child(5){ transition-delay:.33s }
+/* 데스크톱: 호버 확대가 스크롤바를 만들지 않도록 오버플로우 개방 */
+@media (min-width:1024px){ .why-table .cmp-wrap{ overflow:visible } }
+/* 표는 전체가 하나의 블록으로 리빌 (.cmp-wrap.rvl → 기본 .rvl 동작) */
 .cmp-legend{ margin-bottom:1rem; font-size:var(--text-14); color:rgba(var(--ink-rgb),.5) }
 table.cmp{ width:100%; min-width:46rem; border-collapse:separate; border-spacing:0; font-size:var(--text-16) }
-table.cmp th, table.cmp td{ padding:1rem 1.125rem; text-align:left; vertical-align:top; border-bottom:1px solid var(--line) }
-table.cmp thead th{ font-weight:600; font-size:var(--text-16); text-transform:uppercase; letter-spacing:.03em;
-  text-align:center; color:rgba(var(--ink-rgb),.55); border-bottom:1px solid rgba(var(--ink-rgb),.18) }
+table.cmp th, table.cmp td{ padding:1.25rem 1.125rem; text-align:left; vertical-align:top; border-bottom:1px solid var(--line) }
+table.cmp thead th{ font-weight:600; font-size:var(--text-18); letter-spacing:.01em; padding-top:1.75rem;
+  text-align:center; color:rgba(var(--ink-rgb),.55); border-bottom:1px solid var(--line) }
 table.cmp thead th.hl{ color:var(--accent) }
-table.cmp thead th.hl, table.cmp td.hl{ background:rgba(var(--purple-300-rgb),.2) }
-table.cmp thead th.hl{ border-top-left-radius:var(--radius-card-sm); border-top-right-radius:var(--radius-card-sm) }
-table.cmp tbody tr:last-child td.hl{ border-bottom-left-radius:var(--radius-card-sm); border-bottom-right-radius:var(--radius-card-sm) }
-table.cmp tbody tr:last-child td, table.cmp tbody tr:last-child th{ border-bottom:none }
-table.cmp tbody th{ font-weight:500; color:rgba(var(--ink-rgb),.65); white-space:nowrap; padding-left:0; vertical-align:middle }
+table.cmp thead th.hl, table.cmp td.hl{ background:color-mix(in srgb, var(--purple-300) 22%, var(--white)) }
+table.cmp thead th.hl, table.cmp td.hl{ border-bottom-color:rgba(var(--ink-rgb),.16) }
+table.cmp thead th.hl{ border-top-left-radius:var(--radius-control); border-top-right-radius:var(--radius-control) }
+table.cmp tbody tr:last-child td.hl{ border-bottom-left-radius:var(--radius-control); border-bottom-right-radius:var(--radius-control) }
+table.cmp tbody tr:last-child td, table.cmp tbody tr:last-child th{ border-bottom:none; padding-bottom:1.75rem }
+table.cmp tbody th{ font-weight:600; font-size:var(--text-18); color:rgba(var(--ink-rgb),.65); white-space:nowrap; padding-left:0; vertical-align:middle }
 table.cmp td{ color:rgba(var(--ink-rgb),.7); line-height:1.5; text-align:center; vertical-align:middle }
-table.cmp td .mk{ display:block; margin:0 auto .5rem }
+table.cmp td .mk{ display:block; margin:0 auto .125rem }
+table.cmp td .mkv{ width:22px; height:22px }
+table.cmp td .mkv circle{ stroke-width:.8 }
+.why-legend .mkv circle{ stroke-width:1.4 }
 table.cmp td .cell-txt{ display:block; font-size:var(--text-14) }
 table.cmp td.hl{ font-weight:500; color:var(--ink) }
+/* ParaSta 열: 호버 시 열 전체가 버튼처럼 함께 살짝 커짐(그림자 없음) — JS가 hl-hover 동기화 */
+table.cmp th.hl, table.cmp td.hl{ position:relative; transition:transform .4s cubic-bezier(.2,.8,.2,1) }
+table.cmp th.hl.hl-hover, table.cmp td.hl.hl-hover{ transform:scale(1.03); z-index:1 }
 table.cmp .mk{ font-weight:700; margin-right:.375rem }
 table.cmp .mk.on{ color:var(--accent) }
-table.cmp .mk.mid{ color:rgba(var(--ink-rgb),.35) }
+table.cmp .mk.mid{ color:rgba(var(--ink-rgb),.45) }
 table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 /* 간단 가로 바 */
 .barc{ display:flex; flex-direction:column; gap:1rem; max-width:46rem }
@@ -417,6 +417,23 @@ const lineObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.2 });
 document.querySelectorAll('[data-line-reveal]').forEach(el => { initLineReveal(el); lineObserver.observe(el); });
 
+/* ParaSta 비교표 강조열: 열 전체가 하나의 블록처럼 커지도록 */
+const hlCells = document.querySelectorAll('.why-table table.cmp .hl');
+function setHlOrigins(){
+  if(!hlCells.length) return;
+  let top = Infinity, bottom = -Infinity;
+  hlCells.forEach(c => { const r = c.getBoundingClientRect(); top = Math.min(top, r.top); bottom = Math.max(bottom, r.bottom); });
+  const centerY = (top + bottom) / 2;
+  hlCells.forEach(c => { c.style.transformOrigin = 'center ' + (centerY - c.getBoundingClientRect().top) + 'px'; });
+}
+setHlOrigins();
+addEventListener('resize', setHlOrigins);
+addEventListener('load', setHlOrigins);
+hlCells.forEach(c => {
+  c.addEventListener('mouseenter', () => hlCells.forEach(x => x.classList.add('hl-hover')));
+  c.addEventListener('mouseleave', () => hlCells.forEach(x => x.classList.remove('hl-hover')));
+});
+
 /* page hero h1 reveals immediately */
 const pheroH1 = document.querySelector('.phero-h1');
 if (pheroH1){
@@ -590,11 +607,13 @@ def nums(items, cols=3):
     return f'<ul class="cards-{cols}">{lis}</ul>'
 
 def mark_svg(level):
-    # 지원(on)·일부지원(mid) = 채운 동그라미(색으로 구분), 미지원(off) = 빈 링
+    # 지원(on)·일부지원(mid) = 채운 동그라미 + 흰 체크(색으로 구분), 미지원(off) = 빈 링
     if level == 'off':
-        inner = '<circle cx="7" cy="7" r="6" fill="none" stroke="currentColor" stroke-width="1.4"/>'
+        inner = '<circle cx="7" cy="7" r="6" fill="none" stroke="currentColor" stroke-width="1"/>'
     else:
-        inner = '<circle cx="7" cy="7" r="6" fill="currentColor"/>'
+        inner = ('<circle cx="7" cy="7" r="6.4" fill="currentColor"/>'
+                 '<path d="M4.2 7.1 L6.1 9 L9.8 5.1" fill="none" stroke="#fff" '
+                 'stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>')
     return f'<svg class="mkv" viewBox="0 0 14 14" aria-hidden="true">{inner}</svg>'
 
 def cell(level, text):
@@ -884,11 +903,11 @@ PAGES['parasta.html'] = dict(
       {compare_table(
         ['', 'ParaSta', '글로벌 인프라 SaaS', '국내 커스터디', '자체 구축 · SI'],
         [
-          dict(label='국내 규제 대응', cells=[cell('on','AML·트래블룰·감사 로그 내재화'), cell('off','도입사가 직접 대응'), cell('mid','수탁·보관 중심'), cell('off','규제 매핑부터 직접')]),
-          dict(label='신원관리', cells=[cell('on','발행 레이어에 KYC·DID 내장'), cell('mid','외부 KYC 벤더 연동'), cell('off','신원 계층 제한적'), cell('off','KYC·DID 직접 개발')]),
-          dict(label='구축 방식', cells=[cell('on','검증된 모듈을 SDK로 조립'), cell('mid','정해진 기능 세트 안에서'), cell('mid','커스터디 중심 구성'), cell('off','0부터 개발')]),
-          dict(label='도입·운영', cells=[cell('on','키·가스비·노드 운영 대행'), cell('on','빠른 글로벌 도입'), cell('on','수탁 운영 검증됨'), cell('off','개발·유지보수 직접')]),
-          dict(label='글로벌 확장', cells=[cell('mid','국내 우선·멀티체인'), cell('on','글로벌 연결망 보유'), cell('off','국내 중심'), cell('mid','구축 범위에 따라')]),
+          dict(label='국내 규제 대응', cells=[cell('on','AML, 트래블룰, 감사 로그 내장'), cell('off','도입사 직접 대응'), cell('mid','수탁·보관 중심'), cell('off','규제 검토부터 직접 대응')]),
+          dict(label='신원관리', cells=[cell('on','발행 레이어에 KYC, DID 기능 내장'), cell('mid','외부 KYC 솔루션 연동'), cell('off','신원 인증 기능 제한적'), cell('off','KYC, DID 직접 개발')]),
+          dict(label='구축 방식', cells=[cell('on','검증된 모듈을 SDK로 유연하게 구성'), cell('mid','정해진 기능 범위 내 구성'), cell('mid','커스터디 기능 중심'), cell('off','처음부터 직접 개발')]),
+          dict(label='도입·운영', cells=[cell('on','키 관리, 가스비, 노드 운영 대행'), cell('on','글로벌 시장에 빠르게 도입'), cell('on','검증된 수탁 운영'), cell('off','개발, 운영 직접 관리')]),
+          dict(label='글로벌 확장', cells=[cell('mid','국내 환경 최적화, 멀티체인 지원'), cell('on','글로벌 네트워크 보유'), cell('off','국내 시장 중심'), cell('mid','구축 범위에 따라 상이')]),
         ], hl=1)}
     </div>
   </div>

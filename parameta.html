@@ -530,9 +530,9 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 @keyframes caretBlink{ 50%{ opacity:0 } }
 .pc-panel{ position:fixed; top:0; right:0; bottom:0; z-index:105; width:26rem;
   display:flex; flex-direction:column; overflow:hidden; background:var(--white);
-  border-left:1px solid var(--line); box-shadow:-24px 0 64px rgba(var(--ink-rgb),.12);
+  border-left:1px solid var(--line);
   transform:translateX(100%); transition:transform .45s cubic-bezier(.22,1,.36,1) }
-.pc-panel.open{ transform:translateX(0) }
+.pc-panel.open{ transform:translateX(0); box-shadow:-24px 0 64px rgba(var(--ink-rgb),.12) }
 html{ transition:padding-right .45s cubic-bezier(.22,1,.36,1) }
 html.chat-open{ padding-right:26rem }
 html.chat-open #header{ right:26rem }
