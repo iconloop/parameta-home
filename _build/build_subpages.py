@@ -58,7 +58,7 @@ body.hero-dark .phero-h1{ color:var(--white); max-width:18ch; font-size:var(--te
 @media (min-width:640px){ body.hero-dark .phero-h1{ font-size:var(--text-48) } }
 @media (min-width:768px){ body.hero-dark .phero-h1{ font-size:var(--text-60) } }
 @media (min-width:1024px){ body.hero-dark .phero-h1{ font-size:var(--text-72) } }
-body.hero-dark .phero-lead{ color:rgba(var(--white-rgb),.7); font-size:var(--text-18) }
+body.hero-dark .phero-text .phero-lead{ color:rgba(var(--white-rgb),.7); font-size:var(--text-20) }
 body.hero-dark .phero-cta .pill.outline .hspring{ border-color:rgba(var(--white-rgb),.3); color:var(--white) }
 body.hero-dark .phero-cta .pill.outline .pill-badge{ background:var(--white); color:var(--ink) }
 /* 다크 히어로: eyebrow(+블릿)·크럼브/스크롤(+디바이더)·워터마크 제거 */
@@ -68,7 +68,8 @@ body.hero-dark .phero-wm{ display:none }
 /* 100vh · 12칼럼 그리드 스냅: 텍스트 1~6칸 / 비주얼 7~12칸 */
 body.hero-dark .phero-inner{ min-height:100vh; display:grid; grid-template-columns:repeat(12,1fr);
   align-items:center; column-gap:var(--grid-gap); padding-top:6rem; padding-bottom:3rem }
-body.hero-dark .phero-text{ grid-column:1 / 6; align-self:center }
+body.hero-dark .phero-text{ grid-column:1 / 6; align-self:center; gap:1rem }
+body.hero-dark .phero-cta{ margin-top:.5rem }  /* 리드↔버튼 살짝만 */
 body.hero-dark .phero-visual{ grid-column:7 / 13; display:block; align-self:stretch; min-height:56vh;
   border-radius:var(--radius-card); border:1px solid rgba(var(--white-rgb),.12);
   background:radial-gradient(120% 90% at 70% 18%, rgba(var(--accent-rgb),.2), transparent 60%), rgba(var(--white-rgb),.03) }
@@ -78,6 +79,27 @@ body.hero-dark .phero-visual{ grid-column:7 / 13; display:block; align-self:stre
   body.hero-dark .phero-text, body.hero-dark .phero-visual{ grid-column:auto }
   body.hero-dark .phero-visual{ min-height:40vh } }
 
+/* ============ WHAT IS (좌 다이어그램 / 우 텍스트) ============ */
+.whatis-grid{ display:grid; grid-template-columns:1fr; gap:2.5rem; align-items:center }
+@media (min-width:900px){
+  .whatis-grid{ grid-template-columns:repeat(12,1fr); column-gap:var(--grid-gap) }
+  .whatis-grid .ps-flow{ grid-column:1 / 7 }
+  .whatis-grid .whatis-text{ grid-column:8 / 13 } }
+.whatis-text .sec-h2{ margin-top:1rem }
+/* 라이트 카드 톤으로 감싸고 보라 코어만 포인트 */
+.ps-flow{ display:flex; flex-direction:column; gap:1rem; border-radius:var(--radius-card);
+  background:rgba(var(--surface-rgb),.5); padding:2rem; text-align:center }
+.ps-flow-band{ border-radius:var(--radius-card-sm); padding:1.25rem 1.5rem;
+  background:var(--white); border:1px solid var(--line) }
+.ps-flow .chip-row{ justify-content:center }
+.ps-flow-band .lbl{ font-size:var(--text-14); text-transform:uppercase; letter-spacing:.025em;
+  color:rgba(var(--ink-rgb),.45); margin-bottom:.875rem }
+.ps-flow-core{ border-color:transparent; background:linear-gradient(135deg, var(--purple-500), var(--purple-600));
+  color:var(--white); box-shadow:0 12px 32px rgba(var(--accent-rgb),.25) }
+.ps-flow-core .core-title{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em }
+.ps-flow-core .core-sub{ font-size:var(--text-14); color:rgba(var(--white-rgb),.7); margin:.25rem 0 1rem }
+.ps-flow-core .chip{ border-color:rgba(var(--white-rgb),.3); color:var(--white); background:rgba(var(--white-rgb),.08) }
+.ps-flow-arrow{ display:flex; justify-content:center; color:rgba(var(--ink-rgb),.3); font-size:var(--text-16); line-height:1 }
 /* ============ SUBPAGE UTILITIES ============ */
 .sec{ padding:5rem 1.25rem }
 @media (min-width:640px){ .sec{ padding-left:2rem; padding-right:2rem } }
@@ -725,19 +747,35 @@ PAGES['parasta.html'] = dict(
     lead='스테이블코인, 디지털자산 비즈니스를 위한 모듈형 인프라입니다.<br>필요한 기능을 선택해 구성하고, 발행부터 운영까지 하나로 연결합니다.',
     crumb='Products — ParaSta',
     body_class='hero-dark',
-    hero_cta=f'''<div class="phero-cta rvl" style="--rvl-delay:340ms">
-      <a class="pill light with-arrow arw-right hs-scale" href="contact.html"><span class="hspring">View Demo<span class="pill-badge">{ARW}</span></span></a>
-      <a class="pill outline with-arrow arw-right hs-scale" href="contact.html"><span class="hspring">Talk to Sales<span class="pill-badge">{ARW}</span></span></a>
+    hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
+      <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">View Demo</span></a>
+      <a class="pill outline no-arrow hs-scale" href="contact.html"><span class="hspring">Talk to Sales</span></a>
     </div>''',
     content=f'''
 <section><div class="shell sec">
-  {eyebrow('What is ParaSta')}
-  {h2('발행과 운영을 하나로 묶은 디지털자산 인프라')}
-  {lead_p('ParaSta는 스테이블코인·예금토큰 등 다양한 디지털 자산을 하나의 플랫폼에서 발행·운영하고, 기존 은행·결제망에 연결합니다. 사용자의 신원부터 지갑, 정산, 감사까지 ParaSta가 함께합니다.')}
-  <div class="rvl" style="display:flex; flex-direction:column; gap:1.75rem">
-    <div><div style="font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); margin-bottom:.75rem">디지털 자산</div>{chips(['스테이블코인','은행 예금토큰','토큰증권'])}</div>
-    <div><div style="font-size:var(--text-14); color:var(--accent); font-weight:600; margin-bottom:.75rem">ParaSta — 발행 이후 운영을 하나로</div>{chips(['발행','지갑','온체인 KYC','오케스트레이션','통합관제'])}</div>
-    <div><div style="font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); margin-bottom:.75rem">은행 및 결제망 연결</div>{chips(['은행 예금원장','펌뱅킹','카드 · PG','은행간 정산망'])}</div>
+  <div class="whatis-grid">
+    <div class="ps-flow rvl">
+      <div class="ps-flow-band">
+        <div class="lbl">디지털 자산</div>
+        <div class="chip-row"><span class="chip">스테이블코인</span><span class="chip">은행 예금토큰</span><span class="chip">토큰증권</span></div>
+      </div>
+      <div class="ps-flow-arrow" aria-hidden="true">↕</div>
+      <div class="ps-flow-band ps-flow-core">
+        <div class="core-title">ParaSta</div>
+        <div class="core-sub">발행 이후 운영을 하나로</div>
+        <div class="chip-row"><span class="chip">발행</span><span class="chip">지갑</span><span class="chip">온체인 KYC</span><span class="chip">오케스트레이션</span><span class="chip">통합관제</span></div>
+      </div>
+      <div class="ps-flow-arrow" aria-hidden="true">↕</div>
+      <div class="ps-flow-band">
+        <div class="lbl">은행 및 결제망 연결</div>
+        <div class="chip-row"><span class="chip">은행 예금원장</span><span class="chip">펌뱅킹</span><span class="chip">카드 · PG</span><span class="chip">은행간 정산망</span></div>
+      </div>
+    </div>
+    <div class="whatis-text rvl" style="--rvl-delay:120ms">
+      {eyebrow('What is ParaSta')}
+      {h2('발행부터 운영까지 연결하는<br>디지털자산 인프라')}
+      {lead_p('ParaSta는 스테이블코인, 예금토큰 등 다양한 디지털자산의 발행과 운영을 하나의 플랫폼에서 지원하고, 기존 은행, 결제망과 유기적으로 연결합니다. 신원 확인부터 지갑, 정산, 감사까지 디지털자산 운영 전반을 함께합니다.')}
+    </div>
   </div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">

@@ -14,6 +14,8 @@
 <script src="assets/chatbot.js?v=3" defer></script>
 <style>
 /* ============ RESET / BASE ============ */
+@font-face{ font-family:'Departure Mono'; src:url('assets/fonts/DepartureMono-Regular.woff2') format('woff2');
+  font-weight:400; font-style:normal; font-display:swap }
 *{ box-sizing:border-box; margin:0; padding:0 }
 html{ font-size:16px; -webkit-font-smoothing:antialiased }
 body{ background:#ffffff; color:#0E0C27; font-family:'Onest','Pretendard Variable',Pretendard,'Noto Sans KR',sans-serif; overflow-x:hidden; word-break:keep-all; overflow-wrap:break-word }
@@ -224,10 +226,15 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
   background:linear-gradient(to bottom, rgba(var(--white-rgb),.35), transparent, rgba(var(--white-rgb),.35)) }
 .hero-grid{ position:relative; z-index:20; display:flex; flex-direction:column; gap:2rem; padding:8.25rem 1.25rem 5rem }
 .hero-left{ display:flex; flex-direction:column; gap:1.75rem }
-.eyebrow{ display:inline-flex; align-items:center; gap:.5rem; font-size:var(--text-14); font-weight:500 }
-.eyebrow .dot{ width:.375rem; height:.375rem; border-radius:var(--radius-pill) }
-.eyebrow.dark{ color:rgba(var(--ink-rgb),.7) } .eyebrow.dark .dot{ background:rgba(var(--ink-rgb),.5) }
-.eyebrow.light{ color:rgba(var(--white-rgb),.7) } .eyebrow.light .dot{ background:rgba(var(--white-rgb),.6) }
+/* eyebrow — Departure Mono 픽셀 폰트 + [ 대괄호 ] (evervault 레퍼) */
+.eyebrow{ display:inline-flex; align-items:center; gap:.5rem; font-family:'Departure Mono',monospace;
+  font-size:var(--text-16); font-weight:400; text-transform:uppercase; letter-spacing:.06em }
+.eyebrow .dot{ display:none }
+.eyebrow::before{ content:'[' } .eyebrow::after{ content:']' }
+.eyebrow.dark{ color:rgba(var(--ink-rgb),.6) }
+.eyebrow.dark::before, .eyebrow.dark::after{ color:rgba(var(--ink-rgb),.35) }
+.eyebrow.light{ color:rgba(var(--white-rgb),.65) }
+.eyebrow.light::before, .eyebrow.light::after{ color:rgba(var(--white-rgb),.4) }
 .hero-h1{ margin-top:3rem; max-width:18ch; font-size:var(--text-40); font-weight:600; line-height:.98; letter-spacing:-.02em }
 .hero-rating{ display:flex; align-items:center; gap:.75rem }
 .hero-rating .stars{ color:var(--accent); display:inline-flex }
