@@ -818,7 +818,8 @@ body.hero-dark .phero-visual{ grid-column:7 / 13; display:block; align-self:stre
 .cards-2{ display:grid; grid-template-columns:1fr; gap:1.5rem }
 @media (min-width:768px){ .cards-2{ grid-template-columns:repeat(2,1fr) } }
 .work-card.sm{ min-height:18rem }
-.work-card.static{ cursor:default }
+.work-card.static{ cursor:default; transition:transform .35s cubic-bezier(.2,.8,.2,1) }
+.work-card.static:hover{ transform:scale(1.03) }
 .work-quote{ margin-top:1.25rem; border-left:2px solid var(--purple-400); padding-left:1rem;
   font-size:var(--text-14); color:rgba(var(--white-rgb),.75); line-height:1.6 }
 .work-quote cite{ display:block; margin-top:.5rem; font-style:normal; font-size:var(--text-14); color:rgba(var(--white-rgb),.45) }

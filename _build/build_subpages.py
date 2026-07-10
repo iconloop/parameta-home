@@ -153,7 +153,8 @@ body.hero-dark .phero-visual{ grid-column:7 / 13; display:block; align-self:stre
 .cards-2{ display:grid; grid-template-columns:1fr; gap:1.5rem }
 @media (min-width:768px){ .cards-2{ grid-template-columns:repeat(2,1fr) } }
 .work-card.sm{ min-height:18rem }
-.work-card.static{ cursor:default }
+.work-card.static{ cursor:default; transition:transform .35s cubic-bezier(.2,.8,.2,1) }
+.work-card.static:hover{ transform:scale(1.03) }
 .work-quote{ margin-top:1.25rem; border-left:2px solid var(--purple-400); padding-left:1rem;
   font-size:var(--text-14); color:rgba(var(--white-rgb),.75); line-height:1.6 }
 .work-quote cite{ display:block; margin-top:.5rem; font-style:normal; font-size:var(--text-14); color:rgba(var(--white-rgb),.45) }
@@ -612,8 +613,8 @@ def mark_svg(level):
         inner = '<circle cx="7" cy="7" r="6" fill="none" stroke="currentColor" stroke-width="1"/>'
     else:
         inner = ('<circle cx="7" cy="7" r="6.4" fill="currentColor"/>'
-                 '<path d="M4.2 7.1 L6.1 9 L9.8 5.1" fill="none" stroke="#fff" '
-                 'stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>')
+                 '<path d="M4.9 7.1 L6.4 8.5 L9.2 5.6" fill="none" stroke="#fff" '
+                 'stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>')
     return f'<svg class="mkv" viewBox="0 0 14 14" aria-hidden="true">{inner}</svg>'
 
 def cell(level, text):
@@ -891,12 +892,11 @@ PAGES['parasta.html'] = dict(
     </div>
   </div>
 </div></section>
-<section><div class="shell sec" style="padding-top:4rem">
+<section><div class="shell sec">
   <div class="why-grid">
     <div class="why-head">
       {eyebrow('Why ParaSta')}
-      {h2('규제 환경에 유연하게 대응하는 디지털자산 금융 플랫폼')}
-      {lead_p('발행, 지갑, 오케스트레이션, 온체인 KYC, 통합관제를 하나로 연결하고, 스테이블코인, 예금토큰, RWA, 토큰증권까지 단계적으로 확장합니다.')}
+      {h2('디지털자산을 실제 금융 서비스로 연결하는 하나의 인프라')}
       {legend_marks()}
     </div>
     <div class="why-table">
@@ -912,13 +912,13 @@ PAGES['parasta.html'] = dict(
     </div>
   </div>
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
+<section><div class="shell sec">
   {eyebrow('Advantages')}
-  {h2('실제 금융 서비스로 이어지는 하나의 인프라')}
+  {h2('실제 금융 서비스로 이어지는<br>하나의 인프라')}
   {cards_wrap([
-    dark_card('MODULAR', '모듈형 API', '발행 엔진부터 온체인 KYC, 멀티체인 브릿지까지 — 필요한 코어 모듈만 골라 조립합니다. 이미 현장에서 검증된 기술을 그대로 적용합니다.'),
-    dark_card('COMPLIANT', 'Compliant-Ready', 'AML·트래블룰·감사 로그를 인프라 단에 내재화해 규제 대응 부담을 크게 줄입니다. 금융권과 검증한 규제 기술이 그대로 적용됩니다.'),
-    dark_card('ZERO-OPS', 'Zero-Ops', '키 관리부터 가스비 대납, 인프라 운영까지 — 발행과 운영 모두 ParaSta가 책임집니다. 서비스와 성장에만 집중하세요.'),
+    dark_card('MODULAR', '모듈형 API', '발행 엔진부터 온체인 KYC, 멀티체인 브릿지까지, 필요한 코어 모듈을 선택해 유연하게 구성할 수 있습니다. 처음부터 새로 개발할 필요 없이, 실제 현장에서 검증된 기술을 빠르게 적용할 수 있습니다.'),
+    dark_card('COMPLIANT', '규제 대응이 준비된 인프라', 'AML, 트래블룰, 감사 로그를 인프라에 통합해 규제 대응 부담을 줄입니다. 금융권과 함께 검증한 규제 기술을 그대로 적용할 수 있습니다.'),
+    dark_card('ZERO-OPS', '운영까지 책임지는 인프라', '키 관리부터 가스비 대납, 인프라 운영까지, 발행 이후의 운영 전반을 ParaSta가 지원합니다. 기업은 서비스와 비즈니스 성장에만 집중할 수 있습니다.'),
   ], cols=3)}
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
