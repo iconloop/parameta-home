@@ -86,8 +86,7 @@ body.hero-dark .phero-visual{ grid-column:7 / 13; display:block; align-self:stre
   .whatis-grid .ps-flow{ grid-column:1 / 7 }
   .whatis-grid .whatis-text{ grid-column:8 / 13 } }
 .whatis-text .phero-lead{ font-size:var(--text-18) }
-.whatis-text .sec-h2{ margin-top:1rem; margin-bottom:2rem; font-size:var(--text-32) }
-@media (min-width:640px){ .whatis-text .sec-h2{ font-size:var(--text-48) } }
+.whatis-text .sec-h2{ margin-top:1rem; margin-bottom:2rem }
 /* 라이트 카드 톤으로 감싸고 보라 코어만 포인트 */
 .ps-flow{ display:flex; flex-direction:column; align-items:center; gap:0; border-radius:var(--radius-card);
   background-color:rgba(var(--ink-rgb),.06);
@@ -146,8 +145,8 @@ body.hero-dark .phero-visual{ grid-column:7 / 13; display:block; align-self:stre
 .sec{ padding:5rem 1.25rem }
 @media (min-width:640px){ .sec{ padding-left:2rem; padding-right:2rem } }
 @media (min-width:1024px){ .sec{ padding-block:6rem } }
-.sec-h2{ margin:1.25rem 0 3rem; max-width:24ch; font-size:var(--text-30); font-weight:600; letter-spacing:-.02em }
-@media (min-width:640px){ .sec-h2{ font-size:var(--text-40) } }
+.sec-h2{ margin:1.25rem 0 3rem; max-width:24ch; font-size:var(--text-32); font-weight:600; letter-spacing:-.02em }
+@media (min-width:640px){ .sec-h2{ font-size:var(--text-48) } }
 .cards-3{ display:grid; grid-template-columns:1fr; gap:1.5rem }
 @media (min-width:768px){ .cards-3{ grid-template-columns:repeat(2,1fr) } }
 @media (min-width:1024px){ .cards-3{ grid-template-columns:repeat(3,1fr) } }
@@ -183,20 +182,50 @@ body.hero-dark .phero-visual{ grid-column:7 / 13; display:block; align-self:stre
 
 /* ============ CONTENT-PORT ADDITIONS (우리 토큰 유지) ============ */
 /* 비교표 */
+/* Why ParaSta: 타이틀셋(4칼럼) 좌 / 표(8칼럼) 우 */
+.why-grid{ display:grid; grid-template-columns:1fr; gap:2.5rem; align-items:start }
+@media (min-width:900px){ .why-grid{ grid-template-columns:repeat(12,1fr); column-gap:var(--grid-gap); align-items:start }
+  .why-head{ grid-column:1 / 5 } .why-table{ grid-column:5 / 13; min-width:0 } }
+.why-head .sec-h2{ margin-top:1rem; margin-bottom:1.5rem }
+.why-head .phero-lead{ font-size:var(--text-18) }
+.mkv{ width:.8em; height:.8em; display:inline-block; vertical-align:-.1em }
+.why-legend{ display:inline-flex; flex-wrap:wrap; gap:.75rem 1.25rem; margin-top:1.75rem;
+  background:rgba(var(--ink-rgb),.05); border-radius:var(--radius-control); padding:.75rem 1.125rem;
+  font-size:var(--text-14); color:rgba(var(--ink-rgb),.55) }
+.why-legend .lg{ display:inline-flex; align-items:center; gap:.25rem }
+.why-legend .mk{ display:inline-flex; margin-right:0 }
+.why-legend .mk.on{ color:var(--accent) }
+.why-legend .mk.mid{ color:rgba(var(--ink-rgb),.35) }
+.why-legend .mk.off{ color:rgba(var(--ink-rgb),.3) }
 .cmp-wrap{ overflow-x:auto; -webkit-overflow-scrolling:touch }
+/* 표는 블록 페이드 대신 행별 순차 등장으로 리빌 */
+.cmp-wrap.rvl{ opacity:1; transform:none }
+table.cmp tbody tr{ opacity:0; transform:translateY(12px);
+  transition:opacity .5s cubic-bezier(.16,1,.3,1), transform .5s cubic-bezier(.16,1,.3,1) }
+.cmp-wrap.is-in table.cmp tbody tr{ opacity:1; transform:none }
+.cmp-wrap.is-in table.cmp tbody tr:nth-child(1){ transition-delay:.05s }
+.cmp-wrap.is-in table.cmp tbody tr:nth-child(2){ transition-delay:.12s }
+.cmp-wrap.is-in table.cmp tbody tr:nth-child(3){ transition-delay:.19s }
+.cmp-wrap.is-in table.cmp tbody tr:nth-child(4){ transition-delay:.26s }
+.cmp-wrap.is-in table.cmp tbody tr:nth-child(5){ transition-delay:.33s }
 .cmp-legend{ margin-bottom:1rem; font-size:var(--text-14); color:rgba(var(--ink-rgb),.5) }
-table.cmp{ width:100%; min-width:46rem; border-collapse:collapse; font-size:var(--text-16) }
+table.cmp{ width:100%; min-width:46rem; border-collapse:separate; border-spacing:0; font-size:var(--text-16) }
 table.cmp th, table.cmp td{ padding:1rem 1.125rem; text-align:left; vertical-align:top; border-bottom:1px solid var(--line) }
-table.cmp thead th{ font-weight:600; font-size:var(--text-14); text-transform:uppercase; letter-spacing:.03em;
-  color:rgba(var(--ink-rgb),.55); border-bottom:1px solid rgba(var(--ink-rgb),.18) }
+table.cmp thead th{ font-weight:600; font-size:var(--text-16); text-transform:uppercase; letter-spacing:.03em;
+  text-align:center; color:rgba(var(--ink-rgb),.55); border-bottom:1px solid rgba(var(--ink-rgb),.18) }
 table.cmp thead th.hl{ color:var(--accent) }
-table.cmp thead th.hl, table.cmp td.hl{ background:rgba(var(--accent-rgb),.06) }
-table.cmp tbody th{ font-weight:500; color:rgba(var(--ink-rgb),.65); white-space:nowrap }
-table.cmp td{ color:rgba(var(--ink-rgb),.7); line-height:1.5 }
+table.cmp thead th.hl, table.cmp td.hl{ background:rgba(var(--purple-300-rgb),.2) }
+table.cmp thead th.hl{ border-top-left-radius:var(--radius-card-sm); border-top-right-radius:var(--radius-card-sm) }
+table.cmp tbody tr:last-child td.hl{ border-bottom-left-radius:var(--radius-card-sm); border-bottom-right-radius:var(--radius-card-sm) }
+table.cmp tbody tr:last-child td, table.cmp tbody tr:last-child th{ border-bottom:none }
+table.cmp tbody th{ font-weight:500; color:rgba(var(--ink-rgb),.65); white-space:nowrap; padding-left:0; vertical-align:middle }
+table.cmp td{ color:rgba(var(--ink-rgb),.7); line-height:1.5; text-align:center; vertical-align:middle }
+table.cmp td .mk{ display:block; margin:0 auto .5rem }
+table.cmp td .cell-txt{ display:block; font-size:var(--text-14) }
 table.cmp td.hl{ font-weight:500; color:var(--ink) }
 table.cmp .mk{ font-weight:700; margin-right:.375rem }
 table.cmp .mk.on{ color:var(--accent) }
-table.cmp .mk.mid{ color:var(--purple-400) }
+table.cmp .mk.mid{ color:rgba(var(--ink-rgb),.35) }
 table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 /* 간단 가로 바 */
 .barc{ display:flex; flex-direction:column; gap:1rem; max-width:46rem }
@@ -560,9 +589,21 @@ def nums(items, cols=3):
         for i, it in enumerate(items))
     return f'<ul class="cards-{cols}">{lis}</ul>'
 
-MARK = {'on':'●', 'mid':'◐', 'off':'○'}
+def mark_svg(level):
+    # 지원(on)·일부지원(mid) = 채운 동그라미(색으로 구분), 미지원(off) = 빈 링
+    if level == 'off':
+        inner = '<circle cx="7" cy="7" r="6" fill="none" stroke="currentColor" stroke-width="1.4"/>'
+    else:
+        inner = '<circle cx="7" cy="7" r="6" fill="currentColor"/>'
+    return f'<svg class="mkv" viewBox="0 0 14 14" aria-hidden="true">{inner}</svg>'
+
 def cell(level, text):
-    return f'<span class="mk {level}">{MARK[level]}</span>{text}'
+    return f'<span class="mk {level}">{mark_svg(level)}</span><span class="cell-txt">{text}</span>'
+
+def legend_marks():
+    items = [('on','지원'), ('mid','일부 지원'), ('off','미지원')]
+    lis = ''.join(f'<span class="lg"><span class="mk {lv}">{mark_svg(lv)}</span>{lb}</span>' for lv, lb in items)
+    return f'<div class="why-legend rvl">{lis}</div>'
 
 def compare_table(headers, body_rows, hl=1, legend=None):
     # headers: [행라벨열='', 열1, 열2 ...]  / hl: headers 인덱스(1-base) 하이라이트 열
@@ -831,18 +872,26 @@ PAGES['parasta.html'] = dict(
     </div>
   </div>
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {eyebrow('Why ParaSta')}
-  {h2('규제 환경에 맞춘 디지털 자산 금융 플랫폼')}
-  {compare_table(
-    ['', 'ParaSta', '글로벌 인프라 SaaS', '국내 커스터디', '자체 구축 · SI'],
-    [
-      dict(label='국내 규제 대응', cells=[cell('on','AML·트래블룰·감사 로그 내재화'), cell('off','도입사가 직접 대응'), cell('mid','수탁·보관 중심'), cell('off','규제 매핑부터 직접')]),
-      dict(label='온체인 KYC·신원', cells=[cell('on','발행 레이어에 KYC·DID 내장'), cell('mid','외부 KYC 벤더 연동'), cell('off','신원 계층 제한적'), cell('off','KYC·DID 직접 개발')]),
-      dict(label='구축 방식', cells=[cell('on','검증된 모듈을 SDK로 조립'), cell('mid','정해진 기능 세트 안에서'), cell('mid','커스터디 중심 구성'), cell('off','0부터 개발')]),
-      dict(label='도입·운영', cells=[cell('on','키·가스비·노드 운영 대행'), cell('on','빠른 글로벌 도입'), cell('on','수탁 운영 검증됨'), cell('off','개발·유지보수 직접')]),
-      dict(label='글로벌 확장', cells=[cell('mid','국내 우선·멀티체인'), cell('on','글로벌 연결망 보유'), cell('off','국내 중심'), cell('mid','구축 범위에 따라')]),
-    ], hl=1, legend='● 강함 · ◐ 부분적 · ○ 약함/미지원')}
+<section><div class="shell sec" style="padding-top:4rem">
+  <div class="why-grid">
+    <div class="why-head">
+      {eyebrow('Why ParaSta')}
+      {h2('규제 환경에 유연하게 대응하는 디지털자산 금융 플랫폼')}
+      {lead_p('발행, 지갑, 오케스트레이션, 온체인 KYC, 통합관제를 하나로 연결하고, 스테이블코인, 예금토큰, RWA, 토큰증권까지 단계적으로 확장합니다.')}
+      {legend_marks()}
+    </div>
+    <div class="why-table">
+      {compare_table(
+        ['', 'ParaSta', '글로벌 인프라 SaaS', '국내 커스터디', '자체 구축 · SI'],
+        [
+          dict(label='국내 규제 대응', cells=[cell('on','AML·트래블룰·감사 로그 내재화'), cell('off','도입사가 직접 대응'), cell('mid','수탁·보관 중심'), cell('off','규제 매핑부터 직접')]),
+          dict(label='신원관리', cells=[cell('on','발행 레이어에 KYC·DID 내장'), cell('mid','외부 KYC 벤더 연동'), cell('off','신원 계층 제한적'), cell('off','KYC·DID 직접 개발')]),
+          dict(label='구축 방식', cells=[cell('on','검증된 모듈을 SDK로 조립'), cell('mid','정해진 기능 세트 안에서'), cell('mid','커스터디 중심 구성'), cell('off','0부터 개발')]),
+          dict(label='도입·운영', cells=[cell('on','키·가스비·노드 운영 대행'), cell('on','빠른 글로벌 도입'), cell('on','수탁 운영 검증됨'), cell('off','개발·유지보수 직접')]),
+          dict(label='글로벌 확장', cells=[cell('mid','국내 우선·멀티체인'), cell('on','글로벌 연결망 보유'), cell('off','국내 중심'), cell('mid','구축 범위에 따라')]),
+        ], hl=1)}
+    </div>
+  </div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
   {eyebrow('Advantages')}
