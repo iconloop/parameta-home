@@ -27,8 +27,8 @@
     <nav class="nav-primary" aria-label="Primary">\
       <ul>\
         <li><a href="company.html"><span class="nav-lift" style="display:inline-flex">About</span></a></li>\
-        <li class="has-drop"><a href="solution-finance.html" data-mega="solutions"><span class="nav-lift" style="display:inline-flex">Solutions</span></a></li>\
         <li class="has-drop"><a href="parasta.html" data-mega="products"><span class="nav-lift" style="display:inline-flex">Products</span></a></li>\
+        <li class="has-drop"><a href="solution-finance.html" data-mega="solutions"><span class="nav-lift" style="display:inline-flex">Solutions</span></a></li>\
         <li><a href="insights.html"><span class="nav-lift" style="display:inline-flex">Insights</span></a></li>\
       </ul>\
     </nav>\
@@ -123,14 +123,14 @@
     <nav class="shell navmenu-nav" aria-label="Overlay">\
       <ul id="navmenuList">\
         <li><a class="navmenu-item" style="transition-delay:80ms" href="company.html"><span class="nidx">01</span><span class="nlabel">About</span></a></li>\
-        <li><a class="navmenu-item" style="transition-delay:125ms" href="solution-finance.html"><span class="nidx">02</span><span class="nlabel">Solutions</span></a>\
+        <li><a class="navmenu-item" style="transition-delay:125ms" href="parasta.html"><span class="nidx">02</span><span class="nlabel">Products</span></a>\
           <div class="navmenu-sub" style="transition-delay:185ms">\
-            <a href="solution-finance.html">금융</a><a href="solution-gov.html">공공</a><a href="solution-cert.html">증명서</a><a href="solution-exchange.html">화이트라벨 거래소</a><a href="solution-data.html">데이터주권</a><a href="solution-settlement.html">결제·정산</a>\
+            <a href="parasta.html">ParaSta</a><a href="portx.html">Port X</a><a href="myid.html">MyID</a><a href="broof.html">Broof</a><a href="kbtf.html">KBTF</a>\
           </div>\
         </li>\
-        <li><a class="navmenu-item" style="transition-delay:170ms" href="parasta.html"><span class="nidx">03</span><span class="nlabel">Products</span></a>\
+        <li><a class="navmenu-item" style="transition-delay:170ms" href="solution-finance.html"><span class="nidx">03</span><span class="nlabel">Solutions</span></a>\
           <div class="navmenu-sub" style="transition-delay:230ms">\
-            <a href="parasta.html">ParaSta</a><a href="portx.html">Port X</a><a href="myid.html">MyID</a><a href="broof.html">Broof</a><a href="kbtf.html">KBTF</a>\
+            <a href="solution-finance.html">금융</a><a href="solution-gov.html">공공</a><a href="solution-cert.html">증명서</a><a href="solution-exchange.html">화이트라벨 거래소</a><a href="solution-data.html">데이터주권</a><a href="solution-settlement.html">결제·정산</a>\
           </div>\
         </li>\
         <li><a class="navmenu-item" style="transition-delay:215ms" href="insights.html"><span class="nidx">04</span><span class="nlabel">Insights</span></a></li>\

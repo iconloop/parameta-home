@@ -40,6 +40,9 @@ EXTRA_CSS = """
   padding:9rem 1.25rem 3.5rem }
 .phero-h1{ max-width:22ch; font-size:var(--text-36); font-weight:600; line-height:1.05; letter-spacing:-.02em }
 .phero-lead{ max-width:44rem; font-size:var(--text-16); line-height:1.7; color:rgba(var(--ink-rgb),.65) }
+.phero-text{ display:flex; flex-direction:column; gap:1.75rem }
+.phero-cta{ display:flex; flex-wrap:wrap; gap:1rem; margin-top:.5rem }
+.phero-visual{ display:none }
 .phero-status{ display:flex; align-items:center; justify-content:space-between; gap:.75rem;
   border-top:1px solid rgba(var(--ink-rgb),.1); padding:1.25rem; font-size:var(--text-14); font-weight:500;
   text-transform:uppercase; letter-spacing:.025em; color:rgba(var(--ink-rgb),.6); position:relative; z-index:10 }
@@ -49,6 +52,31 @@ EXTRA_CSS = """
 @media (min-width:640px){ .phero-inner{ padding:10rem 2rem 4rem } .phero-h1{ font-size:var(--text-48) }
   .phero-status{ padding-left:2rem; padding-right:2rem } }
 @media (min-width:768px){ .phero-h1{ font-size:var(--text-60) } }
+/* ---- 다크 히어로(서브페이지) — body.hero-dark 지정 시 ---- */
+body.hero-dark .phero{ background:var(--black); min-height:100vh }
+body.hero-dark .phero-h1{ color:var(--white); max-width:18ch; font-size:var(--text-36); line-height:.98; font-weight:500 }
+@media (min-width:640px){ body.hero-dark .phero-h1{ font-size:var(--text-48) } }
+@media (min-width:768px){ body.hero-dark .phero-h1{ font-size:var(--text-60) } }
+@media (min-width:1024px){ body.hero-dark .phero-h1{ font-size:var(--text-72) } }
+body.hero-dark .phero-lead{ color:rgba(var(--white-rgb),.7); font-size:var(--text-18) }
+body.hero-dark .phero-cta .pill.outline .hspring{ border-color:rgba(var(--white-rgb),.3); color:var(--white) }
+body.hero-dark .phero-cta .pill.outline .pill-badge{ background:var(--white); color:var(--ink) }
+/* 다크 히어로: eyebrow(+블릿)·크럼브/스크롤(+디바이더)·워터마크 제거 */
+body.hero-dark .phero-inner .eyebrow.dark{ display:none }
+body.hero-dark .phero-status{ display:none }
+body.hero-dark .phero-wm{ display:none }
+/* 100vh · 12칼럼 그리드 스냅: 텍스트 1~6칸 / 비주얼 7~12칸 */
+body.hero-dark .phero-inner{ min-height:100vh; display:grid; grid-template-columns:repeat(12,1fr);
+  align-items:center; column-gap:var(--grid-gap); padding-top:6rem; padding-bottom:3rem }
+body.hero-dark .phero-text{ grid-column:1 / 6; align-self:center }
+body.hero-dark .phero-visual{ grid-column:7 / 13; display:block; align-self:stretch; min-height:56vh;
+  border-radius:var(--radius-card); border:1px solid rgba(var(--white-rgb),.12);
+  background:radial-gradient(120% 90% at 70% 18%, rgba(var(--accent-rgb),.2), transparent 60%), rgba(var(--white-rgb),.03) }
+@media (max-width:767px){
+  body.hero-dark .phero, body.hero-dark .phero-inner{ min-height:auto }
+  body.hero-dark .phero-inner{ grid-template-columns:1fr; padding-top:8rem; padding-bottom:3rem; row-gap:2rem }
+  body.hero-dark .phero-text, body.hero-dark .phero-visual{ grid-column:auto }
+  body.hero-dark .phero-visual{ min-height:40vh } }
 
 /* ============ SUBPAGE UTILITIES ============ */
 .sec{ padding:5rem 1.25rem }
@@ -694,8 +722,13 @@ PAGES['parasta.html'] = dict(
     desc='ParaSta — 스테이블코인·디지털자산 사업을 위한 모듈형 인프라. 발행·오케스트레이션·지갑·온체인 KYC를 골라 조립하세요. Compliant-Ready · Zero-Ops.',
     eyebrow='Digital Asset Platform',
     h1_lines=['ParaSta'],
-    lead='스테이블코인·디지털자산 사업을 위한 모듈형 인프라입니다. 발행·오케스트레이션·지갑·온체인 KYC를 골라 조립하세요. 발행은 시작일 뿐, 운영 전체를 하나로 연결합니다.',
+    lead='스테이블코인, 디지털자산 비즈니스를 위한 모듈형 인프라입니다.<br>필요한 기능을 선택해 구성하고, 발행부터 운영까지 하나로 연결합니다.',
     crumb='Products — ParaSta',
+    body_class='hero-dark',
+    hero_cta=f'''<div class="phero-cta rvl" style="--rvl-delay:340ms">
+      <a class="pill light with-arrow arw-right hs-scale" href="contact.html"><span class="hspring">View Demo<span class="pill-badge">{ARW}</span></span></a>
+      <a class="pill outline with-arrow arw-right hs-scale" href="contact.html"><span class="hspring">Talk to Sales<span class="pill-badge">{ARW}</span></span></a>
+    </div>''',
     content=f'''
 <section><div class="shell sec">
   {eyebrow('What is ParaSta')}
@@ -1750,19 +1783,23 @@ SHELL = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<script src="assets/nav.js?v=13" defer></script>
+<script src="assets/nav.js?v=14" defer></script>
 <script src="assets/chatbot.js?v=3" defer></script>
 <style>__CSS____EXTRA_CSS__</style>
 </head>
-<body>
+<body class="__BODYCLASS__">
 __HEADER__
 <main id="main">
   <section class="phero">
     <div class="phero-wm">PARAMETA</div>
     <div class="shell phero-inner">
-      <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>__EYEBROW__</div>
-      <h1 class="phero-h1" data-line-stagger="120">__H1__</h1>
-      <p class="phero-lead rvl" style="--rvl-delay:250ms">__LEAD__</p>
+      <div class="phero-text">
+        <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>__EYEBROW__</div>
+        <h1 class="phero-h1" data-line-stagger="120">__H1__</h1>
+        <p class="phero-lead rvl" style="--rvl-delay:250ms">__LEAD__</p>
+        __HERO_CTA__
+      </div>
+      <div class="phero-visual" aria-hidden="true"></div>
     </div>
     <div class="shell phero-status">
       <span>__CRUMB__</span>
@@ -1780,6 +1817,7 @@ __JS__
 for fname, p in PAGES.items():
     h1 = ''.join(f'<span class="rvl-line"><span>{l}</span></span>' for l in p['h1_lines'])
     out = (SHELL
+        .replace('__BODYCLASS__', p.get('body_class', ''))
         .replace('__TITLE__', p['title'])
         .replace('__DESC__', p['desc'])
         .replace('__CSS__', CSS)
@@ -1789,6 +1827,7 @@ for fname, p in PAGES.items():
         .replace('__H1__', h1)
         .replace('__LEAD__', p['lead'])
         .replace('__CRUMB__', p['crumb'])
+        .replace('__HERO_CTA__', p.get('hero_cta', ''))
         .replace('__CONTENT__', p['content'])
         .replace('__FOOTER__', CHROME_FOOTER)
         .replace('__JS__', JS))

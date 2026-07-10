@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<script src="assets/nav.js?v=13" defer></script>
+<script src="assets/nav.js?v=14" defer></script>
 <script src="assets/chatbot.js?v=3" defer></script>
 <style>
 /* ============ RESET / BASE ============ */
@@ -45,7 +45,7 @@ img{ display:block }
   --accent:var(--para-violet); --accent-from:var(--purple-400); --accent-to:var(--purple-600);
   --hero-from:var(--gray-50); --hero-to:var(--gray-200);
   /* ── 그리드 (브레이크포인트: sm 640 / md 768 / lg 1024) ── */
-  --container-shell:88rem; --grid-cols:12; --grid-gap:2.5rem; --shell-pad:1.25rem;
+  --container-shell:88rem; --grid-cols:12; --grid-gap:1.5rem; --shell-pad:1.25rem;
   /* ── 타이포 스케일 (짝수만, 최소 14) ── */
   --font-display:'Onest','Pretendard Variable',Pretendard,'Noto Sans KR',sans-serif;
   --text-12:0.75rem; /* 메타 정보 전용 (시계 등) — 최소14 룰 예외 */
@@ -470,6 +470,7 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 .mega-panel{ position:absolute; top:0; left:0; opacity:0; pointer-events:none; transition:opacity .18s ease }
 .mega-panel.active{ opacity:1; pointer-events:auto }
 .mega .nav-drop-panel{ background:none; box-shadow:none; backdrop-filter:none; -webkit-backdrop-filter:none }
+.mega.on-dark{ padding-top:0 }  /* 다크모드: GNB 하단에 스냅 */
 .mega.on-dark .mega-inner{ background:rgba(42,42,56,.6);
   border-color:rgba(var(--white-rgb),.16); box-shadow:0 16px 40px rgba(0,0,0,.4) }
 .mega.on-dark .nd-col + .nd-col{ border-left-color:rgba(var(--white-rgb),.16) }
@@ -697,6 +698,9 @@ body.show-grid #dev-grid{ display:block }
   padding:9rem 1.25rem 3.5rem }
 .phero-h1{ max-width:22ch; font-size:var(--text-36); font-weight:600; line-height:1.05; letter-spacing:-.02em }
 .phero-lead{ max-width:44rem; font-size:var(--text-16); line-height:1.7; color:rgba(var(--ink-rgb),.65) }
+.phero-text{ display:flex; flex-direction:column; gap:1.75rem }
+.phero-cta{ display:flex; flex-wrap:wrap; gap:1rem; margin-top:.5rem }
+.phero-visual{ display:none }
 .phero-status{ display:flex; align-items:center; justify-content:space-between; gap:.75rem;
   border-top:1px solid rgba(var(--ink-rgb),.1); padding:1.25rem; font-size:var(--text-14); font-weight:500;
   text-transform:uppercase; letter-spacing:.025em; color:rgba(var(--ink-rgb),.6); position:relative; z-index:10 }
@@ -706,6 +710,31 @@ body.show-grid #dev-grid{ display:block }
 @media (min-width:640px){ .phero-inner{ padding:10rem 2rem 4rem } .phero-h1{ font-size:var(--text-48) }
   .phero-status{ padding-left:2rem; padding-right:2rem } }
 @media (min-width:768px){ .phero-h1{ font-size:var(--text-60) } }
+/* ---- 다크 히어로(서브페이지) — body.hero-dark 지정 시 ---- */
+body.hero-dark .phero{ background:var(--black); min-height:100vh }
+body.hero-dark .phero-h1{ color:var(--white); max-width:18ch; font-size:var(--text-36); line-height:.98; font-weight:500 }
+@media (min-width:640px){ body.hero-dark .phero-h1{ font-size:var(--text-48) } }
+@media (min-width:768px){ body.hero-dark .phero-h1{ font-size:var(--text-60) } }
+@media (min-width:1024px){ body.hero-dark .phero-h1{ font-size:var(--text-72) } }
+body.hero-dark .phero-lead{ color:rgba(var(--white-rgb),.7); font-size:var(--text-18) }
+body.hero-dark .phero-cta .pill.outline .hspring{ border-color:rgba(var(--white-rgb),.3); color:var(--white) }
+body.hero-dark .phero-cta .pill.outline .pill-badge{ background:var(--white); color:var(--ink) }
+/* 다크 히어로: eyebrow(+블릿)·크럼브/스크롤(+디바이더)·워터마크 제거 */
+body.hero-dark .phero-inner .eyebrow.dark{ display:none }
+body.hero-dark .phero-status{ display:none }
+body.hero-dark .phero-wm{ display:none }
+/* 100vh · 12칼럼 그리드 스냅: 텍스트 1~6칸 / 비주얼 7~12칸 */
+body.hero-dark .phero-inner{ min-height:100vh; display:grid; grid-template-columns:repeat(12,1fr);
+  align-items:center; column-gap:var(--grid-gap); padding-top:6rem; padding-bottom:3rem }
+body.hero-dark .phero-text{ grid-column:1 / 6; align-self:center }
+body.hero-dark .phero-visual{ grid-column:7 / 13; display:block; align-self:stretch; min-height:56vh;
+  border-radius:var(--radius-card); border:1px solid rgba(var(--white-rgb),.12);
+  background:radial-gradient(120% 90% at 70% 18%, rgba(var(--accent-rgb),.2), transparent 60%), rgba(var(--white-rgb),.03) }
+@media (max-width:767px){
+  body.hero-dark .phero, body.hero-dark .phero-inner{ min-height:auto }
+  body.hero-dark .phero-inner{ grid-template-columns:1fr; padding-top:8rem; padding-bottom:3rem; row-gap:2rem }
+  body.hero-dark .phero-text, body.hero-dark .phero-visual{ grid-column:auto }
+  body.hero-dark .phero-visual{ min-height:40vh } }
 
 /* ============ SUBPAGE UTILITIES ============ */
 .sec{ padding:5rem 1.25rem }
@@ -787,7 +816,7 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 @media (max-width:480px){ .barc-row{ grid-template-columns:5.5rem 1fr auto; gap:.625rem } }
 </style>
 </head>
-<body>
+<body class="">
 
 <a href="#main" class="skip">본문으로 건너뛰기</a>
 <!-- GNB — 단일 소스: assets/nav.js가 배너·헤더·오버레이 메뉴 주입 -->
@@ -797,9 +826,13 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
   <section class="phero">
     <div class="phero-wm">PARAMETA</div>
     <div class="shell phero-inner">
-      <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Solutions — 증명서</div>
-      <h1 class="phero-h1" data-line-stagger="120"><span class="rvl-line"><span>발급부터 공유, 제출처</span></span><span class="rvl-line"><span>검증까지 끝나는</span></span><span class="rvl-line"><span>디지털 증명 인프라</span></span></h1>
-      <p class="phero-lead rvl" style="--rvl-delay:250ms">위촉장·수료증·MOU·디지털 배지 등 다양한 증명을 발급·공유·검증할 수 있는 블록체인 기반 디지털 증명 서비스입니다.</p>
+      <div class="phero-text">
+        <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Solutions — 증명서</div>
+        <h1 class="phero-h1" data-line-stagger="120"><span class="rvl-line"><span>발급부터 공유, 제출처</span></span><span class="rvl-line"><span>검증까지 끝나는</span></span><span class="rvl-line"><span>디지털 증명 인프라</span></span></h1>
+        <p class="phero-lead rvl" style="--rvl-delay:250ms">위촉장·수료증·MOU·디지털 배지 등 다양한 증명을 발급·공유·검증할 수 있는 블록체인 기반 디지털 증명 서비스입니다.</p>
+        
+      </div>
+      <div class="phero-visual" aria-hidden="true"></div>
     </div>
     <div class="shell phero-status">
       <span>Solutions — 증명서</span>
