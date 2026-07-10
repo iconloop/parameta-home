@@ -10,8 +10,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<script src="assets/nav.js?v=4" defer></script>
-<script src="assets/chatbot.js?v=2" defer></script>
+<script src="assets/nav.js?v=13" defer></script>
+<script src="assets/chatbot.js?v=3" defer></script>
 <style>
 /* ============ RESET / BASE ============ */
 *{ box-sizing:border-box; margin:0; padding:0 }
@@ -133,7 +133,7 @@ img{ display:block }
 html.chat-open #banner-fixed{ right:26rem }
 #banner a, #banner-fixed a{ display:flex; width:100%; align-items:center; justify-content:center; gap:.75rem;
   padding:1.125rem 1rem; font-size:14px; font-weight:500; text-align:center }
-#banner .b-strong, #banner-fixed .b-strong{ font-weight:600 }
+#banner .b-strong, #banner-fixed .b-strong{ font-weight:500 }
 #banner .b-cta, #banner-fixed .b-cta{ display:inline-flex; align-items:center; gap:.25rem; color:rgba(var(--white-rgb),.7);
   text-decoration:underline; text-underline-offset:3px }
 @media (hover:hover){ #banner a:hover .b-cta, #banner-fixed a:hover .b-cta{ color:var(--white) } }
@@ -198,6 +198,8 @@ body.hero-dark #header:not(.sticky) .nav-drop-panel b{ color:var(--white) }
 body.hero-dark #header:not(.sticky) .nav-drop-panel b::after{ background:var(--purple-300) }
 body.hero-dark #header:not(.sticky) .nav-drop-panel span{ color:rgba(var(--white-rgb),.5) }
 body.hero-dark #header:not(.sticky) .nd-ico{ background:rgba(var(--white-rgb),.08); color:var(--white) }
+body.hero-dark #header:not(.sticky) .nd-col + .nd-col{ border-left-color:rgba(var(--white-rgb),.16) }
+body.hero-dark #header:not(.sticky) .nd-col-head{ color:rgba(var(--white-rgb),.4) }
 
 /* 다크 히어로: 캐러셀 카드도 다크 글라스 */
 body.hero-dark .hero-card{ background:rgba(var(--white-rgb),.07); backdrop-filter:blur(16px);
@@ -453,14 +455,47 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
   visibility:hidden; pointer-events:none;
   transition:transform .3s cubic-bezier(.2,.8,.2,1), visibility 0s linear .3s }
 @media (hover:hover){ .has-drop:hover .nav-drop{ visibility:visible; pointer-events:auto; transform:translate(-50%,0);
-  transition:transform .3s cubic-bezier(.2,.8,.2,1), visibility 0s } }
+  transition:transform .3s cubic-bezier(.2,.8,.2,1), visibility 0s }
+  .has-drop:hover .nav-caret{ transform:rotate(180deg) } }
+.nav-caret{ transition:transform .25s cubic-bezier(.2,.8,.2,1) }
+@media (hover:hover){ #header .has-drop:has([data-mega]):hover .nav-caret{ transform:rotate(180deg) } }
+/* ===== 메가 드롭다운: 공유 박스 · 화면 중앙 · 리사이즈 모프 ===== */
+.mega{ position:fixed; left:50%; top:64px; transform:translateX(-50%); z-index:70; padding-top:.75rem;
+  visibility:hidden; opacity:0; pointer-events:none; transition:opacity .2s ease, visibility 0s linear .2s }
+.mega.open{ visibility:visible; opacity:1; pointer-events:auto; transition:opacity .2s ease, visibility 0s }
+.mega-inner{ position:relative; overflow:hidden; border-radius:var(--radius-card-sm);
+  background:rgba(var(--white-rgb),.97); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+  border:1px solid rgba(var(--line-rgb),.9); box-shadow:0 16px 40px rgba(0,0,0,.12);
+  transition:width .34s cubic-bezier(.2,.8,.2,1), height .34s cubic-bezier(.2,.8,.2,1) }
+.mega-panel{ position:absolute; top:0; left:0; opacity:0; pointer-events:none; transition:opacity .18s ease }
+.mega-panel.active{ opacity:1; pointer-events:auto }
+.mega .nav-drop-panel{ background:none; box-shadow:none; backdrop-filter:none; -webkit-backdrop-filter:none }
+.mega.on-dark .mega-inner{ background:rgba(42,42,56,.6);
+  border-color:rgba(var(--white-rgb),.16); box-shadow:0 16px 40px rgba(0,0,0,.4) }
+.mega.on-dark .nd-col + .nd-col{ border-left-color:rgba(var(--white-rgb),.16) }
+.mega.on-dark .nd-col-head{ color:rgba(var(--white-rgb),.4) }
+.mega.on-dark .nav-drop-panel b{ color:var(--white) }
+.mega.on-dark .nav-drop-panel span{ color:rgba(var(--white-rgb),.5) }
+.mega.on-dark .nd-ico{ background:rgba(var(--white-rgb),.08); color:var(--white) }
+@media (hover:hover){ .mega.on-dark .nav-drop-panel a:hover .nd-ico{ background:rgba(var(--white-rgb),.22) } }
+.mega.on-dark .nav-drop-panel a:hover b::after{ background:var(--purple-300) }
 .nav-drop-panel{ width:19rem; border-radius:var(--radius-card-sm); background:rgba(var(--white-rgb),.97);
   backdrop-filter:blur(12px); box-shadow:0 16px 40px rgba(0,0,0,.12), 0 0 0 1px rgba(var(--line-rgb),.9);
   padding:1rem .75rem; display:flex; flex-direction:column; gap:.25rem }
+.nav-drop-panel.duo{ width:auto; flex-direction:row; gap:0; padding:0 .75rem; align-items:stretch }
+.nd-col{ display:flex; flex-direction:column; gap:.25rem; width:17.5rem; padding:1.25rem .625rem }
+.nd-col + .nd-col{ border-left:1px solid rgba(var(--line-rgb),.9) }
+.nd-col-head{ padding:.375rem .75rem .375rem; font-size:11px; font-weight:600; letter-spacing:.08em;
+  text-transform:uppercase; color:rgba(var(--ink-rgb),.4) }
 .nav-drop-panel a{ display:flex; align-items:center; gap:1rem; border-radius:var(--radius-control); padding:.75rem }
-.nd-ico{ width:2.5rem; height:2.5rem; flex:none; display:grid; place-items:center; border-radius:var(--radius-control);
-  background:var(--surface); color:var(--ink) }
-.nd-ico .icn{ font-size:1.25rem }
+.nd-ico{ position:relative; overflow:hidden; width:2.5rem; height:2.5rem; flex:none; display:grid; place-items:center;
+  border-radius:var(--radius-control); background:var(--surface); color:var(--ink); transition:background .25s ease, color .25s ease }
+.nd-ico .icn{ font-size:1.25rem; position:relative; z-index:1 }
+.nd-ico::before{ content:''; position:absolute; inset:0; z-index:0; border-radius:inherit;
+  background:linear-gradient(180deg, transparent 58%, var(--purple-600)); opacity:0; transform:translateY(35%);
+  transition:opacity .3s ease, transform .35s cubic-bezier(.2,.8,.2,1) }
+@media (hover:hover){ .nav-drop-panel a:hover .nd-ico{ color:var(--white) }
+  .nav-drop-panel a:hover .nd-ico::before{ opacity:1; transform:translateY(0) } }
 .nd-txt{ display:flex; flex-direction:column; gap:.375rem }
 .nav-drop-panel b{ position:relative; display:inline-block; align-self:flex-start; padding-bottom:2px }
 .nav-drop-panel b::after{ content:''; position:absolute; left:0; bottom:0; width:100%; height:1px;
@@ -470,11 +505,16 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 .nav-drop-panel b{ font-size:14px; font-weight:500; color:var(--ink) }
 .nav-drop-panel span{ font-size:12px; color:rgba(var(--ink-rgb),.7) }
 .fab-chat{ position:fixed; right:1.5rem; bottom:1.5rem; z-index:80; display:inline-flex; align-items:center;
-  justify-content:center; background:var(--accent); color:var(--white); border-radius:var(--radius-pill); padding:0 1.5rem;
+  justify-content:center; color:var(--white); border-radius:var(--radius-pill); padding:0 1.5rem;
   min-height:3.5rem; min-width:3.5rem; /* 최소 1:1 — 빈 상태는 원형 */
-  font-size:var(--text-16); font-weight:500; box-shadow:0 12px 32px rgba(var(--accent-rgb),.35);
+  font-size:var(--text-16); font-weight:500;
+  background:linear-gradient(125deg, var(--fabA) 58%, var(--fabB) 125%); animation:fabFlow 7s ease-in-out infinite;
   transition:transform .35s cubic-bezier(.2,.8,.2,1) }
-@media (hover:hover){ .fab-chat:hover{ transform:none } }
+@property --fabA{ syntax:'<color>'; inherits:false; initial-value:#6100ff }
+@property --fabB{ syntax:'<color>'; inherits:false; initial-value:#7b5cff }
+@keyframes fabFlow{ 0%{ --fabA:#6100ff; --fabB:#7b5cff } 50%{ --fabA:#7b5cff; --fabB:#a83cc9 } 100%{ --fabA:#6100ff; --fabB:#7b5cff } }
+.fab-ai{ flex:none; width:1.125rem; height:1.125rem; margin-right:.5rem; color:var(--white) }
+@media (hover:hover){ .fab-chat:hover{ transform:scale(1.05) } }
 .fab-chat .icn{ font-size:var(--text-16); color:var(--purple-400) }
 .fab-chat #fabLabel{ display:inline-block; white-space:nowrap; text-align:left }
 .fab-caret{ align-self:center; width:2px; height:1.125em; background:currentColor; margin-left:.125rem;
@@ -705,6 +745,46 @@ body.show-grid #dev-grid{ display:block }
 .num-card .n{ font-size:var(--text-40); font-weight:600; letter-spacing:-.02em; line-height:1.1; margin-bottom:.5rem }
 .num-card .n small{ font-size:var(--text-20); font-weight:500 }
 .tag.on-light{ border-color:var(--line); color:var(--ink) }
+
+/* ============ CONTENT-PORT ADDITIONS (우리 토큰 유지) ============ */
+/* 비교표 */
+.cmp-wrap{ overflow-x:auto; -webkit-overflow-scrolling:touch }
+.cmp-legend{ margin-bottom:1rem; font-size:var(--text-14); color:rgba(var(--ink-rgb),.5) }
+table.cmp{ width:100%; min-width:46rem; border-collapse:collapse; font-size:var(--text-16) }
+table.cmp th, table.cmp td{ padding:1rem 1.125rem; text-align:left; vertical-align:top; border-bottom:1px solid var(--line) }
+table.cmp thead th{ font-weight:600; font-size:var(--text-14); text-transform:uppercase; letter-spacing:.03em;
+  color:rgba(var(--ink-rgb),.55); border-bottom:1px solid rgba(var(--ink-rgb),.18) }
+table.cmp thead th.hl{ color:var(--accent) }
+table.cmp thead th.hl, table.cmp td.hl{ background:rgba(var(--accent-rgb),.06) }
+table.cmp tbody th{ font-weight:500; color:rgba(var(--ink-rgb),.65); white-space:nowrap }
+table.cmp td{ color:rgba(var(--ink-rgb),.7); line-height:1.5 }
+table.cmp td.hl{ font-weight:500; color:var(--ink) }
+table.cmp .mk{ font-weight:700; margin-right:.375rem }
+table.cmp .mk.on{ color:var(--accent) }
+table.cmp .mk.mid{ color:var(--purple-400) }
+table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
+/* 간단 가로 바 */
+.barc{ display:flex; flex-direction:column; gap:1rem; max-width:46rem }
+.barc-title{ font-size:var(--text-16); font-weight:600; margin-bottom:.25rem }
+.barc-row{ display:grid; grid-template-columns:7rem 1fr auto; align-items:center; gap:1rem }
+.barc-l{ font-size:var(--text-14); color:rgba(var(--ink-rgb),.6) }
+.barc-track{ height:.625rem; border-radius:var(--radius-pill); background:rgba(var(--ink-rgb),.07); overflow:hidden }
+.barc-fill{ height:100%; border-radius:var(--radius-pill); background:linear-gradient(90deg,var(--purple-400),var(--purple-300)) }
+.barc-row.hi .barc-fill{ background:linear-gradient(90deg,var(--purple-600),var(--accent)) }
+.barc-v{ font-size:var(--text-16); font-weight:600; white-space:nowrap }
+.barc-row.hi .barc-v{ color:var(--accent) }
+.sec-note{ margin-top:1.25rem; font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); line-height:1.6; max-width:54rem }
+/* 칩 · 라우트 */
+.chip-row{ display:flex; flex-wrap:wrap; gap:.5rem }
+.chip{ display:inline-flex; align-items:center; border:1px solid var(--line); border-radius:var(--radius-pill);
+  padding:.5rem 1rem; font-size:var(--text-14); font-weight:500; color:rgba(var(--ink-rgb),.7) }
+.routes{ display:flex; flex-wrap:wrap; gap:.625rem }
+.route{ display:inline-flex; align-items:center; gap:.5rem; border:1px solid var(--line); border-radius:var(--radius-pill);
+  padding:.625rem 1.25rem; font-size:var(--text-16); font-weight:500; color:rgba(var(--ink-rgb),.7);
+  transition:border-color .2s, color .2s, background .2s }
+@media (hover:hover){ .route:hover{ border-color:var(--accent); color:var(--accent) } }
+.route.on{ background:var(--ink); color:var(--white); border-color:var(--ink) }
+@media (max-width:480px){ .barc-row{ grid-template-columns:5.5rem 1fr auto; gap:.625rem } }
 </style>
 </head>
 <body>
@@ -728,19 +808,38 @@ body.show-grid #dev-grid{ display:block }
   </section>
 
 <section><div class="shell sec">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Track Record</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>9년간 쌓아온 신뢰 — 한국 디지털 자산 인프라의 기준</span></span></h2>
-  <ul><li class="service-row-li rvl" style="--rvl-y:24px; --rvl-delay:0ms"><div class="service-row"><span class="service-idx">01</span><h3>9년간 쌓아온 Web3 인프라 경험</h3><p class="service-desc">2016년부터 국내 1세대 Web3 인프라 기업으로서, 한국 디지털 자산 시장의 기반을 만들어왔습니다.</p><span class="service-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></div></li><li class="service-row-li rvl" style="--rvl-y:24px; --rvl-delay:80ms"><div class="service-row"><span class="service-idx">02</span><h3>공공 · 금융이 인정한 기술 신뢰성</h3><p class="service-desc">정부와 금융기관이 요구하는 보안과 품질 기준을 충족하며 기술 신뢰성을 검증받아왔습니다.</p><span class="service-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></div></li><li class="service-row-li rvl" style="--rvl-y:24px; --rvl-delay:160ms"><div class="service-row"><span class="service-idx">03</span><h3>지자체와 함께 검증한 공공 인프라</h3><p class="service-desc">지자체 디지털 신원·블록체인 사업을 수행하며 신뢰 기반 인프라를 구축해왔습니다.</p><span class="service-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></div></li><li class="service-row-li rvl" style="--rvl-y:24px; --rvl-delay:240ms"><div class="service-row"><span class="service-idx">04</span><h3>금융 · 기업과 함께 확장한 신뢰 인프라</h3><p class="service-desc">은행, 증권사, 대기업과의 협업으로 금융권 수준의 보안성과 안정성을 검증해왔습니다.</p><span class="service-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></div></li></ul>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Vision</div>
+  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>Web2 + Web3를 연결하는 WalletFi 생태계를 만들어갑니다</span></span></h2>
+  <p class="phero-lead rvl" style="margin-bottom:2rem">파라메타는 금융권·공공·민간의 전통금융(Web2)부터 퍼블릭 블록체인 플랫폼과 DeFi(Web3)까지, 양쪽 영역의 전문 경험과 노하우를 두루 갖췄습니다. 두 힘을 하나로 모아, 지갑으로 모든 금융을 연결하는 지갑 기반 금융 생태계 WalletFi를 만들어갑니다.</p>
+  <div class="rvl" style="display:flex; flex-direction:column; gap:1.75rem">
+    <div><div style="font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); margin-bottom:.75rem">두 세계를 연결</div><div class="chip-row rvl"><span class="chip">전통금융 TradFi</span><span class="chip">탈중앙화 금융 DeFi</span></div></div>
+    <div><div style="font-size:var(--text-14); color:var(--accent); font-weight:600; margin-bottom:.75rem">WalletFi — 스테이블코인 · 자산 토큰화 · 크로스보더 결제 인프라</div><div class="chip-row rvl"><span class="chip">금융기관 · 핀테크</span><span class="chip">CEX / DEX 사용자</span></div></div>
+    <div><div style="font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); margin-bottom:.75rem">Wallet Infrastructure</div><div class="chip-row rvl"><span class="chip">K-BTF</span><span class="chip">loopchain</span><span class="chip">PDS</span><span class="chip">BFS</span><span class="chip">DID</span></div></div>
+  </div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Impact</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>디지털자산 시장의 새로운 길을 만들어온 기업</span></span></h2>
-  <ul class="cards-2">
-    <li class="rvl" style="--rvl-y:40px"><article class="work-card static sm"><div class="work-meta"><span>2018</span></div><div class="work-bottom"><h3>1세대 퍼블릭 블록체인 ICON 메인넷 출시</h3><p>자체 블록체인 엔진 루프체인(loopchain)을 기반으로 ICON 메인넷을 출시해, 국내 1세대 퍼블릭 블록체인 프로젝트로 자리잡았습니다.</p><div class=work-tags><span class="tag">loopchain</span><span class="tag">MainNet</span></div></div></article></li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm"><div class="work-meta"><span>2020</span></div><div class="work-bottom"><h3>DID 기반 제주안심코드, 누적 수십만 이용자</h3><p>DID 모바일 신원 앱 '쯩(zzeung)'과 제주안심코드 시스템을 공동 구축해, 블록체인 신원 인증으로 출입을 인증한 국내 최초 사례를 만들었습니다.</p><div class=work-tags><span class="tag">DID</span><span class="tag">쯩(zzeung)</span></div></div></article></li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm"><div class="work-meta"><span>2024</span></div><div class="work-bottom"><h3>국내·글로벌 거래소 API 통합 인프라 PortX</h3><p>빗썸·업비트·코인원과 Binance·Coinbase·Kraken 등 글로벌 거래소를 단일 API로 연결하는 디지털자산 통합 인프라를 구축했습니다.</p><div class=work-tags><span class="tag">단일 API</span><span class="tag">거래소 통합</span></div></div></article></li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms"><article class="work-card static sm"><div class="work-meta"><span>2025</span></div><div class="work-bottom"><h3>미래에셋과 파라스타로 통합 지갑 PoC</h3><p>미래에셋과 멀티체인 통합 지갑 PoC를 진행, DID 신원인증과 온체인 KYC를 결합한 증권사 지갑 인프라를 검증했습니다.</p><div class=work-tags><span class="tag">ParaSta</span><span class="tag">온체인 KYC</span></div></div></article></li>
-  </ul>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Track Record</div>
+  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>10년의 트랙레코드, 숫자로 증명한 신뢰</span></span></h2>
+  <p class="phero-lead rvl" style="margin-bottom:2rem">2016년부터 쌓아온 실적이 파라메타의 기술을 증명합니다.</p>
+  <ul class="cards-2"><li class="rvl" style="--rvl-delay:0ms"><div class="light-card num-card"><span class="cap">Since 2016</span><div class="n">10년차</div><p>국내 1세대 Web3 인프라 기업</p></div></li><li class="rvl" style="--rvl-delay:90ms"><div class="light-card num-card"><span class="cap">Investment</span><div class="n">250억 원</div><p>누적 투자유치</p></div></li><li class="rvl" style="--rvl-delay:180ms"><div class="light-card num-card"><span class="cap">Revenue</span><div class="n">750억 원+</div><p>누적 매출 (2016~2025)</p></div></li><li class="rvl" style="--rvl-delay:270ms"><div class="light-card num-card"><span class="cap">Quality</span><div class="n">GS 1등급</div><p>loopchain SW품질 인증</p></div></li></ul>
+  <div class="rvl" style="margin:2.5rem 0">
+    <div style="font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); margin-bottom:1rem">함께 투자한 파트너 — 누적 250억 원</div>
+    <div class="chip-row rvl"><span class="chip">기술보증기금</span><span class="chip">한국성장금융</span><span class="chip">코리아에셋투자증권</span><span class="chip">L&S벤처캐피탈</span><span class="chip">TS인베스트먼트</span><span class="chip">키움인베스트먼트</span><span class="chip">패스파인더에이치</span><span class="chip">케이클라비스</span><span class="chip">신한벤처투자</span></div>
+  </div>
+  <div class="rvl" style="margin-bottom:2.5rem">
+    <div style="font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); margin-bottom:1rem">인증 · 수상</div>
+    <div class="chip-row rvl"><span class="chip">GS인증 1등급 (loopchain)</span><span class="chip">기술보증기금 TI-1 등급</span><span class="chip">과기정통부 장관 표창</span><span class="chip">KISA 기술특례상장 컨설팅 A등급</span><span class="chip">금융위원회 혁신금융서비스 지정</span></div>
+  </div>
+  <ul class="cards-2"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static sm"><div class="work-meta"><span>First</span></div><div class="work-bottom"><h3>세계 최초 블록체인 공동인증 상용화</h3><p>증권사 26개사를 하나의 온체인 신원 체계로 묶은 공동인증을 세계 최초로 상용화했습니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm"><div class="work-meta"><span>First</span></div><div class="work-bottom"><h3>국내 최초 금융권 DID 실명인증 상용화</h3><p>신한은행과 함께 금융권 DID 실명인증을 국내 최초로 상용화했습니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm"><div class="work-meta"><span>First</span></div><div class="work-bottom"><h3>국내 최초 블록체인 서비스 CSAP 인증</h3><p>MyID 2.0으로 블록체인 서비스 최초의 CSAP 클라우드 보안 인증을 획득했습니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms"><article class="work-card static sm"><div class="work-meta"><span>First</span></div><div class="work-bottom"><h3>국내 최초 DID Method Registry 등재</h3><p>국내 최초로 DID Method Registry에 등재했습니다.</p></div></article></li></ul>
+  <div class="rvl" style="margin-top:2.5rem">
+    <div style="font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); margin-bottom:1rem">함께한 파트너 · Stablecoin Alliance 초대 의장사</div>
+    <div class="chip-row rvl"><span class="chip">삼성</span><span class="chip">삼성증권</span><span class="chip">미래에셋</span><span class="chip">NH농협</span><span class="chip">NH투자증권</span><span class="chip">신한</span><span class="chip">IBK기업은행</span><span class="chip">KB</span></div>
+  </div>
+</div></section>
+<section><div class="shell sec" style="padding-top:0">
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>History</div>
+  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>디지털자산 시장을 만들어온 파라메타의 10년</span></span></h2>
+  <ul><li class="service-row-li rvl" style="--rvl-y:24px; --rvl-delay:0ms"><div class="service-row"><span class="row-meta">2016</span><h3>(주)더루프 설립</h3><p class="service-desc">국내 1세대 Web3 인프라 기업으로 출발했습니다.</p><span class="service-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></div></li><li class="service-row-li rvl" style="--rvl-y:24px; --rvl-delay:80ms"><div class="service-row"><span class="row-meta">2018</span><h3>1세대 퍼블릭 메인넷 ICON 출시</h3><p class="service-desc">라인 블록체인 합작법인 ‘언체인’을 설립했습니다(아이콘루프 시절).</p><span class="service-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></div></li><li class="service-row-li rvl" style="--rvl-y:24px; --rvl-delay:160ms"><div class="service-row"><span class="row-meta">2019</span><h3>loopchain GS인증 1등급 · broof 출시</h3><p class="service-desc">금융위 혁신금융서비스로 지정됐습니다.</p><span class="service-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></div></li><li class="service-row-li rvl" style="--rvl-y:24px; --rvl-delay:240ms"><div class="service-row"><span class="row-meta">2020</span><h3>제주안심코드 218만 명 · 신한은행 DID 실명인증</h3><p class="service-desc">DID 금융실명인증을 상용화했습니다.</p><span class="service-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></div></li><li class="service-row-li rvl" style="--rvl-y:24px; --rvl-delay:320ms"><div class="service-row"><span class="row-meta">2023</span><h3>PARAMETA 리브랜딩 (구 아이콘루프)</h3><p class="service-desc">시리즈 C 투자를 유치했습니다.</p><span class="service-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></div></li><li class="service-row-li rvl" style="--rvl-y:24px; --rvl-delay:400ms"><div class="service-row"><span class="row-meta">2024</span><h3>K-BTF 공공 블록체인 공동인프라 사업자 선정</h3><p class="service-desc">공공 블록체인 공동 인프라 사업자로 선정됐습니다.</p><span class="service-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></div></li><li class="service-row-li rvl" style="--rvl-y:24px; --rvl-delay:480ms"><div class="service-row"><span class="row-meta">2025</span><h3>MyID 2.0 블록체인 서비스 최초 CSAP 인증</h3><p class="service-desc">조달청 디지털마켓에 등록했습니다.</p><span class="service-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></div></li><li class="service-row-li rvl" style="--rvl-y:24px; --rvl-delay:560ms"><div class="service-row"><span class="row-meta">2026</span><h3>Stablecoin Alliance 초대 의장사</h3><p class="service-desc">ADB ABMF 국경 간 거래 표준모델을 발표했습니다.</p><span class="service-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></div></li></ul>
 </div></section>
 <section><div class="shell about-grid">
   <div class="about-globe">
@@ -792,17 +891,22 @@ body.show-grid #dev-grid{ display:block }
       <div class="footer-col">
         <div class="footer-col-title">Solutions</div>
         <ul>
-          <li><a class="alink-wrap" href="parasta.html"><span class="alink">ParaSta</span></a></li>
-          <li><a class="alink-wrap" href="portx.html"><span class="alink">Port X</span></a></li>
-          <li><a class="alink-wrap" href="myid.html"><span class="alink">MyID</span></a></li>
+          <li><a class="alink-wrap" href="solution-finance.html"><span class="alink">금융</span></a></li>
+          <li><a class="alink-wrap" href="solution-gov.html"><span class="alink">공공</span></a></li>
+          <li><a class="alink-wrap" href="solution-cert.html"><span class="alink">증명서</span></a></li>
+          <li><a class="alink-wrap" href="solution-exchange.html"><span class="alink">화이트라벨 거래소</span></a></li>
+          <li><a class="alink-wrap" href="solution-data.html"><span class="alink">데이터주권</span></a></li>
+          <li><a class="alink-wrap" href="solution-settlement.html"><span class="alink">결제·정산</span></a></li>
         </ul>
       </div>
       <div class="footer-col">
         <div class="footer-col-title">Products</div>
         <ul>
+          <li><a class="alink-wrap" href="parasta.html"><span class="alink">ParaSta</span></a></li>
+          <li><a class="alink-wrap" href="portx.html"><span class="alink">Port X</span></a></li>
+          <li><a class="alink-wrap" href="myid.html"><span class="alink">MyID</span></a></li>
           <li><a class="alink-wrap" href="broof.html"><span class="alink">Broof</span></a></li>
           <li><a class="alink-wrap" href="kbtf.html"><span class="alink">KBTF</span></a></li>
-          <li><a class="alink-wrap" href="parameta.html#faq"><span class="alink">FAQ</span></a></li>
         </ul>
       </div>
     </div>

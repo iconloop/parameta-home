@@ -10,8 +10,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<script src="assets/nav.js?v=4" defer></script>
-<script src="assets/chatbot.js?v=2" defer></script>
+<script src="assets/nav.js?v=13" defer></script>
+<script src="assets/chatbot.js?v=3" defer></script>
 <style>
 /* ============ RESET / BASE ============ */
 *{ box-sizing:border-box; margin:0; padding:0 }
@@ -133,7 +133,7 @@ img{ display:block }
 html.chat-open #banner-fixed{ right:26rem }
 #banner a, #banner-fixed a{ display:flex; width:100%; align-items:center; justify-content:center; gap:.75rem;
   padding:1.125rem 1rem; font-size:14px; font-weight:500; text-align:center }
-#banner .b-strong, #banner-fixed .b-strong{ font-weight:600 }
+#banner .b-strong, #banner-fixed .b-strong{ font-weight:500 }
 #banner .b-cta, #banner-fixed .b-cta{ display:inline-flex; align-items:center; gap:.25rem; color:rgba(var(--white-rgb),.7);
   text-decoration:underline; text-underline-offset:3px }
 @media (hover:hover){ #banner a:hover .b-cta, #banner-fixed a:hover .b-cta{ color:var(--white) } }
@@ -198,6 +198,8 @@ body.hero-dark #header:not(.sticky) .nav-drop-panel b{ color:var(--white) }
 body.hero-dark #header:not(.sticky) .nav-drop-panel b::after{ background:var(--purple-300) }
 body.hero-dark #header:not(.sticky) .nav-drop-panel span{ color:rgba(var(--white-rgb),.5) }
 body.hero-dark #header:not(.sticky) .nd-ico{ background:rgba(var(--white-rgb),.08); color:var(--white) }
+body.hero-dark #header:not(.sticky) .nd-col + .nd-col{ border-left-color:rgba(var(--white-rgb),.16) }
+body.hero-dark #header:not(.sticky) .nd-col-head{ color:rgba(var(--white-rgb),.4) }
 
 /* 다크 히어로: 캐러셀 카드도 다크 글라스 */
 body.hero-dark .hero-card{ background:rgba(var(--white-rgb),.07); backdrop-filter:blur(16px);
@@ -453,14 +455,47 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
   visibility:hidden; pointer-events:none;
   transition:transform .3s cubic-bezier(.2,.8,.2,1), visibility 0s linear .3s }
 @media (hover:hover){ .has-drop:hover .nav-drop{ visibility:visible; pointer-events:auto; transform:translate(-50%,0);
-  transition:transform .3s cubic-bezier(.2,.8,.2,1), visibility 0s } }
+  transition:transform .3s cubic-bezier(.2,.8,.2,1), visibility 0s }
+  .has-drop:hover .nav-caret{ transform:rotate(180deg) } }
+.nav-caret{ transition:transform .25s cubic-bezier(.2,.8,.2,1) }
+@media (hover:hover){ #header .has-drop:has([data-mega]):hover .nav-caret{ transform:rotate(180deg) } }
+/* ===== 메가 드롭다운: 공유 박스 · 화면 중앙 · 리사이즈 모프 ===== */
+.mega{ position:fixed; left:50%; top:64px; transform:translateX(-50%); z-index:70; padding-top:.75rem;
+  visibility:hidden; opacity:0; pointer-events:none; transition:opacity .2s ease, visibility 0s linear .2s }
+.mega.open{ visibility:visible; opacity:1; pointer-events:auto; transition:opacity .2s ease, visibility 0s }
+.mega-inner{ position:relative; overflow:hidden; border-radius:var(--radius-card-sm);
+  background:rgba(var(--white-rgb),.97); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+  border:1px solid rgba(var(--line-rgb),.9); box-shadow:0 16px 40px rgba(0,0,0,.12);
+  transition:width .34s cubic-bezier(.2,.8,.2,1), height .34s cubic-bezier(.2,.8,.2,1) }
+.mega-panel{ position:absolute; top:0; left:0; opacity:0; pointer-events:none; transition:opacity .18s ease }
+.mega-panel.active{ opacity:1; pointer-events:auto }
+.mega .nav-drop-panel{ background:none; box-shadow:none; backdrop-filter:none; -webkit-backdrop-filter:none }
+.mega.on-dark .mega-inner{ background:rgba(42,42,56,.6);
+  border-color:rgba(var(--white-rgb),.16); box-shadow:0 16px 40px rgba(0,0,0,.4) }
+.mega.on-dark .nd-col + .nd-col{ border-left-color:rgba(var(--white-rgb),.16) }
+.mega.on-dark .nd-col-head{ color:rgba(var(--white-rgb),.4) }
+.mega.on-dark .nav-drop-panel b{ color:var(--white) }
+.mega.on-dark .nav-drop-panel span{ color:rgba(var(--white-rgb),.5) }
+.mega.on-dark .nd-ico{ background:rgba(var(--white-rgb),.08); color:var(--white) }
+@media (hover:hover){ .mega.on-dark .nav-drop-panel a:hover .nd-ico{ background:rgba(var(--white-rgb),.22) } }
+.mega.on-dark .nav-drop-panel a:hover b::after{ background:var(--purple-300) }
 .nav-drop-panel{ width:19rem; border-radius:var(--radius-card-sm); background:rgba(var(--white-rgb),.97);
   backdrop-filter:blur(12px); box-shadow:0 16px 40px rgba(0,0,0,.12), 0 0 0 1px rgba(var(--line-rgb),.9);
   padding:1rem .75rem; display:flex; flex-direction:column; gap:.25rem }
+.nav-drop-panel.duo{ width:auto; flex-direction:row; gap:0; padding:0 .75rem; align-items:stretch }
+.nd-col{ display:flex; flex-direction:column; gap:.25rem; width:17.5rem; padding:1.25rem .625rem }
+.nd-col + .nd-col{ border-left:1px solid rgba(var(--line-rgb),.9) }
+.nd-col-head{ padding:.375rem .75rem .375rem; font-size:11px; font-weight:600; letter-spacing:.08em;
+  text-transform:uppercase; color:rgba(var(--ink-rgb),.4) }
 .nav-drop-panel a{ display:flex; align-items:center; gap:1rem; border-radius:var(--radius-control); padding:.75rem }
-.nd-ico{ width:2.5rem; height:2.5rem; flex:none; display:grid; place-items:center; border-radius:var(--radius-control);
-  background:var(--surface); color:var(--ink) }
-.nd-ico .icn{ font-size:1.25rem }
+.nd-ico{ position:relative; overflow:hidden; width:2.5rem; height:2.5rem; flex:none; display:grid; place-items:center;
+  border-radius:var(--radius-control); background:var(--surface); color:var(--ink); transition:background .25s ease, color .25s ease }
+.nd-ico .icn{ font-size:1.25rem; position:relative; z-index:1 }
+.nd-ico::before{ content:''; position:absolute; inset:0; z-index:0; border-radius:inherit;
+  background:linear-gradient(180deg, transparent 58%, var(--purple-600)); opacity:0; transform:translateY(35%);
+  transition:opacity .3s ease, transform .35s cubic-bezier(.2,.8,.2,1) }
+@media (hover:hover){ .nav-drop-panel a:hover .nd-ico{ color:var(--white) }
+  .nav-drop-panel a:hover .nd-ico::before{ opacity:1; transform:translateY(0) } }
 .nd-txt{ display:flex; flex-direction:column; gap:.375rem }
 .nav-drop-panel b{ position:relative; display:inline-block; align-self:flex-start; padding-bottom:2px }
 .nav-drop-panel b::after{ content:''; position:absolute; left:0; bottom:0; width:100%; height:1px;
@@ -470,11 +505,16 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 .nav-drop-panel b{ font-size:14px; font-weight:500; color:var(--ink) }
 .nav-drop-panel span{ font-size:12px; color:rgba(var(--ink-rgb),.7) }
 .fab-chat{ position:fixed; right:1.5rem; bottom:1.5rem; z-index:80; display:inline-flex; align-items:center;
-  justify-content:center; background:var(--accent); color:var(--white); border-radius:var(--radius-pill); padding:0 1.5rem;
+  justify-content:center; color:var(--white); border-radius:var(--radius-pill); padding:0 1.5rem;
   min-height:3.5rem; min-width:3.5rem; /* 최소 1:1 — 빈 상태는 원형 */
-  font-size:var(--text-16); font-weight:500; box-shadow:0 12px 32px rgba(var(--accent-rgb),.35);
+  font-size:var(--text-16); font-weight:500;
+  background:linear-gradient(125deg, var(--fabA) 58%, var(--fabB) 125%); animation:fabFlow 7s ease-in-out infinite;
   transition:transform .35s cubic-bezier(.2,.8,.2,1) }
-@media (hover:hover){ .fab-chat:hover{ transform:none } }
+@property --fabA{ syntax:'<color>'; inherits:false; initial-value:#6100ff }
+@property --fabB{ syntax:'<color>'; inherits:false; initial-value:#7b5cff }
+@keyframes fabFlow{ 0%{ --fabA:#6100ff; --fabB:#7b5cff } 50%{ --fabA:#7b5cff; --fabB:#a83cc9 } 100%{ --fabA:#6100ff; --fabB:#7b5cff } }
+.fab-ai{ flex:none; width:1.125rem; height:1.125rem; margin-right:.5rem; color:var(--white) }
+@media (hover:hover){ .fab-chat:hover{ transform:scale(1.05) } }
 .fab-chat .icn{ font-size:var(--text-16); color:var(--purple-400) }
 .fab-chat #fabLabel{ display:inline-block; white-space:nowrap; text-align:left }
 .fab-caret{ align-self:center; width:2px; height:1.125em; background:currentColor; margin-left:.125rem;
@@ -705,6 +745,46 @@ body.show-grid #dev-grid{ display:block }
 .num-card .n{ font-size:var(--text-40); font-weight:600; letter-spacing:-.02em; line-height:1.1; margin-bottom:.5rem }
 .num-card .n small{ font-size:var(--text-20); font-weight:500 }
 .tag.on-light{ border-color:var(--line); color:var(--ink) }
+
+/* ============ CONTENT-PORT ADDITIONS (우리 토큰 유지) ============ */
+/* 비교표 */
+.cmp-wrap{ overflow-x:auto; -webkit-overflow-scrolling:touch }
+.cmp-legend{ margin-bottom:1rem; font-size:var(--text-14); color:rgba(var(--ink-rgb),.5) }
+table.cmp{ width:100%; min-width:46rem; border-collapse:collapse; font-size:var(--text-16) }
+table.cmp th, table.cmp td{ padding:1rem 1.125rem; text-align:left; vertical-align:top; border-bottom:1px solid var(--line) }
+table.cmp thead th{ font-weight:600; font-size:var(--text-14); text-transform:uppercase; letter-spacing:.03em;
+  color:rgba(var(--ink-rgb),.55); border-bottom:1px solid rgba(var(--ink-rgb),.18) }
+table.cmp thead th.hl{ color:var(--accent) }
+table.cmp thead th.hl, table.cmp td.hl{ background:rgba(var(--accent-rgb),.06) }
+table.cmp tbody th{ font-weight:500; color:rgba(var(--ink-rgb),.65); white-space:nowrap }
+table.cmp td{ color:rgba(var(--ink-rgb),.7); line-height:1.5 }
+table.cmp td.hl{ font-weight:500; color:var(--ink) }
+table.cmp .mk{ font-weight:700; margin-right:.375rem }
+table.cmp .mk.on{ color:var(--accent) }
+table.cmp .mk.mid{ color:var(--purple-400) }
+table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
+/* 간단 가로 바 */
+.barc{ display:flex; flex-direction:column; gap:1rem; max-width:46rem }
+.barc-title{ font-size:var(--text-16); font-weight:600; margin-bottom:.25rem }
+.barc-row{ display:grid; grid-template-columns:7rem 1fr auto; align-items:center; gap:1rem }
+.barc-l{ font-size:var(--text-14); color:rgba(var(--ink-rgb),.6) }
+.barc-track{ height:.625rem; border-radius:var(--radius-pill); background:rgba(var(--ink-rgb),.07); overflow:hidden }
+.barc-fill{ height:100%; border-radius:var(--radius-pill); background:linear-gradient(90deg,var(--purple-400),var(--purple-300)) }
+.barc-row.hi .barc-fill{ background:linear-gradient(90deg,var(--purple-600),var(--accent)) }
+.barc-v{ font-size:var(--text-16); font-weight:600; white-space:nowrap }
+.barc-row.hi .barc-v{ color:var(--accent) }
+.sec-note{ margin-top:1.25rem; font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); line-height:1.6; max-width:54rem }
+/* 칩 · 라우트 */
+.chip-row{ display:flex; flex-wrap:wrap; gap:.5rem }
+.chip{ display:inline-flex; align-items:center; border:1px solid var(--line); border-radius:var(--radius-pill);
+  padding:.5rem 1rem; font-size:var(--text-14); font-weight:500; color:rgba(var(--ink-rgb),.7) }
+.routes{ display:flex; flex-wrap:wrap; gap:.625rem }
+.route{ display:inline-flex; align-items:center; gap:.5rem; border:1px solid var(--line); border-radius:var(--radius-pill);
+  padding:.625rem 1.25rem; font-size:var(--text-16); font-weight:500; color:rgba(var(--ink-rgb),.7);
+  transition:border-color .2s, color .2s, background .2s }
+@media (hover:hover){ .route:hover{ border-color:var(--accent); color:var(--accent) } }
+.route.on{ background:var(--ink); color:var(--white); border-color:var(--ink) }
+@media (max-width:480px){ .barc-row{ grid-template-columns:5.5rem 1fr auto; gap:.625rem } }
 </style>
 </head>
 <body>
@@ -717,8 +797,8 @@ body.show-grid #dev-grid{ display:block }
   <section class="phero">
     <div class="phero-wm">PARAMETA</div>
     <div class="shell phero-inner">
-      <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Products — Broof</div>
-      <h1 class="phero-h1" data-line-stagger="120"><span class="rvl-line"><span>발급은 웹에서,</span></span><span class="rvl-line"><span>검증은 QR 하나로</span></span></h1>
+      <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Digital Credentials</div>
+      <h1 class="phero-h1" data-line-stagger="120"><span class="rvl-line"><span>Broof</span></span></h1>
       <p class="phero-lead rvl" style="--rvl-delay:250ms">Broof는 블록체인 기반 디지털 증명서 발급·검증 서비스입니다. 별도 시스템 구축 없이 웹에서 증명서를 발급하고, QR 하나로 원본 여부와 위·변조 여부를 즉시 확인할 수 있습니다.</p>
     </div>
     <div class="shell phero-status">
@@ -729,9 +809,9 @@ body.show-grid #dev-grid{ display:block }
 
 <section><div class="shell sec">
   <ul class="cards-3">
-    <li class="rvl"><div class="light-card num-card"><span class="cap">First</span><div class="n">최초</div><p>정부위원회 블록체인 기반 위촉장 발급</p></div></li>
-    <li class="rvl" style="--rvl-delay:90ms"><div class="light-card num-card"><span class="cap">Issued</span><div class="n">38,000<small>+</small></div><p>연간 디지털 증명서 발급</p></div></li>
-    <li class="rvl" style="--rvl-delay:180ms"><div class="light-card num-card"><span class="cap">Adopted</span><div class="n">다수 기관</div><p>대학 · 공공 · 기업 누적 도입</p></div></li>
+    <li class="rvl"><div class="light-card num-card"><span class="cap">First</span><div class="n">정부위원회 첫</div><p>블록체인 기반 위촉장 발급 (국가AI전략위원회)</p></div></li>
+    <li class="rvl" style="--rvl-delay:90ms"><div class="light-card num-card"><span class="cap">Issued</span><div class="n">90,000건<small>+</small></div><p>누적 블록체인 증명서 발급</p></div></li>
+    <li class="rvl" style="--rvl-delay:180ms"><div class="light-card num-card"><span class="cap">Adopted</span><div class="n">20곳<small>+</small></div><p>누적 도입 기관 (대학 · 공공 · 기업)</p></div></li>
   </ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
@@ -790,17 +870,22 @@ body.show-grid #dev-grid{ display:block }
       <div class="footer-col">
         <div class="footer-col-title">Solutions</div>
         <ul>
-          <li><a class="alink-wrap" href="parasta.html"><span class="alink">ParaSta</span></a></li>
-          <li><a class="alink-wrap" href="portx.html"><span class="alink">Port X</span></a></li>
-          <li><a class="alink-wrap" href="myid.html"><span class="alink">MyID</span></a></li>
+          <li><a class="alink-wrap" href="solution-finance.html"><span class="alink">금융</span></a></li>
+          <li><a class="alink-wrap" href="solution-gov.html"><span class="alink">공공</span></a></li>
+          <li><a class="alink-wrap" href="solution-cert.html"><span class="alink">증명서</span></a></li>
+          <li><a class="alink-wrap" href="solution-exchange.html"><span class="alink">화이트라벨 거래소</span></a></li>
+          <li><a class="alink-wrap" href="solution-data.html"><span class="alink">데이터주권</span></a></li>
+          <li><a class="alink-wrap" href="solution-settlement.html"><span class="alink">결제·정산</span></a></li>
         </ul>
       </div>
       <div class="footer-col">
         <div class="footer-col-title">Products</div>
         <ul>
+          <li><a class="alink-wrap" href="parasta.html"><span class="alink">ParaSta</span></a></li>
+          <li><a class="alink-wrap" href="portx.html"><span class="alink">Port X</span></a></li>
+          <li><a class="alink-wrap" href="myid.html"><span class="alink">MyID</span></a></li>
           <li><a class="alink-wrap" href="broof.html"><span class="alink">Broof</span></a></li>
           <li><a class="alink-wrap" href="kbtf.html"><span class="alink">KBTF</span></a></li>
-          <li><a class="alink-wrap" href="parameta.html#faq"><span class="alink">FAQ</span></a></li>
         </ul>
       </div>
     </div>

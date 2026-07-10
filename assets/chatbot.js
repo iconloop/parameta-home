@@ -11,7 +11,7 @@
   fab.id = 'fabChat';
   fab.type = 'button';
   fab.setAttribute('aria-label', '파라메타에게 물어보기');
-  fab.innerHTML = '<span id="fabLabel">무엇이든 물어보세요</span><span class="fab-caret" aria-hidden="true"></span>';
+  fab.innerHTML = '<svg class="fab-ai" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.85 5.65a4 4 0 0 0 2.5 2.5L22 12l-5.65 1.85a4 4 0 0 0-2.5 2.5L12 22l-1.85-5.65a4 4 0 0 0-2.5-2.5L2 12l5.65-1.85a4 4 0 0 0 2.5-2.5L12 2z"/><path d="M19 3l.6 1.9a2 2 0 0 0 1.3 1.3L22.8 6.8l-1.9.6a2 2 0 0 0-1.3 1.3L19 10.6l-.6-1.9a2 2 0 0 0-1.3-1.3L15.2 6.8l1.9-.6a2 2 0 0 0 1.3-1.3L19 3z"/></svg><span id="fabLabel">무엇이든 물어보세요</span><span class="fab-caret" aria-hidden="true"></span>';
   document.body.appendChild(fab);
 
   /* ---- 드로어 ---- */
