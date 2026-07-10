@@ -820,6 +820,13 @@ body.hero-dark .phero-visual{ grid-column:7 / 13; display:block; align-self:stre
 .work-card.sm{ min-height:18rem }
 .work-card.static{ cursor:default; transition:transform .35s cubic-bezier(.2,.8,.2,1) }
 .work-card.static:hover{ transform:scale(1.03) }
+/* grouped: 상단 이미지 영역(고정 높이) + 텍스트는 동일 y에서 시작 */
+.work-card.grouped{ min-height:32rem; height:100%; display:flex; flex-direction:column }
+.cards-3 > li, .cards-2 > li{ display:flex }
+.work-card.grouped::before{ content:''; flex:none; height:16rem } /* 이미지 영역 */
+.work-card.grouped .work-bottom{ position:static; inset:auto }
+.work-card.grouped .work-meta{ margin-bottom:.875rem; color:var(--purple-300) }
+.work-card.grouped .work-bottom p{ font-size:var(--text-16) }
 .work-quote{ margin-top:1.25rem; border-left:2px solid var(--purple-400); padding-left:1rem;
   font-size:var(--text-14); color:rgba(var(--white-rgb),.75); line-height:1.6 }
 .work-quote cite{ display:block; margin-top:.5rem; font-style:normal; font-size:var(--text-14); color:rgba(var(--white-rgb),.45) }
@@ -996,7 +1003,7 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 <section><div class="shell sec">
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Advantages</div>
   <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>실제 금융 서비스로 이어지는<br>하나의 인프라</span></span></h2>
-  <ul class="cards-3"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static sm"><div class="work-meta"><span>MODULAR</span></div><div class="work-bottom"><h3>모듈형 API</h3><p>발행 엔진부터 온체인 KYC, 멀티체인 브릿지까지, 필요한 코어 모듈을 선택해 유연하게 구성할 수 있습니다. 처음부터 새로 개발할 필요 없이, 실제 현장에서 검증된 기술을 빠르게 적용할 수 있습니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm"><div class="work-meta"><span>COMPLIANT</span></div><div class="work-bottom"><h3>규제 대응이 준비된 인프라</h3><p>AML, 트래블룰, 감사 로그를 인프라에 통합해 규제 대응 부담을 줄입니다. 금융권과 함께 검증한 규제 기술을 그대로 적용할 수 있습니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm"><div class="work-meta"><span>ZERO-OPS</span></div><div class="work-bottom"><h3>운영까지 책임지는 인프라</h3><p>키 관리부터 가스비 대납, 인프라 운영까지, 발행 이후의 운영 전반을 ParaSta가 지원합니다. 기업은 서비스와 비즈니스 성장에만 집중할 수 있습니다.</p></div></article></li></ul>
+  <ul class="cards-3"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>MODULAR</span></div><h3>모듈형 API</h3><p>발행 엔진부터 온체인 KYC, 멀티체인 브릿지까지, 필요한 코어 모듈을 선택해 유연하게 구성할 수 있습니다. 처음부터 새로 개발할 필요 없이, 실제 현장에서 검증된 기술을 빠르게 적용할 수 있습니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>COMPLIANT</span></div><h3>규제 대응이 준비된 인프라</h3><p>AML, 트래블룰, 감사 로그를 인프라에 통합해 규제 대응 부담을 줄입니다. 금융권과 함께 검증한 규제 기술을 그대로 적용할 수 있습니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>ZERO-OPS</span></div><h3>운영까지 책임지는 인프라</h3><p>키 관리부터 가스비 대납, 인프라 운영까지, 발행 이후의 운영 전반을 ParaSta가 지원합니다. 기업은 서비스와 비즈니스 성장에만 집중할 수 있습니다.</p></div></article></li></ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Core Modules</div>

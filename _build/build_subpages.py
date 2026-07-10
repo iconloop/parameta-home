@@ -155,6 +155,13 @@ body.hero-dark .phero-visual{ grid-column:7 / 13; display:block; align-self:stre
 .work-card.sm{ min-height:18rem }
 .work-card.static{ cursor:default; transition:transform .35s cubic-bezier(.2,.8,.2,1) }
 .work-card.static:hover{ transform:scale(1.03) }
+/* grouped: 상단 이미지 영역(고정 높이) + 텍스트는 동일 y에서 시작 */
+.work-card.grouped{ min-height:32rem; height:100%; display:flex; flex-direction:column }
+.cards-3 > li, .cards-2 > li{ display:flex }
+.work-card.grouped::before{ content:''; flex:none; height:16rem } /* 이미지 영역 */
+.work-card.grouped .work-bottom{ position:static; inset:auto }
+.work-card.grouped .work-meta{ margin-bottom:.875rem; color:var(--purple-300) }
+.work-card.grouped .work-bottom p{ font-size:var(--text-16) }
 .work-quote{ margin-top:1.25rem; border-left:2px solid var(--purple-400); padding-left:1rem;
   font-size:var(--text-14); color:rgba(var(--white-rgb),.75); line-height:1.6 }
 .work-quote cite{ display:block; margin-top:.5rem; font-style:normal; font-size:var(--text-14); color:rgba(var(--white-rgb),.45) }
@@ -549,11 +556,17 @@ document.getElementById('dev-grid-toggle').addEventListener('click', () => {
 ARW = '<svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg>'
 MARK = '<svg class="icn" viewBox="0 0 48 48" aria-hidden="true"><path fill="currentColor" d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z"/></svg>'
 
-def dark_card(cap, title, desc, tags=None, quote=None, cite=None, sm=True):
+def dark_card(cap, title, desc, tags=None, quote=None, cite=None, sm=True, grouped=False):
     t = ''.join(f'<span class="tag">{x}</span>' for x in (tags or []))
     q = f'<blockquote class="work-quote">&ldquo;{quote}&rdquo;<cite>{cite}</cite></blockquote>' if quote else ''
+    meta = f'<div class="work-meta"><span>{cap}</span></div>'
+    if grouped:
+        # 키커를 하단 텍스트 블록에 붙여 상단은 이미지 영역으로 비움
+        return (f'<article class="work-card static{" sm" if sm else ""} grouped">'
+                f'<div class="work-bottom">{meta}<h3>{title}</h3><p>{desc}</p>{q}'
+                f'{f"<div class=work-tags>{t}</div>" if t else ""}</div></article>')
     return (f'<article class="work-card static{" sm" if sm else ""}">'
-            f'<div class="work-meta"><span>{cap}</span></div>'
+            f'{meta}'
             f'<div class="work-bottom"><h3>{title}</h3><p>{desc}</p>{q}'
             f'{f"<div class=work-tags>{t}</div>" if t else ""}</div></article>')
 
@@ -916,9 +929,9 @@ PAGES['parasta.html'] = dict(
   {eyebrow('Advantages')}
   {h2('실제 금융 서비스로 이어지는<br>하나의 인프라')}
   {cards_wrap([
-    dark_card('MODULAR', '모듈형 API', '발행 엔진부터 온체인 KYC, 멀티체인 브릿지까지, 필요한 코어 모듈을 선택해 유연하게 구성할 수 있습니다. 처음부터 새로 개발할 필요 없이, 실제 현장에서 검증된 기술을 빠르게 적용할 수 있습니다.'),
-    dark_card('COMPLIANT', '규제 대응이 준비된 인프라', 'AML, 트래블룰, 감사 로그를 인프라에 통합해 규제 대응 부담을 줄입니다. 금융권과 함께 검증한 규제 기술을 그대로 적용할 수 있습니다.'),
-    dark_card('ZERO-OPS', '운영까지 책임지는 인프라', '키 관리부터 가스비 대납, 인프라 운영까지, 발행 이후의 운영 전반을 ParaSta가 지원합니다. 기업은 서비스와 비즈니스 성장에만 집중할 수 있습니다.'),
+    dark_card('MODULAR', '모듈형 API', '발행 엔진부터 온체인 KYC, 멀티체인 브릿지까지, 필요한 코어 모듈을 선택해 유연하게 구성할 수 있습니다. 처음부터 새로 개발할 필요 없이, 실제 현장에서 검증된 기술을 빠르게 적용할 수 있습니다.', grouped=True),
+    dark_card('COMPLIANT', '규제 대응이 준비된 인프라', 'AML, 트래블룰, 감사 로그를 인프라에 통합해 규제 대응 부담을 줄입니다. 금융권과 함께 검증한 규제 기술을 그대로 적용할 수 있습니다.', grouped=True),
+    dark_card('ZERO-OPS', '운영까지 책임지는 인프라', '키 관리부터 가스비 대납, 인프라 운영까지, 발행 이후의 운영 전반을 ParaSta가 지원합니다. 기업은 서비스와 비즈니스 성장에만 집중할 수 있습니다.', grouped=True),
   ], cols=3)}
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
