@@ -59,6 +59,8 @@ body.hero-dark .phero-h1{ color:var(--white); max-width:18ch; font-size:var(--te
 @media (min-width:768px){ body.hero-dark .phero-h1{ font-size:var(--text-60) } }
 @media (min-width:1024px){ body.hero-dark .phero-h1{ font-size:var(--text-72) } }
 body.hero-dark .phero-text .phero-lead{ color:rgba(var(--white-rgb),.7); font-size:var(--text-20) }
+/* 히어로 CTA: 폰트 text-16 (높이는 base .pill.no-arrow 토큰 min-height:3rem = with-arrow와 동일) */
+.phero-cta .pill .hspring{ font-size:var(--text-16) }
 body.hero-dark .phero-cta .pill.outline .hspring{ border-color:rgba(var(--white-rgb),.3); color:var(--white) }
 body.hero-dark .phero-cta .pill.outline .pill-badge{ background:var(--white); color:var(--ink) }
 /* 다크 히어로: eyebrow(+블릿)·크럼브/스크롤(+디바이더)·워터마크 제거 */
@@ -195,6 +197,33 @@ body.hero-dark .phero-visual{ grid-column:7 / 13; display:block; align-self:stre
     radial-gradient(rgba(var(--ink-rgb),.06) 1px, transparent 1.5px);
   background-size:100% 100%, 20px 20px; background-position:0 0, 0 0 }
 @media (min-width:640px){ .cm-cards .work-card.grouped::before{ margin:-2rem -2rem 1.5rem } }
+/* Partners 2단 카드: 좌 금융권 / 우 퍼블릭·멀티체인 */
+.pn-grid{ display:grid; grid-template-columns:1fr; gap:1.5rem; align-items:stretch }
+@media (min-width:900px){ .pn-grid{ grid-template-columns:repeat(2,1fr); column-gap:var(--grid-gap) } }
+.pn-card{ background:var(--ink); color:var(--white); border-radius:var(--radius-card); padding:2.5rem;
+  box-shadow:0 0 0 1px rgba(var(--white-rgb),.05) }
+.pn-head{ margin-bottom:1.5rem }
+/* 키커: Advantages 다크카드 보라 키커와 동일 스타일 (타이틀 위) */
+.pn-kick{ font-size:var(--text-14); letter-spacing:.025em; color:var(--purple-300); font-weight:600; margin-bottom:.75rem }
+/* 타이틀은 다크카드(.work-bottom h3)와 동일 토큰 */
+.pn-head h3{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em }
+@media (min-width:640px){ .pn-head h3{ font-size:var(--text-30) } }
+/* 사례: 디바이더 대신 인셋 박스(우리 그레이 인셋 언어의 다크 버전) */
+.pn-list{ display:flex; flex-direction:column; gap:1rem }
+.pn-list li{ background:rgba(var(--white-rgb),.05); border-radius:var(--radius-card-sm); padding:1.5rem }
+.pn-list h4{ font-size:var(--text-18); font-weight:600; letter-spacing:-.01em }
+.pn-list p{ margin-top:.5rem; font-size:var(--text-16); color:rgba(var(--white-rgb),.55); line-height:1.6 }
+.pn-note{ margin-top:1.5rem; font-size:var(--text-16); color:var(--purple-300); line-height:1.6; text-align:center }
+/* 인증 3종: 타이틀 없이 하단 배치 — 이미지 영역 + 라벨, 디바이더 없음 */
+.cert-row{ display:grid; grid-template-columns:1fr; row-gap:3rem; padding:5rem 0 }
+@media (min-width:768px){ .cert-row{ grid-template-columns:repeat(3,1fr); column-gap:var(--grid-gap) } }
+.cert-item{ display:flex; flex-direction:column; align-items:center; gap:1.5rem }
+.cert-img{ width:100%; max-width:14rem; aspect-ratio:16/10; border-radius:var(--radius-card-sm);
+  background:color-mix(in srgb, var(--ink) 6%, var(--white)) }
+.cert-txt{ text-align:center; font-size:var(--text-20); font-weight:600; letter-spacing:-.01em; color:var(--ink) }
+@media (min-width:1024px){ .cert-txt{ font-size:var(--text-24) } }
+/* Proven Core: 3개 스탯이라 데스크톱 3열 */
+@media (min-width:1024px){ .stats-grid.pv-stats{ grid-template-columns:repeat(3,1fr) } }
 /* Core Technology 행: 화살표(페이지 이동) 제거 + 제목 한 토큰 작게 */
 .ct-rows .service-badge{ display:none }
 .ct-rows .service-row h3{ font-size:var(--text-24) }
@@ -495,6 +524,26 @@ if(cmCards.length){
   addEventListener('scroll', () => { if(!ticking){ ticking = true; requestAnimationFrame(() => { updateCmActive(); ticking = false; }); } }, { passive:true });
   addEventListener('resize', updateCmActive);
   updateCmActive();
+}
+
+/* Proven Core 숫자 카운트업 (메인 stats와 같은 결) */
+const pvVals = [...document.querySelectorAll('.pv-val')];
+if(pvVals.length){
+  const pvObs = new IntersectionObserver((ents) => {
+    ents.forEach(en => {
+      if(!en.isIntersecting) return;
+      pvObs.unobserve(en.target);
+      const target = parseInt(en.target.dataset.val, 10);
+      const t0 = performance.now(), dur = 1100;
+      (function tick(now){
+        const p = Math.min((now - t0) / dur, 1);
+        const e = 1 - Math.pow(1 - p, 3); /* easeOutCubic */
+        en.target.textContent = Math.round(target * e);
+        if(p < 1) requestAnimationFrame(tick);
+      })(t0);
+    });
+  }, { threshold: .6 });
+  pvVals.forEach(el => pvObs.observe(el));
 }
 
 /* Core Modules 좌측 타이틀: 화면 중앙 고정점 계산(50vh - 높이/2) */
@@ -1027,25 +1076,53 @@ PAGES['parasta.html'] = dict(
     dict(title='MPC 키 분할, 복구 (Key Share)', desc='개인키를 여러 개의 키셰어로 나누어 분산 보관하고, 정해진 임계값 이상의 키셰어가 모일 때만 서명하거나 복구합니다. 개인키를 한곳에 보관하지 않아 분실과 탈취 위험을 줄입니다.'),
   ])}</div>
 </div></section>
+<!-- Proven Core: 메인 Why Parameta 스타일 다크 스탯 패널 -->
+<section><div class="shell stats-shell">
+  <div class="stats-panel rvl" style="--rvl-y:40px; --rvl-s:.99">
+    <div class="eyebrow light"><span class="dot"></span>Proven Core</div>
+    <h2 class="stats-h2" data-line-reveal><span class="rvl-line"><span>금융, 공공, Web3 현장에서<br>검증된 코어 기술</span></span></h2>
+    <ul class="stats-grid pv-stats">
+      <li class="rvl" style="--rvl-y:20px"><div class="stat-num"><span class="pv-val" data-val="29">0</span>+</div><div class="stat-label">금융기관</div></li>
+      <li class="rvl" style="--rvl-y:20px; --rvl-delay:90ms"><div class="stat-num"><span class="pv-val" data-val="8">0</span>+</div><div class="stat-label">공공기관</div></li>
+      <li class="rvl" style="--rvl-y:20px; --rvl-delay:180ms"><div class="stat-num"><span class="pv-val" data-val="4">0</span>+</div><div class="stat-label">Web3 프로젝트</div></li>
+    </ul>
+  </div>
+</div></section>
 <section><div class="shell sec" style="padding-top:0">
-  {eyebrow('Proven Core')}
-  {h2('이미 금융·공공·퍼블릭 현장에서 검증된 코어 기술')}
-  {nums([
-    dict(cap='금융', n='29+', sub='금융기관'),
-    dict(cap='공공', n='8+', sub='공공기관'),
-    dict(cap='Web3', n='4+', sub='Web3 프로젝트'),
-  ])}
-  <div class="rvl" style="margin:2rem 0 3rem">
-    <div style="font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); margin-bottom:1rem">함께한 파트너</div>
+  {eyebrow('Partners')}
+  {h2('함께한 파트너')}
+  <div class="rvl" style="margin:0 0 3rem">
     {chips(['신한은행','NH농협은행','NH투자증권','삼성증권','삼성','KB','IBK기업은행','한화'])}
   </div>
-  {rows([
-    dict(idx='금융권', title='신한은행 · NH농협은행', desc='금융권 DID 실명인증 상용화 — 올원뱅크 실명인증 적용.'),
-    dict(idx='금융권', title='한국투자증권 외 25개 증권사', desc='증권업권을 하나의 온체인 신원 체계로 묶은 공동인증. 스테이블코인 인프라가 실제로 해야 할 일과 가장 가까운 레퍼런스.'),
-    dict(idx='퍼블릭', title='자체 블록체인 코어 엔진 개발·운영', desc='PBFT 합의와 인터체인 프로토콜을 자체 기술로 구현한 퍼블릭 메인넷을 다국가 밸리데이터 환경에서 구축·운영.'),
-  ], meta=True)}
-  <div class="rvl" style="margin-top:2.5rem">
-    {chips(['기술보증기금 TI-1','CSAP 인증','혁신금융서비스 지정'])}
+  <div class="pn-grid">
+    <article class="pn-card rvl" style="--rvl-y:24px">
+      <div class="pn-head">
+        <p class="pn-kick">규제 산업에서 검증된 기술</p>
+        <h3>금융권</h3>
+      </div>
+      <ul class="pn-list">
+        <li><h4>신한은행</h4><p>금융권 DID 실명인증 상용화</p></li>
+        <li><h4>NH농협은행</h4><p>올원뱅크 실명인증 적용</p></li>
+        <li><h4>한국투자증권 외 25개 증권사</h4><p>증권업권을 하나의 온체인 신원 체계로 연결한 공동인증 서비스. 여러 금융기관의 신원과 인증을 연동한 경험으로, 스테이블코인 인프라에 필요한 규제 대응과 기관 간 연결 역량을 검증.</p></li>
+      </ul>
+    </article>
+    <article class="pn-card rvl" style="--rvl-y:24px; --rvl-delay:90ms">
+      <div class="pn-head">
+        <p class="pn-kick">스테이블코인이 발행되고 유통되는 환경</p>
+        <h3>퍼블릭, 멀티체인</h3>
+      </div>
+      <ul class="pn-list">
+        <li><h4>자체 블록체인 코어 엔진 개발, 운영</h4><p>PBFT 합의와 인터체인 프로토콜을 자체 기술로 구현한 퍼블릭 메인넷. 다국가 밸리데이터 환경에서 축적한 구축, 운영 경험.</p></li>
+        <li><h4>멀티체인 오케스트레이션, 크로스체인 연동</h4><p>CEX, DEX 통합 유동성, 스마트 오더 라우팅, 체인 간 자산 이동을 처리하는 WalletFi 오케스트레이션 솔루션, PortX와 SuperCycl의 직접 개발, 운영 경험.</p></li>
+        <li><h4>규제 친화형 DeFi, 유동성 인프라 기술</h4><p>통합 유동성 집계와 규제 준수형 거래 실행 등, 제도권 환경에 맞춘 DeFi 인프라 기술.</p></li>
+      </ul>
+      <p class="pn-note">퍼블릭 체인에서 축적한 코어 엔진과 오케스트레이션 경험,<br>스테이블코인 발행 이후를 뒷받침하는 기반.</p>
+    </article>
+  </div>
+  <div class="cert-row rvl" style="margin-top:5rem; --rvl-y:24px">
+    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">기술보증기금 TI-1</div></div>
+    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">CSAP 인증</div></div>
+    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">혁신금융서비스 지정</div></div>
   </div>
 </div></section>
 ''')
