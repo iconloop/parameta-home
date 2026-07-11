@@ -822,11 +822,44 @@ body.hero-dark .phero-visual{ grid-column:7 / 13; display:block; align-self:stre
 .work-card.static:hover{ transform:scale(1.03) }
 /* grouped: 상단 이미지 영역(고정 높이) + 텍스트는 동일 y에서 시작 */
 .work-card.grouped{ min-height:32rem; height:100%; display:flex; flex-direction:column }
-.cards-3 > li, .cards-2 > li{ display:flex }
+/* grouped 카드가 든 그리드 셀만 flex로 (다른 카드 레이아웃 영향 없이 높이 정렬) */
+.cards-3 > li:has(.work-card.grouped), .cards-2 > li:has(.work-card.grouped){ display:flex }
 .work-card.grouped::before{ content:''; flex:none; height:16rem } /* 이미지 영역 */
 .work-card.grouped .work-bottom{ position:static; inset:auto }
 .work-card.grouped .work-meta{ margin-bottom:.875rem; color:var(--purple-300) }
 .work-card.grouped .work-bottom p{ font-size:var(--text-16) }
+.core-mods .work-bottom p{ font-size:var(--text-16) }
+/* Core Modules: 좌측 타이틀 sticky + 우측 카드 세로 스크롤 */
+.cm-grid{ display:grid; grid-template-columns:1fr; gap:2.5rem }
+.cm-cards{ display:flex; flex-direction:column; gap:1.5rem }
+@media (min-width:900px){
+  .cm-grid{ grid-template-columns:repeat(12,1fr); column-gap:var(--grid-gap) }
+  .cm-head{ grid-column:1 / 5 }
+  /* 스티키 top = 50vh - 타이틀높이/2 (JS가 --cm-center 세팅)
+     시작: 첫 카드와 같은 y(자연 위치) → 스크롤: 화면 중앙 고정 → 끝: 마지막 카드 하단에서 멈춤 */
+  .cm-sticky{ position:sticky; top:var(--cm-center, 35vh) }
+  .cm-cards{ grid-column:6 / 13 }
+}
+/* 이 섹션 카드는 호버 확대 없음(대형 카드라 랙 방지) */
+.cm-cards .work-card.static{ transition:opacity .6s cubic-bezier(.4,0,.2,1) }
+.cm-cards .work-card.static:hover{ transform:none }
+/* 스크롤 하이라이트: 중앙에 온 카드만 진하게, 나머지는 연하게 */
+.cm-cards .work-card{ opacity:.5; transition:opacity .6s cubic-bezier(.4,0,.2,1) }
+.cm-cards .work-card.cm-active{ opacity:1 }
+/* 그레이 배경 카드(화면 이미지가 들어갈 예정) — 다크 대신 라이트 그레이 */
+.cm-cards .work-card{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); color:var(--ink); height:auto }
+.cm-cards .work-card.grouped .work-meta{ color:var(--purple-500); font-weight:600 }
+.cm-cards .work-bottom h3{ color:var(--ink) }
+.cm-cards .work-bottom p{ color:rgba(var(--ink-rgb),.6); max-width:none }
+/* 태그: 진한 그레이 필 + 흰 글씨, 본문과 같은 사이즈, weight 500 */
+.cm-cards .tag{ border:none; background:rgba(var(--ink-rgb),.45); color:var(--white);
+  font-size:var(--text-16); font-weight:500; padding:.625rem 1.25rem }
+/* 이미지 영역: 카드 폭 full-bleed(양옆·상단 여백 제거) + 도트 패턴 + 하단 그라데이션 마스크 */
+.cm-cards .work-card.grouped::before{ height:16rem; margin:-1.5rem -1.5rem 1.5rem; border-radius:0;
+  background-image:linear-gradient(to bottom, transparent 45%, color-mix(in srgb, var(--ink) 6%, var(--white))),
+    radial-gradient(rgba(var(--ink-rgb),.06) 1px, transparent 1.5px);
+  background-size:100% 100%, 20px 20px; background-position:0 0, 0 0 }
+@media (min-width:640px){ .cm-cards .work-card.grouped::before{ margin:-2rem -2rem 1.5rem } }
 .work-quote{ margin-top:1.25rem; border-left:2px solid var(--purple-400); padding-left:1rem;
   font-size:var(--text-14); color:rgba(var(--white-rgb),.75); line-height:1.6 }
 .work-quote cite{ display:block; margin-top:.5rem; font-style:normal; font-size:var(--text-14); color:rgba(var(--white-rgb),.45) }
@@ -1183,6 +1216,30 @@ hlCells.forEach(c => {
   c.addEventListener('mouseenter', () => hlCells.forEach(x => x.classList.add('hl-hover')));
   c.addEventListener('mouseleave', () => hlCells.forEach(x => x.classList.remove('hl-hover')));
 });
+
+/* Core Modules 카드: 뷰포트 중앙에 가장 가까운 카드만 활성(진하게) */
+const cmCards = [...document.querySelectorAll('.cm-cards .work-card')];
+function updateCmActive(){
+  if(!cmCards.length) return;
+  const mid = window.innerHeight / 2;
+  let best = null, bestD = Infinity;
+  cmCards.forEach(c => { const r = c.getBoundingClientRect(); const d = Math.abs(r.top + r.height/2 - mid); if(d < bestD){ bestD = d; best = c; } });
+  cmCards.forEach(c => c.classList.toggle('cm-active', c === best));
+}
+if(cmCards.length){
+  let ticking = false;
+  addEventListener('scroll', () => { if(!ticking){ ticking = true; requestAnimationFrame(() => { updateCmActive(); ticking = false; }); } }, { passive:true });
+  addEventListener('resize', updateCmActive);
+  updateCmActive();
+}
+
+/* Core Modules 좌측 타이틀: 화면 중앙 고정점 계산(50vh - 높이/2) */
+const cmSticky = document.querySelector('.cm-sticky');
+function setCmCenter(){
+  if(!cmSticky) return;
+  cmSticky.style.setProperty('--cm-center', `calc(50vh - ${Math.round(cmSticky.offsetHeight/2)}px)`);
+}
+if(cmSticky){ setCmCenter(); addEventListener('resize', setCmCenter); }
 
 /* page hero h1 reveals immediately */
 const pheroH1 = document.querySelector('.phero-h1');

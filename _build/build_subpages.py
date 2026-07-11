@@ -157,11 +157,44 @@ body.hero-dark .phero-visual{ grid-column:7 / 13; display:block; align-self:stre
 .work-card.static:hover{ transform:scale(1.03) }
 /* grouped: 상단 이미지 영역(고정 높이) + 텍스트는 동일 y에서 시작 */
 .work-card.grouped{ min-height:32rem; height:100%; display:flex; flex-direction:column }
-.cards-3 > li, .cards-2 > li{ display:flex }
+/* grouped 카드가 든 그리드 셀만 flex로 (다른 카드 레이아웃 영향 없이 높이 정렬) */
+.cards-3 > li:has(.work-card.grouped), .cards-2 > li:has(.work-card.grouped){ display:flex }
 .work-card.grouped::before{ content:''; flex:none; height:16rem } /* 이미지 영역 */
 .work-card.grouped .work-bottom{ position:static; inset:auto }
 .work-card.grouped .work-meta{ margin-bottom:.875rem; color:var(--purple-300) }
 .work-card.grouped .work-bottom p{ font-size:var(--text-16) }
+.core-mods .work-bottom p{ font-size:var(--text-16) }
+/* Core Modules: 좌측 타이틀 sticky + 우측 카드 세로 스크롤 */
+.cm-grid{ display:grid; grid-template-columns:1fr; gap:2.5rem }
+.cm-cards{ display:flex; flex-direction:column; gap:1.5rem }
+@media (min-width:900px){
+  .cm-grid{ grid-template-columns:repeat(12,1fr); column-gap:var(--grid-gap) }
+  .cm-head{ grid-column:1 / 5 }
+  /* 스티키 top = 50vh - 타이틀높이/2 (JS가 --cm-center 세팅)
+     시작: 첫 카드와 같은 y(자연 위치) → 스크롤: 화면 중앙 고정 → 끝: 마지막 카드 하단에서 멈춤 */
+  .cm-sticky{ position:sticky; top:var(--cm-center, 35vh) }
+  .cm-cards{ grid-column:6 / 13 }
+}
+/* 이 섹션 카드는 호버 확대 없음(대형 카드라 랙 방지) */
+.cm-cards .work-card.static{ transition:opacity .6s cubic-bezier(.4,0,.2,1) }
+.cm-cards .work-card.static:hover{ transform:none }
+/* 스크롤 하이라이트: 중앙에 온 카드만 진하게, 나머지는 연하게 */
+.cm-cards .work-card{ opacity:.5; transition:opacity .6s cubic-bezier(.4,0,.2,1) }
+.cm-cards .work-card.cm-active{ opacity:1 }
+/* 그레이 배경 카드(화면 이미지가 들어갈 예정) — 다크 대신 라이트 그레이 */
+.cm-cards .work-card{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); color:var(--ink); height:auto }
+.cm-cards .work-card.grouped .work-meta{ color:var(--purple-500); font-weight:600 }
+.cm-cards .work-bottom h3{ color:var(--ink) }
+.cm-cards .work-bottom p{ color:rgba(var(--ink-rgb),.6); max-width:none }
+/* 태그: 진한 그레이 필 + 흰 글씨, 본문과 같은 사이즈, weight 500 */
+.cm-cards .tag{ border:none; background:rgba(var(--ink-rgb),.45); color:var(--white);
+  font-size:var(--text-16); font-weight:500; padding:.625rem 1.25rem }
+/* 이미지 영역: 카드 폭 full-bleed(양옆·상단 여백 제거) + 도트 패턴 + 하단 그라데이션 마스크 */
+.cm-cards .work-card.grouped::before{ height:16rem; margin:-1.5rem -1.5rem 1.5rem; border-radius:0;
+  background-image:linear-gradient(to bottom, transparent 45%, color-mix(in srgb, var(--ink) 6%, var(--white))),
+    radial-gradient(rgba(var(--ink-rgb),.06) 1px, transparent 1.5px);
+  background-size:100% 100%, 20px 20px; background-position:0 0, 0 0 }
+@media (min-width:640px){ .cm-cards .work-card.grouped::before{ margin:-2rem -2rem 1.5rem } }
 .work-quote{ margin-top:1.25rem; border-left:2px solid var(--purple-400); padding-left:1rem;
   font-size:var(--text-14); color:rgba(var(--white-rgb),.75); line-height:1.6 }
 .work-quote cite{ display:block; margin-top:.5rem; font-style:normal; font-size:var(--text-14); color:rgba(var(--white-rgb),.45) }
@@ -441,6 +474,30 @@ hlCells.forEach(c => {
   c.addEventListener('mouseenter', () => hlCells.forEach(x => x.classList.add('hl-hover')));
   c.addEventListener('mouseleave', () => hlCells.forEach(x => x.classList.remove('hl-hover')));
 });
+
+/* Core Modules 카드: 뷰포트 중앙에 가장 가까운 카드만 활성(진하게) */
+const cmCards = [...document.querySelectorAll('.cm-cards .work-card')];
+function updateCmActive(){
+  if(!cmCards.length) return;
+  const mid = window.innerHeight / 2;
+  let best = null, bestD = Infinity;
+  cmCards.forEach(c => { const r = c.getBoundingClientRect(); const d = Math.abs(r.top + r.height/2 - mid); if(d < bestD){ bestD = d; best = c; } });
+  cmCards.forEach(c => c.classList.toggle('cm-active', c === best));
+}
+if(cmCards.length){
+  let ticking = false;
+  addEventListener('scroll', () => { if(!ticking){ ticking = true; requestAnimationFrame(() => { updateCmActive(); ticking = false; }); } }, { passive:true });
+  addEventListener('resize', updateCmActive);
+  updateCmActive();
+}
+
+/* Core Modules 좌측 타이틀: 화면 중앙 고정점 계산(50vh - 높이/2) */
+const cmSticky = document.querySelector('.cm-sticky');
+function setCmCenter(){
+  if(!cmSticky) return;
+  cmSticky.style.setProperty('--cm-center', `calc(50vh - ${Math.round(cmSticky.offsetHeight/2)}px)`);
+}
+if(cmSticky){ setCmCenter(); addEventListener('resize', setCmCenter); }
 
 /* page hero h1 reveals immediately */
 const pheroH1 = document.querySelector('.phero-h1');
@@ -934,16 +991,24 @@ PAGES['parasta.html'] = dict(
     dark_card('ZERO-OPS', '운영까지 책임지는 인프라', '키 관리부터 가스비 대납, 인프라 운영까지, 발행 이후의 운영 전반을 ParaSta가 지원합니다. 기업은 서비스와 비즈니스 성장에만 집중할 수 있습니다.', grouped=True),
   ], cols=3)}
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {eyebrow('Core Modules')}
-  {h2('필요한 기능만 골라 조립하는 5개의 코어 모듈')}
-  <ul class="cards-2">
-    <li class="rvl" style="--rvl-y:40px">{dark_card('01 / ISSUANCE', 'Issuance', '기업 고유의 스테이블코인·토큰 자산을 발행·관리합니다. Multi-sig, PoR(준비자산 증빙), Whitelist/Blacklist, 자금동결까지 6-Layer 구조로 발행부터 사후검증까지 통제합니다.', ['발행·소각·준비금 운용','PoR 준비자산 증빙','실시간 모니터링'])}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms">{dark_card('02 / WALLET', 'Wallet', '계정 추상화(ERC-4337) 기반 가스리스 UX. 멀티체인을 하나의 인터페이스로 통합하고, Stealth Address로 프라이버시를, 온체인 KYC와 연동해 검증된 지갑만 거래하도록 통제합니다.', ['가스리스 UX','멀티체인 단일 인터페이스','Stealth Address'])}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms">{dark_card('03 / ORCHESTRATION', 'Orchestration', '은행 계좌와 온체인 지갑을 하나의 API로 연결합니다. Fiat-Crypto 자동 스왑, 예약·조건부 정산, 이벤트 기반 연동까지 거래 전체를 하나의 흐름으로 관리합니다.', ['Fiat ↔ Crypto 자동 스왑','예약·조건부 정산','AML 실시간 스크리닝'])}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms">{dark_card('04 / ON-CHAIN KYC', 'On-chain KYC', '공인기관 KYC를 검증 가능한 크레덴셜(VC/VP)로 발급하고, 검증된 지갑을 온체인 신원 레지스트리(KYW)에 등록합니다. 이체 시점에 자격을 확인하며 개인정보는 온체인에 남기지 않습니다.', ['DID 기반 VC/VP 발급','온체인 신원 레지스트리(KYW)','ERC-3643 이체 검증'])}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:360ms">{dark_card('05 / UNIFIED ADMIN', 'Unified Admin', '4개 모듈을 하나의 관제탑에서 통합 관리합니다. Mint/Burn 통제, MPC 기반 키 관리와 다단계 승인(Multi-sig), 자금 흐름 모니터링까지 한 화면에서 확인합니다.', ['Mint/Burn 통제','MPC 키·다단계 승인','통합 감사 리포팅'])}</li>
+<section><div class="shell sec">
+  <div class="cm-grid">
+    <div class="cm-head">
+      <div class="cm-sticky">
+        <div class="cm-head-in rvl" style="--rvl-y:20px">
+          <div class="eyebrow dark"><span class="dot"></span>Core Modules</div>
+          <h2 class="sec-h2" style="max-width:24ch">필요한 기능만 선택해 구성하는<br>5가지 코어 모듈</h2>
+        </div>
+      </div>
+    </div>
+  <ul class="cm-cards core-mods">
+    <li>{dark_card('Issuance', 'Mint with Compliance, Scale Across Chains', '기업 고유의 스테이블코인과 토큰화 자산을 발행하고 관리합니다. Multi-sig, PoR 기반 준비자산 증빙, Whitelist, Blacklist, 자금 동결 기능을 포함한 6-Layer 구조로 발행부터 사후 검증까지 전 과정을 통제합니다.', ['발행, 소각, 준비자산 운용','PoR 기반 준비자산 증빙','자산 수명주기 실시간 모니터링'], grouped=True)}</li>
+    <li>{dark_card('Wallet', 'Enterprise Control, Frictionless UX', '계정 추상화, ERC-4337을 기반으로 가스비 부담 없는 사용자 경험을 제공합니다. 여러 체인을 하나의 인터페이스로 통합하고, Stealth Address로 프라이버시를 보호합니다. 온체인 KYC 모듈과 연동해 신원이 확인된 지갑만 거래할 수 있도록 통제합니다.', ['가스비 없는 사용자 경험','멀티체인 통합 인터페이스','Stealth Address 기반 프라이버시 보호'], grouped=True)}</li>
+    <li>{dark_card('Orchestration', 'Bridge Worlds, Settle Instantly', '은행 계좌와 온체인 지갑을 하나의 API로 연결합니다. Fiat, Crypto 자동 전환부터 예약 정산, 조건부 정산, 이벤트 기반 시스템 연동까지, 거래 전 과정을 하나의 흐름으로 관리합니다.', ['Fiat ↔ Crypto 자동 전환','예약, 조건부 정산','실시간 AML 스크리닝'], grouped=True)}</li>
+    <li>{dark_card('On-chain KYC', 'Verify Once, Use Everywhere', '공인기관의 KYC 결과를 검증 가능한 크레덴셜, VC와 VP 형태로 발급하고, 검증된 지갑 주소를 온체인 신원 레지스트리, KYW에 등록합니다. 토큰 컨트랙트는 이체 시점에 레지스트리를 조회해 자격을 갖춘 지갑만 거래하도록 통제하며, 개인정보는 온체인에 저장하지 않습니다.', ['DID 기반 VC, VP 발급','KYW 온체인 화이트리스트','ERC-3643, T-REX 기반 이체 검증'], grouped=True)}</li>
+    <li>{dark_card('Unified Admin', 'See Everything, Control Everything', '발행, 지갑, 오케스트레이션, 온체인 KYC 등 4개 모듈을 하나의 통합 관제 환경에서 관리합니다. Mint, Burn 통제부터 MPC 기반 키 관리, 다단계 승인, 자금 흐름 모니터링까지 모든 운영 현황을 한 화면에서 확인할 수 있습니다.', ['Mint, Burn 라이프사이클 통제','MPC 기반 키 관리, 다단계 승인','통합 감사 리포팅'], grouped=True)}</li>
   </ul>
+  </div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
   {eyebrow('Core Technology')}
