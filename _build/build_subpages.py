@@ -195,6 +195,12 @@ body.hero-dark .phero-visual{ grid-column:7 / 13; display:block; align-self:stre
     radial-gradient(rgba(var(--ink-rgb),.06) 1px, transparent 1.5px);
   background-size:100% 100%, 20px 20px; background-position:0 0, 0 0 }
 @media (min-width:640px){ .cm-cards .work-card.grouped::before{ margin:-2rem -2rem 1.5rem } }
+/* Core Technology 행: 화살표(페이지 이동) 제거 + 제목 한 토큰 작게 */
+.ct-rows .service-badge{ display:none }
+.ct-rows .service-row h3{ font-size:var(--text-24) }
+.ct-rows .service-desc{ font-size:var(--text-16); max-width:34rem; margin-right:5rem }
+.ct-rows .service-idx{ transition:color .25s ease }
+@media (hover:hover){ .ct-rows .service-row:hover .service-idx{ color:var(--purple-500); font-weight:600 } }
 .work-quote{ margin-top:1.25rem; border-left:2px solid var(--purple-400); padding-left:1rem;
   font-size:var(--text-14); color:rgba(var(--white-rgb),.75); line-height:1.6 }
 .work-quote cite{ display:block; margin-top:.5rem; font-style:normal; font-size:var(--text-14); color:rgba(var(--white-rgb),.45) }
@@ -1010,16 +1016,16 @@ PAGES['parasta.html'] = dict(
   </ul>
   </div>
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
+<section><div class="shell sec">
   {eyebrow('Core Technology')}
   {h2('엔터프라이즈급 기술을 인프라에 내재화')}
-  {rows([
-    dict(title='계정 추상화 (AA)', desc='복잡한 지갑을 Web2 앱처럼 쉽게. 기관이 자기 서비스에 지갑을 붙일 때 진입장벽을 낮춥니다.'),
-    dict(title='선택적 공개 (ZKP · Selective Disclosure)', desc='영지식증명 기반으로 KYC는 하되 개인정보 원문은 넘기지 않고 필요한 사실만 증명합니다.'),
-    dict(title='스텔스 주소 (Stealth Address)', desc='거래 상대·내역을 온체인에 드러내지 않는 프라이버시 보호 구조입니다.'),
-    dict(title='단일 인터페이스 멀티체인', desc='체인마다 따로 개발할 필요 없이 하나의 인터페이스로 여러 체인 자산·거래를 다루고, 같은 API로 확장됩니다.'),
-    dict(title='MPC 키 분할·복구 (Key Share)', desc='개인키를 여러 조각으로 나눠 분산 보관하고, 임계값 이상이 모일 때만 서명·복구해 분실·탈취 위험을 낮춥니다.'),
-  ])}
+  <div class="ct-rows">{rows([
+    dict(title='계정 추상화 (AA)', desc='복잡한 지갑 기능을 Web2 서비스처럼 간편하게 제공합니다. 기관이 자사 서비스에 지갑을 도입할 때 사용자 진입장벽을 낮춥니다.'),
+    dict(title='선택적 공개 (ZKP, Selective Disclosure)', desc='영지식증명을 기반으로 KYC를 수행하되, 개인정보 원문은 공유하지 않고 필요한 정보만 선택적으로 증명합니다.'),
+    dict(title='스텔스 주소 (Stealth Address)', desc='거래마다 새로운 수신 주소를 생성해, 사용자와 거래 내역 간의 연결을 어렵게 하는 프라이버시 보호 기술입니다.'),
+    dict(title='단일 인터페이스 멀티체인 (Multi-chain)', desc='체인별로 지갑, SDK, 연동 기능을 각각 개발할 필요 없이, 하나의 인터페이스에서 여러 체인의 자산과 거래를 통합 관리합니다. 새로운 체인이 필요할 때도 동일한 API로 확장할 수 있어 특정 체인에 종속되지 않습니다.'),
+    dict(title='MPC 키 분할, 복구 (Key Share)', desc='개인키를 여러 개의 키셰어로 나누어 분산 보관하고, 정해진 임계값 이상의 키셰어가 모일 때만 서명하거나 복구합니다. 개인키를 한곳에 보관하지 않아 분실과 탈취 위험을 줄입니다.'),
+  ])}</div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
   {eyebrow('Proven Core')}
