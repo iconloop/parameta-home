@@ -254,12 +254,17 @@ body.hero-dark .phero-visual{ grid-column:7 / 13; display:block; align-self:stre
 .ct-rows .service-desc{ display:block; font-size:var(--text-16); max-width:34rem; margin-right:5rem }
 /* <1024: 행 리스트 본문을 타이틀 아래로 (사라지지 않게) — 전 서브페이지 공통 */
 @media (max-width:1023px){
-  .sec .service-row{ flex-wrap:wrap; row-gap:.5rem }
+  .sec .service-row{ position:relative; padding-right:4.5rem; flex-wrap:wrap; row-gap:.5rem }
+  .sec .service-badge{ position:absolute; right:1.25rem; top:50%; transform:translateY(-50%) }
   .sec .service-desc{ display:block; flex-basis:100%; max-width:none; margin:0 0 0 2.75rem }
   .sec .row-meta ~ .service-desc{ margin-left:0 } }
 @media (min-width:640px) and (max-width:1023px){
   .sec .service-desc{ margin-left:4rem }
   .sec .row-meta ~ .service-desc{ margin-left:7.5rem } }
+/* 모바일: meta(날짜) 행은 날짜 위·타이틀 아래 스택 */
+@media (max-width:639px){
+  .sec .service-row .row-meta{ flex-basis:100%; width:auto; margin-bottom:.125rem }
+  .sec .row-sm h3{ font-size:var(--text-20) } }
 .ct-rows .service-idx{ transition:color .25s ease }
 @media (hover:hover){ .ct-rows .service-row:hover .service-idx{ color:var(--purple-500); font-weight:600 } }
 .work-quote{ margin-top:1.25rem; border-left:2px solid var(--purple-400); padding-left:1rem;
