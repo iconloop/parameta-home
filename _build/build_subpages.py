@@ -935,6 +935,11 @@ PAGES['company.html'] = dict(
     h1_lines=['Web2의 안정성과', 'Web3의 가능성을', '모두 경험한 기업'],
     lead='파라메타는 공공, 금융, 민간 IT 시스템 운영 경험과 1세대 메인넷과 dApp 구축 경험을 바탕으로, 기업의 디지털자산 사업을 안정적으로 시작하고 확장할 수 있도록 지원합니다.',
     crumb='Company — 회사소개',
+    body_class='hero-dark',
+    hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
+      <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">Contact Us</span></a>
+      <a class="pill outline no-arrow hs-scale" href="careers.html"><span class="hspring">Careers</span></a>
+    </div>''',
     content=f'''
 <section><div class="shell sec">
   {eyebrow('Vision')}
@@ -1050,6 +1055,10 @@ PAGES['insights.html'] = dict(
     h1_lines=['디지털자산 시장을', '읽는 인사이트'],
     lead='사업·파트너십·인증·수상 소식과 보도자료, 그리고 시장을 읽는 블로그를 한곳에 모았습니다.',
     crumb='Insights — 보도자료 · 블로그',
+    body_class='hero-dark',
+    hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
+      <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">Contact Us</span></a>
+    </div>''',
     content=f'''
 <section><div class="shell sec">
   {eyebrow('Press Release')}
