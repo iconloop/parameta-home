@@ -351,36 +351,6 @@ CHROME_FOOTER = """
         <p class="footer-tagline">서비스 환경에 맞는 디지털자산 인프라, 파라메타와 함께 시작해보세요.</p>
         <p class="footer-addr">서울특별시 서초구 강남대로 311 드림플러스 8F<br>02-2138-7026 · info@parametacorp.com</p>
       </div>
-      <div class="footer-col">
-        <div class="footer-col-title">Company</div>
-        <ul>
-          <li><a class="alink-wrap" href="company.html"><span class="alink">회사소개</span></a></li>
-          <li><a class="alink-wrap" href="careers.html"><span class="alink">채용</span></a></li>
-          <li><a class="alink-wrap" href="insights.html"><span class="alink">인사이트</span></a></li>
-          <li><a class="alink-wrap" href="contact.html"><span class="alink">컨택</span></a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <div class="footer-col-title">Solutions</div>
-        <ul>
-          <li><a class="alink-wrap" href="solution-finance.html"><span class="alink">금융</span></a></li>
-          <li><a class="alink-wrap" href="solution-gov.html"><span class="alink">공공</span></a></li>
-          <li><a class="alink-wrap" href="solution-cert.html"><span class="alink">증명서</span></a></li>
-          <li><a class="alink-wrap" href="solution-exchange.html"><span class="alink">화이트라벨 거래소</span></a></li>
-          <li><a class="alink-wrap" href="solution-data.html"><span class="alink">데이터주권</span></a></li>
-          <li><a class="alink-wrap" href="solution-settlement.html"><span class="alink">결제·정산</span></a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <div class="footer-col-title">Products</div>
-        <ul>
-          <li><a class="alink-wrap" href="parasta.html"><span class="alink">ParaSta</span></a></li>
-          <li><a class="alink-wrap" href="portx.html"><span class="alink">Port X</span></a></li>
-          <li><a class="alink-wrap" href="myid.html"><span class="alink">MyID</span></a></li>
-          <li><a class="alink-wrap" href="broof.html"><span class="alink">Broof</span></a></li>
-          <li><a class="alink-wrap" href="kbtf.html"><span class="alink">KBTF</span></a></li>
-        </ul>
-      </div>
     </div>
     <div class="footer-legal">
       <span>ⓒ PARAMETA. 2026 · 대표 김종협 · 사업자등록번호 647-81-00375</span>
@@ -1135,6 +1105,11 @@ PAGES['portx.html'] = dict(
     h1_lines=['PortX'],
     lead='PortX는 디지털자산 거래 기능을 빠르게 도입할 수 있는 화이트라벨 거래소 솔루션입니다. 기술·보안·운영 부담은 낮추고, 사용자는 기존 서비스 안에서 그대로 거래할 수 있습니다.',
     crumb='Products — Port X',
+    body_class='hero-dark',
+    hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
+      <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">View Demo</span></a>
+      <a class="pill outline no-arrow hs-scale" href="contact.html"><span class="hspring">Talk to Sales</span></a>
+    </div>''',
     content=f'''
 <section><div class="shell sec">
   {eyebrow('Supported Exchanges')}
@@ -1433,6 +1408,11 @@ PAGES['broof.html'] = dict(
     h1_lines=['Broof'],
     lead='Broof는 블록체인 기반 디지털 증명서 발급·검증 서비스입니다. 별도 시스템 구축 없이 웹에서 증명서를 발급하고, QR 하나로 원본 여부와 위·변조 여부를 즉시 확인할 수 있습니다.',
     crumb='Products — Broof',
+    body_class='hero-dark',
+    hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
+      <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">View Demo</span></a>
+      <a class="pill outline no-arrow hs-scale" href="contact.html"><span class="hspring">Talk to Sales</span></a>
+    </div>''',
     content=f"""
 <section><div class="shell sec">
   <ul class="cards-3">
@@ -1567,6 +1547,11 @@ PAGES['solution-finance.html'] = dict(
     h1_lines=['규제 환경에 맞춘', '엔터프라이즈 디지털자산', '금융 플랫폼'],
     lead='발행·지갑·오케스트레이션·온체인 KYC·통합관제를 하나로 연결합니다. 스테이블코인·예금토큰·RWA·토큰증권까지 단계적으로 확장합니다.',
     crumb='Solutions — 금융',
+    body_class='hero-dark',
+    hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
+      <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">View Demo</span></a>
+      <a class="pill outline no-arrow hs-scale" href="contact.html"><span class="hspring">Talk to Sales</span></a>
+    </div>''',
     content=f"""
 <section><div class="shell sec">
   {eyebrow('Product')}
@@ -1664,6 +1649,11 @@ PAGES['solution-gov.html'] = dict(
     h1_lines=['공공기관용 CSAP 인증', '블록체인 SaaS'],
     lead='DID·지갑·개인데이터저장소(PDS)·분산저장(BFS) 기반 서비스를 직접 구축하지 않고 구독형으로 도입합니다. 신청 4단계, 최대 1주일 내 적용.',
     crumb='Solutions — 공공',
+    body_class='hero-dark',
+    hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
+      <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">View Demo</span></a>
+      <a class="pill outline no-arrow hs-scale" href="contact.html"><span class="hspring">Talk to Sales</span></a>
+    </div>''',
     content=f"""
 <section><div class="shell sec">
   {eyebrow('Product')}
@@ -1759,6 +1749,11 @@ PAGES['solution-cert.html'] = dict(
     h1_lines=['발급부터 공유, 제출처', '검증까지 끝나는', '디지털 증명 인프라'],
     lead='위촉장·수료증·MOU·디지털 배지 등 다양한 증명을 발급·공유·검증할 수 있는 블록체인 기반 디지털 증명 서비스입니다.',
     crumb='Solutions — 증명서',
+    body_class='hero-dark',
+    hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
+      <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">View Demo</span></a>
+      <a class="pill outline no-arrow hs-scale" href="contact.html"><span class="hspring">Talk to Sales</span></a>
+    </div>''',
     content=f"""
 <section><div class="shell sec">
   {eyebrow('Product')}
@@ -1845,6 +1840,11 @@ PAGES['solution-exchange.html'] = dict(
     h1_lines=['거래소를 만들지 않아도,', '서비스 안에 거래 기능을 넣습니다'],
     lead='PortX는 여러 거래소의 유동성과 거래 화면을 우리 서비스 안으로 그대로 가져오는 솔루션입니다. 매칭엔진·유동성·지갑·보안을 직접 만들지 않아도, 우리 브랜드를 단 디지털자산 거래 서비스를 빠르게 시작할 수 있습니다.',
     crumb='Solutions — 화이트라벨 거래소',
+    body_class='hero-dark',
+    hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
+      <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">View Demo</span></a>
+      <a class="pill outline no-arrow hs-scale" href="contact.html"><span class="hspring">Talk to Sales</span></a>
+    </div>''',
     content=f"""
 <section><div class="shell sec">
   {eyebrow('Product')}
@@ -1930,6 +1930,11 @@ PAGES['solution-data.html'] = dict(
     h1_lines=['개인정보를 직접 쌓지 않고,', '사용자가 통제하게 만드는', '데이터 인프라'],
     lead='개인정보를 다루는 서비스일수록 수집·보관·동의 관리·유출 대응 부담이 큽니다. MyID는 사용자가 자기 데이터를 직접 통제해 필요한 곳에 필요한 만큼만 제출하도록 설계된 DID 기반 신원·데이터 인프라입니다. PDS·BFS·선택적 공개로 서비스가 개인정보를 떠안지 않게 합니다.',
     crumb='Solutions — 데이터주권',
+    body_class='hero-dark',
+    hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
+      <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">View Demo</span></a>
+      <a class="pill outline no-arrow hs-scale" href="contact.html"><span class="hspring">Talk to Sales</span></a>
+    </div>''',
     content=f"""
 <section><div class="shell sec">
   {eyebrow('Product')}
@@ -2010,6 +2015,11 @@ PAGES['solution-settlement.html'] = dict(
     h1_lines=['결제·정산을 자동화하고,', '자금 흐름을 통제합니다'],
     lead='ParaSta는 은행망과 블록체인을 잇는 미들웨어로, 환전·송금·정산의 여러 단계를 단일 API로 처리합니다. 기존 결제 레일은 그대로 두고 정산·대사·통제 레이어만 얹어(Dual-Rail), 규제 부담이 적은 폐쇄형 정산토큰으로 시작해 필요할 때 스테이블코인으로 확장합니다.',
     crumb='Solutions — 결제·정산',
+    body_class='hero-dark',
+    hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
+      <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">View Demo</span></a>
+      <a class="pill outline no-arrow hs-scale" href="contact.html"><span class="hspring">Talk to Sales</span></a>
+    </div>''',
     content=f"""
 <section><div class="shell sec">
   {eyebrow('Product')}
