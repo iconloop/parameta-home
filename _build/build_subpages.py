@@ -75,11 +75,11 @@ body.hero-dark .phero-cta{ margin-top:.5rem }  /* 리드↔버튼 살짝만 */
 body.hero-dark .phero-visual{ grid-column:7 / 13; display:block; align-self:stretch; min-height:56vh;
   border-radius:var(--radius-card); border:1px solid rgba(var(--white-rgb),.12);
   background:radial-gradient(120% 90% at 70% 18%, rgba(var(--accent-rgb),.2), transparent 60%), rgba(var(--white-rgb),.03) }
-@media (max-width:767px){
+@media (max-width:1023px){
   body.hero-dark .phero, body.hero-dark .phero-inner{ min-height:auto }
   body.hero-dark .phero-inner{ grid-template-columns:1fr; padding-top:8rem; padding-bottom:3rem; row-gap:2rem }
   body.hero-dark .phero-text, body.hero-dark .phero-visual{ grid-column:auto }
-  body.hero-dark .phero-visual{ min-height:40vh } }
+  body.hero-dark .phero-visual{ min-height:40vh; order:-1 } }
 
 /* ============ WHAT IS (좌 다이어그램 / 우 텍스트) ============ */
 .whatis-grid{ display:grid; grid-template-columns:1fr; gap:2.5rem; align-items:center }
@@ -87,6 +87,7 @@ body.hero-dark .phero-visual{ grid-column:7 / 13; display:block; align-self:stre
   .whatis-grid{ grid-template-columns:repeat(12,1fr); column-gap:var(--grid-gap) }
   .whatis-grid .ps-flow{ grid-column:1 / 7 }
   .whatis-grid .whatis-text{ grid-column:8 / 13 } }
+@media (max-width:899px){ .whatis-grid .ps-flow{ order:1 } }
 .whatis-text .phero-lead{ font-size:var(--text-18) }
 .whatis-text .sec-h2{ margin-top:1rem; margin-bottom:2rem }
 /* 라이트 카드 톤으로 감싸고 보라 코어만 포인트 */
@@ -166,6 +167,23 @@ body.hero-dark .phero-visual{ grid-column:7 / 13; display:block; align-self:stre
 .work-card.grouped .work-meta{ margin-bottom:.875rem; color:var(--purple-300) }
 .work-card.grouped .work-bottom p{ font-size:var(--text-16) }
 .core-mods .work-bottom p{ font-size:var(--text-16) }
+/* ---- 모바일(≤639) 가독성 보정: 간격·R값·폰트 축소 ---- */
+@media (max-width:639px){
+  .sec{ padding-block:4rem }
+  .sec-h2{ margin-bottom:2rem }
+  body.hero-dark .phero-text .phero-lead{ font-size:var(--text-18) }
+  body.hero-dark .phero-visual{ border-radius:var(--radius-card-sm) }
+  /* Advantages 모바일 1열: 카드 컴팩트 */
+  .cards-3:has(.work-card.grouped){ gap:1rem }
+  .cards-3 .work-card.grouped{ min-height:auto; border-radius:var(--radius-card-sm) }
+  .cards-3 .work-card.grouped::before{ height:10rem }
+  .cards-3 .work-card.grouped .work-bottom h3{ font-size:var(--text-20) }
+  /* Core Modules 카드: 이미지 영역·타이틀·태그 축소 */
+  .cm-cards .work-card.grouped::before{ height:10rem; margin:-1.25rem -1.25rem 1.25rem }
+  .cm-cards .work-card.grouped{ padding:1.25rem; border-radius:var(--radius-card-sm) }
+  .cm-cards .work-bottom h3{ font-size:var(--text-20) }
+  .cm-cards .tag{ font-size:var(--text-14); padding:.5rem .875rem }
+}
 /* Core Modules: 좌측 타이틀 sticky + 우측 카드 세로 스크롤 */
 .cm-grid{ display:grid; grid-template-columns:1fr; gap:2.5rem }
 .cm-cards{ display:flex; flex-direction:column; gap:1.5rem }
@@ -202,6 +220,10 @@ body.hero-dark .phero-visual{ grid-column:7 / 13; display:block; align-self:stre
 @media (min-width:900px){ .pn-grid{ grid-template-columns:repeat(2,1fr); column-gap:var(--grid-gap) } }
 .pn-card{ background:var(--ink); color:var(--white); border-radius:var(--radius-card); padding:2.5rem;
   box-shadow:0 0 0 1px rgba(var(--white-rgb),.05) }
+/* 모바일: 카드 폭 대비 패딩 과다 → 축소(상하좌우 동일), 인셋 박스도 함께 */
+@media (max-width:639px){
+  .pn-card{ padding:1.5rem; border-radius:var(--radius-card-sm) }
+  .pn-list li{ padding:1.25rem } }
 .pn-head{ margin-bottom:1.5rem }
 /* 키커: Advantages 다크카드 보라 키커와 동일 스타일 (타이틀 위) */
 .pn-kick{ font-size:var(--text-14); letter-spacing:.025em; color:var(--purple-300); font-weight:600; margin-bottom:.75rem }
@@ -215,19 +237,26 @@ body.hero-dark .phero-visual{ grid-column:7 / 13; display:block; align-self:stre
 .pn-list p{ margin-top:.5rem; font-size:var(--text-16); color:rgba(var(--white-rgb),.55); line-height:1.6 }
 .pn-note{ margin-top:1.5rem; font-size:var(--text-16); color:var(--purple-300); line-height:1.6; text-align:center }
 /* 인증 3종: 타이틀 없이 하단 배치 — 이미지 영역 + 라벨, 디바이더 없음 */
-.cert-row{ display:grid; grid-template-columns:1fr; row-gap:3rem; padding:5rem 0 }
-@media (min-width:768px){ .cert-row{ grid-template-columns:repeat(3,1fr); column-gap:var(--grid-gap) } }
+.cert-row{ display:grid; grid-template-columns:repeat(3,1fr); column-gap:1rem; padding:5rem 0 }
+@media (min-width:768px){ .cert-row{ column-gap:var(--grid-gap) } }
 .cert-item{ display:flex; flex-direction:column; align-items:center; gap:1.5rem }
 .cert-img{ width:100%; max-width:14rem; aspect-ratio:16/10; border-radius:var(--radius-card-sm);
   background:color-mix(in srgb, var(--ink) 6%, var(--white)) }
-.cert-txt{ text-align:center; font-size:var(--text-20); font-weight:600; letter-spacing:-.01em; color:var(--ink) }
+.cert-txt{ text-align:center; font-size:var(--text-14); font-weight:600; letter-spacing:-.01em; color:var(--ink) }
+@media (min-width:768px){ .cert-txt{ font-size:var(--text-20) } }
 @media (min-width:1024px){ .cert-txt{ font-size:var(--text-24) } }
 /* Proven Core: 3개 스탯이라 데스크톱 3열 */
 @media (min-width:1024px){ .stats-grid.pv-stats{ grid-template-columns:repeat(3,1fr) } }
 /* Core Technology 행: 화살표(페이지 이동) 제거 + 제목 한 토큰 작게 */
 .ct-rows .service-badge{ display:none }
 .ct-rows .service-row h3{ font-size:var(--text-24) }
-.ct-rows .service-desc{ font-size:var(--text-16); max-width:34rem; margin-right:5rem }
+.ct-rows .service-desc{ display:block; font-size:var(--text-16); max-width:34rem; margin-right:5rem }
+/* <1024: 본문을 타이틀 아래로 (사라지지 않게) */
+@media (max-width:1023px){
+  .ct-rows .service-row{ flex-wrap:wrap; row-gap:.5rem }
+  .ct-rows .service-desc{ flex-basis:100%; max-width:none; margin:0 0 0 2.75rem } }
+@media (min-width:640px) and (max-width:1023px){
+  .ct-rows .service-desc{ margin-left:4rem } }
 .ct-rows .service-idx{ transition:color .25s ease }
 @media (hover:hover){ .ct-rows .service-row:hover .service-idx{ color:var(--purple-500); font-weight:600 } }
 .work-quote{ margin-top:1.25rem; border-left:2px solid var(--purple-400); padding-left:1rem;
@@ -303,6 +332,49 @@ table.cmp .mk{ font-weight:700; margin-right:.375rem }
 table.cmp .mk.on{ color:var(--accent) }
 table.cmp .mk.mid{ color:rgba(var(--ink-rgb),.45) }
 table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
+/* ---- 비교표 모바일 탭(<768): 열 하나씩만 표시 ---- */
+.cmp-tabs{ display:none }
+@media (max-width:767px){
+  .cmp-tabs{ display:grid; grid-template-columns:minmax(0,1fr) }
+  .cmp-tabs ~ .cmp-wrap{ display:none }
+  .cmpt-barwrap{ grid-row:1; grid-column:1; position:relative; margin-bottom:1rem }
+  .cmpt-bar{ display:flex; gap:.5rem; overflow-x:auto; -webkit-overflow-scrolling:touch;
+    padding-bottom:.5rem; scrollbar-width:none }
+  .cmpt-bar::-webkit-scrollbar{ display:none }
+  /* 좌우 화살표: 흰색 그라 마스크로 뒤를 가리고 그 위에 표시 */
+  .cmpt-nav{ position:absolute; top:0; bottom:.5rem; width:3.5rem; z-index:2; display:flex; align-items:center;
+    color:rgba(var(--ink-rgb),.55); opacity:0; pointer-events:none; transition:opacity .25s }
+  .cmpt-nav.show{ opacity:1; pointer-events:auto }
+  .cmpt-nav svg{ width:1rem; height:1rem; flex:none }
+  .cmpt-nav.prev{ left:0; justify-content:flex-start;
+    background:linear-gradient(to right, var(--white) 45%, transparent) }
+  .cmpt-nav.next{ right:0; justify-content:flex-end;
+    background:linear-gradient(to left, var(--white) 45%, transparent) }
+  .cmpt-btn{ flex:none; padding:.625rem 1rem; border-radius:var(--radius-pill);
+    border:1px solid var(--line); font-size:var(--text-14); font-weight:500;
+    color:rgba(var(--ink-rgb),.55); background:var(--white); transition:all .25s }
+  .cmpt-btn.active{ border-color:transparent; background:var(--ink); color:var(--white) }
+  .cmpt-btn.is-hl.active{ background:var(--accent) }
+  /* 패널은 같은 그리드 셀에 겹쳐 쌓아 높이 통일(가장 긴 패널 기준) */
+  .cmpt-panel{ grid-row:2; grid-column:1; visibility:hidden;
+    border-radius:var(--radius-card-sm); border:1px solid var(--line); padding:.25rem 1.25rem }
+  .cmpt-panel.active{ visibility:visible }
+  .cmpt-panel.is-hl{ border-color:transparent; background:color-mix(in srgb, var(--purple-300) 22%, var(--white)) }
+  .cmpt-row{ display:flex; align-items:center; justify-content:space-between; gap:1rem;
+    padding:1rem 0; border-bottom:1px solid var(--line) }
+  .cmpt-panel.is-hl .cmpt-row{ border-bottom-color:rgba(var(--ink-rgb),.12) }
+  .cmpt-row:last-child{ border-bottom:none }
+  .cmpt-label{ flex:none; font-size:var(--text-14); font-weight:600; color:rgba(var(--ink-rgb),.65) }
+  .cmpt-cell{ display:flex; align-items:center; gap:.5rem; text-align:right; font-size:var(--text-14);
+    color:rgba(var(--ink-rgb),.7); line-height:1.5 }
+  .cmpt-panel.is-hl .cmpt-cell{ color:var(--ink); font-weight:500 }
+  .cmpt-cell .mk{ display:inline-flex; order:2; flex:none }
+  .cmpt-cell .mkv{ width:18px; height:18px }
+  .cmpt-cell .cell-txt{ order:1 }
+  .cmpt-cell .mk.on{ color:var(--accent) }
+  .cmpt-cell .mk.mid{ color:rgba(var(--ink-rgb),.45) }
+  .cmpt-cell .mk.off{ color:rgba(var(--ink-rgb),.3) }
+}
 /* 간단 가로 바 */
 .barc{ display:flex; flex-direction:column; gap:1rem; max-width:46rem }
 .barc-title{ font-size:var(--text-16); font-weight:600; margin-bottom:.25rem }
@@ -568,6 +640,54 @@ modalForm.addEventListener('submit', (e) => {
   setTimeout(() => { modal.classList.add('success'); }, 600);
 });
 
+/* 비교표 모바일 탭 전환 */
+document.querySelectorAll('.cmp-tabs').forEach(wrap => {
+  wrap.addEventListener('click', (e) => {
+    const btn = e.target.closest('.cmpt-btn');
+    if (!btn) return;
+    const idx = btn.dataset.cmpt;
+    wrap.querySelectorAll('.cmpt-btn').forEach(b => {
+      const on = b === btn;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-selected', String(on));
+    });
+    wrap.querySelectorAll('.cmpt-panel').forEach(p =>
+      p.classList.toggle('active', p.dataset.cmptPanel === idx));
+    btn.scrollIntoView({ behavior:'smooth', block:'nearest', inline:'center' });
+  });
+});
+/* 탭바 좌우 화살표: 스크롤 위치에 따라 표시 */
+document.querySelectorAll('.cmpt-barwrap').forEach(bw => {
+  const bar = bw.querySelector('.cmpt-bar');
+  const prev = bw.querySelector('.cmpt-nav.prev');
+  const next = bw.querySelector('.cmpt-nav.next');
+  const upd = () => {
+    prev.classList.toggle('show', bar.scrollLeft > 4);
+    next.classList.toggle('show', bar.scrollLeft < bar.scrollWidth - bar.clientWidth - 4);
+  };
+  bar.addEventListener('scroll', upd, { passive:true });
+  window.addEventListener('resize', upd);
+  upd();
+  prev.addEventListener('click', () => bar.scrollBy({ left:-180, behavior:'smooth' }));
+  next.addEventListener('click', () => bar.scrollBy({ left:180, behavior:'smooth' }));
+});
+
+/* global click routing — 메인(parameta.html)과 동일 */
+document.addEventListener('click', (e) => {
+  const modalBtn = e.target.closest('[data-modal]');
+  if (modalBtn){
+    if (modalBtn.hasAttribute('data-close-menu')) closeMenu();
+    openModal();
+    return;
+  }
+  const openMenuBtn = e.target.closest('[data-open-menu]');
+  if (openMenuBtn){ openMenu(); return; }
+  const closeMenuBtn = e.target.closest('[data-close-menu]:not([data-modal])');
+  if (closeMenuBtn){ closeMenu(); return; }
+  const closeModalBtn = e.target.closest('[data-close-modal]');
+  if (closeModalBtn){ closeModal(); return; }
+});
+
 /* faq accordion — 원본(reasons) 롤 모션 */
 function faqSetH(item, open){
   const content = item.querySelector('.faq-content');
@@ -720,9 +840,10 @@ def legend_marks():
     lis = ''.join(f'<span class="lg"><span class="mk {lv}">{mark_svg(lv)}</span>{lb}</span>' for lv, lb in items)
     return f'<div class="why-legend rvl">{lis}</div>'
 
-def compare_table(headers, body_rows, hl=1, legend=None):
+def compare_table(headers, body_rows, hl=1, legend=None, tabs=False):
     # headers: [행라벨열='', 열1, 열2 ...]  / hl: headers 인덱스(1-base) 하이라이트 열
     # body_rows: dict(label, cells=[열1, 열2 ...])  cells는 문자열(cell() 사용 가능)
+    # tabs=True: 모바일(<768)에서 표 대신 열 단위 탭 UI 병행 출력
     thead = '<tr>' + ''.join(
         (f'<th class="hl">{h}</th>' if i == hl else f'<th>{h}</th>') for i, h in enumerate(headers)
     ) + '</tr>'
@@ -733,7 +854,30 @@ def compare_table(headers, body_rows, hl=1, legend=None):
             for j, c in enumerate(r['cells']))
         rows_html += f'<tr><th scope="row">{r["label"]}</th>{tds}</tr>'
     leg = f'<div class="cmp-legend">{legend}</div>' if legend else ''
-    return (f'{leg}<div class="cmp-wrap rvl"><table class="cmp">'
+    tabs_html = ''
+    if tabs:
+        cols = headers[1:]
+        btns = ''.join(
+            f'<button class="cmpt-btn{" active" if i == 0 else ""}{" is-hl" if (i + 1) == hl else ""}" '
+            f'data-cmpt="{i}" role="tab" aria-selected="{"true" if i == 0 else "false"}">{h}</button>'
+            for i, h in enumerate(cols))
+        panels = ''
+        for i, h in enumerate(cols):
+            rows = ''.join(
+                f'<div class="cmpt-row"><div class="cmpt-label">{r["label"]}</div>'
+                f'<div class="cmpt-cell">{r["cells"][i]}</div></div>'
+                for r in body_rows)
+            panels += (f'<div class="cmpt-panel{" active" if i == 0 else ""}'
+                       f'{" is-hl" if (i + 1) == hl else ""}" data-cmpt-panel="{i}">{rows}</div>')
+        chev_l = '<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3 5 8l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+        chev_r = '<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+        tabs_html = (f'<div class="cmp-tabs rvl">'
+                     f'<div class="cmpt-barwrap">'
+                     f'<button class="cmpt-nav prev" aria-label="이전 탭">{chev_l}</button>'
+                     f'<div class="cmpt-bar" role="tablist">{btns}</div>'
+                     f'<button class="cmpt-nav next" aria-label="다음 탭">{chev_r}</button>'
+                     f'</div>{panels}</div>')
+    return (f'{leg}{tabs_html}<div class="cmp-wrap rvl"><table class="cmp">'
             f'<thead>{thead}</thead><tbody>{rows_html}</tbody></table></div>')
 
 def bar_chart(body_rows, title=None, note=None):
@@ -1003,7 +1147,7 @@ PAGES['parasta.html'] = dict(
           dict(label='구축 방식', cells=[cell('on','검증된 모듈을 SDK로 유연하게 구성'), cell('mid','정해진 기능 범위 내 구성'), cell('mid','커스터디 기능 중심'), cell('off','처음부터 직접 개발')]),
           dict(label='도입·운영', cells=[cell('on','키 관리, 가스비, 노드 운영 대행'), cell('on','글로벌 시장에 빠르게 도입'), cell('on','검증된 수탁 운영'), cell('off','개발, 운영 직접 관리')]),
           dict(label='글로벌 확장', cells=[cell('mid','국내 환경 최적화, 멀티체인 지원'), cell('on','글로벌 네트워크 보유'), cell('off','국내 시장 중심'), cell('mid','구축 범위에 따라 상이')]),
-        ], hl=1)}
+        ], hl=1, tabs=True)}
     </div>
   </div>
 </div></section>
