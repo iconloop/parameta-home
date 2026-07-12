@@ -917,12 +917,14 @@ body.hero-dark .phero-visual{ grid-column:7 / 13; display:block; align-self:stre
 .ct-rows .service-badge{ display:none }
 .ct-rows .service-row h3{ font-size:var(--text-24) }
 .ct-rows .service-desc{ display:block; font-size:var(--text-16); max-width:34rem; margin-right:5rem }
-/* <1024: 본문을 타이틀 아래로 (사라지지 않게) */
+/* <1024: 행 리스트 본문을 타이틀 아래로 (사라지지 않게) — 전 서브페이지 공통 */
 @media (max-width:1023px){
-  .ct-rows .service-row{ flex-wrap:wrap; row-gap:.5rem }
-  .ct-rows .service-desc{ flex-basis:100%; max-width:none; margin:0 0 0 2.75rem } }
+  .sec .service-row{ flex-wrap:wrap; row-gap:.5rem }
+  .sec .service-desc{ display:block; flex-basis:100%; max-width:none; margin:0 0 0 2.75rem }
+  .sec .row-meta ~ .service-desc{ margin-left:0 } }
 @media (min-width:640px) and (max-width:1023px){
-  .ct-rows .service-desc{ margin-left:4rem } }
+  .sec .service-desc{ margin-left:4rem }
+  .sec .row-meta ~ .service-desc{ margin-left:7.5rem } }
 .ct-rows .service-idx{ transition:color .25s ease }
 @media (hover:hover){ .ct-rows .service-row:hover .service-idx{ color:var(--purple-500); font-weight:600 } }
 .work-quote{ margin-top:1.25rem; border-left:2px solid var(--purple-400); padding-left:1rem;
@@ -1109,7 +1111,7 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 <section><div class="shell sec" style="padding-top:0">
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Compare</div>
   <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>구축형 MyID vs 공동 인프라 MyID 2.0</span></span></h2>
-  <div class="cmp-wrap rvl"><table class="cmp"><thead><tr><th></th><th>MyID (구축형)</th><th class="hl">MyID 2.0 (공동 인프라)</th></tr></thead><tbody><tr><th scope="row">대상</th><td>민간 기업 (금융·기업)</td><td class="hl">공공기관</td></tr><tr><th scope="row">도입 방식</th><td>자사 서비스에 맞춘 개별 구축·운영</td><td class="hl">공동 인프라(K-BTF) 위 SaaS 이용</td></tr><tr><th scope="row">기간·비용</th><td>수개월 구축, 수억 원대 예산</td><td class="hl">1주일 도입, 비용 90% 절감</td></tr><tr><th scope="row">강점</th><td>완전한 커스터마이징과 독립 운영</td><td class="hl">별도 구축 없이 즉시, CSAP 인증 보안</td></tr></tbody></table></div>
+  <div class="cmp-tabs rvl"><div class="cmpt-barwrap"><button class="cmpt-nav prev" aria-label="이전 탭"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3 5 8l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="cmpt-bar" role="tablist"><button class="cmpt-btn" data-cmpt="0" role="tab" aria-selected="false">MyID (구축형)</button><button class="cmpt-btn active is-hl" data-cmpt="1" role="tab" aria-selected="true">MyID 2.0 (공동 인프라)</button></div><button class="cmpt-nav next" aria-label="다음 탭"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><div class="cmpt-panel" data-cmpt-panel="0"><div class="cmpt-row"><div class="cmpt-label">대상</div><div class="cmpt-cell">민간 기업 (금융·기업)</div></div><div class="cmpt-row"><div class="cmpt-label">도입 방식</div><div class="cmpt-cell">자사 서비스에 맞춘 개별 구축·운영</div></div><div class="cmpt-row"><div class="cmpt-label">기간·비용</div><div class="cmpt-cell">수개월 구축, 수억 원대 예산</div></div><div class="cmpt-row"><div class="cmpt-label">강점</div><div class="cmpt-cell">완전한 커스터마이징과 독립 운영</div></div></div><div class="cmpt-panel active is-hl" data-cmpt-panel="1"><div class="cmpt-row"><div class="cmpt-label">대상</div><div class="cmpt-cell">공공기관</div></div><div class="cmpt-row"><div class="cmpt-label">도입 방식</div><div class="cmpt-cell">공동 인프라(K-BTF) 위 SaaS 이용</div></div><div class="cmpt-row"><div class="cmpt-label">기간·비용</div><div class="cmpt-cell">1주일 도입, 비용 90% 절감</div></div><div class="cmpt-row"><div class="cmpt-label">강점</div><div class="cmpt-cell">별도 구축 없이 즉시, CSAP 인증 보안</div></div></div></div><div class="cmp-wrap rvl"><table class="cmp"><thead><tr><th></th><th>MyID (구축형)</th><th class="hl">MyID 2.0 (공동 인프라)</th></tr></thead><tbody><tr><th scope="row">대상</th><td>민간 기업 (금융·기업)</td><td class="hl">공공기관</td></tr><tr><th scope="row">도입 방식</th><td>자사 서비스에 맞춘 개별 구축·운영</td><td class="hl">공동 인프라(K-BTF) 위 SaaS 이용</td></tr><tr><th scope="row">기간·비용</th><td>수개월 구축, 수억 원대 예산</td><td class="hl">1주일 도입, 비용 90% 절감</td></tr><tr><th scope="row">강점</th><td>완전한 커스터마이징과 독립 운영</td><td class="hl">별도 구축 없이 즉시, CSAP 인증 보안</td></tr></tbody></table></div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>플랫폼 구성</div>

@@ -252,12 +252,14 @@ body.hero-dark .phero-visual{ grid-column:7 / 13; display:block; align-self:stre
 .ct-rows .service-badge{ display:none }
 .ct-rows .service-row h3{ font-size:var(--text-24) }
 .ct-rows .service-desc{ display:block; font-size:var(--text-16); max-width:34rem; margin-right:5rem }
-/* <1024: 본문을 타이틀 아래로 (사라지지 않게) */
+/* <1024: 행 리스트 본문을 타이틀 아래로 (사라지지 않게) — 전 서브페이지 공통 */
 @media (max-width:1023px){
-  .ct-rows .service-row{ flex-wrap:wrap; row-gap:.5rem }
-  .ct-rows .service-desc{ flex-basis:100%; max-width:none; margin:0 0 0 2.75rem } }
+  .sec .service-row{ flex-wrap:wrap; row-gap:.5rem }
+  .sec .service-desc{ display:block; flex-basis:100%; max-width:none; margin:0 0 0 2.75rem }
+  .sec .row-meta ~ .service-desc{ margin-left:0 } }
 @media (min-width:640px) and (max-width:1023px){
-  .ct-rows .service-desc{ margin-left:4rem } }
+  .sec .service-desc{ margin-left:4rem }
+  .sec .row-meta ~ .service-desc{ margin-left:7.5rem } }
 .ct-rows .service-idx{ transition:color .25s ease }
 @media (hover:hover){ .ct-rows .service-row:hover .service-idx{ color:var(--purple-500); font-weight:600 } }
 .work-quote{ margin-top:1.25rem; border-left:2px solid var(--purple-400); padding-left:1rem;
@@ -858,9 +860,10 @@ def compare_table(headers, body_rows, hl=1, legend=None, tabs=False):
     tabs_html = ''
     if tabs:
         cols = headers[1:]
+        first = hl - 1 if 0 < hl <= len(cols) else 0  # 기본 선택 = 하이라이트 열
         btns = ''.join(
-            f'<button class="cmpt-btn{" active" if i == 0 else ""}{" is-hl" if (i + 1) == hl else ""}" '
-            f'data-cmpt="{i}" role="tab" aria-selected="{"true" if i == 0 else "false"}">{h}</button>'
+            f'<button class="cmpt-btn{" active" if i == first else ""}{" is-hl" if (i + 1) == hl else ""}" '
+            f'data-cmpt="{i}" role="tab" aria-selected="{"true" if i == first else "false"}">{h}</button>'
             for i, h in enumerate(cols))
         panels = ''
         for i, h in enumerate(cols):
@@ -868,7 +871,7 @@ def compare_table(headers, body_rows, hl=1, legend=None, tabs=False):
                 f'<div class="cmpt-row"><div class="cmpt-label">{r["label"]}</div>'
                 f'<div class="cmpt-cell">{r["cells"][i]}</div></div>'
                 for r in body_rows)
-            panels += (f'<div class="cmpt-panel{" active" if i == 0 else ""}'
+            panels += (f'<div class="cmpt-panel{" active" if i == first else ""}'
                        f'{" is-hl" if (i + 1) == hl else ""}" data-cmpt-panel="{i}">{rows}</div>')
         chev_l = '<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3 5 8l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'
         chev_r = '<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'
@@ -1273,7 +1276,7 @@ PAGES['portx.html'] = dict(
       dict(label='유동성', cells=['외부 CEX·DEX 유동성 통합', '직접 확보·운영 부담', '거래 자체가 불가']),
       dict(label='출시 부담', cells=['구축 없이 거래 서비스 출시', '매칭엔진·백오피스까지 무겁게', '가볍지만 거래 서비스는 아님']),
       dict(label='보안', cells=['비수탁 — 민감정보 미보관', '커스터디 부담', '해당 없음']),
-    ], hl=1)}
+    ], hl=1, tabs=True)}
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
   {eyebrow('Why Now')}
@@ -1503,7 +1506,7 @@ PAGES['kbtf.html'] = dict(
       dict(label='도입 방식', cells=['자사 서비스에 맞춘 개별 구축·운영', '공동 인프라(K-BTF) 위 SaaS 이용']),
       dict(label='기간·비용', cells=['수개월 구축, 수억 원대 예산', '1주일 도입, 비용 90% 절감']),
       dict(label='강점', cells=['완전한 커스터마이징과 독립 운영', '별도 구축 없이 즉시, CSAP 인증 보안']),
-    ], hl=2)}
+    ], hl=2, tabs=True)}
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
   {eyebrow('플랫폼 구성')}

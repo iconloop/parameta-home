@@ -917,12 +917,14 @@ body.hero-dark .phero-visual{ grid-column:7 / 13; display:block; align-self:stre
 .ct-rows .service-badge{ display:none }
 .ct-rows .service-row h3{ font-size:var(--text-24) }
 .ct-rows .service-desc{ display:block; font-size:var(--text-16); max-width:34rem; margin-right:5rem }
-/* <1024: 본문을 타이틀 아래로 (사라지지 않게) */
+/* <1024: 행 리스트 본문을 타이틀 아래로 (사라지지 않게) — 전 서브페이지 공통 */
 @media (max-width:1023px){
-  .ct-rows .service-row{ flex-wrap:wrap; row-gap:.5rem }
-  .ct-rows .service-desc{ flex-basis:100%; max-width:none; margin:0 0 0 2.75rem } }
+  .sec .service-row{ flex-wrap:wrap; row-gap:.5rem }
+  .sec .service-desc{ display:block; flex-basis:100%; max-width:none; margin:0 0 0 2.75rem }
+  .sec .row-meta ~ .service-desc{ margin-left:0 } }
 @media (min-width:640px) and (max-width:1023px){
-  .ct-rows .service-desc{ margin-left:4rem } }
+  .sec .service-desc{ margin-left:4rem }
+  .sec .row-meta ~ .service-desc{ margin-left:7.5rem } }
 .ct-rows .service-idx{ transition:color .25s ease }
 @media (hover:hover){ .ct-rows .service-row:hover .service-idx{ color:var(--purple-500); font-weight:600 } }
 .work-quote{ margin-top:1.25rem; border-left:2px solid var(--purple-400); padding-left:1rem;
@@ -1102,7 +1104,7 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Why PortX</div>
   <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>거래소를 만들지 않고, 거래 서비스를 시작하는 방법</span></span></h2>
   <p class="phero-lead rvl" style="margin-bottom:2rem">거래소를 통째로 구축하지도, 데이터만 연결하지도 않습니다. 외부 유동성과 실제 거래 경험을 그대로 내 브랜드 안으로 가져옵니다.</p>
-  <div class="cmp-wrap rvl"><table class="cmp"><thead><tr><th></th><th class="hl">PortX (하이브리드)</th><th>턴키 거래소 솔루션</th><th>단순 API 연결</th></tr></thead><tbody><tr><th scope="row">제공 방식</th><td class="hl">외부 유동성 + 실제 거래 UX를 내 브랜드로</td><td>완성된 거래소 스택을 통째로</td><td>계정·거래내역 데이터만 연결</td></tr><tr><th scope="row">유동성</th><td class="hl">외부 CEX·DEX 유동성 통합</td><td>직접 확보·운영 부담</td><td>거래 자체가 불가</td></tr><tr><th scope="row">출시 부담</th><td class="hl">구축 없이 거래 서비스 출시</td><td>매칭엔진·백오피스까지 무겁게</td><td>가볍지만 거래 서비스는 아님</td></tr><tr><th scope="row">보안</th><td class="hl">비수탁 — 민감정보 미보관</td><td>커스터디 부담</td><td>해당 없음</td></tr></tbody></table></div>
+  <div class="cmp-tabs rvl"><div class="cmpt-barwrap"><button class="cmpt-nav prev" aria-label="이전 탭"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3 5 8l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="cmpt-bar" role="tablist"><button class="cmpt-btn active is-hl" data-cmpt="0" role="tab" aria-selected="true">PortX (하이브리드)</button><button class="cmpt-btn" data-cmpt="1" role="tab" aria-selected="false">턴키 거래소 솔루션</button><button class="cmpt-btn" data-cmpt="2" role="tab" aria-selected="false">단순 API 연결</button></div><button class="cmpt-nav next" aria-label="다음 탭"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><div class="cmpt-panel active is-hl" data-cmpt-panel="0"><div class="cmpt-row"><div class="cmpt-label">제공 방식</div><div class="cmpt-cell">외부 유동성 + 실제 거래 UX를 내 브랜드로</div></div><div class="cmpt-row"><div class="cmpt-label">유동성</div><div class="cmpt-cell">외부 CEX·DEX 유동성 통합</div></div><div class="cmpt-row"><div class="cmpt-label">출시 부담</div><div class="cmpt-cell">구축 없이 거래 서비스 출시</div></div><div class="cmpt-row"><div class="cmpt-label">보안</div><div class="cmpt-cell">비수탁 — 민감정보 미보관</div></div></div><div class="cmpt-panel" data-cmpt-panel="1"><div class="cmpt-row"><div class="cmpt-label">제공 방식</div><div class="cmpt-cell">완성된 거래소 스택을 통째로</div></div><div class="cmpt-row"><div class="cmpt-label">유동성</div><div class="cmpt-cell">직접 확보·운영 부담</div></div><div class="cmpt-row"><div class="cmpt-label">출시 부담</div><div class="cmpt-cell">매칭엔진·백오피스까지 무겁게</div></div><div class="cmpt-row"><div class="cmpt-label">보안</div><div class="cmpt-cell">커스터디 부담</div></div></div><div class="cmpt-panel" data-cmpt-panel="2"><div class="cmpt-row"><div class="cmpt-label">제공 방식</div><div class="cmpt-cell">계정·거래내역 데이터만 연결</div></div><div class="cmpt-row"><div class="cmpt-label">유동성</div><div class="cmpt-cell">거래 자체가 불가</div></div><div class="cmpt-row"><div class="cmpt-label">출시 부담</div><div class="cmpt-cell">가볍지만 거래 서비스는 아님</div></div><div class="cmpt-row"><div class="cmpt-label">보안</div><div class="cmpt-cell">해당 없음</div></div></div></div><div class="cmp-wrap rvl"><table class="cmp"><thead><tr><th></th><th class="hl">PortX (하이브리드)</th><th>턴키 거래소 솔루션</th><th>단순 API 연결</th></tr></thead><tbody><tr><th scope="row">제공 방식</th><td class="hl">외부 유동성 + 실제 거래 UX를 내 브랜드로</td><td>완성된 거래소 스택을 통째로</td><td>계정·거래내역 데이터만 연결</td></tr><tr><th scope="row">유동성</th><td class="hl">외부 CEX·DEX 유동성 통합</td><td>직접 확보·운영 부담</td><td>거래 자체가 불가</td></tr><tr><th scope="row">출시 부담</th><td class="hl">구축 없이 거래 서비스 출시</td><td>매칭엔진·백오피스까지 무겁게</td><td>가볍지만 거래 서비스는 아님</td></tr><tr><th scope="row">보안</th><td class="hl">비수탁 — 민감정보 미보관</td><td>커스터디 부담</td><td>해당 없음</td></tr></tbody></table></div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Why Now</div>
