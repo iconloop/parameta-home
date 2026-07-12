@@ -502,8 +502,10 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 .nd-ico::before{ content:''; position:absolute; inset:0; z-index:0; border-radius:inherit;
   background:linear-gradient(180deg, transparent 58%, var(--purple-600)); opacity:0; transform:translateY(35%);
   transition:opacity .3s ease, transform .35s cubic-bezier(.2,.8,.2,1) }
-@media (hover:hover){ .nav-drop-panel a:hover .nd-ico{ color:var(--white) }
-  .nav-drop-panel a:hover .nd-ico::before{ opacity:1; transform:translateY(0) } }
+@media (hover:hover){ .nav-drop-panel a:hover .nd-ico::before{ opacity:1; transform:translateY(0) } }
+/* 밝은 드롭다운만: 호버 시 아이콘 검정 유지 + 그라는 연보라 (다크는 기존 유지) */
+.mega:not(.on-dark) .nd-ico::before{ background:linear-gradient(180deg, transparent 58%, var(--purple-300)) }
+@media (hover:hover){ .mega.on-dark .nav-drop-panel a:hover .nd-ico{ color:var(--white) } }
 .nd-txt{ display:flex; flex-direction:column; gap:.375rem }
 .nav-drop-panel b{ position:relative; display:inline-block; align-self:flex-start; padding-bottom:2px }
 .nav-drop-panel b::after{ content:''; position:absolute; left:0; bottom:0; width:100%; height:1px;
