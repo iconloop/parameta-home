@@ -868,13 +868,18 @@ def mark_svg(level):
 def cell(level, text):
     return f'<span class="mk {level}">{mark_svg(level)}</span><span class="cell-txt">{text}</span>'
 
-def partner_logos():
+def partner_logos(logos=None):
     # 함께한 파트너 로고 세트 (assets/partners/) — 마퀴 트랙에 2회 반복 삽입
-    logos = [('logo-shinhan', '신한은행'), ('logo-nh', 'NH농협은행'), ('logo-nh-securities', 'NH투자증권'),
-             ('logo-samsung-securities', '삼성증권'), ('logo-samsung', '삼성'), ('logo-kb', 'KB'),
-             ('logo-ibk', 'IBK기업은행'), ('logo-hanwha', '한화')]
+    logos = logos or [('logo-shinhan', '신한은행'), ('logo-nh', 'NH농협은행'), ('logo-nh-securities', 'NH투자증권'),
+                      ('logo-samsung-securities', '삼성증권'), ('logo-samsung', '삼성'), ('logo-kb', 'KB'),
+                      ('logo-ibk', 'IBK기업은행'), ('logo-hanwha', '한화')]
     imgs = ''.join(f'<img src="assets/partners/{f}.png" alt="{name}" loading="lazy">' for f, name in logos)
     return f'<div class="pt-set" aria-hidden="false">{imgs}</div>'
+
+# company 파트너 로고 세트 (미래에셋 포함)
+COMPANY_LOGOS = [('logo-samsung', '삼성'), ('logo-samsung-securities', '삼성증권'), ('logo-mirae', '미래에셋'),
+                 ('logo-nh', 'NH농협'), ('logo-nh-securities', 'NH투자증권'), ('logo-shinhan', '신한'),
+                 ('logo-ibk', 'IBK기업은행'), ('logo-kb', 'KB')]
 
 def legend_marks():
     items = [('on','지원'), ('mid','일부 지원'), ('off','미지원')]
@@ -1010,7 +1015,9 @@ PAGES['company.html'] = dict(
   ], cols=2)}
   <div class="rvl" style="margin-top:2.5rem">
     <div style="font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); margin-bottom:1rem">함께한 파트너 · Stablecoin Alliance 초대 의장사</div>
-    {chips(['삼성','삼성증권','미래에셋','NH농협','NH투자증권','신한','IBK기업은행','KB'])}
+    <div class="pt-marquee" aria-label="함께한 파트너 로고">
+      <div class="pt-track">{partner_logos(COMPANY_LOGOS)}{partner_logos(COMPANY_LOGOS)}</div>
+    </div>
   </div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
