@@ -54,7 +54,7 @@ EXTRA_CSS = """
   .phero-status{ padding-left:2rem; padding-right:2rem } }
 @media (min-width:768px){ .phero-h1{ font-size:var(--text-60) } }
 /* ---- 다크 히어로(서브페이지) — body.hero-dark 지정 시 ---- */
-body.hero-dark .phero{ background:var(--black); min-height:100vh }
+body.hero-dark .phero{ background:var(--ink); min-height:100vh }  /* 푸터와 동일한 잉크 토큰 */
 body.hero-dark .phero-h1{ color:var(--white); max-width:18ch; font-size:var(--text-36); line-height:.98; font-weight:500 }
 @media (min-width:640px){ body.hero-dark .phero-h1{ font-size:var(--text-48) } }
 @media (min-width:768px){ body.hero-dark .phero-h1{ font-size:var(--text-60) } }
@@ -62,8 +62,14 @@ body.hero-dark .phero-h1{ color:var(--white); max-width:18ch; font-size:var(--te
 body.hero-dark .phero-text .phero-lead{ color:rgba(var(--white-rgb),.7); font-size:var(--text-20) }
 /* 히어로 CTA: 폰트 text-16 (높이는 base .pill.no-arrow 토큰 min-height:3rem = with-arrow와 동일) */
 .phero-cta .pill .hspring{ font-size:var(--text-16) }
-body.hero-dark .phero-cta .pill.outline .hspring{ border-color:rgba(var(--white-rgb),.3); color:var(--white) }
+/* light 버튼(View Demo) 호버: 텍스트 purple-500 */
+.phero-cta .pill.light .hspring{ transition:color .25s ease, transform .3s cubic-bezier(.2,.8,.2,1) }
+@media (hover:hover){ .phero-cta .pill.light:hover .hspring{ color:var(--purple-500) } }
+body.hero-dark .phero-cta .pill.outline .hspring{ border-color:rgba(var(--white-rgb),.3); color:var(--white);
+  transition:background .25s ease, color .25s ease, border-color .25s ease, transform .3s cubic-bezier(.2,.8,.2,1) }
 body.hero-dark .phero-cta .pill.outline .pill-badge{ background:var(--white); color:var(--ink) }
+/* outline 버튼 호버: 보라 채움 (uc-arrow와 동일 언어) */
+@media (hover:hover){ body.hero-dark .phero-cta .pill.outline:hover .hspring{ background:var(--accent); border-color:transparent; color:var(--white) } }
 /* 다크 히어로: eyebrow(+블릿)·크럼브/스크롤(+디바이더)·워터마크 제거 */
 body.hero-dark .phero-inner .eyebrow.dark{ display:none }
 body.hero-dark .phero-status{ display:none }
@@ -87,6 +93,13 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
   body.hero-dark .phero-inner{ grid-template-columns:1fr; padding-top:6.25rem; padding-bottom:3rem; row-gap:2rem }
   body.hero-dark .phero-text, body.hero-dark .phero-visual{ grid-column:auto }
   body.hero-dark .phero-visual{ min-height:40vh } }  /* 이미지: 텍스트 아래 (자연 순서) */
+/* ---- 콘텐츠형 히어로(hero-center): 이미지 영역 없음 + 텍스트 중앙정렬 ---- */
+body.hero-center .phero-inner{ grid-template-columns:1fr; place-items:center; text-align:center }
+body.hero-center .phero-visual{ display:none }
+body.hero-center .phero-text{ grid-column:1 / -1; align-items:center; max-width:44rem; margin:0 auto }
+body.hero-center .phero-h1{ max-width:none }
+body.hero-center .phero-text .phero-lead{ max-width:40rem }
+body.hero-center .phero-cta{ justify-content:center }
 
 /* ============ WHAT IS (좌 다이어그램 / 우 텍스트) ============ */
 .whatis-grid{ display:grid; grid-template-columns:1fr; gap:2.5rem; align-items:center }
@@ -219,7 +232,8 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 .work-card.grouped .work-bottom p{ font-size:var(--text-16) }
 .work-card.grouped .tag{ font-size:var(--text-16); font-weight:500; padding:.625rem 1.25rem; color:var(--purple-300);
   border:none; background:rgba(var(--purple-300-rgb),.12) }  /* 연보라 필 + 연보라 텍스트 */
-.cm-cards .work-card.grouped .tag, .work-card.t-gray .tag{ color:var(--white) }  /* 그레이카드 다크필 태그는 흰색 유지 */
+.cm-cards .work-card.grouped .tag, .work-card.t-gray .tag{
+  background:rgba(var(--ink-rgb),.45); color:var(--white) }  /* 그레이 카드 = 진한 잉크 필 + 흰 텍스트 (두 벌 체계) */
 .core-mods .work-bottom p{ font-size:var(--text-16) }
 /* ---- 모바일(≤639) 가독성 보정: 간격·R값·폰트 축소 ---- */
 @media (max-width:639px){
@@ -274,7 +288,8 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 .pn-grid{ display:grid; grid-template-columns:1fr; gap:1.5rem; align-items:stretch }
 @media (min-width:900px){ .pn-grid{ grid-template-columns:repeat(2,1fr); column-gap:var(--grid-gap) } }
 .pn-card{ background:var(--ink); color:var(--white); border-radius:var(--radius-card); padding:2.5rem;
-  box-shadow:0 0 0 1px rgba(var(--white-rgb),.05) }
+  box-shadow:0 0 0 1px rgba(var(--white-rgb),.05); transition:transform .35s cubic-bezier(.2,.8,.2,1) }
+@media (hover:hover){ .pn-card:hover{ transform:scale(1.03) } }  /* 다크카드 공통 호버 */
 /* 모바일: 좌우는 컴팩트, 위아래는 여유 있게 */
 @media (max-width:639px){
   .pn-card{ padding:2.5rem 1.5rem; border-radius:var(--radius-card-sm) }
@@ -296,10 +311,11 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 .uc-arrow svg{ width:1.75rem; height:1.75rem }
 @media (hover:hover){ .uc-arrow:hover{ background:var(--accent); border-color:transparent; color:var(--white); transform:scale(1.06) } }
 .uc-slides{ position:relative }
-.uc-slide{ position:absolute; inset:0; opacity:0; visibility:hidden; transition:opacity .4s ease;
+.uc-slide{ position:absolute; inset:0; opacity:0; visibility:hidden; transition:opacity .4s ease, transform .35s cubic-bezier(.2,.8,.2,1);
   background:color-mix(in srgb, var(--ink) 6%, var(--white)); color:var(--ink); border-radius:var(--radius-card); padding:3rem;
   display:flex; flex-direction:column }
 .uc-slide.is-active{ position:relative; opacity:1; visibility:visible }
+@media (hover:hover){ .uc-slide.is-active:hover{ transform:scale(1.02) } }  /* 호버 시 카드 확대 */
 .uc-thumb{ width:5rem; height:5rem; border-radius:var(--radius-card-sm); background:rgba(var(--ink-rgb),.07); margin-bottom:1.5rem }
 .uc-thumb video, .uc-thumb img{ width:100%; height:100%; object-fit:cover; display:block; border-radius:inherit }
 .uc-slide h3{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em; margin-bottom:.75rem; color:var(--ink) }
@@ -307,7 +323,8 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 .uc-slide > p{ font-size:var(--text-18); color:rgba(var(--ink-rgb),.6); line-height:1.7; word-break:keep-all }
 .uc-testimonial{ margin-top:2.5rem; padding-top:2rem; border-top:1px solid rgba(var(--ink-rgb),.12);
   display:flex; align-items:center; gap:1rem }
-.uc-avatar{ width:3rem; height:3rem; border-radius:var(--radius-pill); background:rgba(var(--ink-rgb),.1); flex:none }
+.uc-avatar{ width:3rem; height:3rem; border-radius:var(--radius-pill); background:rgba(var(--ink-rgb),.1); flex:none; overflow:hidden }
+.uc-avatar video, .uc-avatar img{ width:100%; height:100%; object-fit:cover; display:block }
 .uc-quote{ font-size:var(--text-20); font-weight:500; color:rgba(var(--ink-rgb),.85) }
 .uc-name{ margin-top:.25rem; font-size:var(--text-16); font-weight:600; color:var(--purple-500) }
 /* 탭(640~1023): 카드 패딩을 위 grouped 카드(2rem)와 통일 — 하단은 유지 */
@@ -391,6 +408,20 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 @media (min-width:1024px){ .cert-txt{ font-size:var(--text-24) } }
 /* Proven Core: 3개 스탯이라 데스크톱 3열 */
 @media (min-width:1024px){ .stats-grid.pv-stats{ grid-template-columns:repeat(3,1fr) } }
+/* 라이트 텍스트 스탯: 모바일 1열 세로 스택, 768부터 3열 유지 */
+@media (max-width:767px){ .stats-grid.pv-stats.on-light{ grid-template-columns:1fr; row-gap:2.5rem } }
+@media (min-width:768px){ .stats-grid.pv-stats.on-light{ grid-template-columns:repeat(3,1fr) } }
+/* 라이트 배경 스탯 (박스 없이 풀폭) */
+.pv-stats.on-light{ margin-top:0 }
+.pv-stats.on-light{ text-align:center; padding:5rem 0 }
+.pv-stats.on-light li{ display:flex; flex-direction:column; align-items:center; gap:.5rem }
+.pv-stats.on-light .stat-num{ color:var(--ink); font-size:var(--text-36) }
+/* 768~1023: 3열 열폭 좁음(768서 208px) → 최장 문자열 한 줄 보장 위해 text-28 */
+@media (min-width:768px) and (max-width:1023px){ .pv-stats.on-light .stat-num{ font-size:var(--text-28) } }
+@media (min-width:1024px){ .pv-stats.on-light .stat-num{ font-size:var(--text-48) } }
+.pv-stats.on-light .stat-num .pv-hl{ color:var(--purple-500) }
+.pv-stats.on-light .stat-label{ color:rgba(var(--ink-rgb),.55) }
+@media (min-width:1024px){ .pv-stats.on-light .stat-label{ font-size:var(--text-20) } }
 /* Core Technology 행: 화살표(페이지 이동) 제거 + 제목 한 토큰 작게 */
 .ct-rows .service-badge{ display:none }
 .ct-rows .service-row h3{ font-size:var(--text-24) }
@@ -480,7 +511,7 @@ table.cmp td .cell-txt{ display:block; font-size:var(--text-14) }
 table.cmp td.hl{ font-weight:500; color:var(--ink) }
 /* ParaSta 열: 호버 시 열 전체가 버튼처럼 함께 살짝 커짐(그림자 없음) — JS가 hl-hover 동기화 */
 table.cmp th.hl, table.cmp td.hl{ position:relative; transition:transform .4s cubic-bezier(.2,.8,.2,1) }
-table.cmp th.hl.hl-hover, table.cmp td.hl.hl-hover{ transform:scaleX(1.03); z-index:1 }
+table.cmp th.hl.hl-hover, table.cmp td.hl.hl-hover{ transform:scale(1.03); z-index:1 }
 /* 가로만 확대: 세로 scale 시 셀 경계 틈·디바이더 실종 문제 원천 차단 */
 /* 비교표 헤더 플래그 배지 */
 .cmp-flag{ display:inline-block; margin-left:.5rem; padding:.25rem .625rem; border-radius:var(--radius-pill);
@@ -556,6 +587,52 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 @media (hover:hover){ .route:hover{ border-color:var(--accent); color:var(--accent) } }
 .route.on{ background:var(--ink); color:var(--white); border-color:var(--ink) }
 @media (max-width:480px){ .barc-row{ grid-template-columns:5.5rem 1fr auto; gap:.625rem } }
+
+/* ============ 데모 오버레이 (#demo) — 좌 목업 / 우 코드·스텝 ============ */
+#demo{ position:fixed; inset:0; z-index:120; display:flex; align-items:center; justify-content:center; padding:2rem;
+  background:rgba(var(--ink-rgb),.55); backdrop-filter:blur(8px); opacity:0; pointer-events:none; transition:opacity .35s ease }
+#demo.open{ opacity:1; pointer-events:auto }
+.demo-panel{ position:relative; width:100%; max-width:64rem; max-height:90vh; overflow:hidden;
+  display:grid; grid-template-columns:1fr 1fr; background:var(--white); border-radius:var(--radius-card);
+  box-shadow:0 40px 120px rgba(var(--ink-rgb),.45); transform:translateY(16px) scale(.99); transition:transform .4s cubic-bezier(.2,.8,.2,1) }
+#demo.open .demo-panel{ transform:none }
+.demo-close{ position:absolute; top:1rem; right:1rem; z-index:2; width:2.5rem; height:2.5rem; border-radius:var(--radius-pill);
+  display:grid; place-items:center; background:rgba(var(--ink-rgb),.06); color:var(--ink); transition:background .2s }
+.demo-close .icn{ width:1.125rem; height:1.125rem }
+@media (hover:hover){ .demo-close:hover{ background:rgba(var(--ink-rgb),.12) } }
+/* 좌: 목업 영역 (그레이 + 도트) */
+.demo-visual{ background:color-mix(in srgb, var(--ink) 5%, var(--white)); padding:2.5rem; display:grid; place-items:center;
+  background-image:radial-gradient(rgba(var(--ink-rgb),.06) 1px, transparent 1.5px); background-size:20px 20px }
+.demo-mock{ width:100%; max-width:19rem; aspect-ratio:9/16; border-radius:var(--radius-card);
+  background:var(--white); box-shadow:0 20px 50px rgba(var(--ink-rgb),.14); overflow:hidden }
+.demo-mock img, .demo-mock video{ width:100%; height:100%; object-fit:cover; display:block }
+/* 우: 정보 영역 */
+.demo-info{ padding:3rem 2.75rem; display:flex; flex-direction:column; overflow-y:auto }
+.demo-step-eb{ font-family:'Departure Mono',monospace; font-size:var(--text-14); letter-spacing:.06em; color:var(--purple-500); margin-bottom:1rem }
+.demo-step-t{ font-size:var(--text-24); font-weight:600; letter-spacing:-.01em; color:var(--ink); margin-bottom:.75rem }
+.demo-step-d{ font-size:var(--text-16); line-height:1.7; color:rgba(var(--ink-rgb),.6); word-break:keep-all }
+.demo-tabs{ display:flex; gap:.5rem; margin:1.75rem 0 1rem }
+.demo-tab{ padding:.5rem 1rem; border-radius:var(--radius-pill); font-size:var(--text-14); font-weight:500;
+  color:rgba(var(--ink-rgb),.55); background:rgba(var(--ink-rgb),.05); transition:all .2s }
+.demo-tab.active{ background:var(--ink); color:var(--white) }
+.demo-code{ flex:1; min-height:12rem; border-radius:var(--radius-card-sm); background:var(--ink); color:rgba(var(--white-rgb),.9);
+  padding:1.5rem; font-family:'Departure Mono',monospace; font-size:var(--text-14); line-height:1.7; overflow:auto; white-space:pre; word-break:normal }
+.demo-code .k{ color:var(--purple-300) } .demo-code .s{ color:#7fd0a8 } .demo-code .c{ color:rgba(var(--white-rgb),.4) }
+.demo-foot{ display:flex; align-items:center; justify-content:space-between; margin-top:1.5rem }
+.demo-dots{ display:flex; gap:.5rem }
+.demo-dot{ width:.5rem; height:.5rem; border-radius:var(--radius-pill); background:rgba(var(--ink-rgb),.18); transition:all .25s }
+.demo-dot.is-active{ background:var(--accent); transform:scale(1.25) }
+.demo-arrows{ display:flex; gap:.5rem }
+.demo-arrow{ width:2.75rem; height:2.75rem; border-radius:var(--radius-pill); border:1px solid var(--line);
+  display:grid; place-items:center; color:rgba(var(--ink-rgb),.6); background:var(--white); transition:all .25s }
+.demo-arrow svg{ width:1.125rem; height:1.125rem }
+.demo-arrow:disabled{ opacity:.35; cursor:default }
+@media (hover:hover){ .demo-arrow:not(:disabled):hover{ background:var(--accent); border-color:transparent; color:var(--white) } }
+@media (max-width:767px){
+  #demo{ padding:0 }
+  .demo-panel{ grid-template-columns:1fr; max-height:100vh; height:100vh; border-radius:0; overflow-y:auto }
+  .demo-visual{ padding:2rem } .demo-mock{ max-width:14rem }
+  .demo-info{ padding:2rem 1.5rem } }
 """
 
 CHROME_HEADER = """
@@ -628,6 +705,31 @@ CHROME_FOOTER = """
       <h2>문의가 접수되었습니다</h2>
       <p>확인 후 영업일 기준 1일 내에 회신드리겠습니다. 감사합니다.</p>
       <button class="pill dark no-arrow hs-scale" data-close-modal><span class="hspring">닫기</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- 데모 오버레이 (View Demo → data-demo) — 좌 목업 / 우 코드·설명 / 스텝 네비 -->
+<div id="demo" role="dialog" aria-modal="true" aria-label="Product demo" aria-hidden="true">
+  <div class="demo-panel" id="demoPanel">
+    <button class="demo-close" data-close-demo aria-label="닫기"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 4l16 16M20 4 4 20"/></svg></button>
+    <div class="demo-visual"><div class="demo-mock" id="demoMock"></div></div>
+    <div class="demo-info">
+      <div class="demo-step-eb" id="demoStepEb">STEP 01</div>
+      <h3 class="demo-step-t" id="demoStepT"></h3>
+      <p class="demo-step-d" id="demoStepD"></p>
+      <div class="demo-tabs">
+        <button class="demo-tab active" data-demo-tab="code">Code</button>
+        <button class="demo-tab" data-demo-tab="table">Table</button>
+      </div>
+      <div class="demo-code" id="demoCode"></div>
+      <div class="demo-foot">
+        <div class="demo-dots" id="demoDots"></div>
+        <div class="demo-arrows">
+          <button class="demo-arrow" id="demoPrev" aria-label="이전"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5L8 12l7 7"/></svg></button>
+          <button class="demo-arrow" id="demoNext" aria-label="다음"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -735,11 +837,12 @@ if(pvVals.length){
       if(!en.isIntersecting) return;
       pvObs.unobserve(en.target);
       const target = parseInt(en.target.dataset.val, 10);
+      const from = parseInt(en.target.dataset.from, 10) || 0;
       const t0 = performance.now(), dur = 1100;
       (function tick(now){
         const p = Math.min((now - t0) / dur, 1);
         const e = 1 - Math.pow(1 - p, 3); /* easeOutCubic */
-        en.target.textContent = Math.round(target * e);
+        en.target.textContent = Math.round(from + (target - from) * e).toLocaleString('en-US');
         if(p < 1) requestAnimationFrame(tick);
       })(t0);
     });
@@ -798,6 +901,52 @@ modalForm.addEventListener('submit', (e) => {
   modalSubmitLabel.textContent = '보내는 중…';
   setTimeout(() => { modal.classList.add('success'); }, 600);
 });
+
+/* ---------- 데모 오버레이 ---------- */
+const demo = document.getElementById('demo');
+const demoPanel = document.getElementById('demoPanel');
+// 페이지가 window.DEMO_STEPS를 지정하지 않으면 기본 샘플(placeholder) 사용
+// code는 라인 배열 (백슬래시·따옴표 이스케이프 회피 — join으로 개행)
+const DEMO_STEPS = window.DEMO_STEPS || [
+  { title:'발급 요청', desc:'API 한 번으로 스테이블코인을 발행합니다. 필요한 규제 파라미터가 요청에 함께 전달됩니다.',
+    code:['<span class="c">// 발행 요청</span>', 'POST /v1/issue', '  asset: <span class="s">KRWx</span>', '  amount: <span class="s">100000</span>'] },
+  { title:'온체인 기록', desc:'발행 내역과 준비자산 증빙(PoR)이 온체인에 기록되어, 누구나 검증할 수 있습니다.',
+    code:['<span class="c">// 트랜잭션 확정</span>', '<span class="k">status</span>: <span class="s">confirmed</span>', '<span class="k">txHash</span>: <span class="s">0x9f...c2</span>'] },
+  { title:'운영 관제', desc:'발행 이후의 유통·상환·모니터링을 통합 어드민 한 곳에서 관리합니다.',
+    code:['<span class="c">// 실시간 모니터링</span>', 'GET /v1/reserves', '<span class="k">ratio</span>: <span class="s">102.4%</span>'] },
+];
+let demoIdx = 0;
+function demoRender(){
+  const s = DEMO_STEPS[demoIdx];
+  document.getElementById('demoStepEb').textContent = 'STEP ' + String(demoIdx + 1).padStart(2, '0');
+  document.getElementById('demoStepT').textContent = s.title;
+  document.getElementById('demoStepD').textContent = s.desc;
+  document.getElementById('demoCode').innerHTML = Array.isArray(s.code) ? s.code.join('\\n') : s.code;
+  document.getElementById('demoMock').innerHTML = s.mock || '';
+  document.getElementById('demoPrev').disabled = demoIdx === 0;
+  document.getElementById('demoNext').disabled = demoIdx === DEMO_STEPS.length - 1;
+  document.querySelectorAll('#demoDots .demo-dot').forEach((d, n) => d.classList.toggle('is-active', n === demoIdx));
+}
+(function initDemoDots(){
+  const dots = document.getElementById('demoDots');
+  if (!dots) return;
+  DEMO_STEPS.forEach((_, i) => {
+    const b = document.createElement('button');
+    b.className = 'demo-dot' + (i === 0 ? ' is-active' : ''); b.type = 'button';
+    b.setAttribute('aria-label', (i + 1) + '단계');
+    b.addEventListener('click', () => { demoIdx = i; demoRender(); });
+    dots.appendChild(b);
+  });
+})();
+function openDemo(){ demoIdx = 0; demoRender(); demo.classList.add('open'); demo.setAttribute('aria-hidden', 'false'); stopScroll(); document.addEventListener('keydown', onDemoKey); }
+function closeDemo(){ demo.classList.remove('open'); demo.setAttribute('aria-hidden', 'true'); startScroll(); document.removeEventListener('keydown', onDemoKey); }
+function onDemoKey(e){ if (e.key === 'Escape') closeDemo(); }
+demo.addEventListener('click', (e) => { if (e.target === demo) closeDemo(); });
+document.getElementById('demoPrev').addEventListener('click', () => { if (demoIdx > 0){ demoIdx--; demoRender(); } });
+document.getElementById('demoNext').addEventListener('click', () => { if (demoIdx < DEMO_STEPS.length - 1){ demoIdx++; demoRender(); } });
+document.querySelectorAll('.demo-tab').forEach(t => t.addEventListener('click', () => {
+  document.querySelectorAll('.demo-tab').forEach(x => x.classList.toggle('active', x === t));
+}));
 
 /* 비교표 모바일 탭 전환 */
 document.querySelectorAll('.cmp-tabs').forEach(wrap => {
@@ -862,17 +1011,21 @@ if (ucSlides.length){
     if (Math.abs(dx) < 40) return;
     ucShow(dx < 0 ? (ucIdx + 1) % ucSlides.length : (ucIdx - 1 + ucSlides.length) % ucSlides.length);
   }, { passive:true });
-  // 썸네일 모션: .uc-thumb 안에 <video muted loop playsinline>가 있으면 카드 호버 시 재생
+  // 모션: 슬라이드 안 모든 <video muted loop playsinline>(썸네일·아바타 등)를 카드 호버 시 재생
   ucSlides.forEach(sl => {
-    const v = sl.querySelector('.uc-thumb video');
-    if (!v) return;
-    sl.addEventListener('mouseenter', () => v.play());
-    sl.addEventListener('mouseleave', () => { v.pause(); v.currentTime = 0; });
+    const vids = sl.querySelectorAll('video');
+    if (!vids.length) return;
+    sl.addEventListener('mouseenter', () => vids.forEach(v => v.play()));
+    sl.addEventListener('mouseleave', () => vids.forEach(v => { v.pause(); v.currentTime = 0; }));
   });
 }
 
 /* global click routing — 메인(parameta.html)과 동일 */
 document.addEventListener('click', (e) => {
+  const demoBtn = e.target.closest('[data-demo]');
+  if (demoBtn){ e.preventDefault(); openDemo(); return; }
+  const closeDemoBtn = e.target.closest('[data-close-demo]');
+  if (closeDemoBtn){ closeDemo(); return; }
   const modalBtn = e.target.closest('[data-modal]');
   if (modalBtn){
     if (modalBtn.hasAttribute('data-close-menu')) closeMenu();
@@ -950,6 +1103,7 @@ if (contactForm){
 document.getElementById('dev-grid-toggle').addEventListener('click', () => {
   document.body.classList.toggle('show-grid');
 });
+
 
 </script>
 """
@@ -1199,10 +1353,6 @@ PAGES['company.html'] = dict(
     h1_lines=['Web2의 안정성과', 'Web3의 가능성을', '모두 경험한 기업'],
     lead='파라메타는 공공, 금융, 민간 IT 시스템 운영 경험과 1세대 메인넷과 dApp 구축 경험을 바탕으로, 기업의 디지털자산 사업을 안정적으로 시작하고 확장할 수 있도록 지원합니다.',
     crumb='Company — 회사소개',
-    hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
-      <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">Contact Us</span></a>
-      <a class="pill outline no-arrow hs-scale" href="careers.html"><span class="hspring">Careers</span></a>
-    </div>''',
     content=f'''
 <section><div class="shell sec">
   {sec_head('Vision', 'Web2 + Web3를 연결하는 WalletFi 생태계를 만들어갑니다', '파라메타는 금융권·공공·민간의 전통금융(Web2)부터 퍼블릭 블록체인 플랫폼과 DeFi(Web3)까지, 양쪽 영역의 전문 경험과 노하우를 두루 갖췄습니다. 두 힘을 하나로 모아, 지갑으로 모든 금융을 연결하는 지갑 기반 금융 생태계 WalletFi를 만들어갑니다.')}
@@ -1282,9 +1432,6 @@ PAGES['careers.html'] = dict(
     h1_lines=['디지털자산의 미래를', '함께 만들 사람'],
     lead='파라메타는 새로운 시장에 표준을 세우고, 기술을 사업에 안착시키는 여정을 함께할 동료를 찾습니다.',
     crumb='Company — 채용',
-    hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
-      <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">Contact Us</span></a>
-    </div>''',
     content=f'''
 <section><div class="shell sec">
   {sec_head('Who We Look For', '인재상')}
@@ -1316,9 +1463,6 @@ PAGES['insights.html'] = dict(
     h1_lines=['디지털자산 시장을', '읽는 인사이트'],
     lead='사업·파트너십·인증·수상 소식과 보도자료, 그리고 시장을 읽는 블로그를 한곳에 모았습니다.',
     crumb='Insights — 보도자료 · 블로그',
-    hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
-      <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">Contact Us</span></a>
-    </div>''',
     content=f'''
 <section><div class="shell sec">
   {sec_head('Press Release', '보도자료')}
@@ -1469,7 +1613,7 @@ PAGES['parasta.html'] = dict(
   </div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  {sec_head('Partners', '함께한 파트너')}
+  {sec_head('Partners', '함께한 파트너', 'ParaSta는 금융, 공공, 민간기관부터 Web3 블록체인 프로젝트까지,<br>다양한 현장에서 검증된 코어 기술을 기반으로 합니다.')}
   <div class="pt-marquee rvl" aria-label="함께한 파트너 로고">
     <div class="pt-track">{partner_logos()}{partner_logos()}</div>
   </div>
@@ -1867,58 +2011,57 @@ _broof_orgs = ['서울특별시','POSTECH','한국생산성본부','사람인','
 _broof_chips = ''.join(f'<span class="tag on-light">{o}</span>' for o in _broof_orgs)
 PAGES['broof.html'] = dict(
     title='Broof · 블록체인 증명서 발급 | PARAMETA',
-    desc='블록체인 기반 디지털 증명서 발급·검증 서비스입니다. 발급은 웹에서 간편하게, 검증은 QR 하나로.',
+    desc='Broof — 블록체인 기반 증명서 발급·검증 서비스. 위·변조를 방지하는 디지털 증명서를 발급하고, 누구나 즉시 진위를 확인합니다.',
     eyebrow='Digital Credentials',
     h1_lines=['Broof'],
-    lead='Broof는 블록체인 기반 디지털 증명서 발급·검증 서비스입니다. 별도 시스템 구축 없이 웹에서 증명서를 발급하고, QR 하나로 원본 여부와 위·변조 여부를 즉시 확인할 수 있습니다.',
+    lead='별도 시스템 구축 없이 증명서를 간편하게 발급하고, QR 코드 하나로 진위를 즉시 검증합니다. 블록체인으로 증명서의 위조와 분실 위험까지 낮춥니다.',
     crumb='Products — Broof',
     hero_visual='<img class="fit-contain" src="assets/broof/hero-test.avif" alt="" loading="eager" fetchpriority="high">',
     content=f"""
 <section><div class="shell sec">
-  <ul class="cards-3">
-    <li class="rvl"><div class="light-card num-card"><span class="cap">First</span><div class="n">정부위원회 첫</div><p>블록체인 기반 위촉장 발급 (국가AI전략위원회)</p></div></li>
-    <li class="rvl" style="--rvl-delay:90ms"><div class="light-card num-card"><span class="cap">Issued</span><div class="n">90,000건<small>+</small></div><p>누적 블록체인 증명서 발급</p></div></li>
-    <li class="rvl" style="--rvl-delay:180ms"><div class="light-card num-card"><span class="cap">Adopted</span><div class="n">20곳<small>+</small></div><p>누적 도입 기관 (대학 · 공공 · 기업)</p></div></li>
+  <ul class="stats-grid pv-stats on-light">
+    <li class="rvl" style="--rvl-y:20px"><div class="stat-num">정부 위원회 <span class="pv-hl">최초</span></div><div class="stat-label">블록체인 위촉장 발급 (국가AI전략위원회)</div></li>
+    <li class="rvl" style="--rvl-y:20px; --rvl-delay:90ms"><div class="stat-num">누적 <span class="pv-hl"><span class="pv-val" data-val="90000" data-from="89000">89,000</span>건+</span></div><div class="stat-label">증명서 발급</div></li>
+    <li class="rvl" style="--rvl-y:20px; --rvl-delay:180ms"><div class="stat-num">누적 <span class="pv-hl"><span class="pv-val" data-val="20">0</span>개 기관+</span></div><div class="stat-label">도입 기관 (대학·공공·기업)</div></li>
   </ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  {sec_head('Overview', '복잡한 구축 없이 증명서 발급부터 검증까지')}
-  {rows([
-    dict(title='위 · 변조 방지', desc='발급된 증명서의 원본 정보를 블록체인에 기록해 내용 변경 여부를 즉시 확인합니다.'),
-    dict(title='QR 즉시 검증', desc='QR 스캔만으로 증명서의 진위와 원본 여부를 현장에서 바로 확인합니다.'),
-    dict(title='간편 발급', desc='명단 업로드만으로 여러 건의 증명서를 한 번에 발급합니다.'),
-  ])}
+  {sec_head('Overview', '시스템 구축 없이 완성되는 디지털 증명서', '발급기관은 서버나 별도 시스템 없이 웹에서 바로 증명서를 만들고, 수령자와 제출처는 블록체인에 기록된 원본을 QR 하나로 즉시 확인합니다. 졸업증명서부터 수료증, 위촉장, 자격증까지 형태는 자유롭습니다.')}
+  <div class="ct-rows">{rows([
+    dict(title='위 · 변조 방지', desc='발급 즉시 블록체인에 기록되어, 임의로 바꾸면 원본 기록과 어긋나 드러납니다.'),
+    dict(title='즉시 검증', desc='QR 하나로 누구나 원본 여부를 바로 확인해, 위조 여부를 그 자리에서 가려냅니다.'),
+    dict(title='간편 발급', desc='명단만 올리면 끝, 몇백 명 몫도 한 번에 발급합니다.'),
+  ])}</div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  {sec_head('Workflow', '올리고, 발급하고, 확인하면 끝')}
-  {cards_wrap([
-    dark_card('STEP 1', '템플릿 · 명단 등록', '증명서 양식을 선택하고, 수령자 명단을 업로드합니다.'),
-    dark_card('STEP 2', '증명서 발급', '명단에 맞춰 증명서가 발급되고, 원본 정보가 블록체인에 기록됩니다.'),
-    dark_card('STEP 3', '수령 · QR 검증', '수령자는 증명서를 받고, 제출처는 QR로 진위를 바로 확인합니다.'),
+  {sec_head('Workflow', '세 번의 클릭으로 끝나는 발급 절차', '명단만 올리면, 발급부터 검증까지 전부 자동으로 끝납니다.')}
+  {card_grid([
+    icon_card('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>', 'STEP 1 — 템플릿 · 명단 등록', '발급기관이 증명서 템플릿을 만들고 수령자 명단을 CSV로 일괄 업로드합니다.'),
+    icon_card('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M8 13h8M8 17h5"/></svg>', 'STEP 2 — 발급 · 블록체인 기록', '입력 정보가 명단과 일치하면 증명서가 발급되고, 해시가 블록체인에 영구 기록됩니다.'),
+    icon_card('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="6.5" height="6.5" rx="1"/><rect x="14" y="3.5" width="6.5" height="6.5" rx="1"/><rect x="3.5" y="14" width="6.5" height="6.5" rx="1"/><path d="M14 17l2.5 2.5L21 15"/></svg>', 'STEP 3 — 수령 · 즉시 검증', '수령자는 카카오톡·이메일로 안내받고, 검증자는 QR·링크로 누구나 즉시 진위를 확인합니다.'),
   ], cols=3)}
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  {sec_head('Core Features', '발급 후 관리까지 한 번에')}
-  {rows([
-    dict(title='자동 알림', desc='증명서 발급과 동시에 카카오톡·이메일로 수령자에게 안내를 보냅니다.'),
-    dict(title='발급 현황 관리', desc='발급·폐기·만료 상태를 한눈에 확인하고, 여러 담당자가 함께 관리합니다.'),
-    dict(title='사용량 기반 과금', desc='정기 구독 없이 발급한 만큼만 이용해 부담 없이 시작합니다.'),
-  ])}
+  {sec_head('Core Features', '발급 이후까지 책임지는 관리 기능', '발급은 시작일 뿐입니다. 알림과 현황 관리, 합리적인 과금까지 책임집니다.')}
+  <div class="ct-rows">{rows([
+    dict(title='자동 알림', desc='발급과 동시에 카카오톡·이메일로 안내가 나가, 별도로 연락할 필요가 없습니다.'),
+    dict(title='발급 현황 대시보드', desc='발급·폐기·만료 상태를 한눈에 확인하고, 여러 담당자가 함께 관리합니다.'),
+    dict(title='쓴 만큼만 결제', desc='정기구독이 아닌 건당 과금이라, 발급량이 적어도 부담 없이 시작할 수 있습니다.'),
+  ])}</div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  {sec_head('Applied Cases', '다양한 기관이 선택한 디지털 증명서')}
-  {cards_wrap([
-    dark_card('University', '포스텍 POSTECH', '블록체인 전문가과정 수료증을 정기적으로 발급합니다.', ['수료증'], grouped=True),
-    dark_card('Enterprise', '미래에셋', '장학증서에 QR 검증 기능을 적용해 디지털로 전달합니다.', ['장학증서','QR 검증'], grouped=True),
-    dark_card('Education', '교육 · 자격 기관', '수료증과 인증서 발급에 Broof를 활용하고 있습니다.', ['수료증','인증서'], grouped=True),
+  {sec_head('Applied Cases', '대학부터 기업까지 이어지는 발급 사례', '대학과 기업이 증명서 발급에 Broof를 도입했습니다.')}
+  {card_grid([
+    card('포스텍 (POSTECH)', '블록체인 전문가과정 수료증을 정기적으로 발급합니다.', kicker='University', tags=['수료증'], media=True),
+    card('미래에셋', '장학증서에 QR을 넣어 학생에게 전달하며, 매년 정기적으로 발급합니다.', kicker='Enterprise', tags=['장학증서','QR 검증'], media=True),
+    card('다양한 교육 · 자격 기관', '아트앤가이드, 패스트캠퍼스 등 여러 기관이 수료증·인증서 발급에 Broof를 사용합니다.', kicker='Education', tags=['수료증','인증서'], media=True),
   ], cols=3)}
   <div class="rvl" style="margin-top:3rem">
-    <div style="font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); margin-bottom:1rem">여러 기관이 이미 Broof를 활용하고 있습니다</div>
+    <div style="font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); margin-bottom:1rem">이미 여러 기관이 Broof를 사용합니다</div>
     <div style="display:flex; flex-wrap:wrap; gap:.5rem">{_broof_chips}</div>
   </div>
 </div></section>
 """)
-
 
 # ---------------- contact.html ----------------
 PAGES['contact.html'] = dict(
@@ -2488,7 +2631,7 @@ SHELL = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<script src="assets/nav.js?v=15" defer></script>
+<script src="assets/nav.js?v=18" defer></script>
 <script src="assets/chatbot.js?v=3" defer></script>
 <style>__CSS____EXTRA_CSS__</style>
 </head>
@@ -2519,18 +2662,50 @@ __JS__
 </html>
 """
 
-# ---- 공통 히어로 토큰: 모든 서브페이지 기본 = ParaSta식 다크 히어로 + 표준 CTA ----
-# 페이지별로 body_class / hero_cta / hero_visual 키를 주면 오버라이드 (''로 비활성 가능)
+# ---- 공통 히어로 토큰: 3벌 ----
+#  ① 제품형(product)  : 다크 + 이미지 비주얼 + View Demo/Talk to Sales   (parasta·portx·myid·kbtf·broof)
+#  ② 솔루션형(solution): 다크 + 이미지 비주얼 + Talk to Sales            (solution-* 6종)
+#  ③ 콘텐츠형(content) : 다크 + 이미지 없음 + 텍스트 중앙정렬 + Contact Us (company·insights·careers·contact·privacy·terms)
+# 페이지는 body_class / hero_cta / hero_visual 키로 오버라이드 (''로 비활성)
 DEFAULT_BODY_CLASS = 'hero-dark'
-DEFAULT_HERO_CTA = '''<div class="phero-cta rvl" style="--rvl-delay:340ms">
-      <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">View Demo</span></a>
+HERO_CTA_PRODUCT = '''<div class="phero-cta rvl" style="--rvl-delay:340ms">
+      <a class="pill light no-arrow hs-scale" data-demo href="contact.html"><span class="hspring">View Demo</span></a>
       <a class="pill outline no-arrow hs-scale" href="contact.html"><span class="hspring">Talk to Sales</span></a>
     </div>'''
+HERO_CTA_SOLUTION = '''<div class="phero-cta rvl" style="--rvl-delay:340ms">
+      <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">Talk to Sales</span></a>
+    </div>'''
+HERO_CTA_CONTACT = '''<div class="phero-cta rvl" style="--rvl-delay:340ms">
+      <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">Contact Us</span></a>
+    </div>'''
+DEFAULT_HERO_CTA = HERO_CTA_PRODUCT
+
+# 콘텐츠형(hero-center + Contact Us) 페이지 — 이미지 비주얼 없음
+CONTENT_PAGES = {'careers.html'}
+# CTA 없는 콘텐츠형(회사/인사이트/문의/약관 등) — 중앙정렬만, CTA 없음
+CONTENT_NOCTA = {'company.html', 'insights.html', 'contact.html', 'privacy.html', 'terms.html'}
+def resolve_hero(fname, p):
+    """페이지별 히어로 body_class·CTA를 3벌 토큰으로 해석 (명시적 키가 있으면 우선)."""
+    body = p.get('body_class', DEFAULT_BODY_CLASS)
+    if fname in CONTENT_PAGES or fname in CONTENT_NOCTA:
+        body = (body + ' hero-center').strip()
+    cta = p.get('hero_cta')
+    if cta is None:
+        if fname.startswith('solution-'):
+            cta = ''  # 솔루션은 CTA 없음
+        elif fname in CONTENT_NOCTA:
+            cta = ''
+        elif fname in CONTENT_PAGES:
+            cta = HERO_CTA_CONTACT
+        else:
+            cta = HERO_CTA_PRODUCT
+    return body, cta
 
 for fname, p in PAGES.items():
     h1 = ''.join(f'<span class="rvl-line"><span>{l}</span></span>' for l in p['h1_lines'])
+    _body, _cta = resolve_hero(fname, p)
     out = (SHELL
-        .replace('__BODYCLASS__', p.get('body_class', DEFAULT_BODY_CLASS))
+        .replace('__BODYCLASS__', _body)
         .replace('__TITLE__', p['title'])
         .replace('__DESC__', p['desc'])
         .replace('__CSS__', CSS)
@@ -2540,7 +2715,7 @@ for fname, p in PAGES.items():
         .replace('__H1__', h1)
         .replace('__LEAD__', p['lead'])
         .replace('__CRUMB__', p['crumb'])
-        .replace('__HERO_CTA__', p.get('hero_cta', DEFAULT_HERO_CTA))
+        .replace('__HERO_CTA__', _cta)
         .replace('__HERO_VISUAL__', p.get('hero_visual', ''))
         .replace('__CONTENT__', p['content'])
         .replace('__FOOTER__', CHROME_FOOTER)

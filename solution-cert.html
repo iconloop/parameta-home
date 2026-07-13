@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<script src="assets/nav.js?v=15" defer></script>
+<script src="assets/nav.js?v=18" defer></script>
 <script src="assets/chatbot.js?v=3" defer></script>
 <style>
 /* ============ RESET / BASE ============ */
@@ -167,6 +167,14 @@ html.chat-open #banner-fixed{ right:26rem }
 .clock-time{ font-variant-numeric:tabular-nums; font-weight:500; color:var(--ink) }
 .clock-sep{ color:rgba(var(--ink-rgb),.3) }
 .clock-date{ font-weight:500 }
+.lang-btn{ display:inline-flex; align-items:center; gap:.35rem; border:1px solid rgba(var(--line-rgb),.8);
+  background:rgba(var(--white-rgb),.4); backdrop-filter:blur(4px); border-radius:var(--radius-control);
+  padding:.5rem .7rem; font-size:12px; font-weight:600; letter-spacing:.04em; cursor:pointer;
+  color:rgba(var(--ink-rgb),.5) }
+@media (hover:hover){ .lang-btn:hover{ background:rgba(var(--white-rgb),.7) } }
+.lang-btn .lang-opt{ transition:color .18s }
+.lang-btn .lang-opt.is-active{ color:var(--ink) }
+.lang-btn .lang-sep{ color:rgba(var(--ink-rgb),.3) }
 .menu-btn{ border:1px solid rgba(var(--line-rgb),.8); background:rgba(var(--white-rgb),.4);
   backdrop-filter:blur(4px); border-radius:var(--radius-control); }
 @media (hover:hover){ .menu-btn:hover{ background:rgba(var(--white-rgb),.7) } }
@@ -187,6 +195,11 @@ body.hero-dark #header:not(.sticky) .clock-chip{ border-color:rgba(var(--white-r
 body.hero-dark #header:not(.sticky) .clock-label{ color:rgba(var(--white-rgb),.45) }
 body.hero-dark #header:not(.sticky) .clock-time{ color:var(--white) }
 body.hero-dark #header:not(.sticky) .clock-sep{ color:rgba(var(--white-rgb),.35) }
+body.hero-dark #header:not(.sticky) .lang-btn{ border-color:rgba(var(--white-rgb),.16);
+  background:rgba(var(--white-rgb),.08); color:rgba(var(--white-rgb),.5) }
+body.hero-dark #header:not(.sticky) .lang-btn .lang-opt.is-active{ color:var(--white) }
+body.hero-dark #header:not(.sticky) .lang-btn .lang-sep{ color:rgba(var(--white-rgb),.35) }
+@media (hover:hover){ body.hero-dark #header:not(.sticky) .lang-btn:hover{ background:rgba(var(--white-rgb),.16) } }
 body.hero-dark #header:not(.sticky) .menu-btn{ border-color:rgba(var(--white-rgb),.16);
   background:rgba(var(--white-rgb),.08); color:var(--white) }
 @media (hover:hover){
@@ -727,7 +740,7 @@ body.show-grid #dev-grid{ display:block }
   .phero-status{ padding-left:2rem; padding-right:2rem } }
 @media (min-width:768px){ .phero-h1{ font-size:var(--text-60) } }
 /* ---- 다크 히어로(서브페이지) — body.hero-dark 지정 시 ---- */
-body.hero-dark .phero{ background:var(--black); min-height:100vh }
+body.hero-dark .phero{ background:var(--ink); min-height:100vh }  /* 푸터와 동일한 잉크 토큰 */
 body.hero-dark .phero-h1{ color:var(--white); max-width:18ch; font-size:var(--text-36); line-height:.98; font-weight:500 }
 @media (min-width:640px){ body.hero-dark .phero-h1{ font-size:var(--text-48) } }
 @media (min-width:768px){ body.hero-dark .phero-h1{ font-size:var(--text-60) } }
@@ -735,8 +748,14 @@ body.hero-dark .phero-h1{ color:var(--white); max-width:18ch; font-size:var(--te
 body.hero-dark .phero-text .phero-lead{ color:rgba(var(--white-rgb),.7); font-size:var(--text-20) }
 /* 히어로 CTA: 폰트 text-16 (높이는 base .pill.no-arrow 토큰 min-height:3rem = with-arrow와 동일) */
 .phero-cta .pill .hspring{ font-size:var(--text-16) }
-body.hero-dark .phero-cta .pill.outline .hspring{ border-color:rgba(var(--white-rgb),.3); color:var(--white) }
+/* light 버튼(View Demo) 호버: 텍스트 purple-500 */
+.phero-cta .pill.light .hspring{ transition:color .25s ease, transform .3s cubic-bezier(.2,.8,.2,1) }
+@media (hover:hover){ .phero-cta .pill.light:hover .hspring{ color:var(--purple-500) } }
+body.hero-dark .phero-cta .pill.outline .hspring{ border-color:rgba(var(--white-rgb),.3); color:var(--white);
+  transition:background .25s ease, color .25s ease, border-color .25s ease, transform .3s cubic-bezier(.2,.8,.2,1) }
 body.hero-dark .phero-cta .pill.outline .pill-badge{ background:var(--white); color:var(--ink) }
+/* outline 버튼 호버: 보라 채움 (uc-arrow와 동일 언어) */
+@media (hover:hover){ body.hero-dark .phero-cta .pill.outline:hover .hspring{ background:var(--accent); border-color:transparent; color:var(--white) } }
 /* 다크 히어로: eyebrow(+블릿)·크럼브/스크롤(+디바이더)·워터마크 제거 */
 body.hero-dark .phero-inner .eyebrow.dark{ display:none }
 body.hero-dark .phero-status{ display:none }
@@ -760,6 +779,13 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
   body.hero-dark .phero-inner{ grid-template-columns:1fr; padding-top:6.25rem; padding-bottom:3rem; row-gap:2rem }
   body.hero-dark .phero-text, body.hero-dark .phero-visual{ grid-column:auto }
   body.hero-dark .phero-visual{ min-height:40vh } }  /* 이미지: 텍스트 아래 (자연 순서) */
+/* ---- 콘텐츠형 히어로(hero-center): 이미지 영역 없음 + 텍스트 중앙정렬 ---- */
+body.hero-center .phero-inner{ grid-template-columns:1fr; place-items:center; text-align:center }
+body.hero-center .phero-visual{ display:none }
+body.hero-center .phero-text{ grid-column:1 / -1; align-items:center; max-width:44rem; margin:0 auto }
+body.hero-center .phero-h1{ max-width:none }
+body.hero-center .phero-text .phero-lead{ max-width:40rem }
+body.hero-center .phero-cta{ justify-content:center }
 
 /* ============ WHAT IS (좌 다이어그램 / 우 텍스트) ============ */
 .whatis-grid{ display:grid; grid-template-columns:1fr; gap:2.5rem; align-items:center }
@@ -892,7 +918,8 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 .work-card.grouped .work-bottom p{ font-size:var(--text-16) }
 .work-card.grouped .tag{ font-size:var(--text-16); font-weight:500; padding:.625rem 1.25rem; color:var(--purple-300);
   border:none; background:rgba(var(--purple-300-rgb),.12) }  /* 연보라 필 + 연보라 텍스트 */
-.cm-cards .work-card.grouped .tag, .work-card.t-gray .tag{ color:var(--white) }  /* 그레이카드 다크필 태그는 흰색 유지 */
+.cm-cards .work-card.grouped .tag, .work-card.t-gray .tag{
+  background:rgba(var(--ink-rgb),.45); color:var(--white) }  /* 그레이 카드 = 진한 잉크 필 + 흰 텍스트 (두 벌 체계) */
 .core-mods .work-bottom p{ font-size:var(--text-16) }
 /* ---- 모바일(≤639) 가독성 보정: 간격·R값·폰트 축소 ---- */
 @media (max-width:639px){
@@ -947,7 +974,8 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 .pn-grid{ display:grid; grid-template-columns:1fr; gap:1.5rem; align-items:stretch }
 @media (min-width:900px){ .pn-grid{ grid-template-columns:repeat(2,1fr); column-gap:var(--grid-gap) } }
 .pn-card{ background:var(--ink); color:var(--white); border-radius:var(--radius-card); padding:2.5rem;
-  box-shadow:0 0 0 1px rgba(var(--white-rgb),.05) }
+  box-shadow:0 0 0 1px rgba(var(--white-rgb),.05); transition:transform .35s cubic-bezier(.2,.8,.2,1) }
+@media (hover:hover){ .pn-card:hover{ transform:scale(1.03) } }  /* 다크카드 공통 호버 */
 /* 모바일: 좌우는 컴팩트, 위아래는 여유 있게 */
 @media (max-width:639px){
   .pn-card{ padding:2.5rem 1.5rem; border-radius:var(--radius-card-sm) }
@@ -969,10 +997,11 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 .uc-arrow svg{ width:1.75rem; height:1.75rem }
 @media (hover:hover){ .uc-arrow:hover{ background:var(--accent); border-color:transparent; color:var(--white); transform:scale(1.06) } }
 .uc-slides{ position:relative }
-.uc-slide{ position:absolute; inset:0; opacity:0; visibility:hidden; transition:opacity .4s ease;
+.uc-slide{ position:absolute; inset:0; opacity:0; visibility:hidden; transition:opacity .4s ease, transform .35s cubic-bezier(.2,.8,.2,1);
   background:color-mix(in srgb, var(--ink) 6%, var(--white)); color:var(--ink); border-radius:var(--radius-card); padding:3rem;
   display:flex; flex-direction:column }
 .uc-slide.is-active{ position:relative; opacity:1; visibility:visible }
+@media (hover:hover){ .uc-slide.is-active:hover{ transform:scale(1.02) } }  /* 호버 시 카드 확대 */
 .uc-thumb{ width:5rem; height:5rem; border-radius:var(--radius-card-sm); background:rgba(var(--ink-rgb),.07); margin-bottom:1.5rem }
 .uc-thumb video, .uc-thumb img{ width:100%; height:100%; object-fit:cover; display:block; border-radius:inherit }
 .uc-slide h3{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em; margin-bottom:.75rem; color:var(--ink) }
@@ -980,7 +1009,8 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 .uc-slide > p{ font-size:var(--text-18); color:rgba(var(--ink-rgb),.6); line-height:1.7; word-break:keep-all }
 .uc-testimonial{ margin-top:2.5rem; padding-top:2rem; border-top:1px solid rgba(var(--ink-rgb),.12);
   display:flex; align-items:center; gap:1rem }
-.uc-avatar{ width:3rem; height:3rem; border-radius:var(--radius-pill); background:rgba(var(--ink-rgb),.1); flex:none }
+.uc-avatar{ width:3rem; height:3rem; border-radius:var(--radius-pill); background:rgba(var(--ink-rgb),.1); flex:none; overflow:hidden }
+.uc-avatar video, .uc-avatar img{ width:100%; height:100%; object-fit:cover; display:block }
 .uc-quote{ font-size:var(--text-20); font-weight:500; color:rgba(var(--ink-rgb),.85) }
 .uc-name{ margin-top:.25rem; font-size:var(--text-16); font-weight:600; color:var(--purple-500) }
 /* 탭(640~1023): 카드 패딩을 위 grouped 카드(2rem)와 통일 — 하단은 유지 */
@@ -1064,6 +1094,20 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 @media (min-width:1024px){ .cert-txt{ font-size:var(--text-24) } }
 /* Proven Core: 3개 스탯이라 데스크톱 3열 */
 @media (min-width:1024px){ .stats-grid.pv-stats{ grid-template-columns:repeat(3,1fr) } }
+/* 라이트 텍스트 스탯: 모바일 1열 세로 스택, 768부터 3열 유지 */
+@media (max-width:767px){ .stats-grid.pv-stats.on-light{ grid-template-columns:1fr; row-gap:2.5rem } }
+@media (min-width:768px){ .stats-grid.pv-stats.on-light{ grid-template-columns:repeat(3,1fr) } }
+/* 라이트 배경 스탯 (박스 없이 풀폭) */
+.pv-stats.on-light{ margin-top:0 }
+.pv-stats.on-light{ text-align:center; padding:5rem 0 }
+.pv-stats.on-light li{ display:flex; flex-direction:column; align-items:center; gap:.5rem }
+.pv-stats.on-light .stat-num{ color:var(--ink); font-size:var(--text-36) }
+/* 768~1023: 3열 열폭 좁음(768서 208px) → 최장 문자열 한 줄 보장 위해 text-28 */
+@media (min-width:768px) and (max-width:1023px){ .pv-stats.on-light .stat-num{ font-size:var(--text-28) } }
+@media (min-width:1024px){ .pv-stats.on-light .stat-num{ font-size:var(--text-48) } }
+.pv-stats.on-light .stat-num .pv-hl{ color:var(--purple-500) }
+.pv-stats.on-light .stat-label{ color:rgba(var(--ink-rgb),.55) }
+@media (min-width:1024px){ .pv-stats.on-light .stat-label{ font-size:var(--text-20) } }
 /* Core Technology 행: 화살표(페이지 이동) 제거 + 제목 한 토큰 작게 */
 .ct-rows .service-badge{ display:none }
 .ct-rows .service-row h3{ font-size:var(--text-24) }
@@ -1153,7 +1197,7 @@ table.cmp td .cell-txt{ display:block; font-size:var(--text-14) }
 table.cmp td.hl{ font-weight:500; color:var(--ink) }
 /* ParaSta 열: 호버 시 열 전체가 버튼처럼 함께 살짝 커짐(그림자 없음) — JS가 hl-hover 동기화 */
 table.cmp th.hl, table.cmp td.hl{ position:relative; transition:transform .4s cubic-bezier(.2,.8,.2,1) }
-table.cmp th.hl.hl-hover, table.cmp td.hl.hl-hover{ transform:scaleX(1.03); z-index:1 }
+table.cmp th.hl.hl-hover, table.cmp td.hl.hl-hover{ transform:scale(1.03); z-index:1 }
 /* 가로만 확대: 세로 scale 시 셀 경계 틈·디바이더 실종 문제 원천 차단 */
 /* 비교표 헤더 플래그 배지 */
 .cmp-flag{ display:inline-block; margin-left:.5rem; padding:.25rem .625rem; border-radius:var(--radius-pill);
@@ -1229,6 +1273,52 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 @media (hover:hover){ .route:hover{ border-color:var(--accent); color:var(--accent) } }
 .route.on{ background:var(--ink); color:var(--white); border-color:var(--ink) }
 @media (max-width:480px){ .barc-row{ grid-template-columns:5.5rem 1fr auto; gap:.625rem } }
+
+/* ============ 데모 오버레이 (#demo) — 좌 목업 / 우 코드·스텝 ============ */
+#demo{ position:fixed; inset:0; z-index:120; display:flex; align-items:center; justify-content:center; padding:2rem;
+  background:rgba(var(--ink-rgb),.55); backdrop-filter:blur(8px); opacity:0; pointer-events:none; transition:opacity .35s ease }
+#demo.open{ opacity:1; pointer-events:auto }
+.demo-panel{ position:relative; width:100%; max-width:64rem; max-height:90vh; overflow:hidden;
+  display:grid; grid-template-columns:1fr 1fr; background:var(--white); border-radius:var(--radius-card);
+  box-shadow:0 40px 120px rgba(var(--ink-rgb),.45); transform:translateY(16px) scale(.99); transition:transform .4s cubic-bezier(.2,.8,.2,1) }
+#demo.open .demo-panel{ transform:none }
+.demo-close{ position:absolute; top:1rem; right:1rem; z-index:2; width:2.5rem; height:2.5rem; border-radius:var(--radius-pill);
+  display:grid; place-items:center; background:rgba(var(--ink-rgb),.06); color:var(--ink); transition:background .2s }
+.demo-close .icn{ width:1.125rem; height:1.125rem }
+@media (hover:hover){ .demo-close:hover{ background:rgba(var(--ink-rgb),.12) } }
+/* 좌: 목업 영역 (그레이 + 도트) */
+.demo-visual{ background:color-mix(in srgb, var(--ink) 5%, var(--white)); padding:2.5rem; display:grid; place-items:center;
+  background-image:radial-gradient(rgba(var(--ink-rgb),.06) 1px, transparent 1.5px); background-size:20px 20px }
+.demo-mock{ width:100%; max-width:19rem; aspect-ratio:9/16; border-radius:var(--radius-card);
+  background:var(--white); box-shadow:0 20px 50px rgba(var(--ink-rgb),.14); overflow:hidden }
+.demo-mock img, .demo-mock video{ width:100%; height:100%; object-fit:cover; display:block }
+/* 우: 정보 영역 */
+.demo-info{ padding:3rem 2.75rem; display:flex; flex-direction:column; overflow-y:auto }
+.demo-step-eb{ font-family:'Departure Mono',monospace; font-size:var(--text-14); letter-spacing:.06em; color:var(--purple-500); margin-bottom:1rem }
+.demo-step-t{ font-size:var(--text-24); font-weight:600; letter-spacing:-.01em; color:var(--ink); margin-bottom:.75rem }
+.demo-step-d{ font-size:var(--text-16); line-height:1.7; color:rgba(var(--ink-rgb),.6); word-break:keep-all }
+.demo-tabs{ display:flex; gap:.5rem; margin:1.75rem 0 1rem }
+.demo-tab{ padding:.5rem 1rem; border-radius:var(--radius-pill); font-size:var(--text-14); font-weight:500;
+  color:rgba(var(--ink-rgb),.55); background:rgba(var(--ink-rgb),.05); transition:all .2s }
+.demo-tab.active{ background:var(--ink); color:var(--white) }
+.demo-code{ flex:1; min-height:12rem; border-radius:var(--radius-card-sm); background:var(--ink); color:rgba(var(--white-rgb),.9);
+  padding:1.5rem; font-family:'Departure Mono',monospace; font-size:var(--text-14); line-height:1.7; overflow:auto; white-space:pre; word-break:normal }
+.demo-code .k{ color:var(--purple-300) } .demo-code .s{ color:#7fd0a8 } .demo-code .c{ color:rgba(var(--white-rgb),.4) }
+.demo-foot{ display:flex; align-items:center; justify-content:space-between; margin-top:1.5rem }
+.demo-dots{ display:flex; gap:.5rem }
+.demo-dot{ width:.5rem; height:.5rem; border-radius:var(--radius-pill); background:rgba(var(--ink-rgb),.18); transition:all .25s }
+.demo-dot.is-active{ background:var(--accent); transform:scale(1.25) }
+.demo-arrows{ display:flex; gap:.5rem }
+.demo-arrow{ width:2.75rem; height:2.75rem; border-radius:var(--radius-pill); border:1px solid var(--line);
+  display:grid; place-items:center; color:rgba(var(--ink-rgb),.6); background:var(--white); transition:all .25s }
+.demo-arrow svg{ width:1.125rem; height:1.125rem }
+.demo-arrow:disabled{ opacity:.35; cursor:default }
+@media (hover:hover){ .demo-arrow:not(:disabled):hover{ background:var(--accent); border-color:transparent; color:var(--white) } }
+@media (max-width:767px){
+  #demo{ padding:0 }
+  .demo-panel{ grid-template-columns:1fr; max-height:100vh; height:100vh; border-radius:0; overflow-y:auto }
+  .demo-visual{ padding:2rem } .demo-mock{ max-width:14rem }
+  .demo-info{ padding:2rem 1.5rem } }
 </style>
 </head>
 <body class="hero-dark">
@@ -1245,10 +1335,7 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
         <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Solutions — 증명서</div>
         <h1 class="phero-h1" data-line-stagger="120"><span class="rvl-line"><span>발급부터 공유, 제출처</span></span><span class="rvl-line"><span>검증까지 끝나는</span></span><span class="rvl-line"><span>디지털 증명 인프라</span></span></h1>
         <p class="phero-lead rvl" style="--rvl-delay:250ms">위촉장·수료증·MOU·디지털 배지 등 다양한 증명을 발급·공유·검증할 수 있는 블록체인 기반 디지털 증명 서비스입니다.</p>
-        <div class="phero-cta rvl" style="--rvl-delay:340ms">
-      <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">View Demo</span></a>
-      <a class="pill outline no-arrow hs-scale" href="contact.html"><span class="hspring">Talk to Sales</span></a>
-    </div>
+        
       </div>
       <div class="phero-visual" aria-hidden="true"><img src="assets/solutions/hero-test-1.webp" alt="" loading="eager" fetchpriority="high"></div>
     </div>
@@ -1366,6 +1453,31 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
   </div>
 </div>
 
+<!-- 데모 오버레이 (View Demo → data-demo) — 좌 목업 / 우 코드·설명 / 스텝 네비 -->
+<div id="demo" role="dialog" aria-modal="true" aria-label="Product demo" aria-hidden="true">
+  <div class="demo-panel" id="demoPanel">
+    <button class="demo-close" data-close-demo aria-label="닫기"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 4l16 16M20 4 4 20"/></svg></button>
+    <div class="demo-visual"><div class="demo-mock" id="demoMock"></div></div>
+    <div class="demo-info">
+      <div class="demo-step-eb" id="demoStepEb">STEP 01</div>
+      <h3 class="demo-step-t" id="demoStepT"></h3>
+      <p class="demo-step-d" id="demoStepD"></p>
+      <div class="demo-tabs">
+        <button class="demo-tab active" data-demo-tab="code">Code</button>
+        <button class="demo-tab" data-demo-tab="table">Table</button>
+      </div>
+      <div class="demo-code" id="demoCode"></div>
+      <div class="demo-foot">
+        <div class="demo-dots" id="demoDots"></div>
+        <div class="demo-arrows">
+          <button class="demo-arrow" id="demoPrev" aria-label="이전"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5L8 12l7 7"/></svg></button>
+          <button class="demo-arrow" id="demoNext" aria-label="다음"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="dev-grid" aria-hidden="true"><div class="gi"><div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div><div class="col"></div></div></div>
 <button id="dev-grid-toggle" type="button">GRID</button>
 <!-- 챗봇 — 단일 소스: assets/chatbot.js가 FAB·드로어 주입 -->
@@ -1468,11 +1580,12 @@ if(pvVals.length){
       if(!en.isIntersecting) return;
       pvObs.unobserve(en.target);
       const target = parseInt(en.target.dataset.val, 10);
+      const from = parseInt(en.target.dataset.from, 10) || 0;
       const t0 = performance.now(), dur = 1100;
       (function tick(now){
         const p = Math.min((now - t0) / dur, 1);
         const e = 1 - Math.pow(1 - p, 3); /* easeOutCubic */
-        en.target.textContent = Math.round(target * e);
+        en.target.textContent = Math.round(from + (target - from) * e).toLocaleString('en-US');
         if(p < 1) requestAnimationFrame(tick);
       })(t0);
     });
@@ -1531,6 +1644,52 @@ modalForm.addEventListener('submit', (e) => {
   modalSubmitLabel.textContent = '보내는 중…';
   setTimeout(() => { modal.classList.add('success'); }, 600);
 });
+
+/* ---------- 데모 오버레이 ---------- */
+const demo = document.getElementById('demo');
+const demoPanel = document.getElementById('demoPanel');
+// 페이지가 window.DEMO_STEPS를 지정하지 않으면 기본 샘플(placeholder) 사용
+// code는 라인 배열 (백슬래시·따옴표 이스케이프 회피 — join으로 개행)
+const DEMO_STEPS = window.DEMO_STEPS || [
+  { title:'발급 요청', desc:'API 한 번으로 스테이블코인을 발행합니다. 필요한 규제 파라미터가 요청에 함께 전달됩니다.',
+    code:['<span class="c">// 발행 요청</span>', 'POST /v1/issue', '  asset: <span class="s">KRWx</span>', '  amount: <span class="s">100000</span>'] },
+  { title:'온체인 기록', desc:'발행 내역과 준비자산 증빙(PoR)이 온체인에 기록되어, 누구나 검증할 수 있습니다.',
+    code:['<span class="c">// 트랜잭션 확정</span>', '<span class="k">status</span>: <span class="s">confirmed</span>', '<span class="k">txHash</span>: <span class="s">0x9f...c2</span>'] },
+  { title:'운영 관제', desc:'발행 이후의 유통·상환·모니터링을 통합 어드민 한 곳에서 관리합니다.',
+    code:['<span class="c">// 실시간 모니터링</span>', 'GET /v1/reserves', '<span class="k">ratio</span>: <span class="s">102.4%</span>'] },
+];
+let demoIdx = 0;
+function demoRender(){
+  const s = DEMO_STEPS[demoIdx];
+  document.getElementById('demoStepEb').textContent = 'STEP ' + String(demoIdx + 1).padStart(2, '0');
+  document.getElementById('demoStepT').textContent = s.title;
+  document.getElementById('demoStepD').textContent = s.desc;
+  document.getElementById('demoCode').innerHTML = Array.isArray(s.code) ? s.code.join('\n') : s.code;
+  document.getElementById('demoMock').innerHTML = s.mock || '';
+  document.getElementById('demoPrev').disabled = demoIdx === 0;
+  document.getElementById('demoNext').disabled = demoIdx === DEMO_STEPS.length - 1;
+  document.querySelectorAll('#demoDots .demo-dot').forEach((d, n) => d.classList.toggle('is-active', n === demoIdx));
+}
+(function initDemoDots(){
+  const dots = document.getElementById('demoDots');
+  if (!dots) return;
+  DEMO_STEPS.forEach((_, i) => {
+    const b = document.createElement('button');
+    b.className = 'demo-dot' + (i === 0 ? ' is-active' : ''); b.type = 'button';
+    b.setAttribute('aria-label', (i + 1) + '단계');
+    b.addEventListener('click', () => { demoIdx = i; demoRender(); });
+    dots.appendChild(b);
+  });
+})();
+function openDemo(){ demoIdx = 0; demoRender(); demo.classList.add('open'); demo.setAttribute('aria-hidden', 'false'); stopScroll(); document.addEventListener('keydown', onDemoKey); }
+function closeDemo(){ demo.classList.remove('open'); demo.setAttribute('aria-hidden', 'true'); startScroll(); document.removeEventListener('keydown', onDemoKey); }
+function onDemoKey(e){ if (e.key === 'Escape') closeDemo(); }
+demo.addEventListener('click', (e) => { if (e.target === demo) closeDemo(); });
+document.getElementById('demoPrev').addEventListener('click', () => { if (demoIdx > 0){ demoIdx--; demoRender(); } });
+document.getElementById('demoNext').addEventListener('click', () => { if (demoIdx < DEMO_STEPS.length - 1){ demoIdx++; demoRender(); } });
+document.querySelectorAll('.demo-tab').forEach(t => t.addEventListener('click', () => {
+  document.querySelectorAll('.demo-tab').forEach(x => x.classList.toggle('active', x === t));
+}));
 
 /* 비교표 모바일 탭 전환 */
 document.querySelectorAll('.cmp-tabs').forEach(wrap => {
@@ -1595,17 +1754,21 @@ if (ucSlides.length){
     if (Math.abs(dx) < 40) return;
     ucShow(dx < 0 ? (ucIdx + 1) % ucSlides.length : (ucIdx - 1 + ucSlides.length) % ucSlides.length);
   }, { passive:true });
-  // 썸네일 모션: .uc-thumb 안에 <video muted loop playsinline>가 있으면 카드 호버 시 재생
+  // 모션: 슬라이드 안 모든 <video muted loop playsinline>(썸네일·아바타 등)를 카드 호버 시 재생
   ucSlides.forEach(sl => {
-    const v = sl.querySelector('.uc-thumb video');
-    if (!v) return;
-    sl.addEventListener('mouseenter', () => v.play());
-    sl.addEventListener('mouseleave', () => { v.pause(); v.currentTime = 0; });
+    const vids = sl.querySelectorAll('video');
+    if (!vids.length) return;
+    sl.addEventListener('mouseenter', () => vids.forEach(v => v.play()));
+    sl.addEventListener('mouseleave', () => vids.forEach(v => { v.pause(); v.currentTime = 0; }));
   });
 }
 
 /* global click routing — 메인(parameta.html)과 동일 */
 document.addEventListener('click', (e) => {
+  const demoBtn = e.target.closest('[data-demo]');
+  if (demoBtn){ e.preventDefault(); openDemo(); return; }
+  const closeDemoBtn = e.target.closest('[data-close-demo]');
+  if (closeDemoBtn){ closeDemo(); return; }
   const modalBtn = e.target.closest('[data-modal]');
   if (modalBtn){
     if (modalBtn.hasAttribute('data-close-menu')) closeMenu();
@@ -1683,6 +1846,7 @@ if (contactForm){
 document.getElementById('dev-grid-toggle').addEventListener('click', () => {
   document.body.classList.toggle('show-grid');
 });
+
 
 </script>
 

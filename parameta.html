@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<script src="assets/nav.js?v=15" defer></script>
+<script src="assets/nav.js?v=18" defer></script>
 <script src="assets/chatbot.js?v=3" defer></script>
 <style>
 /* ============ RESET / BASE ============ */
@@ -167,6 +167,14 @@ html.chat-open #banner-fixed{ right:26rem }
 .clock-time{ font-variant-numeric:tabular-nums; font-weight:500; color:var(--ink) }
 .clock-sep{ color:rgba(var(--ink-rgb),.3) }
 .clock-date{ font-weight:500 }
+.lang-btn{ display:inline-flex; align-items:center; gap:.35rem; border:1px solid rgba(var(--line-rgb),.8);
+  background:rgba(var(--white-rgb),.4); backdrop-filter:blur(4px); border-radius:var(--radius-control);
+  padding:.5rem .7rem; font-size:12px; font-weight:600; letter-spacing:.04em; cursor:pointer;
+  color:rgba(var(--ink-rgb),.5) }
+@media (hover:hover){ .lang-btn:hover{ background:rgba(var(--white-rgb),.7) } }
+.lang-btn .lang-opt{ transition:color .18s }
+.lang-btn .lang-opt.is-active{ color:var(--ink) }
+.lang-btn .lang-sep{ color:rgba(var(--ink-rgb),.3) }
 .menu-btn{ border:1px solid rgba(var(--line-rgb),.8); background:rgba(var(--white-rgb),.4);
   backdrop-filter:blur(4px); border-radius:var(--radius-control); }
 @media (hover:hover){ .menu-btn:hover{ background:rgba(var(--white-rgb),.7) } }
@@ -187,6 +195,11 @@ body.hero-dark #header:not(.sticky) .clock-chip{ border-color:rgba(var(--white-r
 body.hero-dark #header:not(.sticky) .clock-label{ color:rgba(var(--white-rgb),.45) }
 body.hero-dark #header:not(.sticky) .clock-time{ color:var(--white) }
 body.hero-dark #header:not(.sticky) .clock-sep{ color:rgba(var(--white-rgb),.35) }
+body.hero-dark #header:not(.sticky) .lang-btn{ border-color:rgba(var(--white-rgb),.16);
+  background:rgba(var(--white-rgb),.08); color:rgba(var(--white-rgb),.5) }
+body.hero-dark #header:not(.sticky) .lang-btn .lang-opt.is-active{ color:var(--white) }
+body.hero-dark #header:not(.sticky) .lang-btn .lang-sep{ color:rgba(var(--white-rgb),.35) }
+@media (hover:hover){ body.hero-dark #header:not(.sticky) .lang-btn:hover{ background:rgba(var(--white-rgb),.16) } }
 body.hero-dark #header:not(.sticky) .menu-btn{ border-color:rgba(var(--white-rgb),.16);
   background:rgba(var(--white-rgb),.08); color:var(--white) }
 @media (hover:hover){
