@@ -152,11 +152,30 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 .ps-flow-link:nth-child(2){ transform-origin:bottom }
 .ps-flow-link:nth-child(4){ transform-origin:top }
 .ps-flow.is-in .ps-flow-link{ transform:scaleY(1); transition-delay:300ms }
+/* PortX 도식: 코어 내부 기능 2분할 미니 카드 */
+.px-duo{ display:grid; grid-template-columns:1fr 1fr; gap:.75rem; margin-top:1rem }
+.px-mini{ background:rgba(var(--ink-rgb),.05); border-radius:var(--radius-control); padding:1rem; text-align:left }
+.px-mini .mi-head{ display:flex; align-items:center; gap:.5rem; font-size:var(--text-14); font-weight:600; color:var(--ink); margin-bottom:.375rem }
+.px-mini .mi-head svg{ width:1.125rem; height:1.125rem; flex:none; color:var(--purple-500) }
+.px-mini p{ font-size:var(--text-14); color:rgba(var(--ink-rgb),.55); line-height:1.5; word-break:keep-all }
+@media (max-width:480px){ .px-duo{ grid-template-columns:1fr } }
 /* ============ SUBPAGE UTILITIES ============ */
 .sec{ padding:5rem 1.25rem }
 @media (min-width:640px){ .sec{ padding-left:2rem; padding-right:2rem } }
 @media (min-width:1024px){ .sec{ padding-block:6rem } }
-.sec-h2{ margin:1.25rem 0 2rem; max-width:24ch; font-size:var(--text-32); font-weight:600; letter-spacing:-.02em }
+/* 섹션 서브카피·바디카피 = text-20 (2026-07-13 통일), 컨테이너 풀폭 */
+.sec .phero-lead{ font-size:var(--text-20); max-width:none }
+/* 타이틀 변형: 서브카피 있는 버전은 하단 0.25rem, 없는 버전은 기본 2rem */
+.sec-h2.has-lead{ margin-bottom:.375rem }
+.sec-h2.has-body{ margin-bottom:2rem }
+.sec-h2.has-body + .phero-lead{ font-size:var(--text-20) }  /* 바디카피는 text-20 */
+/* 섹션 헤더 중앙정렬 변형 (sec_head layout='center') */
+.sh-center{ text-align:center }
+.sh-center .sec-h2{ margin-left:auto; margin-right:auto }
+.sec-lead{ margin-bottom:2rem }
+.sh-center .phero-lead{ margin-left:auto; margin-right:auto; font-size:var(--text-20) }
+.sh-center .sec-lead{ margin-bottom:3rem }
+.sec-h2{ margin:1.25rem 0 3rem; max-width:24ch; font-size:var(--text-32); font-weight:600; letter-spacing:-.02em }
 @media (min-width:640px){ .sec-h2{ font-size:var(--text-48) } }
 /* 섹션 헤더 좌우형(sec_head layout='split'): 좌 아이브로우+타이틀 / 우 서브카피, 900↓ 스택 */
 .sec-head-split{ margin-bottom:3rem }
@@ -198,6 +217,9 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 .work-card.grouped .work-bottom{ position:static; inset:auto }
 .work-card.grouped .work-meta{ margin-bottom:.875rem; color:var(--purple-300) }
 .work-card.grouped .work-bottom p{ font-size:var(--text-16) }
+.work-card.grouped .tag{ font-size:var(--text-16); font-weight:500; padding:.625rem 1.25rem; color:var(--purple-300);
+  border:none; background:rgba(var(--purple-300-rgb),.12) }  /* 연보라 필 + 연보라 텍스트 */
+.cm-cards .work-card.grouped .tag, .work-card.t-gray .tag{ color:var(--white) }  /* 그레이카드 다크필 태그는 흰색 유지 */
 .core-mods .work-bottom p{ font-size:var(--text-16) }
 /* ---- 모바일(≤639) 가독성 보정: 간격·R값·폰트 축소 ---- */
 @media (max-width:639px){
@@ -205,11 +227,11 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
   .sec-h2{ margin-bottom:2rem }
   body.hero-dark .phero-text .phero-lead{ font-size:var(--text-18) }
   body.hero-dark .phero-visual{ border-radius:var(--radius-card-sm) }
-  /* Advantages 모바일 1열: 카드 컴팩트 */
-  .cards-3:has(.work-card.grouped){ gap:1rem }
-  .cards-3 .work-card.grouped{ min-height:auto; border-radius:var(--radius-card-sm) }
-  .cards-3 .work-card.grouped::before{ height:10rem }
-  .cards-3 .work-card.grouped .work-bottom h3{ font-size:var(--text-20) }
+  /* 카드 그리드 모바일 1열: 카드 컴팩트 (cards-2·3 공통) */
+  .cards-3:has(.work-card.grouped), .cards-2:has(.work-card.grouped){ gap:1rem }
+  .cards-3 .work-card.grouped, .cards-2 .work-card.grouped{ min-height:auto; border-radius:var(--radius-card-sm) }
+  .cards-3 .work-card.grouped::before, .cards-2 .work-card.grouped::before{ height:10rem }
+  .cards-3 .work-card.grouped .work-bottom h3, .cards-2 .work-card.grouped .work-bottom h3{ font-size:var(--text-20) }
   /* Core Modules 카드: 이미지 영역·타이틀·태그 축소 */
   .cm-cards .work-card.grouped::before{ height:10rem; margin:-1.25rem -1.25rem 1.25rem }
   .cm-cards .work-card.grouped{ padding:1.25rem; border-radius:var(--radius-card-sm) }
@@ -260,6 +282,67 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 .pn-head{ margin-bottom:1.5rem }
 /* 키커: Advantages 다크카드 보라 키커와 동일 스타일 (타이틀 위) */
 .pn-kick{ font-size:var(--text-14); letter-spacing:.025em; color:var(--purple-300); font-weight:600; margin-bottom:.875rem }
+/* Use Cases 캐러셀: 다크카드 1장 + 좌우 화살표 (레퍼 px-uc 구조 이식) */
+.uc-carousel{ display:grid; grid-template-columns:repeat(12,1fr); column-gap:var(--grid-gap); align-items:center }
+.uc-prev{ grid-column:1; justify-self:stretch }
+.uc-slides{ grid-column:3 / 11 }
+.uc-next{ grid-column:12; justify-self:stretch }
+@media (max-width:899px){
+  .uc-carousel{ grid-template-columns:auto minmax(0,1fr) auto; gap:1rem }
+  .uc-prev, .uc-slides, .uc-next{ grid-column:auto } }
+.uc-arrow{ width:100%; max-width:none; aspect-ratio:1/1; height:auto; border-radius:var(--radius-pill); border:1px solid var(--line);
+  display:grid; place-items:center; color:rgba(var(--ink-rgb),.6); background:var(--white);
+  transition:background .25s ease, color .25s ease, transform .25s }  /* 1칸 폭 원형 */
+.uc-arrow svg{ width:1.75rem; height:1.75rem }
+@media (hover:hover){ .uc-arrow:hover{ background:var(--accent); border-color:transparent; color:var(--white); transform:scale(1.06) } }
+.uc-slides{ position:relative }
+.uc-slide{ position:absolute; inset:0; opacity:0; visibility:hidden; transition:opacity .4s ease;
+  background:color-mix(in srgb, var(--ink) 6%, var(--white)); color:var(--ink); border-radius:var(--radius-card); padding:3rem;
+  display:flex; flex-direction:column }
+.uc-slide.is-active{ position:relative; opacity:1; visibility:visible }
+.uc-thumb{ width:5rem; height:5rem; border-radius:var(--radius-card-sm); background:rgba(var(--ink-rgb),.07); margin-bottom:1.5rem }
+.uc-thumb video, .uc-thumb img{ width:100%; height:100%; object-fit:cover; display:block; border-radius:inherit }
+.uc-slide h3{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em; margin-bottom:.75rem; color:var(--ink) }
+@media (min-width:640px){ .uc-slide h3{ font-size:var(--text-30) } }
+.uc-slide > p{ font-size:var(--text-18); color:rgba(var(--ink-rgb),.6); line-height:1.7; word-break:keep-all }
+.uc-testimonial{ margin-top:2.5rem; padding-top:2rem; border-top:1px solid rgba(var(--ink-rgb),.12);
+  display:flex; align-items:center; gap:1rem }
+.uc-avatar{ width:3rem; height:3rem; border-radius:var(--radius-pill); background:rgba(var(--ink-rgb),.1); flex:none }
+.uc-quote{ font-size:var(--text-20); font-weight:500; color:rgba(var(--ink-rgb),.85) }
+.uc-name{ margin-top:.25rem; font-size:var(--text-16); font-weight:600; color:var(--purple-500) }
+@media (max-width:639px){
+  .uc-carousel{ grid-template-columns:1fr; row-gap:1rem }
+  .uc-slide{ padding:1.5rem; border-radius:var(--radius-card-sm) }
+  .uc-arrow{ display:none }
+  .uc-slides{ order:1 } }
+/* 컴팩트 아이콘 카드 (icon_card) — 아이콘·타이틀·설명 */
+.ico-card{ background:var(--ink); color:var(--white); border-radius:var(--radius-card-sm);
+  padding:2rem; height:100%; box-shadow:0 0 0 1px rgba(var(--white-rgb),.05);
+  transition:transform .35s cubic-bezier(.2,.8,.2,1) }
+@media (hover:hover){ .ico-card:hover{ transform:scale(1.03) } }
+.ico-card .ic{ display:block; width:1.75rem; height:1.75rem; margin-bottom:3.5rem; color:var(--white) }
+.ico-card .ic svg{ width:100%; height:100% }
+.ico-card h3{ font-size:var(--text-20); font-weight:500; letter-spacing:-.01em; margin-bottom:.75rem }
+.ico-card p{ font-size:var(--text-16); color:rgba(var(--white-rgb),.55); line-height:1.65; word-break:keep-all }
+.cards-2 > li:has(.ico-card), .cards-3 > li:has(.ico-card){ display:flex }
+.cards-2 > li > .ico-card, .cards-3 > li > .ico-card{ flex:1 1 auto; min-width:0 }
+@media (max-width:639px){ .ico-card{ padding:1.5rem } .ico-card .ic{ margin-bottom:2.5rem } }
+.ex-card{ padding:1.5rem; transition:transform .35s cubic-bezier(.2,.8,.2,1), background .35s ease, color .35s ease }
+@media (hover:hover){
+  .ex-card[style*="--brand"]:hover{ background:var(--brand); color:var(--brand-txt) }
+  .ex-card[style*="--brand"]:hover .ex-ico{ background:rgba(255,255,255,.4) } }
+.ex-card .ex-ico{ display:block; width:3.5rem; height:3.5rem; margin-bottom:2rem; background:rgba(var(--white-rgb),.08) }
+.ex-card h3{ margin-bottom:0 }
+@media (max-width:639px){ .ex-card .ex-ico{ margin-bottom:2rem } }
+/* 원형 아이콘 + 라벨 행 (거래소·통화 등) */
+.ex-rows{ display:flex; flex-direction:column; gap:3rem }  /* 행 간 = 아이템 간과 동일 토큰 */
+.ex-row{ display:flex; flex-wrap:wrap; justify-content:center; gap:3rem; align-items:center }
+.ex-item{ display:flex; align-items:center; gap:.75rem }
+.ex-ico{ width:2.75rem; height:2.75rem; border-radius:var(--radius-pill); overflow:hidden; flex:none;
+  background:color-mix(in srgb, var(--ink) 6%, var(--white)) }
+.ex-ico img{ width:100%; height:100%; object-fit:cover; display:block }
+.ex-name{ font-size:var(--text-16); font-weight:500; color:var(--ink) }
+@media (max-width:639px){ .ex-rows{ gap:1.75rem } .ex-row{ gap:1.75rem } .ex-ico{ width:2.25rem; height:2.25rem } }
 /* 파트너 로고 마퀴 */
 .pt-marquee{ overflow:hidden; margin:0 0 3.5rem;
   -webkit-mask-image:linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
@@ -339,6 +422,8 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 /* Why ParaSta: 타이틀셋(4칼럼) 좌 / 표(8칼럼) 우 */
 .why-grid{ display:flex; flex-direction:column; gap:2.5rem }
 .why-table{ min-width:0 }
+/* 섹션 직속 표(portx·kbtf): 셀 상하 패딩 확대 — 행이 여유 있게 */
+.sec > .why-table table.cmp th, .sec > .why-table table.cmp td{ padding-top:1.75rem; padding-bottom:1.75rem }
 .why-head .sec-h2{ margin-top:1rem; margin-bottom:1.5rem }
 .why-head .phero-lead{ font-size:var(--text-18) }
 .mkv{ width:.8em; height:.8em; display:inline-block; vertical-align:-.1em }
@@ -376,7 +461,13 @@ table.cmp td .cell-txt{ display:block; font-size:var(--text-14) }
 table.cmp td.hl{ font-weight:500; color:var(--ink) }
 /* ParaSta 열: 호버 시 열 전체가 버튼처럼 함께 살짝 커짐(그림자 없음) — JS가 hl-hover 동기화 */
 table.cmp th.hl, table.cmp td.hl{ position:relative; transition:transform .4s cubic-bezier(.2,.8,.2,1) }
-table.cmp th.hl.hl-hover, table.cmp td.hl.hl-hover{ transform:scale(1.03); z-index:1 }
+table.cmp th.hl.hl-hover, table.cmp td.hl.hl-hover{ transform:scaleX(1.03); z-index:1 }
+/* 가로만 확대: 세로 scale 시 셀 경계 틈·디바이더 실종 문제 원천 차단 */
+/* 비교표 헤더 플래그 배지 */
+.cmp-flag{ display:inline-block; margin-left:.5rem; padding:.25rem .625rem; border-radius:var(--radius-pill);
+  background:rgba(var(--accent-rgb),.1); color:var(--accent); font-size:var(--text-14); font-weight:600; vertical-align:middle }
+.cmpt-btn .cmp-flag{ margin-left:.375rem; padding:.125rem .5rem }
+.cmpt-btn.active .cmp-flag{ background:rgba(255,255,255,.22); color:var(--white) }
 table.cmp .mk{ font-weight:700; margin-right:.375rem }
 table.cmp .mk.on{ color:var(--accent) }
 table.cmp .mk.mid{ color:rgba(var(--ink-rgb),.45) }
@@ -585,7 +676,7 @@ const lineObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('[data-line-reveal]').forEach(el => { initLineReveal(el); lineObserver.observe(el); });
 
 /* ParaSta 비교표 강조열: 열 전체가 하나의 블록처럼 커지도록 */
-const hlCells = document.querySelectorAll('.why-table table.cmp .hl');
+const hlCells = document.querySelectorAll('table.cmp .hl');
 function setHlOrigins(){
   if(!hlCells.length) return;
   let top = Infinity, bottom = -Infinity;
@@ -720,6 +811,22 @@ document.querySelectorAll('.cmpt-barwrap').forEach(bw => {
   prev.addEventListener('click', () => bar.scrollBy({ left:-180, behavior:'smooth' }));
   next.addEventListener('click', () => bar.scrollBy({ left:180, behavior:'smooth' }));
 });
+
+/* Use Cases 캐러셀 (portx) */
+const ucSlides = document.querySelectorAll('.uc-carousel .uc-slide');
+if (ucSlides.length){
+  let ucIdx = 0;
+  const ucShow = i => { ucSlides.forEach((s, n) => s.classList.toggle('is-active', n === i)); ucIdx = i; };
+  document.querySelector('.uc-carousel .uc-prev')?.addEventListener('click', () => ucShow((ucIdx - 1 + ucSlides.length) % ucSlides.length));
+  document.querySelector('.uc-carousel .uc-next')?.addEventListener('click', () => ucShow((ucIdx + 1) % ucSlides.length));
+  // 썸네일 모션: .uc-thumb 안에 <video muted loop playsinline>가 있으면 카드 호버 시 재생
+  ucSlides.forEach(sl => {
+    const v = sl.querySelector('.uc-thumb video');
+    if (!v) return;
+    sl.addEventListener('mouseenter', () => v.play());
+    sl.addEventListener('mouseleave', () => { v.pause(); v.currentTime = 0; });
+  });
+}
 
 /* global click routing — 메인(parameta.html)과 동일 */
 document.addEventListener('click', (e) => {
@@ -866,8 +973,8 @@ def faq(items):
 def eyebrow(label):
     return f'<div class="eyebrow dark rvl rvl-op"><span class="dot"></span>{label}</div>'
 
-def h2(text, mx='24ch'):
-    return f'<h2 class="sec-h2" data-line-reveal style="max-width:{mx}"><span class="rvl-line"><span>{text}</span></span></h2>'
+def h2(text, mx='24ch', cls=''):
+    return f'<h2 class="sec-h2{cls}" data-line-reveal style="max-width:{mx}"><span class="rvl-line"><span>{text}</span></span></h2>'
 
 def card_grid(cards, cols=3):
     lis = ''.join(f'<li class="rvl" style="--rvl-y:40px; --rvl-delay:{i*90}ms">{c}</li>' for i, c in enumerate(cards))
@@ -894,6 +1001,33 @@ def mark_svg(level):
 
 def cell(level, text):
     return f'<span class="mk {level}">{mark_svg(level)}</span><span class="cell-txt">{text}</span>'
+
+def icon_card(icon_svg, title, desc):
+    # 컴팩트 아이콘 카드: 아이콘 상단 + 타이틀 + 짧은 설명 (Privy 스타일, 다크)
+    return (f'<article class="ico-card">'
+            f'<span class="ic" aria-hidden="true">{icon_svg}</span>'
+            f'<h3>{title}</h3><p>{desc}</p></article>')
+
+def exchange_card(name, logo=None, brand=None, dark_text=False):
+    # 거래소 카드: 원형 로고 자리 + 이름. brand=호버 시 카드가 그 브랜드 컬러로 (dark_text=밝은 브랜드용)
+    ico = f'<span class="ex-ico">{f"<img src={chr(34)}{logo}{chr(34)} alt={chr(34)}{chr(34)}>" if logo else ""}</span>'
+    style = f' style="--brand:{brand}; --brand-txt:{"var(--ink)" if dark_text else "var(--white)"}"' if brand else ''
+    return f'<article class="ico-card ex-card"{style}>{ico}<h3>{name}</h3></article>'
+
+def icon_row(*rows):
+    # 원형 아이콘 + 라벨 행 (센터 정렬, 간격 단일 토큰) — icon_row([행1]), icon_row([행1],[행2])
+    # 아이템: 'Binance'(플레이스홀더 원) 또는 ('assets/…png','Binance')(로고)
+    row_html=[]
+    for items in rows:
+        lis=[]
+        for it in items:
+            if isinstance(it, tuple):
+                ico = f'<span class="ex-ico"><img src="{it[0]}" alt=""></span>'; name = it[1]
+            else:
+                ico = '<span class="ex-ico"></span>'; name = it
+            lis.append(f'<span class="ex-item">{ico}<span class="ex-name">{name}</span></span>')
+        row_html.append(f'<div class="ex-row">{"".join(lis)}</div>')
+    return f'<div class="ex-rows rvl">{"".join(row_html)}</div>'
 
 def partner_logos(logos=None):
     # 함께한 파트너 로고 세트 (assets/partners/) — 마퀴 트랙에 2회 반복 삽입
@@ -978,23 +1112,29 @@ def note(text):
     return f'<p class="sec-note rvl">{text}</p>'
 
 def lead_p(text):
-    return f'<p class="phero-lead rvl" style="margin-bottom:2rem">{text}</p>'
+    return f'<p class="phero-lead sec-lead rvl">{text}</p>'
 
-def sec_head(label, title, lead=None, layout='stack', mx='24ch'):
+def sec_head(label, title, lead=None, layout='stack', mx='24ch', body=False):
     """섹션 헤더 공통 토큰 (타이포는 parasta-section-type-set 기준).
     유형:
-      · sec_head('Eyebrow', '타이틀')                          — 아이브로우 + 타이틀
-      · sec_head('Eyebrow', '타이틀', '서브카피')               — + 서브타이틀 (위아래형)
+      · sec_head('Eyebrow', '타이틀')                          — 아이브로우 + 타이틀 (하단 3rem)
+      · sec_head('Eyebrow', '타이틀', '서브카피')               — 서브카피: 타이틀에 붙음 (0.25rem)
+      · sec_head('Eyebrow', '타이틀', '본문', body=True)        — 바디카피: 문단 간격 유지 (2rem)
       · sec_head('Eyebrow', '타이틀', '서브카피', layout='split') — 좌 타이틀셋 / 우 서브 (900↓ 스택)
     """
+    if layout == 'center':  # 중앙정렬 변형
+        inner = eyebrow(label) + h2(title, mx, cls=(' has-lead' if lead else ''))
+        if lead: inner += lead_p(lead)
+        return f'<div class="sh-center">{inner}</div>'
     if layout == 'split' and lead:
         return (f'<div class="sec-head-split">'
                 f'<div class="shl">{eyebrow(label)}{h2(title, mx)}</div>'
                 f'<div class="shr"><p class="phero-lead rvl">{lead}</p></div></div>')
-    parts = eyebrow(label) + h2(title, mx)
-    if lead:
-        parts += lead_p(lead)
-    return parts
+    if lead and not body:  # 서브카피: 타이틀 하단 0.25rem (has-lead 변형)
+        return eyebrow(label) + h2(title, mx, cls=' has-lead') + lead_p(lead)
+    if lead:               # 바디카피: 타이틀 하단 2rem (has-body 변형)
+        return eyebrow(label) + h2(title, mx, cls=' has-body') + lead_p(lead)
+    return eyebrow(label) + h2(title, mx)
 
 # 6개 솔루션 크로스링크 (다른 분야 솔루션)
 SOL_ROUTES = [
@@ -1213,7 +1353,7 @@ PAGES['parasta.html'] = dict(
       </div>
     </div>
     <div class="whatis-text rvl" style="--rvl-delay:120ms">
-      {sec_head('What is ParaSta', '발행부터 운영까지 연결하는<br>디지털자산 인프라', 'ParaSta는 스테이블코인, 예금토큰 등 다양한 디지털자산의 발행과 운영을 하나의 플랫폼에서 지원하고, 기존 은행, 결제망과 유기적으로 연결합니다. 신원 확인부터 지갑, 정산, 감사까지 디지털자산 운영 전반을 함께합니다.')}
+      {sec_head('What is ParaSta', '발행부터 운영까지 연결하는<br>디지털자산 인프라', 'ParaSta는 스테이블코인, 예금토큰 등 다양한 디지털자산의 발행과 운영을 하나의 플랫폼에서 지원하고, 기존 은행, 결제망과 유기적으로 연결합니다. 신원 확인부터 지갑, 정산, 감사까지 디지털자산 운영 전반을 함께합니다.', body=True)}
     </div>
   </div>
 </div></section>
@@ -1329,46 +1469,126 @@ PAGES['portx.html'] = dict(
     desc='PortX — 직접 구축 없이 자체 디지털자산 거래 플랫폼을 소유하는 가장 빠른 길. 화이트라벨 하이브리드 거래소 솔루션. 애그리게이션 엔진·Smart Access·논커스터디.',
     eyebrow='Exchange Solution',
     h1_lines=['PortX'],
-    lead='PortX는 디지털자산 거래 기능을 빠르게 도입할 수 있는 화이트라벨 거래소 솔루션입니다. 기술·보안·운영 부담은 낮추고, 사용자는 기존 서비스 안에서 그대로 거래할 수 있습니다.',
+    lead='PortX는 디지털자산 거래 기능을 위한 화이트라벨 거래소 솔루션입니다. 필요한 기능을 선택해 구성하고, 기존 서비스 안에서 거래부터 운영까지 하나로 연결합니다.',
     crumb='Products — Port X',
     hero_visual='<img class="fit-contain" src="assets/portx/hero-test.avif" alt="" loading="eager" fetchpriority="high">',
     content=f'''
 <section><div class="shell sec">
-  {sec_head('Supported Exchanges', '주요 글로벌·국내 거래소와 연동', 'Binance, Bybit, OKX, Hyperliquid 등 메이저 거래소의 유동성을 하나로 연결합니다.')}
-  {chips(['Binance','OKX','Bybit','Bitget','Gate.io','Hyperliquid','Bithumb','bitFlyer','bitbank'])}
+  <div class="whatis-grid">
+    <div class="ps-flow rvl">
+      <div class="ps-flow-band">
+        <div class="ps-band-head">
+          <span class="ps-band-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><ellipse cx="12" cy="12" rx="3.5" ry="8"/><path d="M4 12h16"/></svg></span>
+          <div class="lbl">글로벌 거래소</div>
+        </div>
+        <div class="ps-tags"><span class="ps-tag">Binance</span><span class="ps-tag">OKX</span><span class="ps-tag">Bybit</span><span class="ps-tag">Hyperliquid</span></div>
+      </div>
+      <div class="ps-flow-link" aria-hidden="true"></div>
+      <div class="ps-flow-band ps-flow-core">
+        <div class="ps-core-head">
+          <img class="ps-flow-logo" src="assets/portx/portx.svg" alt="PortX" width="40" height="40" style="width:28px;height:28px;margin-top:-4px">
+          <div class="ps-core-text">
+            <div class="core-title">PortX</div>
+            <div class="core-sub">외부 유동성과 거래 경험을 하나로</div>
+          </div>
+        </div>
+        <div class="px-duo">
+          <div class="px-mini">
+            <div class="mi-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5"/><path d="M3 16.5l9 5 9-5"/></svg>Aggregation Engine</div>
+            <p>글로벌 CEX, DEX 유동성을 통합해 화이트라벨 거래 서비스를 제공합니다.</p>
+          </div>
+          <div class="px-mini">
+            <div class="mi-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="6.5" height="6.5" rx="1"/><rect x="14" y="3.5" width="6.5" height="6.5" rx="1"/><rect x="3.5" y="14" width="6.5" height="6.5" rx="1"/><path d="M14 14h3v3h-3z"/><path d="M20.5 14v2M14 20.5h2M18.5 18.5h2v2"/></svg>Smart Access</div>
+            <p>외부 거래소 계정을 간편하게 연결해 거래 데이터와 기능을 연동합니다.</p>
+          </div>
+        </div>
+      </div>
+      <div class="ps-flow-link" aria-hidden="true"></div>
+      <div class="ps-flow-band">
+        <div class="ps-band-head">
+          <span class="ps-band-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5.5" y="3" width="13" height="18" rx="2.5"/><path d="M10 17.5h4"/></svg></span>
+          <div class="lbl">적용 서비스</div>
+        </div>
+        <div class="ps-tags"><span class="ps-tag">화이트라벨 거래</span><span class="ps-tag">간편 계정 연동</span><span class="ps-tag">거래 내역 조회</span></div>
+      </div>
+    </div>
+    <div class="whatis-text rvl" style="--rvl-delay:120ms">
+      {sec_head('What is PortX', '외부 유동성과 거래 경험을 연결하는<br>디지털자산 거래 인프라', 'PortX는 글로벌 거래소의 유동성과 외부 거래소 계정을 기존 서비스 안으로 연결하는 디지털자산 거래 솔루션입니다. 화이트라벨 거래 서비스부터 간편한 계정 연동까지, 복잡한 거래소 구축 없이 자사 브랜드 안에서 거래 기능을 빠르게 도입할 수 있습니다.', body=True)}
+    </div>
+  </div>
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('Why PortX', '거래소를 만들지 않고, 거래 서비스를 시작하는 방법', '거래소를 통째로 구축하지도, 데이터만 연결하지도 않습니다. 외부 유동성과 실제 거래 경험을 그대로 내 브랜드 안으로 가져옵니다.')}
-  {compare_table(
-    ['', 'PortX (하이브리드)', '턴키 거래소 솔루션', '단순 API 연결'],
+<section><div class="shell sec">
+  {sec_head('Supported Exchanges', '주요 글로벌, 국내 거래소 유동성 연결', 'Binance, Bybit, OKX, Hyperliquid 등 주요 거래소의 유동성을 하나로 통합해,<br>안정적인 거래 환경을 제공합니다.', layout='center')}
+  {card_grid([
+    exchange_card('Binance', brand='#F0B90B', dark_text=True),
+    exchange_card('OKX', brand='#000000'),
+    exchange_card('Bybit', brand='#F7A600', dark_text=True),
+    exchange_card('Bitget', brand='#00F0FF', dark_text=True),
+    exchange_card('Gate.io', brand='#2354E6'),
+    exchange_card('Hyperliquid', brand='#97FCE4', dark_text=True),
+    exchange_card('Bithumb', brand='#F37321'),
+    exchange_card('bitFlyer', brand='#00A0E9'),
+    exchange_card('bitbank', brand='#00C29E', dark_text=True),
+  ], cols=3)}
+</div></section>
+<section><div class="shell sec">
+  {sec_head('Why PortX', '거래소 구축 없이 시작하는 디지털자산 거래 서비스', '거래소를 통째로 구축하지도, 데이터만 연결하지도 않습니다.<br>외부 유동성과 실제 거래 기능을 자사 브랜드 안으로 가져옵니다.')}
+  <div class="why-table">{compare_table(
+    ['', 'PortX<span class="cmp-flag">하이브리드</span>', '턴키 거래소 솔루션', '단순 API 연동'],
     [
-      dict(label='제공 방식', cells=['외부 유동성 + 실제 거래 UX를 내 브랜드로', '완성된 거래소 스택을 통째로', '계정·거래내역 데이터만 연결']),
-      dict(label='유동성', cells=['외부 CEX·DEX 유동성 통합', '직접 확보·운영 부담', '거래 자체가 불가']),
-      dict(label='출시 부담', cells=['구축 없이 거래 서비스 출시', '매칭엔진·백오피스까지 무겁게', '가볍지만 거래 서비스는 아님']),
-      dict(label='보안', cells=['비수탁 — 민감정보 미보관', '커스터디 부담', '해당 없음']),
-    ], hl=1, tabs=True)}
+      dict(label='제공 방식', cells=['외부 유동성과 거래 UX를 자사 브랜드로 제공', '거래소 전체 스택을 일괄 구축', '계정, 거래내역 데이터만 연동']),
+      dict(label='유동성', cells=['외부 CEX, DEX 유동성 통합', '유동성 직접 확보, 운영 필요', '거래 유동성 미제공']),
+      dict(label='출시 부담', cells=['별도 구축 없이 거래 서비스 출시', '매칭 엔진, 백오피스 구축 필요', '연동은 간편하나 거래 기능 미제공']),
+      dict(label='보안', cells=['비수탁 구조, 민감정보 미보관', '커스터디 운영, 보안 책임 필요', '계정, 데이터 연동 범위에 한정']),
+    ], hl=1, tabs=True)}</div>
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('Why Now', '거래는 이미 일어나고 있습니다', '문제는 그 거래가 어디에서 일어나느냐입니다. 지금이 그 흐름을 내 서비스 안으로 가져올 때입니다.')}
-  {rows([
-    dict(idx='연 58.5조$', title='중앙화 무기한 선물 거래량', desc='그만큼의 거래가 지금도 외부 거래소에서 일어납니다.'),
-    dict(idx='외부 이탈', title='정보는 내 서비스, 거래는 밖에서', desc='수수료와 사용자 생애가치가 함께 빠져나갑니다.'),
-    dict(idx='지금 시작', title='화이트라벨로 매출 전환', desc='구축 부담 없이 그 거래를 내 브랜드 안 실질 매출로 전환할 수 있습니다.'),
-  ], meta=True)}
+<section><div class="shell sec">
+  {sec_head('Why Now', '이미 일어나는 거래를, 내 서비스 안으로', '사용자는 정보를 내 서비스에서 찾고, 거래는 외부에서 실행합니다.<br>이제 그 거래 흐름과 수익 기회를 자사 서비스 안으로 가져올 차례입니다.')}
+  <div class="ct-rows">{rows([
+    dict(title='연 58.5조 달러의 시장', desc='중앙화 무기한 선물 시장에서 발생하는 거래 규모. 지금도 막대한 거래가 외부 거래소에서 이루어지고 있습니다.'),
+    dict(title='거래는 여전히 외부에서', desc='정보 탐색은 내 서비스에서, 실제 거래는 외부 거래소에서. 수수료와 사용자 생애가치가 함께 빠져나갑니다.'),
+    dict(title='그 흐름을 자사 매출로', desc='복잡한 거래소 구축 없이 화이트라벨로 빠르게 시작하고, 외부로 향하던 거래를 자사 브랜드 안의 실질 매출로 전환합니다.'),
+  ])}</div>
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
+<section><div class="shell sec">
   {sec_head('Key Features', '거래 경험을 연결하는 핵심 기능')}
   {card_grid([
-    card('Aggregation Engine', '주요 글로벌 거래소의 호가와 유동성을 통합해, 깊은 유동성과 안정적인 체결 환경을 제공합니다.', kicker='Feature 01', tags=['호가 · 유동성 통합','단일 진입점'], media=True),
-    card('Smart Access', 'QR 코드로 외부 거래소 계정을 간편하게 연결해, 복잡한 API 키 입력 없이 거래 연동을 시작할 수 있습니다.', kicker='Feature 02', tags=['QR 계정 연결','API 키 불필요'], media=True),
+    card('Aggregation Engine', '주요 글로벌 거래소의 호가와 유동성을 통합해, 안정적인 체결 환경을 제공합니다.', kicker='Feature 01', tags=['글로벌 거래소 유동성 통합','단일 진입점 주문 연결'], media=True),
+    card('Smart Access', 'QR 코드로 외부 거래소 계정을 간편하게 연결해, API 키 입력 없이 빠르게 연동합니다.', kicker='Feature 02', tags=['QR 계정 연결','API 키 없는 연동'], media=True),
   ], cols=2)}
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('Use Cases', '디지털자산 비즈니스의 시작부터 운영까지')}
-  {card_grid([
-    card('Supercycl', 'CEX와 DEX 유동성을 하나로 연결하는 무기한 선물 거래 플랫폼. Aggregation Engine과 Smart Access로 여러 거래소의 유동성을 연동합니다.', kicker='Case 01', tags=['선물 거래','유동성 연동'], quote='PortX 덕분에 자체 선물거래 서비스를 더 빠르게 시작할 수 있었습니다.', cite='Supercycl 헤드 개발자', sm=False),
-    card('코인 세금 서비스', '거래소와 연동해 거래 내역을 불러오고 예상 세금을 계산하는 세무 플랫폼. Smart Access로 계정 연결 과정을 간소화했습니다.', kicker='Case 02', tags=['세무 플랫폼','거래 내역 연동'], quote='세금 계산에 필요한 거래 정보를 빠르게 가져올 수 있었습니다.', cite='코인 세금 서비스 CEO', sm=False),
-  ], cols=2)}
+<section><div class="shell sec">
+  {sec_head('Use Cases', '디지털자산 비즈니스의<br>시작부터 운영까지', layout='center')}
+  <div class="uc-carousel">
+    <button class="uc-arrow uc-prev rvl rvl-op" type="button" aria-label="이전 사례"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5L8 12l7 7"/></svg></button>
+    <div class="uc-slides rvl" style="--rvl-y:40px">
+      <article class="uc-slide is-active">
+        <div class="uc-thumb" aria-hidden="true"></div>
+        <h3>Supercycl</h3>
+        <p>Supercycl은 CEX와 DEX 유동성을 하나로 연결하는 디지털자산 무기한 선물 거래 플랫폼입니다.<br>PortX의 Aggregation Engine과 Smart Access를 통해 여러 거래소의 유동성을 연동하고, 사용자가 하나의 환경에서 선물거래를 이용할 수 있도록 합니다.</p>
+        <div class="uc-testimonial">
+          <div class="uc-avatar" aria-hidden="true"></div>
+          <div class="uc-qbody">
+            <p class="uc-quote">&ldquo;PortX 덕분에 자체 선물거래 서비스를 더 빠르게 시작할 수 있었습니다.&rdquo;</p>
+            <p class="uc-name">Supercycl 헤드 개발자</p>
+          </div>
+        </div>
+      </article>
+      <article class="uc-slide">
+        <div class="uc-thumb" aria-hidden="true"></div>
+        <h3>코인 세금 서비스</h3>
+        <p>거래소와 연동해 거래 내역을 불러오고, 예상 세금을 미리 계산해주는 디지털자산 세무 플랫폼입니다.<br>PortX의 Smart Access를 통해 외부 거래소 계정 연결 과정을 간소화하고, 세금 계산에 필요한 거래 정보를 서비스 안에서 활용할 수 있도록 했습니다.</p>
+        <div class="uc-testimonial">
+          <div class="uc-avatar" aria-hidden="true"></div>
+          <div class="uc-qbody">
+            <p class="uc-quote">&ldquo;세금 계산에 필요한 거래 정보를 빠르게 가져올 수 있었습니다.&rdquo;</p>
+            <p class="uc-name">코인 세금 서비스 CEO</p>
+          </div>
+        </div>
+      </article>
+    </div>
+    <button class="uc-arrow uc-next rvl rvl-op" type="button" aria-label="다음 사례"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+  </div>
 </div></section>
 ''')
 
@@ -1555,14 +1775,14 @@ PAGES['kbtf.html'] = dict(
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
   {sec_head('Compare', '구축형 MyID vs 공동 인프라 MyID 2.0')}
-  {compare_table(
+  <div class="why-table">{compare_table(
     ['', 'MyID (구축형)', 'MyID 2.0 (공동 인프라)'],
     [
       dict(label='대상', cells=['민간 기업 (금융·기업)', '공공기관']),
       dict(label='도입 방식', cells=['자사 서비스에 맞춘 개별 구축·운영', '공동 인프라(K-BTF) 위 SaaS 이용']),
       dict(label='기간·비용', cells=['수개월 구축, 수억 원대 예산', '1주일 도입, 비용 90% 절감']),
       dict(label='강점', cells=['완전한 커스터마이징과 독립 운영', '별도 구축 없이 즉시, CSAP 인증 보안']),
-    ], hl=2, tabs=True)}
+    ], hl=2, tabs=True)}</div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
   {sec_head('플랫폼 구성', 'MyID 2.0을 이루는 두 가지 구성')}
