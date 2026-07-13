@@ -1358,17 +1358,17 @@ PAGES['portx.html'] = dict(
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
   {sec_head('Key Features', '거래 경험을 연결하는 핵심 기능')}
-  <ul class="cards-2">
-    <li class="rvl" style="--rvl-y:40px">{dark_card('Feature 01', 'Aggregation Engine', '주요 글로벌 거래소의 호가와 유동성을 통합해, 깊은 유동성과 안정적인 체결 환경을 제공합니다.', ['호가 · 유동성 통합','단일 진입점'], grouped=True)}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms">{dark_card('Feature 02', 'Smart Access', 'QR 코드로 외부 거래소 계정을 간편하게 연결해, 복잡한 API 키 입력 없이 거래 연동을 시작할 수 있습니다.', ['QR 계정 연결','API 키 불필요'], grouped=True)}</li>
-  </ul>
+  {card_grid([
+    card('Aggregation Engine', '주요 글로벌 거래소의 호가와 유동성을 통합해, 깊은 유동성과 안정적인 체결 환경을 제공합니다.', kicker='Feature 01', tags=['호가 · 유동성 통합','단일 진입점'], media=True),
+    card('Smart Access', 'QR 코드로 외부 거래소 계정을 간편하게 연결해, 복잡한 API 키 입력 없이 거래 연동을 시작할 수 있습니다.', kicker='Feature 02', tags=['QR 계정 연결','API 키 불필요'], media=True),
+  ], cols=2)}
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
   {sec_head('Use Cases', '디지털자산 비즈니스의 시작부터 운영까지')}
-  <ul class="cards-2">
-    <li class="rvl" style="--rvl-y:40px">{dark_card('Case 01', 'Supercycl', 'CEX와 DEX 유동성을 하나로 연결하는 무기한 선물 거래 플랫폼. Aggregation Engine과 Smart Access로 여러 거래소의 유동성을 연동합니다.', ['선물 거래','유동성 연동'], quote='PortX 덕분에 자체 선물거래 서비스를 더 빠르게 시작할 수 있었습니다.', cite='Supercycl 헤드 개발자', sm=False)}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms">{dark_card('Case 02', '코인 세금 서비스', '거래소와 연동해 거래 내역을 불러오고 예상 세금을 계산하는 세무 플랫폼. Smart Access로 계정 연결 과정을 간소화했습니다.', ['세무 플랫폼','거래 내역 연동'], quote='세금 계산에 필요한 거래 정보를 빠르게 가져올 수 있었습니다.', cite='코인 세금 서비스 CEO', sm=False)}</li>
-  </ul>
+  {card_grid([
+    card('Supercycl', 'CEX와 DEX 유동성을 하나로 연결하는 무기한 선물 거래 플랫폼. Aggregation Engine과 Smart Access로 여러 거래소의 유동성을 연동합니다.', kicker='Case 01', tags=['선물 거래','유동성 연동'], quote='PortX 덕분에 자체 선물거래 서비스를 더 빠르게 시작할 수 있었습니다.', cite='Supercycl 헤드 개발자', sm=False),
+    card('코인 세금 서비스', '거래소와 연동해 거래 내역을 불러오고 예상 세금을 계산하는 세무 플랫폼. Smart Access로 계정 연결 과정을 간소화했습니다.', kicker='Case 02', tags=['세무 플랫폼','거래 내역 연동'], quote='세금 계산에 필요한 거래 정보를 빠르게 가져올 수 있었습니다.', cite='코인 세금 서비스 CEO', sm=False),
+  ], cols=2)}
 </div></section>
 ''')
 
