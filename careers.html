@@ -839,6 +839,12 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 .cards-2{ display:grid; grid-template-columns:1fr; gap:1.5rem }
 @media (min-width:768px){ .cards-2{ grid-template-columns:repeat(2,1fr) } }
 .work-card.sm{ min-height:18rem }
+/* 카드 톤 변형: tone='gray' — 코어모듈式 라이트 그레이 (스코프 무관 어디서든) */
+.work-card.t-gray{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); color:var(--ink) }
+.work-card.t-gray .work-meta{ color:var(--purple-500); font-weight:600 }
+.work-card.t-gray .work-bottom h3{ color:var(--ink) }
+.work-card.t-gray .work-bottom p{ color:rgba(var(--ink-rgb),.6) }
+.work-card.t-gray .tag{ border:none; background:rgba(var(--ink-rgb),.45); color:var(--white); font-weight:500 }
 .work-card.static{ cursor:default; transition:transform .35s cubic-bezier(.2,.8,.2,1) }
 .work-card.static:hover{ transform:scale(1.03) }
 /* grouped: 상단 이미지 영역(고정 높이) + 텍스트는 동일 y에서 시작 */

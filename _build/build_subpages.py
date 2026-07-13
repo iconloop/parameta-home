@@ -15,7 +15,8 @@
 #   1) PAGES['새페이지.html'] = dict(...) 블록 추가 — content는 아래 헬퍼 조합
 #      · eyebrow(라벨) / h2(제목) : 섹션 헤더
 #      · rows([...])              : 서비스 행 리스트 (idx/meta 옵션)
-#      · dark_card(...) + cards_wrap([...], cols) : 잉크 카드 그리드 (2/3열)
+#      · card(title, desc, kicker=, tags=, tone='dark'|'gray', media=True) + card_grid([...], cols)
+#        : 카드 공통 토큰 (dark_card/cards_wrap은 하위호환 alias)
 #      · faq([...])               : 롤모션 아코디언
 #      · light-card / num-card    : 라이트 카드·숫자 카드 (직접 마크업)
 #   2) 실행하면 test/에 HTML 생성. GNB/푸터에 링크 추가는 이 파일에서.
@@ -172,6 +173,12 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 .cards-2{ display:grid; grid-template-columns:1fr; gap:1.5rem }
 @media (min-width:768px){ .cards-2{ grid-template-columns:repeat(2,1fr) } }
 .work-card.sm{ min-height:18rem }
+/* 카드 톤 변형: tone='gray' — 코어모듈式 라이트 그레이 (스코프 무관 어디서든) */
+.work-card.t-gray{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); color:var(--ink) }
+.work-card.t-gray .work-meta{ color:var(--purple-500); font-weight:600 }
+.work-card.t-gray .work-bottom h3{ color:var(--ink) }
+.work-card.t-gray .work-bottom p{ color:rgba(var(--ink-rgb),.6) }
+.work-card.t-gray .tag{ border:none; background:rgba(var(--ink-rgb),.45); color:var(--white); font-weight:500 }
 .work-card.static{ cursor:default; transition:transform .35s cubic-bezier(.2,.8,.2,1) }
 .work-card.static:hover{ transform:scale(1.03) }
 /* grouped: 상단 이미지 영역(고정 높이) + 텍스트는 동일 y에서 시작 */
@@ -800,19 +807,29 @@ document.getElementById('dev-grid-toggle').addEventListener('click', () => {
 ARW = '<svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg>'
 MARK = '<svg class="icn" viewBox="0 0 48 48" aria-hidden="true"><path fill="currentColor" d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z"/></svg>'
 
-def dark_card(cap, title, desc, tags=None, quote=None, cite=None, sm=True, grouped=False):
+def card(title, desc='', kicker='', tags=None, tone='dark', media=False, quote=None, cite=None, sm=True):
+    """카드 공통 토큰 — 색·간격·타이포는 CSS 단일 소스, 조합만 선언.
+    tone : 'dark'(잉크) | 'gray'(라이트 그레이 — 코어모듈式, 어디서든 사용 가능)
+    media: True → 상단 이미지 영역(full-bleed) + 키커·텍스트 하단 블록
+    kicker/tags/quote+cite : 옵션 요소
+    """
+    cls = 'work-card static' + (' sm' if sm else '') + (' grouped' if media else '') + (' t-gray' if tone == 'gray' else '')
     t = ''.join(f'<span class="tag">{x}</span>' for x in (tags or []))
     q = f'<blockquote class="work-quote">&ldquo;{quote}&rdquo;<cite>{cite}</cite></blockquote>' if quote else ''
-    meta = f'<div class="work-meta"><span>{cap}</span></div>'
-    if grouped:
+    meta = f'<div class="work-meta"><span>{kicker}</span></div>' if kicker else ''
+    if media:
         # 키커를 하단 텍스트 블록에 붙여 상단은 이미지 영역으로 비움
-        return (f'<article class="work-card static{" sm" if sm else ""} grouped">'
+        return (f'<article class="{cls}">'
                 f'<div class="work-bottom">{meta}<h3>{title}</h3><p>{desc}</p>{q}'
                 f'{f"<div class=work-tags>{t}</div>" if t else ""}</div></article>')
-    return (f'<article class="work-card static{" sm" if sm else ""}">'
+    return (f'<article class="{cls}">'
             f'{meta}'
             f'<div class="work-bottom"><h3>{title}</h3><p>{desc}</p>{q}'
             f'{f"<div class=work-tags>{t}</div>" if t else ""}</div></article>')
+
+def dark_card(cap, title, desc, tags=None, quote=None, cite=None, sm=True, grouped=False):
+    # (구 API) card()로 위임 — 새 코드는 card() 직접 사용
+    return card(title, desc, kicker=cap, tags=tags, quote=quote, cite=cite, sm=sm, media=grouped)
 
 def rows(items, sm=False, meta=False):
     out = ['<ul>']
@@ -852,9 +869,10 @@ def eyebrow(label):
 def h2(text, mx='24ch'):
     return f'<h2 class="sec-h2" data-line-reveal style="max-width:{mx}"><span class="rvl-line"><span>{text}</span></span></h2>'
 
-def cards_wrap(cards, cols=3):
+def card_grid(cards, cols=3):
     lis = ''.join(f'<li class="rvl" style="--rvl-y:40px; --rvl-delay:{i*90}ms">{c}</li>' for i, c in enumerate(cards))
     return f'<ul class="cards-{cols}">{lis}</ul>'
+cards_wrap = card_grid  # 구 이름 하위호환
 
 def nums(items, cols=3):
     # items: dict(cap, n, sub) — n은 <small> 포함 가능
