@@ -1302,6 +1302,7 @@ PAGES['portx.html'] = dict(
     lead='PortX는 디지털자산 거래 기능을 빠르게 도입할 수 있는 화이트라벨 거래소 솔루션입니다. 기술·보안·운영 부담은 낮추고, 사용자는 기존 서비스 안에서 그대로 거래할 수 있습니다.',
     crumb='Products — Port X',
     body_class='hero-dark',
+    hero_visual='<img class="fit-contain" src="assets/portx/hero-test.avif" alt="" loading="eager" fetchpriority="high">',
     hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
       <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">View Demo</span></a>
       <a class="pill outline no-arrow hs-scale" href="contact.html"><span class="hspring">Talk to Sales</span></a>
@@ -1435,6 +1436,12 @@ PAGES['myid.html'] = dict(
     h1_lines=['MyID'],
     lead='기업과 기관이 신원 인증 서비스를 안전하게 구축할 수 있도록 지원하는 블록체인 기반 W3C 표준 DID 솔루션입니다. 내가 나를 증명하는 법, MyID.',
     crumb='Products — MyID',
+    body_class='hero-dark',
+    hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
+      <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">View Demo</span></a>
+      <a class="pill outline no-arrow hs-scale" href="contact.html"><span class="hspring">Talk to Sales</span></a>
+    </div>''',
+    hero_visual='<img class="fit-contain" src="assets/myid/hero-test.avif" alt="" loading="eager" fetchpriority="high">',
     content=f"""
 <section><div class="shell sec">
   <ul class="cards-2">
@@ -1526,6 +1533,12 @@ PAGES['kbtf.html'] = dict(
     h1_lines=['KBTF'],
     lead='블록체인 서비스 최초로 CSAP 인증을 받은 공공기관 전용 DID·NFT 플랫폼입니다. 자체 구축 1년·수억 원이 들던 블록체인 도입을 1주일·비용 90% 절감으로 끝냅니다.',
     crumb='Products — KBTF',
+    body_class='hero-dark',
+    hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
+      <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">View Demo</span></a>
+      <a class="pill outline no-arrow hs-scale" href="contact.html"><span class="hspring">Talk to Sales</span></a>
+    </div>''',
+    hero_visual='<img class="fit-contain" src="assets/kbtf/hero-test.avif" alt="" loading="eager" fetchpriority="high">',
     content=f"""
 <section><div class="shell sec">
   <ul class="cards-3">
@@ -1605,6 +1618,7 @@ PAGES['broof.html'] = dict(
     lead='Broof는 블록체인 기반 디지털 증명서 발급·검증 서비스입니다. 별도 시스템 구축 없이 웹에서 증명서를 발급하고, QR 하나로 원본 여부와 위·변조 여부를 즉시 확인할 수 있습니다.',
     crumb='Products — Broof',
     body_class='hero-dark',
+    hero_visual='<img class="fit-contain" src="assets/broof/hero-test.avif" alt="" loading="eager" fetchpriority="high">',
     hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
       <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">View Demo</span></a>
       <a class="pill outline no-arrow hs-scale" href="contact.html"><span class="hspring">Talk to Sales</span></a>
