@@ -243,7 +243,16 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
   .pn-list li{ padding:1.25rem } }
 .pn-head{ margin-bottom:1.5rem }
 /* 키커: Advantages 다크카드 보라 키커와 동일 스타일 (타이틀 위) */
-.pn-kick{ font-size:var(--text-14); letter-spacing:.025em; color:var(--purple-300); font-weight:600; margin-bottom:.75rem }
+.pn-kick{ font-size:var(--text-14); letter-spacing:.025em; color:var(--purple-300); font-weight:600; margin-bottom:.875rem }
+/* 파트너 로고 마퀴 */
+.pt-marquee{ overflow:hidden; margin:0 0 3.5rem;
+  -webkit-mask-image:linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+  mask-image:linear-gradient(to right, transparent, #000 10%, #000 90%, transparent) }
+.pt-track{ display:flex; width:max-content; animation:ptScroll 32s linear infinite }
+.pt-set{ display:flex; align-items:center; gap:3.5rem; padding-right:3.5rem }
+.pt-set img{ height:4.5rem; width:auto; flex:none }
+@keyframes ptScroll{ to{ transform:translateX(-50%) } }
+@media (max-width:639px){ .pt-set{ gap:2rem; padding-right:2rem } .pt-set img{ height:3.25rem } }
 /* 타이틀은 다크카드(.work-bottom h3)와 동일 토큰 */
 .pn-head h3{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em }
 @media (min-width:640px){ .pn-head h3{ font-size:var(--text-30) } }
@@ -859,6 +868,14 @@ def mark_svg(level):
 def cell(level, text):
     return f'<span class="mk {level}">{mark_svg(level)}</span><span class="cell-txt">{text}</span>'
 
+def partner_logos():
+    # 함께한 파트너 로고 세트 (assets/partners/) — 마퀴 트랙에 2회 반복 삽입
+    logos = [('logo-shinhan', '신한은행'), ('logo-nh', 'NH농협은행'), ('logo-nh-securities', 'NH투자증권'),
+             ('logo-samsung-securities', '삼성증권'), ('logo-samsung', '삼성'), ('logo-kb', 'KB'),
+             ('logo-ibk', 'IBK기업은행'), ('logo-hanwha', '한화')]
+    imgs = ''.join(f'<img src="assets/partners/{f}.png" alt="{name}" loading="lazy">' for f, name in logos)
+    return f'<div class="pt-set" aria-hidden="false">{imgs}</div>'
+
 def legend_marks():
     items = [('on','지원'), ('mid','일부 지원'), ('off','미지원')]
     lis = ''.join(f'<span class="lg"><span class="mk {lv}">{mark_svg(lv)}</span>{lb}</span>' for lv, lb in items)
@@ -1240,8 +1257,8 @@ PAGES['parasta.html'] = dict(
 <section><div class="shell sec" style="padding-top:0">
   {eyebrow('Partners')}
   {h2('함께한 파트너')}
-  <div class="rvl" style="margin:0 0 3rem">
-    {chips(['신한은행','NH농협은행','NH투자증권','삼성증권','삼성','KB','IBK기업은행','한화'])}
+  <div class="pt-marquee rvl" aria-label="함께한 파트너 로고">
+    <div class="pt-track">{partner_logos()}{partner_logos()}</div>
   </div>
   <div class="pn-grid">
     <article class="pn-card rvl" style="--rvl-y:24px">
