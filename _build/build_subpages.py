@@ -173,7 +173,7 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 .work-card.grouped::before{ content:''; flex:none; height:16rem } /* 이미지 영역 */
 /* Advantages 3카드 이미지 (임시: 3장 동일, 추후 개별 교체) */
 .cards-3 .work-card.grouped::before{ border-radius:var(--radius-card-sm);
-  background:url('assets/ps-body-test.avif') center/cover no-repeat }
+  background:url('assets/parasta/body-test.avif') center/cover no-repeat }
 .work-card.grouped .work-bottom{ position:static; inset:auto }
 .work-card.grouped .work-meta{ margin-bottom:.875rem; color:var(--purple-300) }
 .work-card.grouped .work-bottom p{ font-size:var(--text-16) }
@@ -1118,7 +1118,7 @@ PAGES['parasta.html'] = dict(
     lead='스테이블코인, 디지털자산 비즈니스를 위한 모듈형 인프라입니다.<br>필요한 기능을 선택해 구성하고, 발행부터 운영까지 하나로 연결합니다.',
     crumb='Products — ParaSta',
     body_class='hero-dark',
-    hero_visual='<img class="fit-contain" src="assets/parasta-test.avif" alt="" loading="eager" fetchpriority="high">',
+    hero_visual='<img class="fit-contain" src="assets/parasta/hero-test.avif" alt="" loading="eager" fetchpriority="high">',
     hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
       <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">View Demo</span></a>
       <a class="pill outline no-arrow hs-scale" href="contact.html"><span class="hspring">Talk to Sales</span></a>
