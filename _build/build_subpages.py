@@ -185,11 +185,14 @@ body.hero-center .phero-cta{ justify-content:center }
 /* 섹션 헤더 중앙정렬 변형 (sec_head layout='center') */
 .sh-center{ text-align:center }
 .sh-center .sec-h2{ margin-left:auto; margin-right:auto }
-.sec-lead{ margin-bottom:2rem }
+.sec-lead{ margin-bottom:3rem }
 .sh-center .phero-lead{ margin-left:auto; margin-right:auto; font-size:var(--text-20) }
 .sh-center .sec-lead{ margin-bottom:3rem }
 .sec-h2{ margin:1.25rem 0 3rem; max-width:24ch; font-size:var(--text-32); font-weight:600; letter-spacing:-.02em }
-@media (min-width:640px){ .sec-h2{ font-size:var(--text-48) } }
+@media (min-width:640px){ .sec-h2{ font-size:var(--text-40) } }   /* 태블릿: 데스크톱보다 한 단계 작게 */
+@media (min-width:1024px){ .sec-h2{ font-size:var(--text-48) } }
+/* 태블릿 이하: 서브카피·바디카피 한 톤 작게 (text-20 → text-18) */
+@media (max-width:1023px){ .sec .phero-lead, .sec-h2.has-body + .phero-lead, .sh-center .phero-lead{ font-size:var(--text-18) } }
 /* 섹션 헤더 좌우형(sec_head layout='split'): 좌 아이브로우+타이틀 / 우 서브카피, 900↓ 스택 */
 .sec-head-split{ margin-bottom:3rem }
 .sec-head-split .sec-h2{ margin-bottom:0 }
@@ -284,6 +287,25 @@ body.hero-center .phero-cta{ justify-content:center }
     radial-gradient(rgba(var(--ink-rgb),.06) 1px, transparent 1.5px);
   background-size:100% 100%, 20px 20px; background-position:0 0, 0 0 }
 @media (min-width:640px){ .cm-cards .work-card.grouped::before{ margin:-2rem -2rem 1.5rem } }
+/* cm-sm 변형(broof Core Features): 이미지 영역·카드 최소높이 축소(텍스트 짧아 아래 빈공간 방지) */
+.cm-cards.cm-sm .work-card.grouped::before{ height:16rem }
+.cm-cards.cm-sm .work-card.grouped{ min-height:0 }
+/* 로고 카드 그리드 (Trusted By) — 한 줄 4개 */
+.logo-grid{ list-style:none; margin:2.5rem 0 0; padding:0; display:grid;
+  grid-template-columns:repeat(12,minmax(0,1fr)); column-gap:var(--grid-gap); row-gap:var(--grid-gap) }
+.logo-grid > li{ grid-column:span 3 }
+.logo-card{ display:flex; flex-direction:column; align-items:flex-start; min-height:6.5rem; height:100%; padding:1.5rem;
+  border:1px solid rgba(var(--white-rgb),.1); border-radius:var(--radius-card-sm);
+  background:var(--ink); font-size:var(--text-18); font-weight:500; color:rgba(var(--white-rgb),.85);
+  transition:transform .35s cubic-bezier(.2,.8,.2,1), background .35s ease, color .35s ease, border-color .35s ease }
+.logo-card .logo-ico{ display:block; width:3.5rem; height:3.5rem; margin-bottom:2rem;
+  border-radius:var(--radius-card-sm); background:rgba(var(--white-rgb),.08); transition:background .35s ease }
+.logo-card .logo-ico img{ width:100%; height:100%; object-fit:contain; display:block }
+@media (hover:hover){
+  .logo-card:hover{ background:var(--brand); border-color:transparent; color:var(--white); transform:scale(1.03) }
+  .logo-card:hover .logo-ico{ background:rgba(255,255,255,.35) } }
+@media (max-width:1023px){ .logo-grid > li{ grid-column:span 4 } }
+@media (max-width:639px){ .logo-grid > li{ grid-column:span 6 } }
 /* Partners 2단 카드: 좌 금융권 / 우 퍼블릭·멀티체인 */
 .pn-grid{ display:grid; grid-template-columns:1fr; gap:1.5rem; align-items:stretch }
 @media (min-width:900px){ .pn-grid{ grid-template-columns:repeat(2,1fr); column-gap:var(--grid-gap) } }
@@ -317,6 +339,8 @@ body.hero-center .phero-cta{ justify-content:center }
 .uc-slide.is-active{ position:relative; opacity:1; visibility:visible }
 @media (hover:hover){ .uc-slide.is-active:hover{ transform:scale(1.02) } }  /* 호버 시 카드 확대 */
 .uc-thumb{ width:5rem; height:5rem; border-radius:var(--radius-card-sm); background:rgba(var(--ink-rgb),.07); margin-bottom:1.5rem }
+/* uc-tall 변형(broof): 이미지↔텍스트 간격 확대로 카드 키움 */
+.uc-carousel.uc-tall .uc-thumb{ margin-bottom:4rem }
 .uc-thumb video, .uc-thumb img{ width:100%; height:100%; object-fit:cover; display:block; border-radius:inherit }
 .uc-slide h3{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em; margin-bottom:.75rem; color:var(--ink) }
 @media (min-width:640px){ .uc-slide h3{ font-size:var(--text-30) } }
@@ -414,7 +438,7 @@ body.hero-center .phero-cta{ justify-content:center }
 /* 라이트 배경 스탯 (박스 없이 풀폭) */
 .pv-stats.on-light{ margin-top:0 }
 .pv-stats.on-light{ text-align:center; padding:5rem 0 }
-.pv-stats.on-light li{ display:flex; flex-direction:column; align-items:center; gap:.5rem }
+.pv-stats.on-light li{ display:flex; flex-direction:column; align-items:center; gap:0 }
 .pv-stats.on-light .stat-num{ color:var(--ink); font-size:var(--text-36) }
 /* 768~1023: 3열 열폭 좁음(768서 208px) → 최장 문자열 한 줄 보장 위해 text-28 */
 @media (min-width:768px) and (max-width:1023px){ .pv-stats.on-light .stat-num{ font-size:var(--text-28) } }
@@ -1308,10 +1332,15 @@ def routes(items, active):
 def note(text):
     return f'<p class="sec-note rvl">{text}</p>'
 
-def lead_p(text):
-    return f'<p class="phero-lead sec-lead rvl">{text}</p>'
+def lead_p(text, mx=None):
+    style = f' style="max-width:{mx}"' if mx else ''
+    return f'<p class="phero-lead sec-lead rvl"{style}>{text}</p>'
 
-def sec_head(label, title, lead=None, layout='stack', mx='24ch', body=False):
+# 12칼럼 그리드에서 n칸까지 폭 (그리드 변수 기반 정확 스냅)
+def grid_cols_w(n):
+    return f'calc((100% - 11 * var(--grid-gap)) / 12 * {n} + {n-1} * var(--grid-gap))'
+
+def sec_head(label, title, lead=None, layout='stack', mx='24ch', body=False, lead_mx=None):
     """섹션 헤더 공통 토큰 (타이포는 parasta-section-type-set 기준).
     유형:
       · sec_head('Eyebrow', '타이틀')                          — 아이브로우 + 타이틀 (하단 3rem)
@@ -1328,9 +1357,9 @@ def sec_head(label, title, lead=None, layout='stack', mx='24ch', body=False):
                 f'<div class="shl">{eyebrow(label)}{h2(title, mx)}</div>'
                 f'<div class="shr"><p class="phero-lead rvl">{lead}</p></div></div>')
     if lead and not body:  # 서브카피: 타이틀 하단 0.25rem (has-lead 변형)
-        return eyebrow(label) + h2(title, mx, cls=' has-lead') + lead_p(lead)
+        return eyebrow(label) + h2(title, mx, cls=' has-lead') + lead_p(lead, lead_mx)
     if lead:               # 바디카피: 타이틀 하단 2rem (has-body 변형)
-        return eyebrow(label) + h2(title, mx, cls=' has-body') + lead_p(lead)
+        return eyebrow(label) + h2(title, mx, cls=' has-body') + lead_p(lead, lead_mx)
     return eyebrow(label) + h2(title, mx)
 
 # 6개 솔루션 크로스링크 (다른 분야 솔루션)
@@ -2009,6 +2038,16 @@ PAGES['kbtf.html'] = dict(
 # ---------------- broof.html ----------------
 _broof_orgs = ['서울특별시','POSTECH','한국생산성본부','사람인','인천','한경닷컴','한빛미디어','스터디파이','아트앤가이드','심플로우','해시넷','서울시민청']
 _broof_chips = ''.join(f'<span class="tag on-light">{o}</span>' for o in _broof_orgs)
+# 기관별 근사 브랜드 컬러(실제 브랜드값은 추후 교체). 호버 시 카드 배경으로 사용.
+_broof_brand = {
+    '서울특별시':'#1f4e9c', 'POSTECH':'#86192b', '한국생산성본부':'#0b4da2', '사람인':'#0e5ee6',
+    '인천':'#00a3a5', '한경닷컴':'#e60012', '한빛미디어':'#d81f26', '스터디파이':'#5b47e0',
+    '아트앤가이드':'#b8863b', '심플로우':'#2bb6a4', '해시넷':'#2f6df6', '서울시민청':'#e5673b',
+}
+_broof_logo_cards = ''.join(
+    f'<li class="rvl" style="--rvl-y:20px; --rvl-delay:{i*40}ms">'
+    f'<article class="logo-card" style="--brand:{_broof_brand.get(o, "var(--purple-500)")}"><span class="logo-ico"></span>{o}</article></li>'
+    for i, o in enumerate(_broof_orgs))
 PAGES['broof.html'] = dict(
     title='Broof · 블록체인 증명서 발급 | PARAMETA',
     desc='Broof — 블록체인 기반 증명서 발급·검증 서비스. 위·변조를 방지하는 디지털 증명서를 발급하고, 누구나 즉시 진위를 확인합니다.',
@@ -2018,47 +2057,73 @@ PAGES['broof.html'] = dict(
     crumb='Products — Broof',
     hero_visual='<img class="fit-contain" src="assets/broof/hero-test.avif" alt="" loading="eager" fetchpriority="high">',
     content=f"""
-<section><div class="shell sec">
+<section><div class="shell sec" style="padding-bottom:0">
   <ul class="stats-grid pv-stats on-light">
-    <li class="rvl" style="--rvl-y:20px"><div class="stat-num">정부 위원회 <span class="pv-hl">최초</span></div><div class="stat-label">블록체인 위촉장 발급 (국가AI전략위원회)</div></li>
-    <li class="rvl" style="--rvl-y:20px; --rvl-delay:90ms"><div class="stat-num">누적 <span class="pv-hl"><span class="pv-val" data-val="90000" data-from="89000">89,000</span>건+</span></div><div class="stat-label">증명서 발급</div></li>
-    <li class="rvl" style="--rvl-y:20px; --rvl-delay:180ms"><div class="stat-num">누적 <span class="pv-hl"><span class="pv-val" data-val="20">0</span>개 기관+</span></div><div class="stat-label">도입 기관 (대학·공공·기업)</div></li>
+    <li class="rvl" style="--rvl-y:20px"><div class="stat-num">정부 위원회 <span class="pv-hl">최초</span></div><div class="stat-label">블록체인 위촉장 발급</div></li>
+    <li class="rvl" style="--rvl-y:20px; --rvl-delay:90ms"><div class="stat-num">누적 <span class="pv-hl"><span class="pv-val" data-val="90000" data-from="89991">89,991</span>건+</span></div><div class="stat-label">증명서 발급</div></li>
+    <li class="rvl" style="--rvl-y:20px; --rvl-delay:180ms"><div class="stat-num">누적 <span class="pv-hl"><span class="pv-val" data-val="20" data-from="11">11</span>개 기관+</span></div><div class="stat-label">대학, 공공기관, 기업 도입</div></li>
   </ul>
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('Overview', '시스템 구축 없이 완성되는 디지털 증명서', '발급기관은 서버나 별도 시스템 없이 웹에서 바로 증명서를 만들고, 수령자와 제출처는 블록체인에 기록된 원본을 QR 하나로 즉시 확인합니다. 졸업증명서부터 수료증, 위촉장, 자격증까지 형태는 자유롭습니다.')}
-  <div class="ct-rows">{rows([
-    dict(title='위 · 변조 방지', desc='발급 즉시 블록체인에 기록되어, 임의로 바꾸면 원본 기록과 어긋나 드러납니다.'),
-    dict(title='즉시 검증', desc='QR 하나로 누구나 원본 여부를 바로 확인해, 위조 여부를 그 자리에서 가려냅니다.'),
-    dict(title='간편 발급', desc='명단만 올리면 끝, 몇백 명 몫도 한 번에 발급합니다.'),
-  ])}</div>
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('Workflow', '세 번의 클릭으로 끝나는 발급 절차', '명단만 올리면, 발급부터 검증까지 전부 자동으로 끝납니다.')}
+<section><div class="shell sec">
+  {sec_head('Overview', '시스템 구축 없이 완성하는 디지털 증명서', '별도 시스템 구축 없이 웹에서 증명서를 발급하고, QR 코드 하나로 원본을 즉시 확인합니다. 졸업증명서, 수료증, 위촉장, 자격증 등 다양한 형태로 활용할 수 있습니다.', lead_mx=grid_cols_w(7))}
   {card_grid([
-    icon_card('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>', 'STEP 1 — 템플릿 · 명단 등록', '발급기관이 증명서 템플릿을 만들고 수령자 명단을 CSV로 일괄 업로드합니다.'),
-    icon_card('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M8 13h8M8 17h5"/></svg>', 'STEP 2 — 발급 · 블록체인 기록', '입력 정보가 명단과 일치하면 증명서가 발급되고, 해시가 블록체인에 영구 기록됩니다.'),
-    icon_card('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="6.5" height="6.5" rx="1"/><rect x="14" y="3.5" width="6.5" height="6.5" rx="1"/><rect x="3.5" y="14" width="6.5" height="6.5" rx="1"/><path d="M14 17l2.5 2.5L21 15"/></svg>', 'STEP 3 — 수령 · 즉시 검증', '수령자는 카카오톡·이메일로 안내받고, 검증자는 QR·링크로 누구나 즉시 진위를 확인합니다.'),
+    card('위·변조 방지', '발급 즉시 블록체인에 기록해, 내용이 변경되면 원본과의 불일치를 확인할 수 있습니다.', kicker='TAMPER-PROOF', media=True),
+    card('즉시 검증', 'QR 코드 하나로 원본 여부와 위·변조 여부를 바로 확인합니다.', kicker='VERIFY', media=True),
+    card('간편 발급', '명단만 등록하면 수백 건의 증명서도 한 번에 발급할 수 있습니다.', kicker='ISSUE', media=True),
   ], cols=3)}
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('Core Features', '발급 이후까지 책임지는 관리 기능', '발급은 시작일 뿐입니다. 알림과 현황 관리, 합리적인 과금까지 책임집니다.')}
+<section><div class="shell sec">
+  {sec_head('Workflow', '올리고, 발급하고, 확인하면 끝', '증명서 양식과 명단만 등록하면, 발급부터 QR 검증까지 간단하게 이어집니다.')}
   <div class="ct-rows">{rows([
-    dict(title='자동 알림', desc='발급과 동시에 카카오톡·이메일로 안내가 나가, 별도로 연락할 필요가 없습니다.'),
-    dict(title='발급 현황 대시보드', desc='발급·폐기·만료 상태를 한눈에 확인하고, 여러 담당자가 함께 관리합니다.'),
-    dict(title='쓴 만큼만 결제', desc='정기구독이 아닌 건당 과금이라, 발급량이 적어도 부담 없이 시작할 수 있습니다.'),
+    dict(title='템플릿, 명단 등록', desc='발급기관이 증명서 템플릿을 만들고, 수령자 정보를 담은 명단을 CSV로 일괄 등록합니다. 여러 명의 증명서도 한 번에 준비할 수 있습니다.'),
+    dict(title='발급, 블록체인 기록', desc='등록된 명단을 바탕으로 증명서가 자동 발급되고, 원본 정보와 해시값이 블록체인에 기록됩니다. 이후 내용이 변경되면 원본과의 차이를 확인할 수 있습니다.'),
+    dict(title='수령, 즉시 검증', desc='수령자는 카카오톡이나 이메일로 증명서를 받고, 제출처는 별도 프로그램 없이 QR 코드나 링크로 진위 여부를 즉시 확인합니다.'),
   ])}</div>
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('Applied Cases', '대학부터 기업까지 이어지는 발급 사례', '대학과 기업이 증명서 발급에 Broof를 도입했습니다.')}
-  {card_grid([
-    card('포스텍 (POSTECH)', '블록체인 전문가과정 수료증을 정기적으로 발급합니다.', kicker='University', tags=['수료증'], media=True),
-    card('미래에셋', '장학증서에 QR을 넣어 학생에게 전달하며, 매년 정기적으로 발급합니다.', kicker='Enterprise', tags=['장학증서','QR 검증'], media=True),
-    card('다양한 교육 · 자격 기관', '아트앤가이드, 패스트캠퍼스 등 여러 기관이 수료증·인증서 발급에 Broof를 사용합니다.', kicker='Education', tags=['수료증','인증서'], media=True),
-  ], cols=3)}
-  <div class="rvl" style="margin-top:3rem">
-    <div style="font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); margin-bottom:1rem">이미 여러 기관이 Broof를 사용합니다</div>
-    <div style="display:flex; flex-wrap:wrap; gap:.5rem">{_broof_chips}</div>
+<section><div class="shell sec">
+  <div class="cm-grid">
+    <div class="cm-head">
+      <div class="cm-sticky">
+        <div class="cm-head-in rvl" style="--rvl-y:20px">
+          <div class="eyebrow dark"><span class="dot"></span>Core Features</div>
+          <h2 class="sec-h2" style="max-width:24ch">알림부터 현황 관리,<br>과금까지 한 번에</h2>
+        </div>
+      </div>
+    </div>
+  <ul class="cm-cards core-mods cm-sm">
+    <li>{dark_card('NOTIFY', '자동 알림', '증명서가 발급되면 수령자에게 카카오톡과 이메일로 안내가 자동 발송됩니다. 담당자가 개별적으로 연락하지 않아도 발급 사실과 확인 방법을 빠르게 전달할 수 있습니다.', grouped=True)}</li>
+    <li>{dark_card('DASHBOARD', '발급 현황 대시보드', '발급된 증명서의 발급, 폐기, 만료 상태를 대시보드에서 한눈에 확인할 수 있습니다. 여러 담당자가 함께 발급 내역을 확인하고 체계적으로 관리할 수 있습니다.', grouped=True)}</li>
+    <li>{dark_card('USAGE', '사용량 기반 과금', '정기구독료 없이 실제로 증명서를 발급한 만큼만 비용이 부과됩니다. 발급량이 많지 않은 기관도 초기 부담 없이 필요한 시점부터 유연하게 이용할 수 있습니다.', grouped=True)}</li>
+  </ul>
+  </div>
+</div></section>
+<section><div class="shell sec">
+  {sec_head('Trusted By', '공공기관, 대학, 기업이 선택한 Broof', '공공기관·대학부터 기업까지, 다양한 현장에서 Broof로 증명서를 발급하고 진위를 검증합니다.')}
+  <ul class="logo-grid">{_broof_logo_cards}</ul>
+</div></section>
+<section><div class="shell sec" style="padding-top:9rem">
+  {sec_head('Applied Cases', '대학, 공공기관, 기업이<br>선택한 디지털 증명서', layout='center')}
+  <div class="uc-carousel uc-tall">
+    <button class="uc-arrow uc-prev rvl rvl-op" type="button" aria-label="이전 사례"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5L8 12l7 7"/></svg></button>
+    <div class="uc-slides rvl" style="--rvl-y:40px">
+      <article class="uc-slide is-active">
+        <div class="uc-thumb" aria-hidden="true"></div>
+        <h3>포스텍 (POSTECH)</h3>
+        <p>블록체인 전문가과정 수료증을 Broof로 정기 발급합니다. 수료자는 QR 코드 하나로 어디서나 수료 사실을 증명하고, 대학은 재발급·진위 확인 업무 부담을 덜었습니다.</p>
+      </article>
+      <article class="uc-slide">
+        <div class="uc-thumb" aria-hidden="true"></div>
+        <h3>미래에셋</h3>
+        <p>장학증서에 QR 코드를 넣어 학생에게 전달하며, 매년 정기적으로 발급합니다. 증서의 진위를 즉시 확인할 수 있어 종이 증서의 위조·분실 우려를 줄였습니다.</p>
+      </article>
+      <article class="uc-slide">
+        <div class="uc-thumb" aria-hidden="true"></div>
+        <h3>다양한 교육 · 자격 기관</h3>
+        <p>아트앤가이드, 패스트캠퍼스 등 여러 교육·자격 기관이 수료증과 인증서 발급에 Broof를 사용합니다. 별도 시스템 구축 없이 필요한 시점에 바로 발급합니다.</p>
+      </article>
+    </div>
+    <div class="uc-dots" aria-label="사례 선택"></div>
+    <button class="uc-arrow uc-next rvl rvl-op" type="button" aria-label="다음 사례"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
   </div>
 </div></section>
 """)
@@ -2631,7 +2696,7 @@ SHELL = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<script src="assets/nav.js?v=18" defer></script>
+<script src="assets/nav.js?v=20" defer></script>
 <script src="assets/chatbot.js?v=3" defer></script>
 <style>__CSS____EXTRA_CSS__</style>
 </head>

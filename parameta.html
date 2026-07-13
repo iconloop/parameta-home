@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<script src="assets/nav.js?v=18" defer></script>
+<script src="assets/nav.js?v=20" defer></script>
 <script src="assets/chatbot.js?v=3" defer></script>
 <style>
 /* ============ RESET / BASE ============ */
@@ -167,14 +167,24 @@ html.chat-open #banner-fixed{ right:26rem }
 .clock-time{ font-variant-numeric:tabular-nums; font-weight:500; color:var(--ink) }
 .clock-sep{ color:rgba(var(--ink-rgb),.3) }
 .clock-date{ font-weight:500 }
-.lang-btn{ display:inline-flex; align-items:center; gap:.35rem; border:1px solid rgba(var(--line-rgb),.8);
-  background:rgba(var(--white-rgb),.4); backdrop-filter:blur(4px); border-radius:var(--radius-control);
-  padding:.5rem .7rem; font-size:12px; font-weight:600; letter-spacing:.04em; cursor:pointer;
-  color:rgba(var(--ink-rgb),.5) }
-@media (hover:hover){ .lang-btn:hover{ background:rgba(var(--white-rgb),.7) } }
-.lang-btn .lang-opt{ transition:color .18s }
-.lang-btn .lang-opt.is-active{ color:var(--ink) }
-.lang-btn .lang-sep{ color:rgba(var(--ink-rgb),.3) }
+.lang-wrap{ position:relative }
+.lang-btn{ display:inline-flex; align-items:center; justify-content:center; padding:.65rem;
+  border:1px solid rgba(var(--line-rgb),.8); background:transparent;
+  border-radius:var(--radius-control); cursor:pointer; color:rgba(var(--ink-rgb),.72); will-change:transform;
+  transition:background .22s cubic-bezier(.22,.61,.36,1), border-color .22s cubic-bezier(.22,.61,.36,1), transform .22s cubic-bezier(.22,.61,.36,1) }
+.lang-btn .lang-globe{ width:1.65rem; height:1.65rem }
+/* 호버에서만 배경·테두리 + 확대 리빌 (열림 상태는 채우지 않음) */
+@media (hover:hover){ .lang-btn:hover{ background:rgba(var(--white-rgb),.7); border-color:rgba(var(--line-rgb),.8); transform:scale(1.1) } }
+.lang-menu{ position:absolute; top:calc(100% + .5rem); right:0; min-width:9rem; padding:.375rem;
+  background:var(--ink); border:1px solid rgba(var(--white-rgb),.12); border-radius:var(--radius-control);
+  box-shadow:0 16px 40px rgba(var(--ink-rgb),.45); z-index:60; display:none; flex-direction:column; gap:.125rem }
+.lang-menu.open{ display:flex }
+.lang-item{ display:flex; align-items:center; justify-content:space-between; gap:.75rem;
+  padding:.5rem .75rem; border-radius:calc(var(--radius-control) - .25rem);
+  font-size:14px; font-weight:500; color:rgba(var(--white-rgb),.7); cursor:pointer; text-align:left }
+@media (hover:hover){ .lang-item:hover{ background:rgba(var(--white-rgb),.08) } }
+.lang-item.is-active{ color:var(--purple-300); font-weight:600 }
+.lang-item.is-active::after{ content:"✓"; font-size:12px }
 .menu-btn{ border:1px solid rgba(var(--line-rgb),.8); background:rgba(var(--white-rgb),.4);
   backdrop-filter:blur(4px); border-radius:var(--radius-control); }
 @media (hover:hover){ .menu-btn:hover{ background:rgba(var(--white-rgb),.7) } }
@@ -183,7 +193,11 @@ html.chat-open #banner-fixed{ right:26rem }
 .menu-btn .icn{ font-size:var(--text-14) }
 @media (max-width:640px){ .menu-word{ display:none } }
 @media (min-width:768px){ .clock-chip{ display:flex } }
-@media (min-width:1024px){ .nav-primary{ display:flex } .menu-btn{ display:none } }
+@media (min-width:1024px){ .nav-primary{ display:flex; justify-content:center }
+  .menu-btn{ display:none }
+  /* 로고/우측 폭과 무관하게 GNB 항목을 정중앙 고정 (1fr auto 1fr) */
+  .header-inner{ display:grid; grid-template-columns:1fr auto 1fr }
+  .header-inner .header-right{ justify-self:end } }
 @media (min-width:640px){ .header-inner{ padding:1.5rem 2rem } }
 
 /* ============ DARK HERO 모드 (배경 이미지가 다크일 때 — body.hero-dark) ============ */
@@ -195,11 +209,8 @@ body.hero-dark #header:not(.sticky) .clock-chip{ border-color:rgba(var(--white-r
 body.hero-dark #header:not(.sticky) .clock-label{ color:rgba(var(--white-rgb),.45) }
 body.hero-dark #header:not(.sticky) .clock-time{ color:var(--white) }
 body.hero-dark #header:not(.sticky) .clock-sep{ color:rgba(var(--white-rgb),.35) }
-body.hero-dark #header:not(.sticky) .lang-btn{ border-color:rgba(var(--white-rgb),.16);
-  background:rgba(var(--white-rgb),.08); color:rgba(var(--white-rgb),.5) }
-body.hero-dark #header:not(.sticky) .lang-btn .lang-opt.is-active{ color:var(--white) }
-body.hero-dark #header:not(.sticky) .lang-btn .lang-sep{ color:rgba(var(--white-rgb),.35) }
-@media (hover:hover){ body.hero-dark #header:not(.sticky) .lang-btn:hover{ background:rgba(var(--white-rgb),.16) } }
+body.hero-dark #header:not(.sticky) .lang-btn{ border-color:rgba(var(--white-rgb),.16); background:transparent; color:var(--white) }
+@media (hover:hover){ body.hero-dark #header:not(.sticky) .lang-btn:hover{ background:rgba(var(--white-rgb),.08); border-color:rgba(var(--white-rgb),.16) } }
 body.hero-dark #header:not(.sticky) .menu-btn{ border-color:rgba(var(--white-rgb),.16);
   background:rgba(var(--white-rgb),.08); color:var(--white) }
 @media (hover:hover){

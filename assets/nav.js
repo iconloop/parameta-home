@@ -33,11 +33,15 @@
       </ul>\
     </nav>\
     <div class="header-right">\
-      <button class="lang-btn" data-lang-toggle aria-label="언어 변경">\
-        <span class="lang-opt is-active" data-lang="ko">KO</span>\
-        <span class="lang-sep">/</span>\
-        <span class="lang-opt" data-lang="en">EN</span>\
-      </button>\
+      <div class="lang-wrap">\
+        <button class="lang-btn" data-lang-toggle aria-label="언어 선택" aria-haspopup="true" aria-expanded="false">\
+          <svg class="lang-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.6 3.9 5.7 3.9 9s-1.3 6.4-3.9 9c-2.6-2.6-3.9-5.7-3.9-9S9.4 5.6 12 3z"/></svg>\
+        </button>\
+        <div class="lang-menu" role="menu">\
+          <button class="lang-item is-active" data-lang="ko" role="menuitem">한국어</button>\
+          <button class="lang-item" data-lang="en" role="menuitem">English</button>\
+        </div>\
+      </div>\
       <button class="menu-btn hs-scale" data-open-menu aria-label="메뉴 열기">\
         <span class="hspring">\
           <svg class="icn" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>\
@@ -162,16 +166,26 @@
   tickClock();
   setInterval(tickClock, 1000);
 
-  /* ---- 언어 토글 (모양만 · 실제 번역은 아직 없음) ---- */
-  var langBtn = document.querySelector('[data-lang-toggle]');
-  if (langBtn){
-    langBtn.addEventListener('click', function(){
-      var cur = langBtn.querySelector('.lang-opt.is-active');
-      var next = (cur && cur.dataset.lang === 'ko') ? 'en' : 'ko';
-      langBtn.querySelectorAll('.lang-opt').forEach(function(o){
-        o.classList.toggle('is-active', o.dataset.lang === next);
+  /* ---- 언어 선택 드롭다운 (모양만 · 실제 번역은 아직 없음) ---- */
+  var langWrap = document.querySelector('.lang-wrap');
+  var langBtn = langWrap && langWrap.querySelector('[data-lang-toggle]');
+  var langMenu = langWrap && langWrap.querySelector('.lang-menu');
+  if (langBtn && langMenu){
+    langBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var open = langMenu.classList.toggle('open');
+      langBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    langMenu.querySelectorAll('.lang-item').forEach(function(it){
+      it.addEventListener('click', function(){
+        langMenu.querySelectorAll('.lang-item').forEach(function(o){ o.classList.toggle('is-active', o === it); });
+        document.documentElement.lang = it.dataset.lang;
+        langMenu.classList.remove('open');
+        langBtn.setAttribute('aria-expanded', 'false');
       });
-      document.documentElement.lang = next;
+    });
+    document.addEventListener('click', function(e){
+      if (!langWrap.contains(e.target)){ langMenu.classList.remove('open'); langBtn.setAttribute('aria-expanded', 'false'); }
     });
   }
 
