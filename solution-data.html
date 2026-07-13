@@ -740,8 +740,12 @@ body.hero-dark .phero-inner{ min-height:100vh; display:grid; grid-template-colum
 body.hero-dark .phero-text{ grid-column:1 / 6; align-self:center; gap:1rem }
 body.hero-dark .phero-cta{ margin-top:.5rem }  /* 리드↔버튼 살짝만 */
 body.hero-dark .phero-visual{ grid-column:7 / 13; display:block; align-self:stretch; min-height:56vh;
+  position:relative; overflow:hidden;
   border-radius:var(--radius-card); border:1px solid rgba(var(--white-rgb),.12);
   background:radial-gradient(120% 90% at 70% 18%, rgba(var(--accent-rgb),.2), transparent 60%), rgba(var(--white-rgb),.03) }
+/* 이미지가 들어간 비주얼: 아웃라인·그라 제거, 영역만 + cover */
+body.hero-dark .phero-visual:has(img){ border:none; background:none }
+body.hero-dark .phero-visual img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block }
 @media (max-width:1023px){
   body.hero-dark .phero, body.hero-dark .phero-inner{ min-height:auto }
   body.hero-dark .phero-inner{ grid-template-columns:1fr; padding-top:8rem; padding-bottom:3rem; row-gap:2rem }

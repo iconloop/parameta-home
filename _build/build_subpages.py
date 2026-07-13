@@ -73,8 +73,12 @@ body.hero-dark .phero-inner{ min-height:100vh; display:grid; grid-template-colum
 body.hero-dark .phero-text{ grid-column:1 / 6; align-self:center; gap:1rem }
 body.hero-dark .phero-cta{ margin-top:.5rem }  /* 리드↔버튼 살짝만 */
 body.hero-dark .phero-visual{ grid-column:7 / 13; display:block; align-self:stretch; min-height:56vh;
+  position:relative; overflow:hidden;
   border-radius:var(--radius-card); border:1px solid rgba(var(--white-rgb),.12);
   background:radial-gradient(120% 90% at 70% 18%, rgba(var(--accent-rgb),.2), transparent 60%), rgba(var(--white-rgb),.03) }
+/* 이미지가 들어간 비주얼: 아웃라인·그라 제거, 영역만 + cover */
+body.hero-dark .phero-visual:has(img){ border:none; background:none }
+body.hero-dark .phero-visual img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block }
 @media (max-width:1023px){
   body.hero-dark .phero, body.hero-dark .phero-inner{ min-height:auto }
   body.hero-dark .phero-inner{ grid-template-columns:1fr; padding-top:8rem; padding-bottom:3rem; row-gap:2rem }
@@ -1107,6 +1111,7 @@ PAGES['parasta.html'] = dict(
     lead='스테이블코인, 디지털자산 비즈니스를 위한 모듈형 인프라입니다.<br>필요한 기능을 선택해 구성하고, 발행부터 운영까지 하나로 연결합니다.',
     crumb='Products — ParaSta',
     body_class='hero-dark',
+    hero_visual='<img src="assets/hero/parasta-hero.webp" alt="" loading="eager" fetchpriority="high">',
     hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
       <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">View Demo</span></a>
       <a class="pill outline no-arrow hs-scale" href="contact.html"><span class="hspring">Talk to Sales</span></a>
@@ -2291,7 +2296,7 @@ __HEADER__
         <p class="phero-lead rvl" style="--rvl-delay:250ms">__LEAD__</p>
         __HERO_CTA__
       </div>
-      <div class="phero-visual" aria-hidden="true"></div>
+      <div class="phero-visual" aria-hidden="true">__HERO_VISUAL__</div>
     </div>
     <div class="shell phero-status">
       <span>__CRUMB__</span>
@@ -2320,6 +2325,7 @@ for fname, p in PAGES.items():
         .replace('__LEAD__', p['lead'])
         .replace('__CRUMB__', p['crumb'])
         .replace('__HERO_CTA__', p.get('hero_cta', ''))
+        .replace('__HERO_VISUAL__', p.get('hero_visual', ''))
         .replace('__CONTENT__', p['content'])
         .replace('__FOOTER__', CHROME_FOOTER)
         .replace('__JS__', JS))
