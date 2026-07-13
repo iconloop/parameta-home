@@ -1072,9 +1072,9 @@ const wordObserver = new IntersectionObserver((entries) => {
 
 /* ---------- HERO CARD CAROUSEL ---------- */
 const HC_ITEMS = [
-  { caption:'Digital Asset Platform', title:'ParaSta — 발행부터 운영까지.' },
-  { caption:'Exchange Solution', title:'Port X — 거래소를 빠르게.' },
-  { caption:'DID Identity', title:'MyID — 신뢰할 수 있는 신원인증.' },
+  { caption:'가상자산', title:'토큰을 발행하고 싶어요', link:'solution-finance.html' },
+  { caption:'가상자산', title:'우리 서비스에 가상자산 선물 거래소를 도입하려면?', link:'portx.html' },
+  { caption:'블록체인', title:'금이랑 부동산을 토큰화하고 싶어요', link:'parasta.html' },
 ];
 let hcIndex = 0;
 const hcSlot = document.getElementById('hcSlot');
@@ -1120,6 +1120,8 @@ function hcGo(step){
 setHcItem(0);
 document.getElementById('heroCardRow').addEventListener('click', (e) => {
   if (e.target.closest('.hc-nav')) return;
+  const cur = HC_ITEMS[hcIndex];
+  if (cur && cur.link) { location.href = cur.link; return; }
   hcGo(1);
 });
 document.getElementById('hcNext').addEventListener('click', () => hcGo(1));
