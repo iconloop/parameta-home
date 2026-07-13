@@ -83,7 +83,7 @@ body.hero-dark .phero-visual img{ position:absolute; inset:0; width:100%; height
 body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 @media (max-width:1023px){
   body.hero-dark .phero, body.hero-dark .phero-inner{ min-height:auto }
-  body.hero-dark .phero-inner{ grid-template-columns:1fr; padding-top:8rem; padding-bottom:3rem; row-gap:2rem }
+  body.hero-dark .phero-inner{ grid-template-columns:1fr; padding-top:6.25rem; padding-bottom:3rem; row-gap:2rem }
   body.hero-dark .phero-text, body.hero-dark .phero-visual{ grid-column:auto }
   body.hero-dark .phero-visual{ min-height:40vh } }  /* 이미지: 텍스트 아래 (자연 순서) */
 
