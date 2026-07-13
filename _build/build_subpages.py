@@ -249,10 +249,10 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
   -webkit-mask-image:linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
   mask-image:linear-gradient(to right, transparent, #000 10%, #000 90%, transparent) }
 .pt-track{ display:flex; width:max-content; animation:ptScroll 32s linear infinite }
-.pt-set{ display:flex; align-items:center; gap:3.5rem; padding-right:3.5rem }
-.pt-set img{ height:4.5rem; width:auto; flex:none }
+.pt-set{ display:flex; align-items:center; gap:0; padding-right:0 }
+.pt-set img{ height:5.25rem; width:auto; flex:none }  /* 83~84px, 로고 PNG 자체 여백만으로 간격 */
 @keyframes ptScroll{ to{ transform:translateX(-50%) } }
-@media (max-width:639px){ .pt-set{ gap:2rem; padding-right:2rem } .pt-set img{ height:3.25rem } }
+@media (max-width:639px){ .pt-set img{ height:4rem } }
 /* 타이틀은 다크카드(.work-bottom h3)와 동일 토큰 */
 .pn-head h3{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em }
 @media (min-width:640px){ .pn-head h3{ font-size:var(--text-30) } }
