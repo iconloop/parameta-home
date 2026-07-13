@@ -156,7 +156,7 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 .sec{ padding:5rem 1.25rem }
 @media (min-width:640px){ .sec{ padding-left:2rem; padding-right:2rem } }
 @media (min-width:1024px){ .sec{ padding-block:6rem } }
-.sec-h2{ margin:1.25rem 0 3rem; max-width:24ch; font-size:var(--text-32); font-weight:600; letter-spacing:-.02em }
+.sec-h2{ margin:1.25rem 0 2rem; max-width:24ch; font-size:var(--text-32); font-weight:600; letter-spacing:-.02em }
 @media (min-width:640px){ .sec-h2{ font-size:var(--text-48) } }
 /* 섹션 헤더 좌우형(sec_head layout='split'): 좌 아이브로우+타이틀 / 우 서브카피, 900↓ 스택 */
 .sec-head-split{ margin-bottom:3rem }
@@ -261,8 +261,6 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 /* 키커: Advantages 다크카드 보라 키커와 동일 스타일 (타이틀 위) */
 .pn-kick{ font-size:var(--text-14); letter-spacing:.025em; color:var(--purple-300); font-weight:600; margin-bottom:.875rem }
 /* 파트너 로고 마퀴 */
-/* 타이틀 바로 아래 마퀴가 오는 경우: 타이틀 하단 간격 3rem→2rem (섹션 스코프 오버라이드) */
-.sec-h2 + .pt-marquee{ margin-top:-1rem }
 .pt-marquee{ overflow:hidden; margin:0 0 3.5rem;
   -webkit-mask-image:linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
   mask-image:linear-gradient(to right, transparent, #000 10%, #000 90%, transparent) }
