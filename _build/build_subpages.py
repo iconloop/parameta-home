@@ -79,6 +79,8 @@ body.hero-dark .phero-visual{ grid-column:7 / 13; display:block; align-self:stre
 /* 이미지가 들어간 비주얼: 아웃라인·그라 제거, 영역만 + cover */
 body.hero-dark .phero-visual:has(img){ border:none; background:none }
 body.hero-dark .phero-visual img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block }
+/* 투명 배경 목업류: 크롭 없이 통짜로 보여주기 */
+body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 @media (max-width:1023px){
   body.hero-dark .phero, body.hero-dark .phero-inner{ min-height:auto }
   body.hero-dark .phero-inner{ grid-template-columns:1fr; padding-top:8rem; padding-bottom:3rem; row-gap:2rem }
@@ -1111,7 +1113,7 @@ PAGES['parasta.html'] = dict(
     lead='스테이블코인, 디지털자산 비즈니스를 위한 모듈형 인프라입니다.<br>필요한 기능을 선택해 구성하고, 발행부터 운영까지 하나로 연결합니다.',
     crumb='Products — ParaSta',
     body_class='hero-dark',
-    hero_visual='<img src="assets/hero/parasta-hero.webp" alt="" loading="eager" fetchpriority="high">',
+    hero_visual='<img class="fit-contain" src="assets/parasta-test.avif" alt="" loading="eager" fetchpriority="high">',
     hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
       <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">View Demo</span></a>
       <a class="pill outline no-arrow hs-scale" href="contact.html"><span class="hspring">Talk to Sales</span></a>

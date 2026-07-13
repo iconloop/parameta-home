@@ -746,6 +746,8 @@ body.hero-dark .phero-visual{ grid-column:7 / 13; display:block; align-self:stre
 /* 이미지가 들어간 비주얼: 아웃라인·그라 제거, 영역만 + cover */
 body.hero-dark .phero-visual:has(img){ border:none; background:none }
 body.hero-dark .phero-visual img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block }
+/* 투명 배경 목업류: 크롭 없이 통짜로 보여주기 */
+body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 @media (max-width:1023px){
   body.hero-dark .phero, body.hero-dark .phero-inner{ min-height:auto }
   body.hero-dark .phero-inner{ grid-template-columns:1fr; padding-top:8rem; padding-bottom:3rem; row-gap:2rem }
@@ -1097,7 +1099,7 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
       <a class="pill outline no-arrow hs-scale" href="contact.html"><span class="hspring">Talk to Sales</span></a>
     </div>
       </div>
-      <div class="phero-visual" aria-hidden="true"><img src="assets/hero/parasta-hero.webp" alt="" loading="eager" fetchpriority="high"></div>
+      <div class="phero-visual" aria-hidden="true"><img class="fit-contain" src="assets/parasta-test.avif" alt="" loading="eager" fetchpriority="high"></div>
     </div>
     <div class="shell phero-status">
       <span>Products — ParaSta</span>
