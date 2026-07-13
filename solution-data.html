@@ -344,7 +344,7 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 .works-shell{ padding:2.5rem 1.25rem 5rem }
 .works-head{ display:flex; flex-direction:column; align-items:center; text-align:center; gap:1.25rem; margin-bottom:2.5rem }
 .eyebrow.bordered{ border:1px solid var(--line); border-radius:var(--radius-pill); padding:.375rem 1rem }
-.works-h2{ font-size:var(--text-36); font-weight:600; letter-spacing:-.02em; width:fit-content }
+.works-h2{ font-size:var(--text-32); font-weight:600; letter-spacing:-.02em; width:fit-content }
 .works-grid{ display:grid; grid-template-columns:1fr; gap:1.5rem }
 .work-card{ position:relative; min-height:22rem; overflow:hidden; border-radius:var(--radius-card); background:var(--ink);
   padding:1.5rem; color:var(--white); box-shadow:0 0 0 1px rgba(var(--white-rgb),.05);
@@ -375,7 +375,7 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 /* ============ FEATURES (services) ============ */
 #services{ background:var(--white) }
 .services-shell{ padding:5rem 1.25rem }
-.services-h2{ margin:1.25rem 0 3rem; max-width:16ch; font-size:var(--text-36); font-weight:600; letter-spacing:-.02em }
+.services-h2{ margin:1.25rem 0 3rem; max-width:16ch; font-size:var(--text-32); font-weight:600; letter-spacing:-.02em }
 .service-row-li{ border-top:1px solid var(--line) }
 .service-row-li:first-child{ border-top:none }
 .service-row{ display:flex; align-items:center; gap:1rem; border-radius:var(--radius-card-sm); padding-block:1.5rem;
@@ -396,6 +396,12 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
   .service-badge{ width:3rem; height:3rem } }
 @media (min-width:768px){ .service-row h3{ font-size:var(--text-36) } }
 @media (min-width:1024px){ .services-shell{ padding-block:7rem } .service-desc{ display:block } }
+/* 공통 토큰 동작: <1024 행 본문 타이틀 아래 + 화살표 우측 고정 */
+@media (max-width:1023px){
+  .services-shell .service-row{ position:relative; padding-right:4.5rem; flex-wrap:wrap; row-gap:.5rem }
+  .services-shell .service-badge{ position:absolute; right:1.25rem; top:50%; transform:translateY(-50%) }
+  .services-shell .service-desc{ display:block; flex-basis:100%; max-width:none; margin:0 0 0 2.75rem } }
+@media (min-width:640px) and (max-width:1023px){ .services-shell .service-desc{ margin-left:4rem } }
 
 /* ============ WHY / STATS ============ */
 #why{ background:var(--white) }
@@ -413,7 +419,7 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 /* ============ FAQ (roll-open motion, 원본 reasons 아코디언 참고) ============ */
 #faq{ background:var(--white) }
 .faq-shell{ padding:0 1.25rem 5rem }
-.faq-h2{ margin:1.25rem 0 3rem; max-width:16ch; font-size:var(--text-36); font-weight:600; letter-spacing:-.02em }
+.faq-h2{ margin:1.25rem 0 3rem; max-width:16ch; font-size:var(--text-32); font-weight:600; letter-spacing:-.02em }
 .faq-li{ border-top:1px solid var(--line) }
 .faq-li:first-of-type{ border-top:none }
 .faq-row{ display:flex; align-items:flex-start; gap:1rem; border-radius:var(--radius-card-sm); text-align:left;
