@@ -973,7 +973,6 @@ PAGES['company.html'] = dict(
     h1_lines=['Web2의 안정성과', 'Web3의 가능성을', '모두 경험한 기업'],
     lead='파라메타는 공공, 금융, 민간 IT 시스템 운영 경험과 1세대 메인넷과 dApp 구축 경험을 바탕으로, 기업의 디지털자산 사업을 안정적으로 시작하고 확장할 수 있도록 지원합니다.',
     crumb='Company — 회사소개',
-    body_class='hero-dark',
     hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
       <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">Contact Us</span></a>
       <a class="pill outline no-arrow hs-scale" href="careers.html"><span class="hspring">Careers</span></a>
@@ -1062,6 +1061,9 @@ PAGES['careers.html'] = dict(
     h1_lines=['디지털자산의 미래를', '함께 만들 사람'],
     lead='파라메타는 새로운 시장에 표준을 세우고, 기술을 사업에 안착시키는 여정을 함께할 동료를 찾습니다.',
     crumb='Company — 채용',
+    hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
+      <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">Contact Us</span></a>
+    </div>''',
     content=f'''
 <section><div class="shell sec">
   {eyebrow('Who We Look For')}
@@ -1095,7 +1097,6 @@ PAGES['insights.html'] = dict(
     h1_lines=['디지털자산 시장을', '읽는 인사이트'],
     lead='사업·파트너십·인증·수상 소식과 보도자료, 그리고 시장을 읽는 블로그를 한곳에 모았습니다.',
     crumb='Insights — 보도자료 · 블로그',
-    body_class='hero-dark',
     hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
       <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">Contact Us</span></a>
     </div>''',
@@ -1146,12 +1147,7 @@ PAGES['parasta.html'] = dict(
     h1_lines=['ParaSta'],
     lead='스테이블코인, 디지털자산 비즈니스를 위한 모듈형 인프라입니다.<br>필요한 기능을 선택해 구성하고, 발행부터 운영까지 하나로 연결합니다.',
     crumb='Products — ParaSta',
-    body_class='hero-dark',
     hero_visual='<img class="fit-contain" src="assets/parasta/hero-test.avif" alt="" loading="eager" fetchpriority="high">',
-    hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
-      <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">View Demo</span></a>
-      <a class="pill outline no-arrow hs-scale" href="contact.html"><span class="hspring">Talk to Sales</span></a>
-    </div>''',
     content=f'''
 <section><div class="shell sec">
   <div class="whatis-grid">
@@ -1308,12 +1304,7 @@ PAGES['portx.html'] = dict(
     h1_lines=['PortX'],
     lead='PortX는 디지털자산 거래 기능을 빠르게 도입할 수 있는 화이트라벨 거래소 솔루션입니다. 기술·보안·운영 부담은 낮추고, 사용자는 기존 서비스 안에서 그대로 거래할 수 있습니다.',
     crumb='Products — Port X',
-    body_class='hero-dark',
     hero_visual='<img class="fit-contain" src="assets/portx/hero-test.avif" alt="" loading="eager" fetchpriority="high">',
-    hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
-      <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">View Demo</span></a>
-      <a class="pill outline no-arrow hs-scale" href="contact.html"><span class="hspring">Talk to Sales</span></a>
-    </div>''',
     content=f'''
 <section><div class="shell sec">
   {eyebrow('Supported Exchanges')}
@@ -1423,6 +1414,7 @@ PAGES['privacy.html'] = dict(
     h1_lines=['개인정보처리방침'],
     lead='PARAMETA의 개인정보 수집·이용에 대한 방침입니다.',
     crumb='Info — 개인정보처리방침',
+    hero_cta='',
     content=legal(['1. 수집하는 개인정보 항목','2. 개인정보의 이용 목적','3. 보유 및 이용 기간','4. 제3자 제공','5. 이용자의 권리','6. 개인정보 보호책임자 및 문의처']))
 
 PAGES['terms.html'] = dict(
@@ -1432,6 +1424,7 @@ PAGES['terms.html'] = dict(
     h1_lines=['이용약관'],
     lead='PARAMETA 서비스 이용에 대한 약관입니다.',
     crumb='Info — 이용약관',
+    hero_cta='',
     content=legal(['제1조 (목적)','제2조 (정의)','제3조 (서비스의 제공)','제4조 (이용자의 의무)','제5조 (면책)']))
 
 
@@ -1443,11 +1436,6 @@ PAGES['myid.html'] = dict(
     h1_lines=['MyID'],
     lead='기업과 기관이 신원 인증 서비스를 안전하게 구축할 수 있도록 지원하는 블록체인 기반 W3C 표준 DID 솔루션입니다. 내가 나를 증명하는 법, MyID.',
     crumb='Products — MyID',
-    body_class='hero-dark',
-    hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
-      <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">View Demo</span></a>
-      <a class="pill outline no-arrow hs-scale" href="contact.html"><span class="hspring">Talk to Sales</span></a>
-    </div>''',
     hero_visual='<img class="fit-contain" src="assets/myid/hero-test.avif" alt="" loading="eager" fetchpriority="high">',
     content=f"""
 <section><div class="shell sec">
@@ -1540,11 +1528,6 @@ PAGES['kbtf.html'] = dict(
     h1_lines=['KBTF'],
     lead='블록체인 서비스 최초로 CSAP 인증을 받은 공공기관 전용 DID·NFT 플랫폼입니다. 자체 구축 1년·수억 원이 들던 블록체인 도입을 1주일·비용 90% 절감으로 끝냅니다.',
     crumb='Products — KBTF',
-    body_class='hero-dark',
-    hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
-      <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">View Demo</span></a>
-      <a class="pill outline no-arrow hs-scale" href="contact.html"><span class="hspring">Talk to Sales</span></a>
-    </div>''',
     hero_visual='<img class="fit-contain" src="assets/kbtf/hero-test.avif" alt="" loading="eager" fetchpriority="high">',
     content=f"""
 <section><div class="shell sec">
@@ -1624,12 +1607,7 @@ PAGES['broof.html'] = dict(
     h1_lines=['Broof'],
     lead='Broof는 블록체인 기반 디지털 증명서 발급·검증 서비스입니다. 별도 시스템 구축 없이 웹에서 증명서를 발급하고, QR 하나로 원본 여부와 위·변조 여부를 즉시 확인할 수 있습니다.',
     crumb='Products — Broof',
-    body_class='hero-dark',
     hero_visual='<img class="fit-contain" src="assets/broof/hero-test.avif" alt="" loading="eager" fetchpriority="high">',
-    hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
-      <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">View Demo</span></a>
-      <a class="pill outline no-arrow hs-scale" href="contact.html"><span class="hspring">Talk to Sales</span></a>
-    </div>''',
     content=f"""
 <section><div class="shell sec">
   <ul class="cards-3">
@@ -1689,6 +1667,7 @@ PAGES['contact.html'] = dict(
     h1_lines=['문의 · 무료 컨설팅'],
     lead='궁금하신 사항이 있으시면 문의하기를 이용해주세요. 담당자가 자세하게 안내해드리겠습니다.',
     crumb='Contact — 문의 · 무료 컨설팅',
+    hero_cta='',
     content=f"""
 <section><div class="shell sec">
   <div class="cards-2" style="align-items:start">
@@ -1764,11 +1743,7 @@ PAGES['solution-finance.html'] = dict(
     h1_lines=['규제 환경에 맞춘', '엔터프라이즈 디지털자산', '금융 플랫폼'],
     lead='발행·지갑·오케스트레이션·온체인 KYC·통합관제를 하나로 연결합니다. 스테이블코인·예금토큰·RWA·토큰증권까지 단계적으로 확장합니다.',
     crumb='Solutions — 금융',
-    body_class='hero-dark',
-    hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
-      <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">View Demo</span></a>
-      <a class="pill outline no-arrow hs-scale" href="contact.html"><span class="hspring">Talk to Sales</span></a>
-    </div>''',
+    hero_visual='<img src="assets/solutions/hero-test-1.webp" alt="" loading="eager" fetchpriority="high">',
     content=f"""
 <section><div class="shell sec">
   {eyebrow('Product')}
@@ -1866,11 +1841,7 @@ PAGES['solution-gov.html'] = dict(
     h1_lines=['공공기관용 CSAP 인증', '블록체인 SaaS'],
     lead='DID·지갑·개인데이터저장소(PDS)·분산저장(BFS) 기반 서비스를 직접 구축하지 않고 구독형으로 도입합니다. 신청 4단계, 최대 1주일 내 적용.',
     crumb='Solutions — 공공',
-    body_class='hero-dark',
-    hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
-      <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">View Demo</span></a>
-      <a class="pill outline no-arrow hs-scale" href="contact.html"><span class="hspring">Talk to Sales</span></a>
-    </div>''',
+    hero_visual='<img src="assets/solutions/hero-test-2.webp" alt="" loading="eager" fetchpriority="high">',
     content=f"""
 <section><div class="shell sec">
   {eyebrow('Product')}
@@ -1966,11 +1937,7 @@ PAGES['solution-cert.html'] = dict(
     h1_lines=['발급부터 공유, 제출처', '검증까지 끝나는', '디지털 증명 인프라'],
     lead='위촉장·수료증·MOU·디지털 배지 등 다양한 증명을 발급·공유·검증할 수 있는 블록체인 기반 디지털 증명 서비스입니다.',
     crumb='Solutions — 증명서',
-    body_class='hero-dark',
-    hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
-      <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">View Demo</span></a>
-      <a class="pill outline no-arrow hs-scale" href="contact.html"><span class="hspring">Talk to Sales</span></a>
-    </div>''',
+    hero_visual='<img src="assets/solutions/hero-test-1.webp" alt="" loading="eager" fetchpriority="high">',
     content=f"""
 <section><div class="shell sec">
   {eyebrow('Product')}
@@ -2057,11 +2024,7 @@ PAGES['solution-exchange.html'] = dict(
     h1_lines=['거래소를 만들지 않아도,', '서비스 안에 거래 기능을 넣습니다'],
     lead='PortX는 여러 거래소의 유동성과 거래 화면을 우리 서비스 안으로 그대로 가져오는 솔루션입니다. 매칭엔진·유동성·지갑·보안을 직접 만들지 않아도, 우리 브랜드를 단 디지털자산 거래 서비스를 빠르게 시작할 수 있습니다.',
     crumb='Solutions — 화이트라벨 거래소',
-    body_class='hero-dark',
-    hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
-      <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">View Demo</span></a>
-      <a class="pill outline no-arrow hs-scale" href="contact.html"><span class="hspring">Talk to Sales</span></a>
-    </div>''',
+    hero_visual='<img src="assets/solutions/hero-test-2.webp" alt="" loading="eager" fetchpriority="high">',
     content=f"""
 <section><div class="shell sec">
   {eyebrow('Product')}
@@ -2147,11 +2110,7 @@ PAGES['solution-data.html'] = dict(
     h1_lines=['개인정보를 직접 쌓지 않고,', '사용자가 통제하게 만드는', '데이터 인프라'],
     lead='개인정보를 다루는 서비스일수록 수집·보관·동의 관리·유출 대응 부담이 큽니다. MyID는 사용자가 자기 데이터를 직접 통제해 필요한 곳에 필요한 만큼만 제출하도록 설계된 DID 기반 신원·데이터 인프라입니다. PDS·BFS·선택적 공개로 서비스가 개인정보를 떠안지 않게 합니다.',
     crumb='Solutions — 데이터주권',
-    body_class='hero-dark',
-    hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
-      <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">View Demo</span></a>
-      <a class="pill outline no-arrow hs-scale" href="contact.html"><span class="hspring">Talk to Sales</span></a>
-    </div>''',
+    hero_visual='<img src="assets/solutions/hero-test-1.webp" alt="" loading="eager" fetchpriority="high">',
     content=f"""
 <section><div class="shell sec">
   {eyebrow('Product')}
@@ -2232,11 +2191,7 @@ PAGES['solution-settlement.html'] = dict(
     h1_lines=['결제·정산을 자동화하고,', '자금 흐름을 통제합니다'],
     lead='ParaSta는 은행망과 블록체인을 잇는 미들웨어로, 환전·송금·정산의 여러 단계를 단일 API로 처리합니다. 기존 결제 레일은 그대로 두고 정산·대사·통제 레이어만 얹어(Dual-Rail), 규제 부담이 적은 폐쇄형 정산토큰으로 시작해 필요할 때 스테이블코인으로 확장합니다.',
     crumb='Solutions — 결제·정산',
-    body_class='hero-dark',
-    hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
-      <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">View Demo</span></a>
-      <a class="pill outline no-arrow hs-scale" href="contact.html"><span class="hspring">Talk to Sales</span></a>
-    </div>''',
+    hero_visual='<img src="assets/solutions/hero-test-2.webp" alt="" loading="eager" fetchpriority="high">',
     content=f"""
 <section><div class="shell sec">
   {eyebrow('Product')}
@@ -2361,10 +2316,18 @@ __JS__
 </html>
 """
 
+# ---- 공통 히어로 토큰: 모든 서브페이지 기본 = ParaSta식 다크 히어로 + 표준 CTA ----
+# 페이지별로 body_class / hero_cta / hero_visual 키를 주면 오버라이드 (''로 비활성 가능)
+DEFAULT_BODY_CLASS = 'hero-dark'
+DEFAULT_HERO_CTA = '''<div class="phero-cta rvl" style="--rvl-delay:340ms">
+      <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">View Demo</span></a>
+      <a class="pill outline no-arrow hs-scale" href="contact.html"><span class="hspring">Talk to Sales</span></a>
+    </div>'''
+
 for fname, p in PAGES.items():
     h1 = ''.join(f'<span class="rvl-line"><span>{l}</span></span>' for l in p['h1_lines'])
     out = (SHELL
-        .replace('__BODYCLASS__', p.get('body_class', ''))
+        .replace('__BODYCLASS__', p.get('body_class', DEFAULT_BODY_CLASS))
         .replace('__TITLE__', p['title'])
         .replace('__DESC__', p['desc'])
         .replace('__CSS__', CSS)
@@ -2374,7 +2337,7 @@ for fname, p in PAGES.items():
         .replace('__H1__', h1)
         .replace('__LEAD__', p['lead'])
         .replace('__CRUMB__', p['crumb'])
-        .replace('__HERO_CTA__', p.get('hero_cta', ''))
+        .replace('__HERO_CTA__', p.get('hero_cta', DEFAULT_HERO_CTA))
         .replace('__HERO_VISUAL__', p.get('hero_visual', ''))
         .replace('__CONTENT__', p['content'])
         .replace('__FOOTER__', CHROME_FOOTER)
