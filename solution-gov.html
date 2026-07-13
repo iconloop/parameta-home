@@ -592,6 +592,7 @@ body.show-grid #dev-grid{ display:block }
   display:grid; grid-template-columns:repeat(var(--grid-cols),1fr); gap:var(--grid-gap); box-sizing:border-box }
 #dev-grid .col{ background:rgba(255,80,180,.08);
   border-left:1px dashed rgba(255,80,180,.4); border-right:1px dashed rgba(255,80,180,.4) }
+@media (min-width:640px){ #dev-grid .gi{ padding:0 2rem } }  /* 섹션 패딩과 동기화 */
 #dev-grid-toggle{ position:fixed; bottom:1rem; left:1rem; z-index:10000; padding:.375rem .75rem;
   background:var(--white); color:var(--ink); border:1px solid rgba(0,0,0,.14); font-size:var(--text-14); font-weight:600;
   letter-spacing:.02em; border-radius:var(--radius-control); cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.06) }
@@ -899,8 +900,8 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
   .sec-h2{ margin-bottom:2rem }
   body.hero-dark .phero-text .phero-lead{ font-size:var(--text-18) }
   body.hero-dark .phero-visual{ border-radius:var(--radius-card-sm) }
-  /* 카드 그리드 모바일 1열: 카드 컴팩트 (cards-2·3 공통) */
-  .cards-3:has(.work-card.grouped), .cards-2:has(.work-card.grouped){ gap:1rem }
+  /* 카드 그리드 모바일 1열: 카드 컴팩트 (cards-2·3·코어모듈 공통 — 카드 간격 1rem 통일) */
+  .cards-3:has(.work-card.grouped), .cards-2:has(.work-card.grouped), .cm-grid .cm-cards{ gap:1rem }
   .cards-3 .work-card.grouped, .cards-2 .work-card.grouped{ min-height:auto; border-radius:var(--radius-card-sm) }
   .cards-3 .work-card.grouped::before, .cards-2 .work-card.grouped::before{ height:10rem }
   .cards-3 .work-card.grouped .work-bottom h3, .cards-2 .work-card.grouped .work-bottom h3{ font-size:var(--text-20) }
@@ -955,14 +956,14 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 /* 키커: Advantages 다크카드 보라 키커와 동일 스타일 (타이틀 위) */
 .pn-kick{ font-size:var(--text-14); letter-spacing:.025em; color:var(--purple-300); font-weight:600; margin-bottom:.875rem }
 /* Use Cases 캐러셀: 다크카드 1장 + 좌우 화살표 (레퍼 px-uc 구조 이식) */
-.uc-carousel{ display:grid; grid-template-columns:repeat(12,1fr); column-gap:var(--grid-gap); align-items:center }
-.uc-prev{ grid-column:1; justify-self:stretch }
+.uc-carousel{ display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); column-gap:var(--grid-gap); align-items:center }
+.uc-prev{ grid-column:1; justify-self:start }
 .uc-slides{ grid-column:3 / 11 }
-.uc-next{ grid-column:12; justify-self:stretch }
-@media (max-width:899px){
-  .uc-carousel{ grid-template-columns:auto minmax(0,1fr) auto; gap:1rem }
-  .uc-prev, .uc-slides, .uc-next{ grid-column:auto } }
-.uc-arrow{ width:100%; max-width:none; aspect-ratio:1/1; height:auto; border-radius:var(--radius-pill); border:1px solid var(--line);
+.uc-next{ grid-column:12; justify-self:end }
+/* PC: 화살표 = 그리드 1칸 폭 (minmax(0,1fr) 트랙이라 밀림 없음) */
+@media (min-width:1024px){ .uc-carousel .uc-arrow{ width:100%; justify-self:stretch } }
+
+.uc-arrow{ width:3.5rem; aspect-ratio:1/1; height:auto; border-radius:var(--radius-pill); border:1px solid var(--line);
   display:grid; place-items:center; color:rgba(var(--ink-rgb),.6); background:var(--white);
   transition:background .25s ease, color .25s ease, transform .25s }  /* 1칸 폭 원형 */
 .uc-arrow svg{ width:1.75rem; height:1.75rem }
@@ -982,11 +983,27 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 .uc-avatar{ width:3rem; height:3rem; border-radius:var(--radius-pill); background:rgba(var(--ink-rgb),.1); flex:none }
 .uc-quote{ font-size:var(--text-20); font-weight:500; color:rgba(var(--ink-rgb),.85) }
 .uc-name{ margin-top:.25rem; font-size:var(--text-16); font-weight:600; color:var(--purple-500) }
+/* 탭(640~1023): 카드 패딩을 위 grouped 카드(2rem)와 통일 — 하단은 유지 */
+@media (min-width:640px) and (max-width:1023px){ .uc-slide{ padding:2rem 2rem 3rem } }
+.uc-dots{ display:none }
 @media (max-width:639px){
-  .uc-carousel{ grid-template-columns:1fr; row-gap:1rem }
-  .uc-slide{ padding:1.5rem; border-radius:var(--radius-card-sm) }
-  .uc-arrow{ display:none }
-  .uc-slides{ order:1 } }
+  .uc-carousel{ display:flex; flex-wrap:wrap; justify-content:center; gap:1.25rem 1rem }
+  .uc-slide{ padding:1.5rem 1.5rem 1.875rem; border-radius:var(--radius-card-sm) }  /* 하단 30px */
+  .uc-slides{ flex:0 0 100%; order:0; touch-action:pan-y }
+  .uc-prev, .uc-next{ display:none }
+  .uc-dots{ display:flex; order:1; gap:.5rem; justify-content:center; flex-basis:100% }
+  .uc-dot{ width:.5rem; height:.5rem; border-radius:var(--radius-pill); background:rgba(var(--ink-rgb),.18);
+    transition:background .25s, transform .25s }
+  .uc-dot.is-active{ background:var(--accent); transform:scale(1.25) }
+  /* 모바일 카드 폰트: 다른 카드 규격과 통일 (타이틀 20 / 본문 16) */
+  .uc-slide h3{ font-size:var(--text-20) }
+  .uc-slide > p{ font-size:var(--text-16) }
+  .uc-quote{ font-size:var(--text-16) }
+  .uc-name{ font-size:var(--text-14) }
+  .uc-thumb{ width:4rem; height:4rem; margin-bottom:1.25rem }
+  .uc-slide h3{ margin-bottom:.5rem }
+  .uc-testimonial{ margin-top:1.75rem; padding-top:1.5rem; gap:.75rem }
+  .uc-avatar{ width:2.5rem; height:2.5rem } }
 /* 컴팩트 아이콘 카드 (icon_card) — 아이콘·타이틀·설명 */
 .ico-card{ background:var(--ink); color:var(--white); border-radius:var(--radius-card-sm);
   padding:2rem; height:100%; box-shadow:0 0 0 1px rgba(var(--white-rgb),.05);
@@ -1005,6 +1022,9 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
   .ex-card[style*="--brand"]:hover .ex-ico{ background:rgba(255,255,255,.4) } }
 .ex-card .ex-ico{ display:block; width:3.5rem; height:3.5rem; margin-bottom:2rem; background:rgba(var(--white-rgb),.08) }
 .ex-card h3{ margin-bottom:0 }
+/* 거래소 카드: 컴팩트라 모바일도 2열, 태블릿 3열 */
+.cards-3:has(.ex-card){ grid-template-columns:repeat(2,1fr); gap:1rem }
+@media (min-width:640px){ .cards-3:has(.ex-card){ grid-template-columns:repeat(3,1fr); gap:1.5rem } }
 @media (max-width:639px){ .ex-card .ex-ico{ margin-bottom:2rem } }
 /* 원형 아이콘 + 라벨 행 (거래소·통화 등) */
 .ex-rows{ display:flex; flex-direction:column; gap:3rem }  /* 행 간 = 아이템 간과 동일 토큰 */
@@ -1554,9 +1574,33 @@ document.querySelectorAll('.cmpt-barwrap').forEach(bw => {
 const ucSlides = document.querySelectorAll('.uc-carousel .uc-slide');
 if (ucSlides.length){
   let ucIdx = 0;
-  const ucShow = i => { ucSlides.forEach((s, n) => s.classList.toggle('is-active', n === i)); ucIdx = i; };
+  let ucShow = i => { ucSlides.forEach((s, n) => s.classList.toggle('is-active', n === i)); ucIdx = i; };
   document.querySelector('.uc-carousel .uc-prev')?.addEventListener('click', () => ucShow((ucIdx - 1 + ucSlides.length) % ucSlides.length));
   document.querySelector('.uc-carousel .uc-next')?.addEventListener('click', () => ucShow((ucIdx + 1) % ucSlides.length));
+  // 닷 인디케이터 (모바일 전용 노출) — 슬라이드 수만큼 생성, ucShow와 동기화
+  const ucDots = document.querySelector('.uc-carousel .uc-dots');
+  if (ucDots){
+    ucSlides.forEach((_, i) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'uc-dot' + (i === 0 ? ' is-active' : '');
+      b.setAttribute('aria-label', (i + 1) + '번째 사례');
+      b.addEventListener('click', () => ucShow(i));
+      ucDots.appendChild(b);
+    });
+  }
+  const ucSync = i => ucDots?.querySelectorAll('.uc-dot').forEach((d, n) => d.classList.toggle('is-active', n === i));
+  const _ucShow = ucShow;
+  ucShow = i => { _ucShow(i); ucSync(i); };
+  // 모바일 스와이프(플리킹)
+  const ucWrap = document.querySelector('.uc-carousel .uc-slides');
+  let ucX = null;
+  ucWrap?.addEventListener('touchstart', e => { ucX = e.touches[0].clientX; }, { passive:true });
+  ucWrap?.addEventListener('touchend', e => {
+    if (ucX === null) return;
+    const dx = e.changedTouches[0].clientX - ucX; ucX = null;
+    if (Math.abs(dx) < 40) return;
+    ucShow(dx < 0 ? (ucIdx + 1) % ucSlides.length : (ucIdx - 1 + ucSlides.length) % ucSlides.length);
+  }, { passive:true });
   // 썸네일 모션: .uc-thumb 안에 <video muted loop playsinline>가 있으면 카드 호버 시 재생
   ucSlides.forEach(sl => {
     const v = sl.querySelector('.uc-thumb video');

@@ -592,6 +592,7 @@ body.show-grid #dev-grid{ display:block }
   display:grid; grid-template-columns:repeat(var(--grid-cols),1fr); gap:var(--grid-gap); box-sizing:border-box }
 #dev-grid .col{ background:rgba(255,80,180,.08);
   border-left:1px dashed rgba(255,80,180,.4); border-right:1px dashed rgba(255,80,180,.4) }
+@media (min-width:640px){ #dev-grid .gi{ padding:0 2rem } }  /* 섹션 패딩과 동기화 */
 #dev-grid-toggle{ position:fixed; bottom:1rem; left:1rem; z-index:10000; padding:.375rem .75rem;
   background:var(--white); color:var(--ink); border:1px solid rgba(0,0,0,.14); font-size:var(--text-14); font-weight:600;
   letter-spacing:.02em; border-radius:var(--radius-control); cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.06) }
