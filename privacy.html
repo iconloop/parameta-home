@@ -861,6 +861,7 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 }
 /* Core Modules: 좌측 타이틀 sticky + 우측 카드 세로 스크롤 */
 .cm-grid{ display:grid; grid-template-columns:1fr; gap:2.5rem }
+@media (max-width:639px){ .cm-grid{ gap:0 } }
 .cm-cards{ display:flex; flex-direction:column; gap:1.5rem }
 @media (min-width:900px){
   .cm-grid{ grid-template-columns:repeat(12,1fr); column-gap:var(--grid-gap) }
