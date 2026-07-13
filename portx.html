@@ -756,6 +756,7 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 
 /* ============ WHAT IS (좌 다이어그램 / 우 텍스트) ============ */
 .whatis-grid{ display:grid; grid-template-columns:1fr; gap:2.5rem; align-items:center }
+@media (max-width:639px){ .whatis-grid{ gap:0 } }
 @media (min-width:900px){
   .whatis-grid{ grid-template-columns:repeat(12,1fr); column-gap:var(--grid-gap) }
   .whatis-grid .ps-flow{ grid-column:1 / 7 }
