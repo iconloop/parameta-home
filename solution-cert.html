@@ -824,6 +824,15 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 @media (min-width:1024px){ .sec{ padding-block:6rem } }
 .sec-h2{ margin:1.25rem 0 3rem; max-width:24ch; font-size:var(--text-32); font-weight:600; letter-spacing:-.02em }
 @media (min-width:640px){ .sec-h2{ font-size:var(--text-48) } }
+/* 섹션 헤더 좌우형(sec_head layout='split'): 좌 아이브로우+타이틀 / 우 서브카피, 900↓ 스택 */
+.sec-head-split{ margin-bottom:3rem }
+.sec-head-split .sec-h2{ margin-bottom:0 }
+.sec-head-split .shr .phero-lead{ font-size:var(--text-18); max-width:34rem; margin-top:1rem }
+@media (min-width:900px){
+  .sec-head-split{ display:grid; grid-template-columns:repeat(12,1fr); column-gap:var(--grid-gap); align-items:end }
+  .sec-head-split .shl{ grid-column:1 / 7 }
+  .sec-head-split .shr{ grid-column:8 / 13 }
+  .sec-head-split .shr .phero-lead{ margin-top:0; margin-bottom:.375rem } }
 .cards-3{ display:grid; grid-template-columns:1fr; gap:1.5rem }
 @media (min-width:768px){ .cards-3{ grid-template-columns:repeat(2,1fr) } }
 @media (min-width:1024px){ .cards-3{ grid-template-columns:repeat(3,1fr) } }
@@ -1127,50 +1136,41 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
   </section>
 
 <section><div class="shell sec">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Product</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>이 솔루션을 구성하는 제품</span></span></h2>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Product</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>이 솔루션을 구성하는 제품</span></span></h2>
   <div class="chip-row rvl"><span class="chip">Broof</span></div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Why Now</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>증명서는 발급보다 발급 이후가 더 부담입니다</span></span></h2>
-  <p class="phero-lead rvl" style="margin-bottom:2rem">PDF나 이미지 증명서는 제출처가 원본 여부를 확인하기 어렵고, 발급기관은 발급 이후에도 검증 문의·재발급·서버·보안 운영을 계속 안습니다. 증명 하나를 위해 검증 시스템을 따로 만들어 유지하는 구조입니다.</p>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Why Now</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>증명서는 발급보다 발급 이후가 더 부담입니다</span></span></h2><p class="phero-lead rvl" style="margin-bottom:2rem">PDF나 이미지 증명서는 제출처가 원본 여부를 확인하기 어렵고, 발급기관은 발급 이후에도 검증 문의·재발급·서버·보안 운영을 계속 안습니다. 증명 하나를 위해 검증 시스템을 따로 만들어 유지하는 구조입니다.</p>
   <div class="barc rvl"><p class="barc-title">증명서 건당 비용 비교 (당사 추산 · 모델)</p><div class="barc-row"><span class="barc-l">종이 증서</span><div class="barc-track"><div class="barc-fill" style="width:100%"></div></div><span class="barc-v">약 5,000원</span></div><div class="barc-row hi"><span class="barc-l">Broof 디지털</span><div class="barc-track"><div class="barc-fill" style="width:22%"></div></div><span class="barc-v">1,100원</span></div></div><p class="sec-note">당사 추산 예시(모델). 종이 증서 1건당 발급·우편·재발급·검증 인건비를 합산한 보수적 가정. 연 10,000건 가정 시 종이 약 5,000만원 → Broof 약 1,100만원.</p>
   <div style="height:2rem"></div>
   <ul class="cards-3"><li class="rvl" style="--rvl-delay:0ms"><div class="light-card num-card"><span class="cap">발급 가능</span><div class="n">481종</div><p>전자증명서 발급 가능 (’26.5)</p></div></li><li class="rvl" style="--rvl-delay:90ms"><div class="light-card num-card"><span class="cap">정부24</span><div class="n">2천만</div><p>정부24 회원</p></div></li><li class="rvl" style="--rvl-delay:180ms"><div class="light-card num-card"><span class="cap">연계</span><div class="n">59개</div><p>연계 공공·민간 앱</p></div></li></ul>
   <p class="sec-note rvl">출처: 행정안전부 정부 전자문서지갑(dpaper.kr, ’26.5). 증명서 디지털화가 이미 광범위하게 자리 잡았습니다. Broof는 위촉장·배지 등 기관 자체 증명 영역을 다룹니다.</p>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Problem</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>발급기관이 반복해서 겪는 문제</span></span></h2>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Problem</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>발급기관이 반복해서 겪는 문제</span></span></h2>
   <ul class="cards-2"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static sm"><div class="work-meta"><span>문제</span></div><div class="work-bottom"><h3>발급 이후 운영 지속</h3><p>검증 문의·재발급·서버·보안 운영이 발급 후에도 계속됩니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm"><div class="work-meta"><span>문제</span></div><div class="work-bottom"><h3>위변조 확인 어려움</h3><p>PDF·이미지 증명서는 제출처가 원본 여부를 확인하기 어렵습니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm"><div class="work-meta"><span>문제</span></div><div class="work-bottom"><h3>검증 시스템 구축 부담</h3><p>증명마다 검증 시스템을 따로 만들어 유지해야 합니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms"><article class="work-card static sm"><div class="work-meta"><span>문제</span></div><div class="work-bottom"><h3>종이 발급·배부 비용</h3><p>인쇄·배부·인건비가 건마다 쌓입니다.</p></div></article></li></ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Features</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>주요 기능</span></span></h2>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Features</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>주요 기능</span></span></h2>
   <div class="chip-row rvl"><span class="chip">위촉장</span><span class="chip">수료증</span><span class="chip">MOU</span><span class="chip">디지털 배지</span></div>
   <div style="height:1.5rem"></div>
   <ul><li class="service-row-li rvl" style="--rvl-y:24px; --rvl-delay:0ms"><div class="service-row"><span class="service-idx">01</span><h3>발급–열람–공유–검증을 하나의 서비스로</h3><p class="service-desc">증명 발급부터 제출·검증까지 한 흐름으로 제공합니다.</p><span class="service-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></div></li><li class="service-row-li rvl" style="--rvl-y:24px; --rvl-delay:80ms"><div class="service-row"><span class="service-idx">02</span><h3>QR·bf-ID로 즉시 진위 확인</h3><p class="service-desc">제출처가 원본 진위를 바로 확인합니다.</p><span class="service-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></div></li><li class="service-row-li rvl" style="--rvl-y:24px; --rvl-delay:160ms"><div class="service-row"><span class="service-idx">03</span><h3>별도 검증 시스템 없이 장기 검증</h3><p class="service-desc">기관이 검증 시스템을 따로 구축·운영하지 않아도 됩니다.</p><span class="service-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></div></li></ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>By the Numbers</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>숫자로 보는 Broof</span></span></h2>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>By the Numbers</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>숫자로 보는 Broof</span></span></h2>
   <ul class="cards-3"><li class="rvl" style="--rvl-delay:0ms"><div class="light-card num-card"><span class="cap">Since</span><div class="n">2019년~</div><p>운영 중인 블록체인 증명 서비스</p></div></li><li class="rvl" style="--rvl-delay:90ms"><div class="light-card num-card"><span class="cap">Issued</span><div class="n">90,000건+</div><p>누적 블록체인 증명 발급</p></div></li><li class="rvl" style="--rvl-delay:180ms"><div class="light-card num-card"><span class="cap">Adopted</span><div class="n">20곳+</div><p>누적 도입 기관</p></div></li><li class="rvl" style="--rvl-delay:270ms"><div class="light-card num-card"><span class="cap">First</span><div class="n">정부 위원회 첫</div><p>블록체인 위촉장 사례</p></div></li></ul>
   <p class="sec-note rvl">누적 발급·도입 기관 수는 Broof 제품 기준. 종이 대비 절감률은 단순 산식(모델) 기준입니다.</p>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Use Cases</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>적용 사례</span></span></h2>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Use Cases</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>적용 사례</span></span></h2>
   <ul class="cards-2"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static"><div class="work-meta"><span>정부 위원회 첫</span></div><div class="work-bottom"><h3>국가AI전략위원회 — 위촉증</h3><p><b>과제</b> · 위원 위촉을 종이 없이 신뢰할 수 있는 형태로 발급·검증해야 함<br><br><b>해결</b> · 180여명에게 블록체인 기반 위촉증을 발급</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static"><div class="work-meta"><span>운영</span></div><div class="work-bottom"><h3>대학·연구기관 — 수료증·학습 증명</h3><p><b>과제</b> · 수료·이수 증명을 제출처가 진위 확인할 수 있어야 함<br><br><b>해결</b> · QR·bf-ID 기반 발급·검증으로 원본 무결성을 제공</p></div></article></li></ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>FAQ</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>자주 묻는 질문</span></span></h2>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>FAQ</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>자주 묻는 질문</span></span></h2>
   <ul><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:0ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><span class="faq-idx">01</span><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top">QR·bf-ID 검증은 어떻게 동작하나요</h3><div class="faq-ans">발급된 증명에 연결된 QR 또는 bf-ID로 제출처가 원본 여부를 즉시 확인합니다. 발급기관에 따로 문의하지 않아도 됩니다.</div><h3 class="faq-t faq-t-bottom">QR·bf-ID 검증은 어떻게 동작하나요</h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div></li><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:60ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><span class="faq-idx">02</span><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top">발급기관은 검증 시스템을 따로 만들어야 하나요</h3><div class="faq-ans">아니요. Broof가 발급·공유·검증 흐름을 제공하므로 기관이 별도 검증 시스템을 구축·운영하지 않습니다.</div><h3 class="faq-t faq-t-bottom">발급기관은 검증 시스템을 따로 만들어야 하나요</h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div></li><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:120ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><span class="faq-idx">03</span><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top">어떤 증명을 발급할 수 있나요</h3><div class="faq-ans">위촉장, 수료증, MOU, 디지털 배지 등 다양한 증명을 발급할 수 있습니다.</div><h3 class="faq-t faq-t-bottom">어떤 증명을 발급할 수 있나요</h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div></li></ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Solutions</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>다른 분야 솔루션</span></span></h2>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Solutions</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>다른 분야 솔루션</span></span></h2>
   <div class="routes rvl"><a class="route" href="solution-finance.html">금융</a><a class="route" href="solution-gov.html">공공</a><a class="route on" href="solution-cert.html">증명서</a><a class="route" href="solution-exchange.html">화이트라벨 거래소</a><a class="route" href="solution-data.html">데이터주권</a><a class="route" href="solution-settlement.html">결제·정산</a></div>
 </div></section>
 

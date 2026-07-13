@@ -824,6 +824,15 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 @media (min-width:1024px){ .sec{ padding-block:6rem } }
 .sec-h2{ margin:1.25rem 0 3rem; max-width:24ch; font-size:var(--text-32); font-weight:600; letter-spacing:-.02em }
 @media (min-width:640px){ .sec-h2{ font-size:var(--text-48) } }
+/* 섹션 헤더 좌우형(sec_head layout='split'): 좌 아이브로우+타이틀 / 우 서브카피, 900↓ 스택 */
+.sec-head-split{ margin-bottom:3rem }
+.sec-head-split .sec-h2{ margin-bottom:0 }
+.sec-head-split .shr .phero-lead{ font-size:var(--text-18); max-width:34rem; margin-top:1rem }
+@media (min-width:900px){
+  .sec-head-split{ display:grid; grid-template-columns:repeat(12,1fr); column-gap:var(--grid-gap); align-items:end }
+  .sec-head-split .shl{ grid-column:1 / 7 }
+  .sec-head-split .shr{ grid-column:8 / 13 }
+  .sec-head-split .shr .phero-lead{ margin-top:0; margin-bottom:.375rem } }
 .cards-3{ display:grid; grid-template-columns:1fr; gap:1.5rem }
 @media (min-width:768px){ .cards-3{ grid-template-columns:repeat(2,1fr) } }
 @media (min-width:1024px){ .cards-3{ grid-template-columns:repeat(3,1fr) } }
@@ -1134,9 +1143,7 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
   </ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>MyID 2.0 · Public</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>공공기관이 하나의 플랫폼에서 쓰는 블록체인 SaaS</span></span></h2>
-  <p class="phero-lead rvl" style="margin-bottom:2rem">MyID 2.0은 공공기관이 하나의 플랫폼에서 블록체인 서비스를 이용할 수 있도록 제공하는 구독형 블록체인 서비스입니다. 과학기술정보통신부·KISA가 주관하는 K-BTF(Korea Blockchain Trust Framework)의 공식 서비스입니다.</p>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>MyID 2.0 · Public</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>공공기관이 하나의 플랫폼에서 쓰는 블록체인 SaaS</span></span></h2><p class="phero-lead rvl" style="margin-bottom:2rem">MyID 2.0은 공공기관이 하나의 플랫폼에서 블록체인 서비스를 이용할 수 있도록 제공하는 구독형 블록체인 서비스입니다. 과학기술정보통신부·KISA가 주관하는 K-BTF(Korea Blockchain Trust Framework)의 공식 서비스입니다.</p>
   <div class="rvl" style="display:flex; flex-direction:column; gap:1.75rem">
     <div><div style="font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); margin-bottom:.75rem">공공 발행 — 정부·전국 지자체</div><div class="chip-row rvl"><span class="chip">DID</span><span class="chip">증명서</span><span class="chip">NFT</span></div></div>
     <div><div style="font-size:var(--text-14); color:var(--accent); font-weight:600; margin-bottom:.75rem">MyID 2.0 — 발급·보관·관리 (파라메타 운영)</div><div class="chip-row rvl"><span class="chip">신분증</span><span class="chip">증명서</span><span class="chip">자격증</span><span class="chip">NFT</span></div></div>
@@ -1144,26 +1151,22 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
   </div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Compare</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>구축형 MyID vs 공동 인프라 MyID 2.0</span></span></h2>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Compare</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>구축형 MyID vs 공동 인프라 MyID 2.0</span></span></h2>
   <div class="cmp-tabs rvl"><div class="cmpt-barwrap"><button class="cmpt-nav prev" aria-label="이전 탭"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3 5 8l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="cmpt-bar" role="tablist"><button class="cmpt-btn" data-cmpt="0" role="tab" aria-selected="false">MyID (구축형)</button><button class="cmpt-btn active is-hl" data-cmpt="1" role="tab" aria-selected="true">MyID 2.0 (공동 인프라)</button></div><button class="cmpt-nav next" aria-label="다음 탭"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><div class="cmpt-panel" data-cmpt-panel="0"><div class="cmpt-row"><div class="cmpt-label">대상</div><div class="cmpt-cell">민간 기업 (금융·기업)</div></div><div class="cmpt-row"><div class="cmpt-label">도입 방식</div><div class="cmpt-cell">자사 서비스에 맞춘 개별 구축·운영</div></div><div class="cmpt-row"><div class="cmpt-label">기간·비용</div><div class="cmpt-cell">수개월 구축, 수억 원대 예산</div></div><div class="cmpt-row"><div class="cmpt-label">강점</div><div class="cmpt-cell">완전한 커스터마이징과 독립 운영</div></div></div><div class="cmpt-panel active is-hl" data-cmpt-panel="1"><div class="cmpt-row"><div class="cmpt-label">대상</div><div class="cmpt-cell">공공기관</div></div><div class="cmpt-row"><div class="cmpt-label">도입 방식</div><div class="cmpt-cell">공동 인프라(K-BTF) 위 SaaS 이용</div></div><div class="cmpt-row"><div class="cmpt-label">기간·비용</div><div class="cmpt-cell">1주일 도입, 비용 90% 절감</div></div><div class="cmpt-row"><div class="cmpt-label">강점</div><div class="cmpt-cell">별도 구축 없이 즉시, CSAP 인증 보안</div></div></div></div><div class="cmp-wrap rvl"><table class="cmp"><thead><tr><th></th><th>MyID (구축형)</th><th class="hl">MyID 2.0 (공동 인프라)</th></tr></thead><tbody><tr><th scope="row">대상</th><td>민간 기업 (금융·기업)</td><td class="hl">공공기관</td></tr><tr><th scope="row">도입 방식</th><td>자사 서비스에 맞춘 개별 구축·운영</td><td class="hl">공동 인프라(K-BTF) 위 SaaS 이용</td></tr><tr><th scope="row">기간·비용</th><td>수개월 구축, 수억 원대 예산</td><td class="hl">1주일 도입, 비용 90% 절감</td></tr><tr><th scope="row">강점</th><td>완전한 커스터마이징과 독립 운영</td><td class="hl">별도 구축 없이 즉시, CSAP 인증 보안</td></tr></tbody></table></div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>플랫폼 구성</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>MyID 2.0을 이루는 두 가지 구성</span></span></h2>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>플랫폼 구성</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>MyID 2.0을 이루는 두 가지 구성</span></span></h2>
   <ul class="cards-2">
     <li class="rvl" style="--rvl-y:40px"><article class="work-card static grouped"><div class="work-bottom"><div class="work-meta"><span>01 / For Public Organizations</span></div><h3>MyID 파트너센터</h3><p>공공기관이 원하는 형태의 모바일 인증서(DID)를 코드 한 줄 없이 만들고, 검증 항목만 골라 설정합니다. 발급부터 검증·관리까지 콘솔 하나에서 이뤄집니다.</p><div class=work-tags><span class="tag">발급 · 검증</span><span class="tag">통합 콘솔</span></div></div></article></li>
     <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static grouped"><div class="work-bottom"><div class="work-meta"><span>02 / For Citizens</span></div><h3>쯩 (zzeung) for 공공기관</h3><p>시민이 직접 지니는 디지털 지갑. 신분증·운전면허증·여권부터 NFT 사원증까지 보관하고, QR·블루투스·NFC·HTTP로 어디서든 제시·검증합니다.</p><div class=work-tags><span class="tag">디지털 지갑</span><span class="tag">QR · NFC</span></div></div></article></li>
   </ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Features</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>파트너센터 하나로, 발급부터 관리까지</span></span></h2>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Features</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>파트너센터 하나로, 발급부터 관리까지</span></span></h2>
   <ul class="cards-3"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>01</span></div><h3>인증서 생성 · 검증 정보 설정</h3><p>원하는 형태의 모바일 인증서(DID)를 코드 없이 만들고, 검증에 필요한 항목만 골라 설정합니다. 과하지 않게 꼭 필요한 정보만 모읍니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>02</span></div><h3>인증서 발급 · 검증 이력</h3><p>발급·제출·검증 데이터를 실시간으로 모니터링하고, 건별 상세 내역까지 한 화면에서 확인합니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>03</span></div><h3>인증서 통합 관리</h3><p>발급·취소·만료 상태와 인증서 전 과정을 하나의 콘솔에서 통합 관리합니다.</p></div></article></li></ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>핵심 기술</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>데이터 주권과 프라이버시를 지키는 독자 기술</span></span></h2>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>핵심 기술</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>데이터 주권과 프라이버시를 지키는 독자 기술</span></span></h2>
   <ul class="cards-2">
     <li class="rvl" style="--rvl-y:40px"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>PDS</span></div><h3>개인 데이터 저장소</h3><p>한 번 발급되면 고정되는 증명서(VC)를 넘어, 계속 바뀌는 내 데이터까지 본인이 직접 통제하며 안전하게 보관합니다.</p><div class=work-tags><span class="tag">데이터 주권</span></div></div></article></li>
     <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>BFS</span></div><h3>블록체인 파일 시스템</h3><p>문서·이미지 같은 대용량 파일을 여러 노드에 다중 복제(멀티 피닝)해, 유실 없이 안전하게 보관하는 분산 저장 기술입니다.</p><div class=work-tags><span class="tag">멀티 피닝</span></div></div></article></li>
@@ -1172,8 +1175,7 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
   </ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Applied Cases</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>공공기관 현장에서 실증된 인프라</span></span></h2>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Applied Cases</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>공공기관 현장에서 실증된 인프라</span></span></h2>
   <ul class="cards-3"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>서울특별시</span></div><h3>블록체인 표준 플랫폼</h3><p>서울시 블록체인 표준 플랫폼에 DID·인증 기반 기술을 공급했습니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>부산광역시</span></div><h3>블록체인 배터리 여권 플랫폼</h3><p>전기차 배터리 전 생애주기 데이터를 DID·VC·PDS로 관리. EU 디지털 제품 여권(DPP) 규제 대응 기반을 MyID 2.0 위에서 구현했습니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>경상북도</span></div><h3>블록체인 마이데이터 플랫폼</h3><p>도민 대상 공공 마이데이터 서비스에 블록체인·DID 신원인증을 적용했습니다.</p></div></article></li></ul>
 </div></section>
 

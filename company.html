@@ -824,6 +824,15 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 @media (min-width:1024px){ .sec{ padding-block:6rem } }
 .sec-h2{ margin:1.25rem 0 3rem; max-width:24ch; font-size:var(--text-32); font-weight:600; letter-spacing:-.02em }
 @media (min-width:640px){ .sec-h2{ font-size:var(--text-48) } }
+/* 섹션 헤더 좌우형(sec_head layout='split'): 좌 아이브로우+타이틀 / 우 서브카피, 900↓ 스택 */
+.sec-head-split{ margin-bottom:3rem }
+.sec-head-split .sec-h2{ margin-bottom:0 }
+.sec-head-split .shr .phero-lead{ font-size:var(--text-18); max-width:34rem; margin-top:1rem }
+@media (min-width:900px){
+  .sec-head-split{ display:grid; grid-template-columns:repeat(12,1fr); column-gap:var(--grid-gap); align-items:end }
+  .sec-head-split .shl{ grid-column:1 / 7 }
+  .sec-head-split .shr{ grid-column:8 / 13 }
+  .sec-head-split .shr .phero-lead{ margin-top:0; margin-bottom:.375rem } }
 .cards-3{ display:grid; grid-template-columns:1fr; gap:1.5rem }
 @media (min-width:768px){ .cards-3{ grid-template-columns:repeat(2,1fr) } }
 @media (min-width:1024px){ .cards-3{ grid-template-columns:repeat(3,1fr) } }
@@ -1127,9 +1136,7 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
   </section>
 
 <section><div class="shell sec">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Vision</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>Web2 + Web3를 연결하는 WalletFi 생태계를 만들어갑니다</span></span></h2>
-  <p class="phero-lead rvl" style="margin-bottom:2rem">파라메타는 금융권·공공·민간의 전통금융(Web2)부터 퍼블릭 블록체인 플랫폼과 DeFi(Web3)까지, 양쪽 영역의 전문 경험과 노하우를 두루 갖췄습니다. 두 힘을 하나로 모아, 지갑으로 모든 금융을 연결하는 지갑 기반 금융 생태계 WalletFi를 만들어갑니다.</p>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Vision</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>Web2 + Web3를 연결하는 WalletFi 생태계를 만들어갑니다</span></span></h2><p class="phero-lead rvl" style="margin-bottom:2rem">파라메타는 금융권·공공·민간의 전통금융(Web2)부터 퍼블릭 블록체인 플랫폼과 DeFi(Web3)까지, 양쪽 영역의 전문 경험과 노하우를 두루 갖췄습니다. 두 힘을 하나로 모아, 지갑으로 모든 금융을 연결하는 지갑 기반 금융 생태계 WalletFi를 만들어갑니다.</p>
   <div class="rvl" style="display:flex; flex-direction:column; gap:1.75rem">
     <div><div style="font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); margin-bottom:.75rem">두 세계를 연결</div><div class="chip-row rvl"><span class="chip">전통금융 TradFi</span><span class="chip">탈중앙화 금융 DeFi</span></div></div>
     <div><div style="font-size:var(--text-14); color:var(--accent); font-weight:600; margin-bottom:.75rem">WalletFi — 스테이블코인 · 자산 토큰화 · 크로스보더 결제 인프라</div><div class="chip-row rvl"><span class="chip">금융기관 · 핀테크</span><span class="chip">CEX / DEX 사용자</span></div></div>
@@ -1137,9 +1144,7 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
   </div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Track Record</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>10년의 트랙레코드, 숫자로 증명한 신뢰</span></span></h2>
-  <p class="phero-lead rvl" style="margin-bottom:2rem">2016년부터 쌓아온 실적이 파라메타의 기술을 증명합니다.</p>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Track Record</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>10년의 트랙레코드, 숫자로 증명한 신뢰</span></span></h2><p class="phero-lead rvl" style="margin-bottom:2rem">2016년부터 쌓아온 실적이 파라메타의 기술을 증명합니다.</p>
   <ul class="cards-2"><li class="rvl" style="--rvl-delay:0ms"><div class="light-card num-card"><span class="cap">Since 2016</span><div class="n">10년차</div><p>국내 1세대 Web3 인프라 기업</p></div></li><li class="rvl" style="--rvl-delay:90ms"><div class="light-card num-card"><span class="cap">Investment</span><div class="n">250억 원</div><p>누적 투자유치</p></div></li><li class="rvl" style="--rvl-delay:180ms"><div class="light-card num-card"><span class="cap">Revenue</span><div class="n">750억 원+</div><p>누적 매출 (2016~2025)</p></div></li><li class="rvl" style="--rvl-delay:270ms"><div class="light-card num-card"><span class="cap">Quality</span><div class="n">GS 1등급</div><p>loopchain SW품질 인증</p></div></li></ul>
   <div class="rvl" style="margin:2.5rem 0">
     <div style="font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); margin-bottom:1rem">함께 투자한 파트너 — 누적 250억 원</div>
@@ -1158,8 +1163,7 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
   </div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>History</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>디지털자산 시장을 만들어온 파라메타의 10년</span></span></h2>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>History</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>디지털자산 시장을 만들어온 파라메타의 10년</span></span></h2>
   <ul><li class="service-row-li rvl" style="--rvl-y:24px; --rvl-delay:0ms"><div class="service-row"><span class="row-meta">2016</span><h3>(주)더루프 설립</h3><p class="service-desc">국내 1세대 Web3 인프라 기업으로 출발했습니다.</p><span class="service-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></div></li><li class="service-row-li rvl" style="--rvl-y:24px; --rvl-delay:80ms"><div class="service-row"><span class="row-meta">2018</span><h3>1세대 퍼블릭 메인넷 ICON 출시</h3><p class="service-desc">라인 블록체인 합작법인 ‘언체인’을 설립했습니다(아이콘루프 시절).</p><span class="service-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></div></li><li class="service-row-li rvl" style="--rvl-y:24px; --rvl-delay:160ms"><div class="service-row"><span class="row-meta">2019</span><h3>loopchain GS인증 1등급 · broof 출시</h3><p class="service-desc">금융위 혁신금융서비스로 지정됐습니다.</p><span class="service-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></div></li><li class="service-row-li rvl" style="--rvl-y:24px; --rvl-delay:240ms"><div class="service-row"><span class="row-meta">2020</span><h3>제주안심코드 218만 명 · 신한은행 DID 실명인증</h3><p class="service-desc">DID 금융실명인증을 상용화했습니다.</p><span class="service-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></div></li><li class="service-row-li rvl" style="--rvl-y:24px; --rvl-delay:320ms"><div class="service-row"><span class="row-meta">2023</span><h3>PARAMETA 리브랜딩 (구 아이콘루프)</h3><p class="service-desc">시리즈 C 투자를 유치했습니다.</p><span class="service-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></div></li><li class="service-row-li rvl" style="--rvl-y:24px; --rvl-delay:400ms"><div class="service-row"><span class="row-meta">2024</span><h3>K-BTF 공공 블록체인 공동인프라 사업자 선정</h3><p class="service-desc">공공 블록체인 공동 인프라 사업자로 선정됐습니다.</p><span class="service-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></div></li><li class="service-row-li rvl" style="--rvl-y:24px; --rvl-delay:480ms"><div class="service-row"><span class="row-meta">2025</span><h3>MyID 2.0 블록체인 서비스 최초 CSAP 인증</h3><p class="service-desc">조달청 디지털마켓에 등록했습니다.</p><span class="service-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></div></li><li class="service-row-li rvl" style="--rvl-y:24px; --rvl-delay:560ms"><div class="service-row"><span class="row-meta">2026</span><h3>Stablecoin Alliance 초대 의장사</h3><p class="service-desc">ADB ABMF 국경 간 거래 표준모델을 발표했습니다.</p><span class="service-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></div></li></ul>
 </div></section>
 <section><div class="shell about-grid">

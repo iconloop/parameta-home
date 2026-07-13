@@ -824,6 +824,15 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 @media (min-width:1024px){ .sec{ padding-block:6rem } }
 .sec-h2{ margin:1.25rem 0 3rem; max-width:24ch; font-size:var(--text-32); font-weight:600; letter-spacing:-.02em }
 @media (min-width:640px){ .sec-h2{ font-size:var(--text-48) } }
+/* 섹션 헤더 좌우형(sec_head layout='split'): 좌 아이브로우+타이틀 / 우 서브카피, 900↓ 스택 */
+.sec-head-split{ margin-bottom:3rem }
+.sec-head-split .sec-h2{ margin-bottom:0 }
+.sec-head-split .shr .phero-lead{ font-size:var(--text-18); max-width:34rem; margin-top:1rem }
+@media (min-width:900px){
+  .sec-head-split{ display:grid; grid-template-columns:repeat(12,1fr); column-gap:var(--grid-gap); align-items:end }
+  .sec-head-split .shl{ grid-column:1 / 7 }
+  .sec-head-split .shr{ grid-column:8 / 13 }
+  .sec-head-split .shr .phero-lead{ margin-top:0; margin-bottom:.375rem } }
 .cards-3{ display:grid; grid-template-columns:1fr; gap:1.5rem }
 @media (min-width:768px){ .cards-3{ grid-template-columns:repeat(2,1fr) } }
 @media (min-width:1024px){ .cards-3{ grid-template-columns:repeat(3,1fr) } }
@@ -1127,38 +1136,31 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
   </section>
 
 <section><div class="shell sec">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Product</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>이 솔루션을 구성하는 제품</span></span></h2>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Product</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>이 솔루션을 구성하는 제품</span></span></h2>
   <div class="chip-row rvl"><span class="chip">ParaSta</span></div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Why Now</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>정산은 이미 디지털로 움직입니다 — 다음은 투명성과 통제입니다</span></span></h2>
-  <p class="phero-lead rvl" style="margin-bottom:2rem">국내 디지털 정산은 이미 하루 약 1조 원 규모로 움직입니다(간편지급 기준). 규모가 커질수록 어려운 건 발행이 아니라 정산의 투명성, 자동 대사, 오류·부정 통제입니다. 지역사랑상품권(2024년 17.6조 원)처럼 공공·민간의 대규모 정산도 같은 과제를 안고 있습니다.</p>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Why Now</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>정산은 이미 디지털로 움직입니다 — 다음은 투명성과 통제입니다</span></span></h2><p class="phero-lead rvl" style="margin-bottom:2rem">국내 디지털 정산은 이미 하루 약 1조 원 규모로 움직입니다(간편지급 기준). 규모가 커질수록 어려운 건 발행이 아니라 정산의 투명성, 자동 대사, 오류·부정 통제입니다. 지역사랑상품권(2024년 17.6조 원)처럼 공공·민간의 대규모 정산도 같은 과제를 안고 있습니다.</p>
   <ul class="cards-2"><li class="rvl" style="--rvl-delay:0ms"><div class="light-card num-card"><span class="cap">간편지급</span><div class="n">약 9,594억원</div><p>간편지급 일평균 이용액 (2024)</p></div></li><li class="rvl" style="--rvl-delay:90ms"><div class="light-card num-card"><span class="cap">간편송금</span><div class="n">약 9,120억원</div><p>간편송금 일평균 이용액 (2024)</p></div></li></ul>
   <p class="sec-note rvl">출처: 한국은행 「2024년중 전자지급서비스 이용현황」(2025.3). 이미 하루 약 1조 원 규모로 디지털 정산이 이뤄집니다(실적).</p>
   <div style="height:2rem"></div>
   <div class="barc rvl"><p class="barc-title">적용 영역 예시 — 지역사랑상품권 발행액 (2024년)</p><div class="barc-row hi"><span class="barc-l">카드형</span><div class="barc-track"><div class="barc-fill" style="width:100%"></div></div><span class="barc-v">12.0조원</span></div><div class="barc-row"><span class="barc-l">모바일</span><div class="barc-track"><div class="barc-fill" style="width:36%"></div></div><span class="barc-v">4.3조원</span></div><div class="barc-row"><span class="barc-l">지류</span><div class="barc-track"><div class="barc-fill" style="width:11%"></div></div><span class="barc-v">1.3조원</span></div></div><p class="sec-note">출처: 국회예산정책처(2025) 지역사랑상품권 발행·관리체계 평가. 2024년 총 발행 17.6조 원. 지역화폐는 이 정산 인프라가 적용되는 여러 영역 중 하나입니다.</p>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Problem</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>결제·정산에서 반복되는 문제</span></span></h2>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Problem</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>결제·정산에서 반복되는 문제</span></span></h2>
   <ul class="cards-2"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static sm"><div class="work-meta"><span>문제</span></div><div class="work-bottom"><h3>정산 데이터 불일치</h3><p>거래 원장과 결제사 데이터가 어긋나 수작업 대사가 필요합니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm"><div class="work-meta"><span>문제</span></div><div class="work-bottom"><h3>환불·취소 재정산</h3><p>환불·취소·차지백이 생기면 정산을 다시 맞춰야 합니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm"><div class="work-meta"><span>문제</span></div><div class="work-bottom"><h3>다자 분배·정산</h3><p>여러 파트너가 얽힌 분배·정산은 대사와 통제가 복잡합니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms"><article class="work-card static sm"><div class="work-meta"><span>문제</span></div><div class="work-bottom"><h3>권한·감사 부담</h3><p>누가 무엇을 언제 바꿨는지 추적하고 감사에 대응해야 합니다.</p></div></article></li></ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Features</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>주요 기능</span></span></h2>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Features</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>주요 기능</span></span></h2>
   <ul class="cards-3"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static sm"><div class="work-meta"><span>01</span></div><div class="work-bottom"><h3>환전·송금·정산 자동화</h3><p>은행망과 블록체인을 잇는 단일 API로 환전·송금·정산 다단계를 자동 처리합니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm"><div class="work-meta"><span>02</span></div><div class="work-bottom"><h3>이벤트 기반 정산·자동 대사</h3><p>승인·취소·환불을 실시간 반영하고, 수수료·정산 내역을 자동으로 맞춥니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm"><div class="work-meta"><span>03</span></div><div class="work-bottom"><h3>Dual-Rail 도입</h3><p>기존 결제 레일은 그대로 두고 정산·통제 레이어만 얹어 도입 부담을 낮춥니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms"><article class="work-card static sm"><div class="work-meta"><span>04</span></div><div class="work-bottom"><h3>2단계 전환</h3><p>규제 변수가 적은 폐쇄형 정산토큰으로 시작해, 필요할 때 스테이블코인으로 확장합니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:360ms"><article class="work-card static sm"><div class="work-meta"><span>05</span></div><div class="work-bottom"><h3>온체인 KYC · 통합 관제</h3><p>지갑·사용자 적격성 확인과 자금 흐름 모니터링·감사 리포팅을 함께 제공합니다.</p></div></article></li></ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>By the Numbers</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>숫자로 보는 정산 인프라</span></span></h2>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>By the Numbers</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>숫자로 보는 정산 인프라</span></span></h2>
   <ul class="cards-3"><li class="rvl" style="--rvl-delay:0ms"><div class="light-card num-card"><span class="cap">Modules</span><div class="n">4개 모듈</div><p>ParaSta 코어 + 통합 관제탑</p></div></li><li class="rvl" style="--rvl-delay:90ms"><div class="light-card num-card"><span class="cap">Transition</span><div class="n">2단계</div><p>폐쇄형 정산토큰 → 스테이블코인</p></div></li><li class="rvl" style="--rvl-delay:180ms"><div class="light-card num-card"><span class="cap">KYC</span><div class="n">온체인 KYC</div><p>지갑·사용자 적격성</p></div></li><li class="rvl" style="--rvl-delay:270ms"><div class="light-card num-card"><span class="cap">Throughput</span><div class="n">최대 100,000</div><p>TPS (벤치마크·제한 환경)</p></div></li></ul>
   <p class="sec-note rvl">예금토큰·스테이블코인 제도는 법제화 상황에 따라 달라집니다.</p>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Use Cases</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>적용 사례</span></span></h2>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Use Cases</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>적용 사례</span></span></h2>
   <ul class="cards-2"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static"><div class="work-meta"><span>MOU</span></div><div class="work-bottom"><h3>쿠콘 · 인피닛블록</h3><p><b>과제</b> · 발행·정산·결제를 API로 연계할 허브가 필요<br><br><b>해결</b> · 발행·정산·결제·API 연계 협력 MOU 체결</p></div></article></li></ul>
   <div class="rvl" style="margin-top:2rem">
     <div style="font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); margin-bottom:1rem">적용 영역 (유형)</div>
@@ -1166,13 +1168,11 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
   </div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>FAQ</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>자주 묻는 질문</span></span></h2>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>FAQ</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>자주 묻는 질문</span></span></h2>
   <ul><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:0ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><span class="faq-idx">01</span><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top">정산토큰과 스테이블코인은 무엇이 다른가요</h3><div class="faq-ans">폐쇄형 정산토큰은 특정 폐쇄 환경의 정산 수단이고, 스테이블코인은 더 넓은 유통을 전제합니다. 같은 인프라에서 단계적으로 전환하는 설계가 가능합니다.</div><h3 class="faq-t faq-t-bottom">정산토큰과 스테이블코인은 무엇이 다른가요</h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div></li><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:60ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><span class="faq-idx">02</span><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top">지역화폐에도 적용할 수 있나요</h3><div class="faq-ans">발행·정산·통제 구조를 지역화폐 정산에 적용하는 설계가 가능합니다. 실제 적용은 제도·발주 조건에 따릅니다.</div><h3 class="faq-t faq-t-bottom">지역화폐에도 적용할 수 있나요</h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div></li></ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Solutions</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>다른 분야 솔루션</span></span></h2>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Solutions</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>다른 분야 솔루션</span></span></h2>
   <div class="routes rvl"><a class="route" href="solution-finance.html">금융</a><a class="route" href="solution-gov.html">공공</a><a class="route" href="solution-cert.html">증명서</a><a class="route" href="solution-exchange.html">화이트라벨 거래소</a><a class="route" href="solution-data.html">데이터주권</a><a class="route on" href="solution-settlement.html">결제·정산</a></div>
 </div></section>
 

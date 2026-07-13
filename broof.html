@@ -824,6 +824,15 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 @media (min-width:1024px){ .sec{ padding-block:6rem } }
 .sec-h2{ margin:1.25rem 0 3rem; max-width:24ch; font-size:var(--text-32); font-weight:600; letter-spacing:-.02em }
 @media (min-width:640px){ .sec-h2{ font-size:var(--text-48) } }
+/* 섹션 헤더 좌우형(sec_head layout='split'): 좌 아이브로우+타이틀 / 우 서브카피, 900↓ 스택 */
+.sec-head-split{ margin-bottom:3rem }
+.sec-head-split .sec-h2{ margin-bottom:0 }
+.sec-head-split .shr .phero-lead{ font-size:var(--text-18); max-width:34rem; margin-top:1rem }
+@media (min-width:900px){
+  .sec-head-split{ display:grid; grid-template-columns:repeat(12,1fr); column-gap:var(--grid-gap); align-items:end }
+  .sec-head-split .shl{ grid-column:1 / 7 }
+  .sec-head-split .shr{ grid-column:8 / 13 }
+  .sec-head-split .shr .phero-lead{ margin-top:0; margin-bottom:.375rem } }
 .cards-3{ display:grid; grid-template-columns:1fr; gap:1.5rem }
 @media (min-width:768px){ .cards-3{ grid-template-columns:repeat(2,1fr) } }
 @media (min-width:1024px){ .cards-3{ grid-template-columns:repeat(3,1fr) } }
@@ -1134,23 +1143,19 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
   </ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Overview</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>복잡한 구축 없이 증명서 발급부터 검증까지</span></span></h2>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Overview</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>복잡한 구축 없이 증명서 발급부터 검증까지</span></span></h2>
   <ul><li class="service-row-li rvl" style="--rvl-y:24px; --rvl-delay:0ms"><div class="service-row"><span class="service-idx">01</span><h3>위 · 변조 방지</h3><p class="service-desc">발급된 증명서의 원본 정보를 블록체인에 기록해 내용 변경 여부를 즉시 확인합니다.</p><span class="service-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></div></li><li class="service-row-li rvl" style="--rvl-y:24px; --rvl-delay:80ms"><div class="service-row"><span class="service-idx">02</span><h3>QR 즉시 검증</h3><p class="service-desc">QR 스캔만으로 증명서의 진위와 원본 여부를 현장에서 바로 확인합니다.</p><span class="service-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></div></li><li class="service-row-li rvl" style="--rvl-y:24px; --rvl-delay:160ms"><div class="service-row"><span class="service-idx">03</span><h3>간편 발급</h3><p class="service-desc">명단 업로드만으로 여러 건의 증명서를 한 번에 발급합니다.</p><span class="service-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></div></li></ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Workflow</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>올리고, 발급하고, 확인하면 끝</span></span></h2>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Workflow</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>올리고, 발급하고, 확인하면 끝</span></span></h2>
   <ul class="cards-3"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static sm"><div class="work-meta"><span>STEP 1</span></div><div class="work-bottom"><h3>템플릿 · 명단 등록</h3><p>증명서 양식을 선택하고, 수령자 명단을 업로드합니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm"><div class="work-meta"><span>STEP 2</span></div><div class="work-bottom"><h3>증명서 발급</h3><p>명단에 맞춰 증명서가 발급되고, 원본 정보가 블록체인에 기록됩니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm"><div class="work-meta"><span>STEP 3</span></div><div class="work-bottom"><h3>수령 · QR 검증</h3><p>수령자는 증명서를 받고, 제출처는 QR로 진위를 바로 확인합니다.</p></div></article></li></ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Core Features</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>발급 후 관리까지 한 번에</span></span></h2>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Core Features</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>발급 후 관리까지 한 번에</span></span></h2>
   <ul><li class="service-row-li rvl" style="--rvl-y:24px; --rvl-delay:0ms"><div class="service-row"><span class="service-idx">01</span><h3>자동 알림</h3><p class="service-desc">증명서 발급과 동시에 카카오톡·이메일로 수령자에게 안내를 보냅니다.</p><span class="service-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></div></li><li class="service-row-li rvl" style="--rvl-y:24px; --rvl-delay:80ms"><div class="service-row"><span class="service-idx">02</span><h3>발급 현황 관리</h3><p class="service-desc">발급·폐기·만료 상태를 한눈에 확인하고, 여러 담당자가 함께 관리합니다.</p><span class="service-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></div></li><li class="service-row-li rvl" style="--rvl-y:24px; --rvl-delay:160ms"><div class="service-row"><span class="service-idx">03</span><h3>사용량 기반 과금</h3><p class="service-desc">정기 구독 없이 발급한 만큼만 이용해 부담 없이 시작합니다.</p><span class="service-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></div></li></ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Applied Cases</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>다양한 기관이 선택한 디지털 증명서</span></span></h2>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Applied Cases</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>다양한 기관이 선택한 디지털 증명서</span></span></h2>
   <ul class="cards-3"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>University</span></div><h3>포스텍 POSTECH</h3><p>블록체인 전문가과정 수료증을 정기적으로 발급합니다.</p><div class=work-tags><span class="tag">수료증</span></div></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>Enterprise</span></div><h3>미래에셋</h3><p>장학증서에 QR 검증 기능을 적용해 디지털로 전달합니다.</p><div class=work-tags><span class="tag">장학증서</span><span class="tag">QR 검증</span></div></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>Education</span></div><h3>교육 · 자격 기관</h3><p>수료증과 인증서 발급에 Broof를 활용하고 있습니다.</p><div class=work-tags><span class="tag">수료증</span><span class="tag">인증서</span></div></div></article></li></ul>
   <div class="rvl" style="margin-top:3rem">
     <div style="font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); margin-bottom:1rem">여러 기관이 이미 Broof를 활용하고 있습니다</div>

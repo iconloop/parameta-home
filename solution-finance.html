@@ -824,6 +824,15 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 @media (min-width:1024px){ .sec{ padding-block:6rem } }
 .sec-h2{ margin:1.25rem 0 3rem; max-width:24ch; font-size:var(--text-32); font-weight:600; letter-spacing:-.02em }
 @media (min-width:640px){ .sec-h2{ font-size:var(--text-48) } }
+/* 섹션 헤더 좌우형(sec_head layout='split'): 좌 아이브로우+타이틀 / 우 서브카피, 900↓ 스택 */
+.sec-head-split{ margin-bottom:3rem }
+.sec-head-split .sec-h2{ margin-bottom:0 }
+.sec-head-split .shr .phero-lead{ font-size:var(--text-18); max-width:34rem; margin-top:1rem }
+@media (min-width:900px){
+  .sec-head-split{ display:grid; grid-template-columns:repeat(12,1fr); column-gap:var(--grid-gap); align-items:end }
+  .sec-head-split .shl{ grid-column:1 / 7 }
+  .sec-head-split .shr{ grid-column:8 / 13 }
+  .sec-head-split .shr .phero-lead{ margin-top:0; margin-bottom:.375rem } }
 .cards-3{ display:grid; grid-template-columns:1fr; gap:1.5rem }
 @media (min-width:768px){ .cards-3{ grid-template-columns:repeat(2,1fr) } }
 @media (min-width:1024px){ .cards-3{ grid-template-columns:repeat(3,1fr) } }
@@ -1127,54 +1136,42 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
   </section>
 
 <section><div class="shell sec">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Product</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>이 솔루션을 구성하는 제품</span></span></h2>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Product</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>이 솔루션을 구성하는 제품</span></span></h2>
   <div class="chip-row rvl"><span class="chip">ParaSta</span></div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Why Now</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>디지털자산의 금융화는 이미 시작됐습니다 — 문제는 발행 이후입니다</span></span></h2>
-  <p class="phero-lead rvl" style="margin-bottom:2rem">글로벌 대형 자산운용·결제사는 이미 RWA와 스테이블코인으로 진입했고, 국내에서도 토큰증권 제도화가 논의되고 있습니다. 핵심 문제는 토큰을 발행하는 것보다 유통·보유·상환 전 구간에서 발생하는 규제와 운영 리스크입니다. 투자자 적격성·자금세탁방지(KYC)를 계속 확인하고, 배당·이자·상환을 약속대로 집행하며, 자산이 여러 지갑으로 옮겨 다니는 과정을 실시간으로 통제·감사하는 일이 사업의 성패를 좌우합니다.</p>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Why Now</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>디지털자산의 금융화는 이미 시작됐습니다 — 문제는 발행 이후입니다</span></span></h2><p class="phero-lead rvl" style="margin-bottom:2rem">글로벌 대형 자산운용·결제사는 이미 RWA와 스테이블코인으로 진입했고, 국내에서도 토큰증권 제도화가 논의되고 있습니다. 핵심 문제는 토큰을 발행하는 것보다 유통·보유·상환 전 구간에서 발생하는 규제와 운영 리스크입니다. 투자자 적격성·자금세탁방지(KYC)를 계속 확인하고, 배당·이자·상환을 약속대로 집행하며, 자산이 여러 지갑으로 옮겨 다니는 과정을 실시간으로 통제·감사하는 일이 사업의 성패를 좌우합니다.</p>
   <div class="barc rvl"><p class="barc-title">국내 토큰증권(STO) 시가총액 전망</p><div class="barc-row"><span class="barc-l">2024년</span><div class="barc-track"><div class="barc-fill" style="width:9%"></div></div><span class="barc-v">34조원</span></div><div class="barc-row"><span class="barc-l">2025년</span><div class="barc-track"><div class="barc-fill" style="width:32%"></div></div><span class="barc-v">119조원</span></div><div class="barc-row hi"><span class="barc-l">2030년</span><div class="barc-track"><div class="barc-fill" style="width:100%"></div></div><span class="barc-v">367조원</span></div></div><p class="sec-note">전망치. 출처: 하나금융경영연구소·삼일PwC(BCG 기준 인용). 현행 자본시장법 기준 30~60조원 등 더 보수적 전망도 있어 ‘전망’으로 표기합니다.</p>
   <div style="height:2.5rem"></div>
   <div class="barc rvl"><p class="barc-title">글로벌 스테이블코인 발행잔액</p><div class="barc-row"><span class="barc-l">2025년 1월</span><div class="barc-track"><div class="barc-fill" style="width:68%"></div></div><span class="barc-v">$2,050억</span></div><div class="barc-row hi"><span class="barc-l">2025년 말</span><div class="barc-track"><div class="barc-fill" style="width:100%"></div></div><span class="barc-v">$3,000억+</span></div></div><p class="sec-note">출처: DeFiLlama 등 시장 집계(실적 집계). 2025년 약 49% 증가. 이미 온체인에서 대규모로 유통 중인 실측치입니다.</p>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Problem</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>금융기관이 마주하는 문제</span></span></h2>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Problem</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>금융기관이 마주하는 문제</span></span></h2>
   <ul class="cards-2"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static sm"><div class="work-meta"><span>문제</span></div><div class="work-bottom"><h3>발행보다 어려운 운영</h3><p>KYC, 상환, 유통 통제, 사후검증이 발행보다 어렵습니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm"><div class="work-meta"><span>문제</span></div><div class="work-bottom"><h3>계좌와 온체인의 분절</h3><p>은행 계좌와 온체인 지갑이 따로 놀아 정산이 복잡합니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm"><div class="work-meta"><span>문제</span></div><div class="work-bottom"><h3>규제 대응 부담</h3><p>AML·트래블룰을 서비스마다 다시 설계해야 합니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms"><article class="work-card static sm"><div class="work-meta"><span>문제</span></div><div class="work-bottom"><h3>범용 SaaS의 한계</h3><p>글로벌 지갑 SaaS는 국내 규제·운영 설계를 대신하지 않습니다.</p></div></article></li></ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Features</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>주요 기능</span></span></h2>
-  <p class="phero-lead rvl" style="margin-bottom:2rem">발행부터 상환·사후검증까지 6-Layer 통제 구조로 연결합니다.</p>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Features</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>주요 기능</span></span></h2><p class="phero-lead rvl" style="margin-bottom:2rem">발행부터 상환·사후검증까지 6-Layer 통제 구조로 연결합니다.</p>
   <ul class="cards-3"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static sm"><div class="work-meta"><span>01</span></div><div class="work-bottom"><h3>Issuance 발행</h3><p>규제 준수형 발행·상환·유통통제.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm"><div class="work-meta"><span>02</span></div><div class="work-bottom"><h3>Wallet 지갑</h3><p>신원 기반 자산 통제, 멀티체인 단일 인터페이스.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm"><div class="work-meta"><span>03</span></div><div class="work-bottom"><h3>Orchestration 관제</h3><p>계좌↔온체인 통합, 조건부 정산, 실시간 스크리닝.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms"><article class="work-card static sm"><div class="work-meta"><span>04</span></div><div class="work-bottom"><h3>On-chain KYC</h3><p>공인 KYC를 VC/VP로 변환, 멀티체인 신원 허브.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:360ms"><article class="work-card static sm"><div class="work-meta"><span>05</span></div><div class="work-bottom"><h3>Unified Admin</h3><p>통합 관제탑, 키 거버넌스, 통합 감사 리포팅.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:450ms"><article class="work-card static sm"><div class="work-meta"><span>RWA · STO</span></div><div class="work-bottom"><h3>ParaSta 연동</h3><p>토큰증권·실물자산 발행 이후 운영까지 API로 연결.</p></div></article></li></ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>How to Adopt</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>이렇게 도입합니다</span></span></h2>
-  <p class="phero-lead rvl" style="margin-bottom:2rem">한 번에 구축하지 않고 단계로 나눕니다.</p>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>How to Adopt</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>이렇게 도입합니다</span></span></h2><p class="phero-lead rvl" style="margin-bottom:2rem">한 번에 구축하지 않고 단계로 나눕니다.</p>
   <ul class="cards-3"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static sm"><div class="work-meta"><span>4주</span></div><div class="work-bottom"><h3>PoC</h3><p>개념 검증</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm"><div class="work-meta"><span>12주</span></div><div class="work-bottom"><h3>Pilot</h3><p>파일럿 운영</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm"><div class="work-meta"><span>4~6개월</span></div><div class="work-bottom"><h3>상용</h3><p>상용 전환</p></div></article></li></ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>By the Numbers</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>숫자로 보는 ParaSta</span></span></h2>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>By the Numbers</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>숫자로 보는 ParaSta</span></span></h2>
   <ul class="cards-3"><li class="rvl" style="--rvl-delay:0ms"><div class="light-card num-card"><span class="cap">Modules</span><div class="n">4개 모듈</div><p>발행·지갑·오케스트레이션·온체인 KYC (+ 통합 관제탑)</p></div></li><li class="rvl" style="--rvl-delay:90ms"><div class="light-card num-card"><span class="cap">Control</span><div class="n">6-Layer</div><p>발행·상환·통제 구조</p></div></li><li class="rvl" style="--rvl-delay:180ms"><div class="light-card num-card"><span class="cap">Package</span><div class="n">4주 · 12주</div><p>PoC · Pilot 패키지</p></div></li><li class="rvl" style="--rvl-delay:270ms"><div class="light-card num-card"><span class="cap">Throughput</span><div class="n">최대 100,000</div><p>TPS (벤치마크·제한 환경)</p></div></li></ul>
   <p class="sec-note rvl">파라메타 트랙레코드(회사 배경) · 금융위 혁신금융서비스 지정 · 기술보증기금 TI-1 · CSAP · ChainID 증권사 공동인증. ParaSta 자체 실적이 아닌 회사 트랙레코드로 표기합니다.</p>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Use Cases</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>적용 사례</span></span></h2>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Use Cases</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>적용 사례</span></span></h2>
   <ul class="cards-3"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static"><div class="work-meta"><span>참여</span></div><div class="work-bottom"><h3>NH투자증권 — STO 비전그룹</h3><p><b>과제</b> · 토큰증권을 발행 이후 운영·관리까지 고려한 인프라가 필요<br><br><b>해결</b> · 토큰증권 발행·운영 논의에 기술 파트너로 참여</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static"><div class="work-meta"><span>MOU</span></div><div class="work-bottom"><h3>쿠콘 · 인피닛블록</h3><p><b>과제</b> · 스테이블코인 발행·정산·결제를 API로 연계할 허브가 필요<br><br><b>해결</b> · 발행·정산·결제·API 연계 협력 MOU 체결</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static"><div class="work-meta"><span>발표</span></div><div class="work-bottom"><h3>ADB ABMF — 온체인 KYC 발표</h3><p><b>과제</b> · 국경 간 투자에서 지갑·사용자 신원의 적격성 확인이 필요<br><br><b>해결</b> · 지갑 인증·온체인 KYC·KYW 접근을 국제 협의체에서 발표</p></div></article></li></ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>FAQ</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>자주 묻는 질문</span></span></h2>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>FAQ</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>자주 묻는 질문</span></span></h2>
   <ul><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:0ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><span class="faq-idx">01</span><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top">스테이블코인과 예금토큰은 무엇이 다른가요</h3><div class="faq-ans">둘 다 가치가 고정된 디지털 화폐지만 발행 주체와 담보 구조가 다릅니다. 제도·발행 요건은 국내 법제화 상황에 따라 달라집니다.</div><h3 class="faq-t faq-t-bottom">스테이블코인과 예금토큰은 무엇이 다른가요</h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div></li><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:60ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><span class="faq-idx">02</span><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top">STO·RWA는 무엇인가요</h3><div class="faq-ans">실물·금융 자산을 토큰으로 발행해 거래·관리하는 방식입니다. 발행뿐 아니라 이후 운영·통제까지 인프라가 필요합니다.</div><h3 class="faq-t faq-t-bottom">STO·RWA는 무엇인가요</h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div></li></ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Solutions</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>다른 분야 솔루션</span></span></h2>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Solutions</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>다른 분야 솔루션</span></span></h2>
   <div class="routes rvl"><a class="route on" href="solution-finance.html">금융</a><a class="route" href="solution-gov.html">공공</a><a class="route" href="solution-cert.html">증명서</a><a class="route" href="solution-exchange.html">화이트라벨 거래소</a><a class="route" href="solution-data.html">데이터주권</a><a class="route" href="solution-settlement.html">결제·정산</a></div>
 </div></section>
 

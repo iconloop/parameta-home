@@ -824,6 +824,15 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 @media (min-width:1024px){ .sec{ padding-block:6rem } }
 .sec-h2{ margin:1.25rem 0 3rem; max-width:24ch; font-size:var(--text-32); font-weight:600; letter-spacing:-.02em }
 @media (min-width:640px){ .sec-h2{ font-size:var(--text-48) } }
+/* 섹션 헤더 좌우형(sec_head layout='split'): 좌 아이브로우+타이틀 / 우 서브카피, 900↓ 스택 */
+.sec-head-split{ margin-bottom:3rem }
+.sec-head-split .sec-h2{ margin-bottom:0 }
+.sec-head-split .shr .phero-lead{ font-size:var(--text-18); max-width:34rem; margin-top:1rem }
+@media (min-width:900px){
+  .sec-head-split{ display:grid; grid-template-columns:repeat(12,1fr); column-gap:var(--grid-gap); align-items:end }
+  .sec-head-split .shl{ grid-column:1 / 7 }
+  .sec-head-split .shr{ grid-column:8 / 13 }
+  .sec-head-split .shr .phero-lead{ margin-top:0; margin-bottom:.375rem } }
 .cards-3{ display:grid; grid-template-columns:1fr; gap:1.5rem }
 @media (min-width:768px){ .cards-3{ grid-template-columns:repeat(2,1fr) } }
 @media (min-width:1024px){ .cards-3{ grid-template-columns:repeat(3,1fr) } }
@@ -1157,17 +1166,14 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
       </div>
     </div>
     <div class="whatis-text rvl" style="--rvl-delay:120ms">
-      <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>What is ParaSta</div>
-      <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>발행부터 운영까지 연결하는<br>디지털자산 인프라</span></span></h2>
-      <p class="phero-lead rvl" style="margin-bottom:2rem">ParaSta는 스테이블코인, 예금토큰 등 다양한 디지털자산의 발행과 운영을 하나의 플랫폼에서 지원하고, 기존 은행, 결제망과 유기적으로 연결합니다. 신원 확인부터 지갑, 정산, 감사까지 디지털자산 운영 전반을 함께합니다.</p>
+      <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>What is ParaSta</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>발행부터 운영까지 연결하는<br>디지털자산 인프라</span></span></h2><p class="phero-lead rvl" style="margin-bottom:2rem">ParaSta는 스테이블코인, 예금토큰 등 다양한 디지털자산의 발행과 운영을 하나의 플랫폼에서 지원하고, 기존 은행, 결제망과 유기적으로 연결합니다. 신원 확인부터 지갑, 정산, 감사까지 디지털자산 운영 전반을 함께합니다.</p>
     </div>
   </div>
 </div></section>
 <section><div class="shell sec">
   <div class="why-grid">
     <div class="why-head">
-      <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Why ParaSta</div>
-      <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>디지털자산을 실제 금융 서비스로 연결하는 하나의 인프라</span></span></h2>
+      <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Why ParaSta</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>디지털자산을 실제 금융 서비스로 연결하는 하나의 인프라</span></span></h2>
       <div class="why-legend rvl"><span class="lg"><span class="mk on"><svg class="mkv" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="6.4" fill="currentColor"/><path d="M4.9 7.1 L6.4 8.5 L9.2 5.6" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>지원</span><span class="lg"><span class="mk mid"><svg class="mkv" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="6.4" fill="currentColor"/><path d="M4.9 7.1 L6.4 8.5 L9.2 5.6" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>일부 지원</span><span class="lg"><span class="mk off"><svg class="mkv" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="6" fill="none" stroke="currentColor" stroke-width="1"/></svg></span>미지원</span></div>
     </div>
     <div class="why-table">
@@ -1176,8 +1182,7 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
   </div>
 </div></section>
 <section><div class="shell sec">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Advantages</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>실제 금융 서비스로 이어지는<br>하나의 인프라</span></span></h2>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Advantages</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>실제 금융 서비스로 이어지는<br>하나의 인프라</span></span></h2>
   <ul class="cards-3"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>MODULAR</span></div><h3>모듈형 API</h3><p>발행 엔진부터 온체인 KYC, 멀티체인 브릿지까지, 필요한 코어 모듈을 선택해 유연하게 구성할 수 있습니다. 처음부터 새로 개발할 필요 없이, 실제 현장에서 검증된 기술을 빠르게 적용할 수 있습니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>COMPLIANT</span></div><h3>규제 대응이 준비된 인프라</h3><p>AML, 트래블룰, 감사 로그를 인프라에 통합해 규제 대응 부담을 줄입니다. 금융권과 함께 검증한 규제 기술을 그대로 적용할 수 있습니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>ZERO-OPS</span></div><h3>운영까지 책임지는 인프라</h3><p>키 관리부터 가스비 대납, 인프라 운영까지, 발행 이후의 운영 전반을 ParaSta가 지원합니다. 기업은 서비스와 비즈니스 성장에만 집중할 수 있습니다.</p></div></article></li></ul>
 </div></section>
 <section><div class="shell sec">
@@ -1200,8 +1205,7 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
   </div>
 </div></section>
 <section><div class="shell sec">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Core Technology</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>엔터프라이즈급 기술을 인프라에 내재화</span></span></h2>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Core Technology</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>엔터프라이즈급 기술을 인프라에 내재화</span></span></h2>
   <div class="ct-rows"><ul><li class="service-row-li rvl" style="--rvl-y:24px; --rvl-delay:0ms"><div class="service-row"><span class="service-idx">01</span><h3>계정 추상화 (AA)</h3><p class="service-desc">복잡한 지갑 기능을 Web2 서비스처럼 간편하게 제공합니다. 기관이 자사 서비스에 지갑을 도입할 때 사용자 진입장벽을 낮춥니다.</p><span class="service-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></div></li><li class="service-row-li rvl" style="--rvl-y:24px; --rvl-delay:80ms"><div class="service-row"><span class="service-idx">02</span><h3>선택적 공개 (ZKP, Selective Disclosure)</h3><p class="service-desc">영지식증명을 기반으로 KYC를 수행하되, 개인정보 원문은 공유하지 않고 필요한 정보만 선택적으로 증명합니다.</p><span class="service-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></div></li><li class="service-row-li rvl" style="--rvl-y:24px; --rvl-delay:160ms"><div class="service-row"><span class="service-idx">03</span><h3>스텔스 주소 (Stealth Address)</h3><p class="service-desc">거래마다 새로운 수신 주소를 생성해, 사용자와 거래 내역 간의 연결을 어렵게 하는 프라이버시 보호 기술입니다.</p><span class="service-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></div></li><li class="service-row-li rvl" style="--rvl-y:24px; --rvl-delay:240ms"><div class="service-row"><span class="service-idx">04</span><h3>단일 인터페이스 멀티체인 (Multi-chain)</h3><p class="service-desc">체인별로 지갑, SDK, 연동 기능을 각각 개발할 필요 없이, 하나의 인터페이스에서 여러 체인의 자산과 거래를 통합 관리합니다. 새로운 체인이 필요할 때도 동일한 API로 확장할 수 있어 특정 체인에 종속되지 않습니다.</p><span class="service-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></div></li><li class="service-row-li rvl" style="--rvl-y:24px; --rvl-delay:320ms"><div class="service-row"><span class="service-idx">05</span><h3>MPC 키 분할, 복구 (Key Share)</h3><p class="service-desc">개인키를 여러 개의 키셰어로 나누어 분산 보관하고, 정해진 임계값 이상의 키셰어가 모일 때만 서명하거나 복구합니다. 개인키를 한곳에 보관하지 않아 분실과 탈취 위험을 줄입니다.</p><span class="service-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></div></li></ul></div>
 </div></section>
 <!-- Proven Core: 메인 Why Parameta 스타일 다크 스탯 패널 -->
@@ -1217,8 +1221,7 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
   </div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Partners</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>함께한 파트너</span></span></h2>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Partners</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>함께한 파트너</span></span></h2>
   <div class="pt-marquee rvl" aria-label="함께한 파트너 로고">
     <div class="pt-track"><div class="pt-set" aria-hidden="false"><img src="assets/partners/logo-shinhan.png" alt="신한은행" loading="lazy"><img src="assets/partners/logo-nh.png" alt="NH농협은행" loading="lazy"><img src="assets/partners/logo-nh-securities.png" alt="NH투자증권" loading="lazy"><img src="assets/partners/logo-samsung-securities.png" alt="삼성증권" loading="lazy"><img src="assets/partners/logo-samsung.png" alt="삼성" loading="lazy"><img src="assets/partners/logo-kb.png" alt="KB" loading="lazy"><img src="assets/partners/logo-ibk.png" alt="IBK기업은행" loading="lazy"><img src="assets/partners/logo-hanwha.png" alt="한화" loading="lazy"></div><div class="pt-set" aria-hidden="false"><img src="assets/partners/logo-shinhan.png" alt="신한은행" loading="lazy"><img src="assets/partners/logo-nh.png" alt="NH농협은행" loading="lazy"><img src="assets/partners/logo-nh-securities.png" alt="NH투자증권" loading="lazy"><img src="assets/partners/logo-samsung-securities.png" alt="삼성증권" loading="lazy"><img src="assets/partners/logo-samsung.png" alt="삼성" loading="lazy"><img src="assets/partners/logo-kb.png" alt="KB" loading="lazy"><img src="assets/partners/logo-ibk.png" alt="IBK기업은행" loading="lazy"><img src="assets/partners/logo-hanwha.png" alt="한화" loading="lazy"></div></div>
   </div>

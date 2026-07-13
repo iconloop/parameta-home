@@ -824,6 +824,15 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 @media (min-width:1024px){ .sec{ padding-block:6rem } }
 .sec-h2{ margin:1.25rem 0 3rem; max-width:24ch; font-size:var(--text-32); font-weight:600; letter-spacing:-.02em }
 @media (min-width:640px){ .sec-h2{ font-size:var(--text-48) } }
+/* 섹션 헤더 좌우형(sec_head layout='split'): 좌 아이브로우+타이틀 / 우 서브카피, 900↓ 스택 */
+.sec-head-split{ margin-bottom:3rem }
+.sec-head-split .sec-h2{ margin-bottom:0 }
+.sec-head-split .shr .phero-lead{ font-size:var(--text-18); max-width:34rem; margin-top:1rem }
+@media (min-width:900px){
+  .sec-head-split{ display:grid; grid-template-columns:repeat(12,1fr); column-gap:var(--grid-gap); align-items:end }
+  .sec-head-split .shl{ grid-column:1 / 7 }
+  .sec-head-split .shr{ grid-column:8 / 13 }
+  .sec-head-split .shr .phero-lead{ margin-top:0; margin-bottom:.375rem } }
 .cards-3{ display:grid; grid-template-columns:1fr; gap:1.5rem }
 @media (min-width:768px){ .cards-3{ grid-template-columns:repeat(2,1fr) } }
 @media (min-width:1024px){ .cards-3{ grid-template-columns:repeat(3,1fr) } }
@@ -1127,34 +1136,26 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
   </section>
 
 <section><div class="shell sec">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Supported Exchanges</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>주요 글로벌·국내 거래소와 연동</span></span></h2>
-  <p class="phero-lead rvl" style="margin-bottom:2rem">Binance, Bybit, OKX, Hyperliquid 등 메이저 거래소의 유동성을 하나로 연결합니다.</p>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Supported Exchanges</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>주요 글로벌·국내 거래소와 연동</span></span></h2><p class="phero-lead rvl" style="margin-bottom:2rem">Binance, Bybit, OKX, Hyperliquid 등 메이저 거래소의 유동성을 하나로 연결합니다.</p>
   <div class="chip-row rvl"><span class="chip">Binance</span><span class="chip">OKX</span><span class="chip">Bybit</span><span class="chip">Bitget</span><span class="chip">Gate.io</span><span class="chip">Hyperliquid</span><span class="chip">Bithumb</span><span class="chip">bitFlyer</span><span class="chip">bitbank</span></div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Why PortX</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>거래소를 만들지 않고, 거래 서비스를 시작하는 방법</span></span></h2>
-  <p class="phero-lead rvl" style="margin-bottom:2rem">거래소를 통째로 구축하지도, 데이터만 연결하지도 않습니다. 외부 유동성과 실제 거래 경험을 그대로 내 브랜드 안으로 가져옵니다.</p>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Why PortX</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>거래소를 만들지 않고, 거래 서비스를 시작하는 방법</span></span></h2><p class="phero-lead rvl" style="margin-bottom:2rem">거래소를 통째로 구축하지도, 데이터만 연결하지도 않습니다. 외부 유동성과 실제 거래 경험을 그대로 내 브랜드 안으로 가져옵니다.</p>
   <div class="cmp-tabs rvl"><div class="cmpt-barwrap"><button class="cmpt-nav prev" aria-label="이전 탭"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3 5 8l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="cmpt-bar" role="tablist"><button class="cmpt-btn active is-hl" data-cmpt="0" role="tab" aria-selected="true">PortX (하이브리드)</button><button class="cmpt-btn" data-cmpt="1" role="tab" aria-selected="false">턴키 거래소 솔루션</button><button class="cmpt-btn" data-cmpt="2" role="tab" aria-selected="false">단순 API 연결</button></div><button class="cmpt-nav next" aria-label="다음 탭"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><div class="cmpt-panel active is-hl" data-cmpt-panel="0"><div class="cmpt-row"><div class="cmpt-label">제공 방식</div><div class="cmpt-cell">외부 유동성 + 실제 거래 UX를 내 브랜드로</div></div><div class="cmpt-row"><div class="cmpt-label">유동성</div><div class="cmpt-cell">외부 CEX·DEX 유동성 통합</div></div><div class="cmpt-row"><div class="cmpt-label">출시 부담</div><div class="cmpt-cell">구축 없이 거래 서비스 출시</div></div><div class="cmpt-row"><div class="cmpt-label">보안</div><div class="cmpt-cell">비수탁 — 민감정보 미보관</div></div></div><div class="cmpt-panel" data-cmpt-panel="1"><div class="cmpt-row"><div class="cmpt-label">제공 방식</div><div class="cmpt-cell">완성된 거래소 스택을 통째로</div></div><div class="cmpt-row"><div class="cmpt-label">유동성</div><div class="cmpt-cell">직접 확보·운영 부담</div></div><div class="cmpt-row"><div class="cmpt-label">출시 부담</div><div class="cmpt-cell">매칭엔진·백오피스까지 무겁게</div></div><div class="cmpt-row"><div class="cmpt-label">보안</div><div class="cmpt-cell">커스터디 부담</div></div></div><div class="cmpt-panel" data-cmpt-panel="2"><div class="cmpt-row"><div class="cmpt-label">제공 방식</div><div class="cmpt-cell">계정·거래내역 데이터만 연결</div></div><div class="cmpt-row"><div class="cmpt-label">유동성</div><div class="cmpt-cell">거래 자체가 불가</div></div><div class="cmpt-row"><div class="cmpt-label">출시 부담</div><div class="cmpt-cell">가볍지만 거래 서비스는 아님</div></div><div class="cmpt-row"><div class="cmpt-label">보안</div><div class="cmpt-cell">해당 없음</div></div></div></div><div class="cmp-wrap rvl"><table class="cmp"><thead><tr><th></th><th class="hl">PortX (하이브리드)</th><th>턴키 거래소 솔루션</th><th>단순 API 연결</th></tr></thead><tbody><tr><th scope="row">제공 방식</th><td class="hl">외부 유동성 + 실제 거래 UX를 내 브랜드로</td><td>완성된 거래소 스택을 통째로</td><td>계정·거래내역 데이터만 연결</td></tr><tr><th scope="row">유동성</th><td class="hl">외부 CEX·DEX 유동성 통합</td><td>직접 확보·운영 부담</td><td>거래 자체가 불가</td></tr><tr><th scope="row">출시 부담</th><td class="hl">구축 없이 거래 서비스 출시</td><td>매칭엔진·백오피스까지 무겁게</td><td>가볍지만 거래 서비스는 아님</td></tr><tr><th scope="row">보안</th><td class="hl">비수탁 — 민감정보 미보관</td><td>커스터디 부담</td><td>해당 없음</td></tr></tbody></table></div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Why Now</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>거래는 이미 일어나고 있습니다</span></span></h2>
-  <p class="phero-lead rvl" style="margin-bottom:2rem">문제는 그 거래가 어디에서 일어나느냐입니다. 지금이 그 흐름을 내 서비스 안으로 가져올 때입니다.</p>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Why Now</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>거래는 이미 일어나고 있습니다</span></span></h2><p class="phero-lead rvl" style="margin-bottom:2rem">문제는 그 거래가 어디에서 일어나느냐입니다. 지금이 그 흐름을 내 서비스 안으로 가져올 때입니다.</p>
   <ul><li class="service-row-li rvl" style="--rvl-y:24px; --rvl-delay:0ms"><div class="service-row"><span class="row-meta">연 58.5조$</span><h3>중앙화 무기한 선물 거래량</h3><p class="service-desc">그만큼의 거래가 지금도 외부 거래소에서 일어납니다.</p><span class="service-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></div></li><li class="service-row-li rvl" style="--rvl-y:24px; --rvl-delay:80ms"><div class="service-row"><span class="row-meta">외부 이탈</span><h3>정보는 내 서비스, 거래는 밖에서</h3><p class="service-desc">수수료와 사용자 생애가치가 함께 빠져나갑니다.</p><span class="service-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></div></li><li class="service-row-li rvl" style="--rvl-y:24px; --rvl-delay:160ms"><div class="service-row"><span class="row-meta">지금 시작</span><h3>화이트라벨로 매출 전환</h3><p class="service-desc">구축 부담 없이 그 거래를 내 브랜드 안 실질 매출로 전환할 수 있습니다.</p><span class="service-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></div></li></ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Key Features</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>거래 경험을 연결하는 핵심 기능</span></span></h2>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Key Features</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>거래 경험을 연결하는 핵심 기능</span></span></h2>
   <ul class="cards-2">
     <li class="rvl" style="--rvl-y:40px"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>Feature 01</span></div><h3>Aggregation Engine</h3><p>주요 글로벌 거래소의 호가와 유동성을 통합해, 깊은 유동성과 안정적인 체결 환경을 제공합니다.</p><div class=work-tags><span class="tag">호가 · 유동성 통합</span><span class="tag">단일 진입점</span></div></div></article></li>
     <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>Feature 02</span></div><h3>Smart Access</h3><p>QR 코드로 외부 거래소 계정을 간편하게 연결해, 복잡한 API 키 입력 없이 거래 연동을 시작할 수 있습니다.</p><div class=work-tags><span class="tag">QR 계정 연결</span><span class="tag">API 키 불필요</span></div></div></article></li>
   </ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Use Cases</div>
-  <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>디지털자산 비즈니스의 시작부터 운영까지</span></span></h2>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Use Cases</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>디지털자산 비즈니스의 시작부터 운영까지</span></span></h2>
   <ul class="cards-2">
     <li class="rvl" style="--rvl-y:40px"><article class="work-card static"><div class="work-meta"><span>Case 01</span></div><div class="work-bottom"><h3>Supercycl</h3><p>CEX와 DEX 유동성을 하나로 연결하는 무기한 선물 거래 플랫폼. Aggregation Engine과 Smart Access로 여러 거래소의 유동성을 연동합니다.</p><blockquote class="work-quote">&ldquo;PortX 덕분에 자체 선물거래 서비스를 더 빠르게 시작할 수 있었습니다.&rdquo;<cite>Supercycl 헤드 개발자</cite></blockquote><div class=work-tags><span class="tag">선물 거래</span><span class="tag">유동성 연동</span></div></div></article></li>
     <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static"><div class="work-meta"><span>Case 02</span></div><div class="work-bottom"><h3>코인 세금 서비스</h3><p>거래소와 연동해 거래 내역을 불러오고 예상 세금을 계산하는 세무 플랫폼. Smart Access로 계정 연결 과정을 간소화했습니다.</p><blockquote class="work-quote">&ldquo;세금 계산에 필요한 거래 정보를 빠르게 가져올 수 있었습니다.&rdquo;<cite>코인 세금 서비스 CEO</cite></blockquote><div class=work-tags><span class="tag">세무 플랫폼</span><span class="tag">거래 내역 연동</span></div></div></article></li>
