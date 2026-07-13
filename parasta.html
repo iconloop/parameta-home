@@ -752,9 +752,7 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
   body.hero-dark .phero, body.hero-dark .phero-inner{ min-height:auto }
   body.hero-dark .phero-inner{ grid-template-columns:1fr; padding-top:8rem; padding-bottom:3rem; row-gap:2rem }
   body.hero-dark .phero-text, body.hero-dark .phero-visual{ grid-column:auto }
-  body.hero-dark .phero-visual{ min-height:40vh; order:-1 } }
-/* (임시) 모바일에선 이미지를 텍스트 아래로 */
-@media (max-width:639px){ body.hero-dark .phero-visual{ order:0 } }
+  body.hero-dark .phero-visual{ min-height:40vh } }  /* 이미지: 텍스트 아래 (자연 순서) */
 
 /* ============ WHAT IS (좌 다이어그램 / 우 텍스트) ============ */
 .whatis-grid{ display:grid; grid-template-columns:1fr; gap:2.5rem; align-items:center }
