@@ -227,9 +227,9 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 @media (min-width:900px){ .pn-grid{ grid-template-columns:repeat(2,1fr); column-gap:var(--grid-gap) } }
 .pn-card{ background:var(--ink); color:var(--white); border-radius:var(--radius-card); padding:2.5rem;
   box-shadow:0 0 0 1px rgba(var(--white-rgb),.05) }
-/* 모바일: 카드 폭 대비 패딩 과다 → 축소(상하좌우 동일), 인셋 박스도 함께 */
+/* 모바일: 좌우는 컴팩트, 위아래는 여유 있게 */
 @media (max-width:639px){
-  .pn-card{ padding:1.5rem; border-radius:var(--radius-card-sm) }
+  .pn-card{ padding:2.5rem 1.5rem; border-radius:var(--radius-card-sm) }
   .pn-list li{ padding:1.25rem } }
 .pn-head{ margin-bottom:1.5rem }
 /* 키커: Advantages 다크카드 보라 키커와 동일 스타일 (타이틀 위) */
