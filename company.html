@@ -838,10 +838,14 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 .cards-3 > li:has(.work-card.grouped), .cards-2 > li:has(.work-card.grouped){ display:flex }
 .cards-3 > li > .work-card.grouped, .cards-2 > li > .work-card.grouped{ flex:1 1 auto; min-width:0 }
 .work-card.grouped::before{ content:''; flex:none; height:16rem } /* 이미지 영역 */
-/* Advantages 3카드 이미지 (임시: 3장 동일, 추후 개별 교체) — full-bleed(좌우·위 여백 없음) + 텍스트와 간격 */
-.cards-3 .work-card.grouped::before{ margin:-1.5rem -1.5rem 1.5rem; border-radius:0;
+/* 상세페이지 다크카드 이미지 영역 (임시: 공통 1장, 추후 개별 교체) — full-bleed(좌우·위 여백 없음) + 텍스트와 간격 */
+.cards-3 .work-card.grouped::before, .cards-2 .work-card.grouped::before{
+  margin:-1.5rem -1.5rem 1.5rem; border-radius:0;
   background:url('assets/parasta/body-test.avif') center/cover no-repeat }
-@media (min-width:640px){ .cards-3 .work-card.grouped::before{ margin:-2rem -2rem 1.75rem } }
+@media (min-width:640px){
+  .cards-3 .work-card.grouped::before, .cards-2 .work-card.grouped::before{ margin:-2rem -2rem 1.75rem } }
+/* 짧은 콘텐츠 카드도 과하지 않게: grouped 최소높이는 콘텐츠 기준 */
+.cards-3 .work-card.grouped, .cards-2 .work-card.grouped{ min-height:0 }
 .work-card.grouped .work-bottom{ position:static; inset:auto }
 .work-card.grouped .work-meta{ margin-bottom:.875rem; color:var(--purple-300) }
 .work-card.grouped .work-bottom p{ font-size:var(--text-16) }
@@ -1136,7 +1140,7 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
     <div style="font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); margin-bottom:1rem">인증 · 수상</div>
     <div class="chip-row rvl"><span class="chip">GS인증 1등급 (loopchain)</span><span class="chip">기술보증기금 TI-1 등급</span><span class="chip">과기정통부 장관 표창</span><span class="chip">KISA 기술특례상장 컨설팅 A등급</span><span class="chip">금융위원회 혁신금융서비스 지정</span></div>
   </div>
-  <ul class="cards-2"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static sm"><div class="work-meta"><span>First</span></div><div class="work-bottom"><h3>세계 최초 블록체인 공동인증 상용화</h3><p>증권사 26개사를 하나의 온체인 신원 체계로 묶은 공동인증을 세계 최초로 상용화했습니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm"><div class="work-meta"><span>First</span></div><div class="work-bottom"><h3>국내 최초 금융권 DID 실명인증 상용화</h3><p>신한은행과 함께 금융권 DID 실명인증을 국내 최초로 상용화했습니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm"><div class="work-meta"><span>First</span></div><div class="work-bottom"><h3>국내 최초 블록체인 서비스 CSAP 인증</h3><p>MyID 2.0으로 블록체인 서비스 최초의 CSAP 클라우드 보안 인증을 획득했습니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms"><article class="work-card static sm"><div class="work-meta"><span>First</span></div><div class="work-bottom"><h3>국내 최초 DID Method Registry 등재</h3><p>국내 최초로 DID Method Registry에 등재했습니다.</p></div></article></li></ul>
+  <ul class="cards-2"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>First</span></div><h3>세계 최초 블록체인 공동인증 상용화</h3><p>증권사 26개사를 하나의 온체인 신원 체계로 묶은 공동인증을 세계 최초로 상용화했습니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>First</span></div><h3>국내 최초 금융권 DID 실명인증 상용화</h3><p>신한은행과 함께 금융권 DID 실명인증을 국내 최초로 상용화했습니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>First</span></div><h3>국내 최초 블록체인 서비스 CSAP 인증</h3><p>MyID 2.0으로 블록체인 서비스 최초의 CSAP 클라우드 보안 인증을 획득했습니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>First</span></div><h3>국내 최초 DID Method Registry 등재</h3><p>국내 최초로 DID Method Registry에 등재했습니다.</p></div></article></li></ul>
   <div class="rvl" style="margin-top:2.5rem">
     <div style="font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); margin-bottom:1rem">함께한 파트너 · Stablecoin Alliance 초대 의장사</div>
     <div class="chip-row rvl"><span class="chip">삼성</span><span class="chip">삼성증권</span><span class="chip">미래에셋</span><span class="chip">NH농협</span><span class="chip">NH투자증권</span><span class="chip">신한</span><span class="chip">IBK기업은행</span><span class="chip">KB</span></div>

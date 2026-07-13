@@ -838,10 +838,14 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 .cards-3 > li:has(.work-card.grouped), .cards-2 > li:has(.work-card.grouped){ display:flex }
 .cards-3 > li > .work-card.grouped, .cards-2 > li > .work-card.grouped{ flex:1 1 auto; min-width:0 }
 .work-card.grouped::before{ content:''; flex:none; height:16rem } /* 이미지 영역 */
-/* Advantages 3카드 이미지 (임시: 3장 동일, 추후 개별 교체) — full-bleed(좌우·위 여백 없음) + 텍스트와 간격 */
-.cards-3 .work-card.grouped::before{ margin:-1.5rem -1.5rem 1.5rem; border-radius:0;
+/* 상세페이지 다크카드 이미지 영역 (임시: 공통 1장, 추후 개별 교체) — full-bleed(좌우·위 여백 없음) + 텍스트와 간격 */
+.cards-3 .work-card.grouped::before, .cards-2 .work-card.grouped::before{
+  margin:-1.5rem -1.5rem 1.5rem; border-radius:0;
   background:url('assets/parasta/body-test.avif') center/cover no-repeat }
-@media (min-width:640px){ .cards-3 .work-card.grouped::before{ margin:-2rem -2rem 1.75rem } }
+@media (min-width:640px){
+  .cards-3 .work-card.grouped::before, .cards-2 .work-card.grouped::before{ margin:-2rem -2rem 1.75rem } }
+/* 짧은 콘텐츠 카드도 과하지 않게: grouped 최소높이는 콘텐츠 기준 */
+.cards-3 .work-card.grouped, .cards-2 .work-card.grouped{ min-height:0 }
 .work-card.grouped .work-bottom{ position:static; inset:auto }
 .work-card.grouped .work-meta{ margin-bottom:.875rem; color:var(--purple-300) }
 .work-card.grouped .work-bottom p{ font-size:var(--text-16) }

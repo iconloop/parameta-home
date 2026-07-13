@@ -838,10 +838,14 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 .cards-3 > li:has(.work-card.grouped), .cards-2 > li:has(.work-card.grouped){ display:flex }
 .cards-3 > li > .work-card.grouped, .cards-2 > li > .work-card.grouped{ flex:1 1 auto; min-width:0 }
 .work-card.grouped::before{ content:''; flex:none; height:16rem } /* 이미지 영역 */
-/* Advantages 3카드 이미지 (임시: 3장 동일, 추후 개별 교체) — full-bleed(좌우·위 여백 없음) + 텍스트와 간격 */
-.cards-3 .work-card.grouped::before{ margin:-1.5rem -1.5rem 1.5rem; border-radius:0;
+/* 상세페이지 다크카드 이미지 영역 (임시: 공통 1장, 추후 개별 교체) — full-bleed(좌우·위 여백 없음) + 텍스트와 간격 */
+.cards-3 .work-card.grouped::before, .cards-2 .work-card.grouped::before{
+  margin:-1.5rem -1.5rem 1.5rem; border-radius:0;
   background:url('assets/parasta/body-test.avif') center/cover no-repeat }
-@media (min-width:640px){ .cards-3 .work-card.grouped::before{ margin:-2rem -2rem 1.75rem } }
+@media (min-width:640px){
+  .cards-3 .work-card.grouped::before, .cards-2 .work-card.grouped::before{ margin:-2rem -2rem 1.75rem } }
+/* 짧은 콘텐츠 카드도 과하지 않게: grouped 최소높이는 콘텐츠 기준 */
+.cards-3 .work-card.grouped, .cards-2 .work-card.grouped{ min-height:0 }
 .work-card.grouped .work-bottom{ position:static; inset:auto }
 .work-card.grouped .work-meta{ margin-bottom:.875rem; color:var(--purple-300) }
 .work-card.grouped .work-bottom p{ font-size:var(--text-16) }
@@ -1138,7 +1142,7 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 <section><div class="shell sec" style="padding-top:0">
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Applied Cases</div>
   <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>다양한 기관이 선택한 디지털 증명서</span></span></h2>
-  <ul class="cards-3"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static sm"><div class="work-meta"><span>University</span></div><div class="work-bottom"><h3>포스텍 POSTECH</h3><p>블록체인 전문가과정 수료증을 정기적으로 발급합니다.</p><div class=work-tags><span class="tag">수료증</span></div></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm"><div class="work-meta"><span>Enterprise</span></div><div class="work-bottom"><h3>미래에셋</h3><p>장학증서에 QR 검증 기능을 적용해 디지털로 전달합니다.</p><div class=work-tags><span class="tag">장학증서</span><span class="tag">QR 검증</span></div></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm"><div class="work-meta"><span>Education</span></div><div class="work-bottom"><h3>교육 · 자격 기관</h3><p>수료증과 인증서 발급에 Broof를 활용하고 있습니다.</p><div class=work-tags><span class="tag">수료증</span><span class="tag">인증서</span></div></div></article></li></ul>
+  <ul class="cards-3"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>University</span></div><h3>포스텍 POSTECH</h3><p>블록체인 전문가과정 수료증을 정기적으로 발급합니다.</p><div class=work-tags><span class="tag">수료증</span></div></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>Enterprise</span></div><h3>미래에셋</h3><p>장학증서에 QR 검증 기능을 적용해 디지털로 전달합니다.</p><div class=work-tags><span class="tag">장학증서</span><span class="tag">QR 검증</span></div></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>Education</span></div><h3>교육 · 자격 기관</h3><p>수료증과 인증서 발급에 Broof를 활용하고 있습니다.</p><div class=work-tags><span class="tag">수료증</span><span class="tag">인증서</span></div></div></article></li></ul>
   <div class="rvl" style="margin-top:3rem">
     <div style="font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); margin-bottom:1rem">여러 기관이 이미 Broof를 활용하고 있습니다</div>
     <div style="display:flex; flex-wrap:wrap; gap:.5rem"><span class="tag on-light">서울특별시</span><span class="tag on-light">POSTECH</span><span class="tag on-light">한국생산성본부</span><span class="tag on-light">사람인</span><span class="tag on-light">인천</span><span class="tag on-light">한경닷컴</span><span class="tag on-light">한빛미디어</span><span class="tag on-light">스터디파이</span><span class="tag on-light">아트앤가이드</span><span class="tag on-light">심플로우</span><span class="tag on-light">해시넷</span><span class="tag on-light">서울시민청</span></div>

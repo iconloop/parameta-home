@@ -171,10 +171,14 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 .cards-3 > li:has(.work-card.grouped), .cards-2 > li:has(.work-card.grouped){ display:flex }
 .cards-3 > li > .work-card.grouped, .cards-2 > li > .work-card.grouped{ flex:1 1 auto; min-width:0 }
 .work-card.grouped::before{ content:''; flex:none; height:16rem } /* 이미지 영역 */
-/* Advantages 3카드 이미지 (임시: 3장 동일, 추후 개별 교체) — full-bleed(좌우·위 여백 없음) + 텍스트와 간격 */
-.cards-3 .work-card.grouped::before{ margin:-1.5rem -1.5rem 1.5rem; border-radius:0;
+/* 상세페이지 다크카드 이미지 영역 (임시: 공통 1장, 추후 개별 교체) — full-bleed(좌우·위 여백 없음) + 텍스트와 간격 */
+.cards-3 .work-card.grouped::before, .cards-2 .work-card.grouped::before{
+  margin:-1.5rem -1.5rem 1.5rem; border-radius:0;
   background:url('assets/parasta/body-test.avif') center/cover no-repeat }
-@media (min-width:640px){ .cards-3 .work-card.grouped::before{ margin:-2rem -2rem 1.75rem } }
+@media (min-width:640px){
+  .cards-3 .work-card.grouped::before, .cards-2 .work-card.grouped::before{ margin:-2rem -2rem 1.75rem } }
+/* 짧은 콘텐츠 카드도 과하지 않게: grouped 최소높이는 콘텐츠 기준 */
+.cards-3 .work-card.grouped, .cards-2 .work-card.grouped{ min-height:0 }
 .work-card.grouped .work-bottom{ position:static; inset:auto }
 .work-card.grouped .work-meta{ margin-bottom:.875rem; color:var(--purple-300) }
 .work-card.grouped .work-bottom p{ font-size:var(--text-16) }
@@ -982,10 +986,10 @@ PAGES['company.html'] = dict(
     {chips(['GS인증 1등급 (loopchain)','기술보증기금 TI-1 등급','과기정통부 장관 표창','KISA 기술특례상장 컨설팅 A등급','금융위원회 혁신금융서비스 지정'])}
   </div>
   {cards_wrap([
-    dark_card('First', '세계 최초 블록체인 공동인증 상용화', '증권사 26개사를 하나의 온체인 신원 체계로 묶은 공동인증을 세계 최초로 상용화했습니다.'),
-    dark_card('First', '국내 최초 금융권 DID 실명인증 상용화', '신한은행과 함께 금융권 DID 실명인증을 국내 최초로 상용화했습니다.'),
-    dark_card('First', '국내 최초 블록체인 서비스 CSAP 인증', 'MyID 2.0으로 블록체인 서비스 최초의 CSAP 클라우드 보안 인증을 획득했습니다.'),
-    dark_card('First', '국내 최초 DID Method Registry 등재', '국내 최초로 DID Method Registry에 등재했습니다.'),
+    dark_card('First', '세계 최초 블록체인 공동인증 상용화', '증권사 26개사를 하나의 온체인 신원 체계로 묶은 공동인증을 세계 최초로 상용화했습니다.', grouped=True),
+    dark_card('First', '국내 최초 금융권 DID 실명인증 상용화', '신한은행과 함께 금융권 DID 실명인증을 국내 최초로 상용화했습니다.', grouped=True),
+    dark_card('First', '국내 최초 블록체인 서비스 CSAP 인증', 'MyID 2.0으로 블록체인 서비스 최초의 CSAP 클라우드 보안 인증을 획득했습니다.', grouped=True),
+    dark_card('First', '국내 최초 DID Method Registry 등재', '국내 최초로 DID Method Registry에 등재했습니다.', grouped=True),
   ], cols=2)}
   <div class="rvl" style="margin-top:2.5rem">
     <div style="font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); margin-bottom:1rem">함께한 파트너 · Stablecoin Alliance 초대 의장사</div>
@@ -1039,9 +1043,9 @@ PAGES['careers.html'] = dict(
   {eyebrow('Who We Look For')}
   {h2('인재상')}
   {cards_wrap([
-    dark_card('01', 'Builder Mindset', '0에서 1을 만드는 일을 즐기는 사람. 새로운 시장에 표준을 세우고, 기술을 사업에 안착시키는 과정에 흥미를 느끼는 사람을 찾습니다.'),
-    dark_card('02', 'Domain × Depth', '블록체인·디지털자산·공공 인프라 중 한 영역에서 깊이를 추구하는 사람. 표면적 트렌드보다 본질을 끝까지 파고드는 전문성을 중요하게 생각합니다.'),
-    dark_card('03', 'Long-term Trust', '9년 동안 운영해 온 인프라처럼, 책임감과 일관성으로 신뢰를 쌓아가는 사람. 단기 성과보다 오래가는 결과를 만드는 일에 가치를 두는 사람을 찾습니다.'),
+    dark_card('01', 'Builder Mindset', '0에서 1을 만드는 일을 즐기는 사람. 새로운 시장에 표준을 세우고, 기술을 사업에 안착시키는 과정에 흥미를 느끼는 사람을 찾습니다.', grouped=True),
+    dark_card('02', 'Domain × Depth', '블록체인·디지털자산·공공 인프라 중 한 영역에서 깊이를 추구하는 사람. 표면적 트렌드보다 본질을 끝까지 파고드는 전문성을 중요하게 생각합니다.', grouped=True),
+    dark_card('03', 'Long-term Trust', '9년 동안 운영해 온 인프라처럼, 책임감과 일관성으로 신뢰를 쌓아가는 사람. 단기 성과보다 오래가는 결과를 만드는 일에 가치를 두는 사람을 찾습니다.', grouped=True),
   ], cols=3)}
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
@@ -1088,10 +1092,10 @@ PAGES['insights.html'] = dict(
   {eyebrow('Blog')}
   {h2('디지털자산 시장을 읽는 인사이트')}
   <ul class="cards-2">
-    <li class="rvl" style="--rvl-y:40px">{dark_card('MARKET', '스테이블코인 사업, 무엇부터 시작할까', '규제·발행·유통까지, 스테이블코인 사업을 시작하기 전 짚어야 할 핵심을 정리합니다.')}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms">{dark_card('DID', '금융권 DID 도입 체크리스트', '은행·증권사가 분산신원 인증을 도입하기 전에 확인할 항목을 정리합니다.')}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms">{dark_card('COMPLIANCE', '온체인 KYC, 규제와 사용성 사이', '규제 요건을 지키면서도 사용자 경험을 해치지 않는 KYC 설계를 다룹니다.')}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms">{dark_card('TECH', 'loopchain은 왜 즉시 확정인가', '즉시 확정(Finality)이 왜 중요한지, 합의 방식과 함께 쉽게 풀어 봅니다.')}</li>
+    <li class="rvl" style="--rvl-y:40px">{dark_card('MARKET', '스테이블코인 사업, 무엇부터 시작할까', '규제·발행·유통까지, 스테이블코인 사업을 시작하기 전 짚어야 할 핵심을 정리합니다.', grouped=True)}</li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms">{dark_card('DID', '금융권 DID 도입 체크리스트', '은행·증권사가 분산신원 인증을 도입하기 전에 확인할 항목을 정리합니다.', grouped=True)}</li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms">{dark_card('COMPLIANCE', '온체인 KYC, 규제와 사용성 사이', '규제 요건을 지키면서도 사용자 경험을 해치지 않는 KYC 설계를 다룹니다.', grouped=True)}</li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms">{dark_card('TECH', 'loopchain은 왜 즉시 확정인가', '즉시 확정(Finality)이 왜 중요한지, 합의 방식과 함께 쉽게 풀어 봅니다.', grouped=True)}</li>
   </ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
@@ -1319,8 +1323,8 @@ PAGES['portx.html'] = dict(
   {eyebrow('Key Features')}
   {h2('거래 경험을 연결하는 핵심 기능')}
   <ul class="cards-2">
-    <li class="rvl" style="--rvl-y:40px">{dark_card('Feature 01', 'Aggregation Engine', '주요 글로벌 거래소의 호가와 유동성을 통합해, 깊은 유동성과 안정적인 체결 환경을 제공합니다.', ['호가 · 유동성 통합','단일 진입점'])}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms">{dark_card('Feature 02', 'Smart Access', 'QR 코드로 외부 거래소 계정을 간편하게 연결해, 복잡한 API 키 입력 없이 거래 연동을 시작할 수 있습니다.', ['QR 계정 연결','API 키 불필요'])}</li>
+    <li class="rvl" style="--rvl-y:40px">{dark_card('Feature 01', 'Aggregation Engine', '주요 글로벌 거래소의 호가와 유동성을 통합해, 깊은 유동성과 안정적인 체결 환경을 제공합니다.', ['호가 · 유동성 통합','단일 진입점'], grouped=True)}</li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms">{dark_card('Feature 02', 'Smart Access', 'QR 코드로 외부 거래소 계정을 간편하게 연결해, 복잡한 API 키 입력 없이 거래 연동을 시작할 수 있습니다.', ['QR 계정 연결','API 키 불필요'], grouped=True)}</li>
   </ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
@@ -1375,8 +1379,8 @@ PAGES['myid.html'] = dict(
   {eyebrow('플랫폼 구성')}
   {h2('MyID 2.0을 이루는 두 가지 구성')}
   <ul class="cards-2">
-    <li class="rvl" style="--rvl-y:40px">{dark_card('01 / For Public Organizations', 'MyID 파트너센터', '공공기관이 원하는 형태의 모바일 인증서(DID)를 코드 한 줄 없이 만들고, 검증 항목만 골라 설정합니다. 발급부터 검증·관리까지 콘솔 하나에서 이뤄집니다.', ['발급 · 검증','통합 콘솔'], sm=False)}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms">{dark_card('02 / For Citizens', '쯩 (zzeung) for 공공기관', '시민이 직접 지니는 디지털 지갑. 신분증·운전면허증·여권부터 NFT 사원증까지 보관하고, QR·블루투스·NFC·HTTP로 어디서든 제시·검증합니다.', ['디지털 지갑','QR · NFC'], sm=False)}</li>
+    <li class="rvl" style="--rvl-y:40px">{dark_card('01 / For Public Organizations', 'MyID 파트너센터', '공공기관이 원하는 형태의 모바일 인증서(DID)를 코드 한 줄 없이 만들고, 검증 항목만 골라 설정합니다. 발급부터 검증·관리까지 콘솔 하나에서 이뤄집니다.', ['발급 · 검증','통합 콘솔'], sm=False, grouped=True)}</li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms">{dark_card('02 / For Citizens', '쯩 (zzeung) for 공공기관', '시민이 직접 지니는 디지털 지갑. 신분증·운전면허증·여권부터 NFT 사원증까지 보관하고, QR·블루투스·NFC·HTTP로 어디서든 제시·검증합니다.', ['디지털 지갑','QR · NFC'], sm=False, grouped=True)}</li>
   </ul>
 </div></section>
 ''')
@@ -1435,10 +1439,10 @@ PAGES['myid.html'] = dict(
   {eyebrow('Platform')}
   {h2('MyID는 블록체인 기반 DID 플랫폼입니다')}
   <ul class="cards-2">
-    <li class="rvl" style="--rvl-y:40px">{dark_card('Console', 'MyID 파트너센터', '코드 없이 DID·VC를 생성하고, 검증 항목을 구성할 수 있는 관리자 콘솔입니다. 발급·검증 이력과 인증 절차를 대시보드에서 통합 관리합니다.', ['DID·VC 생성','검증 항목 설정','이력 대시보드'])}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms">{dark_card('Wallet', 'DID 지갑', '사용자가 자신의 DID와 VC를 직접 관리하는 신원 지갑입니다. Wallet SDK로 서비스 앱에 지갑 기능을 연동하고, 외부 발급 VC도 보관·이용할 수 있습니다.', ['Wallet SDK','외부 VC 보관','PDS 암호화'])}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms">{dark_card('API', 'MyID API', 'DID 관리, VC 발급과 유효성 검증, VP 검증 등 신원 인증에 필요한 기능을 API로 제공합니다. 여러 블록체인과 연결된 통합 API로 외부 VC 연계도 지원합니다.', ['VC 발급','VC·VP 검증','외부 VC 연계'])}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms">{dark_card('BaaS', '블록체인 BaaS', 'MyID 서비스에 필요한 퍼블릭·프라이빗 블록체인 환경을 서비스 형태로 제공합니다. loopchain core2 기반으로 안정적인 DID 서비스 운영을 지원합니다.', ['퍼블릭·프라이빗','loopchain core2'])}</li>
+    <li class="rvl" style="--rvl-y:40px">{dark_card('Console', 'MyID 파트너센터', '코드 없이 DID·VC를 생성하고, 검증 항목을 구성할 수 있는 관리자 콘솔입니다. 발급·검증 이력과 인증 절차를 대시보드에서 통합 관리합니다.', ['DID·VC 생성','검증 항목 설정','이력 대시보드'], grouped=True)}</li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms">{dark_card('Wallet', 'DID 지갑', '사용자가 자신의 DID와 VC를 직접 관리하는 신원 지갑입니다. Wallet SDK로 서비스 앱에 지갑 기능을 연동하고, 외부 발급 VC도 보관·이용할 수 있습니다.', ['Wallet SDK','외부 VC 보관','PDS 암호화'], grouped=True)}</li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms">{dark_card('API', 'MyID API', 'DID 관리, VC 발급과 유효성 검증, VP 검증 등 신원 인증에 필요한 기능을 API로 제공합니다. 여러 블록체인과 연결된 통합 API로 외부 VC 연계도 지원합니다.', ['VC 발급','VC·VP 검증','외부 VC 연계'], grouped=True)}</li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms">{dark_card('BaaS', '블록체인 BaaS', 'MyID 서비스에 필요한 퍼블릭·프라이빗 블록체인 환경을 서비스 형태로 제공합니다. loopchain core2 기반으로 안정적인 DID 서비스 운영을 지원합니다.', ['퍼블릭·프라이빗','loopchain core2'], grouped=True)}</li>
   </ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
@@ -1466,19 +1470,19 @@ PAGES['myid.html'] = dict(
   {eyebrow('Technology')}
   {h2('데이터 주권과 프라이버시를 지키는 핵심 기술')}
   <ul class="cards-2">
-    <li class="rvl" style="--rvl-y:40px">{dark_card('Tech 01', 'PDS — 개인 데이터 저장소', '한 번 발급되면 고정되는 증명서(VC)를 넘어, 계속 바뀌는 내 데이터까지 본인이 직접 통제하며 안전하게 보관합니다.', ['데이터 주권'])}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms">{dark_card('Tech 02', 'Zero-Knowledge Proof — 영지식증명', '원본 정보를 드러내지 않고도 "성인이다", "특정 자격이 있다" 같은 사실만 증명합니다. 범위 증명·소속 증명을 지원합니다.', ['범위 증명','소속 증명'])}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms">{dark_card('Tech 03', 'Selective Disclosure — 선택적 공개', '증명서 전체가 아니라 요구된 항목만 골라 제출합니다. 불필요한 개인정보는 아예 공개하지 않습니다.', ['최소 공개'])}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms">{dark_card('Tech 04', 'Issuer Privacy — 발급자 비식별', '검증 과정에서 어느 기관이 발급했는지까지 감춰, 발급 이력이 불필요하게 노출되지 않도록 보호합니다.', ['프라이버시'])}</li>
+    <li class="rvl" style="--rvl-y:40px">{dark_card('Tech 01', 'PDS — 개인 데이터 저장소', '한 번 발급되면 고정되는 증명서(VC)를 넘어, 계속 바뀌는 내 데이터까지 본인이 직접 통제하며 안전하게 보관합니다.', ['데이터 주권'], grouped=True)}</li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms">{dark_card('Tech 02', 'Zero-Knowledge Proof — 영지식증명', '원본 정보를 드러내지 않고도 "성인이다", "특정 자격이 있다" 같은 사실만 증명합니다. 범위 증명·소속 증명을 지원합니다.', ['범위 증명','소속 증명'], grouped=True)}</li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms">{dark_card('Tech 03', 'Selective Disclosure — 선택적 공개', '증명서 전체가 아니라 요구된 항목만 골라 제출합니다. 불필요한 개인정보는 아예 공개하지 않습니다.', ['최소 공개'], grouped=True)}</li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms">{dark_card('Tech 04', 'Issuer Privacy — 발급자 비식별', '검증 과정에서 어느 기관이 발급했는지까지 감춰, 발급 이력이 불필요하게 노출되지 않도록 보호합니다.', ['프라이버시'], grouped=True)}</li>
   </ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
   {eyebrow('Lineup')}
   {h2('하나의 MyID, 세 가지 도입 형태')}
   {cards_wrap([
-    dark_card('On-Premise', '구축형 MyID', 'MyID를 자사 인프라에 직접 구축해, 완전히 통제하고 자유롭게 커스터마이징하는 기업용 도입 방식입니다.', ['자사 인프라','커스터마이징']),
-    dark_card('민간 SaaS', '쯩 (zzeung)', "구축 없이 구독형으로 바로 시작합니다. 시민용 디지털 지갑 앱 '쯩'으로 민간 서비스에 신원인증을 붙입니다.", ['구독형','디지털 지갑']),
-    dark_card('공공 SaaS', 'MyID 2.0 (K-BTF)', '공공기관 전용 SaaS. 과기정통부·KISA 주관 K-BTF 공동 인프라 위에서 별도 구축 없이 도입합니다.', ['공공 전용','K-BTF']),
+    dark_card('On-Premise', '구축형 MyID', 'MyID를 자사 인프라에 직접 구축해, 완전히 통제하고 자유롭게 커스터마이징하는 기업용 도입 방식입니다.', ['자사 인프라','커스터마이징'], grouped=True),
+    dark_card('민간 SaaS', '쯩 (zzeung)', "구축 없이 구독형으로 바로 시작합니다. 시민용 디지털 지갑 앱 '쯩'으로 민간 서비스에 신원인증을 붙입니다.", ['구독형','디지털 지갑'], grouped=True),
+    dark_card('공공 SaaS', 'MyID 2.0 (K-BTF)', '공공기관 전용 SaaS. 과기정통부·KISA 주관 K-BTF 공동 인프라 위에서 별도 구축 없이 도입합니다.', ['공공 전용','K-BTF'], grouped=True),
   ], cols=3)}
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
@@ -1539,36 +1543,36 @@ PAGES['kbtf.html'] = dict(
   {eyebrow('플랫폼 구성')}
   {h2('MyID 2.0을 이루는 두 가지 구성')}
   <ul class="cards-2">
-    <li class="rvl" style="--rvl-y:40px">{dark_card('01 / For Public Organizations', 'MyID 파트너센터', '공공기관이 원하는 형태의 모바일 인증서(DID)를 코드 한 줄 없이 만들고, 검증 항목만 골라 설정합니다. 발급부터 검증·관리까지 콘솔 하나에서 이뤄집니다.', ['발급 · 검증','통합 콘솔'], sm=False)}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms">{dark_card('02 / For Citizens', '쯩 (zzeung) for 공공기관', '시민이 직접 지니는 디지털 지갑. 신분증·운전면허증·여권부터 NFT 사원증까지 보관하고, QR·블루투스·NFC·HTTP로 어디서든 제시·검증합니다.', ['디지털 지갑','QR · NFC'], sm=False)}</li>
+    <li class="rvl" style="--rvl-y:40px">{dark_card('01 / For Public Organizations', 'MyID 파트너센터', '공공기관이 원하는 형태의 모바일 인증서(DID)를 코드 한 줄 없이 만들고, 검증 항목만 골라 설정합니다. 발급부터 검증·관리까지 콘솔 하나에서 이뤄집니다.', ['발급 · 검증','통합 콘솔'], sm=False, grouped=True)}</li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms">{dark_card('02 / For Citizens', '쯩 (zzeung) for 공공기관', '시민이 직접 지니는 디지털 지갑. 신분증·운전면허증·여권부터 NFT 사원증까지 보관하고, QR·블루투스·NFC·HTTP로 어디서든 제시·검증합니다.', ['디지털 지갑','QR · NFC'], sm=False, grouped=True)}</li>
   </ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
   {eyebrow('Features')}
   {h2('파트너센터 하나로, 발급부터 관리까지')}
   {cards_wrap([
-    dark_card('01', '인증서 생성 · 검증 정보 설정', '원하는 형태의 모바일 인증서(DID)를 코드 없이 만들고, 검증에 필요한 항목만 골라 설정합니다. 과하지 않게 꼭 필요한 정보만 모읍니다.'),
-    dark_card('02', '인증서 발급 · 검증 이력', '발급·제출·검증 데이터를 실시간으로 모니터링하고, 건별 상세 내역까지 한 화면에서 확인합니다.'),
-    dark_card('03', '인증서 통합 관리', '발급·취소·만료 상태와 인증서 전 과정을 하나의 콘솔에서 통합 관리합니다.'),
+    dark_card('01', '인증서 생성 · 검증 정보 설정', '원하는 형태의 모바일 인증서(DID)를 코드 없이 만들고, 검증에 필요한 항목만 골라 설정합니다. 과하지 않게 꼭 필요한 정보만 모읍니다.', grouped=True),
+    dark_card('02', '인증서 발급 · 검증 이력', '발급·제출·검증 데이터를 실시간으로 모니터링하고, 건별 상세 내역까지 한 화면에서 확인합니다.', grouped=True),
+    dark_card('03', '인증서 통합 관리', '발급·취소·만료 상태와 인증서 전 과정을 하나의 콘솔에서 통합 관리합니다.', grouped=True),
   ], cols=3)}
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
   {eyebrow('핵심 기술')}
   {h2('데이터 주권과 프라이버시를 지키는 독자 기술')}
   <ul class="cards-2">
-    <li class="rvl" style="--rvl-y:40px">{dark_card('PDS', '개인 데이터 저장소', '한 번 발급되면 고정되는 증명서(VC)를 넘어, 계속 바뀌는 내 데이터까지 본인이 직접 통제하며 안전하게 보관합니다.', ['데이터 주권'])}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms">{dark_card('BFS', '블록체인 파일 시스템', '문서·이미지 같은 대용량 파일을 여러 노드에 다중 복제(멀티 피닝)해, 유실 없이 안전하게 보관하는 분산 저장 기술입니다.', ['멀티 피닝'])}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms">{dark_card('ZKP', '영지식증명', '원본 정보를 드러내지 않고도 "성인이다", "특정 자격이 있다" 같은 사실만 증명합니다. 범위 증명·소속 증명을 지원합니다.', ['범위 증명','소속 증명'])}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms">{dark_card('Selective Disclosure', '선택적 공개', '증명서 전체가 아니라 요구된 항목만 골라 제출합니다. 불필요한 개인정보는 아예 공개하지 않습니다.', ['최소 공개'])}</li>
+    <li class="rvl" style="--rvl-y:40px">{dark_card('PDS', '개인 데이터 저장소', '한 번 발급되면 고정되는 증명서(VC)를 넘어, 계속 바뀌는 내 데이터까지 본인이 직접 통제하며 안전하게 보관합니다.', ['데이터 주권'], grouped=True)}</li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms">{dark_card('BFS', '블록체인 파일 시스템', '문서·이미지 같은 대용량 파일을 여러 노드에 다중 복제(멀티 피닝)해, 유실 없이 안전하게 보관하는 분산 저장 기술입니다.', ['멀티 피닝'], grouped=True)}</li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms">{dark_card('ZKP', '영지식증명', '원본 정보를 드러내지 않고도 "성인이다", "특정 자격이 있다" 같은 사실만 증명합니다. 범위 증명·소속 증명을 지원합니다.', ['범위 증명','소속 증명'], grouped=True)}</li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms">{dark_card('Selective Disclosure', '선택적 공개', '증명서 전체가 아니라 요구된 항목만 골라 제출합니다. 불필요한 개인정보는 아예 공개하지 않습니다.', ['최소 공개'], grouped=True)}</li>
   </ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
   {eyebrow('Applied Cases')}
   {h2('공공기관 현장에서 실증된 인프라')}
   {cards_wrap([
-    dark_card('서울특별시', '블록체인 표준 플랫폼', '서울시 블록체인 표준 플랫폼에 DID·인증 기반 기술을 공급했습니다.'),
-    dark_card('부산광역시', '블록체인 배터리 여권 플랫폼', '전기차 배터리 전 생애주기 데이터를 DID·VC·PDS로 관리. EU 디지털 제품 여권(DPP) 규제 대응 기반을 MyID 2.0 위에서 구현했습니다.'),
-    dark_card('경상북도', '블록체인 마이데이터 플랫폼', '도민 대상 공공 마이데이터 서비스에 블록체인·DID 신원인증을 적용했습니다.'),
+    dark_card('서울특별시', '블록체인 표준 플랫폼', '서울시 블록체인 표준 플랫폼에 DID·인증 기반 기술을 공급했습니다.', grouped=True),
+    dark_card('부산광역시', '블록체인 배터리 여권 플랫폼', '전기차 배터리 전 생애주기 데이터를 DID·VC·PDS로 관리. EU 디지털 제품 여권(DPP) 규제 대응 기반을 MyID 2.0 위에서 구현했습니다.', grouped=True),
+    dark_card('경상북도', '블록체인 마이데이터 플랫폼', '도민 대상 공공 마이데이터 서비스에 블록체인·DID 신원인증을 적용했습니다.', grouped=True),
   ], cols=3)}
 </div></section>
 """)
@@ -1627,9 +1631,9 @@ PAGES['broof.html'] = dict(
   {eyebrow('Applied Cases')}
   {h2('다양한 기관이 선택한 디지털 증명서')}
   {cards_wrap([
-    dark_card('University', '포스텍 POSTECH', '블록체인 전문가과정 수료증을 정기적으로 발급합니다.', ['수료증']),
-    dark_card('Enterprise', '미래에셋', '장학증서에 QR 검증 기능을 적용해 디지털로 전달합니다.', ['장학증서','QR 검증']),
-    dark_card('Education', '교육 · 자격 기관', '수료증과 인증서 발급에 Broof를 활용하고 있습니다.', ['수료증','인증서']),
+    dark_card('University', '포스텍 POSTECH', '블록체인 전문가과정 수료증을 정기적으로 발급합니다.', ['수료증'], grouped=True),
+    dark_card('Enterprise', '미래에셋', '장학증서에 QR 검증 기능을 적용해 디지털로 전달합니다.', ['장학증서','QR 검증'], grouped=True),
+    dark_card('Education', '교육 · 자격 기관', '수료증과 인증서 발급에 Broof를 활용하고 있습니다.', ['수료증','인증서'], grouped=True),
   ], cols=3)}
   <div class="rvl" style="margin-top:3rem">
     <div style="font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); margin-bottom:1rem">여러 기관이 이미 Broof를 활용하고 있습니다</div>

@@ -838,10 +838,14 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 .cards-3 > li:has(.work-card.grouped), .cards-2 > li:has(.work-card.grouped){ display:flex }
 .cards-3 > li > .work-card.grouped, .cards-2 > li > .work-card.grouped{ flex:1 1 auto; min-width:0 }
 .work-card.grouped::before{ content:''; flex:none; height:16rem } /* 이미지 영역 */
-/* Advantages 3카드 이미지 (임시: 3장 동일, 추후 개별 교체) — full-bleed(좌우·위 여백 없음) + 텍스트와 간격 */
-.cards-3 .work-card.grouped::before{ margin:-1.5rem -1.5rem 1.5rem; border-radius:0;
+/* 상세페이지 다크카드 이미지 영역 (임시: 공통 1장, 추후 개별 교체) — full-bleed(좌우·위 여백 없음) + 텍스트와 간격 */
+.cards-3 .work-card.grouped::before, .cards-2 .work-card.grouped::before{
+  margin:-1.5rem -1.5rem 1.5rem; border-radius:0;
   background:url('assets/parasta/body-test.avif') center/cover no-repeat }
-@media (min-width:640px){ .cards-3 .work-card.grouped::before{ margin:-2rem -2rem 1.75rem } }
+@media (min-width:640px){
+  .cards-3 .work-card.grouped::before, .cards-2 .work-card.grouped::before{ margin:-2rem -2rem 1.75rem } }
+/* 짧은 콘텐츠 카드도 과하지 않게: grouped 최소높이는 콘텐츠 기준 */
+.cards-3 .work-card.grouped, .cards-2 .work-card.grouped{ min-height:0 }
 .work-card.grouped .work-bottom{ position:static; inset:auto }
 .work-card.grouped .work-meta{ margin-bottom:.875rem; color:var(--purple-300) }
 .work-card.grouped .work-bottom p{ font-size:var(--text-16) }
@@ -1136,29 +1140,29 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>플랫폼 구성</div>
   <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>MyID 2.0을 이루는 두 가지 구성</span></span></h2>
   <ul class="cards-2">
-    <li class="rvl" style="--rvl-y:40px"><article class="work-card static"><div class="work-meta"><span>01 / For Public Organizations</span></div><div class="work-bottom"><h3>MyID 파트너센터</h3><p>공공기관이 원하는 형태의 모바일 인증서(DID)를 코드 한 줄 없이 만들고, 검증 항목만 골라 설정합니다. 발급부터 검증·관리까지 콘솔 하나에서 이뤄집니다.</p><div class=work-tags><span class="tag">발급 · 검증</span><span class="tag">통합 콘솔</span></div></div></article></li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static"><div class="work-meta"><span>02 / For Citizens</span></div><div class="work-bottom"><h3>쯩 (zzeung) for 공공기관</h3><p>시민이 직접 지니는 디지털 지갑. 신분증·운전면허증·여권부터 NFT 사원증까지 보관하고, QR·블루투스·NFC·HTTP로 어디서든 제시·검증합니다.</p><div class=work-tags><span class="tag">디지털 지갑</span><span class="tag">QR · NFC</span></div></div></article></li>
+    <li class="rvl" style="--rvl-y:40px"><article class="work-card static grouped"><div class="work-bottom"><div class="work-meta"><span>01 / For Public Organizations</span></div><h3>MyID 파트너센터</h3><p>공공기관이 원하는 형태의 모바일 인증서(DID)를 코드 한 줄 없이 만들고, 검증 항목만 골라 설정합니다. 발급부터 검증·관리까지 콘솔 하나에서 이뤄집니다.</p><div class=work-tags><span class="tag">발급 · 검증</span><span class="tag">통합 콘솔</span></div></div></article></li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static grouped"><div class="work-bottom"><div class="work-meta"><span>02 / For Citizens</span></div><h3>쯩 (zzeung) for 공공기관</h3><p>시민이 직접 지니는 디지털 지갑. 신분증·운전면허증·여권부터 NFT 사원증까지 보관하고, QR·블루투스·NFC·HTTP로 어디서든 제시·검증합니다.</p><div class=work-tags><span class="tag">디지털 지갑</span><span class="tag">QR · NFC</span></div></div></article></li>
   </ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Features</div>
   <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>파트너센터 하나로, 발급부터 관리까지</span></span></h2>
-  <ul class="cards-3"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static sm"><div class="work-meta"><span>01</span></div><div class="work-bottom"><h3>인증서 생성 · 검증 정보 설정</h3><p>원하는 형태의 모바일 인증서(DID)를 코드 없이 만들고, 검증에 필요한 항목만 골라 설정합니다. 과하지 않게 꼭 필요한 정보만 모읍니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm"><div class="work-meta"><span>02</span></div><div class="work-bottom"><h3>인증서 발급 · 검증 이력</h3><p>발급·제출·검증 데이터를 실시간으로 모니터링하고, 건별 상세 내역까지 한 화면에서 확인합니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm"><div class="work-meta"><span>03</span></div><div class="work-bottom"><h3>인증서 통합 관리</h3><p>발급·취소·만료 상태와 인증서 전 과정을 하나의 콘솔에서 통합 관리합니다.</p></div></article></li></ul>
+  <ul class="cards-3"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>01</span></div><h3>인증서 생성 · 검증 정보 설정</h3><p>원하는 형태의 모바일 인증서(DID)를 코드 없이 만들고, 검증에 필요한 항목만 골라 설정합니다. 과하지 않게 꼭 필요한 정보만 모읍니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>02</span></div><h3>인증서 발급 · 검증 이력</h3><p>발급·제출·검증 데이터를 실시간으로 모니터링하고, 건별 상세 내역까지 한 화면에서 확인합니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>03</span></div><h3>인증서 통합 관리</h3><p>발급·취소·만료 상태와 인증서 전 과정을 하나의 콘솔에서 통합 관리합니다.</p></div></article></li></ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>핵심 기술</div>
   <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>데이터 주권과 프라이버시를 지키는 독자 기술</span></span></h2>
   <ul class="cards-2">
-    <li class="rvl" style="--rvl-y:40px"><article class="work-card static sm"><div class="work-meta"><span>PDS</span></div><div class="work-bottom"><h3>개인 데이터 저장소</h3><p>한 번 발급되면 고정되는 증명서(VC)를 넘어, 계속 바뀌는 내 데이터까지 본인이 직접 통제하며 안전하게 보관합니다.</p><div class=work-tags><span class="tag">데이터 주권</span></div></div></article></li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm"><div class="work-meta"><span>BFS</span></div><div class="work-bottom"><h3>블록체인 파일 시스템</h3><p>문서·이미지 같은 대용량 파일을 여러 노드에 다중 복제(멀티 피닝)해, 유실 없이 안전하게 보관하는 분산 저장 기술입니다.</p><div class=work-tags><span class="tag">멀티 피닝</span></div></div></article></li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm"><div class="work-meta"><span>ZKP</span></div><div class="work-bottom"><h3>영지식증명</h3><p>원본 정보를 드러내지 않고도 "성인이다", "특정 자격이 있다" 같은 사실만 증명합니다. 범위 증명·소속 증명을 지원합니다.</p><div class=work-tags><span class="tag">범위 증명</span><span class="tag">소속 증명</span></div></div></article></li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms"><article class="work-card static sm"><div class="work-meta"><span>Selective Disclosure</span></div><div class="work-bottom"><h3>선택적 공개</h3><p>증명서 전체가 아니라 요구된 항목만 골라 제출합니다. 불필요한 개인정보는 아예 공개하지 않습니다.</p><div class=work-tags><span class="tag">최소 공개</span></div></div></article></li>
+    <li class="rvl" style="--rvl-y:40px"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>PDS</span></div><h3>개인 데이터 저장소</h3><p>한 번 발급되면 고정되는 증명서(VC)를 넘어, 계속 바뀌는 내 데이터까지 본인이 직접 통제하며 안전하게 보관합니다.</p><div class=work-tags><span class="tag">데이터 주권</span></div></div></article></li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>BFS</span></div><h3>블록체인 파일 시스템</h3><p>문서·이미지 같은 대용량 파일을 여러 노드에 다중 복제(멀티 피닝)해, 유실 없이 안전하게 보관하는 분산 저장 기술입니다.</p><div class=work-tags><span class="tag">멀티 피닝</span></div></div></article></li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>ZKP</span></div><h3>영지식증명</h3><p>원본 정보를 드러내지 않고도 "성인이다", "특정 자격이 있다" 같은 사실만 증명합니다. 범위 증명·소속 증명을 지원합니다.</p><div class=work-tags><span class="tag">범위 증명</span><span class="tag">소속 증명</span></div></div></article></li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>Selective Disclosure</span></div><h3>선택적 공개</h3><p>증명서 전체가 아니라 요구된 항목만 골라 제출합니다. 불필요한 개인정보는 아예 공개하지 않습니다.</p><div class=work-tags><span class="tag">최소 공개</span></div></div></article></li>
   </ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Applied Cases</div>
   <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>공공기관 현장에서 실증된 인프라</span></span></h2>
-  <ul class="cards-3"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static sm"><div class="work-meta"><span>서울특별시</span></div><div class="work-bottom"><h3>블록체인 표준 플랫폼</h3><p>서울시 블록체인 표준 플랫폼에 DID·인증 기반 기술을 공급했습니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm"><div class="work-meta"><span>부산광역시</span></div><div class="work-bottom"><h3>블록체인 배터리 여권 플랫폼</h3><p>전기차 배터리 전 생애주기 데이터를 DID·VC·PDS로 관리. EU 디지털 제품 여권(DPP) 규제 대응 기반을 MyID 2.0 위에서 구현했습니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm"><div class="work-meta"><span>경상북도</span></div><div class="work-bottom"><h3>블록체인 마이데이터 플랫폼</h3><p>도민 대상 공공 마이데이터 서비스에 블록체인·DID 신원인증을 적용했습니다.</p></div></article></li></ul>
+  <ul class="cards-3"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>서울특별시</span></div><h3>블록체인 표준 플랫폼</h3><p>서울시 블록체인 표준 플랫폼에 DID·인증 기반 기술을 공급했습니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>부산광역시</span></div><h3>블록체인 배터리 여권 플랫폼</h3><p>전기차 배터리 전 생애주기 데이터를 DID·VC·PDS로 관리. EU 디지털 제품 여권(DPP) 규제 대응 기반을 MyID 2.0 위에서 구현했습니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>경상북도</span></div><h3>블록체인 마이데이터 플랫폼</h3><p>도민 대상 공공 마이데이터 서비스에 블록체인·DID 신원인증을 적용했습니다.</p></div></article></li></ul>
 </div></section>
 
 </main>

@@ -838,10 +838,14 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 .cards-3 > li:has(.work-card.grouped), .cards-2 > li:has(.work-card.grouped){ display:flex }
 .cards-3 > li > .work-card.grouped, .cards-2 > li > .work-card.grouped{ flex:1 1 auto; min-width:0 }
 .work-card.grouped::before{ content:''; flex:none; height:16rem } /* 이미지 영역 */
-/* Advantages 3카드 이미지 (임시: 3장 동일, 추후 개별 교체) — full-bleed(좌우·위 여백 없음) + 텍스트와 간격 */
-.cards-3 .work-card.grouped::before{ margin:-1.5rem -1.5rem 1.5rem; border-radius:0;
+/* 상세페이지 다크카드 이미지 영역 (임시: 공통 1장, 추후 개별 교체) — full-bleed(좌우·위 여백 없음) + 텍스트와 간격 */
+.cards-3 .work-card.grouped::before, .cards-2 .work-card.grouped::before{
+  margin:-1.5rem -1.5rem 1.5rem; border-radius:0;
   background:url('assets/parasta/body-test.avif') center/cover no-repeat }
-@media (min-width:640px){ .cards-3 .work-card.grouped::before{ margin:-2rem -2rem 1.75rem } }
+@media (min-width:640px){
+  .cards-3 .work-card.grouped::before, .cards-2 .work-card.grouped::before{ margin:-2rem -2rem 1.75rem } }
+/* 짧은 콘텐츠 카드도 과하지 않게: grouped 최소높이는 콘텐츠 기준 */
+.cards-3 .work-card.grouped, .cards-2 .work-card.grouped{ min-height:0 }
 .work-card.grouped .work-bottom{ position:static; inset:auto }
 .work-card.grouped .work-meta{ margin-bottom:.875rem; color:var(--purple-300) }
 .work-card.grouped .work-bottom p{ font-size:var(--text-16) }
@@ -1135,8 +1139,8 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Key Features</div>
   <h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>거래 경험을 연결하는 핵심 기능</span></span></h2>
   <ul class="cards-2">
-    <li class="rvl" style="--rvl-y:40px"><article class="work-card static sm"><div class="work-meta"><span>Feature 01</span></div><div class="work-bottom"><h3>Aggregation Engine</h3><p>주요 글로벌 거래소의 호가와 유동성을 통합해, 깊은 유동성과 안정적인 체결 환경을 제공합니다.</p><div class=work-tags><span class="tag">호가 · 유동성 통합</span><span class="tag">단일 진입점</span></div></div></article></li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm"><div class="work-meta"><span>Feature 02</span></div><div class="work-bottom"><h3>Smart Access</h3><p>QR 코드로 외부 거래소 계정을 간편하게 연결해, 복잡한 API 키 입력 없이 거래 연동을 시작할 수 있습니다.</p><div class=work-tags><span class="tag">QR 계정 연결</span><span class="tag">API 키 불필요</span></div></div></article></li>
+    <li class="rvl" style="--rvl-y:40px"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>Feature 01</span></div><h3>Aggregation Engine</h3><p>주요 글로벌 거래소의 호가와 유동성을 통합해, 깊은 유동성과 안정적인 체결 환경을 제공합니다.</p><div class=work-tags><span class="tag">호가 · 유동성 통합</span><span class="tag">단일 진입점</span></div></div></article></li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>Feature 02</span></div><h3>Smart Access</h3><p>QR 코드로 외부 거래소 계정을 간편하게 연결해, 복잡한 API 키 입력 없이 거래 연동을 시작할 수 있습니다.</p><div class=work-tags><span class="tag">QR 계정 연결</span><span class="tag">API 키 불필요</span></div></div></article></li>
   </ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
