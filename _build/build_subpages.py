@@ -355,6 +355,12 @@ body.company .vision-panel .wfd-core::before, body.company .vision-panel .wfd-co
 @media (min-width:1024px){ .cards-3{ grid-template-columns:repeat(3,1fr) } }
 .cards-2{ display:grid; grid-template-columns:1fr; gap:1.5rem }
 @media (min-width:768px){ .cards-2{ grid-template-columns:repeat(2,1fr) } }
+.cards-4{ display:grid; grid-template-columns:repeat(2,1fr); gap:1rem }
+@media (min-width:1024px){ .cards-4{ grid-template-columns:repeat(4,1fr) } }
+/* 그레이 라벨 카드 (Coverage 등) — 짧은 유형 라벨용 */
+.label-card{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); border-radius:var(--radius-card-sm);
+  padding:1.75rem; min-height:8rem; display:flex; align-items:flex-end;
+  font-size:var(--text-18); font-weight:600; letter-spacing:-.01em; color:var(--ink); word-break:keep-all }
 .work-card.sm{ min-height:18rem }
 /* 카드 톤 변형: tone='gray' — 코어모듈式 라이트 그레이 (스코프 무관 어디서든) */
 .work-card.t-gray{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); color:var(--ink) }
@@ -563,6 +569,11 @@ body.company .vision-panel .wfd-core::before, body.company .vision-panel .wfd-co
 .ex-card h3{ margin-bottom:0 }
 .ex-card .ex-num{ display:block; font-size:var(--text-14); font-weight:500; color:rgba(var(--white-rgb),.5); margin-bottom:.5rem }  /* 기능 카드 번호 */
 .ex-card h3 + p{ margin-top:.75rem; font-size:var(--text-18) }  /* 서브카피 달릴 때만 간격 + 한 단계 업 */
+/* ex-card 그레이 변형: 라이트 그레이 채움 + 잉크 텍스트 (호버 스케일만 유지) */
+.ex-card.ex-gray{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); color:var(--ink); box-shadow:none }
+.ex-card.ex-gray h3{ color:var(--ink) }
+.ex-card.ex-gray p{ color:rgba(var(--ink-rgb),.6) }
+.ex-card.ex-gray .ex-ico{ background:rgba(var(--ink-rgb),.06) }
 /* 거래소 카드: 컴팩트라 모바일도 2열, 태블릿 3열 */
 .cards-3:has(.ex-card){ grid-template-columns:repeat(2,1fr); gap:1rem }
 @media (min-width:640px){ .cards-3:has(.ex-card){ grid-template-columns:repeat(3,1fr); gap:1.5rem } }
@@ -680,6 +691,8 @@ body.company .vision-panel .wfd-core::before, body.company .vision-panel .wfd-co
   font-size:var(--text-14); color:rgba(var(--ink-rgb),.45) }
 .num-card .n{ font-size:var(--text-40); font-weight:600; letter-spacing:-.02em; line-height:1.1; margin-bottom:.5rem }
 .num-card .n small{ font-size:var(--text-20); font-weight:500 }
+/* 회색 채움 변형 (About Track Record 톤) — company 밖에서도 사용 */
+.num-solid .num-card{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); border:none }
 .tag.on-light{ border-color:var(--line); color:var(--ink) }
 
 /* ============ CONTENT-PORT ADDITIONS (우리 토큰 유지) ============ */
@@ -1669,14 +1682,15 @@ def icon_card(icon_svg, title, desc):
             f'<span class="ic" aria-hidden="true">{icon_svg}</span>'
             f'<h3>{title}</h3><p>{desc}</p></article>')
 
-def exchange_card(name, logo=None, brand=None, dark_text=False, desc=None, num=None):
+def exchange_card(name, logo=None, brand=None, dark_text=False, desc=None, num=None, gray=False):
     # 거래소 카드: 원형 로고 자리 + 이름. brand=호버 시 카드가 그 브랜드 컬러로 (dark_text=밝은 브랜드용)
-    # desc=타이틀 아래 서브카피, num=타이틀 위 번호 (기능 카드 겸용)
+    # desc=타이틀 아래 서브카피, num=타이틀 위 번호 (기능 카드 겸용), gray=라이트 그레이 채움 변형
     ico = f'<span class="ex-ico">{f"<img src={chr(34)}{logo}{chr(34)} alt={chr(34)}{chr(34)}>" if logo else ""}</span>'
-    style = f' style="--brand:{brand}; --brand-txt:{"var(--ink)" if dark_text else "var(--white)"}"' if brand else ''
+    style = f' style="--brand:{brand}; --brand-txt:{"var(--ink)" if dark_text else "var(--white)"}"' if (brand and not gray) else ''
+    cls = 'ico-card ex-card' + (' ex-gray' if gray else '')
     n = f'<span class="ex-num">{num}</span>' if num else ''
     d = f'<p>{desc}</p>' if desc else ''
-    return f'<article class="ico-card ex-card"{style}>{ico}{n}<h3>{name}</h3>{d}</article>'
+    return f'<article class="{cls}"{style}>{ico}{n}<h3>{name}</h3>{d}</article>'
 
 def icon_row(*rows):
     # 원형 아이콘 + 라벨 행 (센터 정렬, 간격 단일 토큰) — icon_row([행1]), icon_row([행1],[행2])
@@ -2888,81 +2902,109 @@ PAGES['solution-gov.html'] = dict(
     h1_lines=['공공기관용 CSAP 인증', '블록체인 SaaS'],
     lead='DID·지갑·개인데이터저장소(PDS)·분산저장(BFS) 기반 서비스를 직접 구축하지 않고 구독형으로 도입합니다. 신청 4단계, 최대 1주일 내 적용.',
     crumb='Solutions — 공공',
+    hero_cta='''<div class="phero-rel rvl" style="--rvl-delay:600ms">
+      <p class="phero-rel-t">관련 제품 살펴보기</p>
+      <a class="phero-rel-flag" href="kbtf.html">KBTF (MyID 2.0)</a>
+    </div>''',
     hero_visual='<img src="assets/solutions/hero-test-2.webp" alt="" loading="eager" fetchpriority="high">',
     content=f"""
+<section><div class="shell sec sec-top-lg sec-stagger">
+  {sec_head('Why Now', '공공 블록체인은 기관마다 새로 구축해야 했습니다', '공공기관이 SaaS형 서비스를 도입하려면 CSAP 같은 엄격한 보안인증을 통과한 제품이어야 합니다. 그런데 블록체인 분야에는 CSAP 인증을 받은 SaaS가 사실상 없어, 기관마다 예산 산정부터 자체 구축까지 최소 1년, 초기 구축비 수억원을 들여 직접 만들어야 했습니다.')}
+  {lead_p('그사이 정부의 블록체인 공공서비스 투자는 계속 늘어, 2024년 지원사업은 총 200억원·14개 규모로 확대됐습니다. 블록체인 활용 수요가 가장 큰 분야 역시 정부·공공입니다.')}
+  {col_chart([
+    dict(l='정부·공공', v='47.9%', w=100, hi=True),
+    dict(l='출판·방송', v='36.5%', w=76),
+    dict(l='금융', v='24.0%', w=50),
+    dict(l='전문·과학', v='20.8%', w=43),
+    dict(l='교통·물류', v='14.6%', w=30),
+  ], title='블록체인 활용 분야 (공급기업 기준)', note='<strong>출처: KISA 2024년도 블록체인 산업 실태조사 결과보고서(국가승인통계 제127017호)</strong><br>복수응답 기준이며, 정부·공공이 가장 높은 활용 수요를 보였습니다.')}
+</div></section>
 <section><div class="shell sec">
-  {sec_head('Product', '이 솔루션을 구성하는 제품')}
-  {chips(['KBTF (MyID 2.0)'])}
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('Why Now', '공공 블록체인은 기관마다 새로 자체구축해야 했습니다', '공공기관이 SaaS형 서비스를 도입하려면 CSAP 같은 엄격한 보안인증을 통과한 제품이어야 합니다. 그런데 블록체인 분야에는 CSAP 인증을 받은 SaaS가 사실상 없어, 기관마다 예산 산정부터 자체 구축까지 최소 1년, 초기 구축비 수억원을 들여 직접 만들어야 했습니다. 그사이 정부의 블록체인 공공서비스 투자는 늘어 2024년 지원사업은 총 200억원·14개 규모로 확대됐고, 블록체인 활용 수요가 가장 큰 분야도 정부·공공입니다.')}
-  {bar_chart([
-    dict(l='정부/공공', v='47.9%', w=80, hi=True),
-    dict(l='출판·방송통신', v='36.5%', w=61),
-    dict(l='은행·보험·증권', v='24.0%', w=40),
-    dict(l='전문·과학·기술', v='20.8%', w=35),
-    dict(l='교통·물류·운수', v='14.6%', w=24),
-  ], title='블록체인 활용 분야 (공급기업 기준, 복수응답)', note='출처: KISA 2024년도 블록체인 산업 실태조사 결과보고서(국가승인통계 제127017호), 복수응답. 정부 지원사업 규모는 과기정통부·KISA 2024.')}
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
   {sec_head('Problem', '공공기관이 반복해서 겪는 문제')}
-  {cards_wrap([
-    dark_card('문제', '중복 인프라 투자', '기관마다 같은 블록체인·DID를 따로 구축·유지보수합니다.'),
-    dark_card('문제', '분절된 앱 경험', '기관·서비스마다 앱과 인증이 흩어져 사용자 경험이 끊깁니다.'),
-    dark_card('문제', '개인정보 보관 부담', '신원 데이터를 직접 보관하며 반복 인증 부담을 안습니다.'),
-    dark_card('문제', '조달·보안인증 문턱', 'CSAP 없는 서비스는 공공 조달 검토를 통과하기 어렵습니다.'),
-  ], cols=2)}
+  <div class="media-tall">{card_grid([
+    card('중복 인프라 투자', '기관마다 같은 블록체인·DID를 따로 구축하고 유지보수합니다.', kicker='문제 01', media=True),
+    card('분절된 앱 경험', '기관·서비스마다 앱과 인증이 흩어져 사용자 경험이 끊깁니다.', kicker='문제 02', media=True),
+    card('개인정보 보관 부담', '신원 데이터를 직접 보관하며 반복 인증 부담을 안습니다.', kicker='문제 03', media=True),
+    card('조달·보안인증 문턱', 'CSAP 없는 서비스는 공공 조달 검토를 통과하기 어렵습니다.', kicker='문제 04', media=True),
+  ], cols=2)}</div>
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('Features', '직접 구축 없이 도입합니다')}
+<section><div class="shell sec">
+  {sec_head('Features', '직접 구축 없이 도입합니다', 'CSAP 인증을 받은 공동 인프라를 구독형으로 도입해, 예산·기간·운영 부담 없이 시작합니다.')}
   {cards_wrap([
-    dark_card('01', '직접 구축 없이 도입', '예산·기간·보안·운영 부담 없이 구독형으로 시작합니다.'),
-    dark_card('02', '블록체인 서비스 최초 CSAP', '클라우드 보안인증을 획득하고 조달에 등록돼 있습니다.'),
-    dark_card('03', '최대 1주일 내 적용', '신청 4단계를 거쳐 최대 일주일 안에 서비스를 적용합니다.'),
-    dark_card('04', '반복 구축 축소', '기관마다 흩어진 앱·인프라를 공통 인프라로 통합합니다.'),
+    exchange_card('직접 구축 없이 도입', brand='var(--purple-500)', desc='예산·기간·보안·운영 부담 없이 구독형으로 시작합니다.'),
+    exchange_card('블록체인 서비스 최초 CSAP', brand='var(--purple-500)', desc='클라우드 보안인증을 획득하고 조달에 등록돼 있습니다.'),
+    exchange_card('최대 1주일 내 적용', brand='var(--purple-500)', desc='신청 4단계를 거쳐 최대 일주일 안에 서비스를 적용합니다.'),
+    exchange_card('반복 구축 축소', brand='var(--purple-500)', desc='기관마다 흩어진 앱·인프라를 공통 인프라로 통합합니다.'),
   ], cols=2)}
   <div class="rvl" style="margin-top:2rem">
-    <div style="font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); margin-bottom:1rem">기본 제공 기능</div>
+    <div style="font-size:var(--text-16); color:rgba(var(--ink-rgb),.45); margin-bottom:1rem">기본 제공 기능</div>
     {chips(['신원 DID / VC / VP', '지갑', '개인데이터저장소 PDS', '분산저장 BFS'])}
   </div>
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('How to Adopt', '같은 서비스를 여는 데 걸리는 시간')}
-  <ul class="cards-2">
-    <li class="rvl" style="--rvl-y:40px">{dark_card('최소 1년+', '기존 개별 구축', '예산 산정 → 업체 선정 → 견적 → 계약 → 구축', sm=False)}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms">{dark_card('1주일', 'MyID 2.0 공동인프라', '가입 승인 → 결제수단 등록 → 회원가입·설정', sm=False)}</li>
-  </ul>
+<section><div class="shell sec">
+  {sec_head('How to Adopt', '같은 서비스를 여는 데 걸리는 시간', '개별 구축과 공동 인프라 도입의 소요 시간을 비교했습니다.')}
+  <div class="ct-rows">{rows([
+    dict(title='<em class="t-acc">최소 1년+</em> : 기존 개별 구축', desc='예산 산정, 업체 선정, 견적, 계약, 구축 단계를 차례로 거칩니다.'),
+    dict(title='<em class="t-acc">1주일</em> : MyID 2.0 공동 인프라', desc='가입 승인, 결제수단 등록, 회원가입·설정만으로 바로 시작합니다.'),
+  ])}</div>
+</div></section>
+<!-- By the Numbers: 다크 스탯 패널 -->
+<section><div class="shell stats-shell">
+  <div class="stats-panel rvl" style="--rvl-y:40px; --rvl-s:.99">
+    <div class="eyebrow light"><span class="dot"></span>By the Numbers</div>
+    <h2 class="stats-h2" data-line-reveal style="max-width:none"><span class="rvl-line"><span>공공 서비스를 위한<br>검증된 블록체인 인프라</span></span></h2>
+    <ul class="stats-grid sg-2x2">
+      <li class="rvl" style="--rvl-y:20px"><div class="stat-num">최초</div><div class="stat-label">블록체인 서비스 CSAP 인증</div></li>
+      <li class="rvl" style="--rvl-y:20px; --rvl-delay:90ms"><div class="stat-num"><span class="pv-val" data-val="90">0</span>%↓</div><div class="stat-label">자체 구축 대비 비용 절감 (모델 기준)</div></li>
+      <li class="rvl" style="--rvl-y:20px; --rvl-delay:180ms"><div class="stat-num"><span class="pv-val" data-val="20000">0</span>건</div><div class="stat-label">월 기본 포함 건수</div></li>
+      <li class="rvl" style="--rvl-y:20px; --rvl-delay:270ms"><div class="stat-num"><span class="pv-val" data-val="1">0</span>주일</div><div class="stat-label">신청부터 적용까지 소요</div></li>
+    </ul>
+  </div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  {sec_head('By the Numbers', '숫자로 보는 MyID 2.0')}
-  {nums([
-    dict(cap='Security', n='최초', sub='블록체인 서비스 CSAP 인증'),
-    dict(cap='Cost', n='90%↓', sub='자체 구축 대비 비용 절감(모델)'),
-    dict(cap='Included', n='20,000건', sub='월 포함 건수'),
-    dict(cap='Speed', n='1주일', sub='도입 소요'),
-  ], cols=2)}
-  {note('구축형 대비 절감률은 단순 산식(모델) 기준입니다.')}
+  {sec_head('Credentials', '공공·금융 분야에서 검증된 기술력', '파라메타는 CSAP를 비롯한 다양한 인증과 공공기관 도입 경험을 바탕으로, 신뢰할 수 있는 블록체인 인프라를 운영해 왔습니다.')}
+  <div class="cert-row rvl" style="--rvl-y:24px; padding:var(--space-32) 0 0">
+    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">블록체인 서비스 최초 CSAP</div></div>
+    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">기술보증기금 TI-1</div></div>
+    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">혁신금융서비스 지정</div></div>
+  </div>
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('Use Cases', '적용 사례')}
-  {cards_wrap([
-    dark_card('시범·적용', '부산시 — 배터리 여권 플랫폼', '<b>과제</b> · 배터리 제조·운행·정비·사용후 데이터가 흩어져 있고, EU DPP 규정에 맞춰 신뢰할 수 있게 연결·검증해야 함<br><br><b>해결</b> · K-BTF 기반 DID·데이터 인프라로 각 단계 데이터를 연결하고 발급·검증 흐름을 표준화', sm=False),
-    dark_card('시범·적용', 'KOMSA — 선박검사 전자증서 검증', '<b>과제</b> · 선박검사 전자증서는 연 약 56만 회 반복 검증되는 고빈도 공적 문서로 검증 처리 부담이 큼<br><br><b>해결</b> · K-BTF SaaS에 MyID 2.0의 DID/VC 발급·검증과 PDS를 결합해 검증체계 구축(연 약 51,066시간 절감 목표)', sm=False),
-    dark_card('운영 · 행안부 수상', '경상북도 — 도민증 모이소', '<b>과제</b> · 도민 대상 행정서비스에서 반복 신원확인과 비대면 신청 처리가 필요<br><br><b>해결</b> · DID 기반 도민증으로 발급·인증을 제공', sm=False),
-    dark_card('역대 최대 규모', '제주도 — 제주안심코드', '<b>과제</b> · 대규모 방문 인증을 빠르게 처리하면서 개인정보 노출을 줄여야 함<br><br><b>해결</b> · QR 기반 인증으로 6만 업장·218만 이용자·누적 9,100만 건 인증을 운영', sm=False),
-  ], cols=2)}
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
+<section><div class="shell sec">
   {sec_head('FAQ', '자주 묻는 질문')}
   {faq([
-    dict(q='CSAP 인증은 무엇이고 왜 중요한가요', a='클라우드 서비스의 보안을 평가하는 국내 인증입니다. 공공기관이 민간 SaaS를 도입할 때 요구되는 기준이라, 인증이 없으면 조달 검토를 통과하기 어렵습니다.'),
-    dict(q='구축형과 공공 SaaS는 무엇이 다른가요', a='구축형은 기관이 인프라를 직접 만들어 소유·운영합니다. 공공 SaaS는 이미 만들어진 인프라를 구독형으로 이용해 별도 구축 없이 시작합니다.'),
-    dict(q='공공 서비스에 DID가 왜 필요한가요', a='반복 신원확인과 개인정보 보관 부담을 줄입니다. 사용자는 필요한 정보만 선택해 제출하고, 기관은 데이터를 직접 쌓지 않습니다.'),
+    dict(q='CSAP 인증은 무엇이고 왜 중요한가요?', a='클라우드 서비스의 보안을 평가하는 국내 인증입니다. 공공기관이 민간 SaaS를 도입할 때 요구되는 기준이라, 인증이 없으면 조달 검토를 통과하기 어렵습니다.'),
+    dict(q='구축형과 공공 SaaS는 무엇이 다른가요?', a='구축형은 기관이 인프라를 직접 만들어 소유·운영합니다. 공공 SaaS는 이미 만들어진 인프라를 구독형으로 이용해 별도 구축 없이 시작합니다.'),
+    dict(q='공공 서비스에 DID가 왜 필요한가요?', a='반복 신원확인과 개인정보 보관 부담을 줄입니다. 사용자는 필요한 정보만 선택해 제출하고, 기관은 데이터를 직접 쌓지 않습니다.'),
   ])}
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('Solutions', '다른 분야 솔루션')}
-  {routes(SOL_ROUTES, 'solution-gov.html')}
+<section><div class="shell sec">
+  {sec_head('Use Cases', '공공 블록체인 적용 사례', layout='center')}
+  <div class="uc-carousel uc-tall uc-lg">
+    <button class="uc-arrow uc-prev rvl rvl-op" type="button" aria-label="이전 사례"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5L8 12l7 7"/></svg></button>
+    <div class="uc-slides rvl" style="--rvl-y:40px">
+      <article class="uc-slide is-active">
+        <div class="uc-thumb" aria-hidden="true"></div>
+        <h3>부산시 · 배터리 여권 플랫폼</h3>
+        <div class="uc-rows"><div class="uc-row"><span class="uc-flag">과제</span><span>배터리 제조·운행·정비·사용후 데이터가 흩어져 있고, EU DPP 규정에 맞춰 신뢰할 수 있게 연결·검증해야 합니다.</span></div><div class="uc-row"><span class="uc-flag">해결</span><span>K-BTF 기반 DID·데이터 인프라로 각 단계 데이터를 연결하고 발급·검증 흐름을 표준화했습니다.</span></div></div>
+      </article>
+      <article class="uc-slide">
+        <div class="uc-thumb" aria-hidden="true"></div>
+        <h3>KOMSA · 선박검사 전자증서 검증</h3>
+        <div class="uc-rows"><div class="uc-row"><span class="uc-flag">과제</span><span>선박검사 전자증서는 연 약 56만 회 반복 검증되는 고빈도 공적 문서로 검증 처리 부담이 큽니다.</span></div><div class="uc-row"><span class="uc-flag">해결</span><span>K-BTF SaaS에 MyID 2.0의 DID/VC 발급·검증과 PDS를 결합해 검증체계를 구축했습니다 (연 약 51,066시간 절감 목표).</span></div></div>
+      </article>
+      <article class="uc-slide">
+        <div class="uc-thumb" aria-hidden="true"></div>
+        <h3>경상북도 · 도민증 모이소</h3>
+        <div class="uc-rows"><div class="uc-row"><span class="uc-flag">과제</span><span>도민 대상 행정서비스에서 반복 신원확인과 비대면 신청 처리가 필요합니다.</span></div><div class="uc-row"><span class="uc-flag">해결</span><span>DID 기반 도민증으로 발급·인증을 제공했습니다 (행정안전부 수상).</span></div></div>
+      </article>
+      <article class="uc-slide">
+        <div class="uc-thumb" aria-hidden="true"></div>
+        <h3>제주도 · 제주안심코드</h3>
+        <div class="uc-rows"><div class="uc-row"><span class="uc-flag">과제</span><span>대규모 방문 인증을 빠르게 처리하면서 개인정보 노출을 줄여야 합니다.</span></div><div class="uc-row"><span class="uc-flag">해결</span><span>QR 기반 인증으로 6만 업장·218만 이용자·누적 9,100만 건 인증을 운영했습니다 (역대 최대 규모).</span></div></div>
+      </article>
+    </div>
+    <button class="uc-arrow uc-next rvl rvl-op" type="button" aria-label="다음 사례"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+  </div>
 </div></section>
 """)
 
@@ -2974,73 +3016,88 @@ PAGES['solution-cert.html'] = dict(
     h1_lines=['발급부터 공유, 제출처', '검증까지 끝나는', '디지털 증명 인프라'],
     lead='위촉장·수료증·MOU·디지털 배지 등 다양한 증명을 발급·공유·검증할 수 있는 블록체인 기반 디지털 증명 서비스입니다.',
     crumb='Solutions — 증명서',
+    hero_cta='''<div class="phero-rel rvl" style="--rvl-delay:600ms">
+      <p class="phero-rel-t">관련 제품 살펴보기</p>
+      <a class="phero-rel-flag" href="broof.html">Broof</a>
+    </div>''',
     hero_visual='<img src="assets/solutions/hero-test-1.webp" alt="" loading="eager" fetchpriority="high">',
     content=f"""
-<section><div class="shell sec">
-  {sec_head('Product', '이 솔루션을 구성하는 제품')}
-  {chips(['Broof'])}
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('Why Now', '증명서는 발급보다 발급 이후가 더 부담입니다', 'PDF나 이미지 증명서는 제출처가 원본 여부를 확인하기 어렵고, 발급기관은 발급 이후에도 검증 문의·재발급·서버·보안 운영을 계속 안습니다. 증명 하나를 위해 검증 시스템을 따로 만들어 유지하는 구조입니다.')}
-  {bar_chart([
+<section><div class="shell sec sec-top-lg sec-stagger">
+  {sec_head('Why Now', '증명서는 발급보다 발급 이후가 더 부담입니다', 'PDF나 이미지 증명서는 제출처가 원본 여부를 확인하기 어렵고, 발급기관은 발급 이후에도 검증 문의·재발급·서버·보안 운영을 계속 안습니다.')}
+  {lead_p('증명 하나를 위해 검증 시스템을 따로 만들어 유지하는 구조입니다. 이미 정부 전자문서지갑에는 481종의 전자증명서가 올라가 있고, 정부24 회원 약 2천만 명·연계 앱 59개로 증명서 디지털화가 광범위하게 자리 잡았습니다.')}
+  {col_chart([
     dict(l='종이 증서', v='약 5,000원', w=100),
     dict(l='Broof 디지털', v='1,100원', w=22, hi=True),
-  ], title='증명서 건당 비용 비교 (당사 추산 · 모델)', note='당사 추산 예시(모델). 종이 증서 1건당 발급·우편·재발급·검증 인건비를 합산한 보수적 가정. 연 10,000건 가정 시 종이 약 5,000만원 → Broof 약 1,100만원.')}
-  <div style="height:2rem"></div>
-  {nums([
-    dict(cap='발급 가능', n='481종', sub='전자증명서 발급 가능 (’26.5)'),
-    dict(cap='정부24', n='2천만', sub='정부24 회원'),
-    dict(cap='연계', n='59개', sub='연계 공공·민간 앱'),
-  ])}
-  {note('출처: 행정안전부 정부 전자문서지갑(dpaper.kr, ’26.5). 증명서 디지털화가 이미 광범위하게 자리 잡았습니다. Broof는 위촉장·배지 등 기관 자체 증명 영역을 다룹니다.')}
+  ], title='증명서 건당 비용 비교 (당사 추산·모델)', note='<strong>당사 추산 예시(모델)</strong><br>종이 증서 1건당 발급·우편·재발급·검증 인건비를 합산한 보수적 가정입니다. 연 10,000건 기준 종이 약 5,000만원, Broof 약 1,100만원입니다.')}
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
+<section><div class="shell sec">
   {sec_head('Problem', '발급기관이 반복해서 겪는 문제')}
+  <div class="media-tall">{card_grid([
+    card('발급 이후 운영 지속', '검증 문의·재발급·서버·보안 운영이 발급 후에도 계속됩니다.', kicker='문제 01', media=True),
+    card('위변조 확인 어려움', 'PDF·이미지 증명서는 제출처가 원본 여부를 확인하기 어렵습니다.', kicker='문제 02', media=True),
+    card('검증 시스템 구축 부담', '증명마다 검증 시스템을 따로 만들어 유지해야 합니다.', kicker='문제 03', media=True),
+    card('종이 발급·배부 비용', '인쇄·배부·인건비가 건마다 쌓입니다.', kicker='문제 04', media=True),
+  ], cols=2)}</div>
+</div></section>
+<section><div class="shell sec">
+  {sec_head('Features', '발급부터 검증까지 한 흐름으로', '증명 발급·공유·검증을 하나의 서비스로 제공해, 기관이 별도 검증 시스템을 운영하지 않아도 됩니다.')}
   {cards_wrap([
-    dark_card('문제', '발급 이후 운영 지속', '검증 문의·재발급·서버·보안 운영이 발급 후에도 계속됩니다.'),
-    dark_card('문제', '위변조 확인 어려움', 'PDF·이미지 증명서는 제출처가 원본 여부를 확인하기 어렵습니다.'),
-    dark_card('문제', '검증 시스템 구축 부담', '증명마다 검증 시스템을 따로 만들어 유지해야 합니다.'),
-    dark_card('문제', '종이 발급·배부 비용', '인쇄·배부·인건비가 건마다 쌓입니다.'),
-  ], cols=2)}
+    exchange_card('발급–열람–공유–검증을 하나로', brand='var(--purple-500)', desc='증명 발급부터 제출·검증까지 한 흐름으로 제공합니다.'),
+    exchange_card('QR·bf-ID로 즉시 진위 확인', brand='var(--purple-500)', desc='제출처가 원본 진위를 별도 문의 없이 바로 확인합니다.'),
+    exchange_card('별도 시스템 없이 장기 검증', brand='var(--purple-500)', desc='기관이 검증 시스템을 따로 구축·운영하지 않아도 됩니다.'),
+  ], cols=3)}
+  <div class="rvl" style="margin-top:2rem">
+    <div style="font-size:var(--text-16); color:rgba(var(--ink-rgb),.45); margin-bottom:1rem">발급 가능 증명</div>
+    {chips(['위촉장', '수료증', 'MOU', '디지털 배지'])}
+  </div>
+</div></section>
+<!-- By the Numbers: 다크 스탯 패널 -->
+<section><div class="shell stats-shell">
+  <div class="stats-panel rvl" style="--rvl-y:40px; --rvl-s:.99">
+    <div class="eyebrow light"><span class="dot"></span>By the Numbers</div>
+    <h2 class="stats-h2" data-line-reveal style="max-width:none"><span class="rvl-line"><span>현장에서 검증된<br>블록체인 증명 인프라</span></span></h2>
+    <ul class="stats-grid sg-2x2">
+      <li class="rvl" style="--rvl-y:20px"><div class="stat-num">2019년~</div><div class="stat-label">운영 중인 블록체인 증명 서비스</div></li>
+      <li class="rvl" style="--rvl-y:20px; --rvl-delay:90ms"><div class="stat-num"><span class="pv-val" data-val="90000">0</span>건+</div><div class="stat-label">누적 블록체인 증명 발급</div></li>
+      <li class="rvl" style="--rvl-y:20px; --rvl-delay:180ms"><div class="stat-num"><span class="pv-val" data-val="20">0</span>곳+</div><div class="stat-label">누적 도입 기관</div></li>
+      <li class="rvl" style="--rvl-y:20px; --rvl-delay:270ms"><div class="stat-num">정부 위원회 첫</div><div class="stat-label">블록체인 위촉장 발급 사례</div></li>
+    </ul>
+  </div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  {sec_head('Features', '주요 기능')}
-  {chips(['위촉장', '수료증', 'MOU', '디지털 배지'])}
-  <div style="height:1.5rem"></div>
-  {rows([
-    dict(title='발급–열람–공유–검증을 하나의 서비스로', desc='증명 발급부터 제출·검증까지 한 흐름으로 제공합니다.'),
-    dict(title='QR·bf-ID로 즉시 진위 확인', desc='제출처가 원본 진위를 바로 확인합니다.'),
-    dict(title='별도 검증 시스템 없이 장기 검증', desc='기관이 검증 시스템을 따로 구축·운영하지 않아도 됩니다.'),
-  ])}
+  {sec_head('Credentials', '공공·민간에서 검증된 기술력', '파라메타는 다양한 인증과 기관 도입 경험을 바탕으로, 신뢰할 수 있는 블록체인 증명 인프라를 운영해 왔습니다.')}
+  <div class="cert-row rvl" style="--rvl-y:24px; padding:var(--space-32) 0 0">
+    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">기술보증기금 TI-1</div></div>
+    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">CSAP 인증</div></div>
+    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">혁신금융서비스 지정</div></div>
+  </div>
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('By the Numbers', '숫자로 보는 Broof')}
-  {nums([
-    dict(cap='Since', n='2019년~', sub='운영 중인 블록체인 증명 서비스'),
-    dict(cap='Issued', n='90,000건+', sub='누적 블록체인 증명 발급'),
-    dict(cap='Adopted', n='20곳+', sub='누적 도입 기관'),
-    dict(cap='First', n='정부 위원회 첫', sub='블록체인 위촉장 사례'),
-  ])}
-  {note('누적 발급·도입 기관 수는 Broof 제품 기준. 종이 대비 절감률은 단순 산식(모델) 기준입니다.')}
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('Use Cases', '적용 사례')}
-  {cards_wrap([
-    dark_card('정부 위원회 첫', '국가AI전략위원회 — 위촉증', '<b>과제</b> · 위원 위촉을 종이 없이 신뢰할 수 있는 형태로 발급·검증해야 함<br><br><b>해결</b> · 180여명에게 블록체인 기반 위촉증을 발급', sm=False),
-    dark_card('운영', '대학·연구기관 — 수료증·학습 증명', '<b>과제</b> · 수료·이수 증명을 제출처가 진위 확인할 수 있어야 함<br><br><b>해결</b> · QR·bf-ID 기반 발급·검증으로 원본 무결성을 제공', sm=False),
-  ], cols=2)}
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
+<section><div class="shell sec">
   {sec_head('FAQ', '자주 묻는 질문')}
   {faq([
-    dict(q='QR·bf-ID 검증은 어떻게 동작하나요', a='발급된 증명에 연결된 QR 또는 bf-ID로 제출처가 원본 여부를 즉시 확인합니다. 발급기관에 따로 문의하지 않아도 됩니다.'),
-    dict(q='발급기관은 검증 시스템을 따로 만들어야 하나요', a='아니요. Broof가 발급·공유·검증 흐름을 제공하므로 기관이 별도 검증 시스템을 구축·운영하지 않습니다.'),
-    dict(q='어떤 증명을 발급할 수 있나요', a='위촉장, 수료증, MOU, 디지털 배지 등 다양한 증명을 발급할 수 있습니다.'),
+    dict(q='QR·bf-ID 검증은 어떻게 동작하나요?', a='발급된 증명에 연결된 QR 또는 bf-ID로 제출처가 원본 여부를 즉시 확인합니다. 발급기관에 따로 문의하지 않아도 됩니다.'),
+    dict(q='발급기관은 검증 시스템을 따로 만들어야 하나요?', a='아니요. Broof가 발급·공유·검증 흐름을 제공하므로 기관이 별도 검증 시스템을 구축·운영하지 않습니다.'),
+    dict(q='어떤 증명을 발급할 수 있나요?', a='위촉장, 수료증, MOU, 디지털 배지 등 다양한 증명을 발급할 수 있습니다.'),
   ])}
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('Solutions', '다른 분야 솔루션')}
-  {routes(SOL_ROUTES, 'solution-cert.html')}
+<section><div class="shell sec">
+  {sec_head('Use Cases', '디지털 증명 적용 사례', layout='center')}
+  <div class="uc-carousel uc-tall uc-lg">
+    <button class="uc-arrow uc-prev rvl rvl-op" type="button" aria-label="이전 사례"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5L8 12l7 7"/></svg></button>
+    <div class="uc-slides rvl" style="--rvl-y:40px">
+      <article class="uc-slide is-active">
+        <div class="uc-thumb" aria-hidden="true"></div>
+        <h3>국가AI전략위원회 · 위촉증</h3>
+        <div class="uc-rows"><div class="uc-row"><span class="uc-flag">과제</span><span>위원 위촉을 종이 없이 신뢰할 수 있는 형태로 발급·검증해야 합니다.</span></div><div class="uc-row"><span class="uc-flag">해결</span><span>180여 명에게 블록체인 기반 위촉증을 발급했습니다 (정부 위원회 첫 사례).</span></div></div>
+      </article>
+      <article class="uc-slide">
+        <div class="uc-thumb" aria-hidden="true"></div>
+        <h3>대학·연구기관 · 수료증·학습 증명</h3>
+        <div class="uc-rows"><div class="uc-row"><span class="uc-flag">과제</span><span>수료·이수 증명을 제출처가 진위 확인할 수 있어야 합니다.</span></div><div class="uc-row"><span class="uc-flag">해결</span><span>QR·bf-ID 기반 발급·검증으로 원본 무결성을 제공했습니다.</span></div></div>
+      </article>
+    </div>
+    <button class="uc-arrow uc-next rvl rvl-op" type="button" aria-label="다음 사례"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+  </div>
 </div></section>
 """)
 
@@ -3052,72 +3109,92 @@ PAGES['solution-exchange.html'] = dict(
     h1_lines=['거래소를 만들지 않아도,', '서비스 안에 거래 기능을 넣습니다'],
     lead='PortX는 여러 거래소의 유동성과 거래 화면을 우리 서비스 안으로 그대로 가져오는 솔루션입니다. 매칭엔진·유동성·지갑·보안을 직접 만들지 않아도, 우리 브랜드를 단 디지털자산 거래 서비스를 빠르게 시작할 수 있습니다.',
     crumb='Solutions — 화이트라벨 거래소',
+    hero_cta='''<div class="phero-rel rvl" style="--rvl-delay:600ms">
+      <p class="phero-rel-t">관련 제품 살펴보기</p>
+      <a class="phero-rel-flag" href="portx.html">PortX</a>
+    </div>''',
     hero_visual='<img src="assets/solutions/hero-test-2.webp" alt="" loading="eager" fetchpriority="high">',
     content=f"""
-<section><div class="shell sec">
-  {sec_head('Product', '이 솔루션을 구성하는 제품')}
-  {chips(['PortX'])}
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('Why Now', '사용자는 거래를 위해 외부 거래소로 빠져나갑니다', '국내 가상자산 이용자는 2023년 말 645만 명에서 2024년 말 970만 명으로 빠르게 늘었습니다. 이용자를 이미 확보한 서비스라도 자체 거래 기능이 없으면, 사용자는 거래를 하려고 외부 거래소로 빠져나갑니다. 그만큼 수수료와 사용자 관계를 외부에 내주게 됩니다. 그렇다고 직접 거래소를 만들자니 유동성·API·지갑·보안 부담이 큽니다.')}
-  {bar_chart([
+<section><div class="shell sec sec-top-lg sec-stagger">
+  {sec_head('Why Now', '사용자는 거래를 위해 외부 거래소로 빠져나갑니다', '국내 가상자산 이용자는 2023년 말 645만 명에서 2024년 말 970만 명으로 빠르게 늘었습니다. 이용자를 이미 확보한 서비스라도 자체 거래 기능이 없으면, 사용자는 거래를 하려고 외부 거래소로 빠져나갑니다.')}
+  {lead_p('그만큼 수수료와 사용자 관계를 외부에 내주게 됩니다. 그렇다고 직접 거래소를 만들자니 유동성·API·지갑·보안 부담이 큽니다.')}
+  <div class="colc-duo">
+  {col_chart([
     dict(l='2023년 말', v='645만명', w=66),
     dict(l='2024년 6월', v='778만명', w=80),
     dict(l='2024년 말', v='970만명', w=100, hi=True),
-  ], title='국내 가상자산 거래가능 이용자 수', note='출처: 금융정보분석원(FIU) 가상자산사업자 실태조사. 신고 사업자 기준 거래가능 이용자.')}
-  <div style="height:2rem"></div>
-  {nums([
-    dict(cap='유출', n='약 20조원', sub='국내에서 해외로 빠져나간 가상자산 (’22 하반기)'),
-    dict(cap='출금', n='30.6조원', sub='국내 거래소 총 외부 출금액 (같은 기간)'),
-  ], cols=2)}
-  {note('출처: 금융정보분석원(FIU) 가상자산사업자 실태조사(’22 하반기). 자금이 국내 서비스 밖으로 빠져나간다는 근거(실적).')}
+  ], title='국내 가상자산 거래가능 이용자 수', note='<strong>출처: 금융정보분석원(FIU) 가상자산사업자 실태조사</strong><br>신고 사업자 기준 거래가능 이용자 수이며, 빠르게 증가하고 있습니다.')}
+  {col_chart([
+    dict(l='해외 유출', v='약 20조원', w=65),
+    dict(l='총 외부 출금', v='30.6조원', w=100, hi=True),
+  ], title='국내에서 빠져나간 가상자산 (2022 하반기)', note='<strong>출처: 금융정보분석원(FIU) 가상자산사업자 실태조사</strong><br>같은 기간 자금이 국내 서비스 밖으로 대규모 이동했습니다.')}
+  </div>
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
+<section><div class="shell sec">
   {sec_head('Problem', '사업자가 마주하는 문제')}
+  <div class="media-tall">{card_grid([
+    card('사용자 외부 이탈', '거래하려는 사용자가 외부 거래소로 빠져 수수료·관계를 잃습니다.', kicker='문제 01', media=True),
+    card('직접 구축 부담', '거래소를 만들려면 유동성·API·지갑·보안·리스크가 부담입니다.', kicker='문제 02', media=True),
+    card('온보딩 마찰', 'API key 발급·입력 과정에서 사용자가 이탈합니다.', kicker='문제 03', media=True),
+    card('체인·거래소 파편화', '여러 체인·거래소를 각각 연동하고 유지해야 합니다.', kicker='문제 04', media=True),
+  ], cols=2)}</div>
+</div></section>
+<section><div class="shell sec">
+  {sec_head('Features', '거래 경험을 서비스 안으로', '외부 거래소의 유동성과 거래 기능을 자사 브랜드 안으로 연결합니다.')}
   {cards_wrap([
-    dark_card('문제', '사용자 외부 이탈', '거래하려는 사용자가 외부 거래소로 빠져 수수료·관계를 잃습니다.'),
-    dark_card('문제', '직접 구축 부담', '거래소를 만들려면 유동성·API·지갑·보안·리스크가 부담입니다.'),
-    dark_card('문제', '온보딩 마찰', 'API key 발급·입력 과정에서 사용자가 이탈합니다.'),
-    dark_card('문제', '체인·거래소 파편화', '여러 체인·거래소를 각각 연동·유지해야 합니다.'),
+    exchange_card('거래소 연동', brand='var(--purple-500)', desc='외부 CEX·DEX 유동성을 고객 서비스로 연결합니다.'),
+    exchange_card('Smart Access · QR', brand='var(--purple-500)', desc='API key 입력 없이 QR 한 번으로 거래소를 연결합니다.'),
+    exchange_card('전문 거래 화면·성과 분석', brand='var(--purple-500)', desc='전문 거래 UX와 PnL·성과 분석을 제공합니다.'),
+    exchange_card('비수탁 보안 · BTP', brand='var(--purple-500)', desc='비수탁 흐름과 체인 간 연결(BTP)로 확장합니다.'),
   ], cols=2)}
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('Features', '주요 기능')}
-  {cards_wrap([
-    dark_card('01', '거래소 연동', '외부 CEX/DEX 유동성을 고객 서비스로 연결합니다.'),
-    dark_card('02', 'Smart Access · QR', 'API key 입력 없이 QR 한 번으로 거래소를 연결합니다.'),
-    dark_card('03', '전문 거래 화면·성과 분석', '전문 거래 UX와 PnL·성과 분석을 제공합니다.'),
-    dark_card('04', '비수탁 보안 · BTP', '비수탁 흐름과 체인 간 연결(BTP)로 확장합니다.'),
-  ], cols=2)}
+<!-- By the Numbers: 다크 스탯 패널 -->
+<section><div class="shell stats-shell">
+  <div class="stats-panel rvl" style="--rvl-y:40px; --rvl-s:.99">
+    <div class="eyebrow light"><span class="dot"></span>By the Numbers</div>
+    <h2 class="stats-h2" data-line-reveal style="max-width:none"><span class="rvl-line"><span>거래소 구축 없이 시작하는<br>화이트라벨 거래 인프라</span></span></h2>
+    <ul class="stats-grid sg-2x2">
+      <li class="rvl" style="--rvl-y:20px"><div class="stat-num"><span class="pv-val" data-val="9">0</span>개 거래소</div><div class="stat-label">연동 노출 가능</div></li>
+      <li class="rvl" style="--rvl-y:20px; --rvl-delay:90ms"><div class="stat-num">QR 1회</div><div class="stat-label">API key 없이 수 초 만에 연결</div></li>
+      <li class="rvl" style="--rvl-y:20px; --rvl-delay:180ms"><div class="stat-num">78~94%</div><div class="stat-label">직접 연동 대비 기간 단축 (모델 기준)</div></li>
+      <li class="rvl" style="--rvl-y:20px; --rvl-delay:270ms"><div class="stat-num">비수탁</div><div class="stat-label">자산 보관을 최소화한 구조</div></li>
+    </ul>
+  </div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  {sec_head('By the Numbers', '숫자로 보는 PortX')}
-  {nums([
-    dict(cap='Exchanges', n='9개 거래소', sub='연동 노출 가능'),
-    dict(cap='Access', n='QR 1회', sub='API key 없이 수 초 연결'),
-    dict(cap='Speed', n='78~94%', sub='직접 연동 대비 기간 단축(모델)'),
-    dict(cap='Security', n='비수탁', sub='자산 보관 최소화 구조'),
-  ])}
-  {note('78~94%는 9개 거래소 직접 연동 대비 기간 단축 모델. BTP(인터체인)는 상호운용 기반 기술입니다.')}
+  {sec_head('Credentials', '공공·금융 분야에서 검증된 기술력', '파라메타는 다양한 인증과 산업 협업 경험을 바탕으로, 안정적인 디지털자산 거래 인프라를 구축해 왔습니다.')}
+  <div class="cert-row rvl" style="--rvl-y:24px; padding:var(--space-32) 0 0">
+    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">기술보증기금 TI-1</div></div>
+    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">CSAP 인증</div></div>
+    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">혁신금융서비스 지정</div></div>
+  </div>
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('Use Cases', '적용 사례')}
-  {cards_wrap([
-    dark_card('적용', 'Supercycl — Pre-OBT', '<b>과제</b> · 자사 서비스 안에서 거래 경험을 빠르게 검증해야 함<br><br><b>해결</b> · PortX 기반 거래 연동으로 Pre-OBT 조기 사용자 확보', sm=False),
-    dark_card('적용', 'TaaS — 디지털자산 세금정산', '<b>과제</b> · 여러 거래소에 흩어진 거래 내역을 모아 예상 세금을 계산해야 함<br><br><b>해결</b> · PortX Smart Access로 외부 거래소 계정 연결을 간소화해, 세금 계산에 필요한 거래 정보를 서비스 안에서 바로 활용', sm=False),
-  ], cols=2)}
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
+<section><div class="shell sec">
   {sec_head('FAQ', '자주 묻는 질문')}
   {faq([
-    dict(q='화이트라벨 하이브리드 거래소가 무엇인가요', a='거래소를 직접 만들지 않고, 외부 거래소의 유동성과 거래 화면을 고객 브랜드 안에 붙이는 방식입니다.'),
-    dict(q='직접 거래소를 만드는 것과 무엇이 다른가요', a='유동성·API·지갑·보안을 반복 개발하지 않고, 표준 거래 인프라로 빠르게 시작합니다.'),
-    dict(q='BTP는 무엇인가요', a='서로 다른 블록체인 사이의 메시지·자산 이동을 지원하는 인터체인 기술입니다.'),
+    dict(q='화이트라벨 하이브리드 거래소가 무엇인가요?', a='거래소를 직접 만들지 않고, 외부 거래소의 유동성과 거래 화면을 고객 브랜드 안에 붙이는 방식입니다.'),
+    dict(q='직접 거래소를 만드는 것과 무엇이 다른가요?', a='유동성·API·지갑·보안을 반복 개발하지 않고, 표준 거래 인프라로 빠르게 시작합니다.'),
+    dict(q='BTP는 무엇인가요?', a='서로 다른 블록체인 사이의 메시지·자산 이동을 지원하는 인터체인 기술입니다.'),
   ])}
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('Solutions', '다른 분야 솔루션')}
-  {routes(SOL_ROUTES, 'solution-exchange.html')}
+<section><div class="shell sec">
+  {sec_head('Use Cases', '화이트라벨 거래 적용 사례', layout='center')}
+  <div class="uc-carousel uc-tall uc-lg">
+    <button class="uc-arrow uc-prev rvl rvl-op" type="button" aria-label="이전 사례"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5L8 12l7 7"/></svg></button>
+    <div class="uc-slides rvl" style="--rvl-y:40px">
+      <article class="uc-slide is-active">
+        <div class="uc-thumb" aria-hidden="true"></div>
+        <h3>Supercycl · Pre-OBT</h3>
+        <div class="uc-rows"><div class="uc-row"><span class="uc-flag">과제</span><span>자사 서비스 안에서 거래 경험을 빠르게 검증해야 합니다.</span></div><div class="uc-row"><span class="uc-flag">해결</span><span>PortX 기반 거래 연동으로 Pre-OBT 단계에서 조기 사용자를 확보했습니다.</span></div></div>
+      </article>
+      <article class="uc-slide">
+        <div class="uc-thumb" aria-hidden="true"></div>
+        <h3>TaaS · 디지털자산 세금정산</h3>
+        <div class="uc-rows"><div class="uc-row"><span class="uc-flag">과제</span><span>여러 거래소에 흩어진 거래 내역을 모아 예상 세금을 계산해야 합니다.</span></div><div class="uc-row"><span class="uc-flag">해결</span><span>PortX Smart Access로 외부 거래소 계정 연결을 간소화해, 세금 계산에 필요한 거래 정보를 서비스 안에서 바로 활용했습니다.</span></div></div>
+      </article>
+    </div>
+    <button class="uc-arrow uc-next rvl rvl-op" type="button" aria-label="다음 사례"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+  </div>
 </div></section>
 """)
 
@@ -3129,68 +3206,87 @@ PAGES['solution-data.html'] = dict(
     h1_lines=['개인정보를 직접 쌓지 않고,', '사용자가 통제하게 만드는', '데이터 인프라'],
     lead='개인정보를 다루는 서비스일수록 수집·보관·동의 관리·유출 대응 부담이 큽니다. MyID는 사용자가 자기 데이터를 직접 통제해 필요한 곳에 필요한 만큼만 제출하도록 설계된 DID 기반 신원·데이터 인프라입니다. PDS·BFS·선택적 공개로 서비스가 개인정보를 떠안지 않게 합니다.',
     crumb='Solutions — 데이터주권',
+    hero_cta='''<div class="phero-rel rvl" style="--rvl-delay:600ms">
+      <p class="phero-rel-t">관련 제품 살펴보기</p>
+      <a class="phero-rel-flag" href="myid.html">MyID</a>
+    </div>''',
     hero_visual='<img src="assets/solutions/hero-test-1.webp" alt="" loading="eager" fetchpriority="high">',
     content=f"""
+<section><div class="shell sec sec-top-lg sec-stagger">
+  {sec_head('Why Now', '데이터는 사용자 중심으로 움직이기 시작했습니다', '마이데이터에서 시작된 ‘사용자가 자기 데이터를 옮기고 통제하는’ 흐름이 의료·통신 등 전 분야로 퍼지고 있습니다. 동시에 개인정보를 많이 쌓아둘수록 유출·규제·동의 관리 부담이 커집니다.')}
+  {lead_p('데이터를 떠안는 대신 사용자가 통제하게 하는 구조가 점점 유리해지고 있습니다.')}
+  <div class="colc-duo">
+  {col_chart([
+    dict(l='2023년', v='0.8억', w=48),
+    dict(l='2024년', v='1.2억', w=73),
+    dict(l='2025.5', v='1.65억', w=100, hi=True),
+  ], title='마이데이터 서비스 이용 (누적)', note='<strong>출처: 금융위원회 보도자료(2025.6, 마이데이터 2.0)</strong><br>14세 이상 국민 1인당 평균 3.5개 서비스를 이용하며, 데이터 이동이 일상화됐습니다.')}
+  {col_chart([
+    dict(l='누적 정보 전송', v='1조 1,430억 건', w=100, hi=True),
+    dict(l='국내 데이터산업', v='30.7조원', w=62),
+  ], title='데이터 이동·시장 규모', note='<strong>출처: 금융위·K-DATA 2024 데이터산업 현황조사</strong><br>데이터가 실제로 대량 이동하면서 안전한 보관·검증 수요가 함께 커지고 있습니다.')}
+  </div>
+</div></section>
 <section><div class="shell sec">
-  {sec_head('Product', '이 솔루션을 구성하는 제품')}
-  {chips(['MyID'])}
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('Why Now', '데이터는 사용자 중심으로 움직이기 시작했습니다')}
-  {lead_p("마이데이터에서 시작된 ‘사용자가 자기 데이터를 옮기고 통제하는’ 흐름이 의료·통신 등 전 분야로 퍼지고 있습니다. 동시에 개인정보를 많이 쌓아둘수록 유출·규제·동의 관리 부담이 커집니다. 데이터를 떠안는 대신 사용자가 통제하게 하는 구조가 점점 유리해지고 있습니다.")}
-  {nums([
-    dict(cap='이용', n='약 1.65억', sub='마이데이터 서비스 이용 (’25.5)'),
-    dict(cap='1인당', n='3.5개', sub='14세 이상 국민 1인당 이용 서비스 수'),
-    dict(cap='전송', n='1조 1,430억 건', sub='마이데이터 누적 정보 전송 (’25.5)'),
-    dict(cap='시장', n='30.7조원', sub='국내 데이터산업 시장 (2024)'),
-  ])}
-  {note('출처: 금융위원회 보도자료(’25.6, 마이데이터 2.0)·K-DATA 2024 데이터산업 현황조사(실적). 데이터가 실제로 대량 이동하고 있어 안전한 보관·검증 수요가 함께 커집니다.')}
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
   {sec_head('Problem', '개인정보를 다루는 서비스가 마주하는 문제')}
+  <div class="media-tall">{card_grid([
+    card('보관 리스크', '개인정보를 직접 쌓아둘수록 유출 사고와 과징금·신뢰 하락 부담이 커집니다.', kicker='문제 01', media=True),
+    card('반복 수집·동의 관리', '서비스마다 같은 정보를 다시 받고 동의를 관리하는 비용이 쌓입니다.', kicker='문제 02', media=True),
+    card('사용자 통제 요구', '전송요구권 등 사용자가 자기 데이터를 옮기고 지우라는 요구에 대응해야 합니다.', kicker='문제 03', media=True),
+    card('위·변조 검증', '받은 데이터가 진짜인지, 바뀌지 않았는지 확인해야 합니다.', kicker='문제 04', media=True),
+  ], cols=2)}</div>
+</div></section>
+<section><div class="shell sec">
+  {sec_head('Features', '개인정보를 떠안지 않는 구조', '데이터를 사용자 통제 아래 두고, 서비스는 필요한 사실만 검증합니다.')}
   {cards_wrap([
-    dark_card('문제', '보관 리스크', '개인정보를 직접 쌓아둘수록 유출 사고와 과징금·신뢰 하락 부담이 커집니다.'),
-    dark_card('문제', '반복 수집·동의 관리', '서비스마다 같은 정보를 다시 받고 동의를 관리하는 비용이 쌓입니다.'),
-    dark_card('문제', '사용자 통제 요구', '전송요구권 등 사용자가 자기 데이터를 옮기고 지우라는 요구에 대응해야 합니다.'),
-    dark_card('문제', '위·변조 검증', '받은 데이터가 진짜인지, 바뀌지 않았는지 확인해야 합니다.'),
+    exchange_card('PDS · 개인데이터저장소', brand='var(--purple-500)', desc='데이터를 사용자 통제 아래 두고, 기관 보관 부담을 줄입니다.'),
+    exchange_card('BFS · 분산 저장', brand='var(--purple-500)', desc='대용량 데이터를 분산 저장해 무결성과 가용성을 확보합니다.'),
+    exchange_card('선택 공개 (ZK)', brand='var(--purple-500)', desc='생년월일 대신 성인 여부만처럼, 필요한 사실만 증명하고 나머지는 감춥니다.'),
+    exchange_card('MyID 지갑·API', brand='var(--purple-500)', desc='별도 인증 앱 없이 API 연결만으로 신원·데이터를 발급·보관·제출·검증합니다.'),
   ], cols=2)}
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('Features', '주요 기능')}
-  {cards_wrap([
-    dark_card('PDS', '개인데이터저장소', '데이터를 사용자 통제 아래 두고, 기관 보관 부담을 줄입니다.'),
-    dark_card('BFS', '분산 저장', '대용량 데이터를 분산 저장해 무결성과 가용성을 확보합니다.'),
-    dark_card('ZK', '선택 공개 (Selective Disclosure)', '생년월일 대신 성인 여부만처럼, 필요한 사실만 증명하고 나머지는 감춥니다.'),
-    dark_card('API', 'MyID 지갑·API', '별도 인증 앱 없이 API 연결만으로 서비스 안에서 신원·데이터를 발급·보관·제출·검증합니다.'),
-  ], cols=2)}
+<!-- By the Numbers: 다크 스탯 패널 -->
+<section><div class="shell stats-shell">
+  <div class="stats-panel rvl" style="--rvl-y:40px; --rvl-s:.99">
+    <div class="eyebrow light"><span class="dot"></span>By the Numbers</div>
+    <h2 class="stats-h2" data-line-reveal style="max-width:none"><span class="rvl-line"><span>국책 R&D로 검증된<br>분산 저장 인프라</span></span></h2>
+    <ul class="stats-grid sg-2x2">
+      <li class="rvl" style="--rvl-y:20px"><div class="stat-num">2021~2025</div><div class="stat-label">국책 R&D 기반 BFS (IITP·ETRI 공동)</div></li>
+      <li class="rvl" style="--rvl-y:20px; --rvl-delay:90ms"><div class="stat-num"><span class="pv-val" data-val="218">0</span>만 명</div><div class="stat-label">제주안심코드 누적 이용자</div></li>
+      <li class="rvl" style="--rvl-y:20px; --rvl-delay:180ms"><div class="stat-num"><span class="pv-val" data-val="9100">0</span>만 건</div><div class="stat-label">제주안심코드 누적 인증</div></li>
+      <li class="rvl" style="--rvl-y:20px; --rvl-delay:270ms"><div class="stat-num">위변조 불가</div><div class="stat-label">해시는 온체인, 원본은 분산 노드</div></li>
+    </ul>
+  </div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  {sec_head('By the Numbers', '숫자로 보는 Core Storage')}
-  {nums([
-    dict(cap='R&D', n='2021~2025', sub='국책 R&D 기반 BFS (IITP·ETRI 공동)'),
-    dict(cap='Users', n='218만 명', sub='제주안심코드 누적 이용자'),
-    dict(cap='Auth', n='9,100만 건', sub='제주안심코드 누적 인증'),
-    dict(cap='Integrity', n='위변조 불가', sub='해시는 온체인, 원본은 분산 노드'),
-  ])}
-  {note('BFS 기반 기술은 IITP 국책 R&D 과제(2021-0-00136, ETRI 공동)로 개발됐고, 제주 스마트시티에서 교통·어류질병·드론 해양환경 모니터링으로 실증됐습니다(R&D 실증).')}
+  {sec_head('Credentials', '공공·연구 분야에서 검증된 기술력', '파라메타는 국책 R&D와 공공 실증을 바탕으로, 신뢰할 수 있는 신원·데이터 인프라를 운영해 왔습니다.')}
+  <div class="cert-row rvl" style="--rvl-y:24px; padding:var(--space-32) 0 0">
+    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">IITP 국책 R&D</div></div>
+    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">CSAP 인증</div></div>
+    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">혁신금융서비스 지정</div></div>
+  </div>
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('Use Cases', '적용 사례')}
-  {cards_wrap([
-    dark_card('공개 · DID·VC·PDS', '부산시 배터리여권 플랫폼 (DPP)', '<b>과제</b> · 전기차 배터리의 제조·운행·정비·중고거래·재활용 데이터가 흩어져 있고, EU 배터리 규제(DPP)에 맞춰 출처·이력·무결성을 증명해야 함<br><br><b>해결</b> · DID·VC·PDS를 결합해 참여자 신원과 데이터 주권을 보장하는 데이터 스페이스로 배터리 생애 데이터를 기록·관리(MyID 2.0이 최초 적용된 공공 인프라 사례)', sm=False),
-  ], cols=2)}
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
+<section><div class="shell sec">
   {sec_head('FAQ', '자주 묻는 질문')}
   {faq([
-    dict(q='PDS는 무엇인가요', a='개인데이터저장소로, 데이터를 기관이 아니라 사용자 통제 아래 두는 저장 방식입니다.'),
-    dict(q='BFS는 무엇인가요', a='데이터를 여러 곳에 분산 저장해 무결성과 가용성을 확보하는 분산저장 기술입니다.'),
-    dict(q='데이터 무결성은 어떻게 보장하나요', a='파일 원본은 분산 노드에, 해시는 블록체인에 남깁니다. 하나라도 바뀌면 즉시 드러나는 구조입니다.'),
+    dict(q='PDS는 무엇인가요?', a='개인데이터저장소로, 데이터를 기관이 아니라 사용자 통제 아래 두는 저장 방식입니다.'),
+    dict(q='BFS는 무엇인가요?', a='데이터를 여러 곳에 분산 저장해 무결성과 가용성을 확보하는 분산저장 기술입니다.'),
+    dict(q='데이터 무결성은 어떻게 보장하나요?', a='파일 원본은 분산 노드에, 해시는 블록체인에 남깁니다. 하나라도 바뀌면 즉시 드러나는 구조입니다.'),
   ])}
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('Solutions', '다른 분야 솔루션')}
-  {routes(SOL_ROUTES, 'solution-data.html')}
+<section><div class="shell sec">
+  {sec_head('Use Cases', '데이터주권 적용 사례', layout='center')}
+  <div class="uc-carousel uc-tall uc-lg">
+    <button class="uc-arrow uc-prev rvl rvl-op" type="button" aria-label="이전 사례"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5L8 12l7 7"/></svg></button>
+    <div class="uc-slides rvl" style="--rvl-y:40px">
+      <article class="uc-slide is-active">
+        <div class="uc-thumb" aria-hidden="true"></div>
+        <h3>부산시 · 배터리여권 플랫폼 (DPP)</h3>
+        <div class="uc-rows"><div class="uc-row"><span class="uc-flag">과제</span><span>전기차 배터리의 제조·운행·정비·중고거래·재활용 데이터가 흩어져 있고, EU 배터리 규제(DPP)에 맞춰 출처·이력·무결성을 증명해야 합니다.</span></div><div class="uc-row"><span class="uc-flag">해결</span><span>DID·VC·PDS를 결합해 참여자 신원과 데이터 주권을 보장하는 데이터 스페이스로 배터리 생애 데이터를 기록·관리했습니다 (MyID 2.0 최초 적용 공공 인프라 사례).</span></div></div>
+      </article>
+    </div>
+    <button class="uc-arrow uc-next rvl rvl-op" type="button" aria-label="다음 사례"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+  </div>
 </div></section>
 """)
 
@@ -3199,78 +3295,88 @@ PAGES['solution-settlement.html'] = dict(
     title='결제·정산 솔루션 | PARAMETA',
     desc='결제·정산을 자동화하고 자금 흐름을 통제합니다. 은행망과 블록체인을 잇는 미들웨어 ParaSta. Dual-Rail 도입, 폐쇄형 정산토큰에서 스테이블코인으로 2단계 전환.',
     eyebrow='Solutions — 결제·정산',
-    h1_lines=['결제·정산을 자동화하고,', '자금 흐름을 통제합니다'],
-    lead='ParaSta는 은행망과 블록체인을 잇는 미들웨어로, 환전·송금·정산의 여러 단계를 단일 API로 처리합니다. 기존 결제 레일은 그대로 두고 정산·대사·통제 레이어만 얹어(Dual-Rail), 규제 부담이 적은 폐쇄형 정산토큰으로 시작해 필요할 때 스테이블코인으로 확장합니다.',
+    h1_lines=['결제·정산을 자동화하고', '자금 흐름을 통제합니다'],
+    lead='ParaSta는 은행망과 블록체인을 연결해 환전, 송금, 정산을 단일 API로 처리합니다. 기존 결제망은 유지하면서 정산, 대사, 통제 기능을 더하고, 폐쇄형 정산토큰부터 스테이블코인까지 규제와 사업 환경에 맞춰 단계적으로 확장할 수 있습니다.',
     crumb='Solutions — 결제·정산',
+    hero_cta='''<div class="phero-rel rvl" style="--rvl-delay:600ms">
+      <p class="phero-rel-t">관련 제품 살펴보기</p>
+      <a class="phero-rel-flag" href="parasta.html">ParaSta</a>
+    </div>''',
     hero_visual='<img src="assets/solutions/hero-test-2.webp" alt="" loading="eager" fetchpriority="high">',
     content=f"""
-<section><div class="shell sec">
-  {sec_head('Product', '이 솔루션을 구성하는 제품')}
-  {chips(['ParaSta'])}
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('Why Now', '정산은 이미 디지털로 움직입니다 — 다음은 투명성과 통제입니다', '국내 디지털 정산은 이미 하루 약 1조 원 규모로 움직입니다(간편지급 기준). 규모가 커질수록 어려운 건 발행이 아니라 정산의 투명성, 자동 대사, 오류·부정 통제입니다. 지역사랑상품권(2024년 17.6조 원)처럼 공공·민간의 대규모 정산도 같은 과제를 안고 있습니다.')}
-  {nums([
-    dict(cap='간편지급', n='약 9,594억원', sub='간편지급 일평균 이용액 (2024)'),
-    dict(cap='간편송금', n='약 9,120억원', sub='간편송금 일평균 이용액 (2024)'),
-  ], cols=2)}
-  {note('출처: 한국은행 「2024년중 전자지급서비스 이용현황」(2025.3). 이미 하루 약 1조 원 규모로 디지털 정산이 이뤄집니다(실적).')}
-  <div style="height:2rem"></div>
-  {bar_chart([
-    dict(l='카드형', v='12.0조원', w=100, hi=True),
-    dict(l='모바일', v='4.3조원', w=36),
+<section><div class="shell sec sec-top-lg sec-stagger">
+  {sec_head('Why Now', '디지털 정산이 커질수록,<br>투명성과 통제가 중요해집니다', '국내 간편지급 서비스의 일평균 이용액은 이미 약 1조 원에 달합니다. 정산 규모가 커질수록 자동 대사와 자금 흐름의 투명성, 오류·부정 거래 통제가 중요해집니다. 2024년 17.6조 원 규모의 지역사랑상품권을 비롯한 공공·민간 정산도 같은 과제를 안고 있습니다.')}
+  <div class="num-solid" style="margin-bottom:var(--space-40)">{nums([
+    dict(cap='2024', n='약 9,594억원', sub='간편지급 일평균 이용액'),
+    dict(cap='2024', n='약 9,120억원', sub='간편송금 일평균 이용액'),
+  ], cols=2)}</div>
+  {col_chart([
     dict(l='지류', v='1.3조원', w=11),
+    dict(l='모바일', v='4.3조원', w=36),
+    dict(l='카드형', v='12.0조원', w=100, hi=True),
   ], title='적용 영역 예시 — 지역사랑상품권 발행액 (2024년)', note='출처: 국회예산정책처(2025) 지역사랑상품권 발행·관리체계 평가. 2024년 총 발행 17.6조 원. 지역화폐는 이 정산 인프라가 적용되는 여러 영역 중 하나입니다.')}
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
+<section><div class="shell sec">
   {sec_head('Problem', '결제·정산에서 반복되는 문제')}
-  {cards_wrap([
-    dark_card('문제', '정산 데이터 불일치', '거래 원장과 결제사 데이터가 어긋나 수작업 대사가 필요합니다.'),
-    dark_card('문제', '환불·취소 재정산', '환불·취소·차지백이 생기면 정산을 다시 맞춰야 합니다.'),
-    dark_card('문제', '다자 분배·정산', '여러 파트너가 얽힌 분배·정산은 대사와 통제가 복잡합니다.'),
-    dark_card('문제', '권한·감사 부담', '누가 무엇을 언제 바꿨는지 추적하고 감사에 대응해야 합니다.'),
-  ], cols=2)}
+  <div class="media-tall">{card_grid([
+    card('정산 데이터 불일치', '거래 원장과 결제사 데이터가 어긋나 수작업 대사가 필요합니다.', kicker='문제 01', media=True),
+    card('환불·취소 재정산', '환불·취소·차지백이 생기면 정산을 다시 맞춰야 합니다.', kicker='문제 02', media=True),
+    card('다자 분배·정산', '여러 파트너가 얽힌 분배·정산은 대사와 통제가 복잡합니다.', kicker='문제 03', media=True),
+    card('권한·감사 부담', '누가 무엇을 언제 바꿨는지 추적하고 감사에 대응해야 합니다.', kicker='문제 04', media=True),
+  ], cols=2)}</div>
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('Features', '주요 기능')}
+<section><div class="shell sec">
+  {sec_head('Features', '정산·대사·통제를 한 레이어로', '기존 결제 레일 위에 정산·통제 레이어만 얹어, 도입 부담 없이 자금 흐름을 자동화합니다.')}
   {cards_wrap([
-    dark_card('01', '환전·송금·정산 자동화', '은행망과 블록체인을 잇는 단일 API로 환전·송금·정산 다단계를 자동 처리합니다.'),
-    dark_card('02', '이벤트 기반 정산·자동 대사', '승인·취소·환불을 실시간 반영하고, 수수료·정산 내역을 자동으로 맞춥니다.'),
-    dark_card('03', 'Dual-Rail 도입', '기존 결제 레일은 그대로 두고 정산·통제 레이어만 얹어 도입 부담을 낮춥니다.'),
-    dark_card('04', '2단계 전환', '규제 변수가 적은 폐쇄형 정산토큰으로 시작해, 필요할 때 스테이블코인으로 확장합니다.'),
-    dark_card('05', '온체인 KYC · 통합 관제', '지갑·사용자 적격성 확인과 자금 흐름 모니터링·감사 리포팅을 함께 제공합니다.'),
+    exchange_card('환전·송금·정산 자동화', gray=True, desc='은행망과 블록체인을 잇는 단일 API로 환전·송금·정산 다단계를 자동 처리합니다.'),
+    exchange_card('이벤트 기반 정산·자동 대사', gray=True, desc='승인·취소·환불을 실시간 반영하고, 수수료·정산 내역을 자동으로 맞춥니다.'),
+    exchange_card('Dual-Rail 도입', gray=True, desc='기존 결제 레일은 그대로 두고 정산·통제 레이어만 얹어 도입 부담을 낮춥니다.'),
+    exchange_card('2단계 전환', gray=True, desc='규제 변수가 적은 폐쇄형 정산토큰으로 시작해, 필요할 때 스테이블코인으로 확장합니다.'),
+    exchange_card('온체인 KYC · 통합 관제', gray=True, desc='지갑·사용자 적격성 확인과 자금 흐름 모니터링·감사 리포팅을 함께 제공합니다.'),
   ], cols=3)}
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('By the Numbers', '숫자로 보는 정산 인프라')}
-  {nums([
-    dict(cap='Modules', n='4개 모듈', sub='ParaSta 코어 + 통합 관제탑'),
-    dict(cap='Transition', n='2단계', sub='폐쇄형 정산토큰 → 스테이블코인'),
-    dict(cap='KYC', n='온체인 KYC', sub='지갑·사용자 적격성'),
-    dict(cap='Throughput', n='최대 100,000', sub='TPS (벤치마크·제한 환경)'),
-  ])}
-  {note('예금토큰·스테이블코인 제도는 법제화 상황에 따라 달라집니다.')}
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('Use Cases', '적용 사례')}
-  {cards_wrap([
-    dark_card('MOU', '쿠콘 · 인피닛블록', '<b>과제</b> · 발행·정산·결제를 API로 연계할 허브가 필요<br><br><b>해결</b> · 발행·정산·결제·API 연계 협력 MOU 체결', sm=False),
-  ], cols=2)}
-  <div class="rvl" style="margin-top:2rem">
-    <div style="font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); margin-bottom:1rem">적용 영역 (유형)</div>
-    {chips(['가맹점 결제 정산', '커머스 에스크로 정산', '크로스보더 송금·정산', '지역화폐·지역상품권'])}
+<!-- By the Numbers: 다크 스탯 패널 -->
+<section><div class="shell stats-shell">
+  <div class="stats-panel rvl" style="--rvl-y:40px; --rvl-s:.99">
+    <div class="eyebrow light"><span class="dot"></span>By the Numbers</div>
+    <h2 class="stats-h2" data-line-reveal style="max-width:none"><span class="rvl-line"><span>자금 흐름을 통제하는<br>정산 인프라</span></span></h2>
+    <ul class="stats-grid sg-2x2">
+      <li class="rvl" style="--rvl-y:20px"><div class="stat-num"><span class="pv-val" data-val="4">0</span>개 모듈</div><div class="stat-label">ParaSta 코어 + 통합 관제탑</div></li>
+      <li class="rvl" style="--rvl-y:20px; --rvl-delay:90ms"><div class="stat-num"><span class="pv-val" data-val="2">0</span>단계 전환</div><div class="stat-label">폐쇄형 정산토큰에서 스테이블코인으로</div></li>
+      <li class="rvl" style="--rvl-y:20px; --rvl-delay:180ms"><div class="stat-num">온체인 KYC</div><div class="stat-label">지갑·사용자 적격성 확인</div></li>
+      <li class="rvl" style="--rvl-y:20px; --rvl-delay:270ms"><div class="stat-num"><span class="pv-val" data-val="100000">0</span> TPS</div><div class="stat-label">제한된 테스트 환경에서 측정한 최대 처리 성능</div></li>
+    </ul>
   </div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
   {sec_head('FAQ', '자주 묻는 질문')}
   {faq([
-    dict(q='정산토큰과 스테이블코인은 무엇이 다른가요', a='폐쇄형 정산토큰은 특정 폐쇄 환경의 정산 수단이고, 스테이블코인은 더 넓은 유통을 전제합니다. 같은 인프라에서 단계적으로 전환하는 설계가 가능합니다.'),
-    dict(q='지역화폐에도 적용할 수 있나요', a='발행·정산·통제 구조를 지역화폐 정산에 적용하는 설계가 가능합니다. 실제 적용은 제도·발주 조건에 따릅니다.'),
+    dict(q='정산토큰과 스테이블코인은 무엇이 다른가요?', a='폐쇄형 정산토큰은 특정 폐쇄 환경의 정산 수단이고, 스테이블코인은 더 넓은 유통을 전제합니다. 같은 인프라에서 단계적으로 전환하는 설계가 가능합니다.'),
+    dict(q='지역화폐에도 적용할 수 있나요?', a='발행·정산·통제 구조를 지역화폐 정산에 적용하는 설계가 가능합니다. 실제 적용은 제도·발주 조건에 따릅니다.'),
   ])}
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('Solutions', '다른 분야 솔루션')}
-  {routes(SOL_ROUTES, 'solution-settlement.html')}
+<section><div class="shell sec">
+  {sec_head('Coverage', '이런 정산 영역에 적용됩니다')}
+  {cards_wrap([
+    exchange_card('가맹점 결제 정산', brand='var(--purple-500)'),
+    exchange_card('커머스 에스크로 정산', brand='var(--purple-500)'),
+    exchange_card('크로스보더 송금·정산', brand='var(--purple-500)'),
+    exchange_card('지역화폐·지역상품권', brand='var(--purple-500)'),
+  ], cols=4)}
+</div></section>
+<section><div class="shell sec">
+  {sec_head('Use Cases', '결제·정산 적용 사례', layout='center')}
+  <div class="uc-carousel uc-tall uc-lg">
+    <button class="uc-arrow uc-prev rvl rvl-op" type="button" aria-label="이전 사례"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5L8 12l7 7"/></svg></button>
+    <div class="uc-slides rvl" style="--rvl-y:40px">
+      <article class="uc-slide is-active">
+        <div class="uc-thumb" aria-hidden="true"></div>
+        <h3>쿠콘 · 인피닛블록 MOU</h3>
+        <div class="uc-rows"><div class="uc-row"><span class="uc-flag">과제</span><span>발행·정산·결제를 API로 연계할 허브가 필요합니다.</span></div><div class="uc-row"><span class="uc-flag">해결</span><span>발행·정산·결제·API 연계 협력을 위한 업무협약을 체결했습니다.</span></div></div>
+      </article>
+    </div>
+    <button class="uc-arrow uc-next rvl rvl-op" type="button" aria-label="다음 사례"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+  </div>
 </div></section>
 """)
 

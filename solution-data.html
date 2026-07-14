@@ -460,7 +460,7 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 .faq-li{ border-top:1px solid var(--line) }
 .faq-li:first-of-type{ border-top:none }
 .faq-row{ display:flex; align-items:flex-start; gap:1rem; border-radius:var(--radius-card-sm); text-align:left;
-  padding:1.5rem; cursor:pointer; user-select:none; background:rgba(var(--surface-rgb),0);
+  padding:2rem 1.5rem; cursor:pointer; user-select:none; background:rgba(var(--surface-rgb),0);
   transition:background .45s cubic-bezier(.45,0,.55,1), padding .45s cubic-bezier(.45,0,.55,1) }
 @media (hover:hover){ .faq-row:hover{ background:rgba(var(--surface-rgb),1) } }
 .faq-item.open .faq-row{ padding-top:2.25rem; padding-bottom:2.5rem }
@@ -472,27 +472,30 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 .faq-inner{ display:flex; flex-direction:column; transform:translateY(calc(-100% + 2.25rem));
   transition:transform .45s cubic-bezier(.45,0,.55,1) }
 .faq-item.open .faq-inner{ transform:translateY(0) }
-.faq-t{ font-size:var(--text-18); font-weight:500; letter-spacing:-.01em; line-height:2.25rem }
+.faq-t{ font-size:var(--text-22); font-weight:500; letter-spacing:-.01em; line-height:2.25rem }
 .faq-t-top{ opacity:0; margin-bottom:.5rem; transition:opacity .4s cubic-bezier(.45,0,.55,1) }
 .faq-item.open .faq-t-top{ opacity:1 }
-.faq-ans{ max-width:44rem; font-size:var(--text-16); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.6) }
+.faq-ans{ max-width:44rem; font-size:var(--text-20); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.6) }
 .faq-t-bottom{ margin-top:1.25rem; max-height:2.25rem; overflow:hidden; white-space:nowrap;
   text-overflow:ellipsis; opacity:1; transform:translateY(0);
   transition:opacity .4s cubic-bezier(.45,0,.55,1), transform .45s cubic-bezier(.45,0,.55,1) }
 .faq-item.open .faq-t-bottom{ opacity:0; transform:translateY(-8px) }
 .faq-badge2{ width:2.5rem; height:2.5rem; flex:none; position:relative;
-  background:transparent; color:var(--accent); transition:transform .45s cubic-bezier(.45,0,.55,1) }
+  margin-block:calc((2.25rem - 2.5rem) / 2);  /* 닫힘 상태 타이틀 라인(2.25rem)에 수직 중앙 정렬 + 행 높이 증가 방지 */
+  background:var(--ink); color:var(--white); border-radius:var(--radius-pill);
+  transition:transform .45s cubic-bezier(.45,0,.55,1) }  /* 캐러셀 화살표와 동일 문법: 남색 원 + 흰 아이콘 */
 .faq-badge2::before, .faq-badge2::after{ content:""; position:absolute; left:50%; top:50%;
   background:currentColor; border-radius:var(--radius-pill) }
-.faq-badge2::before{ width:1.5px; height:1.375rem; transform:translate(-50%,-50%);
+.faq-badge2::before{ width:1.5px; height:1rem; transform:translate(-50%,-50%);
   transition:opacity .35s cubic-bezier(.45,0,.55,1) }
-.faq-badge2::after{ width:1.375rem; height:1.5px; transform:translate(-50%,-50%) }
+.faq-badge2::after{ width:1rem; height:1.5px; transform:translate(-50%,-50%) }
 .faq-item.open .faq-badge2::before{ opacity:0 }
 @media (min-width:640px){ .faq-shell{ padding-left:2rem; padding-right:2rem }
   .faq-h2{ margin-bottom:3.5rem; font-size:var(--text-48) }
   .faq-row{ gap:1.5rem }
   .faq-idx{ width:2.5rem }
-  .faq-t{ font-size:var(--text-22) } }
+  .faq-badge2{ width:3rem; height:3rem; margin-block:calc((2.25rem - 3rem) / 2) }  /* 레퍼와 동일 3rem + 타이틀 라인 중앙 정렬 */
+  .faq-t{ font-size:var(--text-26) } }  /* 행 리스트 타이틀보다 한 단계 업 */
 @media (min-width:1024px){ .faq-shell{ padding-bottom:7rem } }
 
 /* ============ BRAND LOGO / GNB DROPDOWN / CHATBOT ============ */
@@ -1065,6 +1068,12 @@ body.company .vision-panel .wfd-core::before, body.company .vision-panel .wfd-co
 @media (min-width:1024px){ .cards-3{ grid-template-columns:repeat(3,1fr) } }
 .cards-2{ display:grid; grid-template-columns:1fr; gap:1.5rem }
 @media (min-width:768px){ .cards-2{ grid-template-columns:repeat(2,1fr) } }
+.cards-4{ display:grid; grid-template-columns:repeat(2,1fr); gap:1rem }
+@media (min-width:1024px){ .cards-4{ grid-template-columns:repeat(4,1fr) } }
+/* 그레이 라벨 카드 (Coverage 등) — 짧은 유형 라벨용 */
+.label-card{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); border-radius:var(--radius-card-sm);
+  padding:1.75rem; min-height:8rem; display:flex; align-items:flex-end;
+  font-size:var(--text-18); font-weight:600; letter-spacing:-.01em; color:var(--ink); word-break:keep-all }
 .work-card.sm{ min-height:18rem }
 /* 카드 톤 변형: tone='gray' — 코어모듈式 라이트 그레이 (스코프 무관 어디서든) */
 .work-card.t-gray{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); color:var(--ink) }
@@ -1090,6 +1099,9 @@ body.company .vision-panel .wfd-core::before, body.company .vision-panel .wfd-co
   .cards-3 .work-card.grouped::before, .cards-2 .work-card.grouped::before{ margin:-2rem -2rem 1.75rem } }
 /* 짧은 콘텐츠 카드도 과하지 않게: grouped 최소높이는 콘텐츠 기준 */
 .cards-3 .work-card.grouped, .cards-2 .work-card.grouped{ min-height:0 }
+/* 세로형 이미지 카드 변형: 이미지 영역을 카드의 약 2/3로 (기본 16rem → 24rem) */
+.media-tall .work-card.grouped::before{ height:24rem }
+@media (max-width:639px){ .media-tall .work-card.grouped::before{ height:14rem } }
 .work-card.grouped .work-bottom{ position:static; inset:auto }
 .work-card.grouped .work-meta{ margin-bottom:.875rem; color:var(--purple-300) }
 .work-card.grouped .work-bottom p{ font-size:var(--text-16) }
@@ -1203,11 +1215,22 @@ body.company .vision-panel .wfd-core::before, body.company .vision-panel .wfd-co
 .uc-slide{ position:absolute; inset:0; opacity:0; visibility:hidden; transition:opacity .4s ease, transform .35s cubic-bezier(.2,.8,.2,1);
   background:color-mix(in srgb, var(--ink) 6%, var(--white)); color:var(--ink); border-radius:var(--radius-card); padding:3rem;
   display:flex; flex-direction:column }
-.uc-slide.is-active{ position:relative; opacity:1; visibility:visible }
+.uc-slide.is-active{ position:relative; opacity:1; visibility:visible;
+  will-change:transform; backface-visibility:hidden }  /* GPU 레이어 고정: 스케일 종료 시 텍스트 재래스터 스냅(덜컹) 방지 */
 @media (hover:hover){ .uc-slide.is-active:hover{ transform:scale(1.02) } }  /* 호버 시 카드 확대 */
 .uc-thumb{ width:5rem; height:5rem; border-radius:var(--radius-card-sm); background:rgba(var(--ink-rgb),.07); margin-bottom:1.5rem }
 /* uc-tall 변형(broof): 이미지↔텍스트 간격 확대로 카드 키움 */
 .uc-carousel.uc-tall .uc-thumb{ margin-bottom:4rem }
+/* uc-lg 변형(금융): 본문 한 단계 업 + 라벨 플래그 행 구조 */
+.uc-carousel.uc-lg .uc-slide > p{ font-size:var(--text-20) }
+.uc-carousel.uc-lg .uc-slide h3{ margin-bottom:1rem }  /* 타이틀↔플래그 행 간격 */
+.uc-rows{ display:flex; flex-direction:column; gap:.6rem }
+.uc-row{ display:flex; align-items:center; gap:.75rem; font-size:var(--text-20);
+  color:rgba(var(--ink-rgb),.6); line-height:var(--leading-body); word-break:keep-all }
+.uc-flag{ flex:none; display:inline-flex; align-items:center; padding:.375rem .875rem;
+  background:rgba(var(--ink-rgb),.07); border-radius:var(--radius-pill);
+  font-size:var(--text-16); font-weight:600; color:rgba(var(--ink-rgb),.45) }  /* 그레이 필 + 연그레이 텍스트 */
+@media (max-width:639px){ .uc-row{ flex-direction:column; align-items:flex-start; gap:.375rem } }
 .uc-thumb video, .uc-thumb img{ width:100%; height:100%; object-fit:cover; display:block; border-radius:inherit }
 .uc-slide h3{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em; margin-bottom:.75rem; color:var(--ink) }
 @media (min-width:640px){ .uc-slide h3{ font-size:var(--text-30) } }
@@ -1259,6 +1282,11 @@ body.company .vision-panel .wfd-core::before, body.company .vision-panel .wfd-co
 .ex-card h3{ margin-bottom:0 }
 .ex-card .ex-num{ display:block; font-size:var(--text-14); font-weight:500; color:rgba(var(--white-rgb),.5); margin-bottom:.5rem }  /* 기능 카드 번호 */
 .ex-card h3 + p{ margin-top:.75rem; font-size:var(--text-18) }  /* 서브카피 달릴 때만 간격 + 한 단계 업 */
+/* ex-card 그레이 변형: 라이트 그레이 채움 + 잉크 텍스트 (호버 스케일만 유지) */
+.ex-card.ex-gray{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); color:var(--ink); box-shadow:none }
+.ex-card.ex-gray h3{ color:var(--ink) }
+.ex-card.ex-gray p{ color:rgba(var(--ink-rgb),.6) }
+.ex-card.ex-gray .ex-ico{ background:rgba(var(--ink-rgb),.06) }
 /* 거래소 카드: 컴팩트라 모바일도 2열, 태블릿 3열 */
 .cards-3:has(.ex-card){ grid-template-columns:repeat(2,1fr); gap:1rem }
 @media (min-width:640px){ .cards-3:has(.ex-card){ grid-template-columns:repeat(3,1fr); gap:1.5rem } }
@@ -1308,6 +1336,12 @@ body.company .vision-panel .wfd-core::before, body.company .vision-panel .wfd-co
 .stat-num.sn-sm{ font-size:var(--text-36) }
 @media (min-width:640px){ .stat-num.sn-sm{ font-size:var(--text-40) } }
 @media (min-width:768px){ .stat-num.sn-sm{ font-size:var(--text-48) } }
+/* 스탯 2x2 배치 (기본 4열 대신) — 숫자는 기본에서 토큰 1단계 다운 (48→40 / 60→48 / 72→60) */
+@media (min-width:1024px){ .stats-grid.sg-2x2{ grid-template-columns:repeat(2,1fr) } }
+.stats-grid.sg-2x2{ margin-top:var(--space-64); margin-bottom:var(--space-32) }  /* 타이틀↔그리드 여백 업(3.5→4rem) + 하단 마진 */
+.sg-2x2 .stat-num{ font-size:var(--text-36); font-weight:700 }  /* 기본(600)보다 한 단계 볼드, 사이즈는 한 토큰 다운 */
+@media (min-width:640px){ .sg-2x2 .stat-num{ font-size:var(--text-40) } }
+@media (min-width:768px){ .sg-2x2 .stat-num{ font-size:var(--text-48) } }
 .stats-panel .sec-note{ margin-top:3rem; color:rgba(var(--white-rgb),.45) }
 .stats-panel .sec-note + .sec-note{ margin-top:1rem }
 .stats-panel .sec-note strong{ font-weight:600; color:rgba(var(--white-rgb),.7) }
@@ -1370,6 +1404,8 @@ body.company .vision-panel .wfd-core::before, body.company .vision-panel .wfd-co
   font-size:var(--text-14); color:rgba(var(--ink-rgb),.45) }
 .num-card .n{ font-size:var(--text-40); font-weight:600; letter-spacing:-.02em; line-height:1.1; margin-bottom:.5rem }
 .num-card .n small{ font-size:var(--text-20); font-weight:500 }
+/* 회색 채움 변형 (About Track Record 톤) — company 밖에서도 사용 */
+.num-solid .num-card{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); border:none }
 .tag.on-light{ border-color:var(--line); color:var(--ink) }
 
 /* ============ CONTENT-PORT ADDITIONS (우리 토큰 유지) ============ */
@@ -1634,7 +1670,10 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
         <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Solutions — 데이터주권</div>
         <h1 class="phero-h1" data-line-stagger="120"><span class="rvl-line"><span>개인정보를 직접 쌓지 않고,</span></span><span class="rvl-line"><span>사용자가 통제하게 만드는</span></span><span class="rvl-line"><span>데이터 인프라</span></span></h1>
         <p class="phero-lead rvl" style="--rvl-delay:250ms">개인정보를 다루는 서비스일수록 수집·보관·동의 관리·유출 대응 부담이 큽니다. MyID는 사용자가 자기 데이터를 직접 통제해 필요한 곳에 필요한 만큼만 제출하도록 설계된 DID 기반 신원·데이터 인프라입니다. PDS·BFS·선택적 공개로 서비스가 개인정보를 떠안지 않게 합니다.</p>
-        
+        <div class="phero-rel rvl" style="--rvl-delay:600ms">
+      <p class="phero-rel-t">관련 제품 살펴보기</p>
+      <a class="phero-rel-flag" href="myid.html">MyID</a>
+    </div>
       </div>
       <div class="phero-visual" aria-hidden="true"><img src="assets/solutions/hero-test-1.webp" alt="" loading="eager" fetchpriority="high"></div>
       
@@ -1646,40 +1685,60 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
     </div>
   </section>
 
+<section><div class="shell sec sec-top-lg sec-stagger">
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Why Now</div><h2 class="sec-h2 has-lead" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>데이터는 사용자 중심으로 움직이기 시작했습니다</span></span></h2><p class="phero-lead sec-lead rvl">마이데이터에서 시작된 ‘사용자가 자기 데이터를 옮기고 통제하는’ 흐름이 의료·통신 등 전 분야로 퍼지고 있습니다. 동시에 개인정보를 많이 쌓아둘수록 유출·규제·동의 관리 부담이 커집니다.</p>
+  <p class="phero-lead sec-lead rvl">데이터를 떠안는 대신 사용자가 통제하게 하는 구조가 점점 유리해지고 있습니다.</p>
+  <div class="colc-duo">
+  <div class="colc rvl"><p class="barc-title">마이데이터 서비스 이용 (누적)</p><div class="colc-panel"><div class="colc-plot" style="grid-template-columns:repeat(3,1fr)"><div class="colc-stack"><span class="colc-v">0.8억</span><div class="colc-bar" style="height:calc(48*var(--colc-h)/100)"></div></div><div class="colc-stack"><span class="colc-v">1.2억</span><div class="colc-bar" style="height:calc(73*var(--colc-h)/100)"></div></div><div class="colc-stack hi"><span class="colc-v">1.65억</span><div class="colc-bar" style="height:calc(100*var(--colc-h)/100)"></div></div></div><div class="colc-labels" style="grid-template-columns:repeat(3,1fr)"><span class="colc-l">2023년</span><span class="colc-l">2024년</span><span class="colc-l">2025.5</span></div><p class="sec-note"><strong>출처: 금융위원회 보도자료(2025.6, 마이데이터 2.0)</strong><br>14세 이상 국민 1인당 평균 3.5개 서비스를 이용하며, 데이터 이동이 일상화됐습니다.</p></div></div>
+  <div class="colc rvl"><p class="barc-title">데이터 이동·시장 규모</p><div class="colc-panel"><div class="colc-plot" style="grid-template-columns:repeat(2,1fr)"><div class="colc-stack hi"><span class="colc-v">1조 1,430억 건</span><div class="colc-bar" style="height:calc(100*var(--colc-h)/100)"></div></div><div class="colc-stack"><span class="colc-v">30.7조원</span><div class="colc-bar" style="height:calc(62*var(--colc-h)/100)"></div></div></div><div class="colc-labels" style="grid-template-columns:repeat(2,1fr)"><span class="colc-l">누적 정보 전송</span><span class="colc-l">국내 데이터산업</span></div><p class="sec-note"><strong>출처: 금융위·K-DATA 2024 데이터산업 현황조사</strong><br>데이터가 실제로 대량 이동하면서 안전한 보관·검증 수요가 함께 커지고 있습니다.</p></div></div>
+  </div>
+</div></section>
 <section><div class="shell sec">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Product</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>이 솔루션을 구성하는 제품</span></span></h2>
-  <div class="chip-row rvl"><span class="chip">MyID</span></div>
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Why Now</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>데이터는 사용자 중심으로 움직이기 시작했습니다</span></span></h2>
-  <p class="phero-lead sec-lead rvl">마이데이터에서 시작된 ‘사용자가 자기 데이터를 옮기고 통제하는’ 흐름이 의료·통신 등 전 분야로 퍼지고 있습니다. 동시에 개인정보를 많이 쌓아둘수록 유출·규제·동의 관리 부담이 커집니다. 데이터를 떠안는 대신 사용자가 통제하게 하는 구조가 점점 유리해지고 있습니다.</p>
-  <ul class="cards-3"><li class="rvl" style="--rvl-delay:0ms"><div class="light-card num-card"><span class="cap">이용</span><div class="n">약 1.65억</div><p>마이데이터 서비스 이용 (’25.5)</p></div></li><li class="rvl" style="--rvl-delay:90ms"><div class="light-card num-card"><span class="cap">1인당</span><div class="n">3.5개</div><p>14세 이상 국민 1인당 이용 서비스 수</p></div></li><li class="rvl" style="--rvl-delay:180ms"><div class="light-card num-card"><span class="cap">전송</span><div class="n">1조 1,430억 건</div><p>마이데이터 누적 정보 전송 (’25.5)</p></div></li><li class="rvl" style="--rvl-delay:270ms"><div class="light-card num-card"><span class="cap">시장</span><div class="n">30.7조원</div><p>국내 데이터산업 시장 (2024)</p></div></li></ul>
-  <p class="sec-note rvl">출처: 금융위원회 보도자료(’25.6, 마이데이터 2.0)·K-DATA 2024 데이터산업 현황조사(실적). 데이터가 실제로 대량 이동하고 있어 안전한 보관·검증 수요가 함께 커집니다.</p>
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Problem</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>개인정보를 다루는 서비스가 마주하는 문제</span></span></h2>
-  <ul class="cards-2"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static sm"><div class="work-meta"><span>문제</span></div><div class="work-bottom"><h3>보관 리스크</h3><p>개인정보를 직접 쌓아둘수록 유출 사고와 과징금·신뢰 하락 부담이 커집니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm"><div class="work-meta"><span>문제</span></div><div class="work-bottom"><h3>반복 수집·동의 관리</h3><p>서비스마다 같은 정보를 다시 받고 동의를 관리하는 비용이 쌓입니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm"><div class="work-meta"><span>문제</span></div><div class="work-bottom"><h3>사용자 통제 요구</h3><p>전송요구권 등 사용자가 자기 데이터를 옮기고 지우라는 요구에 대응해야 합니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms"><article class="work-card static sm"><div class="work-meta"><span>문제</span></div><div class="work-bottom"><h3>위·변조 검증</h3><p>받은 데이터가 진짜인지, 바뀌지 않았는지 확인해야 합니다.</p></div></article></li></ul>
+  <div class="media-tall"><ul class="cards-2"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>문제 01</span></div><h3>보관 리스크</h3><p>개인정보를 직접 쌓아둘수록 유출 사고와 과징금·신뢰 하락 부담이 커집니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>문제 02</span></div><h3>반복 수집·동의 관리</h3><p>서비스마다 같은 정보를 다시 받고 동의를 관리하는 비용이 쌓입니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>문제 03</span></div><h3>사용자 통제 요구</h3><p>전송요구권 등 사용자가 자기 데이터를 옮기고 지우라는 요구에 대응해야 합니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>문제 04</span></div><h3>위·변조 검증</h3><p>받은 데이터가 진짜인지, 바뀌지 않았는지 확인해야 합니다.</p></div></article></li></ul></div>
+</div></section>
+<section><div class="shell sec">
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Features</div><h2 class="sec-h2 has-lead" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>개인정보를 떠안지 않는 구조</span></span></h2><p class="phero-lead sec-lead rvl">데이터를 사용자 통제 아래 두고, 서비스는 필요한 사실만 검증합니다.</p>
+  <ul class="cards-2"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="ico-card ex-card" style="--brand:var(--purple-500); --brand-txt:var(--white)"><span class="ex-ico"></span><h3>PDS · 개인데이터저장소</h3><p>데이터를 사용자 통제 아래 두고, 기관 보관 부담을 줄입니다.</p></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="ico-card ex-card" style="--brand:var(--purple-500); --brand-txt:var(--white)"><span class="ex-ico"></span><h3>BFS · 분산 저장</h3><p>대용량 데이터를 분산 저장해 무결성과 가용성을 확보합니다.</p></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="ico-card ex-card" style="--brand:var(--purple-500); --brand-txt:var(--white)"><span class="ex-ico"></span><h3>선택 공개 (ZK)</h3><p>생년월일 대신 성인 여부만처럼, 필요한 사실만 증명하고 나머지는 감춥니다.</p></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms"><article class="ico-card ex-card" style="--brand:var(--purple-500); --brand-txt:var(--white)"><span class="ex-ico"></span><h3>MyID 지갑·API</h3><p>별도 인증 앱 없이 API 연결만으로 신원·데이터를 발급·보관·제출·검증합니다.</p></article></li></ul>
+</div></section>
+<!-- By the Numbers: 다크 스탯 패널 -->
+<section><div class="shell stats-shell">
+  <div class="stats-panel rvl" style="--rvl-y:40px; --rvl-s:.99">
+    <div class="eyebrow light"><span class="dot"></span>By the Numbers</div>
+    <h2 class="stats-h2" data-line-reveal style="max-width:none"><span class="rvl-line"><span>국책 R&D로 검증된<br>분산 저장 인프라</span></span></h2>
+    <ul class="stats-grid sg-2x2">
+      <li class="rvl" style="--rvl-y:20px"><div class="stat-num">2021~2025</div><div class="stat-label">국책 R&D 기반 BFS (IITP·ETRI 공동)</div></li>
+      <li class="rvl" style="--rvl-y:20px; --rvl-delay:90ms"><div class="stat-num"><span class="pv-val" data-val="218">0</span>만 명</div><div class="stat-label">제주안심코드 누적 이용자</div></li>
+      <li class="rvl" style="--rvl-y:20px; --rvl-delay:180ms"><div class="stat-num"><span class="pv-val" data-val="9100">0</span>만 건</div><div class="stat-label">제주안심코드 누적 인증</div></li>
+      <li class="rvl" style="--rvl-y:20px; --rvl-delay:270ms"><div class="stat-num">위변조 불가</div><div class="stat-label">해시는 온체인, 원본은 분산 노드</div></li>
+    </ul>
+  </div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Features</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>주요 기능</span></span></h2>
-  <ul class="cards-2"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static sm"><div class="work-meta"><span>PDS</span></div><div class="work-bottom"><h3>개인데이터저장소</h3><p>데이터를 사용자 통제 아래 두고, 기관 보관 부담을 줄입니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm"><div class="work-meta"><span>BFS</span></div><div class="work-bottom"><h3>분산 저장</h3><p>대용량 데이터를 분산 저장해 무결성과 가용성을 확보합니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm"><div class="work-meta"><span>ZK</span></div><div class="work-bottom"><h3>선택 공개 (Selective Disclosure)</h3><p>생년월일 대신 성인 여부만처럼, 필요한 사실만 증명하고 나머지는 감춥니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms"><article class="work-card static sm"><div class="work-meta"><span>API</span></div><div class="work-bottom"><h3>MyID 지갑·API</h3><p>별도 인증 앱 없이 API 연결만으로 서비스 안에서 신원·데이터를 발급·보관·제출·검증합니다.</p></div></article></li></ul>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Credentials</div><h2 class="sec-h2 has-lead" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>공공·연구 분야에서 검증된 기술력</span></span></h2><p class="phero-lead sec-lead rvl">파라메타는 국책 R&D와 공공 실증을 바탕으로, 신뢰할 수 있는 신원·데이터 인프라를 운영해 왔습니다.</p>
+  <div class="cert-row rvl" style="--rvl-y:24px; padding:var(--space-32) 0 0">
+    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">IITP 국책 R&D</div></div>
+    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">CSAP 인증</div></div>
+    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">혁신금융서비스 지정</div></div>
+  </div>
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>By the Numbers</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>숫자로 보는 Core Storage</span></span></h2>
-  <ul class="cards-3"><li class="rvl" style="--rvl-delay:0ms"><div class="light-card num-card"><span class="cap">R&D</span><div class="n">2021~2025</div><p>국책 R&D 기반 BFS (IITP·ETRI 공동)</p></div></li><li class="rvl" style="--rvl-delay:90ms"><div class="light-card num-card"><span class="cap">Users</span><div class="n">218만 명</div><p>제주안심코드 누적 이용자</p></div></li><li class="rvl" style="--rvl-delay:180ms"><div class="light-card num-card"><span class="cap">Auth</span><div class="n">9,100만 건</div><p>제주안심코드 누적 인증</p></div></li><li class="rvl" style="--rvl-delay:270ms"><div class="light-card num-card"><span class="cap">Integrity</span><div class="n">위변조 불가</div><p>해시는 온체인, 원본은 분산 노드</p></div></li></ul>
-  <p class="sec-note rvl">BFS 기반 기술은 IITP 국책 R&D 과제(2021-0-00136, ETRI 공동)로 개발됐고, 제주 스마트시티에서 교통·어류질병·드론 해양환경 모니터링으로 실증됐습니다(R&D 실증).</p>
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Use Cases</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>적용 사례</span></span></h2>
-  <ul class="cards-2"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static"><div class="work-meta"><span>공개 · DID·VC·PDS</span></div><div class="work-bottom"><h3>부산시 배터리여권 플랫폼 (DPP)</h3><p><b>과제</b> · 전기차 배터리의 제조·운행·정비·중고거래·재활용 데이터가 흩어져 있고, EU 배터리 규제(DPP)에 맞춰 출처·이력·무결성을 증명해야 함<br><br><b>해결</b> · DID·VC·PDS를 결합해 참여자 신원과 데이터 주권을 보장하는 데이터 스페이스로 배터리 생애 데이터를 기록·관리(MyID 2.0이 최초 적용된 공공 인프라 사례)</p></div></article></li></ul>
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
+<section><div class="shell sec">
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>FAQ</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>자주 묻는 질문</span></span></h2>
-  <ul><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:0ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><span class="faq-idx">01</span><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top">PDS는 무엇인가요</h3><div class="faq-ans">개인데이터저장소로, 데이터를 기관이 아니라 사용자 통제 아래 두는 저장 방식입니다.</div><h3 class="faq-t faq-t-bottom">PDS는 무엇인가요</h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div></li><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:60ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><span class="faq-idx">02</span><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top">BFS는 무엇인가요</h3><div class="faq-ans">데이터를 여러 곳에 분산 저장해 무결성과 가용성을 확보하는 분산저장 기술입니다.</div><h3 class="faq-t faq-t-bottom">BFS는 무엇인가요</h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div></li><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:120ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><span class="faq-idx">03</span><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top">데이터 무결성은 어떻게 보장하나요</h3><div class="faq-ans">파일 원본은 분산 노드에, 해시는 블록체인에 남깁니다. 하나라도 바뀌면 즉시 드러나는 구조입니다.</div><h3 class="faq-t faq-t-bottom">데이터 무결성은 어떻게 보장하나요</h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div></li></ul>
+  <ul><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:0ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><span class="faq-idx">01</span><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top">PDS는 무엇인가요?</h3><div class="faq-ans">개인데이터저장소로, 데이터를 기관이 아니라 사용자 통제 아래 두는 저장 방식입니다.</div><h3 class="faq-t faq-t-bottom">PDS는 무엇인가요?</h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div></li><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:60ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><span class="faq-idx">02</span><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top">BFS는 무엇인가요?</h3><div class="faq-ans">데이터를 여러 곳에 분산 저장해 무결성과 가용성을 확보하는 분산저장 기술입니다.</div><h3 class="faq-t faq-t-bottom">BFS는 무엇인가요?</h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div></li><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:120ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><span class="faq-idx">03</span><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top">데이터 무결성은 어떻게 보장하나요?</h3><div class="faq-ans">파일 원본은 분산 노드에, 해시는 블록체인에 남깁니다. 하나라도 바뀌면 즉시 드러나는 구조입니다.</div><h3 class="faq-t faq-t-bottom">데이터 무결성은 어떻게 보장하나요?</h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div></li></ul>
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Solutions</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>다른 분야 솔루션</span></span></h2>
-  <div class="routes rvl"><a class="route" href="solution-finance.html">금융</a><a class="route" href="solution-gov.html">공공</a><a class="route" href="solution-cert.html">증명서</a><a class="route" href="solution-exchange.html">화이트라벨 거래소</a><a class="route on" href="solution-data.html">데이터주권</a><a class="route" href="solution-settlement.html">결제·정산</a></div>
+<section><div class="shell sec">
+  <div class="sh-center"><div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Use Cases</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>데이터주권 적용 사례</span></span></h2></div>
+  <div class="uc-carousel uc-tall uc-lg">
+    <button class="uc-arrow uc-prev rvl rvl-op" type="button" aria-label="이전 사례"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5L8 12l7 7"/></svg></button>
+    <div class="uc-slides rvl" style="--rvl-y:40px">
+      <article class="uc-slide is-active">
+        <div class="uc-thumb" aria-hidden="true"></div>
+        <h3>부산시 · 배터리여권 플랫폼 (DPP)</h3>
+        <div class="uc-rows"><div class="uc-row"><span class="uc-flag">과제</span><span>전기차 배터리의 제조·운행·정비·중고거래·재활용 데이터가 흩어져 있고, EU 배터리 규제(DPP)에 맞춰 출처·이력·무결성을 증명해야 합니다.</span></div><div class="uc-row"><span class="uc-flag">해결</span><span>DID·VC·PDS를 결합해 참여자 신원과 데이터 주권을 보장하는 데이터 스페이스로 배터리 생애 데이터를 기록·관리했습니다 (MyID 2.0 최초 적용 공공 인프라 사례).</span></div></div>
+      </article>
+    </div>
+    <button class="uc-arrow uc-next rvl rvl-op" type="button" aria-label="다음 사례"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+  </div>
 </div></section>
 
 </main>

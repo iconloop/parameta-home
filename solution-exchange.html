@@ -460,7 +460,7 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 .faq-li{ border-top:1px solid var(--line) }
 .faq-li:first-of-type{ border-top:none }
 .faq-row{ display:flex; align-items:flex-start; gap:1rem; border-radius:var(--radius-card-sm); text-align:left;
-  padding:1.5rem; cursor:pointer; user-select:none; background:rgba(var(--surface-rgb),0);
+  padding:2rem 1.5rem; cursor:pointer; user-select:none; background:rgba(var(--surface-rgb),0);
   transition:background .45s cubic-bezier(.45,0,.55,1), padding .45s cubic-bezier(.45,0,.55,1) }
 @media (hover:hover){ .faq-row:hover{ background:rgba(var(--surface-rgb),1) } }
 .faq-item.open .faq-row{ padding-top:2.25rem; padding-bottom:2.5rem }
@@ -472,27 +472,30 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 .faq-inner{ display:flex; flex-direction:column; transform:translateY(calc(-100% + 2.25rem));
   transition:transform .45s cubic-bezier(.45,0,.55,1) }
 .faq-item.open .faq-inner{ transform:translateY(0) }
-.faq-t{ font-size:var(--text-18); font-weight:500; letter-spacing:-.01em; line-height:2.25rem }
+.faq-t{ font-size:var(--text-22); font-weight:500; letter-spacing:-.01em; line-height:2.25rem }
 .faq-t-top{ opacity:0; margin-bottom:.5rem; transition:opacity .4s cubic-bezier(.45,0,.55,1) }
 .faq-item.open .faq-t-top{ opacity:1 }
-.faq-ans{ max-width:44rem; font-size:var(--text-16); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.6) }
+.faq-ans{ max-width:44rem; font-size:var(--text-20); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.6) }
 .faq-t-bottom{ margin-top:1.25rem; max-height:2.25rem; overflow:hidden; white-space:nowrap;
   text-overflow:ellipsis; opacity:1; transform:translateY(0);
   transition:opacity .4s cubic-bezier(.45,0,.55,1), transform .45s cubic-bezier(.45,0,.55,1) }
 .faq-item.open .faq-t-bottom{ opacity:0; transform:translateY(-8px) }
 .faq-badge2{ width:2.5rem; height:2.5rem; flex:none; position:relative;
-  background:transparent; color:var(--accent); transition:transform .45s cubic-bezier(.45,0,.55,1) }
+  margin-block:calc((2.25rem - 2.5rem) / 2);  /* 닫힘 상태 타이틀 라인(2.25rem)에 수직 중앙 정렬 + 행 높이 증가 방지 */
+  background:var(--ink); color:var(--white); border-radius:var(--radius-pill);
+  transition:transform .45s cubic-bezier(.45,0,.55,1) }  /* 캐러셀 화살표와 동일 문법: 남색 원 + 흰 아이콘 */
 .faq-badge2::before, .faq-badge2::after{ content:""; position:absolute; left:50%; top:50%;
   background:currentColor; border-radius:var(--radius-pill) }
-.faq-badge2::before{ width:1.5px; height:1.375rem; transform:translate(-50%,-50%);
+.faq-badge2::before{ width:1.5px; height:1rem; transform:translate(-50%,-50%);
   transition:opacity .35s cubic-bezier(.45,0,.55,1) }
-.faq-badge2::after{ width:1.375rem; height:1.5px; transform:translate(-50%,-50%) }
+.faq-badge2::after{ width:1rem; height:1.5px; transform:translate(-50%,-50%) }
 .faq-item.open .faq-badge2::before{ opacity:0 }
 @media (min-width:640px){ .faq-shell{ padding-left:2rem; padding-right:2rem }
   .faq-h2{ margin-bottom:3.5rem; font-size:var(--text-48) }
   .faq-row{ gap:1.5rem }
   .faq-idx{ width:2.5rem }
-  .faq-t{ font-size:var(--text-22) } }
+  .faq-badge2{ width:3rem; height:3rem; margin-block:calc((2.25rem - 3rem) / 2) }  /* 레퍼와 동일 3rem + 타이틀 라인 중앙 정렬 */
+  .faq-t{ font-size:var(--text-26) } }  /* 행 리스트 타이틀보다 한 단계 업 */
 @media (min-width:1024px){ .faq-shell{ padding-bottom:7rem } }
 
 /* ============ BRAND LOGO / GNB DROPDOWN / CHATBOT ============ */
@@ -1065,6 +1068,12 @@ body.company .vision-panel .wfd-core::before, body.company .vision-panel .wfd-co
 @media (min-width:1024px){ .cards-3{ grid-template-columns:repeat(3,1fr) } }
 .cards-2{ display:grid; grid-template-columns:1fr; gap:1.5rem }
 @media (min-width:768px){ .cards-2{ grid-template-columns:repeat(2,1fr) } }
+.cards-4{ display:grid; grid-template-columns:repeat(2,1fr); gap:1rem }
+@media (min-width:1024px){ .cards-4{ grid-template-columns:repeat(4,1fr) } }
+/* 그레이 라벨 카드 (Coverage 등) — 짧은 유형 라벨용 */
+.label-card{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); border-radius:var(--radius-card-sm);
+  padding:1.75rem; min-height:8rem; display:flex; align-items:flex-end;
+  font-size:var(--text-18); font-weight:600; letter-spacing:-.01em; color:var(--ink); word-break:keep-all }
 .work-card.sm{ min-height:18rem }
 /* 카드 톤 변형: tone='gray' — 코어모듈式 라이트 그레이 (스코프 무관 어디서든) */
 .work-card.t-gray{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); color:var(--ink) }
@@ -1090,6 +1099,9 @@ body.company .vision-panel .wfd-core::before, body.company .vision-panel .wfd-co
   .cards-3 .work-card.grouped::before, .cards-2 .work-card.grouped::before{ margin:-2rem -2rem 1.75rem } }
 /* 짧은 콘텐츠 카드도 과하지 않게: grouped 최소높이는 콘텐츠 기준 */
 .cards-3 .work-card.grouped, .cards-2 .work-card.grouped{ min-height:0 }
+/* 세로형 이미지 카드 변형: 이미지 영역을 카드의 약 2/3로 (기본 16rem → 24rem) */
+.media-tall .work-card.grouped::before{ height:24rem }
+@media (max-width:639px){ .media-tall .work-card.grouped::before{ height:14rem } }
 .work-card.grouped .work-bottom{ position:static; inset:auto }
 .work-card.grouped .work-meta{ margin-bottom:.875rem; color:var(--purple-300) }
 .work-card.grouped .work-bottom p{ font-size:var(--text-16) }
@@ -1203,11 +1215,22 @@ body.company .vision-panel .wfd-core::before, body.company .vision-panel .wfd-co
 .uc-slide{ position:absolute; inset:0; opacity:0; visibility:hidden; transition:opacity .4s ease, transform .35s cubic-bezier(.2,.8,.2,1);
   background:color-mix(in srgb, var(--ink) 6%, var(--white)); color:var(--ink); border-radius:var(--radius-card); padding:3rem;
   display:flex; flex-direction:column }
-.uc-slide.is-active{ position:relative; opacity:1; visibility:visible }
+.uc-slide.is-active{ position:relative; opacity:1; visibility:visible;
+  will-change:transform; backface-visibility:hidden }  /* GPU 레이어 고정: 스케일 종료 시 텍스트 재래스터 스냅(덜컹) 방지 */
 @media (hover:hover){ .uc-slide.is-active:hover{ transform:scale(1.02) } }  /* 호버 시 카드 확대 */
 .uc-thumb{ width:5rem; height:5rem; border-radius:var(--radius-card-sm); background:rgba(var(--ink-rgb),.07); margin-bottom:1.5rem }
 /* uc-tall 변형(broof): 이미지↔텍스트 간격 확대로 카드 키움 */
 .uc-carousel.uc-tall .uc-thumb{ margin-bottom:4rem }
+/* uc-lg 변형(금융): 본문 한 단계 업 + 라벨 플래그 행 구조 */
+.uc-carousel.uc-lg .uc-slide > p{ font-size:var(--text-20) }
+.uc-carousel.uc-lg .uc-slide h3{ margin-bottom:1rem }  /* 타이틀↔플래그 행 간격 */
+.uc-rows{ display:flex; flex-direction:column; gap:.6rem }
+.uc-row{ display:flex; align-items:center; gap:.75rem; font-size:var(--text-20);
+  color:rgba(var(--ink-rgb),.6); line-height:var(--leading-body); word-break:keep-all }
+.uc-flag{ flex:none; display:inline-flex; align-items:center; padding:.375rem .875rem;
+  background:rgba(var(--ink-rgb),.07); border-radius:var(--radius-pill);
+  font-size:var(--text-16); font-weight:600; color:rgba(var(--ink-rgb),.45) }  /* 그레이 필 + 연그레이 텍스트 */
+@media (max-width:639px){ .uc-row{ flex-direction:column; align-items:flex-start; gap:.375rem } }
 .uc-thumb video, .uc-thumb img{ width:100%; height:100%; object-fit:cover; display:block; border-radius:inherit }
 .uc-slide h3{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em; margin-bottom:.75rem; color:var(--ink) }
 @media (min-width:640px){ .uc-slide h3{ font-size:var(--text-30) } }
@@ -1259,6 +1282,11 @@ body.company .vision-panel .wfd-core::before, body.company .vision-panel .wfd-co
 .ex-card h3{ margin-bottom:0 }
 .ex-card .ex-num{ display:block; font-size:var(--text-14); font-weight:500; color:rgba(var(--white-rgb),.5); margin-bottom:.5rem }  /* 기능 카드 번호 */
 .ex-card h3 + p{ margin-top:.75rem; font-size:var(--text-18) }  /* 서브카피 달릴 때만 간격 + 한 단계 업 */
+/* ex-card 그레이 변형: 라이트 그레이 채움 + 잉크 텍스트 (호버 스케일만 유지) */
+.ex-card.ex-gray{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); color:var(--ink); box-shadow:none }
+.ex-card.ex-gray h3{ color:var(--ink) }
+.ex-card.ex-gray p{ color:rgba(var(--ink-rgb),.6) }
+.ex-card.ex-gray .ex-ico{ background:rgba(var(--ink-rgb),.06) }
 /* 거래소 카드: 컴팩트라 모바일도 2열, 태블릿 3열 */
 .cards-3:has(.ex-card){ grid-template-columns:repeat(2,1fr); gap:1rem }
 @media (min-width:640px){ .cards-3:has(.ex-card){ grid-template-columns:repeat(3,1fr); gap:1.5rem } }
@@ -1308,6 +1336,12 @@ body.company .vision-panel .wfd-core::before, body.company .vision-panel .wfd-co
 .stat-num.sn-sm{ font-size:var(--text-36) }
 @media (min-width:640px){ .stat-num.sn-sm{ font-size:var(--text-40) } }
 @media (min-width:768px){ .stat-num.sn-sm{ font-size:var(--text-48) } }
+/* 스탯 2x2 배치 (기본 4열 대신) — 숫자는 기본에서 토큰 1단계 다운 (48→40 / 60→48 / 72→60) */
+@media (min-width:1024px){ .stats-grid.sg-2x2{ grid-template-columns:repeat(2,1fr) } }
+.stats-grid.sg-2x2{ margin-top:var(--space-64); margin-bottom:var(--space-32) }  /* 타이틀↔그리드 여백 업(3.5→4rem) + 하단 마진 */
+.sg-2x2 .stat-num{ font-size:var(--text-36); font-weight:700 }  /* 기본(600)보다 한 단계 볼드, 사이즈는 한 토큰 다운 */
+@media (min-width:640px){ .sg-2x2 .stat-num{ font-size:var(--text-40) } }
+@media (min-width:768px){ .sg-2x2 .stat-num{ font-size:var(--text-48) } }
 .stats-panel .sec-note{ margin-top:3rem; color:rgba(var(--white-rgb),.45) }
 .stats-panel .sec-note + .sec-note{ margin-top:1rem }
 .stats-panel .sec-note strong{ font-weight:600; color:rgba(var(--white-rgb),.7) }
@@ -1370,6 +1404,8 @@ body.company .vision-panel .wfd-core::before, body.company .vision-panel .wfd-co
   font-size:var(--text-14); color:rgba(var(--ink-rgb),.45) }
 .num-card .n{ font-size:var(--text-40); font-weight:600; letter-spacing:-.02em; line-height:1.1; margin-bottom:.5rem }
 .num-card .n small{ font-size:var(--text-20); font-weight:500 }
+/* 회색 채움 변형 (About Track Record 톤) — company 밖에서도 사용 */
+.num-solid .num-card{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); border:none }
 .tag.on-light{ border-color:var(--line); color:var(--ink) }
 
 /* ============ CONTENT-PORT ADDITIONS (우리 토큰 유지) ============ */
@@ -1634,7 +1670,10 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
         <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Solutions — 화이트라벨 거래소</div>
         <h1 class="phero-h1" data-line-stagger="120"><span class="rvl-line"><span>거래소를 만들지 않아도,</span></span><span class="rvl-line"><span>서비스 안에 거래 기능을 넣습니다</span></span></h1>
         <p class="phero-lead rvl" style="--rvl-delay:250ms">PortX는 여러 거래소의 유동성과 거래 화면을 우리 서비스 안으로 그대로 가져오는 솔루션입니다. 매칭엔진·유동성·지갑·보안을 직접 만들지 않아도, 우리 브랜드를 단 디지털자산 거래 서비스를 빠르게 시작할 수 있습니다.</p>
-        
+        <div class="phero-rel rvl" style="--rvl-delay:600ms">
+      <p class="phero-rel-t">관련 제품 살펴보기</p>
+      <a class="phero-rel-flag" href="portx.html">PortX</a>
+    </div>
       </div>
       <div class="phero-visual" aria-hidden="true"><img src="assets/solutions/hero-test-2.webp" alt="" loading="eager" fetchpriority="high"></div>
       
@@ -1646,41 +1685,65 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
     </div>
   </section>
 
+<section><div class="shell sec sec-top-lg sec-stagger">
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Why Now</div><h2 class="sec-h2 has-lead" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>사용자는 거래를 위해 외부 거래소로 빠져나갑니다</span></span></h2><p class="phero-lead sec-lead rvl">국내 가상자산 이용자는 2023년 말 645만 명에서 2024년 말 970만 명으로 빠르게 늘었습니다. 이용자를 이미 확보한 서비스라도 자체 거래 기능이 없으면, 사용자는 거래를 하려고 외부 거래소로 빠져나갑니다.</p>
+  <p class="phero-lead sec-lead rvl">그만큼 수수료와 사용자 관계를 외부에 내주게 됩니다. 그렇다고 직접 거래소를 만들자니 유동성·API·지갑·보안 부담이 큽니다.</p>
+  <div class="colc-duo">
+  <div class="colc rvl"><p class="barc-title">국내 가상자산 거래가능 이용자 수</p><div class="colc-panel"><div class="colc-plot" style="grid-template-columns:repeat(3,1fr)"><div class="colc-stack"><span class="colc-v">645만명</span><div class="colc-bar" style="height:calc(66*var(--colc-h)/100)"></div></div><div class="colc-stack"><span class="colc-v">778만명</span><div class="colc-bar" style="height:calc(80*var(--colc-h)/100)"></div></div><div class="colc-stack hi"><span class="colc-v">970만명</span><div class="colc-bar" style="height:calc(100*var(--colc-h)/100)"></div></div></div><div class="colc-labels" style="grid-template-columns:repeat(3,1fr)"><span class="colc-l">2023년 말</span><span class="colc-l">2024년 6월</span><span class="colc-l">2024년 말</span></div><p class="sec-note"><strong>출처: 금융정보분석원(FIU) 가상자산사업자 실태조사</strong><br>신고 사업자 기준 거래가능 이용자 수이며, 빠르게 증가하고 있습니다.</p></div></div>
+  <div class="colc rvl"><p class="barc-title">국내에서 빠져나간 가상자산 (2022 하반기)</p><div class="colc-panel"><div class="colc-plot" style="grid-template-columns:repeat(2,1fr)"><div class="colc-stack"><span class="colc-v">약 20조원</span><div class="colc-bar" style="height:calc(65*var(--colc-h)/100)"></div></div><div class="colc-stack hi"><span class="colc-v">30.6조원</span><div class="colc-bar" style="height:calc(100*var(--colc-h)/100)"></div></div></div><div class="colc-labels" style="grid-template-columns:repeat(2,1fr)"><span class="colc-l">해외 유출</span><span class="colc-l">총 외부 출금</span></div><p class="sec-note"><strong>출처: 금융정보분석원(FIU) 가상자산사업자 실태조사</strong><br>같은 기간 자금이 국내 서비스 밖으로 대규모 이동했습니다.</p></div></div>
+  </div>
+</div></section>
 <section><div class="shell sec">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Product</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>이 솔루션을 구성하는 제품</span></span></h2>
-  <div class="chip-row rvl"><span class="chip">PortX</span></div>
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Why Now</div><h2 class="sec-h2 has-lead" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>사용자는 거래를 위해 외부 거래소로 빠져나갑니다</span></span></h2><p class="phero-lead sec-lead rvl">국내 가상자산 이용자는 2023년 말 645만 명에서 2024년 말 970만 명으로 빠르게 늘었습니다. 이용자를 이미 확보한 서비스라도 자체 거래 기능이 없으면, 사용자는 거래를 하려고 외부 거래소로 빠져나갑니다. 그만큼 수수료와 사용자 관계를 외부에 내주게 됩니다. 그렇다고 직접 거래소를 만들자니 유동성·API·지갑·보안 부담이 큽니다.</p>
-  <div class="barc rvl"><p class="barc-title">국내 가상자산 거래가능 이용자 수</p><div class="barc-row"><span class="barc-l">2023년 말</span><div class="barc-track"><div class="barc-fill" style="width:66%"></div></div><span class="barc-v">645만명</span></div><div class="barc-row"><span class="barc-l">2024년 6월</span><div class="barc-track"><div class="barc-fill" style="width:80%"></div></div><span class="barc-v">778만명</span></div><div class="barc-row hi"><span class="barc-l">2024년 말</span><div class="barc-track"><div class="barc-fill" style="width:100%"></div></div><span class="barc-v">970만명</span></div></div><p class="sec-note">출처: 금융정보분석원(FIU) 가상자산사업자 실태조사. 신고 사업자 기준 거래가능 이용자.</p>
-  <div style="height:2rem"></div>
-  <ul class="cards-2"><li class="rvl" style="--rvl-delay:0ms"><div class="light-card num-card"><span class="cap">유출</span><div class="n">약 20조원</div><p>국내에서 해외로 빠져나간 가상자산 (’22 하반기)</p></div></li><li class="rvl" style="--rvl-delay:90ms"><div class="light-card num-card"><span class="cap">출금</span><div class="n">30.6조원</div><p>국내 거래소 총 외부 출금액 (같은 기간)</p></div></li></ul>
-  <p class="sec-note rvl">출처: 금융정보분석원(FIU) 가상자산사업자 실태조사(’22 하반기). 자금이 국내 서비스 밖으로 빠져나간다는 근거(실적).</p>
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Problem</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>사업자가 마주하는 문제</span></span></h2>
-  <ul class="cards-2"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static sm"><div class="work-meta"><span>문제</span></div><div class="work-bottom"><h3>사용자 외부 이탈</h3><p>거래하려는 사용자가 외부 거래소로 빠져 수수료·관계를 잃습니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm"><div class="work-meta"><span>문제</span></div><div class="work-bottom"><h3>직접 구축 부담</h3><p>거래소를 만들려면 유동성·API·지갑·보안·리스크가 부담입니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm"><div class="work-meta"><span>문제</span></div><div class="work-bottom"><h3>온보딩 마찰</h3><p>API key 발급·입력 과정에서 사용자가 이탈합니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms"><article class="work-card static sm"><div class="work-meta"><span>문제</span></div><div class="work-bottom"><h3>체인·거래소 파편화</h3><p>여러 체인·거래소를 각각 연동·유지해야 합니다.</p></div></article></li></ul>
+  <div class="media-tall"><ul class="cards-2"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>문제 01</span></div><h3>사용자 외부 이탈</h3><p>거래하려는 사용자가 외부 거래소로 빠져 수수료·관계를 잃습니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>문제 02</span></div><h3>직접 구축 부담</h3><p>거래소를 만들려면 유동성·API·지갑·보안·리스크가 부담입니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>문제 03</span></div><h3>온보딩 마찰</h3><p>API key 발급·입력 과정에서 사용자가 이탈합니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>문제 04</span></div><h3>체인·거래소 파편화</h3><p>여러 체인·거래소를 각각 연동하고 유지해야 합니다.</p></div></article></li></ul></div>
+</div></section>
+<section><div class="shell sec">
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Features</div><h2 class="sec-h2 has-lead" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>거래 경험을 서비스 안으로</span></span></h2><p class="phero-lead sec-lead rvl">외부 거래소의 유동성과 거래 기능을 자사 브랜드 안으로 연결합니다.</p>
+  <ul class="cards-2"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="ico-card ex-card" style="--brand:var(--purple-500); --brand-txt:var(--white)"><span class="ex-ico"></span><h3>거래소 연동</h3><p>외부 CEX·DEX 유동성을 고객 서비스로 연결합니다.</p></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="ico-card ex-card" style="--brand:var(--purple-500); --brand-txt:var(--white)"><span class="ex-ico"></span><h3>Smart Access · QR</h3><p>API key 입력 없이 QR 한 번으로 거래소를 연결합니다.</p></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="ico-card ex-card" style="--brand:var(--purple-500); --brand-txt:var(--white)"><span class="ex-ico"></span><h3>전문 거래 화면·성과 분석</h3><p>전문 거래 UX와 PnL·성과 분석을 제공합니다.</p></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms"><article class="ico-card ex-card" style="--brand:var(--purple-500); --brand-txt:var(--white)"><span class="ex-ico"></span><h3>비수탁 보안 · BTP</h3><p>비수탁 흐름과 체인 간 연결(BTP)로 확장합니다.</p></article></li></ul>
+</div></section>
+<!-- By the Numbers: 다크 스탯 패널 -->
+<section><div class="shell stats-shell">
+  <div class="stats-panel rvl" style="--rvl-y:40px; --rvl-s:.99">
+    <div class="eyebrow light"><span class="dot"></span>By the Numbers</div>
+    <h2 class="stats-h2" data-line-reveal style="max-width:none"><span class="rvl-line"><span>거래소 구축 없이 시작하는<br>화이트라벨 거래 인프라</span></span></h2>
+    <ul class="stats-grid sg-2x2">
+      <li class="rvl" style="--rvl-y:20px"><div class="stat-num"><span class="pv-val" data-val="9">0</span>개 거래소</div><div class="stat-label">연동 노출 가능</div></li>
+      <li class="rvl" style="--rvl-y:20px; --rvl-delay:90ms"><div class="stat-num">QR 1회</div><div class="stat-label">API key 없이 수 초 만에 연결</div></li>
+      <li class="rvl" style="--rvl-y:20px; --rvl-delay:180ms"><div class="stat-num">78~94%</div><div class="stat-label">직접 연동 대비 기간 단축 (모델 기준)</div></li>
+      <li class="rvl" style="--rvl-y:20px; --rvl-delay:270ms"><div class="stat-num">비수탁</div><div class="stat-label">자산 보관을 최소화한 구조</div></li>
+    </ul>
+  </div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Features</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>주요 기능</span></span></h2>
-  <ul class="cards-2"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static sm"><div class="work-meta"><span>01</span></div><div class="work-bottom"><h3>거래소 연동</h3><p>외부 CEX/DEX 유동성을 고객 서비스로 연결합니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm"><div class="work-meta"><span>02</span></div><div class="work-bottom"><h3>Smart Access · QR</h3><p>API key 입력 없이 QR 한 번으로 거래소를 연결합니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm"><div class="work-meta"><span>03</span></div><div class="work-bottom"><h3>전문 거래 화면·성과 분석</h3><p>전문 거래 UX와 PnL·성과 분석을 제공합니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms"><article class="work-card static sm"><div class="work-meta"><span>04</span></div><div class="work-bottom"><h3>비수탁 보안 · BTP</h3><p>비수탁 흐름과 체인 간 연결(BTP)로 확장합니다.</p></div></article></li></ul>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Credentials</div><h2 class="sec-h2 has-lead" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>공공·금융 분야에서 검증된 기술력</span></span></h2><p class="phero-lead sec-lead rvl">파라메타는 다양한 인증과 산업 협업 경험을 바탕으로, 안정적인 디지털자산 거래 인프라를 구축해 왔습니다.</p>
+  <div class="cert-row rvl" style="--rvl-y:24px; padding:var(--space-32) 0 0">
+    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">기술보증기금 TI-1</div></div>
+    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">CSAP 인증</div></div>
+    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">혁신금융서비스 지정</div></div>
+  </div>
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>By the Numbers</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>숫자로 보는 PortX</span></span></h2>
-  <ul class="cards-3"><li class="rvl" style="--rvl-delay:0ms"><div class="light-card num-card"><span class="cap">Exchanges</span><div class="n">9개 거래소</div><p>연동 노출 가능</p></div></li><li class="rvl" style="--rvl-delay:90ms"><div class="light-card num-card"><span class="cap">Access</span><div class="n">QR 1회</div><p>API key 없이 수 초 연결</p></div></li><li class="rvl" style="--rvl-delay:180ms"><div class="light-card num-card"><span class="cap">Speed</span><div class="n">78~94%</div><p>직접 연동 대비 기간 단축(모델)</p></div></li><li class="rvl" style="--rvl-delay:270ms"><div class="light-card num-card"><span class="cap">Security</span><div class="n">비수탁</div><p>자산 보관 최소화 구조</p></div></li></ul>
-  <p class="sec-note rvl">78~94%는 9개 거래소 직접 연동 대비 기간 단축 모델. BTP(인터체인)는 상호운용 기반 기술입니다.</p>
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Use Cases</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>적용 사례</span></span></h2>
-  <ul class="cards-2"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static"><div class="work-meta"><span>적용</span></div><div class="work-bottom"><h3>Supercycl — Pre-OBT</h3><p><b>과제</b> · 자사 서비스 안에서 거래 경험을 빠르게 검증해야 함<br><br><b>해결</b> · PortX 기반 거래 연동으로 Pre-OBT 조기 사용자 확보</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static"><div class="work-meta"><span>적용</span></div><div class="work-bottom"><h3>TaaS — 디지털자산 세금정산</h3><p><b>과제</b> · 여러 거래소에 흩어진 거래 내역을 모아 예상 세금을 계산해야 함<br><br><b>해결</b> · PortX Smart Access로 외부 거래소 계정 연결을 간소화해, 세금 계산에 필요한 거래 정보를 서비스 안에서 바로 활용</p></div></article></li></ul>
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
+<section><div class="shell sec">
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>FAQ</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>자주 묻는 질문</span></span></h2>
-  <ul><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:0ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><span class="faq-idx">01</span><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top">화이트라벨 하이브리드 거래소가 무엇인가요</h3><div class="faq-ans">거래소를 직접 만들지 않고, 외부 거래소의 유동성과 거래 화면을 고객 브랜드 안에 붙이는 방식입니다.</div><h3 class="faq-t faq-t-bottom">화이트라벨 하이브리드 거래소가 무엇인가요</h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div></li><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:60ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><span class="faq-idx">02</span><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top">직접 거래소를 만드는 것과 무엇이 다른가요</h3><div class="faq-ans">유동성·API·지갑·보안을 반복 개발하지 않고, 표준 거래 인프라로 빠르게 시작합니다.</div><h3 class="faq-t faq-t-bottom">직접 거래소를 만드는 것과 무엇이 다른가요</h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div></li><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:120ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><span class="faq-idx">03</span><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top">BTP는 무엇인가요</h3><div class="faq-ans">서로 다른 블록체인 사이의 메시지·자산 이동을 지원하는 인터체인 기술입니다.</div><h3 class="faq-t faq-t-bottom">BTP는 무엇인가요</h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div></li></ul>
+  <ul><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:0ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><span class="faq-idx">01</span><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top">화이트라벨 하이브리드 거래소가 무엇인가요?</h3><div class="faq-ans">거래소를 직접 만들지 않고, 외부 거래소의 유동성과 거래 화면을 고객 브랜드 안에 붙이는 방식입니다.</div><h3 class="faq-t faq-t-bottom">화이트라벨 하이브리드 거래소가 무엇인가요?</h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div></li><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:60ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><span class="faq-idx">02</span><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top">직접 거래소를 만드는 것과 무엇이 다른가요?</h3><div class="faq-ans">유동성·API·지갑·보안을 반복 개발하지 않고, 표준 거래 인프라로 빠르게 시작합니다.</div><h3 class="faq-t faq-t-bottom">직접 거래소를 만드는 것과 무엇이 다른가요?</h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div></li><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:120ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><span class="faq-idx">03</span><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top">BTP는 무엇인가요?</h3><div class="faq-ans">서로 다른 블록체인 사이의 메시지·자산 이동을 지원하는 인터체인 기술입니다.</div><h3 class="faq-t faq-t-bottom">BTP는 무엇인가요?</h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div></li></ul>
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Solutions</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>다른 분야 솔루션</span></span></h2>
-  <div class="routes rvl"><a class="route" href="solution-finance.html">금융</a><a class="route" href="solution-gov.html">공공</a><a class="route" href="solution-cert.html">증명서</a><a class="route on" href="solution-exchange.html">화이트라벨 거래소</a><a class="route" href="solution-data.html">데이터주권</a><a class="route" href="solution-settlement.html">결제·정산</a></div>
+<section><div class="shell sec">
+  <div class="sh-center"><div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Use Cases</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>화이트라벨 거래 적용 사례</span></span></h2></div>
+  <div class="uc-carousel uc-tall uc-lg">
+    <button class="uc-arrow uc-prev rvl rvl-op" type="button" aria-label="이전 사례"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5L8 12l7 7"/></svg></button>
+    <div class="uc-slides rvl" style="--rvl-y:40px">
+      <article class="uc-slide is-active">
+        <div class="uc-thumb" aria-hidden="true"></div>
+        <h3>Supercycl · Pre-OBT</h3>
+        <div class="uc-rows"><div class="uc-row"><span class="uc-flag">과제</span><span>자사 서비스 안에서 거래 경험을 빠르게 검증해야 합니다.</span></div><div class="uc-row"><span class="uc-flag">해결</span><span>PortX 기반 거래 연동으로 Pre-OBT 단계에서 조기 사용자를 확보했습니다.</span></div></div>
+      </article>
+      <article class="uc-slide">
+        <div class="uc-thumb" aria-hidden="true"></div>
+        <h3>TaaS · 디지털자산 세금정산</h3>
+        <div class="uc-rows"><div class="uc-row"><span class="uc-flag">과제</span><span>여러 거래소에 흩어진 거래 내역을 모아 예상 세금을 계산해야 합니다.</span></div><div class="uc-row"><span class="uc-flag">해결</span><span>PortX Smart Access로 외부 거래소 계정 연결을 간소화해, 세금 계산에 필요한 거래 정보를 서비스 안에서 바로 활용했습니다.</span></div></div>
+      </article>
+    </div>
+    <button class="uc-arrow uc-next rvl rvl-op" type="button" aria-label="다음 사례"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+  </div>
 </div></section>
 
 </main>
