@@ -132,29 +132,37 @@ body.hero-center .phero-text{ grid-column:1 / -1; align-items:center; max-width:
 body.hero-center .phero-h1{ max-width:none }
 body.hero-center .phero-text .phero-lead{ max-width:40rem }
 body.hero-center .phero-cta{ justify-content:center }
-/* About(company): 이미지 영역 위 + 텍스트 아래, 중앙 스택 (레퍼런스 레이아웃) */
-body.company .phero{ background:var(--white); position:relative; overflow:hidden }  /* 라이트 히어로: 완전 화이트 */
-/* evervault풍 배경 — 암호화 문자 매트릭스(모노스페이스 랜덤 스크램블) + 미세 글로우 (라이트) */
-body:not(.company) .ev-matrix{ display:none }
-body.company .ev-matrix{ position:absolute; inset:0; z-index:0; width:100%; height:100%;
-  display:block; pointer-events:none;
-  -webkit-mask-image:radial-gradient(ellipse 78% 68% at 50% 42%, #000 26%, transparent 100%);
-  mask-image:radial-gradient(ellipse 78% 68% at 50% 42%, #000 26%, transparent 100%) }
-body.company .phero::after{ content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
-  background:radial-gradient(circle 42vw at 50% 40%, rgba(var(--accent-rgb),.05), transparent 62%);
-  animation:about-glow 14s ease-in-out infinite alternate }
-@keyframes about-glow{ from{ transform:translate(-4%,-2%) } to{ transform:translate(4%,2%) } }
-body.company .phero-inner{ position:relative; z-index:1 }
-body.company .phero-inner{ display:flex; flex-direction:column; align-items:center;
-  text-align:center; gap:2.75rem; min-height:0; padding:10rem 2rem 6rem }  /* 100vh 미사용 — 콘텐츠 높이 */
-body.company .phero-status{ display:none }  /* 크럼·Scroll·디바이더 제거 */
-body.company .phero-visual{ display:none }  /* 이미지 영역 제거 */
-body.company .phero-text .eyebrow{ display:none }  /* [COMPANY] 아이브로우 제거 */
-body.company .phero-text{ align-items:center; align-self:center; max-width:44rem; margin:0 auto; gap:1.25rem }
-/* About 히어로 h1 한 토큰 크게 */
-body.company .phero-h1{ font-size:var(--text-40) }
-@media (min-width:640px){ body.company .phero-h1{ font-size:var(--text-60) } }
-@media (min-width:768px){ body.company .phero-h1{ font-size:var(--text-72) } }
+/* ============ 라이트 히어로 공통(hero-light) — company·contact·insights 공유 ============ */
+/* 화이트 배경 + orb 캔버스 + 중앙정렬 텍스트 + 여백/타이포 토큰 (A: 공통) */
+body.hero-light .phero{ background:var(--white); position:relative; overflow:hidden }
+/* orb 배경 캔버스: hero-light에서만 표시 (ev-matrix는 전면 제거) */
+.ev-matrix{ display:none }
+body:not(.hero-light) .orb-bg{ display:none }
+body.hero-light .orb-bg{ position:absolute; inset:0; z-index:0; width:100%; height:100%; display:block; pointer-events:none }
+body.hero-light .phero-inner{ position:relative; z-index:1; display:flex; flex-direction:column; align-items:center;
+  text-align:center; gap:2.75rem; min-height:0; padding:13rem 2rem 6rem }
+body.hero-light .phero-status{ display:none }   /* 크럼·Scroll·디바이더 제거 */
+body.hero-light .phero-visual{ display:none }   /* 이미지 영역 제거 */
+body.hero-light .phero-text{ align-items:center; align-self:center; max-width:44rem; margin:0 auto; gap:.75rem }
+/* h1 한 토큰 크게 */
+body.hero-light .phero-h1{ font-size:var(--text-40) }
+@media (min-width:640px){ body.hero-light .phero-h1{ font-size:var(--text-60) } }
+@media (min-width:768px){ body.hero-light .phero-h1{ font-size:var(--text-72) } }
+/* 리드 본문 사이즈 (16 → 18, 데스크톱 20) */
+body.hero-light .phero-text .phero-lead{ font-size:var(--text-18) }
+@media (min-width:768px){ body.hero-light .phero-text .phero-lead{ font-size:var(--text-20) } }
+
+/* 히어로 플로팅 이미지 — 히어로 하단 중앙, 아래 박스가 하단 절반을 덮음 (페이지별 hero_figure) */
+body:not(.hero-light) .phero-figure{ display:none }
+/* bottom:0(=다크 카드 상단) + translateY(50%) → 크기 무관 항상 정확히 반만 걸침 */
+body.hero-light .phero-figure{ position:absolute; left:50%; bottom:0; transform:translate(-50%, 50%);
+  width:clamp(18rem, 28vw, 28rem); height:auto; z-index:1; pointer-events:none; display:block }
+@media (max-width:767px){ body.hero-light .phero-figure{ width:15rem } }
+
+/* ============ About(company) 전용(B) — 라이트 히어로 위에 Vision 편입 ============ */
+body.company .phero-inner{ padding-bottom:28rem }   /* 아래 Vision 편입 + 그래픽 공간 (두 배로) */
+body.company .hero-vision{ position:relative; z-index:1; margin:0 auto; padding-bottom:6rem }
+body.company .phero-text .eyebrow{ display:none }   /* [COMPANY] 아이브로우 제거 (About만) */
 /* Vision WalletFi 도식 — ParaSta 회색·점 스타일 · 풀 12칼럼 그리드(페이지 그리드 스냅) */
 .wfd{ margin:3rem 0 0; display:grid; grid-template-columns:repeat(12,minmax(0,1fr));
   column-gap:var(--grid-gap); row-gap:var(--grid-gap); align-items:stretch;
@@ -185,6 +193,61 @@ body.company .phero-h1{ font-size:var(--text-40) }
   border:1px solid rgba(var(--white-rgb),.28); border-radius:var(--radius-pill,999px); padding:.5rem 1rem }
 @media (max-width:767px){ .wfd{ padding:2rem 1.25rem } .wfd-side, .wfd-core{ grid-column:1 / -1 }
   .wfd-core::before, .wfd-core::after{ display:none } }
+/* Vision: Proven Core식 다크 박스로 가둠(타이틀 포함) — 위 히어로는 라이트 */
+body.company .vision-panel{ border-radius:var(--radius-card); background:var(--ink); color:var(--white);
+  padding:3rem 1.75rem; text-align:left }
+@media (min-width:640px){ body.company .vision-panel{ padding:3.5rem 3rem } }
+@media (min-width:1024px){ body.company .vision-panel{ padding:4.5rem 4.5rem } }
+/* 헤더 텍스트 라이트 반전 */
+body.company .vision-panel .sh-center{ margin:0 auto }
+body.company .vision-panel .eyebrow{ color:rgba(var(--white-rgb),.9) }
+body.company .vision-panel .eyebrow::before, body.company .vision-panel .eyebrow::after{ color:rgba(var(--white-rgb),.4) }  /* 다크 카드: [ ] 브라켓도 라이트 톤 */
+body.company .vision-panel .sec-h2{ color:var(--white) }
+body.company .vision-panel .phero-lead{ color:rgba(var(--white-rgb),.68); font-size:var(--text-20) }
+@media (max-width:1023px){ body.company .vision-panel .phero-lead{ font-size:var(--text-18) } }
+/* wfd 다이어그램 다크 톤 */
+body.company .vision-panel .wfd{ background-color:transparent; padding:0; margin-top:3rem;
+  background-image:radial-gradient(rgba(var(--white-rgb),.04) 1px, transparent 1.5px); background-size:20px 20px }
+body.company .vision-panel .wfd-band{ background:#2c2a5a; border-color:rgba(var(--white-rgb),.1); box-shadow:none }  /* 좌우 원: 솔리드 컬러(잉크보다 더 밝게) */
+body.company .vision-panel .wfd-t{ color:var(--white) }
+body.company .vision-panel .wfd-t em{ color:var(--purple-300) }
+body.company .vision-panel .wfd-d{ color:rgba(var(--white-rgb),.62) }
+body.company .vision-panel .wfd-d b{ color:var(--white) }
+body.company .vision-panel .wfd-s{ color:rgba(var(--white-rgb),.64) }
+body.company .vision-panel .wfd-core{ background:var(--white); border-color:var(--white) }  /* WalletFi = 흰색 원 */
+body.company .vision-panel .wfd-core .wfd-t{ color:var(--purple-500); font-size:var(--text-30) }  /* 흰 원 위 글자 반전 + 크게 */
+body.company .vision-panel .wfd-core .wfd-s{ color:rgba(var(--ink-rgb),.6) }
+body.company .vision-panel .wfd-core::before, body.company .vision-panel .wfd-core::after{ color:var(--purple-300) }
+/* TradFi·WalletFi·DeFi 셋 다 원 (작게·중앙정렬) + 화살표 크게 */
+body.company .vision-panel .wfd{ align-items:center }
+body.company .vision-panel .wfd-band{ aspect-ratio:1; border-radius:50%; padding:1.5rem;
+  justify-content:center; width:min(100%, 18rem); justify-self:center; margin-inline:auto }
+body.company .vision-panel .wfd-core{ width:min(100%, 19rem) }  /* 중앙 허브만 살짝 크게 */
+body.company .vision-panel .wfd-core .wfd-s{ max-width:13rem; font-size:var(--text-18) }
+body.company .vision-panel .wfd-d{ max-width:12rem }
+/* 연결선: dashed 라인 + 코어 모서리에 반 걸친 노드 dot */
+/* 박스를 코어쪽으로 5.5px 늘려 점이 잘리지 않게(배경 클립 방지), 대시는 갭까지만 */
+body.company .vision-panel .wfd-core::before, body.company .vision-panel .wfd-core::after{
+  content:''; font-size:0; border:0; height:11px; z-index:2;
+  width:calc(var(--grid-gap) + 6.75rem + 5.5px); transform:translateY(-50%);
+  background-image:
+    radial-gradient(circle at center, var(--purple-300) 4.5px, transparent 5px),
+    repeating-linear-gradient(90deg, rgba(var(--purple-300-rgb),.85) 0 4px, transparent 4px 10px);
+  background-size:11px 11px, calc(100% - 5.5px) 2px;
+  background-repeat:no-repeat, repeat-x }
+/* ::before=좌측 갭(코어 왼쪽 모서리에 dot), ::after=우측 갭(코어 오른쪽 모서리에 dot) */
+body.company .vision-panel .wfd-core::before{ left:auto; right:calc(100% - 5.5px); background-position:calc(100% - 2px) center, left center }
+body.company .vision-panel .wfd-core::after{ left:calc(100% - 5.5px); background-position:2px center, right center }
+/* Wallet Infrastructure: 채운 보라 → 라인 박스(아웃라인) */
+body.company .vision-panel .wfd-infra{ background:transparent; border:1px solid rgba(var(--purple-300-rgb),.4) }
+/* 원 호버 리빌 — 3개 다 scale (그림자 없음) */
+body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,.8,.2,1), background-color .35s }
+body.company .vision-panel .wfd-core::before, body.company .vision-panel .wfd-core::after{ transition:transform .35s cubic-bezier(.2,.8,.2,1) }
+@media (hover:hover){
+  body.company .vision-panel .wfd-band:hover{ transform:scale(1.05) }
+  /* 코어 호버 시 커넥터는 카운터-스케일로 선 크기 고정(코어만 확대) */
+  body.company .vision-panel .wfd-core:hover::before, body.company .vision-panel .wfd-core:hover::after{ transform:translateY(-50%) scale(calc(1 / 1.05)) }
+}
 
 /* ============ WHAT IS (좌 다이어그램 / 우 텍스트) ============ */
 .whatis-grid{ display:grid; grid-template-columns:1fr; gap:2.5rem; align-items:center }
@@ -377,14 +440,13 @@ body.company .phero-h1{ font-size:var(--text-40) }
 /* cm-sm 변형(broof Core Features): 이미지 영역·카드 최소높이 축소(텍스트 짧아 아래 빈공간 방지) */
 .cm-cards.cm-sm .work-card.grouped::before{ height:16rem }
 .cm-cards.cm-sm .work-card.grouped{ min-height:0 }
-/* Core Modules(ParaSta) 이미지 영역: 앱 화면 중앙 정렬 — 도트 패턴 위, 하단 그라 마스크 아래 레이어 */
+/* Core Modules(ParaSta) 이미지 영역: 앱 화면 중앙 정렬 — 그라 마스크 없이 이미지 그대로(페이드는 이미지 자체에서 처리) */
 .cm-cards.core-mods .work-card.grouped::before{
-  background-image:linear-gradient(to bottom, transparent 45%, color-mix(in srgb, var(--ink) 6%, var(--white))),
-    url('assets/body-app.avif'),
+  background-image:url('assets/body-app.avif'),
     radial-gradient(rgba(var(--ink-rgb),.06) 1px, transparent 1.5px);
-  background-size:100% 100%, contain, 20px 20px;
-  background-position:center, center, 0 0;
-  background-repeat:no-repeat, no-repeat, repeat }
+  background-size:contain, 20px 20px;
+  background-position:center, 0 0;
+  background-repeat:no-repeat, repeat }
 /* 로고 카드 그리드 (Trusted By) — 한 줄 4개 */
 .logo-grid{ list-style:none; margin:2.5rem 0 0; padding:0; display:grid;
   grid-template-columns:repeat(12,minmax(0,1fr)); column-gap:var(--grid-gap); row-gap:var(--grid-gap) }
@@ -1077,6 +1139,57 @@ if (pheroH1){
     pheroH1.querySelectorAll('.rvl-line').forEach(l => l.classList.add('is-in'))));
 }
 
+/* About 히어로에 편입된 Vision 헤더(아이브로우·타이틀·리드): 히어로라 로드 시 등장 (스크롤 관찰자로는 초기 뷰포트에서 스냅됨) */
+const hvPanel = document.querySelector('.hero-vision .vision-panel');
+if (hvPanel){
+  const hvEb = hvPanel.querySelector(':scope > .eyebrow');
+  const hvLead = hvPanel.querySelector(':scope > .phero-lead');
+  const hvTitle = hvPanel.querySelector(':scope > [data-line-reveal]');
+  if (hvTitle) initLineReveal(hvTitle);
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    if (hvEb) hvEb.classList.add('is-in');
+    if (hvLead) hvLead.classList.add('is-in');
+    if (hvTitle) hvTitle.querySelectorAll('.rvl-line').forEach(l => l.classList.add('is-in'));
+  }));
+}
+
+/* About 히어로 orb 배경 (company 전용) — orb-background.html 이식, .phero 크기에 맞춤 */
+(function(){
+  const cv = document.querySelector('body.hero-light .orb-bg');
+  if(!cv) return;
+  const ctx = cv.getContext('2d', { alpha:false });
+  if(!ctx) return;
+  const phero = cv.closest('.phero');
+  const BACKGROUND='#ffffff', MUTED='#eceef5', VIOLET='#ded8fa';
+  const CELL_SIZE=26, NOISE_SCALE=9, TIME_SPEED=0.085, MAX_RADIUS=3, CENTER_DENSITY=0.22, MAX_DPR=1.5, TAU=Math.PI*2;
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  let width=1, height=1, dpr=1, frame=0, startedAt=performance.now();
+  const clamp=(v,a,b)=>Math.min(b,Math.max(a,v)); const smooth=v=>v*v*(3-2*v); const lerp=(a,b,t)=>a+(b-a)*t;
+  function hash3(x,y,z){ let v=Math.imul(x,374761393)+Math.imul(y,668265263)+Math.imul(z,1442695041); v=Math.imul(v^(v>>>13),1274126177); return ((v^(v>>>16))>>>0)/4294967295; }
+  function noise3(x,y,z){ const x0=Math.floor(x),y0=Math.floor(y),z0=Math.floor(z); const tx=smooth(x-x0),ty=smooth(y-y0),tz=smooth(z-z0);
+    const n000=hash3(x0,y0,z0),n100=hash3(x0+1,y0,z0),n010=hash3(x0,y0+1,z0),n110=hash3(x0+1,y0+1,z0),n001=hash3(x0,y0,z0+1),n101=hash3(x0+1,y0,z0+1),n011=hash3(x0,y0+1,z0+1),n111=hash3(x0+1,y0+1,z0+1);
+    const lo=lerp(lerp(n000,n100,tx),lerp(n010,n110,tx),ty), up=lerp(lerp(n001,n101,tx),lerp(n011,n111,tx),ty); return lerp(lo,up,tz); }
+  function edgeVis(x,y){ const h=Math.abs(x/width-0.5)*2, v=Math.abs(y/height-0.5)*2; const d=Math.max(h,v); return 0.38+smooth(clamp((d-0.18)/0.7,0,1))*0.62; }
+  function densityFor(x,y){ const h=Math.abs(x/width-0.5)*2, v=Math.abs(y/height-0.5)*2; const d=Math.max(h,v); return CENTER_DENSITY+smooth(clamp((d-0.16)/0.68,0,1))*(1-CENTER_DENSITY); }
+  function radiusFor(val){ if(val<0.43||val>=0.9) return 0; const life=(val-0.43)/0.47; return MAX_RADIUS*smooth(Math.sin(life*Math.PI)); }
+  function alphaFor(r,vis){ return clamp((r/MAX_RADIUS)*vis,0,0.58); }
+  function drawOrb(x,y,r,val,vis){ if(r<0.45||vis<0.035) return; ctx.globalAlpha=alphaFor(r,vis); ctx.fillStyle=val>=0.65?VIOLET:MUTED; ctx.beginPath(); ctx.arc(x,y,r,0,TAU); ctx.fill(); }
+  function render(now){ const elapsed=reduced.matches?24:(now-startedAt)/1000; const z=elapsed*TIME_SPEED+4.7;
+    ctx.setTransform(dpr,0,0,dpr,0,0); ctx.globalAlpha=1; ctx.fillStyle=BACKGROUND; ctx.fillRect(0,0,width,height);
+    const cols=Math.ceil(width/CELL_SIZE)+1, rows=Math.ceil(height/CELL_SIZE)+1;
+    for(let r=0;r<rows;r++){ for(let c=0;c<cols;c++){ const x=c*CELL_SIZE+CELL_SIZE/2, y=r*CELL_SIZE+CELL_SIZE/2;
+      const val=noise3(c/Math.max(1,cols)*NOISE_SCALE, r/Math.max(1,rows)*NOISE_SCALE, z); const vis=edgeVis(x,y);
+      if(hash3(c,r,17)>densityFor(x,y)) continue; drawOrb(x,y,radiusFor(val),val,vis); } }
+    ctx.globalAlpha=1; if(!reduced.matches && !document.hidden) frame=requestAnimationFrame(render); }
+  function resize(){ const rc=phero.getBoundingClientRect(); width=Math.max(1,Math.round(rc.width)); height=Math.max(1,Math.round(rc.height));
+    dpr=Math.min(MAX_DPR,Math.max(1,devicePixelRatio||1)); cv.width=Math.round(width*dpr); cv.height=Math.round(height*dpr);
+    ctx.imageSmoothingEnabled=true; cancelAnimationFrame(frame); render(performance.now()); }
+  if('ResizeObserver' in window){ let to; new ResizeObserver(()=>{ clearTimeout(to); to=setTimeout(resize,120); }).observe(phero); } else addEventListener('resize', resize, {passive:true});
+  reduced.addEventListener?.('change', ()=>{ cancelAnimationFrame(frame); render(performance.now()); });
+  document.addEventListener('visibilitychange', ()=>{ cancelAnimationFrame(frame); if(!document.hidden) render(performance.now()); });
+  resize();
+})();
+
 /* nav menu (마크업은 nav.js 주입) */
 const navmenu = document.getElementById('navmenu');
 function openMenu(){
@@ -1708,13 +1821,15 @@ PAGES['company.html'] = dict(
     desc='파라메타는 신뢰할 수 있는 블록체인 기술을 바탕으로, 금융·기업·공공 등 다양한 산업에서 활용되는 디지털 인프라와 서비스를 제공합니다.',
     eyebrow='Company',
     h1_lines=['About PARAMETA'],
-    lead='파라메타는 Web2의 전문성과 Web3의 혁신성으로,<br>지갑이 곧 금융이 되는 WalletFi 생태계를 만들어갑니다.',
+    lead='Web2의 전문성과 Web3 기술을 연결해<br>지갑 중심의 WalletFi 생태계를 만듭니다.',
     crumb='Company — 회사소개',
     body_class='company',  # 라이트 화이트 히어로 + evervault풍 문자 매트릭스 (확정)
     hero_visual='',
-    content=f'''
-<section><div class="shell sec">
-  {sec_head('Vision', 'Web2 + Web3를 연결하는 WalletFi 생태계를 만들어갑니다', '파라메타는 금융권·공공·민간의 전통금융(Web2)부터 퍼블릭 블록체인 플랫폼과 DeFi(Web3)까지, 양쪽 영역의 전문 경험과 노하우를 두루 갖췄습니다. 두 힘을 하나로 모아, 지갑으로 모든 금융을 연결하는 지갑 기반 금융 생태계 WalletFi를 만들어갑니다.', layout='center')}
+    hero_figure='<img class="phero-figure" src="assets/about/hero-cube.png" alt="" aria-hidden="true" width="480" height="480">',
+    # 히어로 배경(라이트+패턴)을 안 짤리게 통으로 — Vision을 히어로 안으로 편입, 다크 박스는 카드로 얹음
+    hero_extra=f'''<div class="shell hero-vision">
+  <div class="vision-panel rvl" style="--rvl-y:40px; --rvl-s:.99">
+  {sec_head('Vision', 'Web2와 Web3를 연결하는<br>WalletFi 생태계', '파라메타는 금융·공공·민간 분야에서 축적한 Web2 경험과 퍼블릭 블록체인·DeFi 기반의 Web3 기술을 연결합니다. 이를 바탕으로 디지털 지갑 하나로 다양한 자산과 금융 서비스를 이용할 수 있는 WalletFi 생태계를 만들어갑니다.')}
   <div class="wfd rvl" style="--rvl-y:24px">
     <div class="wfd-band wfd-side">
       <div class="wfd-t">전통금융 <em>TradFi</em></div>
@@ -1722,7 +1837,7 @@ PAGES['company.html'] = dict(
     </div>
     <div class="wfd-band wfd-core">
       <div class="wfd-t">WalletFi</div>
-      <div class="wfd-s">스테이블코인 · 자산 토큰화 · 크로스보더 결제</div>
+      <div class="wfd-s">스테이블코인<br>자산 토큰화<br>크로스보더 결제</div>
     </div>
     <div class="wfd-band wfd-side">
       <div class="wfd-t">탈중앙화 금융 <em>DeFi</em></div>
@@ -1733,8 +1848,10 @@ PAGES['company.html'] = dict(
       <div class="wfd-chips"><span>K-BTF</span><span>loopchain</span><span>PDS</span><span>BFS</span><span>DID</span></div>
     </div>
   </div>
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
+  </div>
+</div>''',
+    content=f'''
+<section><div class="shell sec">
   {sec_head('Track Record', '10년의 트랙레코드, 숫자로 증명한 신뢰', '2016년부터 쌓아온 실적이 파라메타의 기술을 증명합니다.')}
   {nums([
     dict(cap='Since 2016', n='10년차', sub='국내 1세대 Web3 인프라 기업'),
@@ -3141,6 +3258,7 @@ __HEADER__
 <main id="main">
   <section class="phero">
     <canvas class="ev-matrix" aria-hidden="true"></canvas>
+    <canvas class="orb-bg" aria-hidden="true"></canvas>
     <div class="phero-wm">PARAMETA</div>
     <div class="shell phero-inner">
       <div class="phero-text">
@@ -3150,7 +3268,9 @@ __HEADER__
         __HERO_CTA__
       </div>
       <div class="phero-visual" aria-hidden="true">__HERO_VISUAL__</div>
+      __HERO_FIGURE__
     </div>
+    __HERO_EXTRA__
     <div class="shell phero-status">
       <span>__CRUMB__</span>
       <span style="display:inline-flex; gap:.5rem">Scroll <span aria-hidden="true">↓</span></span>
@@ -3186,8 +3306,17 @@ DEFAULT_HERO_CTA = HERO_CTA_PRODUCT
 CONTENT_PAGES = {'careers.html'}
 # CTA 없는 콘텐츠형(회사/인사이트/문의/약관 등) — 중앙정렬만, CTA 없음
 CONTENT_NOCTA = {'company.html', 'insights.html', 'contact.html', 'privacy.html', 'terms.html'}
+# 라이트 히어로(hero-light) — 화이트+orb+중앙정렬. company는 Vision 편입까지 추가(body_class='company')
+HERO_LIGHT = {'company.html', 'contact.html', 'insights.html'}
 def resolve_hero(fname, p):
-    """페이지별 히어로 body_class·CTA를 3벌 토큰으로 해석 (명시적 키가 있으면 우선)."""
+    """페이지별 히어로 body_class·CTA를 토큰으로 해석 (명시적 키가 있으면 우선)."""
+    if fname in HERO_LIGHT:
+        # 라이트 히어로: hero-dark/hero-center 대신 hero-light. company만 'company' 병용
+        body = ('hero-light ' + p.get('body_class', '')).strip()
+        cta = p.get('hero_cta')
+        if cta is None:
+            cta = '' if fname in CONTENT_NOCTA else HERO_CTA_CONTACT
+        return body, cta
     body = p.get('body_class', DEFAULT_BODY_CLASS)
     if fname in CONTENT_PAGES or fname in CONTENT_NOCTA:
         body = (body + ' hero-center').strip()
@@ -3221,6 +3350,8 @@ for fname, p in PAGES.items():
         .replace('__CRUMB__', p['crumb'])
         .replace('__HERO_CTA__', _cta)
         .replace('__HERO_VISUAL__', p.get('hero_visual', ''))
+        .replace('__HERO_FIGURE__', p.get('hero_figure', ''))
+        .replace('__HERO_EXTRA__', p.get('hero_extra', ''))
         .replace('__CONTENT__', p['content'])
         .replace('__FOOTER__', CHROME_FOOTER)
         .replace('__JS__', JS))

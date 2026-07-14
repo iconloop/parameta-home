@@ -48,6 +48,10 @@ img{ display:block }
   --hero-from:var(--gray-50); --hero-to:var(--gray-200);
   /* ── 그리드 (브레이크포인트: sm 640 / md 768 / lg 1024) ── */
   --container-shell:88rem; --grid-cols:12; --grid-gap:1.5rem; --shell-pad:1.25rem;
+  /* ── 간격 스케일 (px 네이밍, 타이포 토큰과 동일 문법) ── */
+  --space-8:.5rem; --space-12:.75rem; --space-16:1rem; --space-20:1.25rem; --space-24:1.5rem;
+  --space-32:2rem; --space-40:2.5rem; --space-48:3rem; --space-64:4rem; --space-80:5rem;
+  --space-120:7.5rem; --space-144:9rem; --space-160:10rem;
   /* ── 타이포 스케일 (짝수만, 최소 14) ── */
   --font-display:'Onest','Pretendard Variable',Pretendard,'Noto Sans KR',sans-serif;
   --text-12:0.75rem; /* 메타 정보 전용 (시계 등) — 최소14 룰 예외 */
@@ -782,6 +786,32 @@ body.hero-dark .phero-cta .pill.outline .hspring{ border-color:rgba(var(--white-
 body.hero-dark .phero-cta .pill.outline .pill-badge{ background:var(--white); color:var(--ink) }
 /* outline 버튼 호버: 보라 채움 (uc-arrow와 동일 언어) */
 @media (hover:hover){ body.hero-dark .phero-cta .pill.outline:hover .hspring{ background:var(--accent); border-color:transparent; color:var(--white) } }
+/* 관련 제품 바로가기: 리드 아래 좌측, 디바이더 + 캡션 타이틀 + 제품 플래그 (아이브로우 없음) */
+.phero-rel{ display:flex; flex-direction:column; align-items:flex-start; gap:.75rem;
+  margin-top:var(--space-64);  /* 리드↔디바이더: 컬럼 gap 1rem + 64 = 5rem (기존 2rem의 2.5배) */
+  border-top:1px solid var(--line); padding-top:1.25rem }
+.phero-rel-t{ font-size:var(--text-18); font-weight:600; line-height:var(--leading-body); color:var(--accent) }
+.phero-rel-flag{ display:inline-flex; align-items:center; border:1px solid var(--line); border-radius:var(--radius-pill);
+  padding:.625rem 1.25rem; font-size:var(--text-18); font-weight:600; color:rgba(var(--ink-rgb),.7); text-decoration:none;
+  transition:background .25s ease, color .25s ease, border-color .25s ease, transform .35s cubic-bezier(.2,.8,.2,1) }
+body.hero-dark .phero-rel{ border-top-color:rgba(var(--white-rgb),.16) }
+body.hero-dark .phero-rel-t{ color:var(--purple-300) }  /* 다크 배경 가독용 밝은 보라 (lang-item active와 동일 관례) */
+body.hero-dark .phero-rel-flag{ border-color:rgba(var(--white-rgb),.3); color:var(--white) }
+@media (hover:hover){
+  .phero-rel-flag:hover{ transform:scale(1.04) }  /* hs-scale과 동일 스프링 */
+  body.hero-dark .phero-rel-flag:hover{ background:var(--white); border-color:transparent; color:var(--ink) }
+}
+/* 첫 섹션 상단 여백 확장: 모바일 7.5rem / 데스크톱 10rem */
+.sec.sec-top-lg{ padding-top:var(--space-120) }
+@media (min-width:1024px){ .sec.sec-top-lg{ padding-top:var(--space-160) } }
+/* 섹션 본문 다중 문단: 문단 사이 1rem (마지막 문단만 하단 3rem 유지) */
+.sec-lead:has(+ .sec-lead){ margin-bottom:var(--space-16) }
+/* 섹션 스태거: 아이브로우 → 타이틀 → 본문(문단 일괄) → 차트 좌/우 (히어로와 동일 .rvl 딜레이 체계) */
+.sec-stagger .eyebrow{ --rvl-delay:0ms }
+.sec-stagger .sec-h2 .rvl-line span{ transition-delay:120ms !important }  /* 라인리빌 JS 인라인(0ms) 상회용 */
+.sec-stagger .sec-lead{ --rvl-delay:260ms }  /* 문단들은 한 덩어리로 동시 등장 */
+.sec-stagger .colc-duo .colc:first-child{ --rvl-delay:420ms }
+.sec-stagger .colc-duo .colc:last-child{ --rvl-delay:560ms }
 /* 다크 히어로: eyebrow(+블릿)·크럼브/스크롤(+디바이더)·워터마크 제거 */
 body.hero-dark .phero-inner .eyebrow.dark{ display:none }
 body.hero-dark .phero-status{ display:none }
@@ -812,29 +842,37 @@ body.hero-center .phero-text{ grid-column:1 / -1; align-items:center; max-width:
 body.hero-center .phero-h1{ max-width:none }
 body.hero-center .phero-text .phero-lead{ max-width:40rem }
 body.hero-center .phero-cta{ justify-content:center }
-/* About(company): 이미지 영역 위 + 텍스트 아래, 중앙 스택 (레퍼런스 레이아웃) */
-body.company .phero{ background:var(--white); position:relative; overflow:hidden }  /* 라이트 히어로: 완전 화이트 */
-/* evervault풍 배경 — 암호화 문자 매트릭스(모노스페이스 랜덤 스크램블) + 미세 글로우 (라이트) */
-body:not(.company) .ev-matrix{ display:none }
-body.company .ev-matrix{ position:absolute; inset:0; z-index:0; width:100%; height:100%;
-  display:block; pointer-events:none;
-  -webkit-mask-image:radial-gradient(ellipse 78% 68% at 50% 42%, #000 26%, transparent 100%);
-  mask-image:radial-gradient(ellipse 78% 68% at 50% 42%, #000 26%, transparent 100%) }
-body.company .phero::after{ content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
-  background:radial-gradient(circle 42vw at 50% 40%, rgba(var(--accent-rgb),.05), transparent 62%);
-  animation:about-glow 14s ease-in-out infinite alternate }
-@keyframes about-glow{ from{ transform:translate(-4%,-2%) } to{ transform:translate(4%,2%) } }
-body.company .phero-inner{ position:relative; z-index:1 }
-body.company .phero-inner{ display:flex; flex-direction:column; align-items:center;
-  text-align:center; gap:2.75rem; min-height:0; padding:10rem 2rem 6rem }  /* 100vh 미사용 — 콘텐츠 높이 */
-body.company .phero-status{ display:none }  /* 크럼·Scroll·디바이더 제거 */
-body.company .phero-visual{ display:none }  /* 이미지 영역 제거 */
-body.company .phero-text .eyebrow{ display:none }  /* [COMPANY] 아이브로우 제거 */
-body.company .phero-text{ align-items:center; align-self:center; max-width:44rem; margin:0 auto; gap:1.25rem }
-/* About 히어로 h1 한 토큰 크게 */
-body.company .phero-h1{ font-size:var(--text-40) }
-@media (min-width:640px){ body.company .phero-h1{ font-size:var(--text-60) } }
-@media (min-width:768px){ body.company .phero-h1{ font-size:var(--text-72) } }
+/* ============ 라이트 히어로 공통(hero-light) — company·contact·insights 공유 ============ */
+/* 화이트 배경 + orb 캔버스 + 중앙정렬 텍스트 + 여백/타이포 토큰 (A: 공통) */
+body.hero-light .phero{ background:var(--white); position:relative; overflow:hidden }
+/* orb 배경 캔버스: hero-light에서만 표시 (ev-matrix는 전면 제거) */
+.ev-matrix{ display:none }
+body:not(.hero-light) .orb-bg{ display:none }
+body.hero-light .orb-bg{ position:absolute; inset:0; z-index:0; width:100%; height:100%; display:block; pointer-events:none }
+body.hero-light .phero-inner{ position:relative; z-index:1; display:flex; flex-direction:column; align-items:center;
+  text-align:center; gap:2.75rem; min-height:0; padding:13rem 2rem 6rem }
+body.hero-light .phero-status{ display:none }   /* 크럼·Scroll·디바이더 제거 */
+body.hero-light .phero-visual{ display:none }   /* 이미지 영역 제거 */
+body.hero-light .phero-text{ align-items:center; align-self:center; max-width:44rem; margin:0 auto; gap:.75rem }
+/* h1 한 토큰 크게 */
+body.hero-light .phero-h1{ font-size:var(--text-40) }
+@media (min-width:640px){ body.hero-light .phero-h1{ font-size:var(--text-60) } }
+@media (min-width:768px){ body.hero-light .phero-h1{ font-size:var(--text-72) } }
+/* 리드 본문 사이즈 (16 → 18, 데스크톱 20) */
+body.hero-light .phero-text .phero-lead{ font-size:var(--text-18) }
+@media (min-width:768px){ body.hero-light .phero-text .phero-lead{ font-size:var(--text-20) } }
+
+/* 히어로 플로팅 이미지 — 히어로 하단 중앙, 아래 박스가 하단 절반을 덮음 (페이지별 hero_figure) */
+body:not(.hero-light) .phero-figure{ display:none }
+/* bottom:0(=다크 카드 상단) + translateY(50%) → 크기 무관 항상 정확히 반만 걸침 */
+body.hero-light .phero-figure{ position:absolute; left:50%; bottom:0; transform:translate(-50%, 50%);
+  width:clamp(18rem, 28vw, 28rem); height:auto; z-index:1; pointer-events:none; display:block }
+@media (max-width:767px){ body.hero-light .phero-figure{ width:15rem } }
+
+/* ============ About(company) 전용(B) — 라이트 히어로 위에 Vision 편입 ============ */
+body.company .phero-inner{ padding-bottom:28rem }   /* 아래 Vision 편입 + 그래픽 공간 (두 배로) */
+body.company .hero-vision{ position:relative; z-index:1; margin:0 auto; padding-bottom:6rem }
+body.company .phero-text .eyebrow{ display:none }   /* [COMPANY] 아이브로우 제거 (About만) */
 /* Vision WalletFi 도식 — ParaSta 회색·점 스타일 · 풀 12칼럼 그리드(페이지 그리드 스냅) */
 .wfd{ margin:3rem 0 0; display:grid; grid-template-columns:repeat(12,minmax(0,1fr));
   column-gap:var(--grid-gap); row-gap:var(--grid-gap); align-items:stretch;
@@ -865,6 +903,61 @@ body.company .phero-h1{ font-size:var(--text-40) }
   border:1px solid rgba(var(--white-rgb),.28); border-radius:var(--radius-pill,999px); padding:.5rem 1rem }
 @media (max-width:767px){ .wfd{ padding:2rem 1.25rem } .wfd-side, .wfd-core{ grid-column:1 / -1 }
   .wfd-core::before, .wfd-core::after{ display:none } }
+/* Vision: Proven Core식 다크 박스로 가둠(타이틀 포함) — 위 히어로는 라이트 */
+body.company .vision-panel{ border-radius:var(--radius-card); background:var(--ink); color:var(--white);
+  padding:3rem 1.75rem; text-align:left }
+@media (min-width:640px){ body.company .vision-panel{ padding:3.5rem 3rem } }
+@media (min-width:1024px){ body.company .vision-panel{ padding:4.5rem 4.5rem } }
+/* 헤더 텍스트 라이트 반전 */
+body.company .vision-panel .sh-center{ margin:0 auto }
+body.company .vision-panel .eyebrow{ color:rgba(var(--white-rgb),.9) }
+body.company .vision-panel .eyebrow::before, body.company .vision-panel .eyebrow::after{ color:rgba(var(--white-rgb),.4) }  /* 다크 카드: [ ] 브라켓도 라이트 톤 */
+body.company .vision-panel .sec-h2{ color:var(--white) }
+body.company .vision-panel .phero-lead{ color:rgba(var(--white-rgb),.68); font-size:var(--text-20) }
+@media (max-width:1023px){ body.company .vision-panel .phero-lead{ font-size:var(--text-18) } }
+/* wfd 다이어그램 다크 톤 */
+body.company .vision-panel .wfd{ background-color:transparent; padding:0; margin-top:3rem;
+  background-image:radial-gradient(rgba(var(--white-rgb),.04) 1px, transparent 1.5px); background-size:20px 20px }
+body.company .vision-panel .wfd-band{ background:#2c2a5a; border-color:rgba(var(--white-rgb),.1); box-shadow:none }  /* 좌우 원: 솔리드 컬러(잉크보다 더 밝게) */
+body.company .vision-panel .wfd-t{ color:var(--white) }
+body.company .vision-panel .wfd-t em{ color:var(--purple-300) }
+body.company .vision-panel .wfd-d{ color:rgba(var(--white-rgb),.62) }
+body.company .vision-panel .wfd-d b{ color:var(--white) }
+body.company .vision-panel .wfd-s{ color:rgba(var(--white-rgb),.64) }
+body.company .vision-panel .wfd-core{ background:var(--white); border-color:var(--white) }  /* WalletFi = 흰색 원 */
+body.company .vision-panel .wfd-core .wfd-t{ color:var(--purple-500); font-size:var(--text-30) }  /* 흰 원 위 글자 반전 + 크게 */
+body.company .vision-panel .wfd-core .wfd-s{ color:rgba(var(--ink-rgb),.6) }
+body.company .vision-panel .wfd-core::before, body.company .vision-panel .wfd-core::after{ color:var(--purple-300) }
+/* TradFi·WalletFi·DeFi 셋 다 원 (작게·중앙정렬) + 화살표 크게 */
+body.company .vision-panel .wfd{ align-items:center }
+body.company .vision-panel .wfd-band{ aspect-ratio:1; border-radius:50%; padding:1.5rem;
+  justify-content:center; width:min(100%, 18rem); justify-self:center; margin-inline:auto }
+body.company .vision-panel .wfd-core{ width:min(100%, 19rem) }  /* 중앙 허브만 살짝 크게 */
+body.company .vision-panel .wfd-core .wfd-s{ max-width:13rem; font-size:var(--text-18) }
+body.company .vision-panel .wfd-d{ max-width:12rem }
+/* 연결선: dashed 라인 + 코어 모서리에 반 걸친 노드 dot */
+/* 박스를 코어쪽으로 5.5px 늘려 점이 잘리지 않게(배경 클립 방지), 대시는 갭까지만 */
+body.company .vision-panel .wfd-core::before, body.company .vision-panel .wfd-core::after{
+  content:''; font-size:0; border:0; height:11px; z-index:2;
+  width:calc(var(--grid-gap) + 6.75rem + 5.5px); transform:translateY(-50%);
+  background-image:
+    radial-gradient(circle at center, var(--purple-300) 4.5px, transparent 5px),
+    repeating-linear-gradient(90deg, rgba(var(--purple-300-rgb),.85) 0 4px, transparent 4px 10px);
+  background-size:11px 11px, calc(100% - 5.5px) 2px;
+  background-repeat:no-repeat, repeat-x }
+/* ::before=좌측 갭(코어 왼쪽 모서리에 dot), ::after=우측 갭(코어 오른쪽 모서리에 dot) */
+body.company .vision-panel .wfd-core::before{ left:auto; right:calc(100% - 5.5px); background-position:calc(100% - 2px) center, left center }
+body.company .vision-panel .wfd-core::after{ left:calc(100% - 5.5px); background-position:2px center, right center }
+/* Wallet Infrastructure: 채운 보라 → 라인 박스(아웃라인) */
+body.company .vision-panel .wfd-infra{ background:transparent; border:1px solid rgba(var(--purple-300-rgb),.4) }
+/* 원 호버 리빌 — 3개 다 scale (그림자 없음) */
+body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,.8,.2,1), background-color .35s }
+body.company .vision-panel .wfd-core::before, body.company .vision-panel .wfd-core::after{ transition:transform .35s cubic-bezier(.2,.8,.2,1) }
+@media (hover:hover){
+  body.company .vision-panel .wfd-band:hover{ transform:scale(1.05) }
+  /* 코어 호버 시 커넥터는 카운터-스케일로 선 크기 고정(코어만 확대) */
+  body.company .vision-panel .wfd-core:hover::before, body.company .vision-panel .wfd-core:hover::after{ transform:translateY(-50%) scale(calc(1 / 1.05)) }
+}
 
 /* ============ WHAT IS (좌 다이어그램 / 우 텍스트) ============ */
 .whatis-grid{ display:grid; grid-template-columns:1fr; gap:2.5rem; align-items:center }
@@ -1057,14 +1150,13 @@ body.company .phero-h1{ font-size:var(--text-40) }
 /* cm-sm 변형(broof Core Features): 이미지 영역·카드 최소높이 축소(텍스트 짧아 아래 빈공간 방지) */
 .cm-cards.cm-sm .work-card.grouped::before{ height:16rem }
 .cm-cards.cm-sm .work-card.grouped{ min-height:0 }
-/* Core Modules(ParaSta) 이미지 영역: 앱 화면 중앙 정렬 — 도트 패턴 위, 하단 그라 마스크 아래 레이어 */
+/* Core Modules(ParaSta) 이미지 영역: 앱 화면 중앙 정렬 — 그라 마스크 없이 이미지 그대로(페이드는 이미지 자체에서 처리) */
 .cm-cards.core-mods .work-card.grouped::before{
-  background-image:linear-gradient(to bottom, transparent 45%, color-mix(in srgb, var(--ink) 6%, var(--white))),
-    url('assets/body-app.avif'),
+  background-image:url('assets/body-app.avif'),
     radial-gradient(rgba(var(--ink-rgb),.06) 1px, transparent 1.5px);
-  background-size:100% 100%, contain, 20px 20px;
-  background-position:center, center, 0 0;
-  background-repeat:no-repeat, no-repeat, repeat }
+  background-size:contain, 20px 20px;
+  background-position:center, 0 0;
+  background-repeat:no-repeat, repeat }
 /* 로고 카드 그리드 (Trusted By) — 한 줄 4개 */
 .logo-grid{ list-style:none; margin:2.5rem 0 0; padding:0; display:grid;
   grid-template-columns:repeat(12,minmax(0,1fr)); column-gap:var(--grid-gap); row-gap:var(--grid-gap) }
@@ -1165,6 +1257,8 @@ body.company .phero-h1{ font-size:var(--text-40) }
   .ex-card[style*="--brand"]:hover .ex-ico{ background:rgba(255,255,255,.4) } }
 .ex-card .ex-ico{ display:block; width:3.5rem; height:3.5rem; margin-bottom:2rem; background:rgba(var(--white-rgb),.08) }
 .ex-card h3{ margin-bottom:0 }
+.ex-card .ex-num{ display:block; font-size:var(--text-14); font-weight:500; color:rgba(var(--white-rgb),.5); margin-bottom:.5rem }  /* 기능 카드 번호 */
+.ex-card h3 + p{ margin-top:.75rem; font-size:var(--text-18) }  /* 서브카피 달릴 때만 간격 + 한 단계 업 */
 /* 거래소 카드: 컴팩트라 모바일도 2열, 태블릿 3열 */
 .cards-3:has(.ex-card){ grid-template-columns:repeat(2,1fr); gap:1rem }
 @media (min-width:640px){ .cards-3:has(.ex-card){ grid-template-columns:repeat(3,1fr); gap:1.5rem } }
@@ -1207,6 +1301,16 @@ body.company .phero-h1{ font-size:var(--text-40) }
 @media (min-width:1024px){ .cert-txt{ font-size:var(--text-24) } }
 /* Proven Core: 3개 스탯이라 데스크톱 3열 */
 @media (min-width:1024px){ .stats-grid.pv-stats{ grid-template-columns:repeat(3,1fr) } }
+/* 스탯 패널 보조: 숫자 앞뒤 작은 접두어/접미어(최대·TPS 등) · 다크 패널용 노트 */
+.stat-num .sn-pre{ font-size:var(--text-24); font-weight:500; margin-right:.375rem }
+.stat-num .sn-suf{ font-size:var(--text-24); font-weight:500 }
+/* 문장형 스탯: 전체 동일 사이즈, 기본 스탯보다 토큰 2단계 다운 (48→36 / 60→40 / 72→48) */
+.stat-num.sn-sm{ font-size:var(--text-36) }
+@media (min-width:640px){ .stat-num.sn-sm{ font-size:var(--text-40) } }
+@media (min-width:768px){ .stat-num.sn-sm{ font-size:var(--text-48) } }
+.stats-panel .sec-note{ margin-top:3rem; color:rgba(var(--white-rgb),.45) }
+.stats-panel .sec-note + .sec-note{ margin-top:1rem }
+.stats-panel .sec-note strong{ font-weight:600; color:rgba(var(--white-rgb),.7) }
 /* 라이트 텍스트 스탯: 모바일 1열 세로 스택, 768부터 3열 유지 */
 @media (max-width:767px){ .stats-grid.pv-stats.on-light{ grid-template-columns:1fr; row-gap:2.5rem } }
 @media (min-width:768px){ .stats-grid.pv-stats.on-light{ grid-template-columns:repeat(3,1fr) } }
@@ -1239,6 +1343,8 @@ body.company .phero-h1{ font-size:var(--text-40) }
   .sec .service-row .row-meta{ flex-basis:100%; width:auto; margin-bottom:.125rem }
   .sec .row-sm h3{ font-size:var(--text-20) } }
 .ct-rows .service-idx{ transition:color .25s ease }
+.rows-meta-wide .service-idx{ width:4.5rem; white-space:nowrap }  /* 기간형 인덱스(4~6개월 등) 줄바꿈 방지 */
+.service-row h3 .t-acc{ color:var(--accent); font-style:normal }  /* 행 타이틀 내 기간 강조 (보라) */
 @media (hover:hover){ .ct-rows .service-row:hover .service-idx{ color:var(--purple-500); font-weight:600 } }
 .work-quote{ margin-top:1.25rem; border-left:2px solid var(--purple-400); padding-left:1rem;
   font-size:var(--text-14); color:rgba(var(--white-rgb),.75); line-height:var(--leading-body) }
@@ -1375,6 +1481,38 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 .barc-v{ font-size:var(--text-16); font-weight:600; white-space:nowrap }
 .barc-row.hi .barc-v{ color:var(--accent) }
 .sec-note{ margin-top:1.25rem; font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); line-height:var(--leading-body); max-width:54rem }
+/* 세로 막대 차트 (barc 세로 변형) — 값은 막대 위, 라벨은 베이스라인 아래 */
+.colc{ --colc-h:11rem; display:flex; flex-direction:column;
+  border:1px solid var(--line); border-radius:var(--radius-card-sm); padding:var(--space-16) 0 0;
+  background:var(--line) }  /* 밴드 색 = 스트로크 색 통일. 상단 타이틀 밴드만 남기고 흰 패널이 꽉 채움 (위 16 = 아래 마진과 동일 → 밴드 중앙) */
+.colc .barc-title{ padding:0 var(--space-32) }
+.colc-panel{ background:var(--white); padding:var(--space-48) var(--space-32) var(--space-24);
+  border-radius:var(--radius-control) var(--radius-control) calc(var(--radius-card-sm) - 1px) calc(var(--radius-card-sm) - 1px) }  /* 하단은 바깥 R-보더만큼 맞물림. 상단 여유 48 */
+.colc-duo{ display:grid; grid-template-columns:1fr 1fr; gap:var(--grid-gap); align-items:start }
+@media (max-width:767px){ .colc-duo{ grid-template-columns:1fr; row-gap:var(--space-48) } }
+.colc .barc-title{ margin-bottom:var(--space-16); font-size:var(--text-18) }  /* 세로 차트 타이틀 한 단계 업 */
+.colc-plot{ display:grid; align-items:end; gap:var(--grid-gap); border-bottom:1px solid var(--line) }
+.colc-stack{ display:flex; flex-direction:column; align-items:center; justify-content:flex-end; gap:.625rem;
+  transform-origin:bottom center; transition:transform .35s cubic-bezier(.2,.8,.2,1) }  /* 호버 스프링 (hs-scale과 동일) */
+@media (hover:hover){
+  .colc-stack:hover{ transform:scale(1.04) }
+  .colc-stack:hover .colc-bar::after{ opacity:1 }  /* 시머는 오버레이 페이드인 — 배경 교체 없어 번쩍임 없음 */
+}
+/* 호버 시머 오버레이: 막대 3배 광 시트 1장이 아래→위 대각으로 반복 스윕 — 타일링 없어 이음매(네모) 없음 */
+.colc-bar::after{ content:''; position:absolute; inset:-100%; opacity:0; transition:opacity .5s ease;
+  background:linear-gradient(135deg, rgba(var(--white-rgb),0) 32%, rgba(var(--white-rgb),.18) 50%, rgba(var(--white-rgb),0) 68%);
+  animation:colcShimmer 2.2s linear infinite }
+/* 아래(+40%)에서 위(-40%) 한 방향 진행. 시작·끝 모두 광이 막대 밖이라 루프 리셋이 안 보임 */
+@keyframes colcShimmer{ 0%{ transform:translate(40%,40%) } 100%{ transform:translate(-40%,-40%) } }
+.colc-bar{ position:relative; overflow:hidden; width:100%; max-width:4rem; border-radius:var(--radius-control) var(--radius-control) 0 0;
+  background:var(--gray-200) }  /* 둥근 사각형 막대(상단만 R). 비강조는 그레이, 강조(hi)만 보라 */
+.colc-stack.hi .colc-bar{ background:linear-gradient(180deg,var(--accent),var(--purple-600)) }
+.colc-v{ font-size:var(--text-18); font-weight:600; white-space:nowrap }
+.colc-stack.hi .colc-v{ color:var(--accent) }
+.colc .sec-note{ font-size:var(--text-18); color:var(--muted); margin-top:var(--space-32); font-weight:400 }  /* 차트 출처 노트: 본문 레귤러, 라벨과의 간격 32 */
+.colc .sec-note strong{ font-weight:600 }  /* 출처(첫 줄)만 볼드 */
+.colc-labels{ display:grid; gap:var(--grid-gap); margin-top:.625rem }
+.colc-l{ font-size:var(--text-18); font-weight:600; color:rgba(var(--ink-rgb),.6); text-align:center }  /* 축 라벨: 노트와 동일 사이즈 + 볼드, 명도는 한 톤 밝게 */
 /* 칩 · 라우트 */
 .chip-row{ display:flex; flex-wrap:wrap; gap:.5rem }
 .chip{ display:inline-flex; align-items:center; border:1px solid var(--line); border-radius:var(--radius-pill);
@@ -1489,6 +1627,7 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 <main id="main">
   <section class="phero">
     <canvas class="ev-matrix" aria-hidden="true"></canvas>
+    <canvas class="orb-bg" aria-hidden="true"></canvas>
     <div class="phero-wm">PARAMETA</div>
     <div class="shell phero-inner">
       <div class="phero-text">
@@ -1501,7 +1640,9 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
     </div>
       </div>
       <div class="phero-visual" aria-hidden="true"><img class="fit-contain" src="assets/parasta/hero-test.avif" alt="" loading="eager" fetchpriority="high"></div>
+      
     </div>
+    
     <div class="shell phero-status">
       <span>Products — ParaSta</span>
       <span style="display:inline-flex; gap:.5rem">Scroll <span aria-hidden="true">↓</span></span>
@@ -1854,6 +1995,57 @@ if (pheroH1){
   requestAnimationFrame(() => requestAnimationFrame(() =>
     pheroH1.querySelectorAll('.rvl-line').forEach(l => l.classList.add('is-in'))));
 }
+
+/* About 히어로에 편입된 Vision 헤더(아이브로우·타이틀·리드): 히어로라 로드 시 등장 (스크롤 관찰자로는 초기 뷰포트에서 스냅됨) */
+const hvPanel = document.querySelector('.hero-vision .vision-panel');
+if (hvPanel){
+  const hvEb = hvPanel.querySelector(':scope > .eyebrow');
+  const hvLead = hvPanel.querySelector(':scope > .phero-lead');
+  const hvTitle = hvPanel.querySelector(':scope > [data-line-reveal]');
+  if (hvTitle) initLineReveal(hvTitle);
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    if (hvEb) hvEb.classList.add('is-in');
+    if (hvLead) hvLead.classList.add('is-in');
+    if (hvTitle) hvTitle.querySelectorAll('.rvl-line').forEach(l => l.classList.add('is-in'));
+  }));
+}
+
+/* About 히어로 orb 배경 (company 전용) — orb-background.html 이식, .phero 크기에 맞춤 */
+(function(){
+  const cv = document.querySelector('body.hero-light .orb-bg');
+  if(!cv) return;
+  const ctx = cv.getContext('2d', { alpha:false });
+  if(!ctx) return;
+  const phero = cv.closest('.phero');
+  const BACKGROUND='#ffffff', MUTED='#eceef5', VIOLET='#ded8fa';
+  const CELL_SIZE=26, NOISE_SCALE=9, TIME_SPEED=0.085, MAX_RADIUS=3, CENTER_DENSITY=0.22, MAX_DPR=1.5, TAU=Math.PI*2;
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  let width=1, height=1, dpr=1, frame=0, startedAt=performance.now();
+  const clamp=(v,a,b)=>Math.min(b,Math.max(a,v)); const smooth=v=>v*v*(3-2*v); const lerp=(a,b,t)=>a+(b-a)*t;
+  function hash3(x,y,z){ let v=Math.imul(x,374761393)+Math.imul(y,668265263)+Math.imul(z,1442695041); v=Math.imul(v^(v>>>13),1274126177); return ((v^(v>>>16))>>>0)/4294967295; }
+  function noise3(x,y,z){ const x0=Math.floor(x),y0=Math.floor(y),z0=Math.floor(z); const tx=smooth(x-x0),ty=smooth(y-y0),tz=smooth(z-z0);
+    const n000=hash3(x0,y0,z0),n100=hash3(x0+1,y0,z0),n010=hash3(x0,y0+1,z0),n110=hash3(x0+1,y0+1,z0),n001=hash3(x0,y0,z0+1),n101=hash3(x0+1,y0,z0+1),n011=hash3(x0,y0+1,z0+1),n111=hash3(x0+1,y0+1,z0+1);
+    const lo=lerp(lerp(n000,n100,tx),lerp(n010,n110,tx),ty), up=lerp(lerp(n001,n101,tx),lerp(n011,n111,tx),ty); return lerp(lo,up,tz); }
+  function edgeVis(x,y){ const h=Math.abs(x/width-0.5)*2, v=Math.abs(y/height-0.5)*2; const d=Math.max(h,v); return 0.38+smooth(clamp((d-0.18)/0.7,0,1))*0.62; }
+  function densityFor(x,y){ const h=Math.abs(x/width-0.5)*2, v=Math.abs(y/height-0.5)*2; const d=Math.max(h,v); return CENTER_DENSITY+smooth(clamp((d-0.16)/0.68,0,1))*(1-CENTER_DENSITY); }
+  function radiusFor(val){ if(val<0.43||val>=0.9) return 0; const life=(val-0.43)/0.47; return MAX_RADIUS*smooth(Math.sin(life*Math.PI)); }
+  function alphaFor(r,vis){ return clamp((r/MAX_RADIUS)*vis,0,0.58); }
+  function drawOrb(x,y,r,val,vis){ if(r<0.45||vis<0.035) return; ctx.globalAlpha=alphaFor(r,vis); ctx.fillStyle=val>=0.65?VIOLET:MUTED; ctx.beginPath(); ctx.arc(x,y,r,0,TAU); ctx.fill(); }
+  function render(now){ const elapsed=reduced.matches?24:(now-startedAt)/1000; const z=elapsed*TIME_SPEED+4.7;
+    ctx.setTransform(dpr,0,0,dpr,0,0); ctx.globalAlpha=1; ctx.fillStyle=BACKGROUND; ctx.fillRect(0,0,width,height);
+    const cols=Math.ceil(width/CELL_SIZE)+1, rows=Math.ceil(height/CELL_SIZE)+1;
+    for(let r=0;r<rows;r++){ for(let c=0;c<cols;c++){ const x=c*CELL_SIZE+CELL_SIZE/2, y=r*CELL_SIZE+CELL_SIZE/2;
+      const val=noise3(c/Math.max(1,cols)*NOISE_SCALE, r/Math.max(1,rows)*NOISE_SCALE, z); const vis=edgeVis(x,y);
+      if(hash3(c,r,17)>densityFor(x,y)) continue; drawOrb(x,y,radiusFor(val),val,vis); } }
+    ctx.globalAlpha=1; if(!reduced.matches && !document.hidden) frame=requestAnimationFrame(render); }
+  function resize(){ const rc=phero.getBoundingClientRect(); width=Math.max(1,Math.round(rc.width)); height=Math.max(1,Math.round(rc.height));
+    dpr=Math.min(MAX_DPR,Math.max(1,devicePixelRatio||1)); cv.width=Math.round(width*dpr); cv.height=Math.round(height*dpr);
+    ctx.imageSmoothingEnabled=true; cancelAnimationFrame(frame); render(performance.now()); }
+  if('ResizeObserver' in window){ let to; new ResizeObserver(()=>{ clearTimeout(to); to=setTimeout(resize,120); }).observe(phero); } else addEventListener('resize', resize, {passive:true});
+  reduced.addEventListener?.('change', ()=>{ cancelAnimationFrame(frame); render(performance.now()); });
+  document.addEventListener('visibilitychange', ()=>{ cancelAnimationFrame(frame); if(!document.hidden) render(performance.now()); });
+  resize();
+})();
 
 /* nav menu (마크업은 nav.js 주입) */
 const navmenu = document.getElementById('navmenu');
