@@ -176,15 +176,17 @@ html.chat-open #banner-fixed{ right:26rem }
 .lang-btn .lang-globe{ width:1.65rem; height:1.65rem }
 /* 호버에서만 배경·테두리 + 확대 리빌 (열림 상태는 채우지 않음) */
 @media (hover:hover){ .lang-btn:hover{ background:rgba(var(--white-rgb),.7); border-color:rgba(var(--line-rgb),.8); transform:scale(1.1) } }
+/* 언어 드롭다운 — 기본: 라이트 한 벌 (라이트 GNB·sticky), 다크 히어로 위에서만 다크 오버라이드 */
 .lang-menu{ position:absolute; top:calc(100% + .5rem); right:0; min-width:9rem; padding:.375rem;
-  background:var(--ink); border:1px solid rgba(var(--white-rgb),.12); border-radius:var(--radius-control);
-  box-shadow:0 16px 40px rgba(var(--ink-rgb),.45); z-index:60; display:none; flex-direction:column; gap:.125rem }
+  background:rgba(var(--white-rgb),.97); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+  border:1px solid rgba(var(--line-rgb),.8); border-radius:var(--radius-control);
+  z-index:60; display:none; flex-direction:column; gap:.125rem }
 .lang-menu.open{ display:flex }
 .lang-item{ display:flex; align-items:center; justify-content:space-between; gap:.75rem;
   padding:.5rem .75rem; border-radius:calc(var(--radius-control) - .25rem);
-  font-size:14px; font-weight:500; color:rgba(var(--white-rgb),.7); cursor:pointer; text-align:left }
-@media (hover:hover){ .lang-item:hover{ background:rgba(var(--white-rgb),.08) } }
-.lang-item.is-active{ color:var(--purple-300); font-weight:600 }
+  font-size:14px; font-weight:500; color:rgba(var(--ink-rgb),.7); cursor:pointer; text-align:left }
+@media (hover:hover){ .lang-item:hover{ background:rgba(var(--ink-rgb),.06) } }
+.lang-item.is-active{ color:var(--accent); font-weight:600 }
 .lang-item.is-active::after{ content:"✓"; font-size:12px }
 .menu-btn{ border:1px solid rgba(var(--line-rgb),.8); background:rgba(var(--white-rgb),.4);
   backdrop-filter:blur(4px); border-radius:var(--radius-control); }
@@ -227,6 +229,12 @@ body.hero-dark #header:not(.sticky) .nav-drop-panel span{ color:rgba(var(--white
 body.hero-dark #header:not(.sticky) .nd-ico{ background:rgba(var(--white-rgb),.08); color:var(--white) }
 body.hero-dark #header:not(.sticky) .nd-col + .nd-col{ border-left-color:rgba(var(--white-rgb),.16) }
 body.hero-dark #header:not(.sticky) .nd-col-head{ color:rgba(var(--white-rgb),.4) }
+/* 다크 히어로: 언어 드롭다운도 다크 글라스 (nav-drop-panel과 동일 언어, 스티키 시 라이트 복귀) */
+body.hero-dark #header:not(.sticky) .lang-menu{ background:rgba(var(--white-rgb),.07);
+  border-color:rgba(var(--white-rgb),.16); box-shadow:0 16px 40px rgba(0,0,0,.4) }
+body.hero-dark #header:not(.sticky) .lang-item{ color:rgba(var(--white-rgb),.7) }
+@media (hover:hover){ body.hero-dark #header:not(.sticky) .lang-item:hover{ background:rgba(var(--white-rgb),.08) } }
+body.hero-dark #header:not(.sticky) .lang-item.is-active{ color:var(--purple-300) }
 
 /* 다크 히어로: 캐러셀 카드도 다크 글라스 */
 body.hero-dark .hero-card{ background:rgba(var(--white-rgb),.07); backdrop-filter:blur(16px);

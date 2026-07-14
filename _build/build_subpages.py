@@ -64,6 +64,7 @@ body.hero-dark.hero-sol .phero-h1{ font-size:var(--text-32); max-width:24ch }
 @media (min-width:640px){ body.hero-dark.hero-sol .phero-h1{ font-size:var(--text-40) } }
 @media (min-width:768px){ body.hero-dark.hero-sol .phero-h1{ font-size:var(--text-48) } }
 @media (min-width:1024px){ body.hero-dark.hero-sol .phero-h1{ font-size:var(--text-60) } }
+body.hero-dark.hero-sol .phero-h1 .rvl-line + .rvl-line{ margin-top:.2em }  /* 문장형 다중 줄: 줄 블록 사이만 벌림 (행간 .98 유지) */
 body.hero-dark .phero-text .phero-lead{ color:rgba(var(--white-rgb),.7); font-size:var(--text-20) }
 /* 히어로 CTA: 폰트 text-16 (높이는 base .pill.no-arrow 토큰 min-height:3rem = with-arrow와 동일) */
 .phero-cta .pill .hspring{ font-size:var(--text-16) }
@@ -106,13 +107,28 @@ body.hero-center .phero-h1{ max-width:none }
 body.hero-center .phero-text .phero-lead{ max-width:40rem }
 body.hero-center .phero-cta{ justify-content:center }
 /* About(company): 이미지 영역 위 + 텍스트 아래, 중앙 스택 (레퍼런스 레이아웃) */
-body.company .phero-inner{ display:flex; flex-direction:column; align-items:center; justify-content:center;
-  text-align:center; gap:2.75rem; min-height:100vh; padding-top:8rem; padding-bottom:6rem }
-body.company .phero-visual{ order:-1; display:block; position:relative; align-self:center;
-  width:100%; max-width:30rem; aspect-ratio:1/1; min-height:0; border:none; background:none }
-body.company .about-hero-viz{ width:100%; height:100%; border-radius:var(--radius-card);
-  background:radial-gradient(120% 90% at 50% 32%, rgba(123,92,255,.30), rgba(97,0,255,.07) 52%, transparent 74%) }
+body.company .phero{ background:var(--white); position:relative; overflow:hidden }  /* 라이트 히어로: 완전 화이트 */
+/* evervault풍 배경 — 암호화 문자 매트릭스(모노스페이스 랜덤 스크램블) + 미세 글로우 (라이트) */
+body:not(.company) .ev-matrix{ display:none }
+body.company .ev-matrix{ position:absolute; inset:0; z-index:0; width:100%; height:100%;
+  display:block; pointer-events:none;
+  -webkit-mask-image:radial-gradient(ellipse 78% 68% at 50% 42%, #000 26%, transparent 100%);
+  mask-image:radial-gradient(ellipse 78% 68% at 50% 42%, #000 26%, transparent 100%) }
+body.company .phero::after{ content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
+  background:radial-gradient(circle 42vw at 50% 40%, rgba(var(--accent-rgb),.05), transparent 62%);
+  animation:about-glow 14s ease-in-out infinite alternate }
+@keyframes about-glow{ from{ transform:translate(-4%,-2%) } to{ transform:translate(4%,2%) } }
+body.company .phero-inner{ position:relative; z-index:1 }
+body.company .phero-inner{ display:flex; flex-direction:column; align-items:center;
+  text-align:center; gap:2.75rem; min-height:0; padding:10rem 2rem 6rem }  /* 100vh 미사용 — 콘텐츠 높이 */
+body.company .phero-status{ display:none }  /* 크럼·Scroll·디바이더 제거 */
+body.company .phero-visual{ display:none }  /* 이미지 영역 제거 */
+body.company .phero-text .eyebrow{ display:none }  /* [COMPANY] 아이브로우 제거 */
 body.company .phero-text{ align-items:center; align-self:center; max-width:44rem; margin:0 auto; gap:1.25rem }
+/* About 히어로 h1 한 토큰 크게 */
+body.company .phero-h1{ font-size:var(--text-40) }
+@media (min-width:640px){ body.company .phero-h1{ font-size:var(--text-60) } }
+@media (min-width:768px){ body.company .phero-h1{ font-size:var(--text-72) } }
 /* Vision WalletFi 도식 — ParaSta 회색·점 스타일 · 풀 12칼럼 그리드(페이지 그리드 스냅) */
 .wfd{ margin:3rem 0 0; display:grid; grid-template-columns:repeat(12,minmax(0,1fr));
   column-gap:var(--grid-gap); row-gap:var(--grid-gap); align-items:stretch;
@@ -263,7 +279,9 @@ body.company .phero-text{ align-items:center; align-self:center; max-width:44rem
 .work-card.grouped{ min-height:32rem; height:100%; display:flex; flex-direction:column }
 /* grouped 카드가 든 그리드 셀만 flex로 (다른 카드 레이아웃 영향 없이 높이 정렬) */
 .cards-3 > li:has(.work-card.grouped), .cards-2 > li:has(.work-card.grouped){ display:flex }
-.cards-3 > li > .work-card.grouped, .cards-2 > li > .work-card.grouped{ flex:1 1 auto; min-width:0 }
+.cards-3 > li > .work-card.grouped, .cards-2 > li > .work-card.grouped,
+.cards-3 > li > .card-link, .cards-2 > li > .card-link{ flex:1 1 auto; min-width:0 }
+.card-link > .work-card.grouped{ flex:1 1 auto; min-width:0 }  /* 링크 래핑 카드: li>a>article 구조 대응 */
 .work-card.grouped::before{ content:''; flex:none; height:16rem } /* 이미지 영역 */
 /* 상세페이지 다크카드 이미지 영역 (임시: 공통 1장, 추후 개별 교체) — full-bleed(좌우·위 여백 없음) + 텍스트와 간격 */
 .cards-3 .work-card.grouped::before, .cards-2 .work-card.grouped::before{
@@ -333,6 +351,14 @@ body.company .phero-text{ align-items:center; align-self:center; max-width:44rem
 /* cm-sm 변형(broof Core Features): 이미지 영역·카드 최소높이 축소(텍스트 짧아 아래 빈공간 방지) */
 .cm-cards.cm-sm .work-card.grouped::before{ height:16rem }
 .cm-cards.cm-sm .work-card.grouped{ min-height:0 }
+/* Core Modules(ParaSta) 이미지 영역: 앱 화면 중앙 정렬 — 도트 패턴 위, 하단 그라 마스크 아래 레이어 */
+.cm-cards.core-mods .work-card.grouped::before{
+  background-image:linear-gradient(to bottom, transparent 45%, color-mix(in srgb, var(--ink) 6%, var(--white))),
+    url('assets/body-app.avif'),
+    radial-gradient(rgba(var(--ink-rgb),.06) 1px, transparent 1.5px);
+  background-size:100% 100%, contain, 20px 20px;
+  background-position:center, center, 0 0;
+  background-repeat:no-repeat, no-repeat, repeat }
 /* 로고 카드 그리드 (Trusted By) — 한 줄 4개 */
 .logo-grid{ list-style:none; margin:2.5rem 0 0; padding:0; display:grid;
   grid-template-columns:repeat(12,minmax(0,1fr)); column-gap:var(--grid-gap); row-gap:var(--grid-gap) }
@@ -700,6 +726,52 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
   .demo-panel{ grid-template-columns:1fr; max-height:100vh; height:100vh; border-radius:0; overflow-y:auto }
   .demo-visual{ padding:2rem } .demo-mock{ max-width:14rem }
   .demo-info{ padding:2rem 1.5rem } }
+
+/* ============ INSIGHTS — 블로그 탭 필터 + 카드 링크 ============ */
+.blog-tabs{ display:flex; flex-wrap:wrap; gap:.625rem; margin-bottom:2rem }
+.blog-tab{ padding:.625rem 1.25rem; border:1px solid rgba(var(--ink-rgb),.15); border-radius:var(--radius-pill);
+  background:transparent; font-size:var(--text-14); font-weight:500; line-height:1; color:rgba(var(--ink-rgb),.6);
+  cursor:pointer; transition:background .2s ease, color .2s ease, border-color .2s ease }
+@media (hover:hover){ .blog-tab:hover{ color:var(--ink); border-color:rgba(var(--ink-rgb),.4) } }
+.blog-tab.is-on{ background:var(--ink); color:var(--white); border-color:var(--ink) }
+.card-link{ display:flex; text-decoration:none; color:inherit }
+.blog-item.hidden, .press-item.hidden{ display:none }
+/* 페이지네이션 (보도자료·블로그 공용) */
+.pager{ display:flex; justify-content:center; align-items:center; gap:.5rem; margin-top:3rem }
+.pager button{ min-width:2rem; height:2.25rem; padding:0 .375rem; border:none; background:transparent;
+  font-size:var(--text-14); font-weight:500; line-height:1; color:rgba(var(--ink-rgb),.55); cursor:pointer;
+  display:inline-flex; align-items:center; justify-content:center; transition:color .2s ease, opacity .2s ease }
+@media (hover:hover){ .pager button:hover:not(:disabled){ color:var(--ink) } }
+.pager button.is-on{ color:var(--ink); font-weight:700 }
+.pager button:disabled{ opacity:.3; cursor:default }
+.pager button svg{ width:1rem; height:1rem; display:block }
+
+/* ============ POST — 블로그 아티클 상세 ============ */
+.post-meta{ display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; padding:1.5rem 0;
+  border-top:1px solid rgba(var(--ink-rgb),.1); border-bottom:1px solid rgba(var(--ink-rgb),.1) }
+.post-cat{ font-size:var(--text-12); font-weight:600; letter-spacing:.025em; text-transform:uppercase;
+  color:var(--accent); background:rgba(var(--accent-rgb),.08); border-radius:var(--radius-pill); padding:.375rem .875rem }
+.post-date, .post-read{ font-size:var(--text-14); color:rgba(var(--ink-rgb),.55) }
+.post-read{ margin-left:auto }
+.post-grid{ display:grid; grid-template-columns:1fr; gap:2.5rem }
+@media (min-width:1024px){
+  .post-grid{ grid-template-columns:repeat(12,1fr); column-gap:var(--grid-gap) }
+  .post-body{ grid-column:1 / 9 }
+  .post-side{ grid-column:10 / 13; position:sticky; top:7.5rem; align-self:start } }
+.post-body .post-lead{ font-size:var(--text-20); line-height:var(--leading-body); font-weight:500;
+  color:rgba(var(--ink-rgb),.85); margin-bottom:2.5rem }
+.post-body h3{ font-size:var(--text-24); font-weight:600; line-height:var(--leading-heading); letter-spacing:-.01em;
+  margin:3.5rem 0 1rem; scroll-margin-top:6rem }
+.post-body h3:first-of-type{ margin-top:0 }
+.post-body h3::before{ content:''; display:block; width:2rem; height:2px; background:var(--gray-300); margin-bottom:1.5rem }
+.post-body p{ font-size:var(--text-16); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.7); margin-bottom:1.125rem }
+.post-body p b{ color:var(--ink); font-weight:500 }
+.post-side ul{ list-style:none; margin-top:1rem; display:flex; flex-direction:column; gap:.25rem }
+.post-side a{ display:block; padding:.5rem 0 .5rem .875rem; border-left:1px solid rgba(var(--ink-rgb),.14);
+  font-size:var(--text-14); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.6); text-decoration:none;
+  transition:color .2s ease, border-color .2s ease }
+@media (hover:hover){ .post-side a:hover{ color:var(--ink); border-color:var(--accent) } }
+@media (max-width:1023px){ .post-side{ border-top:1px solid rgba(var(--ink-rgb),.1); padding-top:2rem } }
 """
 
 CHROME_HEADER = """
@@ -1166,11 +1238,131 @@ if (contactForm){
   });
 }
 
+/* Insights: 페이지네이션 공통 (최소 5페이지 표시, 빈 페이지는 disabled — 레퍼런스 동작) */
+const PAGER_ARR = {
+  prev:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 6 9 12 15 18"/></svg>',
+  next:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg>'
+};
+function paintPager(pager, sec, cur, real, go){
+  const pages = Math.max(5, real);
+  pager.innerHTML = '';
+  const mk = (label, page, on, dis) => {
+    const b = document.createElement('button'); b.type = 'button';
+    if(label === 'prev' || label === 'next'){ b.innerHTML = PAGER_ARR[label]; b.setAttribute('aria-label', label === 'prev' ? '이전' : '다음'); }
+    else b.textContent = label;
+    if(on) b.classList.add('is-on');
+    if(dis) b.disabled = true;
+    b.addEventListener('click', () => { go(page); sec.scrollIntoView({behavior:'smooth', block:'start'}); });
+    pager.appendChild(b);
+  };
+  mk('prev', cur-1, false, cur <= 1);
+  for(let n = 1; n <= pages; n++) mk(String(n), n, n === cur, n > real);
+  mk('next', cur+1, false, cur >= real);
+}
+/* Insights: 블로그 탭 필터 + 페이지네이션 */
+const blogSec = document.querySelector('[data-blog]');
+if(blogSec){
+  const tabs = [...blogSec.querySelectorAll('.blog-tab')];
+  const posts = [...blogSec.querySelectorAll('.blog-item')];
+  const pager = blogSec.querySelector('.pager');
+  const PER = 6; let filter = 'all', cur = 1;
+  const elig = () => posts.filter(p => filter === 'all' || p.dataset.cat === filter);
+  function paint(){
+    const e = elig();
+    const real = Math.max(1, Math.ceil(e.length / PER));
+    if(cur > real) cur = real;
+    posts.forEach(p => p.classList.add('hidden'));
+    e.slice((cur-1)*PER, cur*PER).forEach(p => p.classList.remove('hidden'));
+    if(pager) paintPager(pager, blogSec, cur, real, page => { cur = page; paint(); });
+  }
+  tabs.forEach(t => {
+    const f = t.dataset.filter;
+    if(f !== 'all' && !posts.some(p => p.dataset.cat === f)) t.disabled = true;
+    t.addEventListener('click', () => {
+      tabs.forEach(o => o.classList.toggle('is-on', o === t));
+      filter = f; cur = 1; paint();
+    });
+  });
+  paint();
+}
+/* Insights: 보도자료 페이지네이션 */
+const pressSec = document.querySelector('[data-press]');
+if(pressSec){
+  const cards = [...pressSec.querySelectorAll('.press-item')];
+  const pager = pressSec.querySelector('.pager');
+  const PER = 6; let cur = 1;
+  function paintP(){
+    const real = Math.max(1, Math.ceil(cards.length / PER));
+    cards.forEach((c, i) => c.classList.toggle('hidden', Math.floor(i/PER)+1 !== cur));
+    if(pager) paintPager(pager, pressSec, cur, real, page => { cur = page; paintP(); });
+  }
+  paintP();
+}
+
 /* dev grid toggle */
 document.getElementById('dev-grid-toggle').addEventListener('click', () => {
   document.body.classList.toggle('show-grid');
 });
 
+/* About 히어로: evervault풍 암호화 문자 매트릭스 (company 전용) */
+(function(){
+  const cv = document.querySelector('body.company .ev-matrix');
+  if(!cv) return;
+  const ctx = cv.getContext('2d');
+  const GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/<>{}[]#'.split('');
+  const CELL = 20;          // 셀 한 변(css px)
+  const FONT = 12;          // 글자 크기(css px)
+  const INK = '14,12,39';   // --ink-rgb
+  const MAXA = 0.16;        // 최대 투명도
+  const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+  let dpr = 1, cols = 0, rows = 0, chars = [], op = [], tgt = [], raf = 0, last = 0;
+  const rnd = a => a[(Math.random()*a.length)|0];
+
+  function build(){
+    const r = cv.getBoundingClientRect();
+    if(!r.width || !r.height) return false;
+    dpr = Math.min(devicePixelRatio||1, 2);
+    cv.width = Math.round(r.width*dpr); cv.height = Math.round(r.height*dpr);
+    cols = Math.ceil(r.width/CELL); rows = Math.ceil(r.height/CELL);
+    const n = cols*rows;
+    chars = new Array(n); op = new Float32Array(n); tgt = new Float32Array(n);
+    for(let i=0;i<n;i++){ chars[i]=rnd(GLYPHS); const v=Math.random()*MAXA*0.5; op[i]=v; tgt[i]=v; }
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.font = FONT+'px ui-monospace, SFMono-Regular, Menlo, monospace';
+    ctx.textBaseline = 'top';
+    return true;
+  }
+  function draw(){
+    const w = cv.width/dpr, h = cv.height/dpr;
+    ctx.clearRect(0,0,w,h);
+    for(let y=0;y<rows;y++){ for(let x=0;x<cols;x++){
+      const i = y*cols+x, a = op[i];
+      if(a < 0.008) continue;
+      ctx.fillStyle = 'rgba('+INK+','+a.toFixed(3)+')';
+      ctx.fillText(chars[i], x*CELL+3, y*CELL+3);
+    }}
+  }
+  function step(t){
+    raf = requestAnimationFrame(step);
+    if(t-last < 55) return;      // ~18fps 스로틀
+    last = t;
+    const n = cols*rows;
+    const churn = Math.max(6, (n*0.02)|0);   // 프레임당 셔머/스크램블 셀 수
+    for(let k=0;k<churn;k++){
+      const i = (Math.random()*n)|0;
+      tgt[i] = Math.random()*MAXA;
+      if(Math.random()<0.5) chars[i] = rnd(GLYPHS);
+    }
+    for(let i=0;i<n;i++) op[i] += (tgt[i]-op[i])*0.12;   // 목표치로 이징
+    draw();
+  }
+  function start(){ if(!build()) return; if(reduce){ draw(); return; } cancelAnimationFrame(raf); last=0; raf=requestAnimationFrame(step); }
+
+  if('ResizeObserver' in window){
+    let to; new ResizeObserver(()=>{ clearTimeout(to); to=setTimeout(start,150); }).observe(cv);
+  } else addEventListener('resize', ()=>{ clearTimeout(window.__evto); window.__evto=setTimeout(start,150); });
+  start();
+})();
 
 </script>
 """
@@ -1425,8 +1617,8 @@ PAGES['company.html'] = dict(
     h1_lines=['About PARAMETA'],
     lead='파라메타는 Web2의 전문성과 Web3의 혁신성으로,<br>지갑이 곧 금융이 되는 WalletFi 생태계를 만들어갑니다.',
     crumb='Company — 회사소개',
-    body_class='hero-dark company',
-    hero_visual='<div class="about-hero-viz" aria-hidden="true"></div>',
+    body_class='company',  # 라이트 히어로 테스트 (원복: 'hero-dark company')
+    hero_visual='',
     content=f'''
 <section><div class="shell sec">
   {sec_head('Vision', 'Web2 + Web3를 연결하는 WalletFi 생태계를 만들어갑니다', '파라메타는 금융권·공공·민간의 전통금융(Web2)부터 퍼블릭 블록체인 플랫폼과 DeFi(Web3)까지, 양쪽 영역의 전문 경험과 노하우를 두루 갖췄습니다. 두 힘을 하나로 모아, 지갑으로 모든 금융을 연결하는 지갑 기반 금융 생태계 WalletFi를 만들어갑니다.', layout='center')}
@@ -1566,29 +1758,36 @@ PAGES['insights.html'] = dict(
     title='Insights | PARAMETA',
     desc='사업·파트너십·인증·수상 소식과 디지털자산 시장 인사이트를 한곳에서 확인할 수 있습니다.',
     eyebrow='Insights',
-    h1_lines=['디지털자산 시장을', '읽는 인사이트'],
-    lead='사업·파트너십·인증·수상 소식과 보도자료, 그리고 시장을 읽는 블로그를 한곳에 모았습니다.',
+    h1_lines=['Insights'],
+    lead='',
     crumb='Insights — 보도자료 · 블로그',
     content=f'''
-<section><div class="shell sec">
+<section data-press><div class="shell sec">
   {sec_head('Press Release', '보도자료')}
-  {rows([
-    dict(idx='2026.02', title="파라메타, ADB 주관 채권 포럼서 '온체인 KYC' 기반 국경 간 거래 표준 모델 발표"),
-    dict(idx='2026.02', title='파라메타, 스테이블코인·STO 무료 컨설팅으로 디지털자산 사업 기회 확대 지원'),
-    dict(idx='2023.11', title='김종협 파라메타 대표, 2023 블록체인 진흥주간에서 과학기술정보통신부 장관 표창 수상'),
-    dict(idx='2023.09', title="파라메타, 기술신용평가 최고 등급 'TI-1' 획득 — 최상위 수준의 기술력 인정"),
-    dict(idx='2023.08', title='파라메타, 카스투게더·솔브릭코리아와 국내 최초 모빌리티·태양광 토큰증권 플랫폼 구축'),
-    dict(idx='2023.07', title="파라메타, 플루토스파트너스와 국내 최초 '부동산 NPL 토큰증권 플랫폼' 구축 협력"),
-  ], sm=True, meta=True)}
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('Blog', '디지털자산 시장을 읽는 인사이트')}
-  <ul class="cards-2">
-    <li class="rvl" style="--rvl-y:40px">{dark_card('MARKET', '스테이블코인 사업, 무엇부터 시작할까', '규제·발행·유통까지, 스테이블코인 사업을 시작하기 전 짚어야 할 핵심을 정리합니다.', grouped=True)}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms">{dark_card('DID', '금융권 DID 도입 체크리스트', '은행·증권사가 분산신원 인증을 도입하기 전에 확인할 항목을 정리합니다.', grouped=True)}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms">{dark_card('COMPLIANCE', '온체인 KYC, 규제와 사용성 사이', '규제 요건을 지키면서도 사용자 경험을 해치지 않는 KYC 설계를 다룹니다.', grouped=True)}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms">{dark_card('TECH', 'loopchain은 왜 즉시 확정인가', '즉시 확정(Finality)이 왜 중요한지, 합의 방식과 함께 쉽게 풀어 봅니다.', grouped=True)}</li>
+  <ul class="cards-3">
+    <li class="rvl press-item" style="--rvl-y:40px">{dark_card('PRESS · 2026.02', "파라메타, ADB 주관 채권 포럼서 '온체인 KYC' 기반 국경 간 거래 표준 모델 발표", '', grouped=True)}</li>
+    <li class="rvl press-item" style="--rvl-y:40px; --rvl-delay:90ms">{dark_card('PRESS · 2026.02', '파라메타, 스테이블코인·STO 무료 컨설팅으로 디지털자산 사업 기회 확대 지원', '', grouped=True)}</li>
+    <li class="rvl press-item" style="--rvl-y:40px; --rvl-delay:180ms">{dark_card('PRESS · 2023.11', '김종협 파라메타 대표, 2023 블록체인 진흥주간에서 과학기술정보통신부 장관 표창 수상', '', grouped=True)}</li>
+    <li class="rvl press-item" style="--rvl-y:40px">{dark_card('PRESS · 2023.09', "파라메타, 기술신용평가 최고 등급 'TI-1' 획득 — 최상위 수준의 기술력 및 성장 가능성 인정", '', grouped=True)}</li>
+    <li class="rvl press-item" style="--rvl-y:40px; --rvl-delay:90ms">{dark_card('PRESS · 2023.08', '파라메타, 카스투게더·솔브릭코리아와 국내 최초 모빌리티·태양광 토큰증권 플랫폼 구축', '', grouped=True)}</li>
+    <li class="rvl press-item" style="--rvl-y:40px; --rvl-delay:180ms">{dark_card('PRESS · 2023.07', "파라메타, 플루토스파트너스와 국내 최초 '부동산 NPL 토큰증권 플랫폼' 구축 협력", '', grouped=True)}</li>
   </ul>
+  <div class="pager" role="navigation" aria-label="보도자료 페이지"></div>
+</div></section>
+<section data-blog><div class="shell sec" style="padding-top:0">
+  {sec_head('Blog', '디지털자산 시장을 읽는 인사이트')}
+  <div class="blog-tabs" role="tablist" aria-label="블로그 카테고리">
+    <button class="blog-tab is-on" type="button" role="tab" data-filter="all">All</button>
+    <button class="blog-tab" type="button" role="tab" data-filter="tech">테크</button>
+    <button class="blog-tab" type="button" role="tab" data-filter="industry">산업동향</button>
+  </div>
+  <ul class="cards-2">
+    <li class="rvl blog-item" data-cat="industry" style="--rvl-y:40px"><a class="card-link" href="post-sample.html">{dark_card('MARKET', '스테이블코인 사업, 무엇부터 시작할까', '규제·발행·유통까지, 스테이블코인 사업을 시작하기 전 짚어야 할 핵심을 정리합니다.', grouped=True)}</a></li>
+    <li class="rvl blog-item" data-cat="industry" style="--rvl-y:40px; --rvl-delay:90ms"><a class="card-link" href="post-sample.html">{dark_card('DID', '금융권 DID 도입 체크리스트', '은행·증권사가 분산신원 인증을 도입하기 전에 확인할 항목을 정리합니다.', grouped=True)}</a></li>
+    <li class="rvl blog-item" data-cat="tech" style="--rvl-y:40px; --rvl-delay:180ms"><a class="card-link" href="post-sample.html">{dark_card('COMPLIANCE', '온체인 KYC, 규제와 사용성 사이', '규제 요건을 지키면서도 사용자 경험을 해치지 않는 KYC 설계를 다룹니다.', grouped=True)}</a></li>
+    <li class="rvl blog-item" data-cat="tech" style="--rvl-y:40px; --rvl-delay:270ms"><a class="card-link" href="post-sample.html">{dark_card('TECH', 'loopchain은 왜 즉시 확정인가', '즉시 확정(Finality)이 왜 중요한지, 합의 방식과 함께 쉽게 풀어 봅니다.', grouped=True)}</a></li>
+  </ul>
+  <div class="pager" role="navigation" aria-label="블로그 페이지"></div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
   {sec_head('Blockchain 101', '용어정리')}
@@ -1602,6 +1801,66 @@ PAGES['insights.html'] = dict(
     dict(q='loopchain (루프체인)', a='파라메타가 자체 개발한 엔터프라이즈 블록체인 엔진. PBFT 계열 LFT 합의 알고리즘으로 즉시 확정(Finality)과 운영 안정성을 제공합니다. 금융·공공 환경의 요구사항을 충족하도록 설계되었습니다.'),
     dict(q='SCORE (Smart Contract on Reliable Environment)', a='파라메타의 자체 코어 엔진 루프체인 위에서 동작하는 스마트 컨트랙트 실행 환경. Java·Python 등 익숙한 언어로 컨트랙트를 작성할 수 있게 합니다.'),
   ])}
+</div></section>
+<section><div class="shell sec" style="padding-top:0">
+  {sec_head('FAQ', '자주 묻는 질문')}
+  {faq([
+    dict(q='파라메타는 어떤 회사인가요?', a='파라메타는 블록체인 기반 디지털자산 인프라를 만드는 Web3 기술 기업입니다.<br>금융·기업·공공 서비스에 필요한 지갑, 토큰 발행, 신원인증, 온체인 KYC, 상호운용 기술을 제공합니다.'),
+    dict(q='ParaSta 솔루션으로 무엇을 할 수 있나요?', a='ParaSta는 지갑, 토큰 발행, RWA, 온체인 KYC, 거래 관리 등 디지털자산 서비스의 핵심 기능을 하나의 플랫폼으로 제공합니다.<br>개발 부담을 줄이고, SaaS 또는 온프레미스 환경에서 빠르게 서비스를 구축할 수 있습니다.'),
+    dict(q='MyID와 K-BTF는 무엇이 다른가요?', a='MyID는 DID 기반 신원인증 서비스이며, K-BTF는 이를 공공·기업 환경에서 안정적으로 활용할 수 있도록 지원하는 공동 인프라입니다.<br>기관은 별도 인프라 구축 부담을 줄이고, 보안 기준에 맞는 디지털 신원 인증을 빠르게 도입할 수 있습니다.'),
+    dict(q='파라메타는 자체 블록체인 엔진을 보유하고 있나요?', a='네. 파라메타는 금융·공공 환경에 필요한 거래 확정성과 운영 안정성을 제공하는 자체 블록체인 엔진을 보유하고 있습니다.<br>PBFT 계열 합의 구조와 LFT 알고리즘을 기반으로, 디지털자산 인프라 구축에 필요한 안정적인 블록체인 기반을 제공합니다.'),
+    dict(q='PortX는 어떤 서비스인가요?', a='PortX는 기존 서비스에 디지털자산 거래 기능을 빠르게 도입할 수 있도록 지원하는 화이트라벨 거래소 솔루션입니다.<br>개발 부담을 줄이고, 자체 브랜드 환경에서 거래 서비스를 제공할 수 있습니다.'),
+  ])}
+</div></section>
+''')
+
+# ---------------- post-sample.html (블로그 상세 샘플) ----------------
+PAGES['post-sample.html'] = dict(
+    title='스테이블코인 사업, 무엇부터 시작할까 | PARAMETA',
+    desc='디지털자산 사업을 시작할 때 필요한 인프라 구성요소 — 지갑, 토큰 발행, 온체인 KYC, 규제 대응. (샘플 아티클)',
+    eyebrow='Insights — Blog',
+    h1_lines=['스테이블코인 사업,', '무엇부터 시작할까'],
+    lead='샘플 아티클 · 2026',
+    crumb='Insights — Sample Post',
+    body_class='hero-dark hero-center',
+    hero_cta='',
+    content=f'''
+<section><div class="shell sec">
+  <div class="post-meta rvl">
+    <span class="post-cat">Stablecoin</span>
+    <span class="post-date">2026.06.18</span>
+    <span class="post-read">읽는 시간 약 5분</span>
+  </div>
+</div></section>
+<section><div class="shell sec" style="padding-top:0">
+  <div class="post-grid">
+    <article class="post-body">
+      <p class="post-lead">디지털자산 사업을 처음 검토하는 기업이 가장 먼저 마주하는 질문은 "무엇부터 만들어야 하는가"입니다. 결제, 송금, 토큰 발행, 자산 토큰화 등 목표는 달라도, 그 밑에 필요한 기반은 대체로 비슷합니다.</p>
+      <h3 id="post-s1">필요한 네 가지 기반</h3>
+      <p><b>① 지갑</b>은 자산을 안전하게 보관하고 키를 관리하는 출발점입니다. 수탁형과 비수탁형 중 무엇을 택할지가 사업 구조를 좌우합니다.</p>
+      <p><b>② 토큰 발행·관리</b>는 어떤 자산을 어떤 규칙으로 발행하고, 락업·유통·정산을 어떻게 통제할지를 다룹니다.</p>
+      <p><b>③ 온체인 KYC와 거래 통제</b>는 규제 대응의 핵심입니다. 누가, 무엇을, 어떤 조건에서 거래할 수 있는지를 검증·기록해야 합니다.</p>
+      <p><b>④ 규제·감사 대응</b>은 위 모든 단계를 신뢰할 수 있게 남기는 일입니다. 위변조가 불가능한 기록과 추적이 있어야 감독기관과 고객 모두를 설득할 수 있습니다.</p>
+      <h3 id="post-s2">직접 만들 것인가, 인프라를 빌릴 것인가</h3>
+      <p>이 네 가지를 처음부터 직접 구축하면 시간과 비용이 크게 듭니다. 검증된 인프라 위에서 시작하면, 기업은 자기 사업과 고객 경험에 집중하고 복잡한 블록체인 기반은 파트너가 맡는 구조를 만들 수 있습니다.</p>
+      <p>파라메타는 지갑·발행·신원·거래에 필요한 인프라를 하나로 제공해, 디지털자산 사업의 진입 장벽을 낮춥니다.</p>
+    </article>
+    <aside class="post-side">
+      {eyebrow('On this page')}
+      <ul>
+        <li><a href="#post-s1">필요한 네 가지 기반</a></li>
+        <li><a href="#post-s2">직접 만들 것인가, 인프라를 빌릴 것인가</a></li>
+      </ul>
+    </aside>
+  </div>
+</div></section>
+<section><div class="shell sec" style="padding-top:0">
+  {sec_head('Related Articles', '함께 보면 좋은 아티클')}
+  <ul class="cards-3">
+    <li class="rvl" style="--rvl-y:40px"><a class="card-link" href="insights.html">{dark_card('DID', '금융권 DID 도입 체크리스트', '은행·증권사가 분산신원 인증을 도입하기 전에 확인할 항목을 정리합니다.', grouped=True)}</a></li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><a class="card-link" href="insights.html">{dark_card('COMPLIANCE', '온체인 KYC, 규제와 사용성 사이', '규제 요건을 지키면서도 사용자 경험을 해치지 않는 KYC 설계를 다룹니다.', grouped=True)}</a></li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><a class="card-link" href="insights.html">{dark_card('TECH', 'loopchain은 왜 즉시 확정인가', '즉시 확정(Finality)이 왜 중요한지, 합의 방식과 함께 쉽게 풀어 봅니다.', grouped=True)}</a></li>
+  </ul>
 </div></section>
 ''')
 
@@ -2781,6 +3040,7 @@ SHELL = """<!DOCTYPE html>
 __HEADER__
 <main id="main">
   <section class="phero">
+    <canvas class="ev-matrix" aria-hidden="true"></canvas>
     <div class="phero-wm">PARAMETA</div>
     <div class="shell phero-inner">
       <div class="phero-text">
@@ -2846,11 +3106,7 @@ def resolve_hero(fname, p):
     return body, cta
 
 for fname, p in PAGES.items():
-    if fname.startswith('solution-'):
-        # 솔루션형: <br> 한 덩어리 — rvl-line 블록 분리 시 행간 .98 + 패딩 트릭으로 영역 겹침
-        h1 = f'<span class="rvl-line"><span>{"<br>".join(p["h1_lines"])}</span></span>'
-    else:
-        h1 = ''.join(f'<span class="rvl-line"><span>{l}</span></span>' for l in p['h1_lines'])
+    h1 = ''.join(f'<span class="rvl-line"><span>{l}</span></span>' for l in p['h1_lines'])
     _body, _cta = resolve_hero(fname, p)
     out = (SHELL
         .replace('__BODYCLASS__', _body)
