@@ -76,6 +76,32 @@ body.hero-dark .phero-cta .pill.outline .hspring{ border-color:rgba(var(--white-
 body.hero-dark .phero-cta .pill.outline .pill-badge{ background:var(--white); color:var(--ink) }
 /* outline 버튼 호버: 보라 채움 (uc-arrow와 동일 언어) */
 @media (hover:hover){ body.hero-dark .phero-cta .pill.outline:hover .hspring{ background:var(--accent); border-color:transparent; color:var(--white) } }
+/* 관련 제품 바로가기: 리드 아래 좌측, 디바이더 + 캡션 타이틀 + 제품 플래그 (아이브로우 없음) */
+.phero-rel{ display:flex; flex-direction:column; align-items:flex-start; gap:.75rem;
+  margin-top:var(--space-64);  /* 리드↔디바이더: 컬럼 gap 1rem + 64 = 5rem (기존 2rem의 2.5배) */
+  border-top:1px solid var(--line); padding-top:1.25rem }
+.phero-rel-t{ font-size:var(--text-18); font-weight:600; line-height:var(--leading-body); color:var(--accent) }
+.phero-rel-flag{ display:inline-flex; align-items:center; border:1px solid var(--line); border-radius:var(--radius-pill);
+  padding:.625rem 1.25rem; font-size:var(--text-18); font-weight:600; color:rgba(var(--ink-rgb),.7); text-decoration:none;
+  transition:background .25s ease, color .25s ease, border-color .25s ease, transform .35s cubic-bezier(.2,.8,.2,1) }
+body.hero-dark .phero-rel{ border-top-color:rgba(var(--white-rgb),.16) }
+body.hero-dark .phero-rel-t{ color:var(--purple-300) }  /* 다크 배경 가독용 밝은 보라 (lang-item active와 동일 관례) */
+body.hero-dark .phero-rel-flag{ border-color:rgba(var(--white-rgb),.3); color:var(--white) }
+@media (hover:hover){
+  .phero-rel-flag:hover{ transform:scale(1.04) }  /* hs-scale과 동일 스프링 */
+  body.hero-dark .phero-rel-flag:hover{ background:var(--white); border-color:transparent; color:var(--ink) }
+}
+/* 첫 섹션 상단 여백 확장: 모바일 7.5rem / 데스크톱 10rem */
+.sec.sec-top-lg{ padding-top:var(--space-120) }
+@media (min-width:1024px){ .sec.sec-top-lg{ padding-top:var(--space-160) } }
+/* 섹션 본문 다중 문단: 문단 사이 1rem (마지막 문단만 하단 3rem 유지) */
+.sec-lead:has(+ .sec-lead){ margin-bottom:var(--space-16) }
+/* 섹션 스태거: 아이브로우 → 타이틀 → 본문(문단 일괄) → 차트 좌/우 (히어로와 동일 .rvl 딜레이 체계) */
+.sec-stagger .eyebrow{ --rvl-delay:0ms }
+.sec-stagger .sec-h2 .rvl-line span{ transition-delay:120ms !important }  /* 라인리빌 JS 인라인(0ms) 상회용 */
+.sec-stagger .sec-lead{ --rvl-delay:260ms }  /* 문단들은 한 덩어리로 동시 등장 */
+.sec-stagger .colc-duo .colc:first-child{ --rvl-delay:420ms }
+.sec-stagger .colc-duo .colc:last-child{ --rvl-delay:560ms }
 /* 다크 히어로: eyebrow(+블릿)·크럼브/스크롤(+디바이더)·워터마크 제거 */
 body.hero-dark .phero-inner .eyebrow.dark{ display:none }
 body.hero-dark .phero-status{ display:none }
@@ -459,6 +485,8 @@ body.company .phero-h1{ font-size:var(--text-40) }
   .ex-card[style*="--brand"]:hover .ex-ico{ background:rgba(255,255,255,.4) } }
 .ex-card .ex-ico{ display:block; width:3.5rem; height:3.5rem; margin-bottom:2rem; background:rgba(var(--white-rgb),.08) }
 .ex-card h3{ margin-bottom:0 }
+.ex-card .ex-num{ display:block; font-size:var(--text-14); font-weight:500; color:rgba(var(--white-rgb),.5); margin-bottom:.5rem }  /* 기능 카드 번호 */
+.ex-card h3 + p{ margin-top:.75rem; font-size:var(--text-18) }  /* 서브카피 달릴 때만 간격 + 한 단계 업 */
 /* 거래소 카드: 컴팩트라 모바일도 2열, 태블릿 3열 */
 .cards-3:has(.ex-card){ grid-template-columns:repeat(2,1fr); gap:1rem }
 @media (min-width:640px){ .cards-3:has(.ex-card){ grid-template-columns:repeat(3,1fr); gap:1.5rem } }
@@ -501,6 +529,16 @@ body.company .phero-h1{ font-size:var(--text-40) }
 @media (min-width:1024px){ .cert-txt{ font-size:var(--text-24) } }
 /* Proven Core: 3개 스탯이라 데스크톱 3열 */
 @media (min-width:1024px){ .stats-grid.pv-stats{ grid-template-columns:repeat(3,1fr) } }
+/* 스탯 패널 보조: 숫자 앞뒤 작은 접두어/접미어(최대·TPS 등) · 다크 패널용 노트 */
+.stat-num .sn-pre{ font-size:var(--text-24); font-weight:500; margin-right:.375rem }
+.stat-num .sn-suf{ font-size:var(--text-24); font-weight:500 }
+/* 문장형 스탯: 전체 동일 사이즈, 기본 스탯보다 토큰 2단계 다운 (48→36 / 60→40 / 72→48) */
+.stat-num.sn-sm{ font-size:var(--text-36) }
+@media (min-width:640px){ .stat-num.sn-sm{ font-size:var(--text-40) } }
+@media (min-width:768px){ .stat-num.sn-sm{ font-size:var(--text-48) } }
+.stats-panel .sec-note{ margin-top:3rem; color:rgba(var(--white-rgb),.45) }
+.stats-panel .sec-note + .sec-note{ margin-top:1rem }
+.stats-panel .sec-note strong{ font-weight:600; color:rgba(var(--white-rgb),.7) }
 /* 라이트 텍스트 스탯: 모바일 1열 세로 스택, 768부터 3열 유지 */
 @media (max-width:767px){ .stats-grid.pv-stats.on-light{ grid-template-columns:1fr; row-gap:2.5rem } }
 @media (min-width:768px){ .stats-grid.pv-stats.on-light{ grid-template-columns:repeat(3,1fr) } }
@@ -533,6 +571,8 @@ body.company .phero-h1{ font-size:var(--text-40) }
   .sec .service-row .row-meta{ flex-basis:100%; width:auto; margin-bottom:.125rem }
   .sec .row-sm h3{ font-size:var(--text-20) } }
 .ct-rows .service-idx{ transition:color .25s ease }
+.rows-meta-wide .service-idx{ width:4.5rem; white-space:nowrap }  /* 기간형 인덱스(4~6개월 등) 줄바꿈 방지 */
+.service-row h3 .t-acc{ color:var(--accent); font-style:normal }  /* 행 타이틀 내 기간 강조 (보라) */
 @media (hover:hover){ .ct-rows .service-row:hover .service-idx{ color:var(--purple-500); font-weight:600 } }
 .work-quote{ margin-top:1.25rem; border-left:2px solid var(--purple-400); padding-left:1rem;
   font-size:var(--text-14); color:rgba(var(--white-rgb),.75); line-height:var(--leading-body) }
@@ -669,6 +709,38 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 .barc-v{ font-size:var(--text-16); font-weight:600; white-space:nowrap }
 .barc-row.hi .barc-v{ color:var(--accent) }
 .sec-note{ margin-top:1.25rem; font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); line-height:var(--leading-body); max-width:54rem }
+/* 세로 막대 차트 (barc 세로 변형) — 값은 막대 위, 라벨은 베이스라인 아래 */
+.colc{ --colc-h:11rem; display:flex; flex-direction:column;
+  border:1px solid var(--line); border-radius:var(--radius-card-sm); padding:var(--space-16) 0 0;
+  background:var(--line) }  /* 밴드 색 = 스트로크 색 통일. 상단 타이틀 밴드만 남기고 흰 패널이 꽉 채움 (위 16 = 아래 마진과 동일 → 밴드 중앙) */
+.colc .barc-title{ padding:0 var(--space-32) }
+.colc-panel{ background:var(--white); padding:var(--space-48) var(--space-32) var(--space-24);
+  border-radius:var(--radius-control) var(--radius-control) calc(var(--radius-card-sm) - 1px) calc(var(--radius-card-sm) - 1px) }  /* 하단은 바깥 R-보더만큼 맞물림. 상단 여유 48 */
+.colc-duo{ display:grid; grid-template-columns:1fr 1fr; gap:var(--grid-gap); align-items:start }
+@media (max-width:767px){ .colc-duo{ grid-template-columns:1fr; row-gap:var(--space-48) } }
+.colc .barc-title{ margin-bottom:var(--space-16); font-size:var(--text-18) }  /* 세로 차트 타이틀 한 단계 업 */
+.colc-plot{ display:grid; align-items:end; gap:var(--grid-gap); border-bottom:1px solid var(--line) }
+.colc-stack{ display:flex; flex-direction:column; align-items:center; justify-content:flex-end; gap:.625rem;
+  transform-origin:bottom center; transition:transform .35s cubic-bezier(.2,.8,.2,1) }  /* 호버 스프링 (hs-scale과 동일) */
+@media (hover:hover){
+  .colc-stack:hover{ transform:scale(1.04) }
+  .colc-stack:hover .colc-bar::after{ opacity:1 }  /* 시머는 오버레이 페이드인 — 배경 교체 없어 번쩍임 없음 */
+}
+/* 호버 시머 오버레이: 막대 3배 광 시트 1장이 아래→위 대각으로 반복 스윕 — 타일링 없어 이음매(네모) 없음 */
+.colc-bar::after{ content:''; position:absolute; inset:-100%; opacity:0; transition:opacity .5s ease;
+  background:linear-gradient(135deg, rgba(var(--white-rgb),0) 32%, rgba(var(--white-rgb),.18) 50%, rgba(var(--white-rgb),0) 68%);
+  animation:colcShimmer 2.2s linear infinite }
+/* 아래(+40%)에서 위(-40%) 한 방향 진행. 시작·끝 모두 광이 막대 밖이라 루프 리셋이 안 보임 */
+@keyframes colcShimmer{ 0%{ transform:translate(40%,40%) } 100%{ transform:translate(-40%,-40%) } }
+.colc-bar{ position:relative; overflow:hidden; width:100%; max-width:4rem; border-radius:var(--radius-control) var(--radius-control) 0 0;
+  background:var(--gray-200) }  /* 둥근 사각형 막대(상단만 R). 비강조는 그레이, 강조(hi)만 보라 */
+.colc-stack.hi .colc-bar{ background:linear-gradient(180deg,var(--accent),var(--purple-600)) }
+.colc-v{ font-size:var(--text-18); font-weight:600; white-space:nowrap }
+.colc-stack.hi .colc-v{ color:var(--accent) }
+.colc .sec-note{ font-size:var(--text-18); color:var(--muted); margin-top:var(--space-32); font-weight:400 }  /* 차트 출처 노트: 본문 레귤러, 라벨과의 간격 32 */
+.colc .sec-note strong{ font-weight:600 }  /* 출처(첫 줄)만 볼드 */
+.colc-labels{ display:grid; gap:var(--grid-gap); margin-top:.625rem }
+.colc-l{ font-size:var(--text-18); font-weight:600; color:rgba(var(--ink-rgb),.6); text-align:center }  /* 축 라벨: 노트와 동일 사이즈 + 볼드, 명도는 한 톤 밝게 */
 /* 칩 · 라우트 */
 .chip-row{ display:flex; flex-wrap:wrap; gap:.5rem }
 .chip{ display:inline-flex; align-items:center; border:1px solid var(--line); border-radius:var(--radius-pill);
@@ -1464,11 +1536,14 @@ def icon_card(icon_svg, title, desc):
             f'<span class="ic" aria-hidden="true">{icon_svg}</span>'
             f'<h3>{title}</h3><p>{desc}</p></article>')
 
-def exchange_card(name, logo=None, brand=None, dark_text=False):
+def exchange_card(name, logo=None, brand=None, dark_text=False, desc=None, num=None):
     # 거래소 카드: 원형 로고 자리 + 이름. brand=호버 시 카드가 그 브랜드 컬러로 (dark_text=밝은 브랜드용)
+    # desc=타이틀 아래 서브카피, num=타이틀 위 번호 (기능 카드 겸용)
     ico = f'<span class="ex-ico">{f"<img src={chr(34)}{logo}{chr(34)} alt={chr(34)}{chr(34)}>" if logo else ""}</span>'
     style = f' style="--brand:{brand}; --brand-txt:{"var(--ink)" if dark_text else "var(--white)"}"' if brand else ''
-    return f'<article class="ico-card ex-card"{style}>{ico}<h3>{name}</h3></article>'
+    n = f'<span class="ex-num">{num}</span>' if num else ''
+    d = f'<p>{desc}</p>' if desc else ''
+    return f'<article class="ico-card ex-card"{style}>{ico}{n}<h3>{name}</h3>{d}</article>'
 
 def icon_row(*rows):
     # 원형 아이콘 + 라벨 행 (센터 정렬, 간격 단일 토큰) — icon_row([행1]), icon_row([행1],[행2])
@@ -1555,6 +1630,24 @@ def bar_chart(body_rows, title=None, note=None):
         for r in body_rows)
     nt = f'<p class="sec-note">{note}</p>' if note else ''
     return f'<div class="barc rvl">{head}{body}</div>{nt}'
+
+def col_chart(cols, title=None, note=None):
+    # cols: dict(l 라벨, v 값, w 높이%, hi=선택) — bar_chart의 세로 변형
+    head = f'<p class="barc-title">{title}</p>' if title else ''
+    n = len(cols)
+    stacks = ''.join(
+        f'<div class="colc-stack{" hi" if c.get("hi") else ""}">'
+        f'<span class="colc-v">{c["v"]}</span>'
+        f'<div class="colc-bar" style="height:calc({c["w"]}*var(--colc-h)/100)"></div></div>'
+        for c in cols)
+    labels = ''.join(f'<span class="colc-l">{c["l"]}</span>' for c in cols)
+    nt = f'<p class="sec-note">{note}</p>' if note else ''
+    return (f'<div class="colc rvl">{head}'
+            f'<div class="colc-panel">'
+            f'<div class="colc-plot" style="grid-template-columns:repeat({n},1fr)">{stacks}</div>'
+            f'<div class="colc-labels" style="grid-template-columns:repeat({n},1fr)">{labels}</div>'
+            f'{nt}'
+            f'</div></div>')
 
 def chips(items):
     return '<div class="chip-row rvl">' + ''.join(f'<span class="chip">{x}</span>' for x in items) + '</div>'
@@ -2547,62 +2640,69 @@ PAGES['solution-finance.html'] = dict(
     h1_lines=['디지털자산 금융의', '모든 단계를 연결합니다'],
     lead='발행, 지갑, 오케스트레이션, 온체인 KYC, 통합 관제를 하나로 연결합니다. 스테이블코인부터 예금토큰, RWA, 토큰증권까지 규제와 사업 환경에 맞춰 단계적으로 확장할 수 있습니다.',
     crumb='Solutions — 금융',
+    hero_cta='''<div class="phero-rel rvl" style="--rvl-delay:600ms">
+      <p class="phero-rel-t">관련 제품 살펴보기</p>
+      <a class="phero-rel-flag" href="parasta.html">ParaSta</a>
+    </div>''',
     hero_visual='<img src="assets/solutions/hero-test-1.webp" alt="" loading="eager" fetchpriority="high">',
     content=f"""
-<section><div class="shell sec">
-  {sec_head('Product', '이 솔루션을 구성하는 제품')}
-  {chips(['ParaSta'])}
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('Why Now', '디지털자산의 금융화는 이미 시작됐습니다 — 문제는 발행 이후입니다', '글로벌 대형 자산운용·결제사는 이미 RWA와 스테이블코인으로 진입했고, 국내에서도 토큰증권 제도화가 논의되고 있습니다. 핵심 문제는 토큰을 발행하는 것보다 유통·보유·상환 전 구간에서 발생하는 규제와 운영 리스크입니다. 투자자 적격성·자금세탁방지(KYC)를 계속 확인하고, 배당·이자·상환을 약속대로 집행하며, 자산이 여러 지갑으로 옮겨 다니는 과정을 실시간으로 통제·감사하는 일이 사업의 성패를 좌우합니다.')}
-  {bar_chart([
+<section><div class="shell sec sec-top-lg sec-stagger">
+  {sec_head('Why Now', '발행보다 중요한 것은 발행 이후입니다', '글로벌 대형 자산운용사와 결제사는 이미 RWA와 스테이블코인 시장에 진입했고, 국내에서도 토큰증권 제도화가 논의되고 있습니다. 이제 핵심은 토큰 발행을 넘어 유통·보유·상환 전 과정에서 발생하는 규제와 운영 리스크를 관리하는 것입니다.')}
+  {lead_p('투자자 적격성과 고객확인(KYC)·자금세탁방지(AML) 요건을 지속적으로 검증하고, 배당·이자 지급과 상환을 정확히 집행하며, 자산의 지갑 간 이동을 실시간으로 통제·감사할 수 있어야 합니다.')}
+  <div class="colc-duo">
+  {col_chart([
     dict(l='2024년', v='34조원', w=9),
     dict(l='2025년', v='119조원', w=32),
     dict(l='2030년', v='367조원', w=100, hi=True),
-  ], title='국내 토큰증권(STO) 시가총액 전망', note='전망치. 출처: 하나금융경영연구소·삼일PwC(BCG 기준 인용). 현행 자본시장법 기준 30~60조원 등 더 보수적 전망도 있어 ‘전망’으로 표기합니다.')}
-  <div style="height:2.5rem"></div>
-  {bar_chart([
+  ], title='국내 토큰증권(STO) 시장 규모 전망', note='<strong>출처: 하나금융경영연구소·삼일PwC(BCG 전망 인용)</strong><br>현행 자본시장법을 기준으로는 30~60조원 규모의 보수적인 전망도 있어, 해당 수치는 ‘전망치’로 표기했습니다.')}
+  {col_chart([
     dict(l='2025년 1월', v='$2,050억', w=68),
     dict(l='2025년 말', v='$3,000억+', w=100, hi=True),
-  ], title='글로벌 스테이블코인 발행잔액', note='출처: DeFiLlama 등 시장 집계(실적 집계). 2025년 약 49% 증가. 이미 온체인에서 대규모로 유통 중인 실측치입니다.')}
+  ], title='글로벌 스테이블코인 발행 잔액 추이', note='<strong>출처: DeFiLlama 등 시장 데이터 집계</strong><br>글로벌 스테이블코인 발행 잔액은 2025년 전년 대비 약 49% 증가했으며, 현재 온체인에서 유통 중인 자산을 기준으로 한 실측치입니다.')}
+  </div>
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('Problem', '금융기관이 마주하는 문제')}
-  {cards_wrap([
-    dark_card('문제', '발행보다 어려운 운영', 'KYC, 상환, 유통 통제, 사후검증이 발행보다 어렵습니다.'),
-    dark_card('문제', '계좌와 온체인의 분절', '은행 계좌와 온체인 지갑이 따로 놀아 정산이 복잡합니다.'),
-    dark_card('문제', '규제 대응 부담', 'AML·트래블룰을 서비스마다 다시 설계해야 합니다.'),
-    dark_card('문제', '범용 SaaS의 한계', '글로벌 지갑 SaaS는 국내 규제·운영 설계를 대신하지 않습니다.'),
+<section><div class="shell sec">
+  {sec_head('Problem', '디지털자산 사업에서 금융기관이 마주하는 문제')}
+  {card_grid([
+    card('발행보다 복잡한 운영', '디지털자산은 발행 이후 KYC, 상환, 유통 통제, 사후 검증까지 지속적인 운영이 필요합니다.', kicker='문제 01', media=True),
+    card('계좌와 온체인 시스템의 분절', '은행 계좌와 온체인 지갑이 분리되어 있어 자산 관리와 정산이 복잡합니다.', kicker='문제 02', media=True),
+    card('규제 대응 부담', '서비스마다 자금세탁방지(AML)와 트래블룰 준수 체계를 별도로 설계해야 합니다.', kicker='문제 03', media=True),
+    card('범용 SaaS의 한계', '글로벌 지갑 SaaS만으로는 국내 규제와 금융기관의 운영 요건에 대응하기 어렵습니다.', kicker='문제 04', media=True),
   ], cols=2)}
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('Features', '주요 기능', '발행부터 상환·사후검증까지 6-Layer 통제 구조로 연결합니다.')}
+<section><div class="shell sec">
+  {sec_head('Features', '발행부터 상환·사후 검증까지 연결하는<br>6-Layer 통제 구조', '디지털자산의 발행·유통·상환·사후 검증 전 과정을 6개의 통제 계층으로 연결해 안정적으로 관리합니다.')}
   {cards_wrap([
-    dark_card('01', 'Issuance 발행', '규제 준수형 발행·상환·유통통제.'),
-    dark_card('02', 'Wallet 지갑', '신원 기반 자산 통제, 멀티체인 단일 인터페이스.'),
-    dark_card('03', 'Orchestration 관제', '계좌↔온체인 통합, 조건부 정산, 실시간 스크리닝.'),
-    dark_card('04', 'On-chain KYC', '공인 KYC를 VC/VP로 변환, 멀티체인 신원 허브.'),
-    dark_card('05', 'Unified Admin', '통합 관제탑, 키 거버넌스, 통합 감사 리포팅.'),
-    dark_card('RWA · STO', 'ParaSta 연동', '토큰증권·실물자산 발행 이후 운영까지 API로 연결.'),
+    exchange_card('Issuance · 발행', brand='var(--purple-500)', desc='규제를 준수하며 디지털자산의 발행·상환·유통을 통제합니다.'),
+    exchange_card('Wallet · 지갑', brand='var(--purple-500)', desc='사용자 신원을 기반으로 자산을 통제하고, 여러 블록체인 지갑을 하나의 인터페이스에서 관리합니다.'),
+    exchange_card('Orchestration · 관제', brand='var(--purple-500)', desc='은행 계좌와 온체인 지갑을 연결해 조건부 정산과 실시간 거래 스크리닝을 지원합니다.'),
+    exchange_card('On-chain KYC · 온체인 신원 인증', brand='var(--purple-500)', desc='검증된 KYC 정보를 VC·VP로 변환해 여러 블록체인에서 활용할 수 있도록 연결합니다.'),
+    exchange_card('Unified Admin · 통합 관리', brand='var(--purple-500)', desc='전체 운영 현황과 키 권한을 통합 관리하고, 감사에 필요한 리포트를 제공합니다.'),
+    exchange_card('Parameta S · RWA·STO 연동', brand='var(--purple-500)', desc='API를 통해 토큰증권과 실물자산의 발행부터 이후 운영까지 연결합니다.'),
   ], cols=3)}
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('How to Adopt', '이렇게 도입합니다', '한 번에 구축하지 않고 단계로 나눕니다.')}
-  {cards_wrap([
-    dark_card('4주', 'PoC', '개념 검증'),
-    dark_card('12주', 'Pilot', '파일럿 운영'),
-    dark_card('4~6개월', '상용', '상용 전환'),
-  ], cols=3)}
+<section><div class="shell sec">
+  {sec_head('How to Adopt', '단계적으로 도입할 수 있습니다', '필요한 기능부터 시작해 운영 환경과 사업 단계에 맞춰 확장합니다.')}
+  <div class="ct-rows">{rows([
+    dict(title='<em class="t-acc">4주</em> : PoC · 개념 검증', desc='도입 범위를 정하고 발행·지갑·온체인 KYC 등 핵심 기능의 적용 가능성을 검증합니다.'),
+    dict(title='<em class="t-acc">12주</em> : Pilot · 파일럿 운영', desc='제한된 환경에서 계좌·지갑 연동과 정산·거래 통제 등 주요 운영 절차를 검증합니다.'),
+    dict(title='<em class="t-acc">4~6개월</em> : 상용 전환', desc='검증된 기능을 기존 시스템과 연동하고, 보안·관제·감사 체계를 갖춰 상용 서비스로 전환합니다.'),
+  ])}</div>
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('By the Numbers', '숫자로 보는 ParaSta')}
-  {nums([
-    dict(cap='Modules', n='4개 모듈', sub='발행·지갑·오케스트레이션·온체인 KYC (+ 통합 관제탑)'),
-    dict(cap='Control', n='6-Layer', sub='발행·상환·통제 구조'),
-    dict(cap='Package', n='4주 · 12주', sub='PoC · Pilot 패키지'),
-    dict(cap='Throughput', n='최대 100,000', sub='TPS (벤치마크·제한 환경)'),
-  ])}
-  {note('파라메타 트랙레코드(회사 배경) · 금융위 혁신금융서비스 지정 · 기술보증기금 TI-1 · CSAP · ChainID 증권사 공동인증. ParaSta 자체 실적이 아닌 회사 트랙레코드로 표기합니다.')}
+<!-- By the Numbers: Proven Core식 다크 스탯 패널 -->
+<section><div class="shell stats-shell">
+  <div class="stats-panel rvl" style="--rvl-y:40px; --rvl-s:.99">
+    <div class="eyebrow light"><span class="dot"></span>By the Numbers</div>
+    <h2 class="stats-h2" data-line-reveal><span class="rvl-line"><span>숫자로 보는 ParaSta</span></span></h2>
+    <ul class="stats-grid">
+      <li class="rvl" style="--rvl-y:20px"><div class="stat-num sn-sm"><span class="pv-val" data-val="4">0</span>개 핵심 모듈</div><div class="stat-label">발행·지갑·오케스트레이션·온체인 KYC와 통합 관리 기능</div></li>
+      <li class="rvl" style="--rvl-y:20px; --rvl-delay:90ms"><div class="stat-num sn-sm"><span class="pv-val" data-val="6">0</span> Layer</div><div class="stat-label">디지털자산의 발행·유통·상환 전 과정을 연결하는 통제 구조</div></li>
+      <li class="rvl" style="--rvl-y:20px; --rvl-delay:180ms"><div class="stat-num sn-sm">4주 · 12주</div><div class="stat-label">4주 PoC와 12주 Pilot로 구성된 단계별 도입 패키지</div></li>
+      <li class="rvl" style="--rvl-y:20px; --rvl-delay:270ms"><div class="stat-num sn-sm">최대 <span class="pv-val" data-val="100000">0</span> TPS</div><div class="stat-label">제한된 테스트 환경에서 측정한 loopchain 처리 성능</div></li>
+    </ul>
+    <p class="sec-note"><strong>파라메타의 기술 및 사업 역량</strong><br>금융위원회 혁신금융서비스 지정 · TCB 기술신용등급 TI-1 · CSAP 인증 · Chain ID 증권사 공동인증</p>
+    <p class="sec-note">※ 위 인증과 사업 이력은 ParaSta 제품이 아닌 파라메타의 회사 실적입니다. 최대 100,000 TPS는 제한된 환경에서 측정한 벤치마크 수치이며, 실제 성능은 구축 환경에 따라 달라질 수 있습니다. Chain ID 참여 증권사 수는 확인 후 별도로 표기합니다.</p>
+  </div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
   {sec_head('Use Cases', '적용 사례')}
