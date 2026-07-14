@@ -658,6 +658,12 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .cert-logo{ width:3.75rem; height:3.75rem; border-radius:var(--radius-pill); background:rgba(var(--ink-rgb),.06); flex:none }
 .cert-label{ font-size:var(--text-18); font-weight:500; color:rgba(var(--ink-rgb),.7); white-space:nowrap }
 @media (max-width:639px){ .cert-item{ padding:0 1.5rem } .cert-logo{ width:3rem; height:3rem } }
+/* 인증·수상 고정 배치(마퀴 없이): cert-item을 flex로 중앙 정렬 */
+.cert-static{ display:flex; flex-wrap:wrap; justify-content:center; row-gap:1.5rem }
+/* 기능 특징 불릿 리스트 */
+.feat-notes{ list-style:none; margin:var(--space-32) 0 0; padding:0; display:flex; flex-direction:column; gap:.75rem }
+.feat-notes li{ position:relative; padding-left:1.5rem; font-size:var(--text-18); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.7) }
+.feat-notes li::before{ content:''; position:absolute; left:0; top:.65em; width:6px; height:6px; border-radius:var(--radius-pill); background:var(--purple-500) }
 /* 의장사 알약 */
 .chair-badge{ display:inline-flex; align-items:center; gap:.875rem; padding:.75rem 1.5rem;
   border:1px solid rgba(var(--purple-300-rgb),.5); border-radius:var(--radius-pill);
@@ -909,7 +915,7 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
   border:1px solid var(--line); border-radius:var(--radius-card-sm); padding:var(--space-16) 0 0;
   background:var(--line) }  /* 밴드 색 = 스트로크 색 통일. 상단 타이틀 밴드만 남기고 흰 패널이 꽉 채움 (위 16 = 아래 마진과 동일 → 밴드 중앙) */
 .colc .barc-title{ padding:0 var(--space-32) }
-.colc-panel{ background:var(--white); padding:var(--space-48) var(--space-32) var(--space-24);
+.colc-panel{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); padding:var(--space-48) var(--space-32) var(--space-24);
   border-radius:var(--radius-control) var(--radius-control) calc(var(--radius-card-sm) - 1px) calc(var(--radius-card-sm) - 1px) }  /* 하단은 바깥 R-보더만큼 맞물림. 상단 여유 48 */
 .colc-duo{ display:grid; grid-template-columns:1fr 1fr; gap:var(--grid-gap); align-items:start }
 @media (max-width:767px){ .colc-duo{ grid-template-columns:1fr; row-gap:var(--space-48) } }
@@ -3128,13 +3134,12 @@ PAGES['solution-gov.html'] = dict(
     crumb='Solutions — 공공',
     hero_cta='''<div class="phero-rel rvl" style="--rvl-delay:600ms">
       <p class="phero-rel-t">관련 제품 살펴보기</p>
-      <a class="phero-rel-flag" href="kbtf.html">KBTF (MyID 2.0)</a>
+      <a class="phero-rel-flag" href="kbtf.html">MyID 2.0</a>
     </div>''',
     hero_visual='<img src="assets/solutions/hero-test-2.webp" alt="" loading="eager" fetchpriority="high">',
     content=f"""
 <section><div class="shell sec sec-top-lg sec-stagger">
-  {sec_head('Why Now', '공공 블록체인은 기관마다 새로 구축해야 했습니다', '공공기관이 SaaS형 서비스를 도입하려면 CSAP 같은 엄격한 보안인증을 통과한 제품이어야 합니다. 그런데 블록체인 분야에는 CSAP 인증을 받은 SaaS가 사실상 없어, 기관마다 예산 산정부터 자체 구축까지 최소 1년, 초기 구축비 수억원을 들여 직접 만들어야 했습니다.')}
-  {lead_p('그사이 정부의 블록체인 공공서비스 투자는 계속 늘어, 2024년 지원사업은 총 200억원·14개 규모로 확대됐습니다. 블록체인 활용 수요가 가장 큰 분야 역시 정부·공공입니다.')}
+  {sec_head('Why Now', '공공 블록체인은 기관마다<br>새로 구축해야 했습니다', '공공기관이 SaaS형 서비스를 도입하려면 CSAP 같은 엄격한 보안인증을 통과한 제품이어야 합니다. 그런데 블록체인 분야에는 CSAP 인증을 받은 SaaS가 사실상 없어, 기관마다 예산 산정부터 자체 구축까지 최소 1년, 초기 구축비 수억원을 들여 직접 만들어야 했습니다.<br><br>그사이 정부의 블록체인 공공서비스 투자는 계속 늘어, 2024년 지원사업은 총 200억원·14개 규모로 확대됐습니다. 블록체인 활용 수요가 가장 큰 분야 역시 정부·공공입니다.')}
   {col_chart([
     dict(l='정부·공공', v='47.9%', w=100, hi=True),
     dict(l='출판·방송', v='36.5%', w=76),
@@ -3155,15 +3160,25 @@ PAGES['solution-gov.html'] = dict(
 <section><div class="shell sec">
   {sec_head('Features', '직접 구축 없이 도입합니다', 'CSAP 인증을 받은 공동 인프라를 구독형으로 도입해, 예산·기간·운영 부담 없이 시작합니다.')}
   {cards_wrap([
-    exchange_card('직접 구축 없이 도입', brand='var(--purple-500)', desc='예산·기간·보안·운영 부담 없이 구독형으로 시작합니다.'),
-    exchange_card('블록체인 서비스 최초 CSAP', brand='var(--purple-500)', desc='클라우드 보안인증을 획득하고 조달에 등록돼 있습니다.'),
-    exchange_card('최대 1주일 내 적용', brand='var(--purple-500)', desc='신청 4단계를 거쳐 최대 일주일 안에 서비스를 적용합니다.'),
-    exchange_card('반복 구축 축소', brand='var(--purple-500)', desc='기관마다 흩어진 앱·인프라를 공통 인프라로 통합합니다.'),
-  ], cols=2)}
-  <div class="rvl" style="margin-top:2rem">
-    <div style="font-size:var(--text-16); color:rgba(var(--ink-rgb),.45); margin-bottom:1rem">기본 제공 기능</div>
-    {chips(['신원 DID / VC / VP', '지갑', '개인데이터저장소 PDS', '분산저장 BFS'])}
-  </div>
+    exchange_card('직접 구축 없이 도입', gray=True, desc='예산·기간·보안·운영 부담 없이 구독형으로 시작합니다.'),
+    exchange_card('블록체인 서비스 최초 CSAP', gray=True, desc='클라우드 보안인증을 획득하고 조달에 등록돼 있습니다.'),
+    exchange_card('최대 1주일 내 적용', gray=True, desc='신청 4단계를 거쳐 최대 일주일 안에 서비스를 적용합니다.'),
+    exchange_card('반복 구축 축소', gray=True, desc='기관마다 흩어진 앱·인프라를 공통 인프라로 통합합니다.'),
+  ], cols=4)}
+</div></section>
+<section><div class="shell sec">
+  {sec_head('Platform', '기본 제공 기능')}
+  {cards_wrap([
+    exchange_card('신원 DID / VC / VP', gray=True),
+    exchange_card('지갑', gray=True),
+    exchange_card('개인데이터저장소 PDS', gray=True),
+    exchange_card('분산저장 BFS', gray=True),
+  ], cols=4)}
+  <ul class="feat-notes rvl">
+    <li>사용자가 필요한 정보만 선택해 제출 (Selective Disclosure)</li>
+    <li>개인 데이터는 사용자 단말·분산 저장, 기관의 보관 부담 축소</li>
+    <li>발급·보유·검증으로 이어지는 표준 신원 흐름</li>
+  </ul>
 </div></section>
 <section><div class="shell sec">
   {sec_head('How to Adopt', '같은 서비스를 여는 데 걸리는 시간', '개별 구축과 공동 인프라 도입의 소요 시간을 비교했습니다.')}
@@ -3346,9 +3361,9 @@ PAGES['solution-exchange.html'] = dict(
     dict(cap='출금', n='30.6조원', sub='국내 거래소 총 외부 출금액 (같은 기간)'),
   ], cols=2)}</div>
   {col_chart([
-    dict(l='2023년 말', v='645만명', w=66),
-    dict(l='2024년 6월', v='778만명', w=80),
     dict(l='2024년 말', v='970만명', w=100, hi=True),
+    dict(l='2024년 6월', v='778만명', w=80),
+    dict(l='2023년 말', v='645만명', w=66),
   ], title='국내 가상자산 거래가능 이용자 수', note='출처: 금융정보분석원(FIU) 가상자산사업자 실태조사. 신고 사업자 기준 거래가능 이용자 수이며, 빠르게 증가하고 있습니다.')}
 </div></section>
 <section><div class="shell sec">

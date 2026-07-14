@@ -1371,6 +1371,12 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .cert-logo{ width:3.75rem; height:3.75rem; border-radius:var(--radius-pill); background:rgba(var(--ink-rgb),.06); flex:none }
 .cert-label{ font-size:var(--text-18); font-weight:500; color:rgba(var(--ink-rgb),.7); white-space:nowrap }
 @media (max-width:639px){ .cert-item{ padding:0 1.5rem } .cert-logo{ width:3rem; height:3rem } }
+/* 인증·수상 고정 배치(마퀴 없이): cert-item을 flex로 중앙 정렬 */
+.cert-static{ display:flex; flex-wrap:wrap; justify-content:center; row-gap:1.5rem }
+/* 기능 특징 불릿 리스트 */
+.feat-notes{ list-style:none; margin:var(--space-32) 0 0; padding:0; display:flex; flex-direction:column; gap:.75rem }
+.feat-notes li{ position:relative; padding-left:1.5rem; font-size:var(--text-18); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.7) }
+.feat-notes li::before{ content:''; position:absolute; left:0; top:.65em; width:6px; height:6px; border-radius:var(--radius-pill); background:var(--purple-500) }
 /* 의장사 알약 */
 .chair-badge{ display:inline-flex; align-items:center; gap:.875rem; padding:.75rem 1.5rem;
   border:1px solid rgba(var(--purple-300-rgb),.5); border-radius:var(--radius-pill);
@@ -1622,7 +1628,7 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
   border:1px solid var(--line); border-radius:var(--radius-card-sm); padding:var(--space-16) 0 0;
   background:var(--line) }  /* 밴드 색 = 스트로크 색 통일. 상단 타이틀 밴드만 남기고 흰 패널이 꽉 채움 (위 16 = 아래 마진과 동일 → 밴드 중앙) */
 .colc .barc-title{ padding:0 var(--space-32) }
-.colc-panel{ background:var(--white); padding:var(--space-48) var(--space-32) var(--space-24);
+.colc-panel{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); padding:var(--space-48) var(--space-32) var(--space-24);
   border-radius:var(--radius-control) var(--radius-control) calc(var(--radius-card-sm) - 1px) calc(var(--radius-card-sm) - 1px) }  /* 하단은 바깥 R-보더만큼 맞물림. 상단 여유 48 */
 .colc-duo{ display:grid; grid-template-columns:1fr 1fr; gap:var(--grid-gap); align-items:start }
 @media (max-width:767px){ .colc-duo{ grid-template-columns:1fr; row-gap:var(--space-48) } }
@@ -1788,7 +1794,7 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 <section><div class="shell sec sec-top-lg sec-stagger">
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Why Now</div><h2 class="sec-h2 has-lead" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>사용자는 거래를 위해<br>외부 거래소로 빠져나갑니다</span></span></h2><p class="phero-lead sec-lead rvl">국내 가상자산 이용자는 2023년 말 645만 명에서 2024년 말 970만 명으로 빠르게 늘었습니다. 이용자를 이미 확보한 서비스라도 자체 거래 기능이 없으면, 사용자는 거래를 하려고 외부 거래소로 빠져나갑니다.<br>그만큼 수수료와 사용자 관계를 외부에 내주게 됩니다. 그렇다고 직접 거래소를 만들자니 유동성·API·지갑·보안 부담이 큽니다.</p>
   <div class="num-solid" style="margin-bottom:var(--space-40)"><ul class="cards-2"><li class="rvl" style="--rvl-delay:0ms"><div class="light-card num-card"><span class="cap">유출</span><div class="n">약 20조원</div><p>국내에서 해외로 빠져나간 가상자산 (’22 하반기)</p></div></li><li class="rvl" style="--rvl-delay:90ms"><div class="light-card num-card"><span class="cap">출금</span><div class="n">30.6조원</div><p>국내 거래소 총 외부 출금액 (같은 기간)</p></div></li></ul></div>
-  <div class="colc rvl"><p class="barc-title">국내 가상자산 거래가능 이용자 수</p><div class="colc-panel"><div class="colc-plot" style="grid-template-columns:repeat(3,1fr)"><div class="colc-stack"><span class="colc-v">645만명</span><div class="colc-bar" style="height:calc(66*var(--colc-h)/100)"></div></div><div class="colc-stack"><span class="colc-v">778만명</span><div class="colc-bar" style="height:calc(80*var(--colc-h)/100)"></div></div><div class="colc-stack hi"><span class="colc-v">970만명</span><div class="colc-bar" style="height:calc(100*var(--colc-h)/100)"></div></div></div><div class="colc-labels" style="grid-template-columns:repeat(3,1fr)"><span class="colc-l">2023년 말</span><span class="colc-l">2024년 6월</span><span class="colc-l">2024년 말</span></div><p class="sec-note">출처: 금융정보분석원(FIU) 가상자산사업자 실태조사. 신고 사업자 기준 거래가능 이용자 수이며, 빠르게 증가하고 있습니다.</p></div></div>
+  <div class="colc rvl"><p class="barc-title">국내 가상자산 거래가능 이용자 수</p><div class="colc-panel"><div class="colc-plot" style="grid-template-columns:repeat(3,1fr)"><div class="colc-stack hi"><span class="colc-v">970만명</span><div class="colc-bar" style="height:calc(100*var(--colc-h)/100)"></div></div><div class="colc-stack"><span class="colc-v">778만명</span><div class="colc-bar" style="height:calc(80*var(--colc-h)/100)"></div></div><div class="colc-stack"><span class="colc-v">645만명</span><div class="colc-bar" style="height:calc(66*var(--colc-h)/100)"></div></div></div><div class="colc-labels" style="grid-template-columns:repeat(3,1fr)"><span class="colc-l">2024년 말</span><span class="colc-l">2024년 6월</span><span class="colc-l">2023년 말</span></div><p class="sec-note">출처: 금융정보분석원(FIU) 가상자산사업자 실태조사. 신고 사업자 기준 거래가능 이용자 수이며, 빠르게 증가하고 있습니다.</p></div></div>
 </div></section>
 <section><div class="shell sec">
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Problem</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>사업자가 마주하는 문제</span></span></h2>
