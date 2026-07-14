@@ -1625,10 +1625,10 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 .sec-note{ margin-top:1.25rem; font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); line-height:var(--leading-body); max-width:54rem }
 /* 세로 막대 차트 (barc 세로 변형) — 값은 막대 위, 라벨은 베이스라인 아래 */
 .colc{ --colc-h:11rem; display:flex; flex-direction:column;
-  border:1px solid var(--line); border-radius:var(--radius-card-sm); padding:var(--space-16) 0 0;
-  background:var(--line) }  /* 밴드 색 = 스트로크 색 통일. 상단 타이틀 밴드만 남기고 흰 패널이 꽉 채움 (위 16 = 아래 마진과 동일 → 밴드 중앙) */
+  border:2px solid color-mix(in srgb, var(--ink) 6%, var(--white)); border-radius:var(--radius-card-sm); padding:var(--space-16) 0 0;
+  background:color-mix(in srgb, var(--ink) 6%, var(--white)) }  /* 밴드 색 = num-solid 카드색. 상단 타이틀 밴드만 남기고 흰 패널이 꽉 채움 (위 16 = 아래 마진과 동일 → 밴드 중앙) */
 .colc .barc-title{ padding:0 var(--space-32) }
-.colc-panel{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); padding:var(--space-48) var(--space-32) var(--space-24);
+.colc-panel{ background:var(--white); padding:var(--space-48) var(--space-32) var(--space-24);
   border-radius:var(--radius-control) var(--radius-control) calc(var(--radius-card-sm) - 1px) calc(var(--radius-card-sm) - 1px) }  /* 하단은 바깥 R-보더만큼 맞물림. 상단 여유 48 */
 .colc-duo{ display:grid; grid-template-columns:1fr 1fr; gap:var(--grid-gap); align-items:start }
 @media (max-width:767px){ .colc-duo{ grid-template-columns:1fr; row-gap:var(--space-48) } }
