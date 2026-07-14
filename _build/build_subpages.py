@@ -39,8 +39,8 @@ EXTRA_CSS = """
   background:linear-gradient(to bottom, var(--surface), var(--gray-200)) }
 .phero-inner{ position:relative; z-index:10; display:flex; flex-direction:column; gap:1.75rem;
   padding:9rem 1.25rem 3.5rem }
-.phero-h1{ max-width:22ch; font-size:var(--text-36); font-weight:600; line-height:1.05; letter-spacing:-.02em }
-.phero-lead{ max-width:44rem; font-size:var(--text-16); line-height:1.7; color:rgba(var(--ink-rgb),.65) }
+.phero-h1{ max-width:22ch; font-size:var(--text-36); font-weight:600; line-height:var(--leading-display); letter-spacing:-.02em }
+.phero-lead{ max-width:44rem; font-size:var(--text-16); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.65) }
 .phero-text{ display:flex; flex-direction:column; gap:1.75rem }
 .phero-cta{ display:flex; flex-wrap:wrap; gap:1rem; margin-top:.5rem }
 .phero-visual{ display:none }
@@ -55,10 +55,15 @@ EXTRA_CSS = """
 @media (min-width:768px){ .phero-h1{ font-size:var(--text-60) } }
 /* ---- 다크 히어로(서브페이지) — body.hero-dark 지정 시 ---- */
 body.hero-dark .phero{ background:var(--ink); min-height:100vh }  /* 푸터와 동일한 잉크 토큰 */
-body.hero-dark .phero-h1{ color:var(--white); max-width:18ch; font-size:var(--text-36); line-height:.98; font-weight:500 }
+body.hero-dark .phero-h1{ color:var(--white); max-width:18ch; font-size:var(--text-36); line-height:var(--leading-display); font-weight:500 }
 @media (min-width:640px){ body.hero-dark .phero-h1{ font-size:var(--text-48) } }
 @media (min-width:768px){ body.hero-dark .phero-h1{ font-size:var(--text-60) } }
 @media (min-width:1024px){ body.hero-dark .phero-h1{ font-size:var(--text-72) } }
+/* ---- 솔루션형 히어로 토큰: 타이틀 한 사이즈 다운 (36/48/60/72 → 32/40/48/60) ---- */
+body.hero-dark.hero-sol .phero-h1{ font-size:var(--text-32); max-width:24ch }
+@media (min-width:640px){ body.hero-dark.hero-sol .phero-h1{ font-size:var(--text-40) } }
+@media (min-width:768px){ body.hero-dark.hero-sol .phero-h1{ font-size:var(--text-48) } }
+@media (min-width:1024px){ body.hero-dark.hero-sol .phero-h1{ font-size:var(--text-60) } }
 body.hero-dark .phero-text .phero-lead{ color:rgba(var(--white-rgb),.7); font-size:var(--text-20) }
 /* 히어로 CTA: 폰트 text-16 (높이는 base .pill.no-arrow 토큰 min-height:3rem = with-arrow와 동일) */
 .phero-cta .pill .hspring{ font-size:var(--text-16) }
@@ -100,6 +105,44 @@ body.hero-center .phero-text{ grid-column:1 / -1; align-items:center; max-width:
 body.hero-center .phero-h1{ max-width:none }
 body.hero-center .phero-text .phero-lead{ max-width:40rem }
 body.hero-center .phero-cta{ justify-content:center }
+/* About(company): 이미지 영역 위 + 텍스트 아래, 중앙 스택 (레퍼런스 레이아웃) */
+body.company .phero-inner{ display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; gap:2.75rem; min-height:100vh; padding-top:8rem; padding-bottom:6rem }
+body.company .phero-visual{ order:-1; display:block; position:relative; align-self:center;
+  width:100%; max-width:30rem; aspect-ratio:1/1; min-height:0; border:none; background:none }
+body.company .about-hero-viz{ width:100%; height:100%; border-radius:var(--radius-card);
+  background:radial-gradient(120% 90% at 50% 32%, rgba(123,92,255,.30), rgba(97,0,255,.07) 52%, transparent 74%) }
+body.company .phero-text{ align-items:center; align-self:center; max-width:44rem; margin:0 auto; gap:1.25rem }
+/* Vision WalletFi 도식 — ParaSta 회색·점 스타일 · 풀 12칼럼 그리드(페이지 그리드 스냅) */
+.wfd{ margin:3rem 0 0; display:grid; grid-template-columns:repeat(12,minmax(0,1fr));
+  column-gap:var(--grid-gap); row-gap:var(--grid-gap); align-items:stretch;
+  padding:3rem 2.5rem; border-radius:var(--radius-card);
+  background-color:rgba(var(--ink-rgb),.06);
+  background-image:radial-gradient(rgba(var(--ink-rgb),.06) 1px, transparent 1.5px); background-size:20px 20px }
+.wfd-side{ grid-column:span 4 }
+.wfd-core{ grid-column:span 4; position:relative; border-color:var(--border-violet) }
+.wfd-infra{ grid-column:1 / -1 }
+.wfd-band{ background:var(--white); border:1px solid rgba(var(--ink-rgb),.12); border-radius:var(--radius-card-sm);
+  box-shadow:0 8px 24px rgba(var(--ink-rgb),.06); padding:1.75rem 1.5rem; text-align:center;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.75rem }
+.wfd-t{ font-size:var(--text-18); font-weight:600; color:var(--ink) }
+.wfd-t em{ font-style:normal; color:var(--purple-500); font-weight:500; margin-left:.25rem }
+.wfd-d{ font-size:var(--text-14); line-height:var(--leading-body,1.6); color:rgba(var(--ink-rgb),.6) }
+.wfd-d b{ display:block; color:var(--ink); font-weight:600; font-size:var(--text-16); margin-bottom:.125rem }
+.wfd-core .wfd-t{ color:var(--purple-500); font-size:var(--text-24) }
+.wfd-s{ font-size:var(--text-14); color:rgba(var(--ink-rgb),.62); max-width:22rem }
+/* 수렴 화살표: 코어 좌우 그리드 갭 중앙에 겹침 */
+.wfd-core::before, .wfd-core::after{ position:absolute; top:50%; transform:translate(-50%,-50%);
+  font-size:var(--text-22); line-height:1; color:var(--purple-500) }
+.wfd-core::before{ content:'→'; left:calc(var(--grid-gap) / -2) }
+.wfd-core::after{ content:'←'; left:calc(100% + var(--grid-gap) / 2) }
+.wfd-infra{ background:linear-gradient(135deg,var(--purple-500),var(--purple-400)); border-radius:var(--radius-card-sm); padding:1.5rem 1.375rem; text-align:center }
+.wfd-infra-t{ font-size:var(--text-16); font-weight:700; letter-spacing:.04em; color:var(--white); margin:0 0 .875rem }
+.wfd-chips{ display:flex; flex-wrap:wrap; justify-content:center; gap:.625rem }
+.wfd-chips span{ font-size:var(--text-14); font-weight:600; color:var(--white); background:rgba(var(--white-rgb),.16);
+  border:1px solid rgba(var(--white-rgb),.28); border-radius:var(--radius-pill,999px); padding:.5rem 1rem }
+@media (max-width:767px){ .wfd{ padding:2rem 1.25rem } .wfd-side, .wfd-core{ grid-column:1 / -1 }
+  .wfd-core::before, .wfd-core::after{ display:none } }
 
 /* ============ WHAT IS (좌 다이어그램 / 우 텍스트) ============ */
 .whatis-grid{ display:grid; grid-template-columns:1fr; gap:2.5rem; align-items:center }
@@ -170,7 +213,7 @@ body.hero-center .phero-cta{ justify-content:center }
 .px-mini{ background:rgba(var(--ink-rgb),.05); border-radius:var(--radius-control); padding:1rem; text-align:left }
 .px-mini .mi-head{ display:flex; align-items:center; gap:.5rem; font-size:var(--text-14); font-weight:600; color:var(--ink); margin-bottom:.375rem }
 .px-mini .mi-head svg{ width:1.125rem; height:1.125rem; flex:none; color:var(--purple-500) }
-.px-mini p{ font-size:var(--text-14); color:rgba(var(--ink-rgb),.55); line-height:1.5; word-break:keep-all }
+.px-mini p{ font-size:var(--text-14); color:rgba(var(--ink-rgb),.55); line-height:1.4 !important; word-break:keep-all }  /* 행간 토큰 예외(사용자 승인): 다이어그램 미니카드만 타이트하게 */
 @media (max-width:480px){ .px-duo{ grid-template-columns:1fr } }
 /* ============ SUBPAGE UTILITIES ============ */
 .sec{ padding:5rem 1.25rem }
@@ -188,7 +231,7 @@ body.hero-center .phero-cta{ justify-content:center }
 .sec-lead{ margin-bottom:3rem }
 .sh-center .phero-lead{ margin-left:auto; margin-right:auto; font-size:var(--text-20) }
 .sh-center .sec-lead{ margin-bottom:3rem }
-.sec-h2{ margin:1.25rem 0 3rem; max-width:24ch; font-size:var(--text-32); font-weight:600; letter-spacing:-.02em }
+.sec-h2{ margin:1.25rem 0 3rem; max-width:24ch; font-size:var(--text-32); font-weight:600; letter-spacing:-.02em; line-height:var(--leading-heading) }
 @media (min-width:640px){ .sec-h2{ font-size:var(--text-40) } }   /* 태블릿: 데스크톱보다 한 단계 작게 */
 @media (min-width:1024px){ .sec-h2{ font-size:var(--text-48) } }
 /* 태블릿 이하: 서브카피·바디카피 한 톤 작게 (text-20 → text-18) */
@@ -344,7 +387,7 @@ body.hero-center .phero-cta{ justify-content:center }
 .uc-thumb video, .uc-thumb img{ width:100%; height:100%; object-fit:cover; display:block; border-radius:inherit }
 .uc-slide h3{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em; margin-bottom:.75rem; color:var(--ink) }
 @media (min-width:640px){ .uc-slide h3{ font-size:var(--text-30) } }
-.uc-slide > p{ font-size:var(--text-18); color:rgba(var(--ink-rgb),.6); line-height:1.7; word-break:keep-all }
+.uc-slide > p{ font-size:var(--text-18); color:rgba(var(--ink-rgb),.6); line-height:var(--leading-body); word-break:keep-all }
 .uc-testimonial{ margin-top:2.5rem; padding-top:2rem; border-top:1px solid rgba(var(--ink-rgb),.12);
   display:flex; align-items:center; gap:1rem }
 .uc-avatar{ width:3rem; height:3rem; border-radius:var(--radius-pill); background:rgba(var(--ink-rgb),.1); flex:none; overflow:hidden }
@@ -379,8 +422,8 @@ body.hero-center .phero-cta{ justify-content:center }
 @media (hover:hover){ .ico-card:hover{ transform:scale(1.03) } }
 .ico-card .ic{ display:block; width:1.75rem; height:1.75rem; margin-bottom:3.5rem; color:var(--white) }
 .ico-card .ic svg{ width:100%; height:100% }
-.ico-card h3{ font-size:var(--text-20); font-weight:500; letter-spacing:-.01em; margin-bottom:.75rem }
-.ico-card p{ font-size:var(--text-16); color:rgba(var(--white-rgb),.55); line-height:1.65; word-break:keep-all }
+.ico-card h3{ font-size:var(--text-20); font-weight:500; letter-spacing:-.01em; margin-bottom:.75rem; line-height:var(--leading-heading) }
+.ico-card p{ font-size:var(--text-16); color:rgba(var(--white-rgb),.55); line-height:var(--leading-body); word-break:keep-all }
 .cards-2 > li:has(.ico-card), .cards-3 > li:has(.ico-card){ display:flex }
 .cards-2 > li > .ico-card, .cards-3 > li > .ico-card{ flex:1 1 auto; min-width:0 }
 @media (max-width:639px){ .ico-card{ padding:1.5rem } .ico-card .ic{ margin-bottom:2.5rem } }
@@ -419,8 +462,8 @@ body.hero-center .phero-cta{ justify-content:center }
 .pn-list{ display:flex; flex-direction:column; gap:1rem }
 .pn-list li{ background:rgba(var(--white-rgb),.05); border-radius:var(--radius-card-sm); padding:1.5rem }
 .pn-list h4{ font-size:var(--text-18); font-weight:600; letter-spacing:-.01em }
-.pn-list p{ margin-top:.5rem; font-size:var(--text-16); color:rgba(var(--white-rgb),.55); line-height:1.6 }
-.pn-note{ margin-top:1.5rem; font-size:var(--text-16); color:var(--purple-300); line-height:1.6; text-align:center }
+.pn-list p{ margin-top:.5rem; font-size:var(--text-16); color:rgba(var(--white-rgb),.55); line-height:var(--leading-body) }
+.pn-note{ margin-top:1.5rem; font-size:var(--text-16); color:var(--purple-300); line-height:var(--leading-body); text-align:center }
 /* 인증 3종: 타이틀 없이 하단 배치 — 이미지 영역 + 라벨, 디바이더 없음 */
 .cert-row{ display:grid; grid-template-columns:repeat(3,1fr); column-gap:1rem; padding:5rem 0 }
 @media (min-width:768px){ .cert-row{ column-gap:var(--grid-gap) } }
@@ -466,24 +509,24 @@ body.hero-center .phero-cta{ justify-content:center }
 .ct-rows .service-idx{ transition:color .25s ease }
 @media (hover:hover){ .ct-rows .service-row:hover .service-idx{ color:var(--purple-500); font-weight:600 } }
 .work-quote{ margin-top:1.25rem; border-left:2px solid var(--purple-400); padding-left:1rem;
-  font-size:var(--text-14); color:rgba(var(--white-rgb),.75); line-height:1.6 }
+  font-size:var(--text-14); color:rgba(var(--white-rgb),.75); line-height:var(--leading-body) }
 .work-quote cite{ display:block; margin-top:.5rem; font-style:normal; font-size:var(--text-14); color:rgba(var(--white-rgb),.45) }
 .row-sm h3{ font-size:var(--text-18) !important }
 @media (min-width:640px){ .row-sm h3{ font-size:var(--text-22) !important } }
 .row-meta{ width:6.5rem; flex:none; font-size:var(--text-14); font-weight:500; text-transform:uppercase;
   letter-spacing:.05em; color:rgba(var(--ink-rgb),.4) }
 .light-card{ border:1px solid var(--line); background:rgba(var(--surface-rgb),.5); border-radius:var(--radius-card-sm); padding:1.75rem }
-.light-card h3{ font-size:var(--text-18); font-weight:600; letter-spacing:-.01em; margin-bottom:.625rem }
-.light-card p{ font-size:var(--text-16); line-height:1.7; color:rgba(var(--ink-rgb),.6) }
+.light-card h3{ font-size:var(--text-18); font-weight:600; letter-spacing:-.01em; margin-bottom:.625rem; line-height:var(--leading-heading) }
+.light-card p{ font-size:var(--text-16); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.6) }
 .light-card .cap{ font-size:var(--text-14); font-weight:500; text-transform:uppercase; letter-spacing:.05em;
   color:var(--accent); margin-bottom:.75rem; display:block }
 .addr-list{ display:flex; flex-direction:column; gap:1.25rem }
 .addr-list .k{ font-size:var(--text-14); font-weight:500; text-transform:uppercase; letter-spacing:.05em; color:rgba(var(--ink-rgb),.45) }
-.addr-list .v{ margin-top:.25rem; font-size:var(--text-16); line-height:1.6 }
+.addr-list .v{ margin-top:.25rem; font-size:var(--text-16); line-height:var(--leading-body) }
 .legal-body{ max-width:48rem }
 .legal-body h3{ font-size:var(--text-18); font-weight:600; margin:2.5rem 0 .75rem }
 .legal-body h3:first-child{ margin-top:0 }
-.legal-body p{ font-size:var(--text-16); line-height:1.7; color:rgba(var(--ink-rgb),.6) }
+.legal-body p{ font-size:var(--text-16); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.6) }
 .legal-note{ display:inline-flex; align-items:center; gap:.5rem; margin-top:.375rem;
   border:1px solid var(--line); border-radius:var(--radius-pill); padding:.25rem .875rem;
   font-size:var(--text-14); color:rgba(var(--ink-rgb),.45) }
@@ -526,7 +569,7 @@ table.cmp thead th.hl{ border-top-left-radius:var(--radius-control); border-top-
 table.cmp tbody tr:last-child td.hl{ border-bottom-left-radius:var(--radius-control); border-bottom-right-radius:var(--radius-control) }
 table.cmp tbody tr:last-child td, table.cmp tbody tr:last-child th{ border-bottom:none; padding-bottom:1.75rem }
 table.cmp tbody th{ font-weight:600; font-size:var(--text-18); color:rgba(var(--ink-rgb),.65); white-space:nowrap; padding-left:0; vertical-align:middle }
-table.cmp td{ color:rgba(var(--ink-rgb),.7); line-height:1.5; text-align:center; vertical-align:middle }
+table.cmp td{ color:rgba(var(--ink-rgb),.7); line-height:var(--leading-body); text-align:center; vertical-align:middle }
 table.cmp td .mk{ display:block; margin:0 auto .125rem }
 table.cmp td .mkv{ width:22px; height:22px }
 table.cmp td .mkv circle{ stroke-width:.8 }
@@ -580,7 +623,7 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
   .cmpt-row:last-child{ border-bottom:none }
   .cmpt-label{ flex:none; font-size:var(--text-14); font-weight:600; color:rgba(var(--ink-rgb),.65) }
   .cmpt-cell{ display:flex; align-items:center; gap:.5rem; text-align:right; font-size:var(--text-14);
-    color:rgba(var(--ink-rgb),.7); line-height:1.5 }
+    color:rgba(var(--ink-rgb),.7); line-height:var(--leading-body) }
   .cmpt-panel.is-hl .cmpt-cell{ color:var(--ink); font-weight:500 }
   .cmpt-cell .mk{ display:inline-flex; order:2; flex:none }
   .cmpt-cell .mkv{ width:18px; height:18px }
@@ -599,7 +642,7 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 .barc-row.hi .barc-fill{ background:linear-gradient(90deg,var(--purple-600),var(--accent)) }
 .barc-v{ font-size:var(--text-16); font-weight:600; white-space:nowrap }
 .barc-row.hi .barc-v{ color:var(--accent) }
-.sec-note{ margin-top:1.25rem; font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); line-height:1.6; max-width:54rem }
+.sec-note{ margin-top:1.25rem; font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); line-height:var(--leading-body); max-width:54rem }
 /* 칩 · 라우트 */
 .chip-row{ display:flex; flex-wrap:wrap; gap:.5rem }
 .chip{ display:inline-flex; align-items:center; border:1px solid var(--line); border-radius:var(--radius-pill);
@@ -633,14 +676,14 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 /* 우: 정보 영역 */
 .demo-info{ padding:3rem 2.75rem; display:flex; flex-direction:column; overflow-y:auto }
 .demo-step-eb{ font-family:'Departure Mono',monospace; font-size:var(--text-14); letter-spacing:.06em; color:var(--purple-500); margin-bottom:1rem }
-.demo-step-t{ font-size:var(--text-24); font-weight:600; letter-spacing:-.01em; color:var(--ink); margin-bottom:.75rem }
-.demo-step-d{ font-size:var(--text-16); line-height:1.7; color:rgba(var(--ink-rgb),.6); word-break:keep-all }
+.demo-step-t{ font-size:var(--text-24); font-weight:600; letter-spacing:-.01em; color:var(--ink); margin-bottom:.75rem; line-height:var(--leading-heading) }
+.demo-step-d{ font-size:var(--text-16); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.6); word-break:keep-all }
 .demo-tabs{ display:flex; gap:.5rem; margin:1.75rem 0 1rem }
 .demo-tab{ padding:.5rem 1rem; border-radius:var(--radius-pill); font-size:var(--text-14); font-weight:500;
   color:rgba(var(--ink-rgb),.55); background:rgba(var(--ink-rgb),.05); transition:all .2s }
 .demo-tab.active{ background:var(--ink); color:var(--white) }
 .demo-code{ flex:1; min-height:12rem; border-radius:var(--radius-card-sm); background:var(--ink); color:rgba(var(--white-rgb),.9);
-  padding:1.5rem; font-family:'Departure Mono',monospace; font-size:var(--text-14); line-height:1.7; overflow:auto; white-space:pre; word-break:normal }
+  padding:1.5rem; font-family:'Departure Mono',monospace; font-size:var(--text-14); line-height:var(--leading-body); overflow:auto; white-space:pre; word-break:normal }
 .demo-code .k{ color:var(--purple-300) } .demo-code .s{ color:#7fd0a8 } .demo-code .c{ color:rgba(var(--white-rgb),.4) }
 .demo-foot{ display:flex; align-items:center; justify-content:space-between; margin-top:1.5rem }
 .demo-dots{ display:flex; gap:.5rem }
@@ -1378,17 +1421,32 @@ PAGES = {}
 PAGES['company.html'] = dict(
     title='회사소개 | PARAMETA',
     desc='파라메타는 신뢰할 수 있는 블록체인 기술을 바탕으로, 금융·기업·공공 등 다양한 산업에서 활용되는 디지털 인프라와 서비스를 제공합니다.',
-    eyebrow='About PARAMETA',
-    h1_lines=['Web2의 안정성과', 'Web3의 가능성을', '모두 경험한 기업'],
-    lead='파라메타는 공공, 금융, 민간 IT 시스템 운영 경험과 1세대 메인넷과 dApp 구축 경험을 바탕으로, 기업의 디지털자산 사업을 안정적으로 시작하고 확장할 수 있도록 지원합니다.',
+    eyebrow='Company',
+    h1_lines=['About PARAMETA'],
+    lead='파라메타는 Web2의 전문성과 Web3의 혁신성으로,<br>지갑이 곧 금융이 되는 WalletFi 생태계를 만들어갑니다.',
     crumb='Company — 회사소개',
+    body_class='hero-dark company',
+    hero_visual='<div class="about-hero-viz" aria-hidden="true"></div>',
     content=f'''
 <section><div class="shell sec">
-  {sec_head('Vision', 'Web2 + Web3를 연결하는 WalletFi 생태계를 만들어갑니다', '파라메타는 금융권·공공·민간의 전통금융(Web2)부터 퍼블릭 블록체인 플랫폼과 DeFi(Web3)까지, 양쪽 영역의 전문 경험과 노하우를 두루 갖췄습니다. 두 힘을 하나로 모아, 지갑으로 모든 금융을 연결하는 지갑 기반 금융 생태계 WalletFi를 만들어갑니다.')}
-  <div class="rvl" style="display:flex; flex-direction:column; gap:1.75rem">
-    <div><div style="font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); margin-bottom:.75rem">두 세계를 연결</div>{chips(['전통금융 TradFi', '탈중앙화 금융 DeFi'])}</div>
-    <div><div style="font-size:var(--text-14); color:var(--accent); font-weight:600; margin-bottom:.75rem">WalletFi — 스테이블코인 · 자산 토큰화 · 크로스보더 결제 인프라</div>{chips(['금융기관 · 핀테크', 'CEX / DEX 사용자'])}</div>
-    <div><div style="font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); margin-bottom:.75rem">Wallet Infrastructure</div>{chips(['K-BTF', 'loopchain', 'PDS', 'BFS', 'DID'])}</div>
+  {sec_head('Vision', 'Web2 + Web3를 연결하는 WalletFi 생태계를 만들어갑니다', '파라메타는 금융권·공공·민간의 전통금융(Web2)부터 퍼블릭 블록체인 플랫폼과 DeFi(Web3)까지, 양쪽 영역의 전문 경험과 노하우를 두루 갖췄습니다. 두 힘을 하나로 모아, 지갑으로 모든 금융을 연결하는 지갑 기반 금융 생태계 WalletFi를 만들어갑니다.', layout='center')}
+  <div class="wfd rvl" style="--rvl-y:24px">
+    <div class="wfd-band wfd-side">
+      <div class="wfd-t">전통금융 <em>TradFi</em></div>
+      <div class="wfd-d"><b>전통 금융기반 사업자</b>금융기관 · 핀테크 등</div>
+    </div>
+    <div class="wfd-band wfd-core">
+      <div class="wfd-t">WalletFi</div>
+      <div class="wfd-s">스테이블코인 · 자산 토큰화 · 크로스보더 결제</div>
+    </div>
+    <div class="wfd-band wfd-side">
+      <div class="wfd-t">탈중앙화 금융 <em>DeFi</em></div>
+      <div class="wfd-d"><b>디지털 자산 사용자</b>CEX / DEX 사용자 등</div>
+    </div>
+    <div class="wfd-infra">
+      <div class="wfd-infra-t">Wallet Infrastructure</div>
+      <div class="wfd-chips"><span>K-BTF</span><span>loopchain</span><span>PDS</span><span>BFS</span><span>DID</span></div>
+    </div>
   </div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
@@ -1399,29 +1457,34 @@ PAGES['company.html'] = dict(
     dict(cap='Revenue', n='750억 원+', sub='누적 매출 (2016~2025)'),
     dict(cap='Quality', n='GS 1등급', sub='loopchain SW품질 인증'),
   ], cols=2)}
-  <div class="rvl" style="margin:2.5rem 0">
-    <div style="font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); margin-bottom:1rem">함께 투자한 파트너 — 누적 250억 원</div>
-    {chips(['기술보증기금','한국성장금융','코리아에셋투자증권','L&S벤처캐피탈','TS인베스트먼트','키움인베스트먼트','패스파인더에이치','케이클라비스','신한벤처투자'])}
+  <div class="rvl" style="margin:2.75rem 0 0">
+    <h3 style="font-size:var(--text-24); font-weight:600; letter-spacing:-.01em; color:var(--ink); margin:0 0 .5rem">파라메타의 10년에 함께 투자한 파트너</h3>
+    <p class="phero-lead" style="margin:0 0 1.25rem">정책금융기관부터 금융그룹 CVC까지, 누적 250억 원을 함께했습니다.</p>
+    {chips(['기술보증기금','한국성장금융투자운용','코리아에셋투자증권','L&S벤처캐피탈','TS인베스트먼트','키움인베스트먼트','패스파인더에이치','케이클라비스인베스트먼트','신한벤처투자'])}
   </div>
-  <div class="rvl" style="margin-bottom:2.5rem">
+  <div class="rvl" style="margin:2.5rem 0 0">
     <div style="font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); margin-bottom:1rem">인증 · 수상</div>
-    {chips(['GS인증 1등급 (loopchain)','기술보증기금 TI-1 등급','과기정통부 장관 표창','KISA 기술특례상장 컨설팅 A등급','금융위원회 혁신금융서비스 지정'])}
+    {chips(['GS인증 1등급 (loopchain)','기술보증기금 TI-1 등급','과학기술정보통신부 장관 표창','KISA 기술특례상장 컨설팅 A등급 (2년 연속)','금융위원회 혁신금융서비스 지정'])}
+  </div>
+  <div class="rvl" style="margin:2.75rem 0 1.5rem">
+    <h3 style="font-size:var(--text-24); font-weight:600; letter-spacing:-.01em; color:var(--ink); margin:0 0 .5rem">파라메타는 업계 주요 플레이어들과 함께 산업을 선도하고 있습니다</h3>
+    <p class="phero-lead" style="margin:0">파라메타는 블록체인 산업이 처음 가는 길을 먼저 열며 시장을 선도해왔습니다.</p>
   </div>
   {cards_wrap([
     dark_card('First', '세계 최초 블록체인 공동인증 상용화', '증권사 26개사를 하나의 온체인 신원 체계로 묶은 공동인증을 세계 최초로 상용화했습니다.', grouped=True),
     dark_card('First', '국내 최초 금융권 DID 실명인증 상용화', '신한은행과 함께 금융권 DID 실명인증을 국내 최초로 상용화했습니다.', grouped=True),
-    dark_card('First', '국내 최초 블록체인 서비스 CSAP 인증', 'MyID 2.0으로 블록체인 서비스 최초의 CSAP 클라우드 보안 인증을 획득했습니다.', grouped=True),
+    dark_card('First', '국내 최초 블록체인 서비스 CSAP 인증 획득', 'MyID 2.0으로 블록체인 서비스 최초의 CSAP 클라우드 보안 인증을 획득했습니다.', grouped=True),
     dark_card('First', '국내 최초 DID Method Registry 등재', '국내 최초로 DID Method Registry에 등재했습니다.', grouped=True),
   ], cols=2)}
   <div class="rvl" style="margin-top:2.5rem">
-    <div style="font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); margin-bottom:1rem">함께한 파트너 · Stablecoin Alliance 초대 의장사</div>
+    <div style="font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); margin-bottom:1rem">Stablecoin Alliance · MyID Alliance 초대 의장사 · 얼라이언스 파트너사 86곳+</div>
     <div class="pt-marquee" aria-label="함께한 파트너 로고">
       <div class="pt-track">{partner_logos(COMPANY_LOGOS)}{partner_logos(COMPANY_LOGOS)}</div>
     </div>
   </div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  {sec_head('History', '디지털자산 시장을 만들어온 파라메타의 10년')}
+  {sec_head('History', '디지털자산 시장을 만들어온 파라메타의 10년', '국내 1세대 Web3 인프라 기업으로서 시장의 기준을 만들어왔습니다.')}
   {rows([
     dict(idx='2016', title='(주)더루프 설립', desc='국내 1세대 Web3 인프라 기업으로 출발했습니다.'),
     dict(idx='2018', title='1세대 퍼블릭 메인넷 ICON 출시', desc='라인 블록체인 합작법인 ‘언체인’을 설립했습니다(아이콘루프 시절).'),
@@ -1447,7 +1510,21 @@ PAGES['company.html'] = dict(
       <div><div class="k">Address</div><div class="v">서울특별시 서초구 강남대로 311, 드림플러스 강남 8층</div></div>
       <div><div class="k">English</div><div class="v">8F, DreamPlus Gangnam, 311 Gangnam-daero, Seocho-gu, Seoul, Republic of Korea</div></div>
       <div><div class="k">Phone</div><div class="v">02-2138-7026</div></div>
-      <div><div class="k">Email</div><div class="v">info@parametacorp.com</div></div>
+    </div>
+  </div>
+</div></section>
+<section><div class="shell sec" style="padding-top:0">
+  <div class="rvl" style="border:1px solid rgba(var(--line-rgb),.8); border-radius:var(--radius-card-sm); overflow:hidden; height:360px">
+    <iframe src="https://maps.google.com/maps?q=DreamPlus+Gangnam,+311+Gangnam-daero,+Seocho-gu,+Seoul&z=16&output=embed" loading="lazy" title="파라메타 오시는 길 — 드림플러스 강남" referrerpolicy="no-referrer-when-downgrade" style="width:100%; height:100%; border:0; display:block"></iframe>
+  </div>
+</div></section>
+<section><div class="shell sec">
+  <div class="rvl" style="background:var(--ink); border-radius:1.25rem; padding:5.5rem 2rem; text-align:center">
+    <h2 style="font-size:var(--text-40); font-weight:600; letter-spacing:-.02em; line-height:var(--leading-heading); color:var(--white); margin:0 0 1rem">전통금융과 Web3 금융을 연결해<br>새로운 금융 생태계를 만들어 갑니다.</h2>
+    <p style="color:var(--purple-300); font-size:var(--text-18); font-weight:600; letter-spacing:.01em; margin:0 0 2.25rem">Digital Asset Enabler, PARAMETA</p>
+    <div class="phero-cta" style="display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap">
+      <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">무료 컨설팅 신청</span></a>
+      <a class="pill outline no-arrow hs-scale" href="parasta.html"><span class="hspring">서비스 둘러보기</span></a>
     </div>
   </div>
 </div></section>
@@ -2208,8 +2285,8 @@ PAGES['solution-finance.html'] = dict(
     title='금융 디지털자산 솔루션 | PARAMETA',
     desc='규제 환경에 맞춘 엔터프라이즈 디지털자산 금융 플랫폼. 발행·지갑·오케스트레이션·온체인 KYC·통합관제를 하나로. 스테이블코인·예금토큰·RWA·토큰증권까지 단계적 확장.',
     eyebrow='Solutions — 금융',
-    h1_lines=['규제 환경에 맞춘', '엔터프라이즈 디지털자산', '금융 플랫폼'],
-    lead='발행·지갑·오케스트레이션·온체인 KYC·통합관제를 하나로 연결합니다. 스테이블코인·예금토큰·RWA·토큰증권까지 단계적으로 확장합니다.',
+    h1_lines=['디지털자산 금융의', '모든 단계를 연결합니다'],
+    lead='발행, 지갑, 오케스트레이션, 온체인 KYC, 통합 관제를 하나로 연결합니다. 스테이블코인부터 예금토큰, RWA, 토큰증권까지 규제와 사업 환경에 맞춰 단계적으로 확장할 수 있습니다.',
     crumb='Solutions — 금융',
     hero_visual='<img src="assets/solutions/hero-test-1.webp" alt="" loading="eager" fetchpriority="high">',
     content=f"""
@@ -2754,6 +2831,8 @@ def resolve_hero(fname, p):
     body = p.get('body_class', DEFAULT_BODY_CLASS)
     if fname in CONTENT_PAGES or fname in CONTENT_NOCTA:
         body = (body + ' hero-center').strip()
+    if fname.startswith('solution-'):
+        body = (body + ' hero-sol').strip()  # 솔루션형 히어로 토큰(타이틀 한 사이즈 다운)
     cta = p.get('hero_cta')
     if cta is None:
         if fname.startswith('solution-'):
@@ -2767,7 +2846,11 @@ def resolve_hero(fname, p):
     return body, cta
 
 for fname, p in PAGES.items():
-    h1 = ''.join(f'<span class="rvl-line"><span>{l}</span></span>' for l in p['h1_lines'])
+    if fname.startswith('solution-'):
+        # 솔루션형: <br> 한 덩어리 — rvl-line 블록 분리 시 행간 .98 + 패딩 트릭으로 영역 겹침
+        h1 = f'<span class="rvl-line"><span>{"<br>".join(p["h1_lines"])}</span></span>'
+    else:
+        h1 = ''.join(f'<span class="rvl-line"><span>{l}</span></span>' for l in p['h1_lines'])
     _body, _cta = resolve_hero(fname, p)
     out = (SHELL
         .replace('__BODYCLASS__', _body)
