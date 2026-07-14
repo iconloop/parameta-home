@@ -380,6 +380,9 @@ body.company .vision-panel .wfd-core::before, body.company .vision-panel .wfd-co
   .cards-3 .work-card.grouped::before, .cards-2 .work-card.grouped::before{ margin:-2rem -2rem 1.75rem } }
 /* 짧은 콘텐츠 카드도 과하지 않게: grouped 최소높이는 콘텐츠 기준 */
 .cards-3 .work-card.grouped, .cards-2 .work-card.grouped{ min-height:0 }
+/* 세로형 이미지 카드 변형: 이미지 영역을 카드의 약 2/3로 (기본 16rem → 24rem) */
+.media-tall .work-card.grouped::before{ height:24rem }
+@media (max-width:639px){ .media-tall .work-card.grouped::before{ height:14rem } }
 .work-card.grouped .work-bottom{ position:static; inset:auto }
 .work-card.grouped .work-meta{ margin-bottom:.875rem; color:var(--purple-300) }
 .work-card.grouped .work-bottom p{ font-size:var(--text-16) }
@@ -493,11 +496,22 @@ body.company .vision-panel .wfd-core::before, body.company .vision-panel .wfd-co
 .uc-slide{ position:absolute; inset:0; opacity:0; visibility:hidden; transition:opacity .4s ease, transform .35s cubic-bezier(.2,.8,.2,1);
   background:color-mix(in srgb, var(--ink) 6%, var(--white)); color:var(--ink); border-radius:var(--radius-card); padding:3rem;
   display:flex; flex-direction:column }
-.uc-slide.is-active{ position:relative; opacity:1; visibility:visible }
+.uc-slide.is-active{ position:relative; opacity:1; visibility:visible;
+  will-change:transform; backface-visibility:hidden }  /* GPU 레이어 고정: 스케일 종료 시 텍스트 재래스터 스냅(덜컹) 방지 */
 @media (hover:hover){ .uc-slide.is-active:hover{ transform:scale(1.02) } }  /* 호버 시 카드 확대 */
 .uc-thumb{ width:5rem; height:5rem; border-radius:var(--radius-card-sm); background:rgba(var(--ink-rgb),.07); margin-bottom:1.5rem }
 /* uc-tall 변형(broof): 이미지↔텍스트 간격 확대로 카드 키움 */
 .uc-carousel.uc-tall .uc-thumb{ margin-bottom:4rem }
+/* uc-lg 변형(금융): 본문 한 단계 업 + 라벨 플래그 행 구조 */
+.uc-carousel.uc-lg .uc-slide > p{ font-size:var(--text-20) }
+.uc-carousel.uc-lg .uc-slide h3{ margin-bottom:1rem }  /* 타이틀↔플래그 행 간격 */
+.uc-rows{ display:flex; flex-direction:column; gap:.6rem }
+.uc-row{ display:flex; align-items:center; gap:.75rem; font-size:var(--text-20);
+  color:rgba(var(--ink-rgb),.6); line-height:var(--leading-body); word-break:keep-all }
+.uc-flag{ flex:none; display:inline-flex; align-items:center; padding:.375rem .875rem;
+  background:rgba(var(--ink-rgb),.07); border-radius:var(--radius-pill);
+  font-size:var(--text-16); font-weight:600; color:rgba(var(--ink-rgb),.45) }  /* 그레이 필 + 연그레이 텍스트 */
+@media (max-width:639px){ .uc-row{ flex-direction:column; align-items:flex-start; gap:.375rem } }
 .uc-thumb video, .uc-thumb img{ width:100%; height:100%; object-fit:cover; display:block; border-radius:inherit }
 .uc-slide h3{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em; margin-bottom:.75rem; color:var(--ink) }
 @media (min-width:640px){ .uc-slide h3{ font-size:var(--text-30) } }
@@ -598,6 +612,12 @@ body.company .vision-panel .wfd-core::before, body.company .vision-panel .wfd-co
 .stat-num.sn-sm{ font-size:var(--text-36) }
 @media (min-width:640px){ .stat-num.sn-sm{ font-size:var(--text-40) } }
 @media (min-width:768px){ .stat-num.sn-sm{ font-size:var(--text-48) } }
+/* 스탯 2x2 배치 (기본 4열 대신) — 숫자는 기본에서 토큰 1단계 다운 (48→40 / 60→48 / 72→60) */
+@media (min-width:1024px){ .stats-grid.sg-2x2{ grid-template-columns:repeat(2,1fr) } }
+.stats-grid.sg-2x2{ margin-top:var(--space-64); margin-bottom:var(--space-32) }  /* 타이틀↔그리드 여백 업(3.5→4rem) + 하단 마진 */
+.sg-2x2 .stat-num{ font-size:var(--text-36); font-weight:700 }  /* 기본(600)보다 한 단계 볼드, 사이즈는 한 토큰 다운 */
+@media (min-width:640px){ .sg-2x2 .stat-num{ font-size:var(--text-40) } }
+@media (min-width:768px){ .sg-2x2 .stat-num{ font-size:var(--text-48) } }
 .stats-panel .sec-note{ margin-top:3rem; color:rgba(var(--white-rgb),.45) }
 .stats-panel .sec-note + .sec-note{ margin-top:1rem }
 .stats-panel .sec-note strong{ font-weight:600; color:rgba(var(--white-rgb),.7) }
@@ -2780,12 +2800,12 @@ PAGES['solution-finance.html'] = dict(
 </div></section>
 <section><div class="shell sec">
   {sec_head('Problem', '디지털자산 사업에서 금융기관이 마주하는 문제')}
-  {card_grid([
+  <div class="media-tall">{card_grid([
     card('발행보다 복잡한 운영', '디지털자산은 발행 이후 KYC, 상환, 유통 통제, 사후 검증까지 지속적인 운영이 필요합니다.', kicker='문제 01', media=True),
     card('계좌와 온체인 시스템의 분절', '은행 계좌와 온체인 지갑이 분리되어 있어 자산 관리와 정산이 복잡합니다.', kicker='문제 02', media=True),
     card('규제 대응 부담', '서비스마다 자금세탁방지(AML)와 트래블룰 준수 체계를 별도로 설계해야 합니다.', kicker='문제 03', media=True),
     card('범용 SaaS의 한계', '글로벌 지갑 SaaS만으로는 국내 규제와 금융기관의 운영 요건에 대응하기 어렵습니다.', kicker='문제 04', media=True),
-  ], cols=2)}
+  ], cols=2)}</div>
 </div></section>
 <section><div class="shell sec">
   {sec_head('Features', '발행부터 상환·사후 검증까지 연결하는<br>6-Layer 통제 구조', '디지털자산의 발행·유통·상환·사후 검증 전 과정을 6개의 통제 계층으로 연결해 안정적으로 관리합니다.')}
@@ -2810,35 +2830,53 @@ PAGES['solution-finance.html'] = dict(
 <section><div class="shell stats-shell">
   <div class="stats-panel rvl" style="--rvl-y:40px; --rvl-s:.99">
     <div class="eyebrow light"><span class="dot"></span>By the Numbers</div>
-    <h2 class="stats-h2" data-line-reveal><span class="rvl-line"><span>숫자로 보는 ParaSta</span></span></h2>
-    <ul class="stats-grid">
-      <li class="rvl" style="--rvl-y:20px"><div class="stat-num sn-sm"><span class="pv-val" data-val="4">0</span>개 핵심 모듈</div><div class="stat-label">발행·지갑·오케스트레이션·온체인 KYC와 통합 관리 기능</div></li>
-      <li class="rvl" style="--rvl-y:20px; --rvl-delay:90ms"><div class="stat-num sn-sm"><span class="pv-val" data-val="6">0</span> Layer</div><div class="stat-label">디지털자산의 발행·유통·상환 전 과정을 연결하는 통제 구조</div></li>
-      <li class="rvl" style="--rvl-y:20px; --rvl-delay:180ms"><div class="stat-num sn-sm">4주 · 12주</div><div class="stat-label">4주 PoC와 12주 Pilot로 구성된 단계별 도입 패키지</div></li>
-      <li class="rvl" style="--rvl-y:20px; --rvl-delay:270ms"><div class="stat-num sn-sm">최대 <span class="pv-val" data-val="100000">0</span> TPS</div><div class="stat-label">제한된 테스트 환경에서 측정한 loopchain 처리 성능</div></li>
+    <h2 class="stats-h2" data-line-reveal style="max-width:none"><span class="rvl-line"><span>디지털자산 금융을 위한<br>핵심 기술과 운영 체계</span></span></h2>
+    <ul class="stats-grid sg-2x2">
+      <li class="rvl" style="--rvl-y:20px"><div class="stat-num"><span class="pv-val" data-val="4">0</span>개 핵심 모듈</div><div class="stat-label">발행, 지갑, 오케스트레이션, 온체인 KYC</div></li>
+      <li class="rvl" style="--rvl-y:20px; --rvl-delay:90ms"><div class="stat-num"><span class="pv-val" data-val="6">0</span> Layer</div><div class="stat-label">발행부터 상환까지 이어지는 구조</div></li>
+      <li class="rvl" style="--rvl-y:20px; --rvl-delay:180ms"><div class="stat-num"><span class="pv-val" data-val="2">0</span>단계 도입</div><div class="stat-label">4주 PoC와 12주 Pilot을 거쳐 단계적으로 도입</div></li>
+      <li class="rvl" style="--rvl-y:20px; --rvl-delay:270ms"><div class="stat-num"><span class="pv-val" data-val="100000">0</span> TPS</div><div class="stat-label">제한된 테스트 환경에서 측정한 loopchain 최대 처리 성능</div></li>
     </ul>
-    <p class="sec-note"><strong>파라메타의 기술 및 사업 역량</strong><br>금융위원회 혁신금융서비스 지정 · TCB 기술신용등급 TI-1 · CSAP 인증 · Chain ID 증권사 공동인증</p>
-    <p class="sec-note">※ 위 인증과 사업 이력은 ParaSta 제품이 아닌 파라메타의 회사 실적입니다. 최대 100,000 TPS는 제한된 환경에서 측정한 벤치마크 수치이며, 실제 성능은 구축 환경에 따라 달라질 수 있습니다. Chain ID 참여 증권사 수는 확인 후 별도로 표기합니다.</p>
   </div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  {sec_head('Use Cases', '적용 사례')}
-  {cards_wrap([
-    dark_card('참여', 'NH투자증권 — STO 비전그룹', '<b>과제</b> · 토큰증권을 발행 이후 운영·관리까지 고려한 인프라가 필요<br><br><b>해결</b> · 토큰증권 발행·운영 논의에 기술 파트너로 참여', sm=False),
-    dark_card('MOU', '쿠콘 · 인피닛블록', '<b>과제</b> · 스테이블코인 발행·정산·결제를 API로 연계할 허브가 필요<br><br><b>해결</b> · 발행·정산·결제·API 연계 협력 MOU 체결', sm=False),
-    dark_card('발표', 'ADB ABMF — 온체인 KYC 발표', '<b>과제</b> · 국경 간 투자에서 지갑·사용자 신원의 적격성 확인이 필요<br><br><b>해결</b> · 지갑 인증·온체인 KYC·KYW 접근을 국제 협의체에서 발표', sm=False),
-  ], cols=3)}
+  {sec_head('Credentials', '금융·공공 분야에서 검증된 기술력', '파라메타는 다양한 인증과 금융기관 협업 경험을 바탕으로, 안정적인 디지털자산 금융 인프라를 구축해 왔습니다.')}
+  <div class="cert-row rvl" style="--rvl-y:24px; padding:var(--space-32) 0 0">
+    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">기술보증기금 TI-1</div></div>
+    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">CSAP 인증</div></div>
+    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">혁신금융서비스 지정</div></div>
+  </div>
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
+<section><div class="shell sec">
   {sec_head('FAQ', '자주 묻는 질문')}
   {faq([
-    dict(q='스테이블코인과 예금토큰은 무엇이 다른가요', a='둘 다 가치가 고정된 디지털 화폐지만 발행 주체와 담보 구조가 다릅니다. 제도·발행 요건은 국내 법제화 상황에 따라 달라집니다.'),
-    dict(q='STO·RWA는 무엇인가요', a='실물·금융 자산을 토큰으로 발행해 거래·관리하는 방식입니다. 발행뿐 아니라 이후 운영·통제까지 인프라가 필요합니다.'),
+    dict(q='스테이블코인과 예금토큰은 무엇이 다른가요?', a='스테이블코인은 법정화폐 등 특정 자산의 가치에 연동되도록 설계된 디지털자산입니다. 예금토큰은 은행 예금을 블록체인상에서 사용할 수 있도록 토큰화한 것으로, 발행 주체와 담보 구조, 적용 규제가 다릅니다.'),
+    dict(q='STO와 RWA는 무엇인가요?', a='STO는 주식·채권 등 증권의 권리를 토큰으로 발행하는 방식이며, RWA는 부동산·채권·원자재 등 실물 및 금융자산을 블록체인과 연결하는 개념입니다. 두 방식 모두 발행 이후 유통·정산·상환을 관리할 수 있는 운영 인프라가 필요합니다.'),
   ])}
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('Solutions', '다른 분야 솔루션')}
-  {routes(SOL_ROUTES, 'solution-finance.html')}
+<section><div class="shell sec">
+  {sec_head('Use Cases', '디지털자산 금융 적용 사례', layout='center')}
+  <div class="uc-carousel uc-tall uc-lg">
+    <button class="uc-arrow uc-prev rvl rvl-op" type="button" aria-label="이전 사례"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5L8 12l7 7"/></svg></button>
+    <div class="uc-slides rvl" style="--rvl-y:40px">
+      <article class="uc-slide is-active">
+        <div class="uc-thumb" aria-hidden="true"></div>
+        <h3>NH투자증권 · STO 비전그룹 참여</h3>
+        <div class="uc-rows"><div class="uc-row"><span class="uc-flag">활용 영역</span><span>토큰증권 발행 이후의 운영·관리 인프라</span></div><div class="uc-row"><span class="uc-flag">주요 내용</span><span>토큰증권 발행·운영 체계 논의에 기술 파트너로 참여</span></div></div>
+      </article>
+      <article class="uc-slide">
+        <div class="uc-thumb" aria-hidden="true"></div>
+        <h3>쿠콘 · 인피닛블록 MOU</h3>
+        <div class="uc-rows"><div class="uc-row"><span class="uc-flag">활용 영역</span><span>스테이블코인 발행·정산·결제 및 API 연계</span></div><div class="uc-row"><span class="uc-flag">주요 내용</span><span>스테이블코인 기반 금융 서비스 연계를 위한 업무협약 체결</span></div></div>
+      </article>
+      <article class="uc-slide">
+        <div class="uc-thumb" aria-hidden="true"></div>
+        <h3>ADB ABMF · 온체인 KYC 발표</h3>
+        <div class="uc-rows"><div class="uc-row"><span class="uc-flag">활용 영역</span><span>국경 간 투자자의 지갑·사용자 신원 및 적격성 확인</span></div><div class="uc-row"><span class="uc-flag">주요 내용</span><span>지갑 인증과 온체인 KYC·KYW 적용 방안을 국제 협의체에서 발표</span></div></div>
+      </article>
+    </div>
+    <button class="uc-arrow uc-next rvl rvl-op" type="button" aria-label="다음 사례"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+  </div>
 </div></section>
 """)
 

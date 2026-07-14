@@ -460,7 +460,7 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 .faq-li{ border-top:1px solid var(--line) }
 .faq-li:first-of-type{ border-top:none }
 .faq-row{ display:flex; align-items:flex-start; gap:1rem; border-radius:var(--radius-card-sm); text-align:left;
-  padding:1.5rem; cursor:pointer; user-select:none; background:rgba(var(--surface-rgb),0);
+  padding:2rem 1.5rem; cursor:pointer; user-select:none; background:rgba(var(--surface-rgb),0);
   transition:background .45s cubic-bezier(.45,0,.55,1), padding .45s cubic-bezier(.45,0,.55,1) }
 @media (hover:hover){ .faq-row:hover{ background:rgba(var(--surface-rgb),1) } }
 .faq-item.open .faq-row{ padding-top:2.25rem; padding-bottom:2.5rem }
@@ -472,27 +472,30 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 .faq-inner{ display:flex; flex-direction:column; transform:translateY(calc(-100% + 2.25rem));
   transition:transform .45s cubic-bezier(.45,0,.55,1) }
 .faq-item.open .faq-inner{ transform:translateY(0) }
-.faq-t{ font-size:var(--text-18); font-weight:500; letter-spacing:-.01em; line-height:2.25rem }
+.faq-t{ font-size:var(--text-22); font-weight:500; letter-spacing:-.01em; line-height:2.25rem }
 .faq-t-top{ opacity:0; margin-bottom:.5rem; transition:opacity .4s cubic-bezier(.45,0,.55,1) }
 .faq-item.open .faq-t-top{ opacity:1 }
-.faq-ans{ max-width:44rem; font-size:var(--text-16); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.6) }
+.faq-ans{ max-width:44rem; font-size:var(--text-20); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.6) }
 .faq-t-bottom{ margin-top:1.25rem; max-height:2.25rem; overflow:hidden; white-space:nowrap;
   text-overflow:ellipsis; opacity:1; transform:translateY(0);
   transition:opacity .4s cubic-bezier(.45,0,.55,1), transform .45s cubic-bezier(.45,0,.55,1) }
 .faq-item.open .faq-t-bottom{ opacity:0; transform:translateY(-8px) }
 .faq-badge2{ width:2.5rem; height:2.5rem; flex:none; position:relative;
-  background:transparent; color:var(--accent); transition:transform .45s cubic-bezier(.45,0,.55,1) }
+  margin-block:calc((2.25rem - 2.5rem) / 2);  /* 닫힘 상태 타이틀 라인(2.25rem)에 수직 중앙 정렬 + 행 높이 증가 방지 */
+  background:var(--ink); color:var(--white); border-radius:var(--radius-pill);
+  transition:transform .45s cubic-bezier(.45,0,.55,1) }  /* 캐러셀 화살표와 동일 문법: 남색 원 + 흰 아이콘 */
 .faq-badge2::before, .faq-badge2::after{ content:""; position:absolute; left:50%; top:50%;
   background:currentColor; border-radius:var(--radius-pill) }
-.faq-badge2::before{ width:1.5px; height:1.375rem; transform:translate(-50%,-50%);
+.faq-badge2::before{ width:1.5px; height:1rem; transform:translate(-50%,-50%);
   transition:opacity .35s cubic-bezier(.45,0,.55,1) }
-.faq-badge2::after{ width:1.375rem; height:1.5px; transform:translate(-50%,-50%) }
+.faq-badge2::after{ width:1rem; height:1.5px; transform:translate(-50%,-50%) }
 .faq-item.open .faq-badge2::before{ opacity:0 }
 @media (min-width:640px){ .faq-shell{ padding-left:2rem; padding-right:2rem }
   .faq-h2{ margin-bottom:3.5rem; font-size:var(--text-48) }
   .faq-row{ gap:1.5rem }
   .faq-idx{ width:2.5rem }
-  .faq-t{ font-size:var(--text-22) } }
+  .faq-badge2{ width:3rem; height:3rem; margin-block:calc((2.25rem - 3rem) / 2) }  /* 레퍼와 동일 3rem + 타이틀 라인 중앙 정렬 */
+  .faq-t{ font-size:var(--text-26) } }  /* 행 리스트 타이틀보다 한 단계 업 */
 @media (min-width:1024px){ .faq-shell{ padding-bottom:7rem } }
 
 /* ============ BRAND LOGO / GNB DROPDOWN / CHATBOT ============ */
@@ -864,10 +867,14 @@ body.hero-light .phero-text .phero-lead{ font-size:var(--text-18) }
 
 /* 히어로 플로팅 이미지 — 히어로 하단 중앙, 아래 박스가 하단 절반을 덮음 (페이지별 hero_figure) */
 body:not(.hero-light) .phero-figure{ display:none }
-/* bottom:0(=다크 카드 상단) + translateY(50%) → 크기 무관 항상 정확히 반만 걸침 */
-body.hero-light .phero-figure{ position:absolute; left:50%; bottom:0; transform:translate(-50%, 50%);
-  width:clamp(18rem, 28vw, 28rem); height:auto; z-index:1; pointer-events:none; display:block }
-@media (max-width:767px){ body.hero-light .phero-figure{ width:15rem } }
+/* bottom:0(=다크 카드 상단) + translateY(44%) → 반 걸침에서 살짝 위로 */
+body.hero-light .phero-figure{ position:absolute; left:50%; bottom:0; transform:translate(-50%, 44%);
+  width:clamp(22rem, 38vw, 40rem); z-index:1; pointer-events:none; display:block }
+@media (max-width:767px){ body.hero-light .phero-figure{ width:19rem } }
+/* 브러시 리빌: base(심플) + detail(복합, 스크롤 크로스페이드) + 캔버스(브러시 리빌) */
+body.hero-light .phero-figure .pf-base{ display:block; width:100%; height:auto; transition:opacity .45s ease }
+body.hero-light .phero-figure .pf-detail{ position:absolute; inset:0; width:100%; height:auto; opacity:0; transition:opacity .45s ease; will-change:opacity }
+body.hero-light .phero-figure .pf-canvas{ position:absolute; inset:0; width:100%; height:100%; pointer-events:none }
 
 /* ============ About(company) 전용(B) — 라이트 히어로 위에 Vision 편입 ============ */
 body.company .phero-inner{ padding-bottom:28rem }   /* 아래 Vision 편입 + 그래픽 공간 (두 배로) */
@@ -916,48 +923,63 @@ body.company .vision-panel .sec-h2{ color:var(--white) }
 body.company .vision-panel .phero-lead{ color:rgba(var(--white-rgb),.68); font-size:var(--text-20) }
 @media (max-width:1023px){ body.company .vision-panel .phero-lead{ font-size:var(--text-18) } }
 /* wfd 다이어그램 다크 톤 */
-body.company .vision-panel .wfd{ background-color:transparent; padding:0; margin-top:3rem;
+body.company .vision-panel .wfd{ background-color:transparent; padding:0; margin-top:4rem;
   background-image:radial-gradient(rgba(var(--white-rgb),.04) 1px, transparent 1.5px); background-size:20px 20px }
-body.company .vision-panel .wfd-band{ background:#2c2a5a; border-color:rgba(var(--white-rgb),.1); box-shadow:none }  /* 좌우 원: 솔리드 컬러(잉크보다 더 밝게) */
-body.company .vision-panel .wfd-t{ color:var(--white) }
-body.company .vision-panel .wfd-t em{ color:var(--purple-300) }
+body.company .vision-panel .wfd-band{ background:var(--purple-400); box-shadow:none; position:relative; z-index:1;
+  box-sizing:border-box; border:1px solid var(--purple-300) }  /* 좌우 원: 밝은 퍼플 + 연보라(purple-300) 인사이드 보더 + 대시 위에 올려서 삐져나온 부분 가림 */
+body.company .vision-panel .wfd-t{ color:var(--white); font-size:var(--text-20) }  /* 좌우 타이틀: 코어보다 한 단계 작게 */
+body.company .vision-panel .wfd-t em{ color:var(--white) }
 body.company .vision-panel .wfd-d{ color:rgba(var(--white-rgb),.62) }
 body.company .vision-panel .wfd-d b{ color:var(--white) }
 body.company .vision-panel .wfd-s{ color:rgba(var(--white-rgb),.64) }
-body.company .vision-panel .wfd-core{ background:var(--white); border-color:var(--white) }  /* WalletFi = 흰색 원 */
-body.company .vision-panel .wfd-core .wfd-t{ color:var(--purple-500); font-size:var(--text-30) }  /* 흰 원 위 글자 반전 + 크게 */
+body.company .vision-panel .wfd-core{ background:var(--white); border:1px solid var(--gray-400) }  /* WalletFi = 흰색 원, 보더는 purple-300과 비슷한 명도의 모노(gray-400) */
+body.company .vision-panel .wfd-core .wfd-t{ color:var(--purple-500); font-size:var(--text-24) }  /* 흰 원 위 글자 반전 */
 body.company .vision-panel .wfd-core .wfd-s{ color:rgba(var(--ink-rgb),.6) }
-body.company .vision-panel .wfd-core::before, body.company .vision-panel .wfd-core::after{ color:var(--purple-300) }
-/* TradFi·WalletFi·DeFi 셋 다 원 (작게·중앙정렬) + 화살표 크게 */
+/* TradFi·WalletFi·DeFi 셋 다 원 */
 body.company .vision-panel .wfd{ align-items:center }
 body.company .vision-panel .wfd-band{ aspect-ratio:1; border-radius:50%; padding:1.5rem;
-  justify-content:center; width:min(100%, 18rem); justify-self:center; margin-inline:auto }
-body.company .vision-panel .wfd-core{ width:min(100%, 19rem) }  /* 중앙 허브만 살짝 크게 */
+  justify-content:center; width:min(100%, 19rem); justify-self:center; margin-inline:auto }  /* 좌우도 코어와 동일 19rem */
+/* 코어: 스케일 안 되는 래퍼(그리드 아이템, 커넥터 보유) + 안쪽 흰 원(호버 시 이것만 확대) */
+body.company .vision-panel .wfd-core-wrap{ grid-column:span 4; justify-self:center; position:relative;
+  width:min(100%, 19rem); aspect-ratio:1 }
+body.company .vision-panel .wfd-core{ width:100% }  /* 래퍼를 꽉 채움 */
 body.company .vision-panel .wfd-core .wfd-s{ max-width:13rem; font-size:var(--text-18) }
-body.company .vision-panel .wfd-d{ max-width:12rem }
-/* 연결선: dashed 라인 + 코어 모서리에 반 걸친 노드 dot */
-/* 박스를 코어쪽으로 5.5px 늘려 점이 잘리지 않게(배경 클립 방지), 대시는 갭까지만 */
+body.company .vision-panel .wfd-d{ max-width:13rem; font-size:var(--text-18) }  /* 좌우 서브카피도 코어와 동일 */
+/* 노드 점: 흰 원(코어) 양옆 모서리에 붙음 → 원과 함께 스케일 */
 body.company .vision-panel .wfd-core::before, body.company .vision-panel .wfd-core::after{
-  content:''; font-size:0; border:0; height:11px; z-index:2;
-  width:calc(var(--grid-gap) + 6.75rem + 5.5px); transform:translateY(-50%);
-  background-image:
-    radial-gradient(circle at center, var(--purple-300) 4.5px, transparent 5px),
-    repeating-linear-gradient(90deg, rgba(var(--purple-300-rgb),.85) 0 4px, transparent 4px 10px);
-  background-size:11px 11px, calc(100% - 5.5px) 2px;
-  background-repeat:no-repeat, repeat-x }
-/* ::before=좌측 갭(코어 왼쪽 모서리에 dot), ::after=우측 갭(코어 오른쪽 모서리에 dot) */
-body.company .vision-panel .wfd-core::before{ left:auto; right:calc(100% - 5.5px); background-position:calc(100% - 2px) center, left center }
-body.company .vision-panel .wfd-core::after{ left:calc(100% - 5.5px); background-position:2px center, right center }
-/* Wallet Infrastructure: 채운 보라 → 라인 박스(아웃라인) */
-body.company .vision-panel .wfd-infra{ background:transparent; border:1px solid rgba(var(--purple-300-rgb),.4) }
-/* 원 호버 리빌 — 3개 다 scale (그림자 없음) */
+  content:''; display:block; position:absolute; top:50%; z-index:2; border:0; font-size:0;
+  width:9px; height:9px; border-radius:50%; background:var(--gray-400) }
+body.company .vision-panel .wfd-core::before{ left:0; right:auto; transform:translate(calc(-50% - 1px),-50%) }
+body.company .vision-panel .wfd-core::after{ left:auto; right:0; transform:translate(calc(50% + 1px),-50%) }
+/* 점선: 별개 — 스케일 안 되는 래퍼 pseudo, 원 모서리에서 살짝 떨어져 갭에만 */
+body.company .vision-panel .wfd-core-wrap::before, body.company .vision-panel .wfd-core-wrap::after{
+  content:''; position:absolute; top:50%; transform:translateY(-50%) scaleX(0); height:0; z-index:-1;
+  width:calc(var(--grid-gap) + 6.75rem + 5rem);  /* 갭 + 양쪽 원 안으로 넉넉히 오버슛(z-index:-1이라 원 뒤로 숨음) */
+  border-top:2px dashed var(--gray-400);  /* PortX/ParaSta와 동일한 dashed 보더 스타일 */
+  transition:transform .45s cubic-bezier(.16,1,.3,1) }  /* 코어 뒤 좌우로 솩 확장 */
+body.company .vision-panel .wfd-core-wrap::before{ left:auto; right:100%; transform-origin:right center }
+body.company .vision-panel .wfd-core-wrap::after{ left:100%; transform-origin:left center }
+/* Wallet Infrastructure: 라인 박스 */
+body.company .vision-panel .wfd-infra{ background:transparent; border:1px solid var(--gray-600); padding-block:1.75rem; margin-top:1rem;
+  /* 좌우 원 바깥 가장자리에 맞춤: 4칼럼 셀폭 − 19rem 원폭의 절반이 인셋 */
+  margin-inline:calc(((100% - 11 * var(--grid-gap)) / 3 + 3 * var(--grid-gap) - 19rem) / 2) }
+/* 인프라 타이틀: 사이즈 키우고 웨이트 낮게 */
+body.company .vision-panel .wfd-infra-t{ font-size:var(--text-20); font-weight:500; letter-spacing:normal; color:var(--gray-400); margin-bottom:.625rem }
+/* ── Vision 다이어그램 순차 리빌: 코어 먼저 → 점선 좌우 확장 → 양옆 원 딱딱 ── */
+body.company .vision-panel .wfd-core, body.company .vision-panel .wfd-side{ opacity:0 }
+body.company .vision-panel .wfd.is-in .wfd-core{ opacity:1; animation:wfdPop .5s cubic-bezier(.16,1,.3,1) backwards }
+body.company .vision-panel .wfd.is-in .wfd-core-wrap::before, body.company .vision-panel .wfd.is-in .wfd-core-wrap::after{ transform:translateY(-50%) scaleX(1); transition-delay:.3s }
+body.company .vision-panel .wfd.is-in .wfd-side{ opacity:1; animation:wfdPop .5s cubic-bezier(.16,1,.3,1) backwards }
+body.company .vision-panel .wfd.is-in .wfd-side{ animation-delay:.55s }  /* 좌우 동시 등장 */
+@keyframes wfdPop{ from{ opacity:0; transform:scale(.82) } }
+/* 인프라 카드 전체 호버 스케일 (칩 개별 호버 아님) */
+body.company .vision-panel .wfd-infra{ transition:transform .35s cubic-bezier(.2,.8,.2,1) }
+@media (hover:hover){ body.company .vision-panel .wfd-infra:hover{ transform:scale(1.03) } }
+/* 항목: 알약 대신 · 구분 텍스트 (서브카피와 동일 톤) */
+body.company .vision-panel .wfd-chips{ display:block; font-size:var(--text-18); color:var(--white) }
+/* 호버 리빌: 원만 scale — 커넥터는 wfd-core-wrap 소속이라 함께 안 커짐 */
 body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,.8,.2,1), background-color .35s }
-body.company .vision-panel .wfd-core::before, body.company .vision-panel .wfd-core::after{ transition:transform .35s cubic-bezier(.2,.8,.2,1) }
-@media (hover:hover){
-  body.company .vision-panel .wfd-band:hover{ transform:scale(1.05) }
-  /* 코어 호버 시 커넥터는 카운터-스케일로 선 크기 고정(코어만 확대) */
-  body.company .vision-panel .wfd-core:hover::before, body.company .vision-panel .wfd-core:hover::after{ transform:translateY(-50%) scale(calc(1 / 1.05)) }
-}
+@media (hover:hover){ body.company .vision-panel .wfd-band:hover{ transform:scale(1.05) } }
 
 /* ============ WHAT IS (좌 다이어그램 / 우 텍스트) ============ */
 .whatis-grid{ display:grid; grid-template-columns:1fr; gap:2.5rem; align-items:center }
@@ -1090,6 +1112,9 @@ body.company .vision-panel .wfd-core::before, body.company .vision-panel .wfd-co
   .cards-3 .work-card.grouped::before, .cards-2 .work-card.grouped::before{ margin:-2rem -2rem 1.75rem } }
 /* 짧은 콘텐츠 카드도 과하지 않게: grouped 최소높이는 콘텐츠 기준 */
 .cards-3 .work-card.grouped, .cards-2 .work-card.grouped{ min-height:0 }
+/* 세로형 이미지 카드 변형: 이미지 영역을 카드의 약 2/3로 (기본 16rem → 24rem) */
+.media-tall .work-card.grouped::before{ height:24rem }
+@media (max-width:639px){ .media-tall .work-card.grouped::before{ height:14rem } }
 .work-card.grouped .work-bottom{ position:static; inset:auto }
 .work-card.grouped .work-meta{ margin-bottom:.875rem; color:var(--purple-300) }
 .work-card.grouped .work-bottom p{ font-size:var(--text-16) }
@@ -1203,11 +1228,22 @@ body.company .vision-panel .wfd-core::before, body.company .vision-panel .wfd-co
 .uc-slide{ position:absolute; inset:0; opacity:0; visibility:hidden; transition:opacity .4s ease, transform .35s cubic-bezier(.2,.8,.2,1);
   background:color-mix(in srgb, var(--ink) 6%, var(--white)); color:var(--ink); border-radius:var(--radius-card); padding:3rem;
   display:flex; flex-direction:column }
-.uc-slide.is-active{ position:relative; opacity:1; visibility:visible }
+.uc-slide.is-active{ position:relative; opacity:1; visibility:visible;
+  will-change:transform; backface-visibility:hidden }  /* GPU 레이어 고정: 스케일 종료 시 텍스트 재래스터 스냅(덜컹) 방지 */
 @media (hover:hover){ .uc-slide.is-active:hover{ transform:scale(1.02) } }  /* 호버 시 카드 확대 */
 .uc-thumb{ width:5rem; height:5rem; border-radius:var(--radius-card-sm); background:rgba(var(--ink-rgb),.07); margin-bottom:1.5rem }
 /* uc-tall 변형(broof): 이미지↔텍스트 간격 확대로 카드 키움 */
 .uc-carousel.uc-tall .uc-thumb{ margin-bottom:4rem }
+/* uc-lg 변형(금융): 본문 한 단계 업 + 라벨 플래그 행 구조 */
+.uc-carousel.uc-lg .uc-slide > p{ font-size:var(--text-20) }
+.uc-carousel.uc-lg .uc-slide h3{ margin-bottom:1rem }  /* 타이틀↔플래그 행 간격 */
+.uc-rows{ display:flex; flex-direction:column; gap:.6rem }
+.uc-row{ display:flex; align-items:center; gap:.75rem; font-size:var(--text-20);
+  color:rgba(var(--ink-rgb),.6); line-height:var(--leading-body); word-break:keep-all }
+.uc-flag{ flex:none; display:inline-flex; align-items:center; padding:.375rem .875rem;
+  background:rgba(var(--ink-rgb),.07); border-radius:var(--radius-pill);
+  font-size:var(--text-16); font-weight:600; color:rgba(var(--ink-rgb),.45) }  /* 그레이 필 + 연그레이 텍스트 */
+@media (max-width:639px){ .uc-row{ flex-direction:column; align-items:flex-start; gap:.375rem } }
 .uc-thumb video, .uc-thumb img{ width:100%; height:100%; object-fit:cover; display:block; border-radius:inherit }
 .uc-slide h3{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em; margin-bottom:.75rem; color:var(--ink) }
 @media (min-width:640px){ .uc-slide h3{ font-size:var(--text-30) } }
@@ -1308,6 +1344,12 @@ body.company .vision-panel .wfd-core::before, body.company .vision-panel .wfd-co
 .stat-num.sn-sm{ font-size:var(--text-36) }
 @media (min-width:640px){ .stat-num.sn-sm{ font-size:var(--text-40) } }
 @media (min-width:768px){ .stat-num.sn-sm{ font-size:var(--text-48) } }
+/* 스탯 2x2 배치 (기본 4열 대신) — 숫자는 기본에서 토큰 1단계 다운 (48→40 / 60→48 / 72→60) */
+@media (min-width:1024px){ .stats-grid.sg-2x2{ grid-template-columns:repeat(2,1fr) } }
+.stats-grid.sg-2x2{ margin-top:var(--space-64); margin-bottom:var(--space-32) }  /* 타이틀↔그리드 여백 업(3.5→4rem) + 하단 마진 */
+.sg-2x2 .stat-num{ font-size:var(--text-36); font-weight:700 }  /* 기본(600)보다 한 단계 볼드, 사이즈는 한 토큰 다운 */
+@media (min-width:640px){ .sg-2x2 .stat-num{ font-size:var(--text-40) } }
+@media (min-width:768px){ .sg-2x2 .stat-num{ font-size:var(--text-48) } }
 .stats-panel .sec-note{ margin-top:3rem; color:rgba(var(--white-rgb),.45) }
 .stats-panel .sec-note + .sec-note{ margin-top:1rem }
 .stats-panel .sec-note strong{ font-weight:600; color:rgba(var(--white-rgb),.7) }
@@ -1659,7 +1701,7 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 </div></section>
 <section><div class="shell sec">
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Problem</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>디지털자산 사업에서 금융기관이 마주하는 문제</span></span></h2>
-  <ul class="cards-2"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>문제 01</span></div><h3>발행보다 복잡한 운영</h3><p>디지털자산은 발행 이후 KYC, 상환, 유통 통제, 사후 검증까지 지속적인 운영이 필요합니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>문제 02</span></div><h3>계좌와 온체인 시스템의 분절</h3><p>은행 계좌와 온체인 지갑이 분리되어 있어 자산 관리와 정산이 복잡합니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>문제 03</span></div><h3>규제 대응 부담</h3><p>서비스마다 자금세탁방지(AML)와 트래블룰 준수 체계를 별도로 설계해야 합니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>문제 04</span></div><h3>범용 SaaS의 한계</h3><p>글로벌 지갑 SaaS만으로는 국내 규제와 금융기관의 운영 요건에 대응하기 어렵습니다.</p></div></article></li></ul>
+  <div class="media-tall"><ul class="cards-2"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>문제 01</span></div><h3>발행보다 복잡한 운영</h3><p>디지털자산은 발행 이후 KYC, 상환, 유통 통제, 사후 검증까지 지속적인 운영이 필요합니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>문제 02</span></div><h3>계좌와 온체인 시스템의 분절</h3><p>은행 계좌와 온체인 지갑이 분리되어 있어 자산 관리와 정산이 복잡합니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>문제 03</span></div><h3>규제 대응 부담</h3><p>서비스마다 자금세탁방지(AML)와 트래블룰 준수 체계를 별도로 설계해야 합니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>문제 04</span></div><h3>범용 SaaS의 한계</h3><p>글로벌 지갑 SaaS만으로는 국내 규제와 금융기관의 운영 요건에 대응하기 어렵습니다.</p></div></article></li></ul></div>
 </div></section>
 <section><div class="shell sec">
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Features</div><h2 class="sec-h2 has-lead" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>발행부터 상환·사후 검증까지 연결하는<br>6-Layer 통제 구조</span></span></h2><p class="phero-lead sec-lead rvl">디지털자산의 발행·유통·상환·사후 검증 전 과정을 6개의 통제 계층으로 연결해 안정적으로 관리합니다.</p>
@@ -1673,28 +1715,50 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 <section><div class="shell stats-shell">
   <div class="stats-panel rvl" style="--rvl-y:40px; --rvl-s:.99">
     <div class="eyebrow light"><span class="dot"></span>By the Numbers</div>
-    <h2 class="stats-h2" data-line-reveal><span class="rvl-line"><span>숫자로 보는 ParaSta</span></span></h2>
-    <ul class="stats-grid">
-      <li class="rvl" style="--rvl-y:20px"><div class="stat-num sn-sm"><span class="pv-val" data-val="4">0</span>개 핵심 모듈</div><div class="stat-label">발행·지갑·오케스트레이션·온체인 KYC와 통합 관리 기능</div></li>
-      <li class="rvl" style="--rvl-y:20px; --rvl-delay:90ms"><div class="stat-num sn-sm"><span class="pv-val" data-val="6">0</span> Layer</div><div class="stat-label">디지털자산의 발행·유통·상환 전 과정을 연결하는 통제 구조</div></li>
-      <li class="rvl" style="--rvl-y:20px; --rvl-delay:180ms"><div class="stat-num sn-sm">4주 · 12주</div><div class="stat-label">4주 PoC와 12주 Pilot로 구성된 단계별 도입 패키지</div></li>
-      <li class="rvl" style="--rvl-y:20px; --rvl-delay:270ms"><div class="stat-num sn-sm">최대 <span class="pv-val" data-val="100000">0</span> TPS</div><div class="stat-label">제한된 테스트 환경에서 측정한 loopchain 처리 성능</div></li>
+    <h2 class="stats-h2" data-line-reveal style="max-width:none"><span class="rvl-line"><span>디지털자산 금융을 위한<br>핵심 기술과 운영 체계</span></span></h2>
+    <ul class="stats-grid sg-2x2">
+      <li class="rvl" style="--rvl-y:20px"><div class="stat-num"><span class="pv-val" data-val="4">0</span>개 핵심 모듈</div><div class="stat-label">발행, 지갑, 오케스트레이션, 온체인 KYC</div></li>
+      <li class="rvl" style="--rvl-y:20px; --rvl-delay:90ms"><div class="stat-num"><span class="pv-val" data-val="6">0</span> Layer</div><div class="stat-label">발행부터 상환까지 이어지는 구조</div></li>
+      <li class="rvl" style="--rvl-y:20px; --rvl-delay:180ms"><div class="stat-num"><span class="pv-val" data-val="2">0</span>단계 도입</div><div class="stat-label">4주 PoC와 12주 Pilot을 거쳐 단계적으로 도입</div></li>
+      <li class="rvl" style="--rvl-y:20px; --rvl-delay:270ms"><div class="stat-num"><span class="pv-val" data-val="100000">0</span> TPS</div><div class="stat-label">제한된 테스트 환경에서 측정한 loopchain 최대 처리 성능</div></li>
     </ul>
-    <p class="sec-note"><strong>파라메타의 기술 및 사업 역량</strong><br>금융위원회 혁신금융서비스 지정 · TCB 기술신용등급 TI-1 · CSAP 인증 · Chain ID 증권사 공동인증</p>
-    <p class="sec-note">※ 위 인증과 사업 이력은 ParaSta 제품이 아닌 파라메타의 회사 실적입니다. 최대 100,000 TPS는 제한된 환경에서 측정한 벤치마크 수치이며, 실제 성능은 구축 환경에 따라 달라질 수 있습니다. Chain ID 참여 증권사 수는 확인 후 별도로 표기합니다.</p>
   </div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Use Cases</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>적용 사례</span></span></h2>
-  <ul class="cards-3"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static"><div class="work-meta"><span>참여</span></div><div class="work-bottom"><h3>NH투자증권 — STO 비전그룹</h3><p><b>과제</b> · 토큰증권을 발행 이후 운영·관리까지 고려한 인프라가 필요<br><br><b>해결</b> · 토큰증권 발행·운영 논의에 기술 파트너로 참여</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static"><div class="work-meta"><span>MOU</span></div><div class="work-bottom"><h3>쿠콘 · 인피닛블록</h3><p><b>과제</b> · 스테이블코인 발행·정산·결제를 API로 연계할 허브가 필요<br><br><b>해결</b> · 발행·정산·결제·API 연계 협력 MOU 체결</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static"><div class="work-meta"><span>발표</span></div><div class="work-bottom"><h3>ADB ABMF — 온체인 KYC 발표</h3><p><b>과제</b> · 국경 간 투자에서 지갑·사용자 신원의 적격성 확인이 필요<br><br><b>해결</b> · 지갑 인증·온체인 KYC·KYW 접근을 국제 협의체에서 발표</p></div></article></li></ul>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Credentials</div><h2 class="sec-h2 has-lead" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>금융·공공 분야에서 검증된 기술력</span></span></h2><p class="phero-lead sec-lead rvl">파라메타는 다양한 인증과 금융기관 협업 경험을 바탕으로, 안정적인 디지털자산 금융 인프라를 구축해 왔습니다.</p>
+  <div class="cert-row rvl" style="--rvl-y:24px; padding:var(--space-32) 0 0">
+    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">기술보증기금 TI-1</div></div>
+    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">CSAP 인증</div></div>
+    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">혁신금융서비스 지정</div></div>
+  </div>
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
+<section><div class="shell sec">
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>FAQ</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>자주 묻는 질문</span></span></h2>
-  <ul><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:0ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><span class="faq-idx">01</span><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top">스테이블코인과 예금토큰은 무엇이 다른가요</h3><div class="faq-ans">둘 다 가치가 고정된 디지털 화폐지만 발행 주체와 담보 구조가 다릅니다. 제도·발행 요건은 국내 법제화 상황에 따라 달라집니다.</div><h3 class="faq-t faq-t-bottom">스테이블코인과 예금토큰은 무엇이 다른가요</h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div></li><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:60ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><span class="faq-idx">02</span><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top">STO·RWA는 무엇인가요</h3><div class="faq-ans">실물·금융 자산을 토큰으로 발행해 거래·관리하는 방식입니다. 발행뿐 아니라 이후 운영·통제까지 인프라가 필요합니다.</div><h3 class="faq-t faq-t-bottom">STO·RWA는 무엇인가요</h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div></li></ul>
+  <ul><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:0ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><span class="faq-idx">01</span><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top">스테이블코인과 예금토큰은 무엇이 다른가요?</h3><div class="faq-ans">스테이블코인은 법정화폐 등 특정 자산의 가치에 연동되도록 설계된 디지털자산입니다. 예금토큰은 은행 예금을 블록체인상에서 사용할 수 있도록 토큰화한 것으로, 발행 주체와 담보 구조, 적용 규제가 다릅니다.</div><h3 class="faq-t faq-t-bottom">스테이블코인과 예금토큰은 무엇이 다른가요?</h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div></li><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:60ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><span class="faq-idx">02</span><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top">STO와 RWA는 무엇인가요?</h3><div class="faq-ans">STO는 주식·채권 등 증권의 권리를 토큰으로 발행하는 방식이며, RWA는 부동산·채권·원자재 등 실물 및 금융자산을 블록체인과 연결하는 개념입니다. 두 방식 모두 발행 이후 유통·정산·상환을 관리할 수 있는 운영 인프라가 필요합니다.</div><h3 class="faq-t faq-t-bottom">STO와 RWA는 무엇인가요?</h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div></li></ul>
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Solutions</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>다른 분야 솔루션</span></span></h2>
-  <div class="routes rvl"><a class="route on" href="solution-finance.html">금융</a><a class="route" href="solution-gov.html">공공</a><a class="route" href="solution-cert.html">증명서</a><a class="route" href="solution-exchange.html">화이트라벨 거래소</a><a class="route" href="solution-data.html">데이터주권</a><a class="route" href="solution-settlement.html">결제·정산</a></div>
+<section><div class="shell sec">
+  <div class="sh-center"><div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Use Cases</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>디지털자산 금융 적용 사례</span></span></h2></div>
+  <div class="uc-carousel uc-tall uc-lg">
+    <button class="uc-arrow uc-prev rvl rvl-op" type="button" aria-label="이전 사례"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5L8 12l7 7"/></svg></button>
+    <div class="uc-slides rvl" style="--rvl-y:40px">
+      <article class="uc-slide is-active">
+        <div class="uc-thumb" aria-hidden="true"></div>
+        <h3>NH투자증권 · STO 비전그룹 참여</h3>
+        <div class="uc-rows"><div class="uc-row"><span class="uc-flag">활용 영역</span><span>토큰증권 발행 이후의 운영·관리 인프라</span></div><div class="uc-row"><span class="uc-flag">주요 내용</span><span>토큰증권 발행·운영 체계 논의에 기술 파트너로 참여</span></div></div>
+      </article>
+      <article class="uc-slide">
+        <div class="uc-thumb" aria-hidden="true"></div>
+        <h3>쿠콘 · 인피닛블록 MOU</h3>
+        <div class="uc-rows"><div class="uc-row"><span class="uc-flag">활용 영역</span><span>스테이블코인 발행·정산·결제 및 API 연계</span></div><div class="uc-row"><span class="uc-flag">주요 내용</span><span>스테이블코인 기반 금융 서비스 연계를 위한 업무협약 체결</span></div></div>
+      </article>
+      <article class="uc-slide">
+        <div class="uc-thumb" aria-hidden="true"></div>
+        <h3>ADB ABMF · 온체인 KYC 발표</h3>
+        <div class="uc-rows"><div class="uc-row"><span class="uc-flag">활용 영역</span><span>국경 간 투자자의 지갑·사용자 신원 및 적격성 확인</span></div><div class="uc-row"><span class="uc-flag">주요 내용</span><span>지갑 인증과 온체인 KYC·KYW 적용 방안을 국제 협의체에서 발표</span></div></div>
+      </article>
+    </div>
+    <button class="uc-arrow uc-next rvl rvl-op" type="button" aria-label="다음 사례"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+  </div>
 </div></section>
 
 </main>
@@ -1834,7 +1898,7 @@ const revealObserver = new IntersectionObserver((entries) => {
     if (e.isIntersecting){ e.target.classList.add('is-in'); revealObserver.unobserve(e.target); }
   });
 }, { threshold: 0.15 });
-document.querySelectorAll('.rvl, .rvl-op, .rvl-wm').forEach(el => revealObserver.observe(el));
+document.querySelectorAll('.rvl, .rvl-op, .rvl-wm, .vision-panel .wfd').forEach(el => revealObserver.observe(el));
 
 function initLineReveal(el){
   const stagger = parseInt(el.dataset.lineStagger || '0', 10);
@@ -1922,19 +1986,16 @@ if (pheroH1){
     pheroH1.querySelectorAll('.rvl-line').forEach(l => l.classList.add('is-in'))));
 }
 
-/* About 히어로에 편입된 Vision 헤더(아이브로우·타이틀·리드): 히어로라 로드 시 등장 (스크롤 관찰자로는 초기 뷰포트에서 스냅됨) */
-const hvPanel = document.querySelector('.hero-vision .vision-panel');
-if (hvPanel){
+/* Vision 헤더(아이브로우·타이틀·리드)는 스크롤 관찰자(revealObserver·lineObserver)가 처리 —
+   패널이 화면에 들어올 때 리빌. 아이브로우 → 타이틀 → 리드 순서 스태거 부여 */
+(function(){
+  const hvPanel = document.querySelector('.hero-vision .vision-panel');
+  if (!hvPanel) return;
   const hvEb = hvPanel.querySelector(':scope > .eyebrow');
   const hvLead = hvPanel.querySelector(':scope > .phero-lead');
-  const hvTitle = hvPanel.querySelector(':scope > [data-line-reveal]');
-  if (hvTitle) initLineReveal(hvTitle);
-  requestAnimationFrame(() => requestAnimationFrame(() => {
-    if (hvEb) hvEb.classList.add('is-in');
-    if (hvLead) hvLead.classList.add('is-in');
-    if (hvTitle) hvTitle.querySelectorAll('.rvl-line').forEach(l => l.classList.add('is-in'));
-  }));
-}
+  if (hvEb) hvEb.style.setProperty('--rvl-delay', '0ms');
+  if (hvLead) hvLead.style.setProperty('--rvl-delay', '220ms');
+})();
 
 /* About 히어로 orb 배경 (company 전용) — orb-background.html 이식, .phero 크기에 맞춤 */
 (function(){
@@ -1944,7 +2005,7 @@ if (hvPanel){
   if(!ctx) return;
   const phero = cv.closest('.phero');
   const BACKGROUND='#ffffff', MUTED='#eceef5', VIOLET='#ded8fa';
-  const CELL_SIZE=26, NOISE_SCALE=9, TIME_SPEED=0.085, MAX_RADIUS=3, CENTER_DENSITY=0.22, MAX_DPR=1.5, TAU=Math.PI*2;
+  const CELL_SIZE=26, NOISE_SCALE=9, TIME_SPEED=0.085, MAX_RADIUS=2, CENTER_DENSITY=0.22, MAX_DPR=1.5, TAU=Math.PI*2;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   let width=1, height=1, dpr=1, frame=0, startedAt=performance.now();
   const clamp=(v,a,b)=>Math.min(b,Math.max(a,v)); const smooth=v=>v*v*(3-2*v); const lerp=(a,b,t)=>a+(b-a)*t;
@@ -1971,6 +2032,64 @@ if (hvPanel){
   reduced.addEventListener?.('change', ()=>{ cancelAnimationFrame(frame); render(performance.now()); });
   document.addEventListener('visibilitychange', ()=>{ cancelAnimationFrame(frame); if(!document.hidden) render(performance.now()); });
   resize();
+})();
+
+/* About 히어로 큐브: 메인식 브러시 리빌 — base=심플(1.png) 위를 마우스로 긁으면 복합(2.png) 드러났다 사라짐 */
+(function(){
+  const fig = document.querySelector('.phero-figure-liquid');
+  if(!fig) return;
+  const canvas = fig.querySelector('.pf-canvas'), baseImg = fig.querySelector('.pf-base');
+  if(!canvas || !baseImg) return;
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  if(reduced.matches) return;   // 정적 base만
+  const ctx = canvas.getContext('2d');
+  const brushRadius = 90, decay = 0.02;
+  const dpr = Math.min(devicePixelRatio||1, 2);
+  let revealSrc=null, revealReady=false, revealW=0, revealH=0;
+  const ri = new Image(); ri.src='assets/about/cube-detail.png';
+  ri.onload=()=>{ revealSrc=ri; revealW=ri.naturalWidth; revealH=ri.naturalHeight; revealReady=true; buildCover(); };
+  let radius=brushRadius*dpr, diam=Math.ceil(radius*2), cw=0, ch=0;
+  const cover=document.createElement('canvas'), brush=document.createElement('canvas'), brushCtx=brush.getContext('2d');
+  brush.width=diam; brush.height=diam;
+  function buildCover(){ if(cw===0||!revealReady) return; cover.width=cw; cover.height=ch; const c=cover.getContext('2d'); c.clearRect(0,0,cw,ch); const s=Math.max(cw/revealW,ch/revealH), dw=revealW*s, dh=revealH*s; c.drawImage(revealSrc,(cw-dw)/2,(ch-dh)/2,dw,dh); }
+  function resize(){ const r=fig.getBoundingClientRect(); if(!r.width) return; cw=Math.max(1,Math.round(r.width*dpr)); ch=Math.max(1,Math.round(r.height*dpr)); canvas.width=cw; canvas.height=ch; canvas.style.width=r.width+'px'; canvas.style.height=r.height+'px'; buildCover(); }
+  if('ResizeObserver' in window){ new ResizeObserver(resize).observe(fig); } else addEventListener('resize',resize,{passive:true});
+  resize();
+  const points=[]; let lastPt=null;
+  addEventListener('pointermove',(e)=>{ const r=canvas.getBoundingClientRect(); const x=(e.clientX-r.left)*dpr, y=(e.clientY-r.top)*dpr;
+    if(x<-radius||y<-radius||x>cw+radius||y>ch+radius){ lastPt=null; return; }
+    if(lastPt){ const dx=x-lastPt.x, dy=y-lastPt.y, dist=Math.hypot(dx,dy), step=Math.max(radius*0.3,1), n=Math.min(Math.ceil(dist/step),60);
+      for(let i=1;i<=n;i++) points.push({x:lastPt.x+dx*i/n, y:lastPt.y+dy*i/n}); }
+    else points.push({x,y});
+    lastPt={x,y}; }, {passive:true});
+  function stamp(x,y){ const c=diam/2; brushCtx.clearRect(0,0,diam,diam); brushCtx.globalCompositeOperation='source-over';
+    const g=brushCtx.createRadialGradient(c,c,0,c,c,radius); g.addColorStop(0,'rgba(255,255,255,1)'); g.addColorStop(.55,'rgba(255,255,255,.82)'); g.addColorStop(1,'rgba(255,255,255,0)');
+    brushCtx.fillStyle=g; brushCtx.fillRect(0,0,diam,diam);
+    brushCtx.globalCompositeOperation='source-in'; brushCtx.drawImage(cover,x-c,y-c,diam,diam,0,0,diam,diam);
+    ctx.globalCompositeOperation='source-over'; ctx.drawImage(brush,x-c,y-c); }
+  let idle=0;
+  function tick(){ const drawing=points.length>0; if(drawing) idle=0; else idle++;
+    if(!drawing&&idle>120){ ctx.clearRect(0,0,cw,ch); if(!document.hidden) requestAnimationFrame(tick); return; }
+    const fade=drawing?decay:Math.min(decay+idle*0.004,0.5);
+    ctx.globalCompositeOperation='destination-out'; ctx.fillStyle='rgba(0,0,0,'+fade+')'; ctx.fillRect(0,0,cw,ch);
+    if(drawing&&revealReady){ for(const p of points) stamp(p.x,p.y); } points.length=0;
+    if(!document.hidden) requestAnimationFrame(tick); }
+  requestAnimationFrame(tick);
+})();
+
+/* About 히어로 큐브: 스크롤 살짝만 해도 심플→복합(detail) 전체 전환 (transition으로 슥) */
+(function(){
+  const fig = document.querySelector('.phero-figure-liquid');
+  const detail = fig && fig.querySelector('.pf-detail');
+  const base = fig && fig.querySelector('.pf-base');
+  if(!detail || !base) return;
+  let ticking=false;
+  function update(){ ticking=false; const on = scrollY > 40;
+    detail.style.opacity = on ? '1' : '0';
+    base.style.opacity = on ? '0' : '1';   /* 스크롤 시 뒤 심플 큐브 숨김 (완전 교체) */
+  }
+  addEventListener('scroll', ()=>{ if(!ticking){ ticking=true; requestAnimationFrame(update); } }, {passive:true});
+  update();
 })();
 
 /* nav menu (마크업은 nav.js 주입) */
