@@ -498,11 +498,12 @@ body.company .vision-panel .wfd-core::before, body.company .vision-panel .wfd-co
   transition:background .25s ease, color .25s ease, transform .25s }  /* 1칸 폭 원형 */
 .uc-arrow svg{ width:1.75rem; height:1.75rem }
 @media (hover:hover){ .uc-arrow:hover{ background:var(--accent); border-color:transparent; color:var(--white); transform:scale(1.06) } }
-.uc-slides{ position:relative }
-.uc-slide{ position:absolute; inset:0; opacity:0; visibility:hidden; transition:opacity .4s ease, transform .35s cubic-bezier(.2,.8,.2,1);
+/* 슬라이드를 그리드 1칸에 겹쳐 쌓아 컨테이너 높이 = 가장 긴 슬라이드 (전환 시 높이 안 튐) */
+.uc-slides{ display:grid }
+.uc-slide{ grid-area:1 / 1; opacity:0; visibility:hidden; transition:opacity .4s ease, transform .35s cubic-bezier(.2,.8,.2,1);
   background:color-mix(in srgb, var(--ink) 6%, var(--white)); color:var(--ink); border-radius:var(--radius-card); padding:3rem;
   display:flex; flex-direction:column }
-.uc-slide.is-active{ position:relative; opacity:1; visibility:visible;
+.uc-slide.is-active{ opacity:1; visibility:visible;
   will-change:transform; backface-visibility:hidden }  /* GPU 레이어 고정: 스케일 종료 시 텍스트 재래스터 스냅(덜컹) 방지 */
 @media (hover:hover){ .uc-slide.is-active:hover{ transform:scale(1.02) } }  /* 호버 시 카드 확대 */
 .uc-thumb{ width:5rem; height:5rem; border-radius:var(--radius-card-sm); background:rgba(var(--ink-rgb),.07); margin-bottom:1.5rem }
@@ -511,7 +512,7 @@ body.company .vision-panel .wfd-core::before, body.company .vision-panel .wfd-co
 /* uc-lg 변형(금융): 본문 한 단계 업 + 라벨 플래그 행 구조 */
 .uc-carousel.uc-lg .uc-slide > p{ font-size:var(--text-20) }
 .uc-carousel.uc-lg .uc-slide h3{ margin-bottom:1rem }  /* 타이틀↔플래그 행 간격 */
-.uc-rows{ display:flex; flex-direction:column; gap:.6rem }
+.uc-rows{ display:flex; flex-direction:column; gap:.6rem }  /* 상단 정렬 + 컨테이너는 최장 슬라이드에 고정 */
 .uc-row{ display:flex; align-items:center; gap:.75rem; font-size:var(--text-20);
   color:rgba(var(--ink-rgb),.6); line-height:var(--leading-body); word-break:keep-all }
 .uc-flag{ flex:none; display:inline-flex; align-items:center; padding:.375rem .875rem;
@@ -3106,7 +3107,7 @@ PAGES['solution-exchange.html'] = dict(
     title='화이트라벨 거래소 솔루션 | PARAMETA',
     desc='직접 거래소를 만들지 않아도 우리 서비스 안에 거래 기능을 넣습니다. 외부 거래소 유동성과 거래 화면을 브랜드 안으로 가져오는 화이트라벨 하이브리드 거래소 솔루션.',
     eyebrow='Solutions — 화이트라벨 거래소',
-    h1_lines=['거래소를 만들지 않아도,', '서비스 안에 거래 기능을 넣습니다'],
+    h1_lines=['거래소 구축 없이', '거래를 더합니다'],
     lead='PortX는 여러 거래소의 유동성과 거래 화면을 우리 서비스 안으로 그대로 가져오는 솔루션입니다. 매칭엔진·유동성·지갑·보안을 직접 만들지 않아도, 우리 브랜드를 단 디지털자산 거래 서비스를 빠르게 시작할 수 있습니다.',
     crumb='Solutions — 화이트라벨 거래소',
     hero_cta='''<div class="phero-rel rvl" style="--rvl-delay:600ms">
@@ -3116,19 +3117,16 @@ PAGES['solution-exchange.html'] = dict(
     hero_visual='<img src="assets/solutions/hero-test-2.webp" alt="" loading="eager" fetchpriority="high">',
     content=f"""
 <section><div class="shell sec sec-top-lg sec-stagger">
-  {sec_head('Why Now', '사용자는 거래를 위해 외부 거래소로 빠져나갑니다', '국내 가상자산 이용자는 2023년 말 645만 명에서 2024년 말 970만 명으로 빠르게 늘었습니다. 이용자를 이미 확보한 서비스라도 자체 거래 기능이 없으면, 사용자는 거래를 하려고 외부 거래소로 빠져나갑니다.')}
-  {lead_p('그만큼 수수료와 사용자 관계를 외부에 내주게 됩니다. 그렇다고 직접 거래소를 만들자니 유동성·API·지갑·보안 부담이 큽니다.')}
-  <div class="colc-duo">
+  {sec_head('Why Now', '사용자는 거래를 위해<br>외부 거래소로 빠져나갑니다', '국내 가상자산 이용자는 2023년 말 645만 명에서 2024년 말 970만 명으로 빠르게 늘었습니다. 이용자를 이미 확보한 서비스라도 자체 거래 기능이 없으면, 사용자는 거래를 하려고 외부 거래소로 빠져나갑니다.<br>그만큼 수수료와 사용자 관계를 외부에 내주게 됩니다. 그렇다고 직접 거래소를 만들자니 유동성·API·지갑·보안 부담이 큽니다.')}
+  <div class="num-solid" style="margin-bottom:var(--space-40)">{nums([
+    dict(cap='유출', n='약 20조원', sub='국내에서 해외로 빠져나간 가상자산 (’22 하반기)'),
+    dict(cap='출금', n='30.6조원', sub='국내 거래소 총 외부 출금액 (같은 기간)'),
+  ], cols=2)}</div>
   {col_chart([
     dict(l='2023년 말', v='645만명', w=66),
     dict(l='2024년 6월', v='778만명', w=80),
     dict(l='2024년 말', v='970만명', w=100, hi=True),
-  ], title='국내 가상자산 거래가능 이용자 수', note='<strong>출처: 금융정보분석원(FIU) 가상자산사업자 실태조사</strong><br>신고 사업자 기준 거래가능 이용자 수이며, 빠르게 증가하고 있습니다.')}
-  {col_chart([
-    dict(l='해외 유출', v='약 20조원', w=65),
-    dict(l='총 외부 출금', v='30.6조원', w=100, hi=True),
-  ], title='국내에서 빠져나간 가상자산 (2022 하반기)', note='<strong>출처: 금융정보분석원(FIU) 가상자산사업자 실태조사</strong><br>같은 기간 자금이 국내 서비스 밖으로 대규모 이동했습니다.')}
-  </div>
+  ], title='국내 가상자산 거래가능 이용자 수', note='출처: 금융정보분석원(FIU) 가상자산사업자 실태조사. 신고 사업자 기준 거래가능 이용자 수이며, 빠르게 증가하고 있습니다.')}
 </div></section>
 <section><div class="shell sec">
   {sec_head('Problem', '사업자가 마주하는 문제')}
@@ -3142,11 +3140,11 @@ PAGES['solution-exchange.html'] = dict(
 <section><div class="shell sec">
   {sec_head('Features', '거래 경험을 서비스 안으로', '외부 거래소의 유동성과 거래 기능을 자사 브랜드 안으로 연결합니다.')}
   {cards_wrap([
-    exchange_card('거래소 연동', brand='var(--purple-500)', desc='외부 CEX·DEX 유동성을 고객 서비스로 연결합니다.'),
-    exchange_card('Smart Access · QR', brand='var(--purple-500)', desc='API key 입력 없이 QR 한 번으로 거래소를 연결합니다.'),
-    exchange_card('전문 거래 화면·성과 분석', brand='var(--purple-500)', desc='전문 거래 UX와 PnL·성과 분석을 제공합니다.'),
-    exchange_card('비수탁 보안 · BTP', brand='var(--purple-500)', desc='비수탁 흐름과 체인 간 연결(BTP)로 확장합니다.'),
-  ], cols=2)}
+    exchange_card('거래소 연동', gray=True, desc='외부 CEX·DEX 유동성을 고객 서비스로 연결합니다.'),
+    exchange_card('Smart Access · QR', gray=True, desc='API key 입력 없이 QR 한 번으로 거래소를 연결합니다.'),
+    exchange_card('전문 거래 화면·성과 분석', gray=True, desc='전문 거래 UX와 PnL·성과 분석을 제공합니다.'),
+    exchange_card('비수탁 보안 · BTP', gray=True, desc='비수탁 흐름과 체인 간 연결(BTP)로 확장합니다.'),
+  ], cols=4)}
 </div></section>
 <!-- By the Numbers: 다크 스탯 패널 -->
 <section><div class="shell stats-shell">
@@ -3162,14 +3160,6 @@ PAGES['solution-exchange.html'] = dict(
   </div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  {sec_head('Credentials', '공공·금융 분야에서 검증된 기술력', '파라메타는 다양한 인증과 산업 협업 경험을 바탕으로, 안정적인 디지털자산 거래 인프라를 구축해 왔습니다.')}
-  <div class="cert-row rvl" style="--rvl-y:24px; padding:var(--space-32) 0 0">
-    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">기술보증기금 TI-1</div></div>
-    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">CSAP 인증</div></div>
-    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">혁신금융서비스 지정</div></div>
-  </div>
-</div></section>
-<section><div class="shell sec">
   {sec_head('FAQ', '자주 묻는 질문')}
   {faq([
     dict(q='화이트라벨 하이브리드 거래소가 무엇인가요?', a='거래소를 직접 만들지 않고, 외부 거래소의 유동성과 거래 화면을 고객 브랜드 안에 붙이는 방식입니다.'),
