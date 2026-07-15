@@ -658,12 +658,30 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .cert-logo{ width:3.75rem; height:3.75rem; border-radius:var(--radius-pill); background:rgba(var(--ink-rgb),.06); flex:none }
 .cert-label{ font-size:var(--text-18); font-weight:500; color:rgba(var(--ink-rgb),.7); white-space:nowrap }
 @media (max-width:639px){ .cert-item{ padding:0 1.5rem } .cert-logo{ width:3rem; height:3rem } }
-/* 인증·수상 고정 배치(마퀴 없이): cert-item을 flex로 중앙 정렬 */
-.cert-static{ display:flex; flex-wrap:wrap; justify-content:center; row-gap:1.5rem }
-/* 기능 특징 불릿 리스트 */
-.feat-notes{ list-style:none; margin:var(--space-32) 0 0; padding:0; display:flex; flex-direction:column; gap:.75rem }
-.feat-notes li{ position:relative; padding-left:1.5rem; font-size:var(--text-18); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.7) }
-.feat-notes li::before{ content:''; position:absolute; left:0; top:.65em; width:6px; height:6px; border-radius:var(--radius-pill); background:var(--purple-500) }
+/* How to Adopt 비교: 두 경로를 위아래로 쌓고 각 경로는 가로 타임라인 — 트랙 길이로 단계·시간 대비 */
+.adopt-compare{ display:flex; flex-direction:column; gap:var(--space-64) }
+.ac-row{ display:grid; grid-template-columns:repeat(var(--grid-cols),1fr); gap:var(--grid-gap); align-items:center }
+@media (max-width:639px){ .ac-row{ display:flex; flex-direction:column; align-items:flex-start; gap:1.25rem } }
+.ac-meta{ grid-column:1 / 4 }
+.ac-meta h3{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em; line-height:var(--leading-heading) }
+.ac-time{ margin-top:.5rem; display:inline-flex; align-items:center; padding:.375rem .875rem; border-radius:var(--radius-pill);
+  background:rgba(var(--ink-rgb),.07); font-size:var(--text-16); font-weight:600; color:rgba(var(--ink-rgb),.45) }
+.ac-row.ac-hi .ac-time{ background:color-mix(in srgb, var(--accent) 12%, var(--white)); color:var(--accent) }
+.ac-track{ grid-column:4 / 13; position:relative; display:flex; justify-content:flex-start; width:100%; align-items:flex-start }
+.ac-track::before{ content:''; position:absolute; left:10%; top:6px; height:2px; background:var(--gray-100) }
+.ac-track.slow::before{ right:10% }   /* 첫 노드(10%) ~ 5번째 노드(90%) */
+.ac-track.fast::before{ right:50% }   /* 첫 노드(10%) ~ 3번째 노드(50%) — 시작 x는 slow와 동일 */
+.ac-row.ac-hi .ac-track::before{ background:color-mix(in srgb, var(--accent) 28%, var(--white)) }
+.ac-step{ position:relative; flex:0 0 20%; display:flex; flex-direction:column; align-items:center; text-align:center; z-index:1 }
+.ac-dot{ width:13px; height:13px; border-radius:var(--radius-pill); background:var(--gray-300); border:2px solid var(--white);
+  transition:transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease }
+.ac-row.ac-hi .ac-dot{ background:var(--accent) }
+.ac-lbl{ margin-top:.75rem; font-size:var(--text-16); line-height:1.35; color:rgba(var(--ink-rgb),.7); transition:color .25s ease }
+@media (hover:hover){
+  .ac-step:hover .ac-dot{ transform:scale(1.5); box-shadow:0 0 0 6px rgba(var(--ink-rgb),.05) }
+  .ac-row.ac-hi .ac-step:hover .ac-dot{ box-shadow:0 0 0 6px color-mix(in srgb, var(--accent) 12%, transparent) }
+  .ac-step:hover .ac-lbl{ color:var(--ink) }
+}
 /* 의장사 알약 */
 .chair-badge{ display:inline-flex; align-items:center; gap:.875rem; padding:.75rem 1.5rem;
   border:1px solid rgba(var(--purple-300-rgb),.5); border-radius:var(--radius-pill);
@@ -2052,6 +2070,16 @@ def col_chart(cols, title=None, note=None):
 def chips(items):
     return '<div class="chip-row rvl">' + ''.join(f'<span class="chip">{x}</span>' for x in items) + '</div>'
 
+def adopt_compare(rows):
+    # How to Adopt 비교: [(name, term, [steps], hi)] 를 위아래 가로 타임라인으로. hi=빠른 경로(짧은 트랙+보라)
+    out = []
+    for name, term, steps, hi in rows:
+        nodes = ''.join(f'<div class="ac-step"><span class="ac-dot"></span><span class="ac-lbl">{s}</span></div>' for s in steps)
+        out.append(f'<div class="ac-row{" ac-hi" if hi else ""}">'
+                   f'<div class="ac-meta"><h3>{name}</h3><span class="ac-time">{term}</span></div>'
+                   f'<div class="ac-track {"fast" if hi else "slow"}">{nodes}</div></div>')
+    return f'<div class="adopt-compare rvl">{"".join(out)}</div>'
+
 def routes(items, active):
     return '<div class="routes rvl">' + ''.join(
         f'<a class="route{" on" if href == active else ""}" href="{href}">{label}</a>'
@@ -3171,7 +3199,7 @@ PAGES['solution-gov.html'] = dict(
     hero_visual='<img src="assets/solutions/hero-test-2.webp" alt="" loading="eager" fetchpriority="high">',
     content=f"""
 <section><div class="shell sec sec-top-lg sec-stagger">
-  {sec_head('Why Now', '공공 블록체인은 기관마다<br>새로 구축해야 했습니다', '공공기관이 SaaS형 서비스를 도입하려면 CSAP 같은 엄격한 보안인증을 통과한 제품이어야 합니다. 그런데 블록체인 분야에는 CSAP 인증을 받은 SaaS가 사실상 없어, 기관마다 예산 산정부터 자체 구축까지 최소 1년, 초기 구축비 수억원을 들여 직접 만들어야 했습니다.<br><br>그사이 정부의 블록체인 공공서비스 투자는 계속 늘어, 2024년 지원사업은 총 200억원·14개 규모로 확대됐습니다. 블록체인 활용 수요가 가장 큰 분야 역시 정부·공공입니다.')}
+  {sec_head('Why Now', '공공 블록체인은 기관마다<br>새로 구축해야 했습니다', '공공기관이 SaaS형 서비스를 도입하려면 CSAP 같은 엄격한 보안인증을 통과한 제품이어야 합니다. 그런데 블록체인 분야에는 CSAP 인증을 받은 SaaS가 사실상 없어, 기관마다 예산 산정부터 자체 구축까지 최소 1년, 초기 구축비 수억원을 들여 직접 만들어야 했습니다.<br>그사이 정부의 블록체인 공공서비스 투자는 계속 늘어, 2024년 지원사업은 총 200억원·14개 규모로 확대됐습니다. 블록체인 활용 수요가 가장 큰 분야 역시 정부·공공입니다.')}
   {col_chart([
     dict(l='정부·공공', v='47.9%', w=100, hi=True),
     dict(l='출판·방송', v='36.5%', w=76),
@@ -3199,25 +3227,20 @@ PAGES['solution-gov.html'] = dict(
   ], cols=4)}
 </div></section>
 <section><div class="shell sec">
-  {sec_head('Platform', '기본 제공 기능')}
+  {sec_head('Platform', '기본 제공 기능', '사용자는 필요한 정보만 선택적으로 제출(Selective Disclosure)할 수 있으며, 개인 데이터는 사용자 단말과 분산 환경에 저장해 기관의 보관 부담을 줄입니다. 이를 바탕으로 발급·보유·검증으로 이어지는 표준화된 신원 흐름을 구현합니다.')}
   {cards_wrap([
     exchange_card('신원 DID / VC / VP', gray=True),
     exchange_card('지갑', gray=True),
     exchange_card('개인데이터저장소 PDS', gray=True),
     exchange_card('분산저장 BFS', gray=True),
   ], cols=4)}
-  <ul class="feat-notes rvl">
-    <li>사용자가 필요한 정보만 선택해 제출 (Selective Disclosure)</li>
-    <li>개인 데이터는 사용자 단말·분산 저장, 기관의 보관 부담 축소</li>
-    <li>발급·보유·검증으로 이어지는 표준 신원 흐름</li>
-  </ul>
 </div></section>
 <section><div class="shell sec">
   {sec_head('How to Adopt', '같은 서비스를 여는 데 걸리는 시간', '개별 구축과 공동 인프라 도입의 소요 시간을 비교했습니다.')}
-  <div class="ct-rows">{rows([
-    dict(title='<em class="t-acc">최소 1년+</em> : 기존 개별 구축', desc='예산 산정, 업체 선정, 견적, 계약, 구축 단계를 차례로 거칩니다.'),
-    dict(title='<em class="t-acc">1주일</em> : MyID 2.0 공동 인프라', desc='가입 승인, 결제수단 등록, 회원가입·설정만으로 바로 시작합니다.'),
-  ])}</div>
+  {adopt_compare([
+    ('기존 개별 구축', '최소 1년+', ['예산 산정', '업체 선정', '견적', '계약', '구축'], False),
+    ('MyID 2.0 공동 인프라', '1주일', ['가입 승인', '결제수단 등록', '회원가입·설정'], True),
+  ])}
 </div></section>
 <!-- By the Numbers: 다크 스탯 패널 -->
 <section><div class="shell stats-shell">
@@ -3228,19 +3251,11 @@ PAGES['solution-gov.html'] = dict(
       <li class="rvl" style="--rvl-y:20px"><div class="stat-num">최초</div><div class="stat-label">블록체인 서비스 CSAP 인증</div></li>
       <li class="rvl" style="--rvl-y:20px; --rvl-delay:90ms"><div class="stat-num"><span class="pv-val" data-val="90">0</span>%↓</div><div class="stat-label">자체 구축 대비 비용 절감 (모델 기준)</div></li>
       <li class="rvl" style="--rvl-y:20px; --rvl-delay:180ms"><div class="stat-num"><span class="pv-val" data-val="20000">0</span>건</div><div class="stat-label">월 기본 포함 건수</div></li>
-      <li class="rvl" style="--rvl-y:20px; --rvl-delay:270ms"><div class="stat-num"><span class="pv-val" data-val="1">0</span>주일</div><div class="stat-label">신청부터 적용까지 소요</div></li>
+      <li class="rvl" style="--rvl-y:20px; --rvl-delay:270ms"><div class="stat-num"><span class="pv-val" data-val="52">0</span>배</div><div class="stat-label">기존 개별 구축 대비 도입 속도 (1년+ → 1주일)</div></li>
     </ul>
   </div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  {sec_head('Credentials', '공공·금융 분야에서 검증된 기술력', '파라메타는 CSAP를 비롯한 다양한 인증과 공공기관 도입 경험을 바탕으로, 신뢰할 수 있는 블록체인 인프라를 운영해 왔습니다.')}
-  <div class="cert-row rvl" style="--rvl-y:24px; padding:var(--space-32) 0 0">
-    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">블록체인 서비스 최초 CSAP</div></div>
-    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">기술보증기금 TI-1</div></div>
-    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">혁신금융서비스 지정</div></div>
-  </div>
-</div></section>
-<section><div class="shell sec">
   {sec_head('FAQ', '자주 묻는 질문')}
   {faq([
     dict(q='CSAP 인증은 무엇이고 왜 중요한가요?', a='클라우드 서비스의 보안을 평가하는 국내 인증입니다. 공공기관이 민간 SaaS를 도입할 때 요구되는 기준이라, 인증이 없으면 조달 검토를 통과하기 어렵습니다.'),
