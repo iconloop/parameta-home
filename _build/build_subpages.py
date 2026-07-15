@@ -797,6 +797,38 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
   font-size:var(--text-14); color:rgba(var(--ink-rgb),.45) }
 .num-card .n{ font-size:var(--text-40); font-weight:600; letter-spacing:-.02em; line-height:1.1; margin-bottom:.5rem }
 .num-card .n small{ font-size:var(--text-20); font-weight:500 }
+/* 증명서 Why Now 2컬럼: 좌 스탯박스(한 박스·3줄) / 우 (콘텐츠 대기) — cert 전용, 타 페이지 영향 없음 */
+.cert-wn-duo{ display:grid; grid-template-columns:7fr 5fr; gap:var(--grid-gap); align-items:stretch }
+@media (max-width:767px){ .cert-wn-duo{ grid-template-columns:1fr; row-gap:var(--space-48) } }
+/* 좌측 차트: 우측 박스 높이에 맞춰 흰 패널까지 같이 늘림 + 노트를 하단 고정해 우측 출처와 y 정렬 (cert 전용) */
+.cert-wn-duo > .colc{ height:100% }
+.cert-wn-duo > .colc .colc-panel{ flex:1; display:flex; flex-direction:column; padding-bottom:var(--space-32) }
+.cert-wn-duo > .colc .colc-panel .colc-plot{ margin-top:var(--space-24) }
+.cert-wn-duo > .colc .colc-panel .sec-note{ margin-top:auto }
+.cert-statbox{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); border:none; border-radius:var(--radius-card-sm);
+  padding:var(--space-32); display:flex; flex-direction:column; justify-content:space-between; gap:var(--space-24) }
+.cert-stats{ display:flex; flex-direction:column }
+.cert-stat{ display:flex; flex-direction:column; gap:.35rem; padding:var(--space-24) 0 }
+.cert-stat:first-child{ padding-top:0 }
+.cert-stat:last-child{ padding-bottom:0 }
+.cert-stat + .cert-stat{ border-top:1px solid var(--line) }
+.cert-stat .csn{ font-size:var(--text-36); font-weight:600; letter-spacing:-.02em; line-height:1.05; color:var(--ink) }
+.cert-stat .csn small{ font-size:inherit; font-weight:inherit; color:inherit; margin-left:.05em }
+.cert-stat p{ font-size:var(--text-16); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.6) }
+.cert-src{ padding-top:var(--space-24); border-top:1px solid var(--line);
+  font-size:var(--text-18); font-weight:400; line-height:var(--leading-body); color:var(--muted) }
+/* 발급 가능 증명: 12칼럼 그리드 정렬 — 아이템 3~12칸(10칸), 4칸 균등폭 + 균등 갭 (cert 전용, About 컴포넌트 유지) */
+.cert-cred{ grid-template-columns:repeat(12,1fr); align-items:center }
+.cert-cred > .ally-head{ grid-column:1 / span 2 }
+.cert-cred > .pt-marquee{ grid-column:3 / span 10; overflow:visible; margin:0 }
+.cert-cred .pt-track{ display:grid; grid-template-columns:repeat(4,1fr); gap:var(--grid-gap); width:100%; animation:none }
+.cert-cred .cert-item{ padding:0 }
+.cert-cred .cert-label{ white-space:normal; text-align:center }
+@media (max-width:639px){
+  .cert-cred{ grid-template-columns:1fr }
+  .cert-cred > .ally-head, .cert-cred > .pt-marquee{ grid-column:auto }
+  .cert-cred .pt-track{ grid-template-columns:repeat(2,1fr) }
+}
 /* 회색 채움 변형 (About Track Record 톤) — company 밖에서도 사용 */
 .num-solid .num-card{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); border:none }
 .tag.on-light{ border-color:var(--line); color:var(--ink) }
@@ -3252,7 +3284,7 @@ PAGES['solution-cert.html'] = dict(
     title='디지털 증명 솔루션 | PARAMETA',
     desc='발급부터 공유, 제출처 검증까지 끝나는 블록체인 디지털 증명 인프라. 위촉장·수료증·MOU·디지털 배지를 발급·공유·검증합니다.',
     eyebrow='Solutions — 증명서',
-    h1_lines=['발급부터 공유, 제출처', '검증까지 끝나는', '디지털 증명 인프라'],
+    h1_lines=['발급부터 검증까지', '하나로 연결합니다'],
     lead='위촉장·수료증·MOU·디지털 배지 등 다양한 증명을 발급·공유·검증할 수 있는 블록체인 기반 디지털 증명 서비스입니다.',
     crumb='Solutions — 증명서',
     hero_cta='''<div class="phero-rel rvl" style="--rvl-delay:600ms">
@@ -3262,12 +3294,21 @@ PAGES['solution-cert.html'] = dict(
     hero_visual='<img src="assets/solutions/hero-test-1.webp" alt="" loading="eager" fetchpriority="high">',
     content=f"""
 <section><div class="shell sec sec-top-lg sec-stagger">
-  {sec_head('Why Now', '증명서는 발급보다 발급 이후가 더 부담입니다', 'PDF나 이미지 증명서는 제출처가 원본 여부를 확인하기 어렵고, 발급기관은 발급 이후에도 검증 문의·재발급·서버·보안 운영을 계속 안습니다.')}
-  {lead_p('증명 하나를 위해 검증 시스템을 따로 만들어 유지하는 구조입니다. 이미 정부 전자문서지갑에는 481종의 전자증명서가 올라가 있고, 정부24 회원 약 2천만 명·연계 앱 59개로 증명서 디지털화가 광범위하게 자리 잡았습니다.')}
-  {col_chart([
-    dict(l='종이 증서', v='약 5,000원', w=100),
-    dict(l='Broof 디지털', v='1,100원', w=22, hi=True),
-  ], title='증명서 건당 비용 비교 (당사 추산·모델)', note='<strong>당사 추산 예시(모델)</strong><br>종이 증서 1건당 발급·우편·재발급·검증 인건비를 합산한 보수적 가정입니다. 연 10,000건 기준 종이 약 5,000만원, Broof 약 1,100만원입니다.')}
+  {sec_head('Why Now', '증명서는 발급보다 발급 이후가 더 부담입니다', 'PDF나 이미지 증명서는 제출처가 원본 여부를 확인하기 어렵고, 발급기관은 발급 이후에도 검증 문의·재발급·서버·보안 운영을 계속 안습니다.<br>증명 하나를 위해 검증 시스템을 따로 만들어 유지하는 구조입니다. 이미 정부 전자문서지갑에는 481종의 전자증명서가 올라가 있고, 정부24 회원 약 2천만 명·연계 앱 59개로 증명서 디지털화가 광범위하게 자리 잡았습니다.')}
+  <div class="cert-wn-duo">
+    {col_chart([
+      dict(l='종이 증서', v='약 5,000원', w=100),
+      dict(l='Broof 디지털', v='1,100원', w=22, hi=True),
+    ], title='증명서 건당 비용 비교 (당사 추산·모델)', note='<strong>당사 추산 예시(모델)</strong><br>종이 증서 1건당 발급·우편·재발급·검증 인건비를 합산한 보수적 가정입니다. 연 10,000건 기준 종이 약 5,000만원, Broof 약 1,100만원입니다.')}
+    <div class="cert-statbox rvl">
+      <div class="cert-stats">
+        <div class="cert-stat"><div class="csn"><span class="pv-val" data-val="481">0</span>종</div><p>전자증명서 발급 가능 (’26.5)</p></div>
+        <div class="cert-stat"><div class="csn"><span class="pv-val" data-val="2">0</span>천만</div><p>정부24 회원</p></div>
+        <div class="cert-stat"><div class="csn"><span class="pv-val" data-val="59">0</span>개</div><p>연계 공공·민간 앱</p></div>
+      </div>
+      <p class="cert-src">출처: 행정안전부 정부 전자문서지갑(dpaper.kr, ’26.5). 증명서 디지털화가 이미 광범위하게 자리 잡음(실적). Broof는 위촉장·배지 등 기관 자체 증명 영역을 다룹니다.</p>
+    </div>
+  </div>
 </div></section>
 <section><div class="shell sec">
   {sec_head('Problem', '발급기관이 반복해서 겪는 문제')}
@@ -3281,13 +3322,18 @@ PAGES['solution-cert.html'] = dict(
 <section><div class="shell sec">
   {sec_head('Features', '발급부터 검증까지 한 흐름으로', '증명 발급·공유·검증을 하나의 서비스로 제공해, 기관이 별도 검증 시스템을 운영하지 않아도 됩니다.')}
   {cards_wrap([
-    exchange_card('발급–열람–공유–검증을 하나로', brand='var(--purple-500)', desc='증명 발급부터 제출·검증까지 한 흐름으로 제공합니다.'),
-    exchange_card('QR·bf-ID로 즉시 진위 확인', brand='var(--purple-500)', desc='제출처가 원본 진위를 별도 문의 없이 바로 확인합니다.'),
-    exchange_card('별도 시스템 없이 장기 검증', brand='var(--purple-500)', desc='기관이 검증 시스템을 따로 구축·운영하지 않아도 됩니다.'),
+    exchange_card('발급–열람–공유–검증을 하나로', gray=True, desc='증명 발급부터 제출·검증까지 한 흐름으로 제공합니다.'),
+    exchange_card('QR·bf-ID로 즉시 진위 확인', gray=True, desc='제출처가 원본 진위를 별도 문의 없이 바로 확인합니다.'),
+    exchange_card('별도 시스템 없이 장기 검증', gray=True, desc='기관이 검증 시스템을 따로 구축·운영하지 않아도 됩니다.'),
   ], cols=3)}
-  <div class="rvl" style="margin-top:2rem">
-    <div style="font-size:var(--text-16); color:rgba(var(--ink-rgb),.45); margin-bottom:1rem">발급 가능 증명</div>
-    {chips(['위촉장', '수료증', 'MOU', '디지털 배지'])}
+  <div class="rvl ally-marquee-wrap cert-cred" style="margin-top:3rem">
+    <div class="ally-head"><span class="ally-num">발급 가능한<br>증명서</span></div>
+    <div class="pt-marquee"><div class="pt-track" style="animation:none">
+      <div class="cert-item"><span class="cert-logo"></span><span class="cert-label">위촉장</span></div>
+      <div class="cert-item"><span class="cert-logo"></span><span class="cert-label">수료증</span></div>
+      <div class="cert-item"><span class="cert-logo"></span><span class="cert-label">MOU</span></div>
+      <div class="cert-item"><span class="cert-logo"></span><span class="cert-label">디지털 배지</span></div>
+    </div></div>
   </div>
 </div></section>
 <!-- By the Numbers: 다크 스탯 패널 -->
@@ -3304,14 +3350,6 @@ PAGES['solution-cert.html'] = dict(
   </div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  {sec_head('Credentials', '공공·민간에서 검증된 기술력', '파라메타는 다양한 인증과 기관 도입 경험을 바탕으로, 신뢰할 수 있는 블록체인 증명 인프라를 운영해 왔습니다.')}
-  <div class="cert-row rvl" style="--rvl-y:24px; padding:var(--space-32) 0 0">
-    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">기술보증기금 TI-1</div></div>
-    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">CSAP 인증</div></div>
-    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">혁신금융서비스 지정</div></div>
-  </div>
-</div></section>
-<section><div class="shell sec">
   {sec_head('FAQ', '자주 묻는 질문')}
   {faq([
     dict(q='QR·bf-ID 검증은 어떻게 동작하나요?', a='발급된 증명에 연결된 QR 또는 bf-ID로 제출처가 원본 여부를 즉시 확인합니다. 발급기관에 따로 문의하지 않아도 됩니다.'),
