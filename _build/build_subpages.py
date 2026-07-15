@@ -165,7 +165,11 @@ body.hero-light .phero-figure .pf-canvas{ position:absolute; inset:0; width:100%
 
 /* ============ About(company) 전용(B) — 라이트 히어로 위에 Vision 편입 ============ */
 body.company .phero-inner{ padding-bottom:28rem }   /* 아래 Vision 편입 + 그래픽 공간 (두 배로) */
-body.company .hero-vision{ position:relative; z-index:1; margin:0 auto; padding-bottom:6rem }
+body.company .hero-vision{ position:relative; z-index:1; margin:0 auto; padding-bottom:6rem; padding-inline:var(--shell-pad) }
+/* 태블릿: 히어로 하단 여백 확보해 큐브가 본문 글자와 안 겹치게 */
+@media (min-width:768px) and (max-width:1023px){
+  body.company .phero-inner{ padding-bottom:260px }
+}
 body.company .tr-flush .sec{ padding-top:0 }  /* Track Record: 위쪽 패딩 제거 (Vision 패널에 붙임) */
 /* Industry Firsts 도식화: 의장사 허브 + 스템, 카드는 노드 점 붙은 항목으로 */
 /* firsts 패널: ParaSta ps-flow처럼 그레이 배경(닷 패턴)으로 감쌈 */
@@ -277,7 +281,8 @@ body.company .vision-panel{ border-radius:var(--radius-card); background:var(--i
 body.company .vision-panel .sh-center{ margin:0 auto }
 body.company .vision-panel .eyebrow{ color:rgba(var(--white-rgb),.9) }
 body.company .vision-panel .eyebrow::before, body.company .vision-panel .eyebrow::after{ color:rgba(var(--white-rgb),.4) }  /* 다크 카드: [ ] 브라켓도 라이트 톤 */
-body.company .vision-panel .sec-h2{ color:var(--white) }
+body.company .vision-panel .sec-h2{ color:var(--white); font-size:var(--text-30); font-weight:500; letter-spacing:-.01em }   /* Proven Core(stats-h2)와 동일 폰트 */
+@media (min-width:768px){ body.company .vision-panel .sec-h2{ font-size:var(--text-36) } }
 body.company .vision-panel .phero-lead{ color:rgba(var(--white-rgb),.68); font-size:var(--text-20) }
 @media (max-width:1023px){ body.company .vision-panel .phero-lead{ font-size:var(--text-18) } }
 /* wfd 다이어그램 다크 톤 */
@@ -321,6 +326,9 @@ body.company .vision-panel .wfd-core-wrap::after{ left:100%; transform-origin:le
 body.company .vision-panel .wfd-infra{ background:transparent; border:1px solid var(--gray-600); padding-block:1.75rem; margin-top:1rem;
   /* 좌우 원 바깥 가장자리에 맞춤: 4칼럼 셀폭 − 19rem 원폭의 절반이 인셋 */
   margin-inline:calc(((100% - 11 * var(--grid-gap)) / 3 + 3 * var(--grid-gap) - 19rem) / 2) }
+/* 태블릿(768~1023): 원이 19rem보다 작아져 위 calc가 음수가 되므로, 밴드를 원 라인 안쪽으로 보정 */
+@media (min-width:768px) and (max-width:1023px){ body.company .vision-panel .wfd-infra{ margin-inline:1rem } }
+@media (max-width:767px){ body.company .vision-panel .wfd-infra{ margin-inline:0 } }   /* 모바일: calc 음수 방지(오버플로우) */
 /* 인프라 타이틀: 사이즈 키우고 웨이트 낮게 */
 body.company .vision-panel .wfd-infra-t{ font-size:var(--text-20); font-weight:500; letter-spacing:normal; color:var(--gray-400); margin-bottom:.625rem }
 /* ── Vision 다이어그램 순차 리빌: 코어 먼저 → 점선 좌우 확장 → 양옆 원 딱딱 ── */
@@ -550,6 +558,8 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .logo-grid{ list-style:none; margin:2.5rem 0 0; padding:0; display:grid;
   grid-template-columns:repeat(12,minmax(0,1fr)); column-gap:var(--grid-gap); row-gap:var(--grid-gap) }
 .logo-grid > li{ grid-column:span 3 }
+@media (max-width:1023px){ .logo-grid > li{ grid-column:span 6 } }   /* 태블릿 2열 */
+@media (max-width:479px){ .logo-grid > li{ grid-column:span 12 } }   /* 소형 모바일 1열 */
 .logo-card{ display:flex; flex-direction:column; align-items:flex-start; min-height:6.5rem; height:100%; padding:1.5rem;
   border:1px solid rgba(var(--white-rgb),.1); border-radius:var(--radius-card-sm);
   background:var(--ink); font-size:var(--text-18); font-weight:500; color:rgba(var(--white-rgb),.85);
@@ -666,8 +676,9 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .ex-card.ex-gray p{ color:rgba(var(--ink-rgb),.6) }
 .ex-card.ex-gray .ex-ico{ background:rgba(var(--ink-rgb),.06) }
 /* 거래소 카드: 컴팩트라 모바일도 2열, 태블릿 3열 */
-.cards-3:has(.ex-card){ grid-template-columns:repeat(2,1fr); gap:1rem }
-@media (min-width:640px){ .cards-3:has(.ex-card){ grid-template-columns:repeat(3,1fr); gap:1.5rem } }
+.cards-3:has(.ex-card){ grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem }
+@media (min-width:640px){ .cards-3:has(.ex-card){ grid-template-columns:repeat(3,minmax(0,1fr)); gap:1.5rem } }
+@media (max-width:479px){ .cards-3:has(.ex-card){ grid-template-columns:1fr } }
 @media (max-width:639px){ .ex-card .ex-ico{ margin-bottom:2rem } }
 /* 원형 아이콘 + 라벨 행 (거래소·통화 등) */
 .ex-rows{ display:flex; flex-direction:column; gap:3rem }  /* 행 간 = 아이템 간과 동일 토큰 */
@@ -831,8 +842,9 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .ex-card .ex-ico{ display:block; width:3.5rem; height:3.5rem; border-radius:var(--radius-pill); margin-bottom:2rem;
   background:rgba(var(--white-rgb),.08); transition:background .35s ease }
 .ex-card h3{ margin-bottom:0 }
-.cards-3:has(.ex-card){ grid-template-columns:repeat(2,1fr); gap:1rem }
-@media (min-width:640px){ .cards-3:has(.ex-card){ grid-template-columns:repeat(3,1fr); gap:1.5rem } }
+.cards-3:has(.ex-card){ grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem }
+@media (min-width:640px){ .cards-3:has(.ex-card){ grid-template-columns:repeat(3,minmax(0,1fr)); gap:1.5rem } }
+@media (max-width:479px){ .cards-3:has(.ex-card){ grid-template-columns:1fr } }
 .light-card{ border:1px solid var(--line); background:rgba(var(--surface-rgb),.5); border-radius:var(--radius-card-sm); padding:1.75rem }
 .light-card h3{ font-size:var(--text-18); font-weight:600; letter-spacing:-.01em; margin-bottom:.625rem; line-height:var(--leading-heading) }
 .light-card p{ font-size:var(--text-16); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.6) }
@@ -1304,7 +1316,7 @@ const lineObserver = new IntersectionObserver((entries) => {
     }
   });
 }, { threshold: 0.2 });
-document.querySelectorAll('[data-line-reveal]').forEach(el => { initLineReveal(el); lineObserver.observe(el); });
+document.querySelectorAll('[data-line-reveal], [data-line-stagger]').forEach(el => { initLineReveal(el); lineObserver.observe(el); });
 
 /* Track Record 숫자 카운트업 (0→목표, 접두·접미 텍스트 보존) — company 전용 */
 (function(){
@@ -2197,7 +2209,7 @@ PAGES['company.html'] = dict(
     # 히어로 배경(라이트+패턴)을 안 짤리게 통으로 — Vision을 히어로 안으로 편입, 다크 박스는 카드로 얹음
     hero_extra=f'''<div class="shell hero-vision">
   <div class="vision-panel rvl" style="--rvl-y:40px; --rvl-s:.99">
-  {sec_head('Vision', 'Web2와 Web3를 연결하는<br>WalletFi 생태계', '파라메타는 금융·공공·민간 분야에서 축적한 Web2 경험과 퍼블릭 블록체인·DeFi 기반의 Web3 기술을 연결합니다. 이를 바탕으로 디지털 지갑 하나로 다양한 자산과 금융 서비스를 이용할 수 있는 WalletFi 생태계를 만들어갑니다.')}
+  {sec_head('Vision', 'Web2와 Web3를 잇는 WalletFi 생태계', '파라메타는 금융, 공공, 민간 서비스에서 쌓은 Web2 전문성에 퍼블릭 블록체인과 DeFi 기반의 Web3 기술을 더합니다. 이를 바탕으로 자산 보관과 거래, 다양한 금융 서비스를 하나의 디지털 지갑에서 이용하는 WalletFi 생태계를 만들어갑니다.', mx='none', lead_mx='52rem')}
   <div class="wfd rvl" style="--rvl-y:24px">
     <div class="wfd-band wfd-side">
       <div class="wfd-t">전통금융 <em>TradFi</em></div>

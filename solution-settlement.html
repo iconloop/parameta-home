@@ -195,9 +195,11 @@ html.chat-open #banner-fixed{ right:26rem }
 .menu-btn{ border:1px solid rgba(var(--line-rgb),.8); background:rgba(var(--white-rgb),.4);
   backdrop-filter:blur(4px); border-radius:var(--radius-control); }
 @media (hover:hover){ .menu-btn:hover{ background:rgba(var(--white-rgb),.7) } }
-.menu-btn .hspring{ align-items:center; gap:.5rem; padding:.5rem 1rem; font-size:14px; font-weight:500;
+.menu-btn .hspring{ align-items:center; gap:.5rem; padding:.9rem 1rem; font-size:14px; font-weight:500;
   text-transform:uppercase; letter-spacing:.05em; --hs:1.05 }
 .menu-btn .icn{ font-size:var(--text-14) }
+@media (max-width:1023px){ .menu-btn{ height:49px } .menu-btn .hspring{ height:100%; box-sizing:border-box; justify-content:center } }
+@media (max-width:639px){ .menu-btn{ width:49px } }   /* 아이콘만 남는 구간: 지구본과 동일 정사각 */
 @media (max-width:640px){ .menu-word{ display:none } }
 @media (min-width:768px){ .clock-chip{ display:flex } }
 @media (min-width:1024px){ .nav-primary{ display:flex; justify-content:center }
@@ -878,7 +880,11 @@ body.hero-light .phero-figure .pf-canvas{ position:absolute; inset:0; width:100%
 
 /* ============ About(company) 전용(B) — 라이트 히어로 위에 Vision 편입 ============ */
 body.company .phero-inner{ padding-bottom:28rem }   /* 아래 Vision 편입 + 그래픽 공간 (두 배로) */
-body.company .hero-vision{ position:relative; z-index:1; margin:0 auto; padding-bottom:6rem }
+body.company .hero-vision{ position:relative; z-index:1; margin:0 auto; padding-bottom:6rem; padding-inline:var(--shell-pad) }
+/* 태블릿: 히어로 하단 여백 확보해 큐브가 본문 글자와 안 겹치게 */
+@media (min-width:768px) and (max-width:1023px){
+  body.company .phero-inner{ padding-bottom:260px }
+}
 body.company .tr-flush .sec{ padding-top:0 }  /* Track Record: 위쪽 패딩 제거 (Vision 패널에 붙임) */
 /* Industry Firsts 도식화: 의장사 허브 + 스템, 카드는 노드 점 붙은 항목으로 */
 /* firsts 패널: ParaSta ps-flow처럼 그레이 배경(닷 패턴)으로 감쌈 */
@@ -915,7 +921,42 @@ body.company .firsts .work-card p:empty{ display:none }
 body.company .tr-flush .num-card{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); border:none;
   border-radius:var(--radius-card); padding:2rem; transition:transform .35s cubic-bezier(.2,.8,.2,1) }
 @media (hover:hover){ body.company .tr-flush .num-card:hover{ transform:scale(1.03) } }
-body.company .phero-text .eyebrow{ display:none }   /* [COMPANY] 아이브로우 제거 (About만) */
+body.company .phero-text .eyebrow, body.contact .phero-text .eyebrow{ display:none }   /* 히어로 아이브로우 제거 (About·Contact) */
+/* Contact 전용: 그래픽 없는 히어로 → 여백 축소로 문의 섹션을 위로, 카드는 솔루션 톤(불투명 그레이·테두리 없음) */
+body.contact .phero-inner{ padding-top:9rem; padding-bottom:var(--space-32); align-items:flex-start; text-align:left }
+body.contact .phero-text{ align-items:flex-start; align-self:flex-start; margin-inline:0 }
+body.contact .phero + section .sec{ padding-top:var(--space-32) }
+body.contact .light-card{ background:var(--white); border:1px solid rgba(var(--ink-rgb),.12);
+  box-shadow:0 8px 24px rgba(var(--ink-rgb),.06); padding:var(--space-32);
+  transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease }   /* ParaSta wfd-band 톤: 흰색+스트로크+쉐도우 */
+@media (hover:hover){ body.contact .light-card:hover{ transform:scale(1.02); box-shadow:0 16px 40px rgba(var(--ink-rgb),.1) } }
+/* 상담 신청 버튼: 메인 히어로 CTA와 동일 크기 (text-16 + 배지 2.5rem) */
+body.contact .modal-bottom .pill .hspring{ font-size:var(--text-16); gap:.875rem; padding:.5rem .5rem .5rem 1.75rem }
+body.contact .modal-bottom .pill-badge{ width:2.5rem; height:2.5rem; font-size:var(--text-18) }
+body.contact .work-bottom p{ font-size:var(--text-18) }   /* Process 카드 본문 키움 */
+/* 개인정보 수집·이용 안내 (제출 시 동의 간주) */
+body.contact .privacy-guide{ display:flex; flex-direction:column; gap:.3rem; font-size:var(--text-16); color:rgba(var(--ink-rgb),.5) }
+body.contact .privacy-guide strong{ font-size:var(--text-18); font-weight:600; color:rgba(var(--ink-rgb),.5); margin-bottom:.15rem }
+body.contact .pg-item{ position:relative; padding-left:.85rem }
+body.contact .pg-item::before{ content:'·'; position:absolute; left:.1rem; color:rgba(var(--ink-rgb),.4) }
+body.contact .work-meta{ color:var(--purple-300) }   /* STEP 01 라벨 보라 (다크카드 톤) */
+/* 문의 폼·연락처 텍스트 2토큰씩 키움 */
+body.contact .light-card .cap{ font-size:var(--text-22); font-weight:600; margin-bottom:.25rem }
+body.contact .light-card p{ font-size:var(--text-20) }
+body.contact .modal-field label{ font-size:var(--text-16) }
+body.contact .modal-field input, body.contact .modal-field select, body.contact .modal-field textarea{ font-size:var(--text-20); padding:1.25rem }
+/* 관심 서비스 드롭다운: 기본 화살표 제거 + 커스텀 chevron, 오른쪽 여백 확보 */
+body.contact .modal-field select{ appearance:none; -webkit-appearance:none; padding-right:2.75rem;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none' stroke='%230E0C27' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right 1.1rem center; background-size:1rem }
+body.contact .modal-form{ gap:var(--space-24) }                 /* 필드 행 간격 벌림 (관심 서비스·문의 내용) */
+body.contact .addr-list .k{ font-size:var(--text-16) }
+body.contact .addr-list .v{ font-size:var(--text-20) }
+/* 폼 섹션: 좌(폼) 8컬럼 · 우(연락처) 4컬럼 — 12컬럼 그리드 */
+.contact-split{ display:grid; grid-template-columns:repeat(var(--grid-cols),1fr); gap:var(--grid-gap) }
+.contact-split > :first-child{ grid-column:1 / 9 }
+.contact-split > :last-child{ grid-column:9 / 13 }
+@media (max-width:767px){ .contact-split{ display:flex; flex-direction:column } }
 /* Vision WalletFi 도식 — ParaSta 회색·점 스타일 · 풀 12칼럼 그리드(페이지 그리드 스냅) */
 .wfd{ margin:3rem 0 0; display:grid; grid-template-columns:repeat(12,minmax(0,1fr));
   column-gap:var(--grid-gap); row-gap:var(--grid-gap); align-items:stretch;
@@ -955,7 +996,8 @@ body.company .vision-panel{ border-radius:var(--radius-card); background:var(--i
 body.company .vision-panel .sh-center{ margin:0 auto }
 body.company .vision-panel .eyebrow{ color:rgba(var(--white-rgb),.9) }
 body.company .vision-panel .eyebrow::before, body.company .vision-panel .eyebrow::after{ color:rgba(var(--white-rgb),.4) }  /* 다크 카드: [ ] 브라켓도 라이트 톤 */
-body.company .vision-panel .sec-h2{ color:var(--white) }
+body.company .vision-panel .sec-h2{ color:var(--white); font-size:var(--text-30); font-weight:500; letter-spacing:-.01em }   /* Proven Core(stats-h2)와 동일 폰트 */
+@media (min-width:768px){ body.company .vision-panel .sec-h2{ font-size:var(--text-36) } }
 body.company .vision-panel .phero-lead{ color:rgba(var(--white-rgb),.68); font-size:var(--text-20) }
 @media (max-width:1023px){ body.company .vision-panel .phero-lead{ font-size:var(--text-18) } }
 /* wfd 다이어그램 다크 톤 */
@@ -999,6 +1041,9 @@ body.company .vision-panel .wfd-core-wrap::after{ left:100%; transform-origin:le
 body.company .vision-panel .wfd-infra{ background:transparent; border:1px solid var(--gray-600); padding-block:1.75rem; margin-top:1rem;
   /* 좌우 원 바깥 가장자리에 맞춤: 4칼럼 셀폭 − 19rem 원폭의 절반이 인셋 */
   margin-inline:calc(((100% - 11 * var(--grid-gap)) / 3 + 3 * var(--grid-gap) - 19rem) / 2) }
+/* 태블릿(768~1023): 원이 19rem보다 작아져 위 calc가 음수가 되므로, 밴드를 원 라인 안쪽으로 보정 */
+@media (min-width:768px) and (max-width:1023px){ body.company .vision-panel .wfd-infra{ margin-inline:1rem } }
+@media (max-width:767px){ body.company .vision-panel .wfd-infra{ margin-inline:0 } }   /* 모바일: calc 음수 방지(오버플로우) */
 /* 인프라 타이틀: 사이즈 키우고 웨이트 낮게 */
 body.company .vision-panel .wfd-infra-t{ font-size:var(--text-20); font-weight:500; letter-spacing:normal; color:var(--gray-400); margin-bottom:.625rem }
 /* ── Vision 다이어그램 순차 리빌: 코어 먼저 → 점선 좌우 확장 → 양옆 원 딱딱 ── */
@@ -1228,6 +1273,8 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .logo-grid{ list-style:none; margin:2.5rem 0 0; padding:0; display:grid;
   grid-template-columns:repeat(12,minmax(0,1fr)); column-gap:var(--grid-gap); row-gap:var(--grid-gap) }
 .logo-grid > li{ grid-column:span 3 }
+@media (max-width:1023px){ .logo-grid > li{ grid-column:span 6 } }   /* 태블릿 2열 */
+@media (max-width:479px){ .logo-grid > li{ grid-column:span 12 } }   /* 소형 모바일 1열 */
 .logo-card{ display:flex; flex-direction:column; align-items:flex-start; min-height:6.5rem; height:100%; padding:1.5rem;
   border:1px solid rgba(var(--white-rgb),.1); border-radius:var(--radius-card-sm);
   background:var(--ink); font-size:var(--text-18); font-weight:500; color:rgba(var(--white-rgb),.85);
@@ -1344,8 +1391,9 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .ex-card.ex-gray p{ color:rgba(var(--ink-rgb),.6) }
 .ex-card.ex-gray .ex-ico{ background:rgba(var(--ink-rgb),.06) }
 /* 거래소 카드: 컴팩트라 모바일도 2열, 태블릿 3열 */
-.cards-3:has(.ex-card){ grid-template-columns:repeat(2,1fr); gap:1rem }
-@media (min-width:640px){ .cards-3:has(.ex-card){ grid-template-columns:repeat(3,1fr); gap:1.5rem } }
+.cards-3:has(.ex-card){ grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem }
+@media (min-width:640px){ .cards-3:has(.ex-card){ grid-template-columns:repeat(3,minmax(0,1fr)); gap:1.5rem } }
+@media (max-width:479px){ .cards-3:has(.ex-card){ grid-template-columns:1fr } }
 @media (max-width:639px){ .ex-card .ex-ico{ margin-bottom:2rem } }
 /* 원형 아이콘 + 라벨 행 (거래소·통화 등) */
 .ex-rows{ display:flex; flex-direction:column; gap:3rem }  /* 행 간 = 아이템 간과 동일 토큰 */
@@ -1371,12 +1419,30 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .cert-logo{ width:3.75rem; height:3.75rem; border-radius:var(--radius-pill); background:rgba(var(--ink-rgb),.06); flex:none }
 .cert-label{ font-size:var(--text-18); font-weight:500; color:rgba(var(--ink-rgb),.7); white-space:nowrap }
 @media (max-width:639px){ .cert-item{ padding:0 1.5rem } .cert-logo{ width:3rem; height:3rem } }
-/* 인증·수상 고정 배치(마퀴 없이): cert-item을 flex로 중앙 정렬 */
-.cert-static{ display:flex; flex-wrap:wrap; justify-content:center; row-gap:1.5rem }
-/* 기능 특징 불릿 리스트 */
-.feat-notes{ list-style:none; margin:var(--space-32) 0 0; padding:0; display:flex; flex-direction:column; gap:.75rem }
-.feat-notes li{ position:relative; padding-left:1.5rem; font-size:var(--text-18); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.7) }
-.feat-notes li::before{ content:''; position:absolute; left:0; top:.65em; width:6px; height:6px; border-radius:var(--radius-pill); background:var(--purple-500) }
+/* How to Adopt 비교: 두 경로를 위아래로 쌓고 각 경로는 가로 타임라인 — 트랙 길이로 단계·시간 대비 */
+.adopt-compare{ display:flex; flex-direction:column; gap:var(--space-64) }
+.ac-row{ display:grid; grid-template-columns:repeat(var(--grid-cols),1fr); gap:var(--grid-gap); align-items:center }
+@media (max-width:639px){ .ac-row{ display:flex; flex-direction:column; align-items:flex-start; gap:1.25rem } }
+.ac-meta{ grid-column:1 / 4 }
+.ac-meta h3{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em; line-height:var(--leading-heading) }
+.ac-time{ margin-top:.5rem; display:inline-flex; align-items:center; padding:.375rem .875rem; border-radius:var(--radius-pill);
+  background:rgba(var(--ink-rgb),.07); font-size:var(--text-16); font-weight:600; color:rgba(var(--ink-rgb),.45) }
+.ac-row.ac-hi .ac-time{ background:color-mix(in srgb, var(--accent) 12%, var(--white)); color:var(--accent) }
+.ac-track{ grid-column:4 / 13; position:relative; display:flex; justify-content:flex-start; width:100%; align-items:flex-start }
+.ac-track::before{ content:''; position:absolute; left:10%; top:6px; height:2px; background:var(--gray-100) }
+.ac-track.slow::before{ right:10% }   /* 첫 노드(10%) ~ 5번째 노드(90%) */
+.ac-track.fast::before{ right:50% }   /* 첫 노드(10%) ~ 3번째 노드(50%) — 시작 x는 slow와 동일 */
+.ac-row.ac-hi .ac-track::before{ background:color-mix(in srgb, var(--accent) 28%, var(--white)) }
+.ac-step{ position:relative; flex:0 0 20%; display:flex; flex-direction:column; align-items:center; text-align:center; z-index:1 }
+.ac-dot{ width:13px; height:13px; border-radius:var(--radius-pill); background:var(--gray-300); border:2px solid var(--white);
+  transition:transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease }
+.ac-row.ac-hi .ac-dot{ background:var(--accent) }
+.ac-lbl{ margin-top:.75rem; font-size:var(--text-16); line-height:1.35; color:rgba(var(--ink-rgb),.7); transition:color .25s ease }
+@media (hover:hover){
+  .ac-step:hover .ac-dot{ transform:scale(1.5); box-shadow:0 0 0 6px rgba(var(--ink-rgb),.05) }
+  .ac-row.ac-hi .ac-step:hover .ac-dot{ box-shadow:0 0 0 6px color-mix(in srgb, var(--accent) 12%, transparent) }
+  .ac-step:hover .ac-lbl{ color:var(--ink) }
+}
 /* 의장사 알약 */
 .chair-badge{ display:inline-flex; align-items:center; gap:.875rem; padding:.75rem 1.5rem;
   border:1px solid rgba(var(--purple-300-rgb),.5); border-radius:var(--radius-pill);
@@ -1491,8 +1557,9 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .ex-card .ex-ico{ display:block; width:3.5rem; height:3.5rem; border-radius:var(--radius-pill); margin-bottom:2rem;
   background:rgba(var(--white-rgb),.08); transition:background .35s ease }
 .ex-card h3{ margin-bottom:0 }
-.cards-3:has(.ex-card){ grid-template-columns:repeat(2,1fr); gap:1rem }
-@media (min-width:640px){ .cards-3:has(.ex-card){ grid-template-columns:repeat(3,1fr); gap:1.5rem } }
+.cards-3:has(.ex-card){ grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem }
+@media (min-width:640px){ .cards-3:has(.ex-card){ grid-template-columns:repeat(3,minmax(0,1fr)); gap:1.5rem } }
+@media (max-width:479px){ .cards-3:has(.ex-card){ grid-template-columns:1fr } }
 .light-card{ border:1px solid var(--line); background:rgba(var(--surface-rgb),.5); border-radius:var(--radius-card-sm); padding:1.75rem }
 .light-card h3{ font-size:var(--text-18); font-weight:600; letter-spacing:-.01em; margin-bottom:.625rem; line-height:var(--leading-heading) }
 .light-card p{ font-size:var(--text-16); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.6) }
@@ -1510,6 +1577,51 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
   font-size:var(--text-14); color:rgba(var(--ink-rgb),.45) }
 .num-card .n{ font-size:var(--text-40); font-weight:600; letter-spacing:-.02em; line-height:1.1; margin-bottom:.5rem }
 .num-card .n small{ font-size:var(--text-20); font-weight:500 }
+/* 증명서 Why Now 2컬럼: 좌 스탯박스(한 박스·3줄) / 우 (콘텐츠 대기) — cert 전용, 타 페이지 영향 없음 */
+.cert-wn-duo{ display:grid; grid-template-columns:7fr 5fr; gap:var(--grid-gap); align-items:stretch }
+@media (max-width:767px){ .cert-wn-duo{ grid-template-columns:1fr; row-gap:var(--space-48) } }
+/* 좌측 차트: 우측 박스 높이에 맞춰 흰 패널까지 같이 늘림 + 노트를 하단 고정해 우측 출처와 y 정렬 (cert 전용) */
+.cert-wn-duo > .colc{ height:100% }
+.cert-wn-duo > .colc .colc-panel{ flex:1; display:flex; flex-direction:column; padding-bottom:var(--space-32) }
+.cert-wn-duo > .colc .colc-panel .colc-plot{ margin-top:var(--space-24) }
+.cert-wn-duo > .colc .colc-panel .sec-note{ margin-top:auto }
+/* data Why Now 차트: 바 높이 살짝 축소(→ 우측 박스도 같이 줄어듦) + 바를 위로 + 주석 간격 확보 (data 전용) */
+.wn-data > .colc{ --colc-h:9.5rem }
+.wn-data > .colc .colc-panel .colc-plot{ margin-top:0 }
+.wn-data > .colc .colc-panel .colc-labels{ margin-bottom:var(--space-40) }
+.cert-statbox{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); border:none; border-radius:var(--radius-card-sm);
+  padding:var(--space-32); display:flex; flex-direction:column; justify-content:space-between; gap:var(--space-24) }
+.cert-stats{ display:flex; flex-direction:column }
+.cert-stat{ display:flex; flex-direction:column; gap:.35rem; padding:var(--space-24) 0 }
+.cert-stat:first-child{ padding-top:0 }
+.cert-stat:last-child{ padding-bottom:0 }
+.cert-stat + .cert-stat{ border-top:1px solid var(--line) }
+.cert-stat .csn{ font-size:var(--text-36); font-weight:600; letter-spacing:-.02em; line-height:1.05; color:var(--ink) }
+.cert-stat .csn small{ font-size:inherit; font-weight:inherit; color:inherit; margin-left:.05em }
+.cert-stat p{ font-size:var(--text-16); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.6) }
+.cert-src{ padding-top:var(--space-24); border-top:1px solid var(--line);
+  font-size:var(--text-18); font-weight:400; line-height:var(--leading-body); color:var(--muted) }
+/* 스탯박스 4지표 2x2 배치 (data 등에서 사용) */
+.cert-stats.is-2x2{ display:grid; grid-template-columns:1fr 1fr; column-gap:var(--space-40) }
+.cert-stats.is-2x2 .cert-stat{ border-top:none; padding:var(--space-24) 0 }
+.cert-stats.is-2x2 .cert-stat:nth-child(-n+2){ padding-top:0 }
+.cert-stats.is-2x2 .cert-stat:nth-child(n+3){ border-top:1px solid var(--line); padding-top:var(--space-40); padding-bottom:0 }
+@media (max-width:479px){ .cert-stats.is-2x2{ grid-template-columns:1fr } }
+/* 2x2 스탯박스: 하단정렬(출처=좌측 차트 출처와 같은 지점) + 그리드↔출처 gap을 키워 그리드를 위로 → 위쪽 여백 축소 */
+.statbox-2x2{ justify-content:flex-end; gap:var(--space-32) }
+.statbox-2x2 .cert-src{ border-top:none }
+/* 발급 가능 증명: 12칼럼 그리드 정렬 — 아이템 3~12칸(10칸), 4칸 균등폭 + 균등 갭 (cert 전용, About 컴포넌트 유지) */
+.cert-cred{ grid-template-columns:repeat(12,1fr); align-items:center }
+.cert-cred > .ally-head{ grid-column:1 / span 2 }
+.cert-cred > .pt-marquee{ grid-column:3 / span 10; overflow:visible; margin:0 }
+.cert-cred .pt-track{ display:grid; grid-template-columns:repeat(4,1fr); gap:var(--grid-gap); width:100%; animation:none }
+.cert-cred .cert-item{ padding:0 }
+.cert-cred .cert-label{ white-space:normal; text-align:center }
+@media (max-width:639px){
+  .cert-cred{ grid-template-columns:1fr }
+  .cert-cred > .ally-head, .cert-cred > .pt-marquee{ grid-column:auto }
+  .cert-cred .pt-track{ grid-template-columns:repeat(2,1fr) }
+}
 /* 회색 채움 변형 (About Track Record 톤) — company 밖에서도 사용 */
 .num-solid .num-card{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); border:none }
 .tag.on-light{ border-color:var(--line); color:var(--ink) }
@@ -1993,7 +2105,7 @@ const lineObserver = new IntersectionObserver((entries) => {
     }
   });
 }, { threshold: 0.2 });
-document.querySelectorAll('[data-line-reveal]').forEach(el => { initLineReveal(el); lineObserver.observe(el); });
+document.querySelectorAll('[data-line-reveal], [data-line-stagger]').forEach(el => { initLineReveal(el); lineObserver.observe(el); });
 
 /* Track Record 숫자 카운트업 (0→목표, 접두·접미 텍스트 보존) — company 전용 */
 (function(){
@@ -2069,13 +2181,14 @@ if(pvVals.length){
     ents.forEach(en => {
       if(!en.isIntersecting) return;
       pvObs.unobserve(en.target);
-      const target = parseInt(en.target.dataset.val, 10);
-      const from = parseInt(en.target.dataset.from, 10) || 0;
+      const target = parseFloat(en.target.dataset.val);
+      const from = parseFloat(en.target.dataset.from) || 0;
+      const dec = parseInt(en.target.dataset.decimals, 10) || 0;  /* 소수 자릿수 (없으면 0=정수, 기존과 동일) */
       const t0 = performance.now(), dur = 1100;
       (function tick(now){
         const p = Math.min((now - t0) / dur, 1);
         const e = 1 - Math.pow(1 - p, 3); /* easeOutCubic */
-        en.target.textContent = Math.round(from + (target - from) * e).toLocaleString('en-US');
+        en.target.textContent = (from + (target - from) * e).toLocaleString('en-US', {minimumFractionDigits: dec, maximumFractionDigits: dec});
         if(p < 1) requestAnimationFrame(tick);
       })(t0);
     });

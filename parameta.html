@@ -195,9 +195,11 @@ html.chat-open #banner-fixed{ right:26rem }
 .menu-btn{ border:1px solid rgba(var(--line-rgb),.8); background:rgba(var(--white-rgb),.4);
   backdrop-filter:blur(4px); border-radius:var(--radius-control); }
 @media (hover:hover){ .menu-btn:hover{ background:rgba(var(--white-rgb),.7) } }
-.menu-btn .hspring{ align-items:center; gap:.5rem; padding:.5rem 1rem; font-size:14px; font-weight:500;
+.menu-btn .hspring{ align-items:center; gap:.5rem; padding:.9rem 1rem; font-size:14px; font-weight:500;
   text-transform:uppercase; letter-spacing:.05em; --hs:1.05 }
 .menu-btn .icn{ font-size:var(--text-14) }
+@media (max-width:1023px){ .menu-btn{ height:49px } .menu-btn .hspring{ height:100%; box-sizing:border-box; justify-content:center } }
+@media (max-width:639px){ .menu-btn{ width:49px } }   /* 아이콘만 남는 구간: 지구본과 동일 정사각 */
 @media (max-width:640px){ .menu-word{ display:none } }
 @media (min-width:768px){ .clock-chip{ display:flex } }
 @media (min-width:1024px){ .nav-primary{ display:flex; justify-content:center }
@@ -1088,9 +1090,9 @@ const wordObserver = new IntersectionObserver((entries) => {
 
 /* ---------- HERO CARD CAROUSEL ---------- */
 const HC_ITEMS = [
-  { caption:'가상자산', title:'토큰을 발행하고 싶어요', link:'solution-finance.html' },
-  { caption:'가상자산', title:'우리 서비스에 가상자산 선물 거래소를 도입하려면?', link:'portx.html' },
-  { caption:'블록체인', title:'금이랑 부동산을 토큰화하고 싶어요', link:'parasta.html' },
+  { caption:'Stablecoin', title:'스테이블코인을 발행하고 싶다면?', link:'solution-finance.html' },
+  { caption:'Perpetual DEX', title:'서비스에 가상자산 선물 거래 기능을 도입하고 싶다면?', link:'portx.html' },
+  { caption:'Deposit Token', title:'은행 예금을 토큰화해 서비스에 활용하고 싶다면?', link:'parasta.html' },
 ];
 let hcIndex = 0;
 const hcSlot = document.getElementById('hcSlot');
