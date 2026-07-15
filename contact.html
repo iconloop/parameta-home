@@ -915,7 +915,42 @@ body.company .firsts .work-card p:empty{ display:none }
 body.company .tr-flush .num-card{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); border:none;
   border-radius:var(--radius-card); padding:2rem; transition:transform .35s cubic-bezier(.2,.8,.2,1) }
 @media (hover:hover){ body.company .tr-flush .num-card:hover{ transform:scale(1.03) } }
-body.company .phero-text .eyebrow{ display:none }   /* [COMPANY] 아이브로우 제거 (About만) */
+body.company .phero-text .eyebrow, body.contact .phero-text .eyebrow{ display:none }   /* 히어로 아이브로우 제거 (About·Contact) */
+/* Contact 전용: 그래픽 없는 히어로 → 여백 축소로 문의 섹션을 위로, 카드는 솔루션 톤(불투명 그레이·테두리 없음) */
+body.contact .phero-inner{ padding-top:9rem; padding-bottom:var(--space-32); align-items:flex-start; text-align:left }
+body.contact .phero-text{ align-items:flex-start; align-self:flex-start; margin-inline:0 }
+body.contact .phero + section .sec{ padding-top:var(--space-32) }
+body.contact .light-card{ background:var(--white); border:1px solid rgba(var(--ink-rgb),.12);
+  box-shadow:0 8px 24px rgba(var(--ink-rgb),.06); padding:var(--space-32);
+  transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease }   /* ParaSta wfd-band 톤: 흰색+스트로크+쉐도우 */
+@media (hover:hover){ body.contact .light-card:hover{ transform:scale(1.02); box-shadow:0 16px 40px rgba(var(--ink-rgb),.1) } }
+/* 상담 신청 버튼: 메인 히어로 CTA와 동일 크기 (text-16 + 배지 2.5rem) */
+body.contact .modal-bottom .pill .hspring{ font-size:var(--text-16); gap:.875rem; padding:.5rem .5rem .5rem 1.75rem }
+body.contact .modal-bottom .pill-badge{ width:2.5rem; height:2.5rem; font-size:var(--text-18) }
+body.contact .work-bottom p{ font-size:var(--text-18) }   /* Process 카드 본문 키움 */
+/* 개인정보 수집·이용 안내 (제출 시 동의 간주) */
+body.contact .privacy-guide{ display:flex; flex-direction:column; gap:.3rem; font-size:var(--text-16); color:rgba(var(--ink-rgb),.5) }
+body.contact .privacy-guide strong{ font-size:var(--text-18); font-weight:600; color:rgba(var(--ink-rgb),.5); margin-bottom:.15rem }
+body.contact .pg-item{ position:relative; padding-left:.85rem }
+body.contact .pg-item::before{ content:'·'; position:absolute; left:.1rem; color:rgba(var(--ink-rgb),.4) }
+body.contact .work-meta{ color:var(--purple-300) }   /* STEP 01 라벨 보라 (다크카드 톤) */
+/* 문의 폼·연락처 텍스트 2토큰씩 키움 */
+body.contact .light-card .cap{ font-size:var(--text-22); font-weight:600; margin-bottom:.25rem }
+body.contact .light-card p{ font-size:var(--text-20) }
+body.contact .modal-field label{ font-size:var(--text-16) }
+body.contact .modal-field input, body.contact .modal-field select, body.contact .modal-field textarea{ font-size:var(--text-20); padding:1.25rem }
+/* 관심 서비스 드롭다운: 기본 화살표 제거 + 커스텀 chevron, 오른쪽 여백 확보 */
+body.contact .modal-field select{ appearance:none; -webkit-appearance:none; padding-right:2.75rem;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none' stroke='%230E0C27' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right 1.1rem center; background-size:1rem }
+body.contact .modal-form{ gap:var(--space-24) }                 /* 필드 행 간격 벌림 (관심 서비스·문의 내용) */
+body.contact .addr-list .k{ font-size:var(--text-16) }
+body.contact .addr-list .v{ font-size:var(--text-20) }
+/* 폼 섹션: 좌(폼) 8컬럼 · 우(연락처) 4컬럼 — 12컬럼 그리드 */
+.contact-split{ display:grid; grid-template-columns:repeat(var(--grid-cols),1fr); gap:var(--grid-gap) }
+.contact-split > :first-child{ grid-column:1 / 9 }
+.contact-split > :last-child{ grid-column:9 / 13 }
+@media (max-width:767px){ .contact-split{ display:flex; flex-direction:column } }
 /* Vision WalletFi 도식 — ParaSta 회색·점 스타일 · 풀 12칼럼 그리드(페이지 그리드 스냅) */
 .wfd{ margin:3rem 0 0; display:grid; grid-template-columns:repeat(12,minmax(0,1fr));
   column-gap:var(--grid-gap); row-gap:var(--grid-gap); align-items:stretch;
@@ -1371,6 +1406,30 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .cert-logo{ width:3.75rem; height:3.75rem; border-radius:var(--radius-pill); background:rgba(var(--ink-rgb),.06); flex:none }
 .cert-label{ font-size:var(--text-18); font-weight:500; color:rgba(var(--ink-rgb),.7); white-space:nowrap }
 @media (max-width:639px){ .cert-item{ padding:0 1.5rem } .cert-logo{ width:3rem; height:3rem } }
+/* How to Adopt 비교: 두 경로를 위아래로 쌓고 각 경로는 가로 타임라인 — 트랙 길이로 단계·시간 대비 */
+.adopt-compare{ display:flex; flex-direction:column; gap:var(--space-64) }
+.ac-row{ display:grid; grid-template-columns:repeat(var(--grid-cols),1fr); gap:var(--grid-gap); align-items:center }
+@media (max-width:639px){ .ac-row{ display:flex; flex-direction:column; align-items:flex-start; gap:1.25rem } }
+.ac-meta{ grid-column:1 / 4 }
+.ac-meta h3{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em; line-height:var(--leading-heading) }
+.ac-time{ margin-top:.5rem; display:inline-flex; align-items:center; padding:.375rem .875rem; border-radius:var(--radius-pill);
+  background:rgba(var(--ink-rgb),.07); font-size:var(--text-16); font-weight:600; color:rgba(var(--ink-rgb),.45) }
+.ac-row.ac-hi .ac-time{ background:color-mix(in srgb, var(--accent) 12%, var(--white)); color:var(--accent) }
+.ac-track{ grid-column:4 / 13; position:relative; display:flex; justify-content:flex-start; width:100%; align-items:flex-start }
+.ac-track::before{ content:''; position:absolute; left:10%; top:6px; height:2px; background:var(--gray-100) }
+.ac-track.slow::before{ right:10% }   /* 첫 노드(10%) ~ 5번째 노드(90%) */
+.ac-track.fast::before{ right:50% }   /* 첫 노드(10%) ~ 3번째 노드(50%) — 시작 x는 slow와 동일 */
+.ac-row.ac-hi .ac-track::before{ background:color-mix(in srgb, var(--accent) 28%, var(--white)) }
+.ac-step{ position:relative; flex:0 0 20%; display:flex; flex-direction:column; align-items:center; text-align:center; z-index:1 }
+.ac-dot{ width:13px; height:13px; border-radius:var(--radius-pill); background:var(--gray-300); border:2px solid var(--white);
+  transition:transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease }
+.ac-row.ac-hi .ac-dot{ background:var(--accent) }
+.ac-lbl{ margin-top:.75rem; font-size:var(--text-16); line-height:1.35; color:rgba(var(--ink-rgb),.7); transition:color .25s ease }
+@media (hover:hover){
+  .ac-step:hover .ac-dot{ transform:scale(1.5); box-shadow:0 0 0 6px rgba(var(--ink-rgb),.05) }
+  .ac-row.ac-hi .ac-step:hover .ac-dot{ box-shadow:0 0 0 6px color-mix(in srgb, var(--accent) 12%, transparent) }
+  .ac-step:hover .ac-lbl{ color:var(--ink) }
+}
 /* 의장사 알약 */
 .chair-badge{ display:inline-flex; align-items:center; gap:.875rem; padding:.75rem 1.5rem;
   border:1px solid rgba(var(--purple-300-rgb),.5); border-radius:var(--radius-pill);
@@ -1504,6 +1563,51 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
   font-size:var(--text-14); color:rgba(var(--ink-rgb),.45) }
 .num-card .n{ font-size:var(--text-40); font-weight:600; letter-spacing:-.02em; line-height:1.1; margin-bottom:.5rem }
 .num-card .n small{ font-size:var(--text-20); font-weight:500 }
+/* 증명서 Why Now 2컬럼: 좌 스탯박스(한 박스·3줄) / 우 (콘텐츠 대기) — cert 전용, 타 페이지 영향 없음 */
+.cert-wn-duo{ display:grid; grid-template-columns:7fr 5fr; gap:var(--grid-gap); align-items:stretch }
+@media (max-width:767px){ .cert-wn-duo{ grid-template-columns:1fr; row-gap:var(--space-48) } }
+/* 좌측 차트: 우측 박스 높이에 맞춰 흰 패널까지 같이 늘림 + 노트를 하단 고정해 우측 출처와 y 정렬 (cert 전용) */
+.cert-wn-duo > .colc{ height:100% }
+.cert-wn-duo > .colc .colc-panel{ flex:1; display:flex; flex-direction:column; padding-bottom:var(--space-32) }
+.cert-wn-duo > .colc .colc-panel .colc-plot{ margin-top:var(--space-24) }
+.cert-wn-duo > .colc .colc-panel .sec-note{ margin-top:auto }
+/* data Why Now 차트: 바 높이 살짝 축소(→ 우측 박스도 같이 줄어듦) + 바를 위로 + 주석 간격 확보 (data 전용) */
+.wn-data > .colc{ --colc-h:9.5rem }
+.wn-data > .colc .colc-panel .colc-plot{ margin-top:0 }
+.wn-data > .colc .colc-panel .colc-labels{ margin-bottom:var(--space-40) }
+.cert-statbox{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); border:none; border-radius:var(--radius-card-sm);
+  padding:var(--space-32); display:flex; flex-direction:column; justify-content:space-between; gap:var(--space-24) }
+.cert-stats{ display:flex; flex-direction:column }
+.cert-stat{ display:flex; flex-direction:column; gap:.35rem; padding:var(--space-24) 0 }
+.cert-stat:first-child{ padding-top:0 }
+.cert-stat:last-child{ padding-bottom:0 }
+.cert-stat + .cert-stat{ border-top:1px solid var(--line) }
+.cert-stat .csn{ font-size:var(--text-36); font-weight:600; letter-spacing:-.02em; line-height:1.05; color:var(--ink) }
+.cert-stat .csn small{ font-size:inherit; font-weight:inherit; color:inherit; margin-left:.05em }
+.cert-stat p{ font-size:var(--text-16); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.6) }
+.cert-src{ padding-top:var(--space-24); border-top:1px solid var(--line);
+  font-size:var(--text-18); font-weight:400; line-height:var(--leading-body); color:var(--muted) }
+/* 스탯박스 4지표 2x2 배치 (data 등에서 사용) */
+.cert-stats.is-2x2{ display:grid; grid-template-columns:1fr 1fr; column-gap:var(--space-40) }
+.cert-stats.is-2x2 .cert-stat{ border-top:none; padding:var(--space-24) 0 }
+.cert-stats.is-2x2 .cert-stat:nth-child(-n+2){ padding-top:0 }
+.cert-stats.is-2x2 .cert-stat:nth-child(n+3){ border-top:1px solid var(--line); padding-top:var(--space-40); padding-bottom:0 }
+@media (max-width:479px){ .cert-stats.is-2x2{ grid-template-columns:1fr } }
+/* 2x2 스탯박스: 하단정렬(출처=좌측 차트 출처와 같은 지점) + 그리드↔출처 gap을 키워 그리드를 위로 → 위쪽 여백 축소 */
+.statbox-2x2{ justify-content:flex-end; gap:var(--space-32) }
+.statbox-2x2 .cert-src{ border-top:none }
+/* 발급 가능 증명: 12칼럼 그리드 정렬 — 아이템 3~12칸(10칸), 4칸 균등폭 + 균등 갭 (cert 전용, About 컴포넌트 유지) */
+.cert-cred{ grid-template-columns:repeat(12,1fr); align-items:center }
+.cert-cred > .ally-head{ grid-column:1 / span 2 }
+.cert-cred > .pt-marquee{ grid-column:3 / span 10; overflow:visible; margin:0 }
+.cert-cred .pt-track{ display:grid; grid-template-columns:repeat(4,1fr); gap:var(--grid-gap); width:100%; animation:none }
+.cert-cred .cert-item{ padding:0 }
+.cert-cred .cert-label{ white-space:normal; text-align:center }
+@media (max-width:639px){
+  .cert-cred{ grid-template-columns:1fr }
+  .cert-cred > .ally-head, .cert-cred > .pt-marquee{ grid-column:auto }
+  .cert-cred .pt-track{ grid-template-columns:repeat(2,1fr) }
+}
 /* 회색 채움 변형 (About Track Record 톤) — company 밖에서도 사용 */
 .num-solid .num-card{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); border:none }
 .tag.on-light{ border-color:var(--line); color:var(--ink) }
@@ -1619,8 +1723,8 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 .sec-note{ margin-top:1.25rem; font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); line-height:var(--leading-body); max-width:54rem }
 /* 세로 막대 차트 (barc 세로 변형) — 값은 막대 위, 라벨은 베이스라인 아래 */
 .colc{ --colc-h:11rem; display:flex; flex-direction:column;
-  border:1px solid var(--line); border-radius:var(--radius-card-sm); padding:var(--space-16) 0 0;
-  background:var(--line) }  /* 밴드 색 = 스트로크 색 통일. 상단 타이틀 밴드만 남기고 흰 패널이 꽉 채움 (위 16 = 아래 마진과 동일 → 밴드 중앙) */
+  border:2px solid color-mix(in srgb, var(--ink) 6%, var(--white)); border-radius:var(--radius-card-sm); padding:var(--space-16) 0 0;
+  background:color-mix(in srgb, var(--ink) 6%, var(--white)) }  /* 밴드 색 = num-solid 카드색. 상단 타이틀 밴드만 남기고 흰 패널이 꽉 채움 (위 16 = 아래 마진과 동일 → 밴드 중앙) */
 .colc .barc-title{ padding:0 var(--space-32) }
 .colc-panel{ background:var(--white); padding:var(--space-48) var(--space-32) var(--space-24);
   border-radius:var(--radius-control) var(--radius-control) calc(var(--radius-card-sm) - 1px) calc(var(--radius-card-sm) - 1px) }  /* 하단은 바깥 R-보더만큼 맞물림. 상단 여유 48 */
@@ -1754,7 +1858,7 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 @media (max-width:1023px){ .post-side{ border-top:1px solid rgba(var(--ink-rgb),.1); padding-top:2rem } }
 </style>
 </head>
-<body class="hero-light">
+<body class="hero-light contact">
 
 <a href="#main" class="skip">본문으로 건너뛰기</a>
 <!-- GNB — 단일 소스: assets/nav.js가 배너·헤더·오버레이 메뉴 주입 -->
@@ -1768,8 +1872,8 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
     <div class="shell phero-inner">
       <div class="phero-text">
         <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Contact</div>
-        <h1 class="phero-h1" data-line-stagger="120"><span class="rvl-line"><span>문의 · 무료 컨설팅</span></span></h1>
-        <p class="phero-lead rvl" style="--rvl-delay:250ms">궁금하신 사항이 있으시면 문의하기를 이용해주세요. 담당자가 자세하게 안내해드리겠습니다.</p>
+        <h1 class="phero-h1" data-line-stagger="120"><span class="rvl-line"><span>Contact</span></span></h1>
+        <p class="phero-lead rvl" style="--rvl-delay:250ms">궁금하신 사항이 있으시면 문의하기를 이용해주세요.<br>담당자가 자세하게 안내해드리겠습니다.</p>
         
       </div>
       <div class="phero-visual" aria-hidden="true"></div>
@@ -1783,12 +1887,12 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
   </section>
 
 <section><div class="shell sec">
-  <div class="cards-2" style="align-items:start">
+  <div class="contact-split" style="align-items:start">
     <div class="light-card rvl">
       <span class="cap">컨설팅 신청</span>
       <p style="margin-bottom:1.5rem">담당자가 영업일 기준 1~2일 내 회신드립니다. 모든 정보는 컨설팅 목적으로만 사용됩니다.</p>
       <form class="modal-form" id="contactForm">
-        <div class="cards-2" style="gap:1rem">
+        <div class="cards-2" style="column-gap:1rem; row-gap:var(--space-24)">
           <div class="modal-field"><label for="cfName">이름</label><input id="cfName" type="text" required placeholder="이름"></div>
           <div class="modal-field"><label for="cfOrg">회사 / 기관</label><input id="cfOrg" type="text" required placeholder="회사 또는 기관명"></div>
           <div class="modal-field"><label for="cfEmail">이메일</label><input id="cfEmail" type="email" required placeholder="you@company.com"></div>
@@ -1805,11 +1909,13 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
         <div class="modal-field"><label for="cfMsg">문의 내용</label>
           <textarea id="cfMsg" rows="5" required resize="none" placeholder="검토 중인 사업, 일정, 환경(SaaS/온프레미스)을 알려주세요."></textarea>
         </div>
-        <label style="display:flex; align-items:center; gap:.5rem; font-size:var(--text-14); color:rgba(var(--ink-rgb),.6)">
-          <input type="checkbox" required style="width:1rem; height:1rem"> 개인정보 수집·이용에 동의합니다
-        </label>
-        <div class="modal-bottom">
-          <span class="modal-note" id="cfNote">영업일 기준 1~2일 내 회신드립니다.</span>
+        <div class="privacy-guide">
+          <strong>개인정보 수집·이용에 대한 안내</strong>
+          <span class="pg-item">수집 목적 : 회원 문의사항 처리</span>
+          <span class="pg-item">수집 항목 : 성, 이름, 이메일, 전화번호, 법인명</span>
+          <span class="pg-item">보유 및 이용기간 : 3년 보관 후 즉시 파기</span>
+        </div>
+        <div class="modal-bottom" style="justify-content:flex-start">
           <button class="pill dark with-arrow arw-up hs-scale" type="submit">
             <span class="hspring"><span id="cfSubmitLabel">상담 신청</span><span class="pill-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></span>
           </button>
@@ -1819,25 +1925,19 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
     <div class="rvl" style="--rvl-delay:120ms">
       <div class="light-card" style="margin-bottom:1.5rem">
         <span class="cap">바로 문의하기</span>
-        <p style="margin-bottom:1.25rem">폼 작성이 번거롭다면 메일·전화로 바로 연락주세요.</p>
+        <p style="margin-bottom:1.25rem">폼 작성이 번거롭다면 연락주세요.</p>
         <div class="addr-list">
           <div><div class="k">Email</div><div class="v">info@parametacorp.com</div></div>
           <div><div class="k">Tel</div><div class="v">02-2138-7026</div></div>
-          <div><div class="k">Hours</div><div class="v">평일 10:00 – 18:00</div></div>
-        </div>
-      </div>
-      <div class="light-card">
-        <span class="cap">오시는 길</span>
-        <div class="addr-list">
-          <div><div class="k">Address</div><div class="v">서울특별시 서초구 강남대로 311 드림플러스 강남 8F</div></div>
+          <div><div class="k">Hours</div><div class="v">평일 9:00 – 20:00</div></div>
         </div>
       </div>
     </div>
   </div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Process</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>컨설팅 진행 방식 — 부담 없이 3단계로</span></span></h2>
-  <ul class="cards-3"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static sm"><div class="work-meta"><span>STEP 01</span></div><div class="work-bottom"><h3>신청 접수</h3><p>폼을 작성하시면 담당자가 영업일 기준 1~2일 내 회신드립니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm"><div class="work-meta"><span>STEP 02</span></div><div class="work-bottom"><h3>1:1 컨설팅</h3><p>온라인·오프라인 미팅으로 사업 단계·요구사항·예산을 함께 정리합니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm"><div class="work-meta"><span>STEP 03</span></div><div class="work-bottom"><h3>제안 및 검토</h3><p>최적의 솔루션 구성과 도입 로드맵을 제안서로 제공합니다.</p></div></article></li></ul>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Process</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>컨설팅은 3단계로 진행됩니다</span></span></h2>
+  <ul class="cards-3"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static sm"><div class="work-meta"><span>STEP 01</span></div><div class="work-bottom"><h3>상담 신청</h3><p>폼을 작성해 주시면 담당자가 영업일 기준 1~2일 이내에 회신드립니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm"><div class="work-meta"><span>STEP 02</span></div><div class="work-bottom"><h3>1:1 컨설팅</h3><p>온라인 또는 오프라인 미팅을 통해 사업 단계, 요구사항, 예산을 함께 정리합니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm"><div class="work-meta"><span>STEP 03</span></div><div class="work-bottom"><h3>제안 및 검토</h3><p>요구사항에 맞는 솔루션 구성과 단계별 도입 로드맵을 제안서로 제공합니다.</p></div></article></li></ul>
 </div></section>
 
 </main>
@@ -2069,13 +2169,14 @@ if(pvVals.length){
     ents.forEach(en => {
       if(!en.isIntersecting) return;
       pvObs.unobserve(en.target);
-      const target = parseInt(en.target.dataset.val, 10);
-      const from = parseInt(en.target.dataset.from, 10) || 0;
+      const target = parseFloat(en.target.dataset.val);
+      const from = parseFloat(en.target.dataset.from) || 0;
+      const dec = parseInt(en.target.dataset.decimals, 10) || 0;  /* 소수 자릿수 (없으면 0=정수, 기존과 동일) */
       const t0 = performance.now(), dur = 1100;
       (function tick(now){
         const p = Math.min((now - t0) / dur, 1);
         const e = 1 - Math.pow(1 - p, 3); /* easeOutCubic */
-        en.target.textContent = Math.round(from + (target - from) * e).toLocaleString('en-US');
+        en.target.textContent = (from + (target - from) * e).toLocaleString('en-US', {minimumFractionDigits: dec, maximumFractionDigits: dec});
         if(p < 1) requestAnimationFrame(tick);
       })(t0);
     });

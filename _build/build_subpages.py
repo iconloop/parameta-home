@@ -202,7 +202,42 @@ body.company .firsts .work-card p:empty{ display:none }
 body.company .tr-flush .num-card{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); border:none;
   border-radius:var(--radius-card); padding:2rem; transition:transform .35s cubic-bezier(.2,.8,.2,1) }
 @media (hover:hover){ body.company .tr-flush .num-card:hover{ transform:scale(1.03) } }
-body.company .phero-text .eyebrow{ display:none }   /* [COMPANY] 아이브로우 제거 (About만) */
+body.company .phero-text .eyebrow, body.contact .phero-text .eyebrow{ display:none }   /* 히어로 아이브로우 제거 (About·Contact) */
+/* Contact 전용: 그래픽 없는 히어로 → 여백 축소로 문의 섹션을 위로, 카드는 솔루션 톤(불투명 그레이·테두리 없음) */
+body.contact .phero-inner{ padding-top:9rem; padding-bottom:var(--space-32); align-items:flex-start; text-align:left }
+body.contact .phero-text{ align-items:flex-start; align-self:flex-start; margin-inline:0 }
+body.contact .phero + section .sec{ padding-top:var(--space-32) }
+body.contact .light-card{ background:var(--white); border:1px solid rgba(var(--ink-rgb),.12);
+  box-shadow:0 8px 24px rgba(var(--ink-rgb),.06); padding:var(--space-32);
+  transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease }   /* ParaSta wfd-band 톤: 흰색+스트로크+쉐도우 */
+@media (hover:hover){ body.contact .light-card:hover{ transform:scale(1.02); box-shadow:0 16px 40px rgba(var(--ink-rgb),.1) } }
+/* 상담 신청 버튼: 메인 히어로 CTA와 동일 크기 (text-16 + 배지 2.5rem) */
+body.contact .modal-bottom .pill .hspring{ font-size:var(--text-16); gap:.875rem; padding:.5rem .5rem .5rem 1.75rem }
+body.contact .modal-bottom .pill-badge{ width:2.5rem; height:2.5rem; font-size:var(--text-18) }
+body.contact .work-bottom p{ font-size:var(--text-18) }   /* Process 카드 본문 키움 */
+/* 개인정보 수집·이용 안내 (제출 시 동의 간주) */
+body.contact .privacy-guide{ display:flex; flex-direction:column; gap:.3rem; font-size:var(--text-16); color:rgba(var(--ink-rgb),.5) }
+body.contact .privacy-guide strong{ font-size:var(--text-18); font-weight:600; color:rgba(var(--ink-rgb),.5); margin-bottom:.15rem }
+body.contact .pg-item{ position:relative; padding-left:.85rem }
+body.contact .pg-item::before{ content:'·'; position:absolute; left:.1rem; color:rgba(var(--ink-rgb),.4) }
+body.contact .work-meta{ color:var(--purple-300) }   /* STEP 01 라벨 보라 (다크카드 톤) */
+/* 문의 폼·연락처 텍스트 2토큰씩 키움 */
+body.contact .light-card .cap{ font-size:var(--text-22); font-weight:600; margin-bottom:.25rem }
+body.contact .light-card p{ font-size:var(--text-20) }
+body.contact .modal-field label{ font-size:var(--text-16) }
+body.contact .modal-field input, body.contact .modal-field select, body.contact .modal-field textarea{ font-size:var(--text-20); padding:1.25rem }
+/* 관심 서비스 드롭다운: 기본 화살표 제거 + 커스텀 chevron, 오른쪽 여백 확보 */
+body.contact .modal-field select{ appearance:none; -webkit-appearance:none; padding-right:2.75rem;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none' stroke='%230E0C27' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right 1.1rem center; background-size:1rem }
+body.contact .modal-form{ gap:var(--space-24) }                 /* 필드 행 간격 벌림 (관심 서비스·문의 내용) */
+body.contact .addr-list .k{ font-size:var(--text-16) }
+body.contact .addr-list .v{ font-size:var(--text-20) }
+/* 폼 섹션: 좌(폼) 8컬럼 · 우(연락처) 4컬럼 — 12컬럼 그리드 */
+.contact-split{ display:grid; grid-template-columns:repeat(var(--grid-cols),1fr); gap:var(--grid-gap) }
+.contact-split > :first-child{ grid-column:1 / 9 }
+.contact-split > :last-child{ grid-column:9 / 13 }
+@media (max-width:767px){ .contact-split{ display:flex; flex-direction:column } }
 /* Vision WalletFi 도식 — ParaSta 회색·점 스타일 · 풀 12칼럼 그리드(페이지 그리드 스냅) */
 .wfd{ margin:3rem 0 0; display:grid; grid-template-columns:repeat(12,minmax(0,1fr));
   column-gap:var(--grid-gap); row-gap:var(--grid-gap); align-items:stretch;
@@ -3017,18 +3052,19 @@ PAGES['contact.html'] = dict(
     title='문의 · 무료 컨설팅 | PARAMETA',
     desc='스테이블코인·STO 1:1 무료 컨설팅 신청. 파라메타 디지털자산 인프라 도입 문의.',
     eyebrow='Contact',
-    h1_lines=['문의 · 무료 컨설팅'],
-    lead='궁금하신 사항이 있으시면 문의하기를 이용해주세요. 담당자가 자세하게 안내해드리겠습니다.',
+    body_class='contact',
+    h1_lines=['Contact'],
+    lead='궁금하신 사항이 있으시면 문의하기를 이용해주세요.<br>담당자가 자세하게 안내해드리겠습니다.',
     crumb='Contact — 문의 · 무료 컨설팅',
     hero_cta='',
     content=f"""
 <section><div class="shell sec">
-  <div class="cards-2" style="align-items:start">
+  <div class="contact-split" style="align-items:start">
     <div class="light-card rvl">
       <span class="cap">컨설팅 신청</span>
       <p style="margin-bottom:1.5rem">담당자가 영업일 기준 1~2일 내 회신드립니다. 모든 정보는 컨설팅 목적으로만 사용됩니다.</p>
       <form class="modal-form" id="contactForm">
-        <div class="cards-2" style="gap:1rem">
+        <div class="cards-2" style="column-gap:1rem; row-gap:var(--space-24)">
           <div class="modal-field"><label for="cfName">이름</label><input id="cfName" type="text" required placeholder="이름"></div>
           <div class="modal-field"><label for="cfOrg">회사 / 기관</label><input id="cfOrg" type="text" required placeholder="회사 또는 기관명"></div>
           <div class="modal-field"><label for="cfEmail">이메일</label><input id="cfEmail" type="email" required placeholder="you@company.com"></div>
@@ -3045,11 +3081,13 @@ PAGES['contact.html'] = dict(
         <div class="modal-field"><label for="cfMsg">문의 내용</label>
           <textarea id="cfMsg" rows="5" required resize="none" placeholder="검토 중인 사업, 일정, 환경(SaaS/온프레미스)을 알려주세요."></textarea>
         </div>
-        <label style="display:flex; align-items:center; gap:.5rem; font-size:var(--text-14); color:rgba(var(--ink-rgb),.6)">
-          <input type="checkbox" required style="width:1rem; height:1rem"> 개인정보 수집·이용에 동의합니다
-        </label>
-        <div class="modal-bottom">
-          <span class="modal-note" id="cfNote">영업일 기준 1~2일 내 회신드립니다.</span>
+        <div class="privacy-guide">
+          <strong>개인정보 수집·이용에 대한 안내</strong>
+          <span class="pg-item">수집 목적 : 회원 문의사항 처리</span>
+          <span class="pg-item">수집 항목 : 성, 이름, 이메일, 전화번호, 법인명</span>
+          <span class="pg-item">보유 및 이용기간 : 3년 보관 후 즉시 파기</span>
+        </div>
+        <div class="modal-bottom" style="justify-content:flex-start">
           <button class="pill dark with-arrow arw-up hs-scale" type="submit">
             <span class="hspring"><span id="cfSubmitLabel">상담 신청</span><span class="pill-badge">{ARW}</span></span>
           </button>
@@ -3059,28 +3097,22 @@ PAGES['contact.html'] = dict(
     <div class="rvl" style="--rvl-delay:120ms">
       <div class="light-card" style="margin-bottom:1.5rem">
         <span class="cap">바로 문의하기</span>
-        <p style="margin-bottom:1.25rem">폼 작성이 번거롭다면 메일·전화로 바로 연락주세요.</p>
+        <p style="margin-bottom:1.25rem">폼 작성이 번거롭다면 연락주세요.</p>
         <div class="addr-list">
           <div><div class="k">Email</div><div class="v">info@parametacorp.com</div></div>
           <div><div class="k">Tel</div><div class="v">02-2138-7026</div></div>
-          <div><div class="k">Hours</div><div class="v">평일 10:00 – 18:00</div></div>
-        </div>
-      </div>
-      <div class="light-card">
-        <span class="cap">오시는 길</span>
-        <div class="addr-list">
-          <div><div class="k">Address</div><div class="v">서울특별시 서초구 강남대로 311 드림플러스 강남 8F</div></div>
+          <div><div class="k">Hours</div><div class="v">평일 9:00 – 20:00</div></div>
         </div>
       </div>
     </div>
   </div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  {sec_head('Process', '컨설팅 진행 방식 — 부담 없이 3단계로')}
+  {sec_head('Process', '컨설팅은 3단계로 진행됩니다')}
   {cards_wrap([
-    dark_card('STEP 01', '신청 접수', '폼을 작성하시면 담당자가 영업일 기준 1~2일 내 회신드립니다.'),
-    dark_card('STEP 02', '1:1 컨설팅', '온라인·오프라인 미팅으로 사업 단계·요구사항·예산을 함께 정리합니다.'),
-    dark_card('STEP 03', '제안 및 검토', '최적의 솔루션 구성과 도입 로드맵을 제안서로 제공합니다.'),
+    dark_card('STEP 01', '상담 신청', '폼을 작성해 주시면 담당자가 영업일 기준 1~2일 이내에 회신드립니다.'),
+    dark_card('STEP 02', '1:1 컨설팅', '온라인 또는 오프라인 미팅을 통해 사업 단계, 요구사항, 예산을 함께 정리합니다.'),
+    dark_card('STEP 03', '제안 및 검토', '요구사항에 맞는 솔루션 구성과 단계별 도입 로드맵을 제안서로 제공합니다.'),
   ], cols=3)}
 </div></section>
 """)
