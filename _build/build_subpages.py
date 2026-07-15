@@ -26,7 +26,7 @@
 # ============================================================================
 
 #!/usr/bin/env python3
-# Build Lumora-styled Parameta subpages from shared chrome + per-page content
+# Build PARAMETA subpages from shared chrome + per-page content
 import re, os
 
 ROOT = '/Users/sang/Desktop/Claude/test'
