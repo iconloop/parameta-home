@@ -2317,37 +2317,6 @@ PAGES['company.html'] = dict(
 </div></section>
 ''')
 
-# ---------------- careers.html ----------------
-PAGES['careers.html'] = dict(
-    title='채용 | PARAMETA',
-    desc='디지털자산의 미래를 함께 만들 분을 찾습니다.',
-    eyebrow='Careers',
-    h1_lines=['디지털자산의 미래를', '함께 만들 사람'],
-    lead='파라메타는 새로운 시장에 표준을 세우고, 기술을 사업에 안착시키는 여정을 함께할 동료를 찾습니다.',
-    crumb='Company — 채용',
-    content=f'''
-<section><div class="shell sec">
-  {sec_head('Who We Look For', '인재상')}
-  {cards_wrap([
-    dark_card('01', 'Builder Mindset', '0에서 1을 만드는 일을 즐기는 사람. 새로운 시장에 표준을 세우고, 기술을 사업에 안착시키는 과정에 흥미를 느끼는 사람을 찾습니다.', grouped=True),
-    dark_card('02', 'Domain × Depth', '블록체인·디지털자산·공공 인프라 중 한 영역에서 깊이를 추구하는 사람. 표면적 트렌드보다 본질을 끝까지 파고드는 전문성을 중요하게 생각합니다.', grouped=True),
-    dark_card('03', 'Long-term Trust', '9년 동안 운영해 온 인프라처럼, 책임감과 일관성으로 신뢰를 쌓아가는 사람. 단기 성과보다 오래가는 결과를 만드는 일에 가치를 두는 사람을 찾습니다.', grouped=True),
-  ], cols=3)}
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('Open Positions', '채용 공고')}
-  <div class="light-card rvl" style="max-width:44rem">
-    <p>진행 중인 채용 공고는 사람인 · 잡코리아 · LinkedIn 등 외부 채용 플랫폼에서 확인하실 수 있습니다.<br><br>
-    무관한 분야라도 합류 의사가 있다면 컨택을 통해 자유 지원해 주세요.</p>
-    <div style="margin-top:1.5rem">
-      <button class="pill dark with-arrow arw-up hs-scale" data-modal>
-        <span class="hspring">자유 지원하기<span class="pill-badge">{ARW}</span></span>
-      </button>
-    </div>
-  </div>
-</div></section>
-''')
-
 # ---------------- insights.html ----------------
 PAGES['insights.html'] = dict(
     title='Insights | PARAMETA',
@@ -3782,7 +3751,7 @@ HERO_CTA_CONTACT = '''<div class="phero-cta rvl" style="--rvl-delay:340ms">
 DEFAULT_HERO_CTA = HERO_CTA_PRODUCT
 
 # 콘텐츠형(hero-center + Contact Us) 페이지 — 이미지 비주얼 없음
-CONTENT_PAGES = {'careers.html'}
+CONTENT_PAGES = set()
 # CTA 없는 콘텐츠형(회사/인사이트/문의/약관 등) — 중앙정렬만, CTA 없음
 CONTENT_NOCTA = {'company.html', 'insights.html', 'contact.html', 'privacy.html', 'terms.html'}
 # 라이트 히어로(hero-light) — 화이트+orb+중앙정렬. company는 Vision 편입까지 추가(body_class='company')
