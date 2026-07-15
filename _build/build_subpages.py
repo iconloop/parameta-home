@@ -823,6 +823,10 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .cert-wn-duo > .colc .colc-panel{ flex:1; display:flex; flex-direction:column; padding-bottom:var(--space-32) }
 .cert-wn-duo > .colc .colc-panel .colc-plot{ margin-top:var(--space-24) }
 .cert-wn-duo > .colc .colc-panel .sec-note{ margin-top:auto }
+/* data Why Now 차트: 바 높이 살짝 축소(→ 우측 박스도 같이 줄어듦) + 바를 위로 + 주석 간격 확보 (data 전용) */
+.wn-data > .colc{ --colc-h:9.5rem }
+.wn-data > .colc .colc-panel .colc-plot{ margin-top:0 }
+.wn-data > .colc .colc-panel .colc-labels{ margin-bottom:var(--space-40) }
 .cert-statbox{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); border:none; border-radius:var(--radius-card-sm);
   padding:var(--space-32); display:flex; flex-direction:column; justify-content:space-between; gap:var(--space-24) }
 .cert-stats{ display:flex; flex-direction:column }
@@ -835,6 +839,15 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .cert-stat p{ font-size:var(--text-16); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.6) }
 .cert-src{ padding-top:var(--space-24); border-top:1px solid var(--line);
   font-size:var(--text-18); font-weight:400; line-height:var(--leading-body); color:var(--muted) }
+/* 스탯박스 4지표 2x2 배치 (data 등에서 사용) */
+.cert-stats.is-2x2{ display:grid; grid-template-columns:1fr 1fr; column-gap:var(--space-40) }
+.cert-stats.is-2x2 .cert-stat{ border-top:none; padding:var(--space-24) 0 }
+.cert-stats.is-2x2 .cert-stat:nth-child(-n+2){ padding-top:0 }
+.cert-stats.is-2x2 .cert-stat:nth-child(n+3){ border-top:1px solid var(--line); padding-top:var(--space-40); padding-bottom:0 }
+@media (max-width:479px){ .cert-stats.is-2x2{ grid-template-columns:1fr } }
+/* 2x2 스탯박스: 하단정렬(출처=좌측 차트 출처와 같은 지점) + 그리드↔출처 gap을 키워 그리드를 위로 → 위쪽 여백 축소 */
+.statbox-2x2{ justify-content:flex-end; gap:var(--space-32) }
+.statbox-2x2 .cert-src{ border-top:none }
 /* 발급 가능 증명: 12칼럼 그리드 정렬 — 아이템 3~12칸(10칸), 4칸 균등폭 + 균등 갭 (cert 전용, About 컴포넌트 유지) */
 .cert-cred{ grid-template-columns:repeat(12,1fr); align-items:center }
 .cert-cred > .ally-head{ grid-column:1 / span 2 }
@@ -1332,13 +1345,14 @@ if(pvVals.length){
     ents.forEach(en => {
       if(!en.isIntersecting) return;
       pvObs.unobserve(en.target);
-      const target = parseInt(en.target.dataset.val, 10);
-      const from = parseInt(en.target.dataset.from, 10) || 0;
+      const target = parseFloat(en.target.dataset.val);
+      const from = parseFloat(en.target.dataset.from) || 0;
+      const dec = parseInt(en.target.dataset.decimals, 10) || 0;  /* 소수 자릿수 (없으면 0=정수, 기존과 동일) */
       const t0 = performance.now(), dur = 1100;
       (function tick(now){
         const p = Math.min((now - t0) / dur, 1);
         const e = 1 - Math.pow(1 - p, 3); /* easeOutCubic */
-        en.target.textContent = Math.round(from + (target - from) * e).toLocaleString('en-US');
+        en.target.textContent = (from + (target - from) * e).toLocaleString('en-US', {minimumFractionDigits: dec, maximumFractionDigits: dec});
         if(p < 1) requestAnimationFrame(tick);
       })(t0);
     });
@@ -3484,8 +3498,8 @@ PAGES['solution-data.html'] = dict(
     title='데이터주권 솔루션 | PARAMETA',
     desc='개인정보를 직접 쌓지 않고 사용자가 통제하게 만드는 데이터 인프라. PDS·BFS·선택적 공개로 서비스가 개인정보를 떠안지 않게 하는 DID 기반 신원·데이터 솔루션.',
     eyebrow='Solutions — 데이터주권',
-    h1_lines=['개인정보를 직접 쌓지 않고,', '사용자가 통제하게 만드는', '데이터 인프라'],
-    lead='개인정보를 다루는 서비스일수록 수집·보관·동의 관리·유출 대응 부담이 큽니다. MyID는 사용자가 자기 데이터를 직접 통제해 필요한 곳에 필요한 만큼만 제출하도록 설계된 DID 기반 신원·데이터 인프라입니다. PDS·BFS·선택적 공개로 서비스가 개인정보를 떠안지 않게 합니다.',
+    h1_lines=['개인정보는 쌓지 않고', '통제권은 사용자에게'],
+    lead='개인정보를 다루는 서비스는 수집, 보관, 동의 관리와 유출 대응 부담이 큽니다. MyID는 사용자가 데이터를 직접 통제하고, 필요한 곳에 필요한 만큼만 제출하는 DID 기반 신원, 데이터 인프라입니다. PDS, BFS, 선택적 공개로 개인정보 보관 부담을 줄입니다.',
     crumb='Solutions — 데이터주권',
     hero_cta='''<div class="phero-rel rvl" style="--rvl-delay:600ms">
       <p class="phero-rel-t">관련 제품 살펴보기</p>
@@ -3494,18 +3508,22 @@ PAGES['solution-data.html'] = dict(
     hero_visual='<img src="assets/solutions/hero-test-1.webp" alt="" loading="eager" fetchpriority="high">',
     content=f"""
 <section><div class="shell sec sec-top-lg sec-stagger">
-  {sec_head('Why Now', '데이터는 사용자 중심으로 움직이기 시작했습니다', '마이데이터에서 시작된 ‘사용자가 자기 데이터를 옮기고 통제하는’ 흐름이 의료·통신 등 전 분야로 퍼지고 있습니다. 동시에 개인정보를 많이 쌓아둘수록 유출·규제·동의 관리 부담이 커집니다.')}
-  {lead_p('데이터를 떠안는 대신 사용자가 통제하게 하는 구조가 점점 유리해지고 있습니다.')}
-  <div class="colc-duo">
-  {col_chart([
-    dict(l='2023년', v='0.8억', w=48),
-    dict(l='2024년', v='1.2억', w=73),
-    dict(l='2025.5', v='1.65억', w=100, hi=True),
-  ], title='마이데이터 서비스 이용 (누적)', note='<strong>출처: 금융위원회 보도자료(2025.6, 마이데이터 2.0)</strong><br>14세 이상 국민 1인당 평균 3.5개 서비스를 이용하며, 데이터 이동이 일상화됐습니다.')}
-  {col_chart([
-    dict(l='누적 정보 전송', v='1조 1,430억 건', w=100, hi=True),
-    dict(l='국내 데이터산업', v='30.7조원', w=62),
-  ], title='데이터 이동·시장 규모', note='<strong>출처: 금융위·K-DATA 2024 데이터산업 현황조사</strong><br>데이터가 실제로 대량 이동하면서 안전한 보관·검증 수요가 함께 커지고 있습니다.')}
+  {sec_head('Why Now', '데이터는 사용자 중심으로 움직이기 시작했습니다', '마이데이터에서 시작된 ‘사용자가 자기 데이터를 옮기고 통제하는’ 흐름이 의료·통신 등 전 분야로 퍼지고 있습니다.<br>동시에 개인정보를 많이 쌓아둘수록 유출·규제·동의 관리 부담이 커집니다.<br>데이터를 떠안는 대신 사용자가 통제하게 하는 구조가 점점 유리해지고 있습니다.')}
+  <div class="cert-wn-duo wn-data">
+    {col_chart([
+      dict(l='2023년', v='0.8억', w=48),
+      dict(l='2024년', v='1.2억', w=73),
+      dict(l='2025.5', v='1.65억', w=100, hi=True),
+    ], title='마이데이터 서비스 이용 (누적)', note='<strong>출처: 금융위원회 보도자료(2025.6, 마이데이터 2.0)</strong><br>누적 이용이 매년 늘며 데이터 이동이 일상화되고 있습니다.')}
+    <div class="cert-statbox statbox-2x2 rvl">
+      <div class="cert-stats is-2x2">
+        <div class="cert-stat"><div class="csn">약 <span class="pv-val" data-val="1.65" data-decimals="2">0.00</span>억</div><p>마이데이터 서비스 이용 (’25.5)</p></div>
+        <div class="cert-stat"><div class="csn"><span class="pv-val" data-val="3.5" data-decimals="1">0.0</span>개</div><p>1인당 이용 서비스 수</p></div>
+        <div class="cert-stat"><div class="csn">1조 <span class="pv-val" data-val="1430">0</span>억 건</div><p>마이데이터 누적 정보 전송 (’25.5)</p></div>
+        <div class="cert-stat"><div class="csn"><span class="pv-val" data-val="30.7" data-decimals="1">0.0</span>조원</div><p>국내 데이터산업 시장 (2024)</p></div>
+      </div>
+      <p class="cert-src">출처: 금융위(마이데이터, ’25.6)·과기정통부 K-DATA 데이터산업현황조사(2024). 서비스 이용 수 기준이라 순수 개인 수와는 다르며, 전 분야 마이데이터는 개인정보보호위원회가 추진합니다.</p>
+    </div>
   </div>
 </div></section>
 <section><div class="shell sec">
@@ -3520,10 +3538,10 @@ PAGES['solution-data.html'] = dict(
 <section><div class="shell sec">
   {sec_head('Features', '개인정보를 떠안지 않는 구조', '데이터를 사용자 통제 아래 두고, 서비스는 필요한 사실만 검증합니다.')}
   {cards_wrap([
-    exchange_card('PDS · 개인데이터저장소', brand='var(--purple-500)', desc='데이터를 사용자 통제 아래 두고, 기관 보관 부담을 줄입니다.'),
-    exchange_card('BFS · 분산 저장', brand='var(--purple-500)', desc='대용량 데이터를 분산 저장해 무결성과 가용성을 확보합니다.'),
-    exchange_card('선택 공개 (ZK)', brand='var(--purple-500)', desc='생년월일 대신 성인 여부만처럼, 필요한 사실만 증명하고 나머지는 감춥니다.'),
-    exchange_card('MyID 지갑·API', brand='var(--purple-500)', desc='별도 인증 앱 없이 API 연결만으로 신원·데이터를 발급·보관·제출·검증합니다.'),
+    exchange_card('PDS · 개인데이터저장소', gray=True, desc='데이터를 사용자 통제 아래 두고, 기관 보관 부담을 줄입니다.'),
+    exchange_card('BFS · 분산 저장', gray=True, desc='대용량 데이터를 분산 저장해 무결성과 가용성을 확보합니다.'),
+    exchange_card('선택 공개 (ZK)', gray=True, desc='생년월일 대신 성인 여부만처럼, 필요한 사실만 증명하고 나머지는 감춥니다.'),
+    exchange_card('MyID 지갑·API', gray=True, desc='별도 인증 앱 없이 API 연결만으로 신원·데이터를 발급·보관·제출·검증합니다.'),
   ], cols=2)}
 </div></section>
 <!-- By the Numbers: 다크 스탯 패널 -->
@@ -3535,19 +3553,11 @@ PAGES['solution-data.html'] = dict(
       <li class="rvl" style="--rvl-y:20px"><div class="stat-num">2021~2025</div><div class="stat-label">국책 R&D 기반 BFS (IITP·ETRI 공동)</div></li>
       <li class="rvl" style="--rvl-y:20px; --rvl-delay:90ms"><div class="stat-num"><span class="pv-val" data-val="218">0</span>만 명</div><div class="stat-label">제주안심코드 누적 이용자</div></li>
       <li class="rvl" style="--rvl-y:20px; --rvl-delay:180ms"><div class="stat-num"><span class="pv-val" data-val="9100">0</span>만 건</div><div class="stat-label">제주안심코드 누적 인증</div></li>
-      <li class="rvl" style="--rvl-y:20px; --rvl-delay:270ms"><div class="stat-num">위변조 불가</div><div class="stat-label">해시는 온체인, 원본은 분산 노드</div></li>
+      <li class="rvl" style="--rvl-y:20px; --rvl-delay:270ms"><div class="stat-num">위·변조 탐지</div><div class="stat-label">해시는 온체인, 원본은 분산 노드</div></li>
     </ul>
   </div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  {sec_head('Credentials', '공공·연구 분야에서 검증된 기술력', '파라메타는 국책 R&D와 공공 실증을 바탕으로, 신뢰할 수 있는 신원·데이터 인프라를 운영해 왔습니다.')}
-  <div class="cert-row rvl" style="--rvl-y:24px; padding:var(--space-32) 0 0">
-    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">IITP 국책 R&D</div></div>
-    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">CSAP 인증</div></div>
-    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">혁신금융서비스 지정</div></div>
-  </div>
-</div></section>
-<section><div class="shell sec">
   {sec_head('FAQ', '자주 묻는 질문')}
   {faq([
     dict(q='PDS는 무엇인가요?', a='개인데이터저장소로, 데이터를 기관이 아니라 사용자 통제 아래 두는 저장 방식입니다.'),
