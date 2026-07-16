@@ -59,12 +59,12 @@
     mega.innerHTML = '\
     <div class="mega-inner">\
       <div class="mega-panel" data-for="solutions"><div class="nav-drop-panel duo">\
-        <div class="nd-col"><div class="nd-col-head">금융 · 거래</div>\
+        <div class="nd-col">\
           <a href="solution-finance.html"><span class="nd-ico"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="12" r="5"/><path d="M14 7a5 5 0 0 1 0 10"/></svg></span><span class="nd-txt"><b>금융</b><span>디지털자산 금융 플랫폼</span></span></a>\
           <a href="solution-settlement.html"><span class="nd-ico"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg></span><span class="nd-txt"><b>결제·정산</b><span>정산 자동화·자금 통제</span></span></a>\
           <a href="solution-exchange.html"><span class="nd-ico"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13l-3-3"/><path d="M20 16H7l3 3"/></svg></span><span class="nd-txt"><b>화이트라벨 거래소</b><span>서비스 안에 거래 기능</span></span></a>\
         </div>\
-        <div class="nd-col"><div class="nd-col-head">공공 · 신원</div>\
+        <div class="nd-col">\
           <a href="solution-gov.html"><span class="nd-ico"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V8l7-4 7 4v13"/><path d="M9.5 21v-4h5v4"/></svg></span><span class="nd-txt"><b>공공</b><span>CSAP 인증 블록체인 SaaS</span></span></a>\
           <a href="solution-cert.html"><span class="nd-ico"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M9 15l2 2 4-4"/></svg></span><span class="nd-txt"><b>증명서</b><span>블록체인 디지털 증명</span></span></a>\
           <a href="solution-data.html"><span class="nd-ico"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg></span><span class="nd-txt"><b>데이터주권</b><span>사용자 통제 데이터 인프라</span></span></a>\
