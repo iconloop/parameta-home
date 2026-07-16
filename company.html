@@ -192,8 +192,8 @@ html.chat-open #banner-fixed{ right:26rem }
 @media (hover:hover){ .lang-item:hover{ background:rgba(var(--ink-rgb),.06) } }
 .lang-item.is-active{ color:var(--accent); font-weight:600 }
 .lang-item.is-active::after{ content:"✓"; font-size:12px }
-.menu-btn{ border:1px solid rgba(var(--line-rgb),.8); background:rgba(var(--white-rgb),.4);
-  backdrop-filter:blur(4px); border-radius:var(--radius-control); }
+.menu-btn{ border:1px solid rgba(var(--line-rgb),.8); background:transparent;
+  border-radius:var(--radius-control); }
 @media (hover:hover){ .menu-btn:hover{ background:rgba(var(--white-rgb),.7) } }
 .menu-btn .hspring{ align-items:center; gap:.5rem; padding:.9rem 1rem; font-size:14px; font-weight:500;
   text-transform:uppercase; letter-spacing:.05em; --hs:1.05 }
@@ -236,7 +236,7 @@ body.hero-dark #header:not(.sticky) .clock-sep{ color:rgba(var(--white-rgb),.35)
 body.hero-dark #header:not(.sticky) .lang-btn{ border-color:rgba(var(--white-rgb),.16); background:transparent; color:var(--white) }
 @media (hover:hover){ body.hero-dark #header:not(.sticky) .lang-btn:hover{ background:rgba(var(--white-rgb),.08); border-color:rgba(var(--white-rgb),.16) } }
 body.hero-dark #header:not(.sticky) .menu-btn{ border-color:rgba(var(--white-rgb),.16);
-  background:rgba(var(--white-rgb),.08); color:var(--white) }
+  background:transparent; color:var(--white) }
 @media (hover:hover){
   body.hero-dark #header:not(.sticky) .menu-btn:hover{ background:rgba(var(--white-rgb),.16) }
 }
