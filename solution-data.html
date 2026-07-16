@@ -210,6 +210,11 @@ html.chat-open #banner-fixed{ right:26rem }
     .lang-btn:hover .lang-globe{ transform:scale(1.1) }
   }
 }
+@media (max-width:767px){   /* <768: MENU·지구본 살짝 축소 (44→40, globe 22→20) — 로고는 유지 */
+  .menu-btn{ height:40px }
+  .lang-btn{ width:40px; height:40px }
+  .lang-btn .lang-globe{ width:20px; height:20px }
+}
 @media (min-width:768px){ .clock-chip{ display:flex } }
 @media (min-width:1024px){ .nav-primary{ display:flex; justify-content:center }
   .menu-btn{ display:none }
@@ -338,15 +343,27 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 @media (hover:hover){ .hc-nav:hover{ color:var(--ink) } }
 @media (min-width:640px){
   .hero-grid{ padding-left:2rem; padding-right:2rem }
-  .hero-h1{ font-size:var(--text-60) }
+  .hero-h1{ font-size:var(--text-40) }   /* 640~767: 60→40 (3토큰 다운) */
     }
 @media (min-width:768px){ .hero-h1{ font-size:var(--text-72) } }
+/* 모바일·sm(~767): 태블릿과 동일 구조 — 위 타이틀/CTA, 아래 배너, 가운데 가변 */
+@media (max-width:767px){
+  .hero-grid{ min-height:100lvh; justify-content:space-between; padding-block:72px 24px }   /* 위쪽 패딩 상72/하24 */
+  .hero-h1{ margin-top:1rem }   /* 위쪽 여백 3rem→1rem */
+  .hero-left{ gap:16px }   /* 타이틀↔레츠톡 간격 28→16 (태블릿 20보다 작게) */
+  .hero-cta .pill-badge{ width:32px; height:32px }   /* 레츠톡 badge — 태블릿과 동일 32 (사용자 승인) */
+  .hero-cta .pill .hspring{ font-size:var(--text-16) }   /* 레츠톡 라벨 16 */
+  .hero-card{ max-width:320px }   /* 배너 카드 축소 (400→320) */
+  .hero-card .hc-tile{ width:88px }
+  .hero-card .hc-slot{ min-height:64px }
+}
 /* 태블릿(768~1023): H1 더 작은 토큰 + 상단여백 절반 + 100vh 세로 중앙 */
 @media (min-width:768px) and (max-width:1023px){
-  .hero-h1{ font-size:var(--text-56); margin-top:2rem }
-  .hero-grid{ min-height:100lvh; justify-content:center; padding-block:4rem }
+  .hero-h1{ font-size:var(--text-56); margin-top:1rem }   /* 위쪽 여백 2rem→1rem */
+  .hero-grid{ min-height:100lvh; justify-content:space-between; padding-block:80px 24px }   /* 가변공간을 Let's Talk↔배너 사이로, 상단 80 / 하단 24 */
+  .hero-left{ gap:20px }   /* 타이틀↔레츠톡 살짝 붙임 (28→20) */
   .hero-cta .pill-badge{ width:32px; height:32px }   /* 레츠톡 버튼 축소 */
-  .hero-cta .pill .hspring{ font-size:var(--text-14) }
+  .hero-cta .pill .hspring{ font-size:var(--text-16) }   /* 레츠톡 라벨 16 */
   .hero-card{ max-width:320px; margin-top:24px }   /* 배너 카드 축소 + 위로 */
   .hero-card .hc-tile{ width:88px }
   .hero-card .hc-slot{ min-height:64px }   /* 카드 높이 살짝 ↓ → 타일 덜 길쭉하게 */
@@ -617,6 +634,10 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 .fab-chat .icn{ font-size:var(--text-16); color:var(--purple-400) }
 /* 태블릿(768~1023): 챗봇 FAB 축소 */
 @media (min-width:768px) and (max-width:1023px){
+  .fab-chat{ min-height:48px; padding:0 20px; font-size:var(--text-14) }
+  .fab-ai{ width:16px; height:16px } }
+/* <768: 챗봇 FAB 축소 (56→48) — 기본정의 뒤에 둬야 이김 */
+@media (max-width:767px){
   .fab-chat{ min-height:48px; padding:0 20px; font-size:var(--text-14) }
   .fab-ai{ width:16px; height:16px } }
 .fab-chat #fabLabel{ display:inline-block; white-space:nowrap; text-align:left }
