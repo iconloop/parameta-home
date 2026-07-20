@@ -227,14 +227,14 @@ html.chat-open #banner-fixed{ right:26rem }
 @media (min-width:1024px){
   .header-inner{ padding:12px 2rem }
   #header .brand-logo{ height:20px }
-  .nav-primary ul{ font-size:var(--text-16) } .nav-caret{ font-size:var(--text-16) }   /* 1024~1535: 토큰 16 (1100대에서 너무 작아져 한 단계 업) */
+  .nav-primary ul{ font-size:var(--text-18) } .nav-caret{ font-size:var(--text-18) }   /* 1024~1535: 토큰 18 */
   #header .lang-btn .lang-globe{ width:24px; height:24px } }
 /* 큰 화면: GNB 요소만 약간 키우되 헤더 "높이"는 표준 유지(≈76~80px). 패딩·지구본은 vw로 안 키움 */
 @media (min-width:1536px){
   .header-inner{ padding:12px 2.5rem }   /* 높이 좌우값은 px 고정 (유동 root 영향 차단) */
   .brand-btn{ font-size:var(--text-20) } .brand-btn .icn{ font-size:var(--text-22) }
   #header .brand-logo{ height:24px }
-  .nav-primary ul{ font-size:var(--text-16); gap:2.5rem } .nav-caret{ font-size:var(--text-16) }   /* 1536~1919: 토큰 16 */
+  .nav-primary ul{ font-size:var(--text-18); gap:2.5rem } .nav-caret{ font-size:var(--text-18) }   /* 1536~1919: 토큰 18 */
   #header .lang-btn .lang-globe{ width:24px; height:24px }
   .clock-chip{ font-size:13px; padding:.55rem .85rem } }
 /* ≥1920: 요소만 한 단계 더 크게, 높이는 여전히 고정 */
@@ -242,7 +242,7 @@ html.chat-open #banner-fixed{ right:26rem }
   .header-inner{ padding:12px clamp(3rem, 2.5vw, 4.5rem) }
   .brand-btn{ font-size:var(--text-22) } .brand-btn .icn{ font-size:var(--text-24) }
   #header .brand-logo{ height:28px }
-  .nav-primary ul{ font-size:var(--text-18); gap:clamp(2.5rem, 2vw, 4rem) } .nav-caret{ font-size:var(--text-18) }   /* 1920+: 토큰 18 (유동 root가 키워줘서 한 단계 낮춤) */
+  .nav-primary ul{ font-size:var(--text-18); gap:clamp(2.5rem, 2vw, 4rem) } .nav-caret{ font-size:var(--text-18) }   /* 1920+: 토큰 18 */
   #header .lang-btn .lang-globe{ width:28px; height:28px } }
 
 /* ============ DARK HERO 모드 (배경 이미지가 다크일 때 — body.hero-dark) ============ */
@@ -1722,6 +1722,29 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
   font-size:var(--text-14); color:rgba(var(--ink-rgb),.45) }
 .num-card .n{ font-size:var(--text-40); font-weight:600; letter-spacing:-.02em; line-height:1.1; margin-bottom:.5rem }
 .num-card .n small{ font-size:var(--text-20); font-weight:500 }
+/* With/Without 좌우 비교 (Problem 문제→해결, PR#1 기획) — 좌: 라이트(지금·문제) / 우: 다크(도입 후·해결) */
+.ww{ display:grid; grid-template-columns:1fr 1fr; gap:var(--grid-gap); align-items:stretch }
+@media (max-width:767px){ .ww{ grid-template-columns:1fr } }
+.ww-col{ border-radius:var(--radius-card); padding:var(--space-32) }
+@media (min-width:1024px){ .ww-col{ padding:var(--space-40) } }
+.ww-now{ background:color-mix(in srgb, var(--ink) 6%, var(--white)) }
+.ww-after{ background:var(--ink); color:var(--white); box-shadow:0 0 0 1px rgba(var(--white-rgb),.05) }
+.ww-col .ww-cap{ display:block; font-size:var(--text-14); font-weight:500; text-transform:uppercase; letter-spacing:.05em; margin-bottom:var(--space-12) }
+.ww-now .ww-cap{ color:rgba(var(--ink-rgb),.45) }
+.ww-after .ww-cap{ color:var(--purple-300) }
+.ww-col .ww-t{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em; margin-bottom:var(--space-24); line-height:var(--leading-heading) }
+.ww-after .ww-t{ color:var(--white) }
+.ww-col ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column }
+.ww-col li{ display:flex; gap:var(--space-12); padding-block:var(--space-16); align-items:flex-start }
+.ww-now li + li{ border-top:1px solid var(--line) }
+.ww-after li + li{ border-top:1px solid rgba(var(--white-rgb),.1) }
+.ww-mk{ flex:none; font-weight:700; font-size:var(--text-16); line-height:var(--leading-heading); margin-top:.125rem }
+.ww-now .ww-mk{ color:rgba(var(--ink-rgb),.3) }
+.ww-after .ww-mk{ color:var(--purple-300) }
+.ww-col li b{ display:block; font-size:var(--text-18); font-weight:600; letter-spacing:-.01em; margin-bottom:.375rem; line-height:var(--leading-heading) }
+.ww-col li p{ font-size:var(--text-16); line-height:var(--leading-body); margin:0 }
+.ww-now li p{ color:rgba(var(--ink-rgb),.6) }
+.ww-after li p{ color:rgba(var(--white-rgb),.62) }
 /* 증명서 Why Now 2컬럼: 좌 스탯박스(한 박스·3줄) / 우 (콘텐츠 대기) — cert 전용, 타 페이지 영향 없음 */
 .cert-wn-duo{ display:grid; grid-template-columns:7fr 5fr; gap:var(--grid-gap); align-items:stretch }
 @media (max-width:767px){ .cert-wn-duo{ grid-template-columns:1fr; row-gap:var(--space-48) } }
@@ -2015,6 +2038,63 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
   transition:color .2s ease, border-color .2s ease }
 @media (hover:hover){ .post-side a:hover{ color:var(--ink); border-color:var(--accent) } }
 @media (max-width:1023px){ .post-side{ border-top:1px solid rgba(var(--ink-rgb),.1); padding-top:2rem } }
+
+/* ══ 검수 시안: ① Recognition 칩 통합(Track Record 하단) ② Industry Firsts 1st 앵커 재구성 ══ */
+/* ① 인증·수상 칩 — 독립 섹션 대신 Track Record 숫자 카드 아래 한 줄 증거 밴드 */
+.recog-chips{ margin-top:var(--space-48); padding-top:var(--space-32); border-top:1px solid var(--line) }
+.recog-chips .rc-label{ display:block; font-size:var(--text-12); font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--subtle); margin-bottom:var(--space-24) }
+/* 인증·수상 무한 스와이프 — [로고 위 / 수상명 아래] 셀, 기존 ptScroll 재사용 */
+.aw-marquee{ overflow:hidden;
+  mask-image:linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image:linear-gradient(to right, transparent, #000 8%, #000 92%, transparent) }
+.aw-marquee .pt-track{ display:flex; width:max-content; animation:ptScroll 42s linear infinite; grid-template-columns:none; gap:0 }
+.aw-marquee:hover .pt-track{ animation-play-state:paused }
+.aw-set{ display:flex; align-items:flex-start; gap:0; padding-right:0 }
+.aw-item{ display:flex; flex-direction:column; align-items:center; gap:.9rem;
+  width:12.5rem; margin:0 1.25rem; text-align:center }
+.aw-logo{ position:relative; width:4.75rem; height:4.75rem; border-radius:1.125rem;
+  background:#fff; border:1px solid var(--line); box-shadow:0 4px 14px rgba(var(--ink-rgb),.05);
+  display:flex; align-items:center; justify-content:center }
+.aw-logo img{ max-width:68%; max-height:68%; width:auto; height:auto; object-fit:contain }
+.aw-logo img:not([style*="none"]) + i{ display:none } /* 로고 파일 있으면 약칭 숨김 */
+.aw-logo i{ font-style:normal; font-family:'Departure Mono',monospace; font-size:var(--text-14);
+  font-weight:400; color:var(--gray-400); letter-spacing:.02em }
+.aw-item figcaption{ display:flex; flex-direction:column; gap:.3rem }
+.aw-item b{ font-size:var(--text-14); font-weight:600; color:var(--ink); line-height:1.35; word-break:keep-all }
+.aw-item figcaption span{ font-size:var(--text-12); color:var(--muted) }
+@media (max-width:640px){ .aw-item{ width:10rem; margin:0 .875rem } }
+
+/* ② Industry Firsts — 집계(1st)를 크게, 개별 항목은 작게 */
+.firsts-hero{ display:grid; grid-template-columns:auto 1fr; align-items:center; gap:clamp(2.5rem,6vw,5.5rem);
+  background-color:rgba(var(--ink-rgb),.04); border-radius:var(--radius-card);
+  padding:3rem clamp(1.5rem,4vw,3.5rem);
+  background-image:radial-gradient(rgba(var(--ink-rgb),.06) 1px, transparent 1.5px); background-size:20px 20px }
+.fh-big{ display:flex; flex-direction:column; align-items:center; gap:.75rem }
+.fh-num{ font-weight:700; line-height:.85; color:var(--ink); letter-spacing:-.04em; font-size:clamp(6rem,11vw,9.5rem) }
+.fh-num .st{ font-size:.38em; font-weight:700; color:var(--accent); vertical-align:1.05em; letter-spacing:0; margin-left:.04em }
+.fh-cap{ font-size:var(--text-14); color:var(--muted); white-space:nowrap }
+.fh-list li{ display:flex; align-items:center; gap:.9rem; padding-block:1rem;
+  font-size:var(--text-16); font-weight:500; color:var(--ink); line-height:1.4 }
+.fh-list li + li{ border-top:1px solid rgba(var(--ink-rgb),.09) }
+.fh-chip{ flex:none; font-size:var(--text-12); font-weight:700; letter-spacing:.02em;
+  padding:.3rem .7rem; border-radius:999px; background:rgba(97,0,255,.09); color:var(--purple-600) }
+.fh-chip.world{ background:var(--purple-500); color:#fff }
+.fh-chip.lead{ background:rgba(var(--ink-rgb),.07); color:var(--ink) }
+.fh-list li.fh-ally{ margin-top:.5rem; padding-top:1.5rem }
+.fh-sub{ margin-left:auto; padding-left:1rem; font-size:var(--text-14); font-weight:400; color:var(--muted); white-space:nowrap }
+@media (max-width:767px){
+  .firsts-hero{ grid-template-columns:1fr; gap:1.75rem; padding:2rem 1.25rem }
+  .fh-num{ font-size:5.5rem }
+  .fh-list li{ flex-wrap:wrap; row-gap:.35rem }
+  .fh-sub{ margin-left:0; padding-left:0; flex-basis:100% }
+}
+.ht-era{ list-style:none; display:flex; align-items:center; gap:.6rem; padding:2.25rem 0 .75rem }
+.ht-era:first-child{ padding-top:0 }
+.ht-era .dot{ width:.45rem; height:.45rem; border-radius:50%; background:var(--accent); flex:none }
+.ht-era-label{ font-size:var(--text-13, .8125rem); font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--subtle); white-space:nowrap }
+.ht-sub li .m{ color:var(--muted); margin-right:.6rem; font-variant-numeric:tabular-nums; white-space:nowrap }
+/* Alliance 소절 카드 위 여백 */
+.firsts-eco .cards-2{ margin-top:var(--space-16) }
 </style>
 </head>
 <body class="hero-dark hero-center">

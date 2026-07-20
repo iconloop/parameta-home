@@ -227,14 +227,14 @@ html.chat-open #banner-fixed{ right:26rem }
 @media (min-width:1024px){
   .header-inner{ padding:12px 2rem }
   #header .brand-logo{ height:20px }
-  .nav-primary ul{ font-size:var(--text-16) } .nav-caret{ font-size:var(--text-16) }   /* 1024~1535: 토큰 16 (1100대에서 너무 작아져 한 단계 업) */
+  .nav-primary ul{ font-size:var(--text-18) } .nav-caret{ font-size:var(--text-18) }   /* 1024~1535: 토큰 18 */
   #header .lang-btn .lang-globe{ width:24px; height:24px } }
 /* 큰 화면: GNB 요소만 약간 키우되 헤더 "높이"는 표준 유지(≈76~80px). 패딩·지구본은 vw로 안 키움 */
 @media (min-width:1536px){
   .header-inner{ padding:12px 2.5rem }   /* 높이 좌우값은 px 고정 (유동 root 영향 차단) */
   .brand-btn{ font-size:var(--text-20) } .brand-btn .icn{ font-size:var(--text-22) }
   #header .brand-logo{ height:24px }
-  .nav-primary ul{ font-size:var(--text-16); gap:2.5rem } .nav-caret{ font-size:var(--text-16) }   /* 1536~1919: 토큰 16 */
+  .nav-primary ul{ font-size:var(--text-18); gap:2.5rem } .nav-caret{ font-size:var(--text-18) }   /* 1536~1919: 토큰 18 */
   #header .lang-btn .lang-globe{ width:24px; height:24px }
   .clock-chip{ font-size:13px; padding:.55rem .85rem } }
 /* ≥1920: 요소만 한 단계 더 크게, 높이는 여전히 고정 */
@@ -242,7 +242,7 @@ html.chat-open #banner-fixed{ right:26rem }
   .header-inner{ padding:12px clamp(3rem, 2.5vw, 4.5rem) }
   .brand-btn{ font-size:var(--text-22) } .brand-btn .icn{ font-size:var(--text-24) }
   #header .brand-logo{ height:28px }
-  .nav-primary ul{ font-size:var(--text-18); gap:clamp(2.5rem, 2vw, 4rem) } .nav-caret{ font-size:var(--text-18) }   /* 1920+: 토큰 18 (유동 root가 키워줘서 한 단계 낮춤) */
+  .nav-primary ul{ font-size:var(--text-18); gap:clamp(2.5rem, 2vw, 4rem) } .nav-caret{ font-size:var(--text-18) }   /* 1920+: 토큰 18 */
   #header .lang-btn .lang-globe{ width:28px; height:28px } }
 
 /* ============ DARK HERO 모드 (배경 이미지가 다크일 때 — body.hero-dark) ============ */
@@ -1722,6 +1722,29 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
   font-size:var(--text-14); color:rgba(var(--ink-rgb),.45) }
 .num-card .n{ font-size:var(--text-40); font-weight:600; letter-spacing:-.02em; line-height:1.1; margin-bottom:.5rem }
 .num-card .n small{ font-size:var(--text-20); font-weight:500 }
+/* With/Without 좌우 비교 (Problem 문제→해결, PR#1 기획) — 좌: 라이트(지금·문제) / 우: 다크(도입 후·해결) */
+.ww{ display:grid; grid-template-columns:1fr 1fr; gap:var(--grid-gap); align-items:stretch }
+@media (max-width:767px){ .ww{ grid-template-columns:1fr } }
+.ww-col{ border-radius:var(--radius-card); padding:var(--space-32) }
+@media (min-width:1024px){ .ww-col{ padding:var(--space-40) } }
+.ww-now{ background:color-mix(in srgb, var(--ink) 6%, var(--white)) }
+.ww-after{ background:var(--ink); color:var(--white); box-shadow:0 0 0 1px rgba(var(--white-rgb),.05) }
+.ww-col .ww-cap{ display:block; font-size:var(--text-14); font-weight:500; text-transform:uppercase; letter-spacing:.05em; margin-bottom:var(--space-12) }
+.ww-now .ww-cap{ color:rgba(var(--ink-rgb),.45) }
+.ww-after .ww-cap{ color:var(--purple-300) }
+.ww-col .ww-t{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em; margin-bottom:var(--space-24); line-height:var(--leading-heading) }
+.ww-after .ww-t{ color:var(--white) }
+.ww-col ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column }
+.ww-col li{ display:flex; gap:var(--space-12); padding-block:var(--space-16); align-items:flex-start }
+.ww-now li + li{ border-top:1px solid var(--line) }
+.ww-after li + li{ border-top:1px solid rgba(var(--white-rgb),.1) }
+.ww-mk{ flex:none; font-weight:700; font-size:var(--text-16); line-height:var(--leading-heading); margin-top:.125rem }
+.ww-now .ww-mk{ color:rgba(var(--ink-rgb),.3) }
+.ww-after .ww-mk{ color:var(--purple-300) }
+.ww-col li b{ display:block; font-size:var(--text-18); font-weight:600; letter-spacing:-.01em; margin-bottom:.375rem; line-height:var(--leading-heading) }
+.ww-col li p{ font-size:var(--text-16); line-height:var(--leading-body); margin:0 }
+.ww-now li p{ color:rgba(var(--ink-rgb),.6) }
+.ww-after li p{ color:rgba(var(--white-rgb),.62) }
 /* 증명서 Why Now 2컬럼: 좌 스탯박스(한 박스·3줄) / 우 (콘텐츠 대기) — cert 전용, 타 페이지 영향 없음 */
 .cert-wn-duo{ display:grid; grid-template-columns:7fr 5fr; gap:var(--grid-gap); align-items:stretch }
 @media (max-width:767px){ .cert-wn-duo{ grid-template-columns:1fr; row-gap:var(--space-48) } }
@@ -2015,6 +2038,63 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
   transition:color .2s ease, border-color .2s ease }
 @media (hover:hover){ .post-side a:hover{ color:var(--ink); border-color:var(--accent) } }
 @media (max-width:1023px){ .post-side{ border-top:1px solid rgba(var(--ink-rgb),.1); padding-top:2rem } }
+
+/* ══ 검수 시안: ① Recognition 칩 통합(Track Record 하단) ② Industry Firsts 1st 앵커 재구성 ══ */
+/* ① 인증·수상 칩 — 독립 섹션 대신 Track Record 숫자 카드 아래 한 줄 증거 밴드 */
+.recog-chips{ margin-top:var(--space-48); padding-top:var(--space-32); border-top:1px solid var(--line) }
+.recog-chips .rc-label{ display:block; font-size:var(--text-12); font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--subtle); margin-bottom:var(--space-24) }
+/* 인증·수상 무한 스와이프 — [로고 위 / 수상명 아래] 셀, 기존 ptScroll 재사용 */
+.aw-marquee{ overflow:hidden;
+  mask-image:linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image:linear-gradient(to right, transparent, #000 8%, #000 92%, transparent) }
+.aw-marquee .pt-track{ display:flex; width:max-content; animation:ptScroll 42s linear infinite; grid-template-columns:none; gap:0 }
+.aw-marquee:hover .pt-track{ animation-play-state:paused }
+.aw-set{ display:flex; align-items:flex-start; gap:0; padding-right:0 }
+.aw-item{ display:flex; flex-direction:column; align-items:center; gap:.9rem;
+  width:12.5rem; margin:0 1.25rem; text-align:center }
+.aw-logo{ position:relative; width:4.75rem; height:4.75rem; border-radius:1.125rem;
+  background:#fff; border:1px solid var(--line); box-shadow:0 4px 14px rgba(var(--ink-rgb),.05);
+  display:flex; align-items:center; justify-content:center }
+.aw-logo img{ max-width:68%; max-height:68%; width:auto; height:auto; object-fit:contain }
+.aw-logo img:not([style*="none"]) + i{ display:none } /* 로고 파일 있으면 약칭 숨김 */
+.aw-logo i{ font-style:normal; font-family:'Departure Mono',monospace; font-size:var(--text-14);
+  font-weight:400; color:var(--gray-400); letter-spacing:.02em }
+.aw-item figcaption{ display:flex; flex-direction:column; gap:.3rem }
+.aw-item b{ font-size:var(--text-14); font-weight:600; color:var(--ink); line-height:1.35; word-break:keep-all }
+.aw-item figcaption span{ font-size:var(--text-12); color:var(--muted) }
+@media (max-width:640px){ .aw-item{ width:10rem; margin:0 .875rem } }
+
+/* ② Industry Firsts — 집계(1st)를 크게, 개별 항목은 작게 */
+.firsts-hero{ display:grid; grid-template-columns:auto 1fr; align-items:center; gap:clamp(2.5rem,6vw,5.5rem);
+  background-color:rgba(var(--ink-rgb),.04); border-radius:var(--radius-card);
+  padding:3rem clamp(1.5rem,4vw,3.5rem);
+  background-image:radial-gradient(rgba(var(--ink-rgb),.06) 1px, transparent 1.5px); background-size:20px 20px }
+.fh-big{ display:flex; flex-direction:column; align-items:center; gap:.75rem }
+.fh-num{ font-weight:700; line-height:.85; color:var(--ink); letter-spacing:-.04em; font-size:clamp(6rem,11vw,9.5rem) }
+.fh-num .st{ font-size:.38em; font-weight:700; color:var(--accent); vertical-align:1.05em; letter-spacing:0; margin-left:.04em }
+.fh-cap{ font-size:var(--text-14); color:var(--muted); white-space:nowrap }
+.fh-list li{ display:flex; align-items:center; gap:.9rem; padding-block:1rem;
+  font-size:var(--text-16); font-weight:500; color:var(--ink); line-height:1.4 }
+.fh-list li + li{ border-top:1px solid rgba(var(--ink-rgb),.09) }
+.fh-chip{ flex:none; font-size:var(--text-12); font-weight:700; letter-spacing:.02em;
+  padding:.3rem .7rem; border-radius:999px; background:rgba(97,0,255,.09); color:var(--purple-600) }
+.fh-chip.world{ background:var(--purple-500); color:#fff }
+.fh-chip.lead{ background:rgba(var(--ink-rgb),.07); color:var(--ink) }
+.fh-list li.fh-ally{ margin-top:.5rem; padding-top:1.5rem }
+.fh-sub{ margin-left:auto; padding-left:1rem; font-size:var(--text-14); font-weight:400; color:var(--muted); white-space:nowrap }
+@media (max-width:767px){
+  .firsts-hero{ grid-template-columns:1fr; gap:1.75rem; padding:2rem 1.25rem }
+  .fh-num{ font-size:5.5rem }
+  .fh-list li{ flex-wrap:wrap; row-gap:.35rem }
+  .fh-sub{ margin-left:0; padding-left:0; flex-basis:100% }
+}
+.ht-era{ list-style:none; display:flex; align-items:center; gap:.6rem; padding:2.25rem 0 .75rem }
+.ht-era:first-child{ padding-top:0 }
+.ht-era .dot{ width:.45rem; height:.45rem; border-radius:50%; background:var(--accent); flex:none }
+.ht-era-label{ font-size:var(--text-13, .8125rem); font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--subtle); white-space:nowrap }
+.ht-sub li .m{ color:var(--muted); margin-right:.6rem; font-variant-numeric:tabular-nums; white-space:nowrap }
+/* Alliance 소절 카드 위 여백 */
+.firsts-eco .cards-2{ margin-top:var(--space-16) }
 </style>
 </head>
 <body class="hero-dark hero-sol">
@@ -2032,7 +2112,7 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
       <div class="phero-text">
         <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Solutions — 금융</div>
         <h1 class="phero-h1" data-line-stagger="120"><span class="rvl-line"><span>디지털자산 금융의</span></span><span class="rvl-line"><span>모든 단계를 연결합니다</span></span></h1>
-        <p class="phero-lead rvl" style="--rvl-delay:250ms">발행, 지갑, 오케스트레이션, 온체인 KYC, 통합 관제를 하나로 연결합니다. 스테이블코인부터 예금토큰, RWA, 토큰증권까지 규제와 사업 환경에 맞춰 단계적으로 확장할 수 있습니다.</p>
+        <p class="phero-lead rvl" style="--rvl-delay:250ms">발행, 지갑, 오케스트레이션, 온체인 KYC, 통합 관리를 하나로 연결합니다. 스테이블코인부터 예금토큰, RWA, 토큰증권까지 규제와 사업 환경에 맞춰 단계적으로 확장할 수 있습니다.</p>
         <div class="phero-rel rvl" style="--rvl-delay:600ms">
       <p class="phero-rel-t">관련 제품 살펴보기</p>
       <a class="phero-rel-flag" href="parasta.html">ParaSta</a>
@@ -2052,17 +2132,17 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Why Now</div><h2 class="sec-h2 has-lead" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>발행보다 중요한 것은 발행 이후입니다</span></span></h2><p class="phero-lead sec-lead rvl">글로벌 대형 자산운용사와 결제사는 이미 RWA와 스테이블코인 시장에 진입했고, 국내에서도 토큰증권 제도화가 논의되고 있습니다. 이제 핵심은 토큰 발행을 넘어 유통·보유·상환 전 과정에서 발생하는 규제와 운영 리스크를 관리하는 것입니다.</p>
   <p class="phero-lead sec-lead rvl">투자자 적격성과 고객확인(KYC)·자금세탁방지(AML) 요건을 지속적으로 검증하고, 배당·이자 지급과 상환을 정확히 집행하며, 자산의 지갑 간 이동을 실시간으로 통제·감사할 수 있어야 합니다.</p>
   <div class="colc-duo">
-  <div class="colc rvl"><p class="barc-title">국내 토큰증권(STO) 시장 규모 전망</p><div class="colc-panel"><div class="colc-plot" style="grid-template-columns:repeat(3,1fr)"><div class="colc-stack"><span class="colc-v">34조원</span><div class="colc-bar" style="height:calc(9*var(--colc-h)/100)"></div></div><div class="colc-stack"><span class="colc-v">119조원</span><div class="colc-bar" style="height:calc(32*var(--colc-h)/100)"></div></div><div class="colc-stack hi"><span class="colc-v">367조원</span><div class="colc-bar" style="height:calc(100*var(--colc-h)/100)"></div></div></div><div class="colc-labels" style="grid-template-columns:repeat(3,1fr)"><span class="colc-l">2024년</span><span class="colc-l">2025년</span><span class="colc-l">2030년</span></div><p class="sec-note"><strong>출처: 하나금융경영연구소·삼일PwC(BCG 전망 인용)</strong><br>현행 자본시장법을 기준으로는 30~60조원 규모의 보수적인 전망도 있어, 해당 수치는 ‘전망치’로 표기했습니다.</p></div></div>
-  <div class="colc rvl"><p class="barc-title">글로벌 스테이블코인 발행 잔액 추이</p><div class="colc-panel"><div class="colc-plot" style="grid-template-columns:repeat(2,1fr)"><div class="colc-stack"><span class="colc-v">$2,050억</span><div class="colc-bar" style="height:calc(68*var(--colc-h)/100)"></div></div><div class="colc-stack hi"><span class="colc-v">$3,000억+</span><div class="colc-bar" style="height:calc(100*var(--colc-h)/100)"></div></div></div><div class="colc-labels" style="grid-template-columns:repeat(2,1fr)"><span class="colc-l">2025년 1월</span><span class="colc-l">2025년 말</span></div><p class="sec-note"><strong>출처: DeFiLlama 등 시장 데이터 집계</strong><br>글로벌 스테이블코인 발행 잔액은 2025년 전년 대비 약 49% 증가했으며, 현재 온체인에서 유통 중인 자산을 기준으로 한 실측치입니다.</p></div></div>
+  <div class="colc rvl"><p class="barc-title">국내 토큰증권(STO) 시장 규모 전망</p><div class="colc-panel"><div class="colc-plot" style="grid-template-columns:repeat(3,1fr)"><div class="colc-stack"><span class="colc-v">34조원</span><div class="colc-bar" style="height:calc(9*var(--colc-h)/100)"></div></div><div class="colc-stack"><span class="colc-v">119조원</span><div class="colc-bar" style="height:calc(32*var(--colc-h)/100)"></div></div><div class="colc-stack hi"><span class="colc-v">367조원</span><div class="colc-bar" style="height:calc(100*var(--colc-h)/100)"></div></div></div><div class="colc-labels" style="grid-template-columns:repeat(3,1fr)"><span class="colc-l">2024년</span><span class="colc-l">2025년</span><span class="colc-l">2030년</span></div><p class="sec-note"><strong>출처: 하나금융경영연구소·삼일PwC(BCG 전망 인용)</strong><br>현행 자본시장법 기준 30~60조원의 보수적 전망도 있습니다. 위 수치는 전망치입니다.</p></div></div>
+  <div class="colc rvl"><p class="barc-title">글로벌 스테이블코인 발행 잔액 추이</p><div class="colc-panel"><div class="colc-plot" style="grid-template-columns:repeat(2,1fr)"><div class="colc-stack"><span class="colc-v">$2,050억</span><div class="colc-bar" style="height:calc(68*var(--colc-h)/100)"></div></div><div class="colc-stack hi"><span class="colc-v">$3,000억+</span><div class="colc-bar" style="height:calc(100*var(--colc-h)/100)"></div></div></div><div class="colc-labels" style="grid-template-columns:repeat(2,1fr)"><span class="colc-l">2025년 1월</span><span class="colc-l">2025년 말</span></div><p class="sec-note"><strong>출처: DeFiLlama 등 시장 데이터 집계</strong><br>2025년 발행 잔액은 전년 대비 약 49% 증가. 온체인에서 유통 중인 자산 기준 실측치입니다.</p></div></div>
   </div>
 </div></section>
 <section><div class="shell sec">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Problem</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>디지털자산 사업에서 금융기관이 마주하는 문제</span></span></h2>
-  <div class="media-tall"><ul class="cards-2"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>문제 01</span></div><h3>발행보다 복잡한 운영</h3><p>디지털자산은 발행 이후 KYC, 상환, 유통 통제, 사후 검증까지 지속적인 운영이 필요합니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>문제 02</span></div><h3>계좌와 온체인 시스템의 분절</h3><p>은행 계좌와 온체인 지갑이 분리되어 있어 자산 관리와 정산이 복잡합니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>문제 03</span></div><h3>규제 대응 부담</h3><p>서비스마다 자금세탁방지(AML)와 트래블룰 준수 체계를 별도로 설계해야 합니다.</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>문제 04</span></div><h3>범용 SaaS의 한계</h3><p>글로벌 지갑 SaaS만으로는 국내 규제와 금융기관의 운영 요건에 대응하기 어렵습니다.</p></div></article></li></ul></div>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Problem</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>디지털자산 사업의 과제, 이렇게 해결합니다</span></span></h2>
+  <div class="ww rvl" style="--rvl-y:40px"><div class="ww-col ww-now"><span class="ww-cap">지금</span><div class="ww-t">발행 이후의 운영을 각자 감당해야 합니다</div><ul><li><span class="ww-mk">✕</span><div><b>발행보다 복잡한 운영</b><p>디지털자산은 발행 이후 KYC, 상환, 유통 통제, 사후 검증까지 지속적인 운영이 필요합니다.</p></div></li><li><span class="ww-mk">✕</span><div><b>계좌와 온체인 시스템의 분절</b><p>은행 계좌와 온체인 지갑이 분리되어 있어 자산 관리와 정산이 복잡합니다.</p></div></li><li><span class="ww-mk">✕</span><div><b>규제 대응 부담</b><p>서비스마다 자금세탁방지(AML)와 트래블룰 준수 체계를 별도로 설계해야 합니다.</p></div></li><li><span class="ww-mk">✕</span><div><b>범용 SaaS의 한계</b><p>글로벌 지갑 SaaS만으로는 국내 규제와 금융기관의 운영 요건에 대응하기 어렵습니다.</p></div></li></ul></div><div class="ww-col ww-after"><span class="ww-cap">ParaSta 도입 후</span><div class="ww-t">발행부터 운영까지 하나로 연결합니다</div><ul><li><span class="ww-mk">✓</span><div><b>발행부터 운영까지 한 곳에서</b><p>발행, KYC, 상환, 유통 통제를 하나로 연결해 관리합니다.</p></div></li><li><span class="ww-mk">✓</span><div><b>계좌와 지갑을 연결</b><p>은행 계좌와 온체인 지갑을 이어, 자산 관리와 정산을 한 흐름으로 처리합니다.</p></div></li><li><span class="ww-mk">✓</span><div><b>규제 대응을 기본 제공</b><p>AML, 트래블룰 대응을 기본으로 갖춰, 서비스마다 따로 설계하지 않아도 됩니다.</p></div></li><li><span class="ww-mk">✓</span><div><b>국내 규제에 맞춘 설계</b><p>국내 규제와 금융기관 운영 요건에 맞춰 설계했습니다.</p></div></li></ul></div></div>
 </div></section>
 <section><div class="shell sec">
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Features</div><h2 class="sec-h2 has-lead" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>발행부터 상환·사후 검증까지 연결하는<br>6-Layer 통제 구조</span></span></h2><p class="phero-lead sec-lead rvl">디지털자산의 발행·유통·상환·사후 검증 전 과정을 6개의 통제 계층으로 연결해 안정적으로 관리합니다.</p>
-  <ul class="cards-3"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="ico-card ex-card" style="--brand:var(--purple-500); --brand-txt:var(--white)"><span class="ex-ico"></span><h3>Issuance · 발행</h3><p>규제를 준수하며 디지털자산의 발행·상환·유통을 통제합니다.</p></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="ico-card ex-card" style="--brand:var(--purple-500); --brand-txt:var(--white)"><span class="ex-ico"></span><h3>Wallet · 지갑</h3><p>사용자 신원을 기반으로 자산을 통제하고, 여러 블록체인 지갑을 하나의 인터페이스에서 관리합니다.</p></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="ico-card ex-card" style="--brand:var(--purple-500); --brand-txt:var(--white)"><span class="ex-ico"></span><h3>Orchestration · 관제</h3><p>은행 계좌와 온체인 지갑을 연결해 조건부 정산과 실시간 거래 스크리닝을 지원합니다.</p></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms"><article class="ico-card ex-card" style="--brand:var(--purple-500); --brand-txt:var(--white)"><span class="ex-ico"></span><h3>On-chain KYC · 온체인 신원 인증</h3><p>검증된 KYC 정보를 VC·VP로 변환해 여러 블록체인에서 활용할 수 있도록 연결합니다.</p></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:360ms"><article class="ico-card ex-card" style="--brand:var(--purple-500); --brand-txt:var(--white)"><span class="ex-ico"></span><h3>Unified Admin · 통합 관리</h3><p>전체 운영 현황과 키 권한을 통합 관리하고, 감사에 필요한 리포트를 제공합니다.</p></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:450ms"><article class="ico-card ex-card" style="--brand:var(--purple-500); --brand-txt:var(--white)"><span class="ex-ico"></span><h3>Parameta S · RWA·STO 연동</h3><p>API를 통해 토큰증권과 실물자산의 발행부터 이후 운영까지 연결합니다.</p></article></li></ul>
+  <ul class="cards-3"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="ico-card ex-card" style="--brand:var(--purple-500); --brand-txt:var(--white)"><span class="ex-ico"></span><h3>Issuance · 발행</h3><p>규제를 준수하며 디지털자산의 발행·상환·유통을 통제합니다.</p></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="ico-card ex-card" style="--brand:var(--purple-500); --brand-txt:var(--white)"><span class="ex-ico"></span><h3>Wallet · 지갑</h3><p>사용자 신원을 기반으로 자산을 통제하고, 여러 블록체인 지갑을 하나의 인터페이스에서 관리합니다.</p></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="ico-card ex-card" style="--brand:var(--purple-500); --brand-txt:var(--white)"><span class="ex-ico"></span><h3>Orchestration · 오케스트레이션</h3><p>은행 계좌와 온체인 지갑을 연결해 조건부 정산과 실시간 거래 스크리닝을 지원합니다.</p></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms"><article class="ico-card ex-card" style="--brand:var(--purple-500); --brand-txt:var(--white)"><span class="ex-ico"></span><h3>On-chain KYC · 온체인 신원 인증</h3><p>검증된 KYC 정보를 위·변조 확인이 가능한 디지털 증명(VC·VP)으로 변환해, 여러 블록체인에서 활용합니다.</p></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:360ms"><article class="ico-card ex-card" style="--brand:var(--purple-500); --brand-txt:var(--white)"><span class="ex-ico"></span><h3>Unified Admin · 통합 관리</h3><p>전체 운영 현황과 키 권한을 통합 관리하고, 감사에 필요한 리포트를 제공합니다.</p></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:450ms"><article class="ico-card ex-card" style="--brand:var(--purple-500); --brand-txt:var(--white)"><span class="ex-ico"></span><h3>Parameta S · RWA·STO 연동</h3><p>API를 통해 토큰증권과 실물자산의 발행부터 이후 운영까지 연결합니다.</p></article></li></ul>
 </div></section>
 <section><div class="shell sec">
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>How to Adopt</div><h2 class="sec-h2 has-lead" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>단계적으로 도입할 수 있습니다</span></span></h2><p class="phero-lead sec-lead rvl">필요한 기능부터 시작해 운영 환경과 사업 단계에 맞춰 확장합니다.</p>
@@ -2111,7 +2191,7 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
       <article class="uc-slide">
         <div class="uc-thumb" aria-hidden="true"></div>
         <h3>ADB ABMF · 온체인 KYC 발표</h3>
-        <div class="uc-rows"><div class="uc-row"><span class="uc-flag">활용 영역</span><span>국경 간 투자자의 지갑·사용자 신원 및 적격성 확인</span></div><div class="uc-row"><span class="uc-flag">주요 내용</span><span>지갑 인증과 온체인 KYC·KYW 적용 방안을 국제 협의체에서 발표</span></div></div>
+        <div class="uc-rows"><div class="uc-row"><span class="uc-flag">활용 영역</span><span>국경 간 투자자의 지갑·사용자 신원 및 적격성 확인</span></div><div class="uc-row"><span class="uc-flag">주요 내용</span><span>지갑 인증과 온체인 KYC, 지갑 검증(KYW) 적용 방안을 국제 협의체에서 발표</span></div></div>
       </article>
     </div>
     <button class="uc-arrow uc-next rvl rvl-op" type="button" aria-label="다음 사례"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>

@@ -227,14 +227,14 @@ html.chat-open #banner-fixed{ right:26rem }
 @media (min-width:1024px){
   .header-inner{ padding:12px 2rem }
   #header .brand-logo{ height:20px }
-  .nav-primary ul{ font-size:var(--text-16) } .nav-caret{ font-size:var(--text-16) }   /* 1024~1535: 토큰 16 (1100대에서 너무 작아져 한 단계 업) */
+  .nav-primary ul{ font-size:var(--text-18) } .nav-caret{ font-size:var(--text-18) }   /* 1024~1535: 토큰 18 */
   #header .lang-btn .lang-globe{ width:24px; height:24px } }
 /* 큰 화면: GNB 요소만 약간 키우되 헤더 "높이"는 표준 유지(≈76~80px). 패딩·지구본은 vw로 안 키움 */
 @media (min-width:1536px){
   .header-inner{ padding:12px 2.5rem }   /* 높이 좌우값은 px 고정 (유동 root 영향 차단) */
   .brand-btn{ font-size:var(--text-20) } .brand-btn .icn{ font-size:var(--text-22) }
   #header .brand-logo{ height:24px }
-  .nav-primary ul{ font-size:var(--text-16); gap:2.5rem } .nav-caret{ font-size:var(--text-16) }   /* 1536~1919: 토큰 16 */
+  .nav-primary ul{ font-size:var(--text-18); gap:2.5rem } .nav-caret{ font-size:var(--text-18) }   /* 1536~1919: 토큰 18 */
   #header .lang-btn .lang-globe{ width:24px; height:24px }
   .clock-chip{ font-size:13px; padding:.55rem .85rem } }
 /* ≥1920: 요소만 한 단계 더 크게, 높이는 여전히 고정 */
@@ -242,7 +242,7 @@ html.chat-open #banner-fixed{ right:26rem }
   .header-inner{ padding:12px clamp(3rem, 2.5vw, 4.5rem) }
   .brand-btn{ font-size:var(--text-22) } .brand-btn .icn{ font-size:var(--text-24) }
   #header .brand-logo{ height:28px }
-  .nav-primary ul{ font-size:var(--text-18); gap:clamp(2.5rem, 2vw, 4rem) } .nav-caret{ font-size:var(--text-18) }   /* 1920+: 토큰 18 (유동 root가 키워줘서 한 단계 낮춤) */
+  .nav-primary ul{ font-size:var(--text-18); gap:clamp(2.5rem, 2vw, 4rem) } .nav-caret{ font-size:var(--text-18) }   /* 1920+: 토큰 18 */
   #header .lang-btn .lang-globe{ width:28px; height:28px } }
 
 /* ============ DARK HERO 모드 (배경 이미지가 다크일 때 — body.hero-dark) ============ */

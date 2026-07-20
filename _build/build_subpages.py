@@ -1249,6 +1249,63 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
   transition:color .2s ease, border-color .2s ease }
 @media (hover:hover){ .post-side a:hover{ color:var(--ink); border-color:var(--accent) } }
 @media (max-width:1023px){ .post-side{ border-top:1px solid rgba(var(--ink-rgb),.1); padding-top:2rem } }
+
+/* ══ 검수 시안: ① Recognition 칩 통합(Track Record 하단) ② Industry Firsts 1st 앵커 재구성 ══ */
+/* ① 인증·수상 칩 — 독립 섹션 대신 Track Record 숫자 카드 아래 한 줄 증거 밴드 */
+.recog-chips{ margin-top:var(--space-48); padding-top:var(--space-32); border-top:1px solid var(--line) }
+.recog-chips .rc-label{ display:block; font-size:var(--text-12); font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--subtle); margin-bottom:var(--space-24) }
+/* 인증·수상 무한 스와이프 — [로고 위 / 수상명 아래] 셀, 기존 ptScroll 재사용 */
+.aw-marquee{ overflow:hidden;
+  mask-image:linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image:linear-gradient(to right, transparent, #000 8%, #000 92%, transparent) }
+.aw-marquee .pt-track{ display:flex; width:max-content; animation:ptScroll 42s linear infinite; grid-template-columns:none; gap:0 }
+.aw-marquee:hover .pt-track{ animation-play-state:paused }
+.aw-set{ display:flex; align-items:flex-start; gap:0; padding-right:0 }
+.aw-item{ display:flex; flex-direction:column; align-items:center; gap:.9rem;
+  width:12.5rem; margin:0 1.25rem; text-align:center }
+.aw-logo{ position:relative; width:4.75rem; height:4.75rem; border-radius:1.125rem;
+  background:#fff; border:1px solid var(--line); box-shadow:0 4px 14px rgba(var(--ink-rgb),.05);
+  display:flex; align-items:center; justify-content:center }
+.aw-logo img{ max-width:68%; max-height:68%; width:auto; height:auto; object-fit:contain }
+.aw-logo img:not([style*="none"]) + i{ display:none } /* 로고 파일 있으면 약칭 숨김 */
+.aw-logo i{ font-style:normal; font-family:'Departure Mono',monospace; font-size:var(--text-14);
+  font-weight:400; color:var(--gray-400); letter-spacing:.02em }
+.aw-item figcaption{ display:flex; flex-direction:column; gap:.3rem }
+.aw-item b{ font-size:var(--text-14); font-weight:600; color:var(--ink); line-height:1.35; word-break:keep-all }
+.aw-item figcaption span{ font-size:var(--text-12); color:var(--muted) }
+@media (max-width:640px){ .aw-item{ width:10rem; margin:0 .875rem } }
+
+/* ② Industry Firsts — 집계(1st)를 크게, 개별 항목은 작게 */
+.firsts-hero{ display:grid; grid-template-columns:auto 1fr; align-items:center; gap:clamp(2.5rem,6vw,5.5rem);
+  background-color:rgba(var(--ink-rgb),.04); border-radius:var(--radius-card);
+  padding:3rem clamp(1.5rem,4vw,3.5rem);
+  background-image:radial-gradient(rgba(var(--ink-rgb),.06) 1px, transparent 1.5px); background-size:20px 20px }
+.fh-big{ display:flex; flex-direction:column; align-items:center; gap:.75rem }
+.fh-num{ font-weight:700; line-height:.85; color:var(--ink); letter-spacing:-.04em; font-size:clamp(6rem,11vw,9.5rem) }
+.fh-num .st{ font-size:.38em; font-weight:700; color:var(--accent); vertical-align:1.05em; letter-spacing:0; margin-left:.04em }
+.fh-cap{ font-size:var(--text-14); color:var(--muted); white-space:nowrap }
+.fh-list li{ display:flex; align-items:center; gap:.9rem; padding-block:1rem;
+  font-size:var(--text-16); font-weight:500; color:var(--ink); line-height:1.4 }
+.fh-list li + li{ border-top:1px solid rgba(var(--ink-rgb),.09) }
+.fh-chip{ flex:none; font-size:var(--text-12); font-weight:700; letter-spacing:.02em;
+  padding:.3rem .7rem; border-radius:999px; background:rgba(97,0,255,.09); color:var(--purple-600) }
+.fh-chip.world{ background:var(--purple-500); color:#fff }
+.fh-chip.lead{ background:rgba(var(--ink-rgb),.07); color:var(--ink) }
+.fh-list li.fh-ally{ margin-top:.5rem; padding-top:1.5rem }
+.fh-sub{ margin-left:auto; padding-left:1rem; font-size:var(--text-14); font-weight:400; color:var(--muted); white-space:nowrap }
+@media (max-width:767px){
+  .firsts-hero{ grid-template-columns:1fr; gap:1.75rem; padding:2rem 1.25rem }
+  .fh-num{ font-size:5.5rem }
+  .fh-list li{ flex-wrap:wrap; row-gap:.35rem }
+  .fh-sub{ margin-left:0; padding-left:0; flex-basis:100% }
+}
+.ht-era{ list-style:none; display:flex; align-items:center; gap:.6rem; padding:2.25rem 0 .75rem }
+.ht-era:first-child{ padding-top:0 }
+.ht-era .dot{ width:.45rem; height:.45rem; border-radius:50%; background:var(--accent); flex:none }
+.ht-era-label{ font-size:var(--text-13, .8125rem); font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--subtle); white-space:nowrap }
+.ht-sub li .m{ color:var(--muted); margin-right:.6rem; font-variant-numeric:tabular-nums; white-space:nowrap }
+/* Alliance 소절 카드 위 여백 */
+.firsts-eco .cards-2{ margin-top:var(--space-16) }
 """
 
 CHROME_HEADER = """
@@ -2346,100 +2403,205 @@ PAGES['company.html'] = dict(
   </div>
   </div>
 </div>''',
-    content=f'''
+    content='''
 <section class="tr-flush"><div class="shell sec">
-  {sec_head('Track Record', '10년의 트랙레코드, 숫자로 증명한 신뢰', '2016년부터 쌓아온 실적이 파라메타의 기술을 증명합니다.')}
-  {nums([
-    dict(cap='Since 2016', n='10년차', sub='국내 1세대 Web3 인프라 기업'),
-    dict(cap='Investment', n='250억 원', sub='누적 투자유치'),
-    dict(cap='Revenue', n='750억 원+', sub='누적 매출 (2016~2025)'),
-    dict(cap='Quality', n='GS 1등급', sub='loopchain SW품질 인증'),
-  ], cols=2)}
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Track Record</div><h2 class="sec-h2 has-lead" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>10년의 트랙레코드, 숫자로 증명한 신뢰</span></span></h2><p class="phero-lead sec-lead rvl">2016년부터 쌓아온 실적이 파라메타의 기술을 증명합니다.</p>
+  <ul class="cards-2"><li class="rvl" style="--rvl-delay:0ms"><div class="light-card num-card"><span class="cap">Since 2016</span><div class="n">10년차</div><p>국내 1세대 Web3 인프라 기업</p></div></li><li class="rvl" style="--rvl-delay:90ms"><div class="light-card num-card"><span class="cap">Investment</span><div class="n">250억 원</div><p>누적 투자유치</p></div></li><li class="rvl" style="--rvl-delay:180ms"><div class="light-card num-card"><span class="cap">Revenue</span><div class="n">750억 원+</div><p>누적 매출 (2016~2025)</p></div></li><li class="rvl" style="--rvl-delay:270ms"><div class="light-card num-card"><span class="cap">Users</span><div class="n">370만 명</div><p>Wallet &amp; DID 서비스 누적 이용자</p></div></li></ul>
+  <div class="recog-chips rvl">
+    <span class="rc-label">Recognition — 인증·수상</span>
+    <div class="aw-marquee" aria-label="인증·수상 목록">
+      <div class="pt-track">
+        <div class="aw-set">
+          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-gs.png" alt="" onerror="this.style.display='none'"><i>GS</i></span><figcaption><b>GS인증 1등급</b><span>loopchain SW품질</span></figcaption></figure>
+          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-tcb.png" alt="" onerror="this.style.display='none'"><i>TI-1</i></span><figcaption><b>투자용 기술평가 TI-1</b><span>최고 등급</span></figcaption></figure>
+          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-csap.png" alt="" onerror="this.style.display='none'"><i>CSAP</i></span><figcaption><b>CSAP 인증</b><span>블록체인 서비스 최초 · MyID 2.0</span></figcaption></figure>
+          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-msit.png" alt="" onerror="this.style.display='none'"><i>MSIT</i></span><figcaption><b>과학기술정보통신부 장관 표창</b><span>2018</span></figcaption></figure>
+          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-kisa.png" alt="" onerror="this.style.display='none'"><i>KISA</i></span><figcaption><b>기술특례상장 컨설팅 A등급</b><span>KISA · 2년 연속</span></figcaption></figure>
+          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-fsc.png" alt="" onerror="this.style.display='none'"><i>FSC</i></span><figcaption><b>혁신금융서비스 지정</b><span>금융위원회 · 2019</span></figcaption></figure>
+          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-swaward.png" alt="" onerror="this.style.display='none'"><i>SW</i></span><figcaption><b>SW제품 품질대상 최우수상</b><span>2019</span></figcaption></figure>
+          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-jeju.png" alt="" onerror="this.style.display='none'"><i>JEJU</i></span><figcaption><b>제주특별자치도 표창패</b><span>제주안심코드 · 2021</span></figcaption></figure>
+        </div>
+        <div class="aw-set" aria-hidden="true">
+          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-gs.png" alt="" onerror="this.style.display='none'"><i>GS</i></span><figcaption><b>GS인증 1등급</b><span>loopchain SW품질</span></figcaption></figure>
+          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-tcb.png" alt="" onerror="this.style.display='none'"><i>TI-1</i></span><figcaption><b>투자용 기술평가 TI-1</b><span>최고 등급</span></figcaption></figure>
+          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-csap.png" alt="" onerror="this.style.display='none'"><i>CSAP</i></span><figcaption><b>CSAP 인증</b><span>블록체인 서비스 최초 · MyID 2.0</span></figcaption></figure>
+          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-msit.png" alt="" onerror="this.style.display='none'"><i>MSIT</i></span><figcaption><b>과학기술정보통신부 장관 표창</b><span>2018</span></figcaption></figure>
+          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-kisa.png" alt="" onerror="this.style.display='none'"><i>KISA</i></span><figcaption><b>기술특례상장 컨설팅 A등급</b><span>KISA · 2년 연속</span></figcaption></figure>
+          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-fsc.png" alt="" onerror="this.style.display='none'"><i>FSC</i></span><figcaption><b>혁신금융서비스 지정</b><span>금융위원회 · 2019</span></figcaption></figure>
+          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-swaward.png" alt="" onerror="this.style.display='none'"><i>SW</i></span><figcaption><b>SW제품 품질대상 최우수상</b><span>2019</span></figcaption></figure>
+          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-jeju.png" alt="" onerror="this.style.display='none'"><i>JEJU</i></span><figcaption><b>제주특별자치도 표창패</b><span>제주안심코드 · 2021</span></figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </div>
 </div></section>
-<section class="recog"><div class="shell sec">
-  {sec_head('Recognition', '인증과 수상으로 검증된 기술력', '국가 공인 인증부터 정부 표창까지, 파라메타의 기술은 대외적으로 인정받아 왔습니다.')}
-  {cards_wrap([
-    card('GS인증 1등급', 'loopchain 소프트웨어 품질 인증', tone='gray'),
-    card('기술신용평가 TI-1 등급', '기술보증기금 최고 등급', tone='gray'),
-    card('CSAP 인증', '블록체인 서비스 최초 클라우드 보안 인증 (2025)', tone='gray'),
-    card('과학기술정보통신부 장관 표창', '2023 블록체인 진흥주간', tone='gray'),
-    card('KISA 기술특례상장<br>컨설팅 A등급', '2년 연속 획득', tone='gray'),
-    card('혁신금융서비스 지정', '금융위원회', tone='gray'),
-  ], cols=3)}
-</div></section>
+
 <section class="firsts"><div class="shell sec">
-  {sec_head('Industry Firsts', '파라메타는 업계 주요 플레이어들과 함께 산업을 선도하고 있습니다', '파라메타는 블록체인 산업이 처음 가는 길을 먼저 열며 시장을 선도해왔습니다.')}
-  <div class="firsts-panel">
-    <div class="rvl firsts-hub">
-      <span class="chair-badge"><span class="pm-mark"><img src="assets/brand/logo-horizontal-color-dark.svg" alt="PARAMETA"></span><i>PARAMETA</i></span>
-      <span class="firsts-stem"></span>
-    </div>
-    <div class="firsts-branch rvl" aria-hidden="true"><span class="fb-l"></span><span class="fb-r"></span></div>
-    {cards_wrap([
-      card('Stablecoin Alliance', '스테이블코인 생태계 협의체 · 초대 의장사', tone='gray', media=False),
-      card('MyID Alliance', 'DID 신원인증 생태계 · 결성 주도', tone='gray', media=False),
-    ], cols=2)}
-    <div class="rvl firsts-list-wrap">
-      <div class="ally-head"><span class="ally-num">Industry Firsts</span></div>
-      <ul class="firsts-list">
-        <li>세계 최초 블록체인 공동인증 상용화</li>
-        <li>국내 최초 금융권 DID 실명인증 상용화</li>
-        <li>국내 최초 블록체인 서비스 CSAP 인증 획득</li>
-        <li>국내 최초 DID Method Registry 등재</li>
-      </ul>
-    </div>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Industry Firsts</div><h2 class="sec-h2 has-lead" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>블록체인 산업의 첫 기록</span></span></h2><p class="phero-lead sec-lead rvl">파라메타는 산업이 처음 가는 길을 먼저 열어왔습니다.</p>
+  <div class="firsts-hero rvl">
+    <div class="fh-big" aria-hidden="true"><span class="fh-num">1<span class="st">st</span></span><span class="fh-cap">세계·국내 최초 4건</span></div>
+    <ul class="fh-list">
+      <li><span class="fh-chip world">세계 최초</span>블록체인 공동인증 상용화<span class="fh-sub">증권사 26개사 · 2017</span></li>
+      <li><span class="fh-chip">국내 최초</span>금융권 DID 실명인증 상용화<span class="fh-sub">2020</span></li>
+      <li><span class="fh-chip">국내 최초</span>블록체인 서비스 CSAP 인증<span class="fh-sub">MyID 2.0 · 2025</span></li>
+      <li><span class="fh-chip">국내 최초</span>W3C DID Method Registry 등재</li>
+    </ul>
   </div>
-  <div class="rvl ally-marquee-wrap" style="margin-top:3rem">
-    <div class="ally-head"><span class="ally-num">86+</span><span class="ally-cap">얼라이언스 파트너사</span></div>
-    <div class="pt-marquee ally-logos" aria-label="얼라이언스 파트너 로고"><div class="pt-track">{partner_logos(COMPANY_LOGOS)}{partner_logos(COMPANY_LOGOS)}</div></div>
+  
+  
+  
+  <div class="rvl firsts-eco" style="margin-top:var(--space-48)">
+    <div class="ally-head"><span class="ally-num" style="font-size:var(--text-22)">Alliance</span><span class="ally-cap">주요 얼라이언스 파트너와 함께 블록체인 생태계를 만들어갑니다</span></div>
+    <ul class="cards-2"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static sm t-gray"><div class="work-bottom"><h3>Stablecoin Alliance</h3><p>스테이블코인 생태계 협의체 · 초대 의장사</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm t-gray"><div class="work-bottom"><h3>MyID Alliance</h3><p>DID 신원인증 생태계 협의체 · 의장사</p></div></article></li></ul>
+  </div>
+  <div class="rvl ally-marquee-wrap" style="margin-top:var(--space-48)">
+    <div class="ally-head"><span class="ally-num">86+</span><span class="ally-cap">파트너사</span></div>
+    <div class="pt-marquee ally-logos" aria-label="파트너 로고"><div class="pt-track"><div class="pt-set" aria-hidden="false"><img src="assets/partners/logo-shinhan.png" alt="신한" loading="lazy"><img src="assets/partners/logo-samsung-securities.png" alt="삼성증권" loading="lazy"><img src="assets/partners/logo-nh-securities.png" alt="NH투자증권" loading="lazy"><img src="assets/partners/logo-mirae.png" alt="미래에셋" loading="lazy"><img src="assets/partners/logo-samsung.png" alt="삼성" loading="lazy"><img src="assets/partners/logo-nh.png" alt="NH농협" loading="lazy"><img src="assets/partners/logo-ibk.png" alt="IBK기업은행" loading="lazy"><img src="assets/partners/logo-kb.png" alt="KB" loading="lazy"></div><div class="pt-set" aria-hidden="true"><img src="assets/partners/logo-shinhan.png" alt="신한" loading="lazy"><img src="assets/partners/logo-samsung-securities.png" alt="삼성증권" loading="lazy"><img src="assets/partners/logo-nh-securities.png" alt="NH투자증권" loading="lazy"><img src="assets/partners/logo-mirae.png" alt="미래에셋" loading="lazy"><img src="assets/partners/logo-samsung.png" alt="삼성" loading="lazy"><img src="assets/partners/logo-nh.png" alt="NH농협" loading="lazy"><img src="assets/partners/logo-ibk.png" alt="IBK기업은행" loading="lazy"><img src="assets/partners/logo-kb.png" alt="KB" loading="lazy"></div></div></div>
   </div>
 </div></section>
+
+
 <section><div class="shell sec" style="padding-top:0">
-  {sec_head('History', '디지털자산 시장을 만들어온<br>파라메타의 10년', '국내 1세대 Web3 인프라 기업으로서 시장의 기준을 만들어왔습니다.')}
-  {hist_timeline([
-    ('2026', 'Stablecoin Alliance 초대 의장사 / ADB ABMF 국경 간 거래 표준모델 발표', [
-      'Stablecoin Alliance 결성, 초대 의장사 선임',
-      'ADB 주관 채권 포럼에서 온체인 KYC 기반 국경 간 거래 표준 모델 발표',
-      '스테이블코인, STO 무료 컨설팅 프로그램 운영',
-    ]),
-    ('2025', 'MyID 2.0 블록체인 서비스 최초 CSAP 인증 / 조달청 디지털마켓 등록', [
-      'MyID 2.0, 블록체인 서비스 최초 CSAP 클라우드 보안 인증 획득',
-      '조달청 디지털서비스몰 등록으로 공공기관 도입 경로 확보',
-    ]),
-    ('2024', 'K-BTF 공공 블록체인 공동인프라 사업자 선정', [
-      'K-BTF 공공 블록체인 공동인프라 사업자 선정',
-    ]),
-    ('2023', 'PARAMETA 리브랜딩(구 아이콘루프) / 시리즈 C 투자유치', [
-      'PARAMETA로 사명 변경 (구 아이콘루프)',
-      '시리즈 C 투자유치',
-      '기술신용평가 최고 등급 TI-1 획득',
-      '부동산 NPL, 모빌리티, 태양광 토큰증권 플랫폼 구축 협력',
-    ]),
-    ('2020', '제주안심코드(전자출입명부) 누적 이용자 218만 명 / 신한은행 DID 금융실명인증 상용화', [
-      '제주안심코드 전자출입명부 운영, 누적 이용자 218만 명',
-      '신한은행 DID 금융실명인증 상용화',
-    ]),
-    ('2019', 'loopchain GS인증 1등급 취득 / broof(블록체인 증명서) 출시 / 금융위 혁신금융서비스 지정', [
-      'loopchain GS인증 1등급 취득',
-      '블록체인 증명서 발급 서비스 broof 출시',
-      '금융위원회 혁신금융서비스 지정',
-      'MyID Alliance 결성 주도',
-    ]),
-    ('2018', "1세대 퍼블릭 메인넷 ICON 출시 / 라인 블록체인 합작법인 '언체인' 설립(아이콘루프 시절)", [
-      '1세대 퍼블릭 메인넷 ICON 출시',
-      "라인과 블록체인 합작법인 '언체인' 설립",
-    ]),
-    ('2016', '(주)더루프 설립, 국내 1세대 Web3 인프라 기업 출발', [
-      '(주)더루프 설립, 국내 1세대 Web3 인프라 기업 출발',
-    ]),
-  ])}
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>History</div><h2 class="sec-h2 has-lead" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>디지털자산 시장을 만들어온<br>파라메타의 10년</span></span></h2><p class="phero-lead sec-lead rvl">국내 1세대 Web3 인프라 기업으로서 시장의 기준을 만들어왔습니다.</p>
+  <ul class="ht-list"><li class="ht-era"><span class="dot"></span><span class="ht-era-label">2023–2026 · 디지털자산 인프라 확장</span></li>
+<li class="ht-item rvl" style="--rvl-y:24px; --rvl-delay:0ms"><span class="ht-node"></span><div class="ht-yr">2026</div>
+<div class="ht-card ht-acc"><input type="checkbox" id="ht-acc-0" hidden><label for="ht-acc-0"><p>APAC 확장 — ADB 채권 포럼 국경 간 거래 표준모델 발표 등 시장 확대</p><span class="ht-chev" aria-hidden="true"></span></label><div class="ht-subwrap"><ul class="ht-sub"><li><span class="m">06월</span>인도네시아 HARA와 전략적 업무협약 체결, APAC 사업 확장 본격화</li>
+<li><span class="m">02월</span>'스테이블코인·STO 무료 컨설팅' 실시, 디지털자산 사업 기회 확대 지원</li>
+<li><span class="m">02월</span>ADB 주관 채권 포럼(ABMF)에서 온체인 KYC 기반 국경 간 거래 표준 모델 발표</li>
+<li><span class="m">01월</span>리스크엑스(RiskX)와 스테이블코인 기반 글로벌 디지털 자산·금융 사업 협력</li></ul>
+</div></div></li>
+<li class="ht-item rvl" style="--rvl-y:24px; --rvl-delay:70ms"><span class="ht-node"></span><div class="ht-yr">2025</div>
+<div class="ht-card ht-acc"><input type="checkbox" id="ht-acc-1" hidden><label for="ht-acc-1"><p>Stablecoin Alliance 초대 의장사 선임</p><span class="ht-chev" aria-hidden="true"></span></label><div class="ht-subwrap"><ul class="ht-sub"><li><span class="m">12월</span>Stablecoin Alliance 출범, 초대 의장사 선임</li>
+<li><span class="m">12월</span>코스포·네이버클라우드·네이버 아라비아 3자 MOU, broof로 블록체인에 영구 기록</li>
+<li><span class="m">11월</span>국가AI전략위원회 위촉증, 블록체인 증명서 broof로 발급</li>
+<li><span class="m">10월</span>조달청 디지털서비스몰 등록으로 공공기관 도입 경로 확보</li>
+<li><span class="m">10월</span>쿠콘·인피닛블록과 스테이블코인 인프라 확장 MoU 체결</li>
+<li><span class="m">09월</span>하나테크와 글로벌 스테이블코인 결제지원 MoU 체결</li>
+<li><span class="m">08월</span>국내 최초 유럽 DPP 대응 '블록체인 기반 배터리 여권 플랫폼' 구축 수주</li>
+<li><span class="m">05월</span>DID 플랫폼 'MyID 2.0', 블록체인 서비스 최초 CSAP 인증 획득</li></ul>
+</div></div></li>
+<li class="ht-item rvl" style="--rvl-y:24px; --rvl-delay:140ms"><span class="ht-node"></span><div class="ht-yr">2024</div>
+<div class="ht-card ht-acc"><input type="checkbox" id="ht-acc-2" hidden><label for="ht-acc-2"><p>K-BTF 공공 블록체인 공동인프라 사업자 선정</p><span class="ht-chev" aria-hidden="true"></span></label><div class="ht-subwrap"><ul class="ht-sub"><li><span class="m">11월</span>Web3Auth와 블록체인 신원인증 글로벌 확대 MoU 체결</li>
+<li><span class="m">06월</span>국내 최초·유일 CSAP 기반 공공용 블록체인 서비스(K-BTF) 사업자 선정</li>
+<li><span class="m">03월</span>90억 원 규모 추가 투자 유치, 누적 투자금 250억 원 달성</li></ul>
+</div></div></li>
+<li class="ht-item rvl" style="--rvl-y:24px; --rvl-delay:210ms"><span class="ht-node"></span><div class="ht-yr">2023</div>
+<div class="ht-card ht-acc"><input type="checkbox" id="ht-acc-3" hidden><label for="ht-acc-3"><p>PARAMETA 리브랜딩, 디지털자산 인프라 기업 전환</p><span class="ht-chev" aria-hidden="true"></span></label><div class="ht-subwrap"><ul class="ht-sub"><li><span class="m">12월</span>핑거랩스·블로코엑스와이지와 웹3 생태계 확장 MOU 체결</li>
+<li><span class="m">11월</span>2023 블록체인 진흥주간 과학기술정보통신부 장관 표창 수상 (김종협 대표)</li>
+<li><span class="m">11월</span>신한EZ손해보험·피엠그로우와 전기차 배터리 잔존 수명 인증 생태계 구축 파트너십 체결</li>
+<li><span class="m">10월</span>비트블루와 IP·콘텐츠 토큰증권 플랫폼 구축 MOU 체결</li>
+<li><span class="m">09월</span>기술신용평가 최고 등급 TI-1 획득</li>
+<li><span class="m">09월</span>글로벌 노드 프로바이더 Alchemy·QuickNode와 국내 최초 Web3 인프라 파트너십 체결</li>
+<li><span class="m">09월</span>loopchain 성능 측정 및 향상 방안 리포트 공개</li>
+<li><span class="m">08월</span>솔브릭코리아와 국내 최초 '태양광 발전소 토큰증권 플랫폼' 구축 MOU 체결</li>
+<li><span class="m">08월</span>카스투게더와 국내 최초 '모빌리티 토큰증권 플랫폼' 구축 MOU 체결</li>
+<li><span class="m">08월</span>페블러스와 블록체인 기반 AI 모델 유통 생태계 구축 MOU 체결</li>
+<li><span class="m">07월</span>플루토스파트너스와 국내 최초 '부동산 NPL 토큰증권 플랫폼' 구축 MOU 체결</li>
+<li><span class="m">07월</span>DID 기반 경북형 공공마이데이터 플랫폼 '모이소 경상북도' 고도화(2단계) 사업 수주</li>
+<li><span class="m">06월</span>독일 '인터배터리 유럽 2023'에서 전기차 배터리 잔존 수명 인증 서비스 공개</li>
+<li><span class="m">05월</span>2023 블록체인 민간분야 집중사업 '전기차 배터리 잔존 수명 인증 서비스' 수주</li>
+<li><span class="m">03월</span>NH투자증권 토큰증권 협의체 'STO 비전그룹' 기술 기업 참여</li>
+<li><span class="m">03월</span>유하와 STO 활용 '콘텐츠 조각투자 플랫폼' 구축 협업</li>
+<li><span class="m">03월</span>그리너리와 '탄소배출권 조각투자 플랫폼' 구축 전략적 파트너십 체결</li>
+<li><span class="m">03월</span>스피젠-파이프라인과 모빌리티 조각투자·멤버십 NFT 플랫폼 구축 협력</li>
+<li><span class="m">02월</span>㈜파라메타로 사명 변경</li>
+<li><span class="m">02월</span>'파라메타 서비스(Parameta Service)' 출시</li>
+<li><span class="m">02월</span>코스닥 기술특례상장 모의 기술성 평가 A등급 획득</li>
+<li><span class="m">02월</span>경북형 공공마이데이터 플랫폼 '모이소 경상북도'에 블록체인 DID 기술 적용</li>
+<li><span class="m">02월</span>시지온과 웹3 데이터 프로토콜 '퍼미(Perme)' 구축 전략적 파트너십 체결</li>
+<li><span class="m">02월</span>피에스엑스와 토큰증권 플랫폼 공동 개발 전략적 파트너십 체결</li>
+<li><span class="m">01월</span>인텔렉추얼브릿지와 지식재산권 NFT 플랫폼 사업 구축 MOU 체결</li></ul>
+</div></div></li>
+<li class="ht-era"><span class="dot"></span><span class="ht-era-label">2019–2022 · DID 상용화와 공공 확산, Web2 → Web3 전환 확대</span></li>
+<li class="ht-item rvl" style="--rvl-y:24px; --rvl-delay:280ms"><span class="ht-node"></span><div class="ht-yr">2022</div>
+<div class="ht-card ht-acc"><input type="checkbox" id="ht-acc-4" hidden><label for="ht-acc-4"><p>블록체인 프레임워크 'Parameta Framework' 공개</p><span class="ht-chev" aria-hidden="true"></span></label><div class="ht-subwrap"><ul class="ht-sub"><li><span class="m">12월</span>마이아이디, 금융위원회 혁신금융서비스 규제개선 요청 통과</li>
+<li><span class="m">08월</span>1세대 마이데이터 사업자 '깃플'과 블록체인 기반 마이데이터 사업 협약 체결</li>
+<li><span class="m">07월</span>'경상북도 디지털 신원인증 마이데이터 플랫폼' 구축 사업 수주</li>
+<li><span class="m">06월</span>자체 블록체인 프레임워크 '파라메타 프레임워크(Parameta Framework)' 공개</li>
+<li><span class="m">06월</span>broof로 제26회 제주국제관광마라톤축제 블록체인 완주증 발급</li>
+<li><span class="m">04월</span>국내 최초 블록체인 기반 통합 서비스 플랫폼 강원도 '나야나'에 DID 기술 적용</li>
+<li><span class="m">01월</span>아이콘재단·투바이트와 인터체인 NFT 플랫폼 '하바(HAVAH)' 구축 전략적 파트너십 체결</li></ul>
+</div></div></li>
+<li class="ht-item rvl" style="--rvl-y:24px; --rvl-delay:350ms"><span class="ht-node"></span><div class="ht-yr">2021</div>
+<div class="ht-card ht-acc"><input type="checkbox" id="ht-acc-5" hidden><label for="ht-acc-5"><p>NH농협은행 DID 실명인증 출시, 금융·기업·공공으로 적용 확산</p><span class="ht-chev" aria-hidden="true"></span></label><div class="ht-subwrap"><ul class="ht-sub"><li><span class="m">12월</span>제주안심코드, 제주특별자치도 표창패 수여</li>
+<li><span class="m">12월</span>신한카드와 블록체인·DID 사업 전략적 제휴</li>
+<li><span class="m">12월</span>포스코그룹 거점 오피스에 블록체인 DID 기반 출입인증 시스템 적용</li>
+<li><span class="m">12월</span>코로나19 예방접종 서비스 출시</li>
+<li><span class="m">12월</span>제주특별자치도관광협회·제주산학융합원과 MOU 체결</li>
+<li><span class="m">11월</span>제주형 공유물류 플랫폼 '모당' 구축 사업 참여</li>
+<li><span class="m">11월</span>아이콘루프 컨소시엄, 스마트팜 빅데이터 플랫폼 출시</li>
+<li><span class="m">10월</span>블록체인 기반 선박검사관리플랫폼 서비스 출시</li>
+<li><span class="m">08월</span>NH농협은행 DID 금융실명인증 서비스 출시</li>
+<li><span class="m">06월</span>포항 체인지업 그라운드에 블록체인 DID 기반 통합 신원인증 시스템 구축</li>
+<li><span class="m">01월</span>블록체인 기반 '모바일 운전면허증 서비스' ICT 규제 샌드박스 임시허가</li></ul>
+</div></div></li>
+<li class="ht-item rvl" style="--rvl-y:24px; --rvl-delay:420ms"><span class="ht-node"></span><div class="ht-yr">2020</div>
+<div class="ht-card ht-acc"><input type="checkbox" id="ht-acc-6" hidden><label for="ht-acc-6"><p>신한은행 국내 최초 금융권 DID 실명인증 상용화</p><span class="ht-chev" aria-hidden="true"></span></label><div class="ht-subwrap"><ul class="ht-sub"><li><span class="m">12월</span>제주형 관광방역 시스템 '제주안심코드' 공식 출시 (이후 누적 이용자 218만 명)</li>
+<li><span class="m">12월</span>서울블록체인지원센터와 블록체인 연동형(DID) 방문객 관리 시스템 공동개발 협약</li>
+<li><span class="m">12월</span>강원도 정부혁신 분야 공로 표창장 수상</li>
+<li><span class="m">12월</span>기술혁신형 중소기업(INNO-BIZ) 인증 획득</li>
+<li><span class="m">10월</span>고신대복음병원과 스마트 헬스케어 구축 MOU 체결</li>
+<li><span class="m">09월</span>사람인HR과 국내 최초 채용 서비스 전반에 블록체인 기술 적용</li>
+<li><span class="m">09월</span>이니텍과 DID 기반 차세대 사설인증 사업 추진 MOU 체결</li>
+<li><span class="m">09월</span>포항시·포스코·포스텍 등과 포항 데이터 생태계 구축 MOU 체결</li>
+<li><span class="m">08월</span>신한은행과 국내 최초 금융권 DID 실명인증 상용화</li>
+<li><span class="m">08월</span>제주도와 블록체인 DID 신원인증 관광방역 MOU 체결</li>
+<li><span class="m">07월</span>브릿지 라운드 투자 유치, 누적 투자금 160억 원 달성</li>
+<li><span class="m">05월</span>IITP 분산 디지털 신원 관리·보안 기술 연구개발 참여</li>
+<li><span class="m">05월</span>블록체인 기반 강원도형 만성질환 통합 관리 플랫폼 시범사업 주관 사업자 선정</li>
+<li><span class="m">04월</span>고성능 합의 알고리즘 'LFT2' 공개</li>
+<li><span class="m">02월</span>포스텍과 국내 최초 전체 졸업생 대상 블록체인 학위기 발급</li>
+<li><span class="m">01월</span>사람인HR과 블록체인 기반 인사 채용 생태계 구축 MOU 체결</li></ul>
+</div></div></li>
+<li class="ht-item rvl" style="--rvl-y:24px; --rvl-delay:490ms"><span class="ht-node"></span><div class="ht-yr">2019</div>
+<div class="ht-card ht-acc"><input type="checkbox" id="ht-acc-7" hidden><label for="ht-acc-7"><p>분산ID 'MyID' 혁신금융서비스 지정</p><span class="ht-chev" aria-hidden="true"></span></label><div class="ht-subwrap"><ul class="ht-sub"><li><span class="m">11월</span>'마이아이디 얼라이언스(MyID Alliance)' 출범, 의장사 선임</li>
+<li><span class="m">11월</span>대한민국 SW제품 품질대상 최우수상 수상</li>
+<li><span class="m">10월</span>100억 원 규모 시리즈 A 투자 유치</li>
+<li><span class="m">08월</span>loopchain V1.0 GS인증 1등급 획득</li>
+<li><span class="m">08월</span>한국생산성본부와 업무협약 체결</li>
+<li><span class="m">08월</span>미술품 공동구매 플랫폼 아트앤가이드에 블록체인 증명서 발급 서비스 적용</li>
+<li><span class="m">07월</span>블록체인 신원인증 서비스 '디패스(DPASS)' 출시</li>
+<li><span class="m">06월</span>분산ID 서비스 'MyID', 금융위원회 혁신금융서비스 금융규제 샌드박스 지정</li>
+<li><span class="m">05월</span>블록체인 증명서 발급 서비스 '브루프(broof)' 출시</li>
+<li><span class="m">04월</span>UN 산하 국제전기통신연합(ITU)과 업무협약 체결</li>
+<li><span class="m">04월</span>SBI저축은행 블록체인 개인인증 서비스 출시</li>
+<li><span class="m">02월</span>AWS 파트너 네트워크(APN) 어드밴스드 기술 파트너 선정</li></ul>
+</div></div></li>
+<li class="ht-era"><span class="dot"></span><span class="ht-era-label">2016–2018 · 기술 기반 구축</span></li>
+<li class="ht-item rvl" style="--rvl-y:24px; --rvl-delay:560ms"><span class="ht-node"></span><div class="ht-yr">2018</div>
+<div class="ht-card ht-acc"><input type="checkbox" id="ht-acc-8" hidden><label for="ht-acc-8"><p>라인과 블록체인 합작법인 설립</p><span class="ht-chev" aria-hidden="true"></span></label><div class="ht-subwrap"><ul class="ht-sub"><li><span class="m">11월</span>블록체인 발전 기여 공로, 과학기술정보통신부 장관 표창 수상</li>
+<li><span class="m">11월</span>AWS 마켓플레이스에 'ICON Development Network' 론칭</li>
+<li><span class="m">09월</span>서울시 블록체인 기반 단위업무 정보전략계획(ISP) 수립 사업자 선정</li>
+<li><span class="m">08월</span>선관위 차세대 선거시스템 구축 계획 블록체인 부문 컨설팅 사업자 선정</li>
+<li><span class="m">08월</span>'소상공인 전용 디지털광장' 플랫폼에 블록체인 기술 적용</li>
+<li><span class="m">08월</span>㈜아이콘루프로 사명 변경</li>
+<li><span class="m">06월</span>관세청 수입 통관 절차에 loopchain 기술 적용</li>
+<li><span class="m">05월</span>라인과 블록체인 합작법인 설립, 링크체인 메인넷 개발</li>
+<li><span class="m">05월</span>'CHAIN ID'-삼성패스 연계 운영 업무 협약 체결</li>
+<li><span class="m">03월</span>기업부설연구소 설립 인정</li>
+<li><span class="m">01월</span>1세대 퍼블릭 메인넷 ICON 출시에 기술 파트너로 참여, 코어 엔진 loopchain 제공</li></ul>
+</div></div></li>
+<li class="ht-item rvl" style="--rvl-y:24px; --rvl-delay:630ms"><span class="ht-node"></span><div class="ht-yr">2017</div>
+<div class="ht-card ht-acc"><input type="checkbox" id="ht-acc-9" hidden><label for="ht-acc-9"><p>세계 최초 블록체인 공동인증 'CHAIN ID' 상용화</p><span class="ht-chev" aria-hidden="true"></span></label><div class="ht-subwrap"><ul class="ht-sub"><li><span class="m">12월</span>U-Coin·위비코인 파일럿 서비스 출시</li>
+<li><span class="m">11월</span>교보생명과 블록체인 기반 보험금 자동청구 서비스 출시</li>
+<li><span class="m">11월</span>금융투자업권 개인정보노출자 사고정보 시스템 출시</li>
+<li><span class="m">10월</span>금융투자업권 공동인증 서비스 'CHAIN ID' 출시 — 증권사 26개사 참여</li>
+<li><span class="m">09월</span>국가전략 프로젝트 'P-HIS 컨소시엄' 기술 파트너 참여</li></ul>
+</div></div></li>
+<li class="ht-item rvl" style="--rvl-y:24px; --rvl-delay:700ms"><span class="ht-node"></span><div class="ht-yr">2016</div>
+<div class="ht-card ht-acc"><input type="checkbox" id="ht-acc-10" hidden><label for="ht-acc-10"><p>(주)더루프 설립, 국내 1세대 Web3 인프라 기업 출발</p><span class="ht-chev" aria-hidden="true"></span></label><div class="ht-subwrap"><ul class="ht-sub"><li><span class="m">12월</span>'금융투자업권 블록체인 컨소시엄' 출범</li>
+<li><span class="m">08월</span>서강대학교 내 블록체인 기반 디지털화폐 PoC 완료</li>
+<li><span class="m">06월</span>서울시 S-coin 시범사업 추진</li>
+<li><span class="m">05월</span>(주)더루프 설립</li>
+<li><span class="m">05월</span>서강대학교와 블록체인 공동사업화 업무협약 체결</li></ul>
+</div></div></li></ul>
 </div>
 <script>/* History 아코디언: 하나만 열림 유지 */
-document.querySelectorAll('.ht-acc input').forEach(function(i){{
-  i.addEventListener('change', function(){{
-    if (i.checked) document.querySelectorAll('.ht-acc input').forEach(function(o){{ if (o !== i) o.checked = false; }});
-  }});
-}});
+document.querySelectorAll('.ht-acc input').forEach(function(i){
+  i.addEventListener('change', function(){
+    if (i.checked) document.querySelectorAll('.ht-acc input').forEach(function(o){ if (o !== i) o.checked = false; });
+  });
+});
 </script></section>
 <section><div class="shell about-grid">
   <div class="about-globe">
