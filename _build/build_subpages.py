@@ -171,6 +171,21 @@ body.company .hero-vision{ position:relative; z-index:1; margin:0 auto; padding-
   body.company .phero-inner{ padding-bottom:260px }
 }
 body.company .tr-flush .sec{ padding-top:0 }  /* Track Record: 위쪽 패딩 제거 (Vision 패널에 붙임) */
+/* Industry Firsts 최초 실적: 도식 패널 안 불릿 리스트 + 디바이더 (얼라이언스 노드 아래 합체, 소제목으로 묶음 구분) */
+body.company .firsts .firsts-list-wrap{ margin-top:var(--space-48) }
+body.company .firsts .firsts-list-wrap .ally-num{ font-size:var(--text-22) }  /* 기본 28에서 3토큰 다운 */
+body.company .firsts .firsts-list{ margin-top:var(--space-16) }
+body.company .firsts .firsts-list li{ display:flex; align-items:center; gap:1rem;
+  padding-block:var(--space-24); font-size:var(--text-22); font-weight:500; color:var(--ink);
+  line-height:var(--leading-heading) }
+body.company .firsts .firsts-list{ display:grid; grid-template-columns:1fr 1fr; column-gap:var(--grid-gap) }  /* 2×2 배열 */
+body.company .firsts .firsts-list li:nth-child(n+3){ border-top:1px solid rgba(var(--ink-rgb),.1) }  /* 둘째 줄에만 디바이더 */
+@media (max-width:767px){
+  body.company .firsts .firsts-list{ grid-template-columns:1fr }
+  body.company .firsts .firsts-list li + li{ border-top:1px solid rgba(var(--ink-rgb),.1) }
+}
+body.company .firsts .firsts-list li::before{ content:''; flex:none; width:.375rem; height:.375rem;
+  border-radius:50%; background:var(--purple-500) }
 /* Industry Firsts 도식화: 의장사 허브 + 스템, 카드는 노드 점 붙은 항목으로 */
 /* firsts 패널: ParaSta ps-flow처럼 그레이 배경(닷 패턴)으로 감쌈 */
 body.company .firsts .firsts-panel{ background-color:rgba(var(--ink-rgb),.04); border-radius:var(--radius-card);
@@ -187,25 +202,81 @@ body.company .firsts .firsts-branch .fb-l, body.company .firsts .firsts-branch .
 body.company .firsts .firsts-branch .fb-l{ left:25% }
 body.company .firsts .firsts-branch .fb-r{ left:75% }
 /* 의장사 허브: WalletFi 코어 원 스타일(화이트 원 + gray-400 보더), 작게 + 로고 치환 */
-body.company .firsts .chair-badge{ flex-direction:column; align-items:center; justify-content:center; gap:.5rem;
-  width:8.5rem; height:8.5rem; padding:1rem; border-radius:50%; background:var(--white); border:1px solid rgba(var(--ink-rgb),.14); text-align:center;
+body.company .firsts .chair-badge{ flex-direction:column; align-items:center; justify-content:center; gap:.625rem;
+  width:12.5rem; height:12.5rem; padding:1.25rem; border-radius:50%; background:var(--white); border:1px solid rgba(var(--ink-rgb),.14); text-align:center;
   box-shadow:0 8px 24px rgba(var(--ink-rgb),.06); transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s }
 @media (hover:hover){ body.company .firsts .chair-badge:hover{ transform:scale(1.03); box-shadow:0 16px 40px rgba(var(--ink-rgb),.1) } }
-body.company .firsts .chair-badge .pm-mark{ display:block; width:3.7rem; height:3rem; overflow:hidden; flex:none }
-body.company .firsts .chair-badge .pm-mark img{ height:3rem; width:auto; max-width:none; display:block }  /* 가로 로고(300×40)에서 좌측 컬러 심볼(0~48.4u)만 크롭 — 흰색 워드마크는 흰 원 위에서 안 보임 */
-body.company .firsts .chair-badge i{ font-size:var(--text-16); font-style:normal; font-weight:500; color:rgba(var(--ink-rgb),.6) }
+body.company .firsts .chair-badge .pm-mark{ display:block; width:4.95rem; height:4rem; overflow:hidden; flex:none }
+body.company .firsts .chair-badge .pm-mark img{ height:4rem; width:auto; max-width:none; display:block }  /* 가로 로고(300×40)에서 좌측 컬러 심볼(0~48.4u)만 크롭 — 흰색 워드마크는 흰 원 위에서 안 보임 */
+body.company .firsts .chair-badge i{ font-size:var(--text-20); font-style:normal; font-weight:500; color:var(--ink) }  /* 본문 검정(잉크)과 동일 토큰 + 한 토큰 업 */
 /* firsts 카드: ParaSta ps-flow 밴드 스타일 — 화이트 + 소프트 보더 + 그림자 */
 body.company .firsts .work-card{ min-height:0; border-radius:var(--radius-card-sm); padding:1.75rem 2rem;
   background:var(--white); border:1px solid rgba(var(--ink-rgb),.14); box-shadow:0 8px 24px rgba(var(--ink-rgb),.06);
   transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s }
 @media (hover:hover){ body.company .firsts .work-card:hover{ transform:scale(1.03); box-shadow:0 16px 40px rgba(var(--ink-rgb),.1) } }
 body.company .firsts .work-card .work-bottom{ position:static; inset:auto }  /* 이미지 카드용 하단 고정 해제 → 일반 패딩 */
+/* 얼라이언스 노드: 좌측 아이콘 영역 (로고 플레이스홀더 원) */
+body.company .firsts .work-card{ display:flex; align-items:center; gap:var(--space-20) }
+body.company .firsts .work-card::before{ content:''; flex:none; width:4.5rem; height:4.5rem; border-radius:50%; background:rgba(var(--ink-rgb),.08) }
+body.company .firsts .work-card .work-bottom p{ margin-top:.25rem; font-size:var(--text-16) }  /* 타이틀-서브카피 간격 축소(.5rem→.25rem) + 한 토큰 업(14→16) */
 body.company .firsts .work-card .work-bottom h3{ font-size:var(--text-22) }
 body.company .firsts .work-card p:empty{ display:none }
 /* Track Record 카드: 대시보드(work-card t-gray) 카드와 동일 톤 — 라이트 그레이 채움·라운드·간격, 이미지 영역 없음 */
 body.company .tr-flush .num-card{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); border:none;
   border-radius:var(--radius-card); padding:2rem; transition:transform .35s cubic-bezier(.2,.8,.2,1) }
 @media (hover:hover){ body.company .tr-flush .num-card:hover{ transform:scale(1.03) } }
+body.company .tr-flush .num-card p{ font-size:var(--text-18) }  /* 서브카피 한 토큰 업 (기본 text-16) */
+body.company .tr-flush .num-card .n{ font-size:var(--text-36) }  /* 숫자 한 토큰 다운 (기본 text-40) */
+body.company .tr-flush .num-card .cap{ margin-bottom:var(--space-24) }  /* 라벨-숫자 간격 2배 (기본 .75rem) */
+/* 좌측 일러스트 영역: 카드 높이만큼의 정사각형, 카드 모서리에 패딩 없이 밀착 — 마크업 변경 없이 그리드+pseudo */
+body.company .tr-flush .num-card{ display:grid; grid-template-columns:auto 1fr; grid-template-rows:auto auto auto; padding:0 }
+body.company .tr-flush .num-card::before{ content:''; grid-column:1; grid-row:1 / 4; height:100%; aspect-ratio:4/5;  /* 3:4에서 폭 소폭 확대 */
+  background-color:color-mix(in srgb, var(--ink) 12%, var(--white)); border-radius:var(--radius-card) 0 0 var(--radius-card);
+  background-repeat:no-repeat; background-position:center; background-size:3rem auto }
+/* 카드별 라인 아이콘 (기존 .icn 문법: 스트로크 1.4 · 라운드 캡 · 잉크 톤) — 순서: 깃발/코인 스택/추세 차트/메달 */
+body.company .tr-flush .cards-2 li:nth-child(1) .num-card::before{ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230E0C27' stroke-opacity='.55' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 21V3'/%3E%3Cpath d='M6 4h11l-2.5 3.5L17 11H6'/%3E%3C/svg%3E") }
+body.company .tr-flush .cards-2 li:nth-child(2) .num-card::before{ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230E0C27' stroke-opacity='.55' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cellipse cx='12' cy='6.5' rx='7' ry='3'/%3E%3Cpath d='M5 6.5v11c0 1.66 3.13 3 7 3s7-1.34 7-3v-11'/%3E%3Cpath d='M5 12c0 1.66 3.13 3 7 3s7-1.34 7-3'/%3E%3C/svg%3E") }
+body.company .tr-flush .cards-2 li:nth-child(3) .num-card::before{ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230E0C27' stroke-opacity='.55' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 4v16h16'/%3E%3Cpath d='M7.5 14.5l4-4 3 3 5.5-5.5'/%3E%3Cpath d='M16.5 8H20v3.5'/%3E%3C/svg%3E") }
+body.company .tr-flush .cards-2 li:nth-child(4) .num-card::before{ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230E0C27' stroke-opacity='.55' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='9.5' r='5.25'/%3E%3Cpath d='M9.75 13.9L8 21l4-2.25L16 21l-1.75-7.1'/%3E%3Cpath d='M10 9.5l1.5 1.5 2.75-2.75'/%3E%3C/svg%3E") }
+body.company .tr-flush .num-card > *{ grid-column:2; padding-inline:var(--space-24) var(--space-32) }  /* 좌측(이미지-텍스트 간격)만 한 토큰 축소 */
+body.company .tr-flush .num-card .cap{ padding-top:var(--space-32) }
+body.company .tr-flush .num-card p{ padding-bottom:var(--space-32) }
+/* Recognition 카드: 상단에 실제 인증 로고 들어갈 아이콘 영역 (플레이스홀더 원) — 오프셋은 공통 카드 패딩(1.5rem, ≥640px 2rem)과 동기화 */
+body.company .recog .work-card::before{ content:''; position:absolute; top:1.5rem; left:1.5rem;
+  width:5rem; height:5rem; border-radius:50%; background:rgba(var(--ink-rgb),.08) }
+@media (min-width:640px){ body.company .recog .work-card::before{ top:2rem; left:2rem } }
+body.company .recog .work-card .work-bottom h3{ font-size:var(--text-26) }  /* 22 → 24 → 26 두 토큰 업 (사용자 확정) */
+body.company .recog .work-card .work-bottom p{ font-size:var(--text-16) }  /* 서브카피 한 토큰 업 (기본 text-14) */
+/* History 드롭다운: 체크박스 토글 아코디언 — 대표내용은 label, 세부는 타임라인 레일 위 연보라 미니 노드 */
+body.company .ht-acc{ padding:0 }
+body.company .ht-acc label{ cursor:pointer; display:flex; align-items:center; justify-content:space-between;
+  gap:1rem; padding:1.3rem 1.6rem }
+body.company .ht-acc .ht-chev{ flex:none; width:.625rem; height:.625rem; margin-top:-.25rem;
+  border-right:2px solid rgba(var(--ink-rgb),.45); border-bottom:2px solid rgba(var(--ink-rgb),.45);
+  transform:rotate(45deg); transition:transform .45s cubic-bezier(.16,1,.3,1) }
+body.company .ht-acc input:checked ~ label .ht-chev{ transform:rotate(225deg); margin-top:.25rem }
+/* 부드러운 펼침·접힘: grid-rows 0fr↔1fr 트랜지션. 좌측으로 확장한 클립 박스가 레일 노드까지 포함 */
+body.company .ht-subwrap{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s cubic-bezier(.16,1,.3,1);
+  margin-left:-10.725rem }  /* 연도 칼럼 5.5 + 갭 1.75 + 카드 패딩 1.6 + 레일까지 1.875 */
+body.company .ht-acc input:checked ~ .ht-subwrap{ grid-template-rows:1fr }
+body.company .ht-sub{ list-style:none; margin:0; overflow:hidden; min-height:0; padding-left:12.325rem;  /* 마진 상쇄 + 카드 좌패딩 1.6 */
+  display:flex; flex-direction:column; gap:.625rem; opacity:0; transform:translateY(-4px);
+  transition:opacity .4s ease .05s, transform .5s cubic-bezier(.16,1,.3,1) }
+body.company .ht-acc input:checked ~ .ht-subwrap .ht-sub{ opacity:1; transform:none }
+body.company .ht-sub li{ position:relative; padding:0 1.6rem 0 0; font-size:var(--text-16); line-height:var(--leading-body);
+  color:rgba(var(--ink-rgb),.62) }
+body.company .ht-sub li:last-child{ padding-bottom:1.3rem }
+body.company .ht-sub li::before{ content:''; position:absolute; left:-10.725rem; top:.5em; width:7px; height:7px; border-radius:50%;
+  margin-left:1px; background:var(--purple-300) }  /* 레일 위: 메인 노드(11px 보라)보다 작고 연한 연보라, 레일 센터 정렬 실측 보정 */
+@media (max-width:639px){  /* 모바일: 연도 상단 배치라 레일까지 거리 축소 */
+  body.company .ht-subwrap{ margin-left:-3.475rem }
+  body.company .ht-sub{ padding-left:5.075rem }
+  body.company .ht-sub li::before{ left:-3.14rem }
+}
+/* 펼침 시 연도·노드는 대표행 첫 줄 중심(라벨 패딩 1.3 + 행간 절반 .9 = 2.2rem)에 고정 */
+body.company .ht-item{ align-items:start }
+body.company .ht-yr{ line-height:1; padding-top:calc(2.2rem - .875rem) }  /* 연도 중심 = 2.2rem (text-28 절반 보정) */
+body.company .ht-node{ top:calc(2.2rem + 1.25rem); transform:translateY(-50%) }  /* +아이템 상단 패딩 1.25 (absolute는 패딩 미반영) */
 body.company .phero-text .eyebrow, body.contact .phero-text .eyebrow{ display:none }   /* 히어로 아이브로우 제거 (About·Contact) */
 /* Contact 전용: 그래픽 없는 히어로 → 여백 축소로 문의 섹션을 위로, 카드는 솔루션 톤(불투명 그레이·테두리 없음) */
 body.contact .phero-inner{ padding-top:9rem; padding-bottom:var(--space-32); align-items:flex-start; text-align:left }
@@ -745,7 +816,7 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .ht-list::before{ content:''; position:absolute; left:5px; top:.5rem; bottom:.5rem; width:2px; background:var(--gray-100) }
 .ht-item{ position:relative; display:grid; grid-template-columns:5.5rem 1fr; gap:1.75rem; align-items:center; padding:1.25rem 0 }
 .ht-node{ position:absolute; left:-2rem; top:50%; transform:translateY(-50%); width:11px; height:11px; border-radius:50%;
-  background:var(--purple-500); margin-left:-0.5px }
+  background:var(--purple-500); margin-left:.5px }  /* 레일(5~7px, 2px선) 중심 정렬: -2rem+5.5px+.5px = 레일 센터 */
 .ht-yr{ font-size:var(--text-28); font-weight:700; letter-spacing:-.02em; color:var(--ink) }
 .ht-card{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); border-radius:var(--radius-card-sm); padding:1.3rem 1.6rem }
 .ht-card p{ font-size:var(--text-18); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.78); margin:0 }
@@ -1330,7 +1401,7 @@ document.querySelectorAll('[data-line-reveal], [data-line-stagger]').forEach(el 
     if (!m) return null;
     const target = parseInt(m[0].replace(/,/g, ''), 10);
     if (target < 10) return null;               // 'GS 1등급' 등 소수치는 정적 유지
-    return { el, full, target, start: m.index, len: m[0].length, comma: m[0].includes(',') };
+    return { el, full, target, from: Math.max(0, target - 10), start: m.index, len: m[0].length, comma: m[0].includes(',') };  // 목표 −10부터 촤라락 (250은 240부터)
   }).filter(Boolean);
   if (!items.length) return;
   const fmt = (n, c) => c ? n.toLocaleString('en-US') : String(n);
@@ -1341,7 +1412,7 @@ document.querySelectorAll('[data-line-reveal], [data-line-stagger]').forEach(el 
     function step(ts){
       if (s === null) s = ts;
       const p = Math.min(1, (ts - s) / dur);
-      it.el.textContent = pre + fmt(Math.round(ease(p) * it.target), it.comma) + suf;
+      it.el.textContent = pre + fmt(Math.round(it.from + ease(p) * (it.target - it.from)), it.comma) + suf;
       if (p < 1) requestAnimationFrame(step); else it.el.textContent = it.full;
     }
     requestAnimationFrame(step);
@@ -2040,12 +2111,21 @@ def cert_marquee(items):
 
 def hist_timeline(items):
     # History C안: 세로 좌측 레일 + 노드 + 큰 연도 + 그레이 내용 카드
-    lis = ''.join(
-        f'<li class="ht-item rvl" style="--rvl-y:24px; --rvl-delay:{i*70}ms">'
-        f'<span class="ht-node"></span><div class="ht-yr">{y}</div>'
-        f'<div class="ht-card"><p>{t}</p></div></li>'
-        for i, (y, t) in enumerate(items))
-    return f'<ul class="ht-list">{lis}</ul>'
+    # 항목: (연도, 대표내용) 또는 (연도, 대표내용, [세부...]) — 세부가 있으면 <details> 드롭다운
+    lis = []
+    for i, it in enumerate(items):
+        y, t, subs = (it[0], it[1], it[2] if len(it) > 2 else None)
+        if subs:
+            sub_lis = ''.join(f'<li>{s}</li>' for s in subs)
+            body = (f'<div class="ht-card ht-acc">'
+                    f'<input type="checkbox" id="ht-acc-{i}" hidden>'
+                    f'<label for="ht-acc-{i}"><p>{t}</p><span class="ht-chev" aria-hidden="true"></span></label>'
+                    f'<div class="ht-subwrap"><ul class="ht-sub">{sub_lis}</ul></div></div>')
+        else:
+            body = f'<div class="ht-card"><p>{t}</p></div>'
+        lis.append(f'<li class="ht-item rvl" style="--rvl-y:24px; --rvl-delay:{i*70}ms">'
+                   f'<span class="ht-node"></span><div class="ht-yr">{y}</div>{body}</li>')
+    return f'<ul class="ht-list">{"".join(lis)}</ul>'
 
 # company 파트너 로고 세트 (미래에셋 포함)
 COMPANY_LOGOS = [('logo-samsung', '삼성'), ('logo-samsung-securities', '삼성증권'), ('logo-mirae', '미래에셋'),
@@ -2197,7 +2277,7 @@ PAGES['company.html'] = dict(
     desc='파라메타는 신뢰할 수 있는 블록체인 기술을 바탕으로, 금융·기업·공공 등 다양한 산업에서 활용되는 디지털 인프라와 서비스를 제공합니다.',
     eyebrow='Company',
     h1_lines=['About PARAMETA'],
-    lead='Web2의 전문성과 Web3 기술을 연결해<br>지갑 중심의 WalletFi 생태계를 만듭니다.',
+    lead='Web2의 경험과 이해에 Web3 기술을 더해<br>지갑 중심의 WalletFi 생태계를 만듭니다.',
     crumb='Company — 회사소개',
     body_class='company',  # 라이트 화이트 히어로 + evervault풍 문자 매트릭스 (확정)
     hero_visual='',
@@ -2209,7 +2289,7 @@ PAGES['company.html'] = dict(
     # 히어로 배경(라이트+패턴)을 안 짤리게 통으로 — Vision을 히어로 안으로 편입, 다크 박스는 카드로 얹음
     hero_extra=f'''<div class="shell hero-vision">
   <div class="vision-panel rvl" style="--rvl-y:40px; --rvl-s:.99">
-  {sec_head('Vision', 'Web2와 Web3를 잇는 WalletFi 생태계', '파라메타는 금융, 공공, 민간 서비스에서 쌓은 Web2 전문성에 퍼블릭 블록체인과 DeFi 기반의 Web3 기술을 더합니다. 이를 바탕으로 자산 보관과 거래, 다양한 금융 서비스를 하나의 디지털 지갑에서 이용하는 WalletFi 생태계를 만들어갑니다.', mx='none', lead_mx='52rem')}
+  {sec_head('Vision', 'Web2와 Web3를 잇는 WalletFi 생태계', '파라메타는 금융, 공공, 민간 서비스에 블록체인을 전개해 온 경험으로 규제와 시장 환경을 깊이 이해하고, 그 위에 퍼블릭 블록체인과 DeFi 기반의 Web3 기술을 더합니다. 이를 바탕으로 자산 보관과 거래, 다양한 금융 서비스를 하나의 디지털 지갑에서 이용하는 WalletFi 생태계를 만들어갑니다.', mx='none', lead_mx='52rem')}
   <div class="wfd rvl" style="--rvl-y:24px">
     <div class="wfd-band wfd-side">
       <div class="wfd-t">전통금융 <em>TradFi</em></div>
@@ -2242,38 +2322,38 @@ PAGES['company.html'] = dict(
     dict(cap='Quality', n='GS 1등급', sub='loopchain SW품질 인증'),
   ], cols=2)}
 </div></section>
-<section><div class="shell sec">
-  {sec_head('Trusted By', '파라메타의 10년에 함께 투자한 파트너', '정책금융기관부터 금융그룹 CVC까지, 누적 250억 원을 함께했습니다.')}
-  {ex_cards([
-    ('기술보증기금', '#005BAC', 'white'),
-    ('한국성장금융투자운용', '#003876', 'white'),
-    ('코리아에셋투자증권', '#0B2D5B', 'white'),
-    ('L&S벤처캐피탈', '#2E7D6B', 'white'),
-    ('TS인베스트먼트', '#1F3A93', 'white'),
-    ('키움인베스트먼트', '#E60012', 'white'),
-    ('패스파인더에이치', '#2A7DE1', 'white'),
-    ('케이클라비스인베스트먼트', '#3D3A8C', 'white'),
-    ('신한벤처투자', '#0046FF', 'white'),
-  ])}
-  <div class="rvl ally-marquee-wrap" style="margin-top:3rem">
-    <div class="ally-head"><span class="ally-num">인증 · 수상</span></div>
-    {cert_marquee(['GS인증 1등급 (loopchain)','기술보증기금 TI-1 등급','과학기술정보통신부 장관 표창','KISA 기술특례상장 컨설팅 A등급 (2년 연속)','금융위원회 혁신금융서비스 지정'])}
-  </div>
+<section class="recog"><div class="shell sec">
+  {sec_head('Recognition', '인증과 수상으로 검증된 기술력', '국가 공인 인증부터 정부 표창까지, 파라메타의 기술은 대외적으로 인정받아 왔습니다.')}
+  {cards_wrap([
+    card('GS인증 1등급', 'loopchain 소프트웨어 품질 인증', tone='gray'),
+    card('기술신용평가 TI-1 등급', '기술보증기금 최고 등급', tone='gray'),
+    card('CSAP 인증', '블록체인 서비스 최초 클라우드 보안 인증 (2025)', tone='gray'),
+    card('과학기술정보통신부 장관 표창', '2023 블록체인 진흥주간', tone='gray'),
+    card('KISA 기술특례상장<br>컨설팅 A등급', '2년 연속 획득', tone='gray'),
+    card('혁신금융서비스 지정', '금융위원회', tone='gray'),
+  ], cols=3)}
 </div></section>
 <section class="firsts"><div class="shell sec">
   {sec_head('Industry Firsts', '파라메타는 업계 주요 플레이어들과 함께 산업을 선도하고 있습니다', '파라메타는 블록체인 산업이 처음 가는 길을 먼저 열며 시장을 선도해왔습니다.')}
   <div class="firsts-panel">
     <div class="rvl firsts-hub">
-      <span class="chair-badge"><span class="pm-mark"><img src="assets/brand/logo-horizontal-color-dark.svg" alt="PARAMETA"></span><i>의장사</i></span>
+      <span class="chair-badge"><span class="pm-mark"><img src="assets/brand/logo-horizontal-color-dark.svg" alt="PARAMETA"></span><i>PARAMETA</i></span>
       <span class="firsts-stem"></span>
     </div>
     <div class="firsts-branch rvl" aria-hidden="true"><span class="fb-l"></span><span class="fb-r"></span></div>
     {cards_wrap([
-      card('세계 최초 블록체인 공동인증 상용화', tone='gray', media=False),
-      card('국내 최초 금융권 DID 실명인증 상용화', tone='gray', media=False),
-      card('국내 최초 블록체인 서비스 CSAP 인증 획득', tone='gray', media=False),
-      card('국내 최초 DID Method Registry 등재', tone='gray', media=False),
+      card('Stablecoin Alliance', '스테이블코인 생태계 협의체 · 초대 의장사', tone='gray', media=False),
+      card('MyID Alliance', 'DID 신원인증 생태계 · 결성 주도', tone='gray', media=False),
     ], cols=2)}
+    <div class="rvl firsts-list-wrap">
+      <div class="ally-head"><span class="ally-num">Industry Firsts</span></div>
+      <ul class="firsts-list">
+        <li>세계 최초 블록체인 공동인증 상용화</li>
+        <li>국내 최초 금융권 DID 실명인증 상용화</li>
+        <li>국내 최초 블록체인 서비스 CSAP 인증 획득</li>
+        <li>국내 최초 DID Method Registry 등재</li>
+      </ul>
+    </div>
   </div>
   <div class="rvl ally-marquee-wrap" style="margin-top:3rem">
     <div class="ally-head"><span class="ally-num">86+</span><span class="ally-cap">얼라이언스 파트너사</span></div>
@@ -2283,16 +2363,50 @@ PAGES['company.html'] = dict(
 <section><div class="shell sec" style="padding-top:0">
   {sec_head('History', '디지털자산 시장을 만들어온<br>파라메타의 10년', '국내 1세대 Web3 인프라 기업으로서 시장의 기준을 만들어왔습니다.')}
   {hist_timeline([
-    ('2026', 'Stablecoin Alliance 초대 의장사 / ADB ABMF 국경 간 거래 표준모델 발표'),
-    ('2025', 'MyID 2.0 블록체인 서비스 최초 CSAP 인증 / 조달청 디지털마켓 등록'),
-    ('2024', 'K-BTF 공공 블록체인 공동인프라 사업자 선정'),
-    ('2023', 'PARAMETA 리브랜딩(구 아이콘루프) / 시리즈 C 투자유치'),
-    ('2020', '제주안심코드(전자출입명부) 누적 이용자 218만 명 / 신한은행 DID 금융실명인증 상용화'),
-    ('2019', 'loopchain GS인증 1등급 취득 / broof(블록체인 증명서) 출시 / 금융위 혁신금융서비스 지정'),
-    ('2018', "1세대 퍼블릭 메인넷 ICON 출시 / 라인 블록체인 합작법인 '언체인' 설립(아이콘루프 시절)"),
-    ('2016', '(주)더루프 설립, 국내 1세대 Web3 인프라 기업 출발'),
+    ('2026', 'Stablecoin Alliance 초대 의장사 / ADB ABMF 국경 간 거래 표준모델 발표', [
+      'Stablecoin Alliance 결성, 초대 의장사 선임',
+      'ADB 주관 채권 포럼에서 온체인 KYC 기반 국경 간 거래 표준 모델 발표',
+      '스테이블코인, STO 무료 컨설팅 프로그램 운영',
+    ]),
+    ('2025', 'MyID 2.0 블록체인 서비스 최초 CSAP 인증 / 조달청 디지털마켓 등록', [
+      'MyID 2.0, 블록체인 서비스 최초 CSAP 클라우드 보안 인증 획득',
+      '조달청 디지털서비스몰 등록으로 공공기관 도입 경로 확보',
+    ]),
+    ('2024', 'K-BTF 공공 블록체인 공동인프라 사업자 선정', [
+      'K-BTF 공공 블록체인 공동인프라 사업자 선정',
+    ]),
+    ('2023', 'PARAMETA 리브랜딩(구 아이콘루프) / 시리즈 C 투자유치', [
+      'PARAMETA로 사명 변경 (구 아이콘루프)',
+      '시리즈 C 투자유치',
+      '기술신용평가 최고 등급 TI-1 획득',
+      '부동산 NPL, 모빌리티, 태양광 토큰증권 플랫폼 구축 협력',
+    ]),
+    ('2020', '제주안심코드(전자출입명부) 누적 이용자 218만 명 / 신한은행 DID 금융실명인증 상용화', [
+      '제주안심코드 전자출입명부 운영, 누적 이용자 218만 명',
+      '신한은행 DID 금융실명인증 상용화',
+    ]),
+    ('2019', 'loopchain GS인증 1등급 취득 / broof(블록체인 증명서) 출시 / 금융위 혁신금융서비스 지정', [
+      'loopchain GS인증 1등급 취득',
+      '블록체인 증명서 발급 서비스 broof 출시',
+      '금융위원회 혁신금융서비스 지정',
+      'MyID Alliance 결성 주도',
+    ]),
+    ('2018', "1세대 퍼블릭 메인넷 ICON 출시 / 라인 블록체인 합작법인 '언체인' 설립(아이콘루프 시절)", [
+      '1세대 퍼블릭 메인넷 ICON 출시',
+      "라인과 블록체인 합작법인 '언체인' 설립",
+    ]),
+    ('2016', '(주)더루프 설립, 국내 1세대 Web3 인프라 기업 출발', [
+      '(주)더루프 설립, 국내 1세대 Web3 인프라 기업 출발',
+    ]),
   ])}
-</div></section>
+</div>
+<script>/* History 아코디언: 하나만 열림 유지 */
+document.querySelectorAll('.ht-acc input').forEach(function(i){{
+  i.addEventListener('change', function(){{
+    if (i.checked) document.querySelectorAll('.ht-acc input').forEach(function(o){{ if (o !== i) o.checked = false; }});
+  }});
+}});
+</script></section>
 <section><div class="shell about-grid">
   <div class="about-globe">
     <svg class="icn about-globe-bg" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9.25" stroke="currentColor" stroke-width="1.4"/><ellipse cx="12" cy="12" rx="4.2" ry="9.25" stroke="currentColor" stroke-width="1.4"/><path stroke="currentColor" stroke-width="1.4" stroke-linecap="round" d="M2.75 12h18.5"/></svg>
