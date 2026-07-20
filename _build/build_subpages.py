@@ -3698,7 +3698,7 @@ SHELL = """<!DOCTYPE html>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <script src="assets/nav.js?v=21" defer></script>
-<script src="assets/chatbot.js?v=3" defer></script>
+<script src="assets/chatbot.js?v=4" defer></script>
 <style>__CSS____EXTRA_CSS__</style>
 </head>
 <body class="__BODYCLASS__">
