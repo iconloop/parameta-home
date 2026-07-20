@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<script src="assets/nav.js?v=25" defer></script>
+<script src="assets/nav.js?v=26" defer></script>
 <script src="assets/chatbot.js?v=4" defer></script>
 <style>
 /* ============ RESET / BASE ============ */
@@ -159,7 +159,7 @@ html.chat-open #banner-fixed{ right:26rem }
 .brand-btn{ display:flex; align-items:center; gap:.5rem; font-size:var(--text-18); font-weight:600; letter-spacing:.02em }
 .brand-btn .icn{ font-size:var(--text-20); color:var(--accent) }
 .nav-primary{ display:none }
-.nav-primary ul{ display:flex; gap:2rem; font-size:14px; font-weight:500 } /* GNB는 px 고정 */
+.nav-primary ul{ display:flex; gap:2rem; font-size:var(--text-14); font-weight:500 } /* GNB도 유동 토큰 — 브레이크포인트별 토큰 계단 */
 .nav-primary li button{ display:inline-flex; align-items:center; gap:.25rem }
 .nav-lift{ display:inline-flex; transition:transform .34s cubic-bezier(.2,.8,.2,1), opacity .34s cubic-bezier(.2,.8,.2,1); opacity:.8 }
 @media (hover:hover){ .nav-primary li a:hover .nav-lift, .nav-primary li button:hover .nav-lift{ transform:translateY(-2px); opacity:1 } }
@@ -227,14 +227,14 @@ html.chat-open #banner-fixed{ right:26rem }
 @media (min-width:1024px){
   .header-inner{ padding:12px 2rem }
   #header .brand-logo{ height:20px }
-  .nav-primary ul{ font-size:16px } .nav-caret{ font-size:16px }
+  .nav-primary ul{ font-size:var(--text-16) } .nav-caret{ font-size:var(--text-16) }   /* 1024~1535: 토큰 16 (1100대에서 너무 작아져 한 단계 업) */
   #header .lang-btn .lang-globe{ width:24px; height:24px } }
 /* 큰 화면: GNB 요소만 약간 키우되 헤더 "높이"는 표준 유지(≈76~80px). 패딩·지구본은 vw로 안 키움 */
 @media (min-width:1536px){
   .header-inner{ padding:12px 2.5rem }   /* 높이 좌우값은 px 고정 (유동 root 영향 차단) */
   .brand-btn{ font-size:var(--text-20) } .brand-btn .icn{ font-size:var(--text-22) }
   #header .brand-logo{ height:24px }
-  .nav-primary ul{ font-size:16px; gap:2.5rem } .nav-caret{ font-size:16px }
+  .nav-primary ul{ font-size:var(--text-16); gap:2.5rem } .nav-caret{ font-size:var(--text-16) }   /* 1536~1919: 토큰 16 */
   #header .lang-btn .lang-globe{ width:24px; height:24px }
   .clock-chip{ font-size:13px; padding:.55rem .85rem } }
 /* ≥1920: 요소만 한 단계 더 크게, 높이는 여전히 고정 */
@@ -242,7 +242,7 @@ html.chat-open #banner-fixed{ right:26rem }
   .header-inner{ padding:12px clamp(3rem, 2.5vw, 4.5rem) }
   .brand-btn{ font-size:var(--text-22) } .brand-btn .icn{ font-size:var(--text-24) }
   #header .brand-logo{ height:28px }
-  .nav-primary ul{ font-size:20px; gap:clamp(2.5rem, 2vw, 4rem) } .nav-caret{ font-size:20px }
+  .nav-primary ul{ font-size:var(--text-18); gap:clamp(2.5rem, 2vw, 4rem) } .nav-caret{ font-size:var(--text-18) }   /* 1920+: 토큰 18 (유동 root가 키워줘서 한 단계 낮춤) */
   #header .lang-btn .lang-globe{ width:28px; height:28px } }
 
 /* ============ DARK HERO 모드 (배경 이미지가 다크일 때 — body.hero-dark) ============ */
@@ -1223,8 +1223,7 @@ document.getElementById('hcPrev').addEventListener('click', () => hcGo(-1));
 const WORKS = [
   { name:'ParaSta', cat:'Platform', year:'2026', href:'parasta.html', desc:'발행부터 지갑, 신원확인, 오케스트레이션까지 디지털자산 서비스의 핵심 기능을 하나의 플랫폼에서 제공합니다.', tags:['토큰 발행','지갑','온체인 KYC'] },
   { name:'Port X', cat:'Exchange', year:'2026', href:'portx.html', desc:'거래소 구축에 필요한 핵심 기능을 하나의 솔루션으로 제공해, 개발 부담을 줄이고 빠른 출시를 지원합니다.', tags:['화이트라벨','거래 연동','빠른 출시'] },
-  { name:'MyID', cat:'Identity', year:'2026', href:'myid.html', desc:'고객사의 서비스 환경에 맞는 DID 기반 신원확인 체계를 쉽고 유연하게 구축할 수 있도록 지원합니다.', tags:['DID','신원인증','K-BTF'] },
-  { name:'K-BTF', cat:'Public', year:'2026', href:'kbtf.html', desc:'블록체인 서비스 최초로 CSAP 인증을 받은 공공기관 전용 DID·NFT 플랫폼입니다. 구축 없이 약 1주일 만에 도입합니다.', tags:['CSAP 인증','공공 SaaS','DID·NFT'] },
+  { name:'MyID', cat:'Identity', year:'2026', href:'myid.html', desc:'고객사의 서비스 환경에 맞는 DID 기반 신원확인 체계를 쉽고 유연하게 구축할 수 있도록 지원합니다.', tags:['DID','신원인증','CSAP 인증'] },
 ];
 const logoMark = '<svg class="icn" viewBox="0 0 48 48" aria-hidden="true"><path fill="currentColor" d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z"/></svg>';
 const arrowUpRight = '<svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg>';

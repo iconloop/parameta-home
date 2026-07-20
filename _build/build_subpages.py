@@ -987,7 +987,7 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 /* Why ParaSta: 타이틀셋(4칼럼) 좌 / 표(8칼럼) 우 */
 .why-grid{ display:flex; flex-direction:column; gap:2.5rem }
 .why-table{ min-width:0 }
-/* 섹션 직속 표(portx·kbtf): 셀 상하 패딩 확대 — 행이 여유 있게 */
+/* 섹션 직속 표(portx·myid): 셀 상하 패딩 확대 — 행이 여유 있게 */
 .sec > .why-table table.cmp th, .sec > .why-table table.cmp td{ padding-top:1.75rem; padding-bottom:1.75rem }
 .why-head .sec-h2{ margin-top:1rem; margin-bottom:1.5rem }
 .why-head .phero-lead{ font-size:var(--text-18) }
@@ -2823,50 +2823,6 @@ PAGES['portx.html'] = dict(
 </div></section>
 ''')
 
-# ---------------- myid.html ----------------
-PAGES['myid.html'] = dict(
-    title='MyID · K-BTF 공공기관 블록체인 공동 인프라 | PARAMETA',
-    desc='블록체인 서비스 최초로 CSAP 인증을 받은 공공기관 전용 DID·NFT 플랫폼입니다.',
-    eyebrow='DID Identity',
-    h1_lines=['공공기관을 위한', '블록체인 SaaS,', 'K-BTF'],
-    lead='블록체인 서비스 최초로 CSAP 인증을 받은 공공기관 전용 DID·NFT 플랫폼입니다. 1년 이상 걸리던 자체 구축 과정을 약 1주일로 줄이고, 도입 비용도 최대 90%까지 절감합니다.',
-    crumb='Solutions — MyID · K-BTF',
-    content=f'''
-<section><div class="shell sec">
-  {sec_head('Infrastructure', '공공기관을 위한 블록체인 공동 인프라')}
-  {rows([
-    dict(title='기관별 구축 부담 없이 — 공동 인프라', desc='각 기관이 따로 블록체인을 만들지 않아도 공동 인프라 위에서 서비스를 운영합니다.'),
-    dict(title='SaaS 형태로 빠르게 도입', desc='복잡한 인프라 구축 과정 없이 필요한 기능을 서비스 형태로 이용합니다.'),
-    dict(title='DID · NFT 기반 인증 지원', desc='도민증, 공무원증, 수료증, NFT 사원증 등 공공 인증 서비스를 발급·관리합니다.'),
-    dict(title='CSAP 인증 기반 운영', desc='공공기관이 안심하고 도입할 수 있도록 클라우드 보안 인증 기준을 갖췄습니다.'),
-  ])}
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('핵심 기술', '데이터 주권과 프라이버시를 지키는 독자 기술')}
-  <ul class="cards-2">
-    <li class="rvl" style="--rvl-y:40px">{dark_card('Tech 01', 'W3C 표준 기반', 'W3C DID 1.0과 VC 2.0 표준 기반의 신원증명 환경. 신뢰수준 LoA를 단계별로 적용해 검증 강도를 설정합니다.', ['DID 1.0','VC 2.0','LoA'])}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms">{dark_card('Tech 02', '필요한 정보만 증명', '선택적 공개, 범위 증명, 소속 증명, 발급자 비식별 지원. 개인정보 전체 공개 없이 필요한 사실만 증명합니다.', ['선택적 공개','범위 증명'])}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms">{dark_card('Tech 03', '개인 데이터 저장소 (PDS)', '고정된 증명서(VC)를 넘어, 계속 바뀌는 내 데이터까지 본인이 직접 통제하며 안전하게 보관합니다.', ['PDS','데이터 주권'])}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms">{dark_card('Tech 04', '블록체인 파일 시스템 (BFS)', '대용량 파일을 여러 노드에 다중 복제(멀티 피닝)해, 유실 없이 안전하게 보관하는 분산 저장 기술입니다.', ['BFS','멀티 피닝'])}</li>
-  </ul>
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('References', '공공 현장에서 검증된 K-BTF')}
-  {rows([
-    dict(idx='서울', title='서울특별시 · 블록체인 표준 플랫폼', desc='서울시 블록체인 표준 플랫폼에 DID·인증 기반 기술을 공급합니다.'),
-    dict(idx='부산', title='부산광역시 · 블록체인 배터리 여권', desc='전기차 배터리 생애주기 데이터를 DID·VC·PDS로 관리하고, EU DPP 규제 대응 기반을 구현합니다.'),
-    dict(idx='경북', title='경상북도 · 블록체인 마이데이터', desc='도민 대상 공공 마이데이터 서비스에 블록체인·DID 신원인증을 적용합니다.'),
-  ], meta=True)}
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('플랫폼 구성', 'MyID 2.0을 이루는 두 가지 구성')}
-  <ul class="cards-2">
-    <li class="rvl" style="--rvl-y:40px">{dark_card('01 / For Public Organizations', 'MyID 파트너센터', '공공기관이 원하는 형태의 모바일 인증서(DID)를 코드 한 줄 없이 만들고, 검증 항목만 골라 설정합니다. 발급부터 검증·관리까지 콘솔 하나에서 이뤄집니다.', ['발급 · 검증','통합 콘솔'], sm=False, grouped=True)}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms">{dark_card('02 / For Citizens', '쯩 (zzeung) for 공공기관', '시민이 직접 지니는 디지털 지갑. 신분증·운전면허증·여권부터 NFT 사원증까지 보관하고, QR·블루투스·NFC·HTTP로 어디서든 제시·검증합니다.', ['디지털 지갑','QR · NFC'], sm=False, grouped=True)}</li>
-  </ul>
-</div></section>
-''')
-
 # ---------------- privacy.html / terms.html ----------------
 def legal(sections):
     return '<section><div class="shell sec"><div class="legal-body rvl">' + ''.join(
@@ -2894,17 +2850,29 @@ PAGES['terms.html'] = dict(
     content=legal(['제1조 (목적)','제2조 (정의)','제3조 (서비스의 제공)','제4조 (이용자의 의무)','제5조 (면책)']))
 
 
-# ---------------- myid.html (DID 솔루션 — 실제 myid.html 콘텐츠) ----------------
+# ---------------- myid.html (DID 솔루션 — PR#1 기획 반영) ----------------
+MYID_TRUST_LOGOS = [('logo-shinhan', '신한은행'), ('logo-nh', 'NH농협은행'), ('logo-nh-securities', 'NH투자증권'),
+                    ('logo-samsung-securities', '삼성증권'), ('logo-samsung', '삼성'), ('logo-kb', 'KB'),
+                    ('logo-ibk', 'IBK기업은행'), ('logo-hanwha', '한화'), ('logo-hyundai', '현대'), ('logo-mirae', '미래에셋증권')]
+
 PAGES['myid.html'] = dict(
     title='MyID · 자기주권 분산신원 | PARAMETA',
-    desc='MyID — 기업·민간을 위한 자기주권형 분산신원(DID) 솔루션. W3C 표준 기반으로 발급·보관·검증을 하나로. 내가 나를 증명하는 법.',
-    eyebrow='DID Solution',
+    desc='MyID — 블록체인 기술로 신뢰는 그대로 유지하면서, 신원확인 단계를 줄이고 개인정보는 사용자가 직접 관리합니다. 구축형부터 공공 SaaS까지.',
+    eyebrow='MY DATA · MY CHOICE · MY ID',
     h1_lines=['MyID'],
-    lead='기업과 기관이 신원 인증 서비스를 안전하게 구축할 수 있도록 지원하는 블록체인 기반 W3C 표준 DID 솔루션입니다. 내가 나를 증명하는 법, MyID.',
+    lead='블록체인 기술로 신뢰는 그대로 유지하면서, 신원확인 단계를 줄이고 개인정보는 사용자가 직접 관리합니다. 수많은 적용 사례와 검증된 보안성을 바탕으로 구축형부터 공공 SaaS까지 제공합니다.',
     crumb='Products — MyID',
+    hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
+      <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">무료 컨설팅 신청</span></a>
+      <a class="pill outline no-arrow hs-scale" href="#lineup"><span class="hspring">라인업 · 요금 보기</span></a>
+    </div>''',
     hero_visual='<img class="fit-contain" src="assets/myid/hero-test.avif" alt="" loading="eager" fetchpriority="high">',
     content=f"""
 <section><div class="shell sec">
+  {eyebrow('Trusted by')}
+  <div class="pt-marquee rvl" aria-label="함께한 파트너 로고">
+    <div class="pt-track">{partner_logos(MYID_TRUST_LOGOS)}{partner_logos(MYID_TRUST_LOGOS)}</div>
+  </div>
   <ul class="cards-2">
     <li class="rvl"><div class="light-card num-card"><span class="cap">Users</span><div class="n">약 370만</div><p>MyID · DID 누적 이용자 수</p></div></li>
     <li class="rvl" style="--rvl-delay:90ms"><div class="light-card num-card"><span class="cap">Verifications</span><div class="n">9,100만<small>+</small></div><p>제주안심코드 누적 인증 건수</p></div></li>
@@ -2917,10 +2885,32 @@ PAGES['myid.html'] = dict(
     dict(idx='국내 최초', title='DID 기반 혁신금융서비스 지정'),
     dict(idx='국내 최초', title='금융권 KYC DID 상용화'),
     dict(idx='세계 최초', title='블록체인 공동인증 — 증권사 26개사'),
+    dict(idx='블록체인 최초', title='블록체인 서비스 최초 CSAP 인증'),
   ], sm=True, meta=True)}
 </div></section>
+<section id="lineup"><div class="shell sec" style="padding-top:0">
+  {sec_head('Lineup', 'MyID vs MyID 2.0 (K-BTF)', '같은 DID 플랫폼을 대상에 맞게 두 갈래로 제공합니다. 민간은 MyID, 공공기관은 K-BTF 공동 인프라 기반 MyID 2.0으로 도입합니다.')}
+  <ul class="cards-2">
+    <li class="rvl" style="--rvl-y:40px">{dark_card('민간 · 기업 · 금융', 'MyID', '기업·금융·민간 서비스가 자체 신원인증을 구축합니다. 도입 방식은 구축형과 서비스형 두 가지 중에서 선택합니다.', ['구축형 (On-Premise)','서비스형 (SaaS)'], grouped=True)}</li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms">{dark_card('공공기관 전용', 'MyID 2.0 (K-BTF)', '공공기관은 CSAP 보안인증을 받은 서비스만 이용할 수 있습니다. MyID 2.0은 블록체인 서비스 최초 CSAP 인증 SaaS로, 과기정통부·KISA 주관 K-BTF 공동 인프라 위에서 별도 구축 없이 도입합니다.', ['공동 인프라 구독형 SaaS','CSAP 인증'], grouped=True)}</li>
+  </ul>
+  {compare_table(['', 'MyID', 'MyID 2.0 (K-BTF)'], [
+    dict(label='대상', cells=['기업 · 금융 · 민간 서비스', '공공기관 · 지자체']),
+    dict(label='도입 방식', cells=['구축형(On-Premise) · 서비스형(SaaS)', 'K-BTF 공동 인프라 구독형 SaaS']),
+    dict(label='인증', cells=['W3C 표준 DID · 금융권 KYC 상용화', '블록체인 서비스 최초 CSAP 인증 — 공공기관 도입 요건 충족']),
+    dict(label='도입 기간', cells=['규모·방식에 따라 협의', '최대 1주일']),
+    dict(label='예상 비용', cells=['도입 방식·규모별 협의', '월 200만원~ + 건당 과금']),
+    dict(label='', cells=['<a href="contact.html">도입·요금 상담 신청</a>', '<a href="https://zzeung.kr/" target="_blank" rel="noopener">K-BTF 홈페이지 →</a>']),
+  ], hl=2, tabs=True)}
+</div></section>
 <section><div class="shell sec" style="padding-top:0">
-  {sec_head('Platform', 'MyID는 블록체인 기반 DID 플랫폼입니다')}
+  {sec_head('Platform', '개인정보는 쌓지 않고, 신원은 사용자가 통제합니다', 'MyID는 블록체인 기반 DID 플랫폼입니다. 신원증명(VC)을 사용자 지갑에 보관하고 필요한 정보만 선택 제출하며, W3C 표준 기반으로 발급·검증·연동을 제공합니다. 아래 4가지 구성으로 서비스에 바로 붙일 수 있습니다.')}
+  {rows([
+    dict(idx='Issuer', title='신원인증기관 — VC 발급'),
+    dict(idx='Holder', title='사용자 — 지갑 보관 · 필요한 정보만 제출'),
+    dict(idx='Verifier', title='서비스제공자 — 검증'),
+  ], sm=True, meta=True)}
+  {note('세 주체 모두 MyID 위에서 DID 등록 · 블록체인으로 무결성 검증')}
   <ul class="cards-2">
     <li class="rvl" style="--rvl-y:40px">{dark_card('Console', 'MyID 파트너센터', '코드 없이 DID·VC를 생성하고, 검증 항목을 구성할 수 있는 관리자 콘솔입니다. 발급·검증 이력과 인증 절차를 대시보드에서 통합 관리합니다.', ['DID·VC 생성','검증 항목 설정','이력 대시보드'], grouped=True)}</li>
     <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms">{dark_card('Wallet', 'DID 지갑', '사용자가 자신의 DID와 VC를 직접 관리하는 신원 지갑입니다. Wallet SDK로 서비스 앱에 지갑 기능을 연동하고, 외부 발급 VC도 보관·이용할 수 있습니다.', ['Wallet SDK','외부 VC 보관','PDS 암호화'], grouped=True)}</li>
@@ -2929,123 +2919,29 @@ PAGES['myid.html'] = dict(
   </ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  {sec_head('Issue & Hold', '신원증명이 발급되고 검증되는 구조')}
-  {rows([
-    dict(idx='Issuer', title='발급기관', desc='신원증명(VC)을 발급하고, 취소·만료 상태를 관리합니다.'),
-    dict(idx='Holder', title='사용자', desc='VC를 DID 지갑에 보관하고, 필요한 정보만 선택해 제출합니다.'),
-    dict(idx='Verifier', title='검증기관', desc='제출된 VC의 발급자와 유효성을 확인합니다.'),
-    dict(idx='Chain', title='블록체인 인프라', desc='VC 상태 정보를 기록해 위·변조 여부를 검증할 수 있게 합니다.'),
-  ], meta=True)}
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('Features', 'MyID 주요 기능')}
-  {rows([
-    dict(title='DID · Key 관리', desc='플랫폼의 각 주체에게 DID를 발급하고, 키(Key)를 안전하게 관리합니다.'),
-    dict(title='크레덴셜 발급 · 제출', desc='신원증명(VC)을 발급하고, 사용자가 필요한 정보만 골라 제출합니다.'),
-    dict(title='크레덴셜 검증 · 폐기', desc='제출된 VC의 발급자·유효성을 검증하고, 취소·만료 상태를 관리합니다.'),
-    dict(title='전자서명', desc='사용자·발급자·검증자 사이 모든 크레덴셜에 전자서명을 포함해 보안성을 높입니다.'),
-    dict(title='저장 (PDS · Vault)', desc='크레덴셜을 별도 클라우드에 안전하게 저장해, 사용자가 본인 데이터를 직접 통제합니다.'),
-  ])}
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
   {sec_head('Technology', '데이터 주권과 프라이버시를 지키는 핵심 기술')}
   <ul class="cards-2">
-    <li class="rvl" style="--rvl-y:40px">{dark_card('Tech 01', 'PDS — 개인 데이터 저장소', '한 번 발급되면 고정되는 증명서(VC)를 넘어, 계속 바뀌는 내 데이터까지 본인이 직접 통제하며 안전하게 보관합니다.', ['데이터 주권'], grouped=True)}</li>
+    <li class="rvl" style="--rvl-y:40px">{dark_card('Tech 01', 'PDS + BFS — 개인 데이터 저장소 · 분산 파일 저장', '계속 바뀌는 내 데이터는 개인 데이터 저장소(PDS)에 본인 통제로 보관하고, 문서·이미지 같은 대용량 파일은 여러 노드에 다중 복제하는 블록체인 파일 시스템(BFS)에 유실 없이 저장합니다.', ['데이터 주권','멀티 피닝'], grouped=True)}</li>
     <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms">{dark_card('Tech 02', 'Zero-Knowledge Proof — 영지식증명', '원본 정보를 드러내지 않고도 "성인이다", "특정 자격이 있다" 같은 사실만 증명합니다. 범위 증명·소속 증명을 지원합니다.', ['범위 증명','소속 증명'], grouped=True)}</li>
     <li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms">{dark_card('Tech 03', 'Selective Disclosure — 선택적 공개', '증명서 전체가 아니라 요구된 항목만 골라 제출합니다. 불필요한 개인정보는 아예 공개하지 않습니다.', ['최소 공개'], grouped=True)}</li>
     <li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms">{dark_card('Tech 04', 'Issuer Privacy — 발급자 비식별', '검증 과정에서 어느 기관이 발급했는지까지 감춰, 발급 이력이 불필요하게 노출되지 않도록 보호합니다.', ['프라이버시'], grouped=True)}</li>
   </ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  {sec_head('Lineup', '하나의 MyID, 세 가지 도입 형태')}
-  {cards_wrap([
-    dark_card('On-Premise', '구축형 MyID', 'MyID를 자사 인프라에 직접 구축해, 완전히 통제하고 자유롭게 커스터마이징하는 기업용 도입 방식입니다.', ['자사 인프라','커스터마이징'], grouped=True),
-    dark_card('민간 SaaS', '쯩 (zzeung)', "구축 없이 구독형으로 바로 시작합니다. 시민용 디지털 지갑 앱 '쯩'으로 민간 서비스에 신원인증을 붙입니다.", ['구독형','디지털 지갑'], grouped=True),
-    dark_card('공공 SaaS', 'MyID 2.0 (K-BTF)', '공공기관 전용 SaaS. 과기정통부·KISA 주관 K-BTF 공동 인프라 위에서 별도 구축 없이 도입합니다.', ['공공 전용','K-BTF'], grouped=True),
-  ], cols=3)}
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
   {sec_head('References', '금융·공공·기업이 검증한 적용 사례')}
   {rows([
     dict(idx='Finance', title='신한은행 · NH농협은행 금융실명인증', desc='기존 실명확인 3단계를 MyID 1단계로 통합해 비대면 실명인증을 간소화했습니다. NH농협은행은 올원뱅크 올원PASS 발급·재발급, 송금 이체한도 상향 등에 적용했습니다.'),
-    dict(idx='Finance', title='SBI저축은행 블록체인 개인인증', desc='블록체인 기반 개인인증을 도입해 안전하고 간편한 본인확인 절차를 제공했습니다.'),
-    dict(idx='Public', title='제주안심코드', desc='제주도청과 함께 개발한 전자출입명부 서비스로, QR 스캔만으로 출입 정보를 남깁니다. 설치 업장 6만 개, 앱 설치 218만 건, 누적 인증 9,100만 건을 기록했습니다.'),
+    dict(idx='Public', title='제주안심코드', desc='제주도청과 함께 개발한 전자출입명부 서비스로, QR 스캔만으로 출입 정보를 남길 수 있게 했습니다. 설치 업장 6만 개, 앱 설치 218만 건, 누적 인증 9,100만 건을 기록했습니다.'),
     dict(idx='Public', title='질병관리청 백신접종증명', desc='질병관리청 시스템과 연동해 백신 접종 정보를 신원증명서(VC)로 발급하고, 제주안심코드 전자출입명부와 결합해 제출할 수 있게 했습니다.'),
     dict(idx='Public', title='강원도 나야나', desc='강원도 행정·경제·복지 통합 서비스에 DID 기반 신원인증을 적용했습니다.'),
-    dict(idx='Public', title='경상북도 모이소', desc='행정안전부 우수 서비스로 선정된 도민 앱. 도민증 발급부터 복지급여 신청, 공공 마이데이터 연계, 관광 QR까지 하나로 제공했습니다.'),
-    dict(idx='Public', title='모바일 운전면허인증', desc='ICT 규제 샌드박스 임시허가를 획득해 모바일 운전면허 인증 시범 서비스를 진행했습니다.'),
+    dict(idx='Public · Healthcare', title='강원도 만성질환 통합관리 플랫폼', desc='과기정통부·KISA 2020 블록체인 공공선도 시범사업(의료 부문)으로, DID 기반 사용자 인증과 건강정보 자기주권 관리 체계를 구축했습니다. 심뇌혈관 만성질환자의 건강정보를 안전하게 관리하고 AI 분석·IoMT 측정 데이터를 모바일로 제공합니다.'),
+    dict(idx='Public', title='경상북도 모이소', desc='행정안전부 우수 서비스로 선정된 도민 앱입니다. 경북도청과 함께 도민증 발급부터 복지급여 신청, 공공 마이데이터 연계, 관광 QR까지 하나로 제공했습니다.'),
+    dict(idx='Public', title='부산시 배터리여권 플랫폼 (DPP)', desc='전기차 배터리의 제조·운행·정비·재활용 데이터를 DID·VC·PDS로 연결해, EU 배터리 규제(DPP)에 맞춰 출처·이력·무결성을 증명하는 데이터 플랫폼입니다.'),
+    dict(idx='Public', title='KCA 블록체인 선박검사 관리 플랫폼', desc='KISA 블록체인 시범사업으로, 중앙전파관리소·KCA·KOMSA·수협에 흩어진 무선국 허가·선박검사 증서를 블록체인으로 연계·조회하고 검사 증서를 NFT로 발행합니다. 서류 위·변조와 분실 위험을 낮춰 해양안전 데이터의 신뢰성을 높입니다.'),
+    dict(idx='Public', title='KOMSA 선박 전자증서 검증', desc='연 약 56만 회 반복 검증되는 선박검사 전자증서에 DID·VC 발급·검증과 PDS를 결합해, 위·변조 확인 부담을 줄이는 검증체계를 구축했습니다.'),
+    dict(idx='Enterprise', title='WattEver 배터리 잔존수명 인증서', desc='중고·재사용 배터리 거래에서 잔존수명 인증 데이터를 PDS 기반으로 저장·검증해, 위·변조 없이 신뢰할 수 있게 합니다.'),
     dict(idx='Enterprise', title='포스코 체인지업그라운드', desc='출입통제부터 방문자 초대, 사무기기 이용, 공간 예약, 주차관리까지 DID 신원인증 하나로 처리했습니다. 포스코·포스텍·RIST 구성원은 소속 증명만으로 시설을 이용했습니다.'),
   ], meta=True)}
-</div></section>
-""")
-
-# ---------------- kbtf.html (K-BTF — 기존 myid20 콘텐츠) ----------------
-PAGES['kbtf.html'] = dict(
-    title='KBTF · 공공기관 블록체인 공동 인프라 | PARAMETA',
-    desc='MyID 2.0 — 블록체인 서비스 최초 CSAP 인증. 공공기관이 별도 구축 없이 도입 1주일·비용 90% 절감으로 DID·NFT·블록체인 서비스를 쓰는 공공 전용 SaaS. K-BTF 공동 인프라 기반.',
-    eyebrow='Public Blockchain SaaS',
-    h1_lines=['KBTF'],
-    lead='블록체인 서비스 최초로 CSAP 인증을 받은 공공기관 전용 DID·NFT 플랫폼입니다. 자체 구축 1년·수억 원이 들던 블록체인 도입을 1주일·비용 90% 절감으로 끝냅니다.',
-    crumb='Products — KBTF',
-    hero_visual='<img class="fit-contain" src="assets/kbtf/hero-test.avif" alt="" loading="eager" fetchpriority="high">',
-    content=f"""
-<section><div class="shell sec">
-  <ul class="cards-3">
-    <li class="rvl"><div class="light-card num-card"><span class="cap">Security</span><div class="n">최초</div><p>블록체인 서비스 CSAP 클라우드 보안 인증 (2025)</p></div></li>
-    <li class="rvl" style="--rvl-delay:90ms"><div class="light-card num-card"><span class="cap">Procurement</span><div class="n">유일</div><p>조달청 디지털마켓 등록 블록체인 SaaS</p></div></li>
-    <li class="rvl" style="--rvl-delay:180ms"><div class="light-card num-card"><span class="cap">Speed · Cost</span><div class="n">1주 · 90%↓</div><p>자체 구축(1년·수억 원) 대비 도입 기간·비용</p></div></li>
-  </ul>
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('MyID 2.0 · Public', '공공기관이 하나의 플랫폼에서 쓰는 블록체인 SaaS', 'MyID 2.0은 공공기관이 하나의 플랫폼에서 블록체인 서비스를 이용할 수 있도록 제공하는 구독형 블록체인 서비스입니다. 과학기술정보통신부·KISA가 주관하는 K-BTF(Korea Blockchain Trust Framework)의 공식 서비스입니다.')}
-  <div class="rvl" style="display:flex; flex-direction:column; gap:1.75rem">
-    <div><div style="font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); margin-bottom:.75rem">공공 발행 — 정부·전국 지자체</div>{chips(['DID','증명서','NFT'])}</div>
-    <div><div style="font-size:var(--text-14); color:var(--accent); font-weight:600; margin-bottom:.75rem">MyID 2.0 — 발급·보관·관리 (파라메타 운영)</div>{chips(['신분증','증명서','자격증','NFT'])}</div>
-    <div><div style="font-size:var(--text-14); color:rgba(var(--ink-rgb),.45); margin-bottom:.75rem">공공·민간 활용</div>{chips(['공공 서비스','은행 개설','항공','취업'])}</div>
-  </div>
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('Compare', '구축형 MyID vs 공동 인프라 MyID 2.0')}
-  <div class="why-table">{compare_table(
-    ['', 'MyID (구축형)', 'MyID 2.0 (공동 인프라)'],
-    [
-      dict(label='대상', cells=['민간 기업 (금융·기업)', '공공기관']),
-      dict(label='도입 방식', cells=['자사 서비스에 맞춘 개별 구축·운영', '공동 인프라(K-BTF) 위 SaaS 이용']),
-      dict(label='기간·비용', cells=['수개월 구축, 수억 원대 예산', '1주일 도입, 비용 90% 절감']),
-      dict(label='강점', cells=['완전한 커스터마이징과 독립 운영', '별도 구축 없이 즉시, CSAP 인증 보안']),
-    ], hl=2, tabs=True)}</div>
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('플랫폼 구성', 'MyID 2.0을 이루는 두 가지 구성')}
-  <ul class="cards-2">
-    <li class="rvl" style="--rvl-y:40px">{dark_card('01 / For Public Organizations', 'MyID 파트너센터', '공공기관이 원하는 형태의 모바일 인증서(DID)를 코드 한 줄 없이 만들고, 검증 항목만 골라 설정합니다. 발급부터 검증·관리까지 콘솔 하나에서 이뤄집니다.', ['발급 · 검증','통합 콘솔'], sm=False, grouped=True)}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms">{dark_card('02 / For Citizens', '쯩 (zzeung) for 공공기관', '시민이 직접 지니는 디지털 지갑. 신분증·운전면허증·여권부터 NFT 사원증까지 보관하고, QR·블루투스·NFC·HTTP로 어디서든 제시·검증합니다.', ['디지털 지갑','QR · NFC'], sm=False, grouped=True)}</li>
-  </ul>
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('Features', '파트너센터 하나로, 발급부터 관리까지')}
-  {cards_wrap([
-    dark_card('01', '인증서 생성 · 검증 정보 설정', '원하는 형태의 모바일 인증서(DID)를 코드 없이 만들고, 검증에 필요한 항목만 골라 설정합니다. 과하지 않게 꼭 필요한 정보만 모읍니다.', grouped=True),
-    dark_card('02', '인증서 발급 · 검증 이력', '발급·제출·검증 데이터를 실시간으로 모니터링하고, 건별 상세 내역까지 한 화면에서 확인합니다.', grouped=True),
-    dark_card('03', '인증서 통합 관리', '발급·취소·만료 상태와 인증서 전 과정을 하나의 콘솔에서 통합 관리합니다.', grouped=True),
-  ], cols=3)}
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('핵심 기술', '데이터 주권과 프라이버시를 지키는 독자 기술')}
-  <ul class="cards-2">
-    <li class="rvl" style="--rvl-y:40px">{dark_card('PDS', '개인 데이터 저장소', '한 번 발급되면 고정되는 증명서(VC)를 넘어, 계속 바뀌는 내 데이터까지 본인이 직접 통제하며 안전하게 보관합니다.', ['데이터 주권'], grouped=True)}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms">{dark_card('BFS', '블록체인 파일 시스템', '문서·이미지 같은 대용량 파일을 여러 노드에 다중 복제(멀티 피닝)해, 유실 없이 안전하게 보관하는 분산 저장 기술입니다.', ['멀티 피닝'], grouped=True)}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms">{dark_card('ZKP', '영지식증명', '원본 정보를 드러내지 않고도 "성인이다", "특정 자격이 있다" 같은 사실만 증명합니다. 범위 증명·소속 증명을 지원합니다.', ['범위 증명','소속 증명'], grouped=True)}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms">{dark_card('Selective Disclosure', '선택적 공개', '증명서 전체가 아니라 요구된 항목만 골라 제출합니다. 불필요한 개인정보는 아예 공개하지 않습니다.', ['최소 공개'], grouped=True)}</li>
-  </ul>
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('Applied Cases', '공공기관 현장에서 실증된 인프라')}
-  {cards_wrap([
-    dark_card('서울특별시', '블록체인 표준 플랫폼', '서울시 블록체인 표준 플랫폼에 DID·인증 기반 기술을 공급했습니다.', grouped=True),
-    dark_card('부산광역시', '블록체인 배터리 여권 플랫폼', '전기차 배터리 전 생애주기 데이터를 DID·VC·PDS로 관리. EU 디지털 제품 여권(DPP) 규제 대응 기반을 MyID 2.0 위에서 구현했습니다.', grouped=True),
-    dark_card('경상북도', '블록체인 마이데이터 플랫폼', '도민 대상 공공 마이데이터 서비스에 블록체인·DID 신원인증을 적용했습니다.', grouped=True),
-  ], cols=3)}
 </div></section>
 """)
 
@@ -3335,7 +3231,7 @@ PAGES['solution-gov.html'] = dict(
     crumb='Solutions — 공공',
     hero_cta='''<div class="phero-rel rvl" style="--rvl-delay:600ms">
       <p class="phero-rel-t">관련 제품 살펴보기</p>
-      <a class="phero-rel-flag" href="kbtf.html">MyID 2.0</a>
+      <a class="phero-rel-flag" href="myid.html#lineup">MyID 2.0</a>
     </div>''',
     hero_visual='<img src="assets/solutions/hero-test-2.webp" alt="" loading="eager" fetchpriority="high">',
     content=f"""
@@ -3811,7 +3707,7 @@ SHELL = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<script src="assets/nav.js?v=25" defer></script>
+<script src="assets/nav.js?v=26" defer></script>
 <script src="assets/chatbot.js?v=4" defer></script>
 <style>__CSS____EXTRA_CSS__</style>
 </head>
@@ -3847,7 +3743,7 @@ __JS__
 """
 
 # ---- 공통 히어로 토큰: 3벌 ----
-#  ① 제품형(product)  : 다크 + 이미지 비주얼 + View Demo/Talk to Sales   (parasta·portx·myid·kbtf·broof)
+#  ① 제품형(product)  : 다크 + 이미지 비주얼 + View Demo/Talk to Sales   (parasta·portx·myid·broof)
 #  ② 솔루션형(solution): 다크 + 이미지 비주얼 + Talk to Sales            (solution-* 6종)
 #  ③ 콘텐츠형(content) : 다크 + 이미지 없음 + 텍스트 중앙정렬 + Contact Us (company·insights·careers·contact·privacy·terms)
 # 페이지는 body_class / hero_cta / hero_visual 키로 오버라이드 (''로 비활성)

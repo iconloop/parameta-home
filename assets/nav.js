@@ -75,7 +75,6 @@
         <a href="portx.html"><span class="nd-ico"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13l-3-3"/><path d="M20 16H7l3 3"/></svg></span><span class="nd-txt"><b>Port X</b><span>디지털자산 거래소 인프라</span></span></a>\
         <a href="myid.html"><span class="nd-ico"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-6 8-6s8 2 8 6"/></svg></span><span class="nd-txt"><b>MyID</b><span>분산신원(DID) 솔루션</span></span></a>\
         <a href="broof.html"><span class="nd-ico"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M9 15l2 2 4-4"/></svg></span><span class="nd-txt"><b>Broof</b><span>블록체인 증명서 발급·검증</span></span></a>\
-        <a href="kbtf.html"><span class="nd-ico"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V8l7-4 7 4v13"/><path d="M9.5 21v-4h5v4"/></svg></span><span class="nd-txt"><b>KBTF</b><span>공공 블록체인 공동 인프라</span></span></a>\
       </div></div>\
     </div>';
     document.body.appendChild(mega);
@@ -141,7 +140,6 @@
           <li><a href="portx.html">Port X</a></li>\
           <li><a href="myid.html">MyID</a></li>\
           <li><a href="broof.html">Broof</a></li>\
-          <li><a href="kbtf.html">KBTF</a></li>\
         </ul>\
       </nav>\
       <nav class="navmenu-l2" data-panel="solutions" aria-label="Solutions">\

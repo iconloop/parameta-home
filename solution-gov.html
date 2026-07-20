@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<script src="assets/nav.js?v=25" defer></script>
+<script src="assets/nav.js?v=26" defer></script>
 <script src="assets/chatbot.js?v=4" defer></script>
 <style>
 /* ============ RESET / BASE ============ */
@@ -159,7 +159,7 @@ html.chat-open #banner-fixed{ right:26rem }
 .brand-btn{ display:flex; align-items:center; gap:.5rem; font-size:var(--text-18); font-weight:600; letter-spacing:.02em }
 .brand-btn .icn{ font-size:var(--text-20); color:var(--accent) }
 .nav-primary{ display:none }
-.nav-primary ul{ display:flex; gap:2rem; font-size:14px; font-weight:500 } /* GNB는 px 고정 */
+.nav-primary ul{ display:flex; gap:2rem; font-size:var(--text-14); font-weight:500 } /* GNB도 유동 토큰 — 브레이크포인트별 토큰 계단 */
 .nav-primary li button{ display:inline-flex; align-items:center; gap:.25rem }
 .nav-lift{ display:inline-flex; transition:transform .34s cubic-bezier(.2,.8,.2,1), opacity .34s cubic-bezier(.2,.8,.2,1); opacity:.8 }
 @media (hover:hover){ .nav-primary li a:hover .nav-lift, .nav-primary li button:hover .nav-lift{ transform:translateY(-2px); opacity:1 } }
@@ -227,14 +227,14 @@ html.chat-open #banner-fixed{ right:26rem }
 @media (min-width:1024px){
   .header-inner{ padding:12px 2rem }
   #header .brand-logo{ height:20px }
-  .nav-primary ul{ font-size:16px } .nav-caret{ font-size:16px }
+  .nav-primary ul{ font-size:var(--text-16) } .nav-caret{ font-size:var(--text-16) }   /* 1024~1535: 토큰 16 (1100대에서 너무 작아져 한 단계 업) */
   #header .lang-btn .lang-globe{ width:24px; height:24px } }
 /* 큰 화면: GNB 요소만 약간 키우되 헤더 "높이"는 표준 유지(≈76~80px). 패딩·지구본은 vw로 안 키움 */
 @media (min-width:1536px){
   .header-inner{ padding:12px 2.5rem }   /* 높이 좌우값은 px 고정 (유동 root 영향 차단) */
   .brand-btn{ font-size:var(--text-20) } .brand-btn .icn{ font-size:var(--text-22) }
   #header .brand-logo{ height:24px }
-  .nav-primary ul{ font-size:16px; gap:2.5rem } .nav-caret{ font-size:16px }
+  .nav-primary ul{ font-size:var(--text-16); gap:2.5rem } .nav-caret{ font-size:var(--text-16) }   /* 1536~1919: 토큰 16 */
   #header .lang-btn .lang-globe{ width:24px; height:24px }
   .clock-chip{ font-size:13px; padding:.55rem .85rem } }
 /* ≥1920: 요소만 한 단계 더 크게, 높이는 여전히 고정 */
@@ -242,7 +242,7 @@ html.chat-open #banner-fixed{ right:26rem }
   .header-inner{ padding:12px clamp(3rem, 2.5vw, 4.5rem) }
   .brand-btn{ font-size:var(--text-22) } .brand-btn .icn{ font-size:var(--text-24) }
   #header .brand-logo{ height:28px }
-  .nav-primary ul{ font-size:20px; gap:clamp(2.5rem, 2vw, 4rem) } .nav-caret{ font-size:20px }
+  .nav-primary ul{ font-size:var(--text-18); gap:clamp(2.5rem, 2vw, 4rem) } .nav-caret{ font-size:var(--text-18) }   /* 1920+: 토큰 18 (유동 root가 키워줘서 한 단계 낮춤) */
   #header .lang-btn .lang-globe{ width:28px; height:28px } }
 
 /* ============ DARK HERO 모드 (배경 이미지가 다크일 때 — body.hero-dark) ============ */
@@ -1776,7 +1776,7 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 /* Why ParaSta: 타이틀셋(4칼럼) 좌 / 표(8칼럼) 우 */
 .why-grid{ display:flex; flex-direction:column; gap:2.5rem }
 .why-table{ min-width:0 }
-/* 섹션 직속 표(portx·kbtf): 셀 상하 패딩 확대 — 행이 여유 있게 */
+/* 섹션 직속 표(portx·myid): 셀 상하 패딩 확대 — 행이 여유 있게 */
 .sec > .why-table table.cmp th, .sec > .why-table table.cmp td{ padding-top:1.75rem; padding-bottom:1.75rem }
 .why-head .sec-h2{ margin-top:1rem; margin-bottom:1.5rem }
 .why-head .phero-lead{ font-size:var(--text-18) }
@@ -2035,7 +2035,7 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
         <p class="phero-lead rvl" style="--rvl-delay:250ms">DID·지갑·개인데이터저장소(PDS)·분산저장(BFS) 기반 서비스를 직접 구축하지 않고 구독형으로 도입합니다. 신청 4단계, 최대 1주일 내 적용.</p>
         <div class="phero-rel rvl" style="--rvl-delay:600ms">
       <p class="phero-rel-t">관련 제품 살펴보기</p>
-      <a class="phero-rel-flag" href="kbtf.html">MyID 2.0</a>
+      <a class="phero-rel-flag" href="myid.html#lineup">MyID 2.0</a>
     </div>
       </div>
       <div class="phero-visual" aria-hidden="true"><img src="assets/solutions/hero-test-2.webp" alt="" loading="eager" fetchpriority="high"></div>
