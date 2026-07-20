@@ -1334,6 +1334,89 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 .ht-sub li .m{ color:var(--muted); margin-right:.6rem; font-variant-numeric:tabular-nums; white-space:nowrap }
 /* Alliance 소절 카드 위 여백 */
 .firsts-eco .cards-2{ margin-top:var(--space-16) }
+
+/* ============ NEWSROOM — 피처드(1큰카드+2적층) + 보도자료 리스트 ============ */
+.news-feat{ display:grid; grid-template-columns:1fr; gap:1rem; margin-bottom:var(--space-64) }
+@media (min-width:768px){
+  .news-feat{ grid-template-columns:repeat(12,1fr); gap:var(--grid-gap) }
+  .nf-big{ grid-column:1 / 9 } .nf-side{ grid-column:9 / 13 } }
+.nf-big{ display:flex }
+.nf-big .work-card{ flex:1 1 auto; min-width:0; min-height:0 }
+/* 큰 카드 이미지 영역: full-bleed, 남는 높이를 채움 */
+.nf-big .work-card.grouped::before{ flex:1 1 auto; height:auto; min-height:16rem;
+  margin:-1.5rem -1.5rem 1.5rem; border-radius:0;
+  background:url('assets/parasta/body-test.avif') center/cover no-repeat }
+@media (min-width:640px){ .nf-big .work-card.grouped::before{ margin:-2rem -2rem 1.75rem } }
+.nf-side{ display:flex; flex-direction:column; gap:1rem }
+@media (min-width:768px){ .nf-side{ gap:var(--grid-gap) } }
+/* 적층 카드: 킥커→제목 플로우 배치 (절대배치 해제 — 긴 제목이 킥커를 덮지 않게) */
+.nf-side .work-card{ flex:1 1 0; min-height:11rem; display:flex; flex-direction:column }
+.nf-side .work-card .work-bottom{ position:static; inset:auto; margin-top:auto; padding-top:.875rem }
+.nf-side .work-card .work-bottom h3{ font-size:var(--text-20) }
+/* 컨트롤 — 연도 드롭다운 + 검색창 */
+.news-controls{ display:flex; align-items:center; gap:.75rem; flex-wrap:wrap;
+  padding-bottom:1.25rem; border-bottom:1px solid rgba(var(--ink-rgb),.14) }
+.news-select{ height:2.75rem; padding:0 2.25rem 0 1.25rem; border:1px solid rgba(var(--ink-rgb),.15);
+  border-radius:var(--radius-pill); background:transparent; font-size:var(--text-14); font-weight:500;
+  color:var(--ink); cursor:pointer; appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right .875rem center; background-size:1rem }
+.news-search{ display:flex; align-items:center; gap:.5rem; margin-left:auto;
+  height:2.75rem; padding:0 1.25rem; border:1px solid rgba(var(--ink-rgb),.15); border-radius:var(--radius-pill) }
+.news-search svg{ width:1rem; height:1rem; color:rgba(var(--ink-rgb),.45); flex:none }
+.news-search input{ border:none; background:transparent; outline:none; min-width:0; width:11rem;
+  font-size:var(--text-14); color:var(--ink) }
+.news-search input::placeholder{ color:rgba(var(--ink-rgb),.4) }
+/* 리스트 — 날짜 | 제목 | 썸네일 영역 */
+.news-list{ list-style:none }
+.news-row{ display:grid; grid-template-columns:6rem 1fr 15rem; align-items:center; gap:var(--grid-gap);
+  padding-block:1.5rem; border-bottom:1px solid rgba(var(--ink-rgb),.1) }
+.nr-date{ font-size:var(--text-14); color:rgba(var(--ink-rgb),.5); font-variant-numeric:tabular-nums }
+.nr-title{ font-size:var(--text-20); font-weight:500; letter-spacing:-.01em; line-height:var(--leading-heading);
+  color:var(--ink); word-break:keep-all }
+.nr-thumb{ width:100%; aspect-ratio:3/2; border-radius:var(--radius-card-sm);
+  background:color-mix(in srgb, var(--ink) 6%, var(--white)) }
+@media (max-width:767px){
+  .news-row{ grid-template-columns:1fr; gap:.75rem; padding-block:1.25rem }
+  .nr-title{ font-size:var(--text-18) }
+  .nr-thumb{ max-width:20rem }
+  .news-search{ margin-left:0; flex:1 } }
+
+/* ============ BLOG — 좌측 카테고리 레일 + 3열 카드 피드 ============ */
+.blog-layout{ display:grid; grid-template-columns:1fr; gap:2rem }
+@media (min-width:1024px){
+  .blog-layout{ grid-template-columns:repeat(12,1fr); column-gap:var(--grid-gap) }
+  .blog-rail{ grid-column:1 / 3; flex-direction:column; align-items:flex-start;
+    position:sticky; top:7.5rem; align-self:start }
+  .blog-main{ grid-column:3 / 13 } }
+.blog-rail{ display:flex; flex-wrap:wrap; gap:.5rem }
+.blog-grid{ list-style:none; display:grid; grid-template-columns:1fr; gap:2.5rem 1.5rem }
+@media (min-width:640px){ .blog-grid{ grid-template-columns:repeat(2,1fr) } }
+@media (min-width:1024px){ .blog-grid{ grid-template-columns:repeat(3,1fr) } }
+.bf-card{ display:flex; flex-direction:column; align-items:flex-start; text-decoration:none; color:inherit }
+.bf-thumb{ width:100%; aspect-ratio:1/1; border-radius:var(--radius-card-sm); margin-bottom:1.25rem;
+  background:color-mix(in srgb, var(--ink) 6%, var(--white)); transition:transform .35s cubic-bezier(.2,.8,.2,1) }
+@media (hover:hover){ .bf-card:hover .bf-thumb{ transform:translateY(-4px) } }
+.bf-title{ font-size:var(--text-20); font-weight:600; letter-spacing:-.01em; line-height:var(--leading-heading);
+  color:var(--ink); word-break:keep-all }
+.bf-desc{ margin-top:.5rem; font-size:var(--text-14); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.6) }
+.bf-tag{ margin-top:1rem; font-size:var(--text-14); line-height:1; padding:.375rem .875rem;
+  border:1px solid rgba(var(--ink-rgb),.15); border-radius:var(--radius-pill); color:rgba(var(--ink-rgb),.6) }
+
+/* ============ RESOURCES — 로고 다운로드 ============ */
+.res-logo{ display:grid; grid-template-columns:1fr; gap:1.5rem }
+@media (min-width:768px){
+  .res-logo{ grid-template-columns:repeat(12,1fr); column-gap:var(--grid-gap) }
+  .rl-preview{ grid-column:1 / 9 } .rl-actions{ grid-column:9 / 13; align-self:center } }
+.rl-preview{ aspect-ratio:3/1; border-radius:var(--radius-card);
+  background:color-mix(in srgb, var(--ink) 6%, var(--white)) }
+.rl-actions{ display:flex; flex-direction:column; align-items:flex-start; gap:.75rem }
+.rl-btn{ height:2.75rem; padding:0 1.5rem; border:1px solid rgba(var(--ink-rgb),.15); border-radius:var(--radius-pill);
+  background:transparent; font-size:var(--text-14); font-weight:500; color:var(--ink); cursor:pointer;
+  transition:background .2s ease, color .2s ease, border-color .2s ease }
+@media (hover:hover){ .rl-btn:not(:disabled):hover{ background:var(--ink); color:var(--white); border-color:var(--ink) } }
+.rl-btn:disabled{ opacity:.4; cursor:default }
+.rl-note{ font-size:var(--text-14); color:rgba(var(--ink-rgb),.5) }
 """
 
 CHROME_HEADER = """
@@ -1988,17 +2071,30 @@ if(blogSec){
   });
   paint();
 }
-/* Insights: 보도자료 페이지네이션 */
+/* Insights(Newsroom): 보도자료 리스트 — 연도·검색 필터 + 페이지네이션(10개씩) */
 const pressSec = document.querySelector('[data-press]');
 if(pressSec){
-  const cards = [...pressSec.querySelectorAll('.press-item')];
+  const items = [...pressSec.querySelectorAll('.press-item')];
   const pager = pressSec.querySelector('.pager');
-  const PER = 6; let cur = 1;
+  const selY = pressSec.querySelector('.news-sel-year');
+  const selM = pressSec.querySelector('.news-sel-month');
+  const inp = pressSec.querySelector('.news-search input');
+  const PER = 10; let year = 'all', month = 'all', kw = '', cur = 1;
+  const elig = () => items.filter(r =>
+    (year === 'all' || r.dataset.year === year) &&
+    (month === 'all' || r.dataset.month === month) &&
+    (!kw || r.querySelector('.nr-title').textContent.toLowerCase().includes(kw)));
   function paintP(){
-    const real = Math.max(1, Math.ceil(cards.length / PER));
-    cards.forEach((c, i) => c.classList.toggle('hidden', Math.floor(i/PER)+1 !== cur));
+    const e = elig();
+    const real = Math.max(1, Math.ceil(e.length / PER));
+    if(cur > real) cur = real;
+    items.forEach(r => r.classList.add('hidden'));
+    e.slice((cur-1)*PER, cur*PER).forEach(r => r.classList.remove('hidden'));
     if(pager) paintPager(pager, pressSec, cur, real, page => { cur = page; paintP(); });
   }
+  if(selY) selY.addEventListener('change', () => { year = selY.value; cur = 1; paintP(); });
+  if(selM) selM.addEventListener('change', () => { month = selM.value; cur = 1; paintP(); });
+  if(inp) inp.addEventListener('input', () => { kw = inp.value.trim().toLowerCase(); cur = 1; paintP(); });
   paintP();
 }
 
@@ -2655,41 +2751,121 @@ document.querySelectorAll('.ht-acc input').forEach(function(i){
 </div></section>
 ''')
 
-# ---------------- insights.html ----------------
+# ---------------- insights.html (Newsroom) ----------------
+# 보도자료 데이터 — 피처드(최신 3)와 리스트가 공유 (최신순)
+PRESS_ITEMS = [
+    dict(date='2026.02', title="파라메타, ADB 주관 채권 포럼서 '온체인 KYC' 기반 국경 간 거래 표준 모델 발표"),
+    dict(date='2026.02', title='파라메타, 스테이블코인·STO 무료 컨설팅으로 디지털자산 사업 기회 확대 지원'),
+    dict(date='2023.11', title='김종협 파라메타 대표, 2023 블록체인 진흥주간에서 과학기술정보통신부 장관 표창 수상'),
+    dict(date='2023.09', title="파라메타, 기술신용평가 최고 등급 'TI-1' 획득 — 최상위 수준의 기술력 및 성장 가능성 인정"),
+    dict(date='2023.08', title='파라메타, 카스투게더·솔브릭코리아와 국내 최초 모빌리티·태양광 토큰증권 플랫폼 구축'),
+    dict(date='2023.07', title="파라메타, 플루토스파트너스와 국내 최초 '부동산 NPL 토큰증권 플랫폼' 구축 협력"),
+]
+
+def press_featured(items):
+    """피처드 — 좌측 큰 카드 1(8col) + 우측 작은 카드 2 적층(4col)."""
+    big, subs = items[0], items[1:3]
+    big_card = card(big['title'], '', kicker='PRESS · ' + big['date'], media=True, sm=False)
+    side = ''.join(card(s['title'], '', kicker='PRESS · ' + s['date']) for s in subs)
+    return ('<div class="news-feat rvl" style="--rvl-y:40px">'
+            f'<div class="nf-big">{big_card}</div>'
+            f'<div class="nf-side">{side}</div></div>')
+
+def press_list(items):
+    """보도자료 리스트 — 날짜 | 제목 | 썸네일 영역(placeholder)."""
+    years = sorted({it['date'][:4] for it in items}, reverse=True)
+    y_opts = '<option value="all">전체 연도</option>' + ''.join(f'<option value="{y}">{y}</option>' for y in years)
+    m_opts = '<option value="all">전체 월</option>' + ''.join(f'<option value="{m:02d}">{m}월</option>' for m in range(1, 13))
+    rows = ''.join(
+        f'<li class="news-row press-item rvl" data-year="{it["date"][:4]}" data-month="{it["date"][5:7]}" style="--rvl-y:24px; --rvl-delay:{(i % 5) * 60}ms">'
+        f'<span class="nr-date">{it["date"]}</span>'
+        f'<h3 class="nr-title">{it["title"]}</h3>'
+        f'<span class="nr-thumb" aria-hidden="true"></span></li>'
+        for i, it in enumerate(items))
+    return (f'<div class="news-controls rvl">'
+            f'<select class="news-select news-sel-year" aria-label="연도 필터">{y_opts}</select>'
+            f'<select class="news-select news-sel-month" aria-label="월 필터">{m_opts}</select>'
+            f'<div class="news-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>'
+            f'<input type="search" placeholder="보도자료 검색" aria-label="보도자료 검색"></div></div>'
+            f'<ul class="news-list">{rows}</ul>')
+
 PAGES['insights.html'] = dict(
-    title='Insights | PARAMETA',
-    desc='사업·파트너십·인증·수상 소식과 디지털자산 시장 인사이트를 한곳에서 확인할 수 있습니다.',
-    eyebrow='Insights',
-    h1_lines=['Insights'],
+    title='Newsroom | PARAMETA',
+    desc='파라메타의 사업, 파트너십, 인증, 수상 소식을 한곳에서 확인할 수 있습니다.',
+    eyebrow='Newsroom',
+    h1_lines=['Newsroom'],
     lead='',
-    crumb='Insights — 보도자료 · 블로그',
+    crumb='Newsroom — 보도자료',
     content=f'''
 <section data-press><div class="shell sec">
   {sec_head('Press Release', '보도자료')}
-  <ul class="cards-3">
-    <li class="rvl press-item" style="--rvl-y:40px">{dark_card('PRESS · 2026.02', "파라메타, ADB 주관 채권 포럼서 '온체인 KYC' 기반 국경 간 거래 표준 모델 발표", '', grouped=True)}</li>
-    <li class="rvl press-item" style="--rvl-y:40px; --rvl-delay:90ms">{dark_card('PRESS · 2026.02', '파라메타, 스테이블코인·STO 무료 컨설팅으로 디지털자산 사업 기회 확대 지원', '', grouped=True)}</li>
-    <li class="rvl press-item" style="--rvl-y:40px; --rvl-delay:180ms">{dark_card('PRESS · 2023.11', '김종협 파라메타 대표, 2023 블록체인 진흥주간에서 과학기술정보통신부 장관 표창 수상', '', grouped=True)}</li>
-    <li class="rvl press-item" style="--rvl-y:40px">{dark_card('PRESS · 2023.09', "파라메타, 기술신용평가 최고 등급 'TI-1' 획득 — 최상위 수준의 기술력 및 성장 가능성 인정", '', grouped=True)}</li>
-    <li class="rvl press-item" style="--rvl-y:40px; --rvl-delay:90ms">{dark_card('PRESS · 2023.08', '파라메타, 카스투게더·솔브릭코리아와 국내 최초 모빌리티·태양광 토큰증권 플랫폼 구축', '', grouped=True)}</li>
-    <li class="rvl press-item" style="--rvl-y:40px; --rvl-delay:180ms">{dark_card('PRESS · 2023.07', "파라메타, 플루토스파트너스와 국내 최초 '부동산 NPL 토큰증권 플랫폼' 구축 협력", '', grouped=True)}</li>
-  </ul>
+  {press_featured(PRESS_ITEMS)}
+  {press_list(PRESS_ITEMS)}
   <div class="pager" role="navigation" aria-label="보도자료 페이지"></div>
 </div></section>
-<section data-blog><div class="shell sec" style="padding-top:0">
+''')
+
+# ---------------- blog.html ----------------
+# 블로그 아티클 데이터 — 카테고리 레일과 카드 피드가 공유
+BLOG_CATS = [('tech', '테크'), ('industry', '산업동향')]
+BLOG_ITEMS = [
+    dict(cat='industry', title='스테이블코인 사업, 무엇부터 시작할까', desc='규제, 발행, 유통까지, 스테이블코인 사업을 시작하기 전 짚어야 할 핵심을 정리합니다.'),
+    dict(cat='industry', title='금융권 DID 도입 체크리스트', desc='은행·증권사가 분산신원 인증을 도입하기 전에 확인할 항목을 정리합니다.'),
+    dict(cat='tech', title='온체인 KYC, 규제와 사용성 사이', desc='규제 요건을 지키면서도 사용자 경험을 해치지 않는 KYC 설계를 다룹니다.'),
+    dict(cat='tech', title='loopchain은 왜 즉시 확정인가', desc='즉시 확정(Finality)이 왜 중요한지, 합의 방식과 함께 쉽게 풀어 봅니다.'),
+]
+
+def blog_feed(items, cats):
+    """블로그 피드 — 좌측 카테고리 레일 + 우측 3열 카드(썸네일, 제목, 설명, 카테고리 칩)."""
+    label = dict(cats)
+    tabs = ('<button class="blog-tab is-on" type="button" role="tab" data-filter="all">All</button>'
+            + ''.join(f'<button class="blog-tab" type="button" role="tab" data-filter="{k}">{v}</button>' for k, v in cats))
+    cards = ''.join(
+        f'<li class="blog-item rvl" data-cat="{it["cat"]}" style="--rvl-y:24px; --rvl-delay:{(i % 3) * 60}ms">'
+        f'<a class="bf-card" href="post-sample.html">'
+        f'<span class="bf-thumb" aria-hidden="true"></span>'
+        f'<h3 class="bf-title">{it["title"]}</h3>'
+        f'<p class="bf-desc">{it["desc"]}</p>'
+        f'<span class="bf-tag">{label[it["cat"]]}</span></a></li>'
+        for i, it in enumerate(items))
+    return ('<div class="blog-layout">'
+            f'<div class="blog-rail" role="tablist" aria-label="블로그 카테고리">{tabs}</div>'
+            f'<div class="blog-main"><ul class="blog-grid">{cards}</ul>'
+            '<div class="pager" role="navigation" aria-label="블로그 페이지"></div></div></div>')
+
+PAGES['blog.html'] = dict(
+    title='Blog | PARAMETA',
+    desc='디지털자산 시장을 읽는 인사이트를 확인할 수 있습니다.',
+    eyebrow='Blog',
+    h1_lines=['Blog'],
+    lead='',
+    crumb='Blog — 디지털자산 인사이트',
+    content=f'''
+<section data-blog><div class="shell sec">
   {sec_head('Blog', '디지털자산 시장을 읽는 인사이트')}
-  <div class="blog-tabs" role="tablist" aria-label="블로그 카테고리">
-    <button class="blog-tab is-on" type="button" role="tab" data-filter="all">All</button>
-    <button class="blog-tab" type="button" role="tab" data-filter="tech">테크</button>
-    <button class="blog-tab" type="button" role="tab" data-filter="industry">산업동향</button>
+  {blog_feed(BLOG_ITEMS, BLOG_CATS)}
+</div></section>
+''')
+
+# ---------------- resources.html (자료실) ----------------
+PAGES['resources.html'] = dict(
+    title='Resources | PARAMETA',
+    desc='블록체인 용어정리, 자주 묻는 질문, 로고 등 브랜드 자료를 한곳에서 확인할 수 있습니다.',
+    eyebrow='Resources',
+    h1_lines=['Resources'],
+    lead='',
+    crumb='Resources — 자료실',
+    content=f'''
+<section><div class="shell sec">
+  {sec_head('Logo', '로고 다운로드')}
+  <div class="res-logo rvl" style="--rvl-y:24px">
+    <div class="rl-preview" aria-hidden="true"></div>
+    <div class="rl-actions">
+      <button class="rl-btn" type="button" disabled>AI 다운로드</button>
+      <button class="rl-btn" type="button" disabled>PNG 다운로드</button>
+      <p class="rl-note">로고 파일은 준비 중입니다.</p>
+    </div>
   </div>
-  <ul class="cards-2">
-    <li class="rvl blog-item" data-cat="industry" style="--rvl-y:40px"><a class="card-link" href="post-sample.html">{dark_card('MARKET', '스테이블코인 사업, 무엇부터 시작할까', '규제·발행·유통까지, 스테이블코인 사업을 시작하기 전 짚어야 할 핵심을 정리합니다.', grouped=True)}</a></li>
-    <li class="rvl blog-item" data-cat="industry" style="--rvl-y:40px; --rvl-delay:90ms"><a class="card-link" href="post-sample.html">{dark_card('DID', '금융권 DID 도입 체크리스트', '은행·증권사가 분산신원 인증을 도입하기 전에 확인할 항목을 정리합니다.', grouped=True)}</a></li>
-    <li class="rvl blog-item" data-cat="tech" style="--rvl-y:40px; --rvl-delay:180ms"><a class="card-link" href="post-sample.html">{dark_card('COMPLIANCE', '온체인 KYC, 규제와 사용성 사이', '규제 요건을 지키면서도 사용자 경험을 해치지 않는 KYC 설계를 다룹니다.', grouped=True)}</a></li>
-    <li class="rvl blog-item" data-cat="tech" style="--rvl-y:40px; --rvl-delay:270ms"><a class="card-link" href="post-sample.html">{dark_card('TECH', 'loopchain은 왜 즉시 확정인가', '즉시 확정(Finality)이 왜 중요한지, 합의 방식과 함께 쉽게 풀어 봅니다.', grouped=True)}</a></li>
-  </ul>
-  <div class="pager" role="navigation" aria-label="블로그 페이지"></div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
   {sec_head('Blockchain 101', '용어정리')}
@@ -2720,10 +2896,10 @@ PAGES['insights.html'] = dict(
 PAGES['post-sample.html'] = dict(
     title='스테이블코인 사업, 무엇부터 시작할까 | PARAMETA',
     desc='디지털자산 사업을 시작할 때 필요한 인프라 구성요소 — 지갑, 토큰 발행, 온체인 KYC, 규제 대응. (샘플 아티클)',
-    eyebrow='Insights — Blog',
+    eyebrow='Blog',
     h1_lines=['스테이블코인 사업,', '무엇부터 시작할까'],
     lead='샘플 아티클 · 2026',
-    crumb='Insights — Sample Post',
+    crumb='Blog — Sample Post',
     body_class='hero-dark hero-center',
     hero_cta='',
     content=f'''
@@ -2759,9 +2935,9 @@ PAGES['post-sample.html'] = dict(
 <section><div class="shell sec" style="padding-top:0">
   {sec_head('Related Articles', '함께 보면 좋은 아티클')}
   <ul class="cards-3">
-    <li class="rvl" style="--rvl-y:40px"><a class="card-link" href="insights.html">{dark_card('DID', '금융권 DID 도입 체크리스트', '은행·증권사가 분산신원 인증을 도입하기 전에 확인할 항목을 정리합니다.', grouped=True)}</a></li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><a class="card-link" href="insights.html">{dark_card('COMPLIANCE', '온체인 KYC, 규제와 사용성 사이', '규제 요건을 지키면서도 사용자 경험을 해치지 않는 KYC 설계를 다룹니다.', grouped=True)}</a></li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><a class="card-link" href="insights.html">{dark_card('TECH', 'loopchain은 왜 즉시 확정인가', '즉시 확정(Finality)이 왜 중요한지, 합의 방식과 함께 쉽게 풀어 봅니다.', grouped=True)}</a></li>
+    <li class="rvl" style="--rvl-y:40px"><a class="card-link" href="blog.html">{dark_card('DID', '금융권 DID 도입 체크리스트', '은행·증권사가 분산신원 인증을 도입하기 전에 확인할 항목을 정리합니다.', grouped=True)}</a></li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><a class="card-link" href="blog.html">{dark_card('COMPLIANCE', '온체인 KYC, 규제와 사용성 사이', '규제 요건을 지키면서도 사용자 경험을 해치지 않는 KYC 설계를 다룹니다.', grouped=True)}</a></li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><a class="card-link" href="blog.html">{dark_card('TECH', 'loopchain은 왜 즉시 확정인가', '즉시 확정(Finality)이 왜 중요한지, 합의 방식과 함께 쉽게 풀어 봅니다.', grouped=True)}</a></li>
   </ul>
 </div></section>
 ''')
@@ -4021,9 +4197,9 @@ DEFAULT_HERO_CTA = HERO_CTA_PRODUCT
 # 콘텐츠형(hero-center + Contact Us) 페이지 — 이미지 비주얼 없음
 CONTENT_PAGES = set()
 # CTA 없는 콘텐츠형(회사/인사이트/문의/약관 등) — 중앙정렬만, CTA 없음
-CONTENT_NOCTA = {'company.html', 'insights.html', 'contact.html', 'privacy.html', 'terms.html'}
+CONTENT_NOCTA = {'company.html', 'insights.html', 'blog.html', 'resources.html', 'contact.html', 'privacy.html', 'terms.html'}
 # 라이트 히어로(hero-light) — 화이트+orb+중앙정렬. company는 Vision 편입까지 추가(body_class='company')
-HERO_LIGHT = {'company.html', 'contact.html', 'insights.html'}
+HERO_LIGHT = {'company.html', 'contact.html', 'insights.html', 'blog.html', 'resources.html'}
 def resolve_hero(fname, p):
     """페이지별 히어로 body_class·CTA를 토큰으로 해석 (명시적 키가 있으면 우선)."""
     if fname in HERO_LIGHT:

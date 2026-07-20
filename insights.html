@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Insights | PARAMETA</title>
-<meta name="description" content="사업·파트너십·인증·수상 소식과 디지털자산 시장 인사이트를 한곳에서 확인할 수 있습니다." />
+<title>Newsroom | PARAMETA</title>
+<meta name="description" content="파라메타의 사업, 파트너십, 인증, 수상 소식을 한곳에서 확인할 수 있습니다." />
 <meta name="theme-color" content="#0E0C27" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -2124,6 +2124,53 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 .ht-sub li .m{ color:var(--muted); margin-right:.6rem; font-variant-numeric:tabular-nums; white-space:nowrap }
 /* Alliance 소절 카드 위 여백 */
 .firsts-eco .cards-2{ margin-top:var(--space-16) }
+
+/* ============ NEWSROOM — 피처드(1큰카드+2적층) + 보도자료 리스트 ============ */
+.news-feat{ display:grid; grid-template-columns:1fr; gap:1rem; margin-bottom:var(--space-64) }
+@media (min-width:768px){
+  .news-feat{ grid-template-columns:repeat(12,1fr); gap:var(--grid-gap) }
+  .nf-big{ grid-column:1 / 9 } .nf-side{ grid-column:9 / 13 } }
+.nf-big{ display:flex }
+.nf-big .work-card{ flex:1 1 auto; min-width:0; min-height:0 }
+/* 큰 카드 이미지 영역: full-bleed, 남는 높이를 채움 */
+.nf-big .work-card.grouped::before{ flex:1 1 auto; height:auto; min-height:16rem;
+  margin:-1.5rem -1.5rem 1.5rem; border-radius:0;
+  background:url('assets/parasta/body-test.avif') center/cover no-repeat }
+@media (min-width:640px){ .nf-big .work-card.grouped::before{ margin:-2rem -2rem 1.75rem } }
+.nf-side{ display:flex; flex-direction:column; gap:1rem }
+@media (min-width:768px){ .nf-side{ gap:var(--grid-gap) } }
+/* 적층 카드: 킥커→제목 플로우 배치 (절대배치 해제 — 긴 제목이 킥커를 덮지 않게) */
+.nf-side .work-card{ flex:1 1 0; min-height:11rem; display:flex; flex-direction:column }
+.nf-side .work-card .work-bottom{ position:static; inset:auto; margin-top:auto; padding-top:.875rem }
+.nf-side .work-card .work-bottom h3{ font-size:var(--text-20) }
+/* 컨트롤 — 연도 드롭다운 + 검색창 */
+.news-controls{ display:flex; align-items:center; gap:.75rem; flex-wrap:wrap;
+  padding-bottom:1.25rem; border-bottom:1px solid rgba(var(--ink-rgb),.14) }
+.news-select{ height:2.75rem; padding:0 2.25rem 0 1.25rem; border:1px solid rgba(var(--ink-rgb),.15);
+  border-radius:var(--radius-pill); background:transparent; font-size:var(--text-14); font-weight:500;
+  color:var(--ink); cursor:pointer; appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right .875rem center; background-size:1rem }
+.news-search{ display:flex; align-items:center; gap:.5rem; margin-left:auto;
+  height:2.75rem; padding:0 1.25rem; border:1px solid rgba(var(--ink-rgb),.15); border-radius:var(--radius-pill) }
+.news-search svg{ width:1rem; height:1rem; color:rgba(var(--ink-rgb),.45); flex:none }
+.news-search input{ border:none; background:transparent; outline:none; min-width:0; width:11rem;
+  font-size:var(--text-14); color:var(--ink) }
+.news-search input::placeholder{ color:rgba(var(--ink-rgb),.4) }
+/* 리스트 — 날짜 | 제목 | 썸네일 영역 */
+.news-list{ list-style:none }
+.news-row{ display:grid; grid-template-columns:6rem 1fr 15rem; align-items:center; gap:var(--grid-gap);
+  padding-block:1.5rem; border-bottom:1px solid rgba(var(--ink-rgb),.1) }
+.nr-date{ font-size:var(--text-14); color:rgba(var(--ink-rgb),.5); font-variant-numeric:tabular-nums }
+.nr-title{ font-size:var(--text-20); font-weight:500; letter-spacing:-.01em; line-height:var(--leading-heading);
+  color:var(--ink); word-break:keep-all }
+.nr-thumb{ width:100%; aspect-ratio:3/2; border-radius:var(--radius-card-sm);
+  background:color-mix(in srgb, var(--ink) 6%, var(--white)) }
+@media (max-width:767px){
+  .news-row{ grid-template-columns:1fr; gap:.75rem; padding-block:1.25rem }
+  .nr-title{ font-size:var(--text-18) }
+  .nr-thumb{ max-width:20rem }
+  .news-search{ margin-left:0; flex:1 } }
 </style>
 </head>
 <body class="hero-light">
@@ -2139,8 +2186,8 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
     <div class="phero-wm">PARAMETA</div>
     <div class="shell phero-inner">
       <div class="phero-text">
-        <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Insights</div>
-        <h1 class="phero-h1" data-line-stagger="120"><span class="rvl-line"><span>Insights</span></span></h1>
+        <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Newsroom</div>
+        <h1 class="phero-h1" data-line-stagger="120"><span class="rvl-line"><span>Newsroom</span></span></h1>
         <p class="phero-lead rvl" style="--rvl-delay:250ms"></p>
         
       </div>
@@ -2149,45 +2196,16 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
     </div>
     
     <div class="shell phero-status">
-      <span>Insights — 보도자료 · 블로그</span>
+      <span>Newsroom — 보도자료</span>
       <span style="display:inline-flex; gap:.5rem">Scroll <span aria-hidden="true">↓</span></span>
     </div>
   </section>
 
 <section data-press><div class="shell sec">
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Press Release</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>보도자료</span></span></h2>
-  <ul class="cards-3">
-    <li class="rvl press-item" style="--rvl-y:40px"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>PRESS · 2026.02</span></div><h3>파라메타, ADB 주관 채권 포럼서 '온체인 KYC' 기반 국경 간 거래 표준 모델 발표</h3><p></p></div></article></li>
-    <li class="rvl press-item" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>PRESS · 2026.02</span></div><h3>파라메타, 스테이블코인·STO 무료 컨설팅으로 디지털자산 사업 기회 확대 지원</h3><p></p></div></article></li>
-    <li class="rvl press-item" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>PRESS · 2023.11</span></div><h3>김종협 파라메타 대표, 2023 블록체인 진흥주간에서 과학기술정보통신부 장관 표창 수상</h3><p></p></div></article></li>
-    <li class="rvl press-item" style="--rvl-y:40px"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>PRESS · 2023.09</span></div><h3>파라메타, 기술신용평가 최고 등급 'TI-1' 획득 — 최상위 수준의 기술력 및 성장 가능성 인정</h3><p></p></div></article></li>
-    <li class="rvl press-item" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>PRESS · 2023.08</span></div><h3>파라메타, 카스투게더·솔브릭코리아와 국내 최초 모빌리티·태양광 토큰증권 플랫폼 구축</h3><p></p></div></article></li>
-    <li class="rvl press-item" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>PRESS · 2023.07</span></div><h3>파라메타, 플루토스파트너스와 국내 최초 '부동산 NPL 토큰증권 플랫폼' 구축 협력</h3><p></p></div></article></li>
-  </ul>
+  <div class="news-feat rvl" style="--rvl-y:40px"><div class="nf-big"><article class="work-card static grouped"><div class="work-bottom"><div class="work-meta"><span>PRESS · 2026.02</span></div><h3>파라메타, ADB 주관 채권 포럼서 '온체인 KYC' 기반 국경 간 거래 표준 모델 발표</h3><p></p></div></article></div><div class="nf-side"><article class="work-card static sm"><div class="work-meta"><span>PRESS · 2026.02</span></div><div class="work-bottom"><h3>파라메타, 스테이블코인·STO 무료 컨설팅으로 디지털자산 사업 기회 확대 지원</h3><p></p></div></article><article class="work-card static sm"><div class="work-meta"><span>PRESS · 2023.11</span></div><div class="work-bottom"><h3>김종협 파라메타 대표, 2023 블록체인 진흥주간에서 과학기술정보통신부 장관 표창 수상</h3><p></p></div></article></div></div>
+  <div class="news-controls rvl"><select class="news-select news-sel-year" aria-label="연도 필터"><option value="all">전체 연도</option><option value="2026">2026</option><option value="2023">2023</option></select><select class="news-select news-sel-month" aria-label="월 필터"><option value="all">전체 월</option><option value="01">1월</option><option value="02">2월</option><option value="03">3월</option><option value="04">4월</option><option value="05">5월</option><option value="06">6월</option><option value="07">7월</option><option value="08">8월</option><option value="09">9월</option><option value="10">10월</option><option value="11">11월</option><option value="12">12월</option></select><div class="news-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg><input type="search" placeholder="보도자료 검색" aria-label="보도자료 검색"></div></div><ul class="news-list"><li class="news-row press-item rvl" data-year="2026" data-month="02" style="--rvl-y:24px; --rvl-delay:0ms"><span class="nr-date">2026.02</span><h3 class="nr-title">파라메타, ADB 주관 채권 포럼서 '온체인 KYC' 기반 국경 간 거래 표준 모델 발표</h3><span class="nr-thumb" aria-hidden="true"></span></li><li class="news-row press-item rvl" data-year="2026" data-month="02" style="--rvl-y:24px; --rvl-delay:60ms"><span class="nr-date">2026.02</span><h3 class="nr-title">파라메타, 스테이블코인·STO 무료 컨설팅으로 디지털자산 사업 기회 확대 지원</h3><span class="nr-thumb" aria-hidden="true"></span></li><li class="news-row press-item rvl" data-year="2023" data-month="11" style="--rvl-y:24px; --rvl-delay:120ms"><span class="nr-date">2023.11</span><h3 class="nr-title">김종협 파라메타 대표, 2023 블록체인 진흥주간에서 과학기술정보통신부 장관 표창 수상</h3><span class="nr-thumb" aria-hidden="true"></span></li><li class="news-row press-item rvl" data-year="2023" data-month="09" style="--rvl-y:24px; --rvl-delay:180ms"><span class="nr-date">2023.09</span><h3 class="nr-title">파라메타, 기술신용평가 최고 등급 'TI-1' 획득 — 최상위 수준의 기술력 및 성장 가능성 인정</h3><span class="nr-thumb" aria-hidden="true"></span></li><li class="news-row press-item rvl" data-year="2023" data-month="08" style="--rvl-y:24px; --rvl-delay:240ms"><span class="nr-date">2023.08</span><h3 class="nr-title">파라메타, 카스투게더·솔브릭코리아와 국내 최초 모빌리티·태양광 토큰증권 플랫폼 구축</h3><span class="nr-thumb" aria-hidden="true"></span></li><li class="news-row press-item rvl" data-year="2023" data-month="07" style="--rvl-y:24px; --rvl-delay:0ms"><span class="nr-date">2023.07</span><h3 class="nr-title">파라메타, 플루토스파트너스와 국내 최초 '부동산 NPL 토큰증권 플랫폼' 구축 협력</h3><span class="nr-thumb" aria-hidden="true"></span></li></ul>
   <div class="pager" role="navigation" aria-label="보도자료 페이지"></div>
-</div></section>
-<section data-blog><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Blog</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>디지털자산 시장을 읽는 인사이트</span></span></h2>
-  <div class="blog-tabs" role="tablist" aria-label="블로그 카테고리">
-    <button class="blog-tab is-on" type="button" role="tab" data-filter="all">All</button>
-    <button class="blog-tab" type="button" role="tab" data-filter="tech">테크</button>
-    <button class="blog-tab" type="button" role="tab" data-filter="industry">산업동향</button>
-  </div>
-  <ul class="cards-2">
-    <li class="rvl blog-item" data-cat="industry" style="--rvl-y:40px"><a class="card-link" href="post-sample.html"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>MARKET</span></div><h3>스테이블코인 사업, 무엇부터 시작할까</h3><p>규제·발행·유통까지, 스테이블코인 사업을 시작하기 전 짚어야 할 핵심을 정리합니다.</p></div></article></a></li>
-    <li class="rvl blog-item" data-cat="industry" style="--rvl-y:40px; --rvl-delay:90ms"><a class="card-link" href="post-sample.html"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>DID</span></div><h3>금융권 DID 도입 체크리스트</h3><p>은행·증권사가 분산신원 인증을 도입하기 전에 확인할 항목을 정리합니다.</p></div></article></a></li>
-    <li class="rvl blog-item" data-cat="tech" style="--rvl-y:40px; --rvl-delay:180ms"><a class="card-link" href="post-sample.html"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>COMPLIANCE</span></div><h3>온체인 KYC, 규제와 사용성 사이</h3><p>규제 요건을 지키면서도 사용자 경험을 해치지 않는 KYC 설계를 다룹니다.</p></div></article></a></li>
-    <li class="rvl blog-item" data-cat="tech" style="--rvl-y:40px; --rvl-delay:270ms"><a class="card-link" href="post-sample.html"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>TECH</span></div><h3>loopchain은 왜 즉시 확정인가</h3><p>즉시 확정(Finality)이 왜 중요한지, 합의 방식과 함께 쉽게 풀어 봅니다.</p></div></article></a></li>
-  </ul>
-  <div class="pager" role="navigation" aria-label="블로그 페이지"></div>
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Blockchain 101</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>용어정리</span></span></h2>
-  <ul><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:0ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><span class="faq-idx">01</span><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top">DID (Decentralized Identifier, 분산아이디)</h3><div class="faq-ans">외부 인증기관 없이 사용자가 자신의 디지털 서명으로 신원을 직접 증명하는 분산형 신원 체계. 필요한 정보만 선택적으로 공개할 수 있고, W3C 표준을 따릅니다. 자기주권신원(SSI)을 구현하는 핵심 기술입니다.</div><h3 class="faq-t faq-t-bottom">DID (Decentralized Identifier, 분산아이디)</h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div></li><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:60ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><span class="faq-idx">02</span><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top">SSI (Self-Sovereign Identity, 자기주권신원)</h3><div class="faq-ans">개인이 자신의 신원 정보를 스스로 소유·관리하는 신원 모델. 중앙 발급기관이 아닌 사용자가 인증·공개 범위·이력을 직접 제어합니다. DID 기술이 SSI를 가능하게 합니다.</div><h3 class="faq-t faq-t-bottom">SSI (Self-Sovereign Identity, 자기주권신원)</h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div></li><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:120ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><span class="faq-idx">03</span><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top">Stable Coin (스테이블 코인)</h3><div class="faq-ans">법정통화나 자산에 가치를 연동(Peg)해 가격 변동성을 최소화한 디지털 자산. 결제·송금·정산처럼 안정적인 가치 이동이 필요한 환경에서 활용됩니다.</div><h3 class="faq-t faq-t-bottom">Stable Coin (스테이블 코인)</h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div></li><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:180ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><span class="faq-idx">04</span><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top">DeFi (Decentralized Finance, 탈중앙화 금융)</h3><div class="faq-ans">은행 등 중앙 기관 없이 블록체인 위에서 자동으로 거래되는 금융 메커니즘. 스마트 컨트랙트로 송금·예치·대출·환전을 처리하며, 누구나 참여할 수 있습니다.</div><h3 class="faq-t faq-t-bottom">DeFi (Decentralized Finance, 탈중앙화 금융)</h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div></li><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:240ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><span class="faq-idx">05</span><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top">NFT (Non-Fungible Token, 대체 불가능 토큰)</h3><div class="faq-ans">교환·복제가 불가능한 고유 식별자를 가진 블록체인 기반 토큰. 작품·콘텐츠·자산을 유일한 형태로 표현하며 스마트 컨트랙트로 발행·이전됩니다. FT(대체 가능 토큰)의 상대 개념.</div><h3 class="faq-t faq-t-bottom">NFT (Non-Fungible Token, 대체 불가능 토큰)</h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div></li><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:300ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><span class="faq-idx">06</span><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top">BTP (Blockchain Transmission Protocol)</h3><div class="faq-ans">서로 다른 블록체인 간에 자산과 메시지를 안전하게 이동시키는 인터체인 프로토콜. 검증·중계·릴레이 메커니즘으로 체인 간 신뢰 가능한 통신을 제공합니다. 파라메타가 직접 개발했습니다.</div><h3 class="faq-t faq-t-bottom">BTP (Blockchain Transmission Protocol)</h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div></li><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:360ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><span class="faq-idx">07</span><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top">loopchain (루프체인)</h3><div class="faq-ans">파라메타가 자체 개발한 엔터프라이즈 블록체인 엔진. PBFT 계열 LFT 합의 알고리즘으로 즉시 확정(Finality)과 운영 안정성을 제공합니다. 금융·공공 환경의 요구사항을 충족하도록 설계되었습니다.</div><h3 class="faq-t faq-t-bottom">loopchain (루프체인)</h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div></li><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:420ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><span class="faq-idx">08</span><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top">SCORE (Smart Contract on Reliable Environment)</h3><div class="faq-ans">파라메타의 자체 코어 엔진 루프체인 위에서 동작하는 스마트 컨트랙트 실행 환경. Java·Python 등 익숙한 언어로 컨트랙트를 작성할 수 있게 합니다.</div><h3 class="faq-t faq-t-bottom">SCORE (Smart Contract on Reliable Environment)</h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div></li></ul>
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>FAQ</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>자주 묻는 질문</span></span></h2>
-  <ul><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:0ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><span class="faq-idx">01</span><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top">파라메타는 어떤 회사인가요?</h3><div class="faq-ans">파라메타는 블록체인 기반 디지털자산 인프라를 만드는 Web3 기술 기업입니다.<br>금융·기업·공공 서비스에 필요한 지갑, 토큰 발행, 신원인증, 온체인 KYC, 상호운용 기술을 제공합니다.</div><h3 class="faq-t faq-t-bottom">파라메타는 어떤 회사인가요?</h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div></li><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:60ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><span class="faq-idx">02</span><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top">ParaSta 솔루션으로 무엇을 할 수 있나요?</h3><div class="faq-ans">ParaSta는 지갑, 토큰 발행, RWA, 온체인 KYC, 거래 관리 등 디지털자산 서비스의 핵심 기능을 하나의 플랫폼으로 제공합니다.<br>개발 부담을 줄이고, SaaS 또는 온프레미스 환경에서 빠르게 서비스를 구축할 수 있습니다.</div><h3 class="faq-t faq-t-bottom">ParaSta 솔루션으로 무엇을 할 수 있나요?</h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div></li><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:120ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><span class="faq-idx">03</span><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top">MyID와 K-BTF는 무엇이 다른가요?</h3><div class="faq-ans">MyID는 DID 기반 신원인증 서비스이며, K-BTF는 이를 공공·기업 환경에서 안정적으로 활용할 수 있도록 지원하는 공동 인프라입니다.<br>기관은 별도 인프라 구축 부담을 줄이고, 보안 기준에 맞는 디지털 신원 인증을 빠르게 도입할 수 있습니다.</div><h3 class="faq-t faq-t-bottom">MyID와 K-BTF는 무엇이 다른가요?</h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div></li><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:180ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><span class="faq-idx">04</span><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top">파라메타는 자체 블록체인 엔진을 보유하고 있나요?</h3><div class="faq-ans">네. 파라메타는 금융·공공 환경에 필요한 거래 확정성과 운영 안정성을 제공하는 자체 블록체인 엔진을 보유하고 있습니다.<br>PBFT 계열 합의 구조와 LFT 알고리즘을 기반으로, 디지털자산 인프라 구축에 필요한 안정적인 블록체인 기반을 제공합니다.</div><h3 class="faq-t faq-t-bottom">파라메타는 자체 블록체인 엔진을 보유하고 있나요?</h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div></li><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:240ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><span class="faq-idx">05</span><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top">PortX는 어떤 서비스인가요?</h3><div class="faq-ans">PortX는 기존 서비스에 디지털자산 거래 기능을 빠르게 도입할 수 있도록 지원하는 화이트라벨 거래소 솔루션입니다.<br>개발 부담을 줄이고, 자체 브랜드 환경에서 거래 서비스를 제공할 수 있습니다.</div><h3 class="faq-t faq-t-bottom">PortX는 어떤 서비스인가요?</h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div></li></ul>
 </div></section>
 
 </main>
@@ -2836,17 +2854,30 @@ if(blogSec){
   });
   paint();
 }
-/* Insights: 보도자료 페이지네이션 */
+/* Insights(Newsroom): 보도자료 리스트 — 연도·검색 필터 + 페이지네이션(10개씩) */
 const pressSec = document.querySelector('[data-press]');
 if(pressSec){
-  const cards = [...pressSec.querySelectorAll('.press-item')];
+  const items = [...pressSec.querySelectorAll('.press-item')];
   const pager = pressSec.querySelector('.pager');
-  const PER = 6; let cur = 1;
+  const selY = pressSec.querySelector('.news-sel-year');
+  const selM = pressSec.querySelector('.news-sel-month');
+  const inp = pressSec.querySelector('.news-search input');
+  const PER = 10; let year = 'all', month = 'all', kw = '', cur = 1;
+  const elig = () => items.filter(r =>
+    (year === 'all' || r.dataset.year === year) &&
+    (month === 'all' || r.dataset.month === month) &&
+    (!kw || r.querySelector('.nr-title').textContent.toLowerCase().includes(kw)));
   function paintP(){
-    const real = Math.max(1, Math.ceil(cards.length / PER));
-    cards.forEach((c, i) => c.classList.toggle('hidden', Math.floor(i/PER)+1 !== cur));
+    const e = elig();
+    const real = Math.max(1, Math.ceil(e.length / PER));
+    if(cur > real) cur = real;
+    items.forEach(r => r.classList.add('hidden'));
+    e.slice((cur-1)*PER, cur*PER).forEach(r => r.classList.remove('hidden'));
     if(pager) paintPager(pager, pressSec, cur, real, page => { cur = page; paintP(); });
   }
+  if(selY) selY.addEventListener('change', () => { year = selY.value; cur = 1; paintP(); });
+  if(selM) selM.addEventListener('change', () => { month = selM.value; cur = 1; paintP(); });
+  if(inp) inp.addEventListener('input', () => { kw = inp.value.trim().toLowerCase(); cur = 1; paintP(); });
   paintP();
 }
 

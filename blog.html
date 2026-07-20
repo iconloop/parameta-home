@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>스테이블코인 사업, 무엇부터 시작할까 | PARAMETA</title>
-<meta name="description" content="디지털자산 사업을 시작할 때 필요한 인프라 구성요소 — 지갑, 토큰 발행, 온체인 KYC, 규제 대응. (샘플 아티클)" />
+<title>Blog | PARAMETA</title>
+<meta name="description" content="디지털자산 시장을 읽는 인사이트를 확인할 수 있습니다." />
 <meta name="theme-color" content="#0E0C27" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -2171,9 +2171,45 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
   .nr-title{ font-size:var(--text-18) }
   .nr-thumb{ max-width:20rem }
   .news-search{ margin-left:0; flex:1 } }
+
+/* ============ BLOG — 좌측 카테고리 레일 + 3열 카드 피드 ============ */
+.blog-layout{ display:grid; grid-template-columns:1fr; gap:2rem }
+@media (min-width:1024px){
+  .blog-layout{ grid-template-columns:repeat(12,1fr); column-gap:var(--grid-gap) }
+  .blog-rail{ grid-column:1 / 3; flex-direction:column; align-items:flex-start;
+    position:sticky; top:7.5rem; align-self:start }
+  .blog-main{ grid-column:3 / 13 } }
+.blog-rail{ display:flex; flex-wrap:wrap; gap:.5rem }
+.blog-grid{ list-style:none; display:grid; grid-template-columns:1fr; gap:2.5rem 1.5rem }
+@media (min-width:640px){ .blog-grid{ grid-template-columns:repeat(2,1fr) } }
+@media (min-width:1024px){ .blog-grid{ grid-template-columns:repeat(3,1fr) } }
+.bf-card{ display:flex; flex-direction:column; align-items:flex-start; text-decoration:none; color:inherit }
+.bf-thumb{ width:100%; aspect-ratio:1/1; border-radius:var(--radius-card-sm); margin-bottom:1.25rem;
+  background:color-mix(in srgb, var(--ink) 6%, var(--white)); transition:transform .35s cubic-bezier(.2,.8,.2,1) }
+@media (hover:hover){ .bf-card:hover .bf-thumb{ transform:translateY(-4px) } }
+.bf-title{ font-size:var(--text-20); font-weight:600; letter-spacing:-.01em; line-height:var(--leading-heading);
+  color:var(--ink); word-break:keep-all }
+.bf-desc{ margin-top:.5rem; font-size:var(--text-14); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.6) }
+.bf-tag{ margin-top:1rem; font-size:var(--text-14); line-height:1; padding:.375rem .875rem;
+  border:1px solid rgba(var(--ink-rgb),.15); border-radius:var(--radius-pill); color:rgba(var(--ink-rgb),.6) }
+
+/* ============ RESOURCES — 로고 다운로드 ============ */
+.res-logo{ display:grid; grid-template-columns:1fr; gap:1.5rem }
+@media (min-width:768px){
+  .res-logo{ grid-template-columns:repeat(12,1fr); column-gap:var(--grid-gap) }
+  .rl-preview{ grid-column:1 / 9 } .rl-actions{ grid-column:9 / 13; align-self:center } }
+.rl-preview{ aspect-ratio:3/1; border-radius:var(--radius-card);
+  background:color-mix(in srgb, var(--ink) 6%, var(--white)) }
+.rl-actions{ display:flex; flex-direction:column; align-items:flex-start; gap:.75rem }
+.rl-btn{ height:2.75rem; padding:0 1.5rem; border:1px solid rgba(var(--ink-rgb),.15); border-radius:var(--radius-pill);
+  background:transparent; font-size:var(--text-14); font-weight:500; color:var(--ink); cursor:pointer;
+  transition:background .2s ease, color .2s ease, border-color .2s ease }
+@media (hover:hover){ .rl-btn:not(:disabled):hover{ background:var(--ink); color:var(--white); border-color:var(--ink) } }
+.rl-btn:disabled{ opacity:.4; cursor:default }
+.rl-note{ font-size:var(--text-14); color:rgba(var(--ink-rgb),.5) }
 </style>
 </head>
-<body class="hero-dark hero-center">
+<body class="hero-light">
 
 <a href="#main" class="skip">본문으로 건너뛰기</a>
 <!-- GNB — 단일 소스: assets/nav.js가 배너·헤더·오버레이 메뉴 주입 -->
@@ -2187,8 +2223,8 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
     <div class="shell phero-inner">
       <div class="phero-text">
         <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Blog</div>
-        <h1 class="phero-h1" data-line-stagger="120"><span class="rvl-line"><span>스테이블코인 사업,</span></span><span class="rvl-line"><span>무엇부터 시작할까</span></span></h1>
-        <p class="phero-lead rvl" style="--rvl-delay:250ms">샘플 아티클 · 2026</p>
+        <h1 class="phero-h1" data-line-stagger="120"><span class="rvl-line"><span>Blog</span></span></h1>
+        <p class="phero-lead rvl" style="--rvl-delay:250ms"></p>
         
       </div>
       <div class="phero-visual" aria-hidden="true"></div>
@@ -2196,47 +2232,14 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
     </div>
     
     <div class="shell phero-status">
-      <span>Blog — Sample Post</span>
+      <span>Blog — 디지털자산 인사이트</span>
       <span style="display:inline-flex; gap:.5rem">Scroll <span aria-hidden="true">↓</span></span>
     </div>
   </section>
 
-<section><div class="shell sec">
-  <div class="post-meta rvl">
-    <span class="post-cat">Stablecoin</span>
-    <span class="post-date">2026.06.18</span>
-    <span class="post-read">읽는 시간 약 5분</span>
-  </div>
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
-  <div class="post-grid">
-    <article class="post-body">
-      <p class="post-lead">디지털자산 사업을 처음 검토하는 기업이 가장 먼저 마주하는 질문은 "무엇부터 만들어야 하는가"입니다. 결제, 송금, 토큰 발행, 자산 토큰화 등 목표는 달라도, 그 밑에 필요한 기반은 대체로 비슷합니다.</p>
-      <h3 id="post-s1">필요한 네 가지 기반</h3>
-      <p><b>① 지갑</b>은 자산을 안전하게 보관하고 키를 관리하는 출발점입니다. 수탁형과 비수탁형 중 무엇을 택할지가 사업 구조를 좌우합니다.</p>
-      <p><b>② 토큰 발행·관리</b>는 어떤 자산을 어떤 규칙으로 발행하고, 락업·유통·정산을 어떻게 통제할지를 다룹니다.</p>
-      <p><b>③ 온체인 KYC와 거래 통제</b>는 규제 대응의 핵심입니다. 누가, 무엇을, 어떤 조건에서 거래할 수 있는지를 검증·기록해야 합니다.</p>
-      <p><b>④ 규제·감사 대응</b>은 위 모든 단계를 신뢰할 수 있게 남기는 일입니다. 위변조가 불가능한 기록과 추적이 있어야 감독기관과 고객 모두를 설득할 수 있습니다.</p>
-      <h3 id="post-s2">직접 만들 것인가, 인프라를 빌릴 것인가</h3>
-      <p>이 네 가지를 처음부터 직접 구축하면 시간과 비용이 크게 듭니다. 검증된 인프라 위에서 시작하면, 기업은 자기 사업과 고객 경험에 집중하고 복잡한 블록체인 기반은 파트너가 맡는 구조를 만들 수 있습니다.</p>
-      <p>파라메타는 지갑·발행·신원·거래에 필요한 인프라를 하나로 제공해, 디지털자산 사업의 진입 장벽을 낮춥니다.</p>
-    </article>
-    <aside class="post-side">
-      <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>On this page</div>
-      <ul>
-        <li><a href="#post-s1">필요한 네 가지 기반</a></li>
-        <li><a href="#post-s2">직접 만들 것인가, 인프라를 빌릴 것인가</a></li>
-      </ul>
-    </aside>
-  </div>
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Related Articles</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>함께 보면 좋은 아티클</span></span></h2>
-  <ul class="cards-3">
-    <li class="rvl" style="--rvl-y:40px"><a class="card-link" href="blog.html"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>DID</span></div><h3>금융권 DID 도입 체크리스트</h3><p>은행·증권사가 분산신원 인증을 도입하기 전에 확인할 항목을 정리합니다.</p></div></article></a></li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><a class="card-link" href="blog.html"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>COMPLIANCE</span></div><h3>온체인 KYC, 규제와 사용성 사이</h3><p>규제 요건을 지키면서도 사용자 경험을 해치지 않는 KYC 설계를 다룹니다.</p></div></article></a></li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><a class="card-link" href="blog.html"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>TECH</span></div><h3>loopchain은 왜 즉시 확정인가</h3><p>즉시 확정(Finality)이 왜 중요한지, 합의 방식과 함께 쉽게 풀어 봅니다.</p></div></article></a></li>
-  </ul>
+<section data-blog><div class="shell sec">
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Blog</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>디지털자산 시장을 읽는 인사이트</span></span></h2>
+  <div class="blog-layout"><div class="blog-rail" role="tablist" aria-label="블로그 카테고리"><button class="blog-tab is-on" type="button" role="tab" data-filter="all">All</button><button class="blog-tab" type="button" role="tab" data-filter="tech">테크</button><button class="blog-tab" type="button" role="tab" data-filter="industry">산업동향</button></div><div class="blog-main"><ul class="blog-grid"><li class="blog-item rvl" data-cat="industry" style="--rvl-y:24px; --rvl-delay:0ms"><a class="bf-card" href="post-sample.html"><span class="bf-thumb" aria-hidden="true"></span><h3 class="bf-title">스테이블코인 사업, 무엇부터 시작할까</h3><p class="bf-desc">규제, 발행, 유통까지, 스테이블코인 사업을 시작하기 전 짚어야 할 핵심을 정리합니다.</p><span class="bf-tag">산업동향</span></a></li><li class="blog-item rvl" data-cat="industry" style="--rvl-y:24px; --rvl-delay:60ms"><a class="bf-card" href="post-sample.html"><span class="bf-thumb" aria-hidden="true"></span><h3 class="bf-title">금융권 DID 도입 체크리스트</h3><p class="bf-desc">은행·증권사가 분산신원 인증을 도입하기 전에 확인할 항목을 정리합니다.</p><span class="bf-tag">산업동향</span></a></li><li class="blog-item rvl" data-cat="tech" style="--rvl-y:24px; --rvl-delay:120ms"><a class="bf-card" href="post-sample.html"><span class="bf-thumb" aria-hidden="true"></span><h3 class="bf-title">온체인 KYC, 규제와 사용성 사이</h3><p class="bf-desc">규제 요건을 지키면서도 사용자 경험을 해치지 않는 KYC 설계를 다룹니다.</p><span class="bf-tag">테크</span></a></li><li class="blog-item rvl" data-cat="tech" style="--rvl-y:24px; --rvl-delay:0ms"><a class="bf-card" href="post-sample.html"><span class="bf-thumb" aria-hidden="true"></span><h3 class="bf-title">loopchain은 왜 즉시 확정인가</h3><p class="bf-desc">즉시 확정(Finality)이 왜 중요한지, 합의 방식과 함께 쉽게 풀어 봅니다.</p><span class="bf-tag">테크</span></a></li></ul><div class="pager" role="navigation" aria-label="블로그 페이지"></div></div></div>
 </div></section>
 
 </main>
@@ -2890,11 +2893,13 @@ const pressSec = document.querySelector('[data-press]');
 if(pressSec){
   const items = [...pressSec.querySelectorAll('.press-item')];
   const pager = pressSec.querySelector('.pager');
-  const sel = pressSec.querySelector('.news-select');
+  const selY = pressSec.querySelector('.news-sel-year');
+  const selM = pressSec.querySelector('.news-sel-month');
   const inp = pressSec.querySelector('.news-search input');
-  const PER = 10; let year = 'all', kw = '', cur = 1;
+  const PER = 10; let year = 'all', month = 'all', kw = '', cur = 1;
   const elig = () => items.filter(r =>
     (year === 'all' || r.dataset.year === year) &&
+    (month === 'all' || r.dataset.month === month) &&
     (!kw || r.querySelector('.nr-title').textContent.toLowerCase().includes(kw)));
   function paintP(){
     const e = elig();
@@ -2904,7 +2909,8 @@ if(pressSec){
     e.slice((cur-1)*PER, cur*PER).forEach(r => r.classList.remove('hidden'));
     if(pager) paintPager(pager, pressSec, cur, real, page => { cur = page; paintP(); });
   }
-  if(sel) sel.addEventListener('change', () => { year = sel.value; cur = 1; paintP(); });
+  if(selY) selY.addEventListener('change', () => { year = selY.value; cur = 1; paintP(); });
+  if(selM) selM.addEventListener('change', () => { month = selM.value; cur = 1; paintP(); });
   if(inp) inp.addEventListener('input', () => { kw = inp.value.trim().toLowerCase(); cur = 1; paintP(); });
   paintP();
 }
