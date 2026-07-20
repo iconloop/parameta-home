@@ -53,6 +53,46 @@ EXTRA_CSS = """
   --text-48:2.5rem; --text-56:3rem; --text-60:3.5rem; --text-72:3.75rem;
   --text-76:4.5rem; --text-80:4.75rem; --text-96:5rem;
 } }
+/* 챗봇 전체(FAB+패널): 메인과 동일 렌더 보장.
+   - 641~1023: 서브만 루트가 유동이라 px 고정(메인 루트 16px 환산값)
+   - ≤640: 루트는 메인과 동일하므로 다운시프트된 텍스트 토큰만 원복(rem)
+   - 1024+: 루트 규칙이 메인과 동일해 자동 일치 */
+@media (min-width:641px) and (max-width:1023px){
+  .fab-chat{ min-height:48px; min-width:48px; padding:0 20px; font-size:14px; right:24px; bottom:24px }
+  .fab-ai{ width:16px; height:16px; margin-right:8px }
+  .fab-chat .icn{ font-size:16px }
+  .pc-panel{ width:416px }
+  html.chat-open{ padding-right:416px }
+  html.chat-open #header{ right:416px }
+  html.chat-open #banner-fixed{ right:416px }
+  .pc-head{ flex-basis:64px; padding:0 16px 0 24px; font-size:14px }
+  .pc-head .pc-title{ gap:12px }
+  .pc-head img{ height:16px }
+  .pc-dot{ width:8px; height:8px }
+  .pc-close{ width:36px; height:36px }
+  .pc-msgs{ padding:20px; gap:12px }
+  .pc-msg{ padding:12px 16px; font-size:14px; border-radius:14px }
+  .pc-msg.bot{ border-top-left-radius:4px }
+  .pc-msg.user{ border-bottom-right-radius:4px }
+  .pc-msg.typing{ padding:14px 16px; gap:4px }
+  .pc-msg.typing span{ width:6px; height:6px }
+  .pc-chips{ gap:8px; margin-top:4px }
+  .pc-chip{ padding:8px 14px; font-size:14px }
+  .pc-input{ padding:16px 20px; gap:8px }
+  .pc-input input{ padding:10px 18px; font-size:14px }
+  .pc-send{ width:40px; height:40px }
+  .pc-send .icn{ font-size:16px }
+}
+@media (max-width:640px){
+  /* 다운시프트된 텍스트 토큰만 메인 값으로 원복 — 루트·일반 rem은 메인과 동일해 그대로 */
+  .fab-chat{ font-size:.875rem }
+  .fab-chat .icn{ font-size:1rem }
+  .pc-head{ font-size:.875rem }
+  .pc-msg{ font-size:.875rem }
+  .pc-chip{ font-size:.875rem }
+  .pc-input input{ font-size:.875rem }
+  .pc-send .icn{ font-size:1rem }
+}
 /* ============ SUBPAGE HERO ============ */
 .phero{ position:relative; isolation:isolate; overflow:hidden; border-radius:0 0 var(--radius-card) var(--radius-card);
   background:linear-gradient(to bottom, var(--surface), var(--gray-200)) }
@@ -177,9 +217,12 @@ body:not(.hero-light) .phero-figure{ display:none }
 /* bottom:0(=다크 카드 상단) + translateY(44%) → 반 걸침에서 살짝 위로 */
 body.hero-light .phero-figure{ position:absolute; left:50%; bottom:0; transform:translate(-50%, 44%);
   width:clamp(22rem, 38vw, 40rem); z-index:1; pointer-events:none; display:block }
+@media (min-width:768px) and (max-width:1024px){
+  body.hero-light .phero-figure{ width:clamp(26rem, 42vw, 40rem) }  /* 루트 유동화로 줄어든 만큼 보정 */
+}
 @media (max-width:767px){
   body.hero-light .phero-inner{ padding-top:7.5rem }   /* 타이틀 위로 당김 */
-  body.hero-light .phero-figure{ width:19rem; transform:translate(-50%, 8%); z-index:2 }  /* 큐브 위로 올리고 다크 카드 위로 걸치게 */
+  body.hero-light .phero-figure{ width:24rem; transform:translate(-50%, 8%); z-index:2 }  /* 큐브 위치는 고정 */
 }
 /* 브러시 리빌: base(심플) + detail(복합, 스크롤 크로스페이드) + 캔버스(브러시 리빌) */
 body.hero-light .phero-figure .pf-base{ display:block; width:100%; height:auto; transition:opacity .45s ease }
@@ -192,6 +235,11 @@ body.company .hero-vision{ position:relative; z-index:1; margin:0 auto; padding-
 /* 태블릿: 히어로 하단 여백 확보해 큐브가 본문 글자와 안 겹치게 */
 @media (min-width:768px) and (max-width:1023px){
   body.company .phero-inner{ padding-bottom:260px }
+}
+/* 모바일: Vision(남색 박스) 자체를 위로 — 큐브는 그대로 두고 남색 영역이 올라와 큐브 하단에 겹침. base 28rem 뒤에 둬야 이김 */
+@media (max-width:767px){
+  body.company .phero-inner{ padding-bottom:24rem; min-height:calc(100lvh + 3rem) }  /* 첫 화면은 히어로만 — 남색은 폴드 아래에서 시작 */
+  body.company .hero-vision{ margin-top:-3rem }
 }
 body.company .tr-flush .sec{ padding-top:0 }  /* Track Record: 위쪽 패딩 제거 (Vision 패널에 붙임) */
 /* Industry Firsts 최초 실적: 도식 패널 안 불릿 리스트 + 디바이더 (얼라이언스 노드 아래 합체, 소제목으로 묶음 구분) */
@@ -427,13 +475,52 @@ body.company .vision-panel .wfd-infra{ background:transparent; border:1px solid 
   body.company .vision-panel .wfd-infra-t{ font-size:var(--text-16) }   /* Wallet Infrastructure 한 단계 축소 */
   body.company .vision-panel .wfd-band{ gap:.5rem }   /* 원 안 타이틀↔서브텍스트 간격 살짝 축소 */
 }
-@media (max-width:767px){ body.company .vision-panel .wfd-infra{ margin-inline:0 } }   /* 모바일: calc 음수 방지(오버플로우) */
+@media (max-width:767px){ body.company .vision-panel .wfd-infra{ margin-inline:0 }   /* 모바일: calc 음수 방지(오버플로우) */
+  /* 동그라미 3개: 세로 스택 대신 한 줄 유지 + 원·폰트 축소 */
+  body.company .vision-panel .wfd{ margin-top:2rem }
+  body.company .vision-panel .wfd-side{ grid-column:span 4 }
+  body.company .vision-panel .wfd-core-wrap{ grid-column:span 4; width:min(100%, 12rem) }
+  body.company .vision-panel .wfd-band{ width:min(100%, 11rem); padding:1rem; gap:.25rem }
+  body.company .vision-panel .wfd-core{ width:100% }
+  body.company .vision-panel .wfd-core .wfd-t{ font-size:var(--text-20) }
+  body.company .vision-panel .wfd-core .wfd-s{ font-size:var(--text-14) }
+  body.company .vision-panel .wfd-side .wfd-t{ font-size:var(--text-16) }
+  body.company .vision-panel .wfd-side .wfd-d{ font-size:var(--text-14) }
+  /* 점선: 축소된 원 기준으로 오버슛 줄임 — 사이드 원 밖으로 못 나가게 */
+  body.company .vision-panel .wfd-core-wrap::before, body.company .vision-panel .wfd-core-wrap::after{
+    width:calc(var(--grid-gap) + 3rem) }
+}
+/* 모바일(≤640): 원 3개 세로 스택 + 서브텍스트 유지 + 커넥터(점·점선) 세로 전환 */
+@media (max-width:640px){
+  body.company .vision-panel .wfd-core .wfd-t{ font-size:var(--text-20) }  /* WalletFi: 세로 스택에서 원이 커져 20으로 복귀 */
+  body.company .vision-panel .wfd-side .wfd-t{ font-size:var(--text-18) }  /* 사이드 타이틀(전통금융/탈중앙화 금융) 살짝 업 */
+  body.company .vision-panel .wfd-side, body.company .vision-panel .wfd-core-wrap{ grid-column:1 / -1 }
+  /* 세로 스택은 폭 여유 있으니 원 살짝 키움 (서브텍스트 수용) — 사이드만! (.wfd-band로 잡으면 코어까지 축소돼 래퍼와 어긋남) */
+  body.company .vision-panel .wfd-band.wfd-side{ width:min(100%, 13rem) }
+  body.company .vision-panel .wfd-core-wrap{ width:min(100%, 14rem) }
+  body.company .vision-panel .wfd-core{ width:100% }  /* 코어는 래퍼(14rem) 꽉 채움 — 점·점선 앵커 일치 */
+  /* 노드 점: 코어 원 상하 모서리로 이동 */
+  body.company .vision-panel .wfd-core::before{ left:50%; top:0; transform:translate(-50%, calc(-50% - 1px)) }
+  body.company .vision-panel .wfd-core::after{ left:50%; right:auto; top:auto; bottom:0; transform:translate(-50%, calc(50% + 1px)) }
+  /* 점선: 코어 위아래로 뻗는 세로 대시 (리빌은 scaleY로) */
+  body.company .vision-panel .wfd-core-wrap::before, body.company .vision-panel .wfd-core-wrap::after{
+    left:50%; width:0; height:calc(var(--grid-gap) + 4rem); border-top:0;
+    border-left:2px dashed var(--gray-400) }
+  body.company .vision-panel .wfd-core-wrap::before{ right:auto; top:auto; bottom:100%;
+    transform:translate(-50%,0) scaleY(0); transform-origin:bottom center }
+  body.company .vision-panel .wfd-core-wrap::after{ left:50%; top:100%;
+    transform:translate(-50%,0) scaleY(0); transform-origin:top center }
+}
 /* 인프라 타이틀: 사이즈 키우고 웨이트 낮게 */
 body.company .vision-panel .wfd-infra-t{ font-size:var(--text-18); font-weight:500; letter-spacing:normal; color:var(--gray-400); margin-bottom:.625rem }   /* 20→18 (한 토큰↓) */
 /* ── Vision 다이어그램 순차 리빌: 코어 먼저 → 점선 좌우 확장 → 양옆 원 딱딱 ── */
 body.company .vision-panel .wfd-core, body.company .vision-panel .wfd-side{ opacity:0 }
 body.company .vision-panel .wfd.is-in .wfd-core{ opacity:1; animation:wfdPop .5s cubic-bezier(.16,1,.3,1) backwards }
 body.company .vision-panel .wfd.is-in .wfd-core-wrap::before, body.company .vision-panel .wfd.is-in .wfd-core-wrap::after{ transform:translateY(-50%) scaleX(1); transition-delay:.3s }
+@media (max-width:640px){  /* 모바일 세로 점선: 리빌 완료 상태도 세로 트랜스폼으로 (위 가로용 규칙 대체 — 반드시 뒤에) */
+  body.company .vision-panel .wfd.is-in .wfd-core-wrap::before,
+  body.company .vision-panel .wfd.is-in .wfd-core-wrap::after{ transform:translate(-50%,0) scaleY(1) }
+}
 body.company .vision-panel .wfd.is-in .wfd-side{ opacity:1; animation:wfdPop .5s cubic-bezier(.16,1,.3,1) backwards }
 body.company .vision-panel .wfd.is-in .wfd-side{ animation-delay:.55s }  /* 좌우 동시 등장 */
 @keyframes wfdPop{ from{ opacity:0; transform:scale(.82) } }
@@ -442,6 +529,7 @@ body.company .vision-panel .wfd-infra{ transition:transform .35s cubic-bezier(.2
 @media (hover:hover){ body.company .vision-panel .wfd-infra:hover{ transform:scale(1.03) } }
 /* 항목: 알약 대신 · 구분 텍스트 (서브카피와 동일 톤) */
 body.company .vision-panel .wfd-chips{ display:block; font-size:var(--text-20); font-weight:500; color:var(--white) }   /* 인프라 텍스트 20 · 웨이트 500 */
+@media (max-width:640px){ body.company .vision-panel .wfd-chips{ font-size:var(--text-18) } }   /* 모바일: 칩 살짝 다운(20→18) — 위 20 규칙 뒤라 이김 */
 /* 호버 리빌: 원만 scale — 커넥터는 wfd-core-wrap 소속이라 함께 안 커짐 */
 body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,.8,.2,1), background-color .35s }
 @media (hover:hover){ body.company .vision-panel .wfd-band:hover{ transform:scale(1.05) } }
@@ -1331,6 +1419,7 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 .ht-era:first-child{ padding-top:0 }
 .ht-era .dot{ width:.45rem; height:.45rem; border-radius:50%; background:var(--accent); flex:none }
 .ht-era-label{ font-size:var(--text-13, .8125rem); font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--subtle); white-space:nowrap }
+@media (max-width:767px){ .ht-era-label{ white-space:normal } }  /* 긴 라벨이 뷰포트 밖으로 밀려 가로 스크롤 만드는 것 방지 */
 .ht-sub li .m{ color:var(--muted); margin-right:.6rem; font-variant-numeric:tabular-nums; white-space:nowrap }
 /* Alliance 소절 카드 위 여백 */
 .firsts-eco .cards-2{ margin-top:var(--space-16) }

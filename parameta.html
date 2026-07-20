@@ -143,6 +143,7 @@ html.chat-open #banner-fixed{ right:26rem }
 #banner .b-strong, #banner-fixed .b-strong{ font-weight:500 }
 #banner .b-cta, #banner-fixed .b-cta{ display:inline-flex; align-items:center; gap:.25rem; color:rgba(var(--white-rgb),.7);
   text-decoration:underline; text-underline-offset:3px }
+@media (max-width:640px){ #banner a, #banner-fixed a{ font-size:var(--text-12) } }  /* 모바일: 배너(메타성 스트립) 한 줄 유지 */
 @media (hover:hover){ #banner a:hover .b-cta, #banner-fixed a:hover .b-cta{ color:var(--white) } }
 
 /* ============ HEADER ============ */
