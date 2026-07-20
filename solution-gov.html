@@ -563,7 +563,7 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 .brand-logo{ height:18px; width:auto; display:block } /* GNB 로고도 px 고정 */
 .loader-brand .brand-logo{ height:1.625rem }
 .footer-brand .brand-logo{ height:1.5rem }
-.navmenu-brand .brand-logo{ height:1.375rem }
+.navmenu-brand .brand-logo{ height:18px }   /* 헤더 로고와 동일 */
 .nav-primary li{ position:relative }
 .nav-drop{ position:absolute; left:50%; top:100%; transform:translate(-50%,8px); padding-top:.875rem;
   visibility:hidden; pointer-events:none;
@@ -744,7 +744,7 @@ body.show-grid #dev-grid{ display:block }
   background:var(--ink); color:var(--white); opacity:0; pointer-events:none;
   transition:opacity .4s cubic-bezier(.2,.8,.2,1) }
 #navmenu.open{ opacity:1; pointer-events:auto }
-.navmenu-top{ display:flex; align-items:center; justify-content:space-between; padding:1.25rem }
+.navmenu-top{ display:flex; align-items:center; justify-content:space-between; padding:12px var(--shell-pad); max-width:none; margin-inline:0 }   /* 닫힌 헤더와 동일: full-width, 좌우 --shell-pad, 세로 12px */
 .navmenu-brand{ display:flex; align-items:center; gap:.5rem; font-size:var(--text-18); font-weight:600; letter-spacing:.02em }
 .navmenu-brand .icn{ font-size:var(--text-20); color:var(--purple-400) }
 .navmenu-close{ display:inline-flex; align-items:center; gap:.5rem; border:1px solid rgba(var(--white-rgb),.15);
@@ -752,7 +752,7 @@ body.show-grid #dev-grid{ display:block }
   letter-spacing:.05em; color:rgba(var(--white-rgb),.7) }
 .navmenu-close .icn{ font-size:var(--text-14) }
 @media (hover:hover){ .navmenu-close:hover{ border-color:rgba(var(--white-rgb),.4); color:var(--white) } }
-.navmenu-nav{ flex:1; display:flex; flex-direction:column; justify-content:center }
+.navmenu-nav{ flex:1; display:flex; flex-direction:column; justify-content:center; max-width:none; margin-inline:0; padding-inline:var(--shell-pad) }   /* 항목을 그리드에 정렬 */
 .navmenu-nav ul{ display:flex; flex-direction:column; gap:.25rem }
 .navmenu-item{ display:flex; align-items:baseline; gap:1rem; padding-block:.5rem; text-align:left;
   font-size:var(--text-36); font-weight:600; letter-spacing:-.02em; width:100%;
@@ -767,13 +767,12 @@ body.show-grid #dev-grid{ display:block }
 .navmenu-sub a{ font-size:var(--text-18); color:rgba(var(--white-rgb),.45); transition:color .3s }
 @media (hover:hover){ .navmenu-sub a:hover{ color:var(--white) } }
 .navmenu-bottom{ display:flex; flex-direction:column; gap:.75rem; border-top:1px solid rgba(var(--white-rgb),.1);
-  padding:1.5rem 1.25rem; font-size:var(--text-14); text-transform:uppercase; letter-spacing:.025em; color:rgba(var(--white-rgb),.45) }
+  padding:1.5rem var(--shell-pad); max-width:none; margin-inline:0; font-size:var(--text-14); text-transform:uppercase; letter-spacing:.025em; color:rgba(var(--white-rgb),.45) }
 .navmenu-start{ color:rgba(var(--white-rgb),.7); text-align:left }
 @media (hover:hover){ .navmenu-start:hover{ text-decoration:underline; color:var(--white) } }
 @media (min-width:640px){
-  .navmenu-top{ padding:1.5rem 2rem }
   .navmenu-item{ font-size:var(--text-60) }
-  .navmenu-bottom{ flex-direction:row; align-items:center; justify-content:space-between; padding:1.5rem 2rem }
+  .navmenu-bottom{ flex-direction:row; align-items:center; justify-content:space-between; padding:1.5rem var(--shell-pad) }
 }
 
 /* ============ REQUEST MODAL ============ */
