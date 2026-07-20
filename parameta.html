@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<script src="assets/nav.js?v=29" defer></script>
+<script src="assets/nav.js?v=30" defer></script>
 <script src="assets/chatbot.js?v=4" defer></script>
 <style>
 /* ============ RESET / BASE ============ */
@@ -761,9 +761,10 @@ body.show-grid #dev-grid{ display:block }
   padding:0 var(--shell-pad) 2rem; overflow-y:auto; background:var(--ink);   /* L2가 L1을 완전히 덮도록 */
   transition:transform .42s cubic-bezier(.22,.61,.36,1) }
 .navmenu-l2{ transform:translateX(100%); pointer-events:none }
-#navmenu[data-view="products"] .navmenu-l1, #navmenu[data-view="solutions"] .navmenu-l1{ transform:translateX(-28%) }
+#navmenu[data-view="products"] .navmenu-l1, #navmenu[data-view="solutions"] .navmenu-l1, #navmenu[data-view="insights"] .navmenu-l1{ transform:translateX(-28%) }
 #navmenu[data-view="products"] .navmenu-l2[data-panel="products"],
-#navmenu[data-view="solutions"] .navmenu-l2[data-panel="solutions"]{ transform:translateX(0); pointer-events:auto }
+#navmenu[data-view="solutions"] .navmenu-l2[data-panel="solutions"],
+#navmenu[data-view="insights"] .navmenu-l2[data-panel="insights"]{ transform:translateX(0); pointer-events:auto }
 .navmenu-l1 ul, .navmenu-l2 ul{ display:flex; flex-direction:column }
 .navmenu-l2 ul{ padding-top:8px }   /* 첫 서브 항목 위 여백 */
 /* 항목: 구분선 + 큰 화살표 */

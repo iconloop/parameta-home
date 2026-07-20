@@ -34,8 +34,19 @@ main = open(os.path.join(ROOT, 'parameta.html'), encoding='utf-8').read()
 CSS = re.search(r'<style>([\s\S]*?)</style>', main).group(1)
 
 EXTRA_CSS = """
+/* 서브페이지 전용: 641~1024 루트 유동화 — 640에서 14px → 1024에서 16px 선형 보간.
+   rem 기반 토큰(폰트·간격·라운드)이 전부 비례 스케일. 메인(parameta.html)은 고정 16px 유지 */
+@media (min-width:641px) and (max-width:1024px){ html{ font-size:calc(10.667px + 0.52083vw) } }
 /* 태블릿(768~1023)에서만: 서브페이지 타입 토큰을 한 단계씩 아래 값으로 다운시프트(예: 14→12값, 36→32값). 기존 토큰 그리드 그대로. 여백 토큰·메인·타 해상도 무관 */
 @media (min-width:768px) and (max-width:1023px){ :root{
+  --text-14:0.75rem; --text-16:0.875rem; --text-18:1rem; --text-20:1.125rem;
+  --text-22:1.25rem; --text-24:1.375rem; --text-26:1.5rem; --text-28:1.625rem;
+  --text-30:1.75rem; --text-32:1.875rem; --text-36:2rem; --text-40:2.25rem;
+  --text-48:2.5rem; --text-56:3rem; --text-60:3.5rem; --text-72:3.75rem;
+  --text-76:4.5rem; --text-80:4.75rem; --text-96:5rem;
+} }
+/* sm(≤767)에서도: 서브페이지 타입 토큰을 한 단계씩 다운시프트(태블릿과 동일). 메인·여백 토큰 무관 */
+@media (max-width:767px){ :root{
   --text-14:0.75rem; --text-16:0.875rem; --text-18:1rem; --text-20:1.125rem;
   --text-22:1.25rem; --text-24:1.375rem; --text-26:1.5rem; --text-28:1.625rem;
   --text-30:1.75rem; --text-32:1.875rem; --text-36:2rem; --text-40:2.25rem;
@@ -155,6 +166,7 @@ body.hero-light .phero-text{ align-items:center; align-self:center; max-width:44
 /* h1 한 토큰 크게 */
 body.hero-light .phero-h1{ font-size:var(--text-40) }
 @media (min-width:640px){ body.hero-light .phero-h1{ font-size:var(--text-60) } }
+@media (min-width:640px) and (max-width:767px){ body.hero-light .phero-h1{ font-size:var(--text-56) } }
 @media (min-width:768px){ body.hero-light .phero-h1{ font-size:var(--text-72) } }
 /* 리드 본문 사이즈 (16 → 18, 데스크톱 20) */
 body.hero-light .phero-text .phero-lead{ font-size:var(--text-18) }
@@ -165,7 +177,10 @@ body:not(.hero-light) .phero-figure{ display:none }
 /* bottom:0(=다크 카드 상단) + translateY(44%) → 반 걸침에서 살짝 위로 */
 body.hero-light .phero-figure{ position:absolute; left:50%; bottom:0; transform:translate(-50%, 44%);
   width:clamp(22rem, 38vw, 40rem); z-index:1; pointer-events:none; display:block }
-@media (max-width:767px){ body.hero-light .phero-figure{ width:19rem } }
+@media (max-width:767px){
+  body.hero-light .phero-inner{ padding-top:7.5rem }   /* 타이틀 위로 당김 */
+  body.hero-light .phero-figure{ width:19rem; transform:translate(-50%, 8%); z-index:2 }  /* 큐브 위로 올리고 다크 카드 위로 걸치게 */
+}
 /* 브러시 리빌: base(심플) + detail(복합, 스크롤 크로스페이드) + 캔버스(브러시 리빌) */
 body.hero-light .phero-figure .pf-base{ display:block; width:100%; height:auto; transition:opacity .45s ease }
 body.hero-light .phero-figure .pf-detail{ position:absolute; inset:0; width:100%; height:auto; opacity:0; transition:opacity .45s ease; will-change:opacity }
@@ -3950,7 +3965,7 @@ SHELL = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<script src="assets/nav.js?v=29" defer></script>
+<script src="assets/nav.js?v=30" defer></script>
 <script src="assets/chatbot.js?v=4" defer></script>
 <style>__CSS____EXTRA_CSS__</style>
 </head>

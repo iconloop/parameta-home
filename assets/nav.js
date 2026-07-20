@@ -29,7 +29,7 @@
         <li><a href="company.html"><span class="nav-lift" style="display:inline-flex">About</span></a></li>\
         <li class="has-drop"><a href="parasta.html" data-mega="products"><span class="nav-lift" style="display:inline-flex">Products</span></a></li>\
         <li class="has-drop"><a href="solution-finance.html" data-mega="solutions"><span class="nav-lift" style="display:inline-flex">Solutions</span></a></li>\
-        <li><a href="insights.html"><span class="nav-lift" style="display:inline-flex">Insights</span></a></li>\
+        <li class="has-drop"><a href="insights.html" data-mega="insights"><span class="nav-lift" style="display:inline-flex">Insights</span></a></li>\
       </ul>\
     </nav>\
     <div class="header-right">\
@@ -75,6 +75,10 @@
         <a href="portx.html"><span class="nd-ico"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13l-3-3"/><path d="M20 16H7l3 3"/></svg></span><span class="nd-txt"><b>Port X</b><span>디지털자산 거래소 인프라</span></span></a>\
         <a href="myid.html"><span class="nd-ico"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-6 8-6s8 2 8 6"/></svg></span><span class="nd-txt"><b>MyID</b><span>분산신원(DID) 솔루션</span></span></a>\
         <a href="broof.html"><span class="nd-ico"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M9 15l2 2 4-4"/></svg></span><span class="nd-txt"><b>Broof</b><span>블록체인 증명서 발급·검증</span></span></a>\
+      </div></div>\
+      <div class="mega-panel" data-for="insights"><div class="nav-drop-panel">\
+        <a href="insights.html"><span class="nd-ico"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h13a2 2 0 0 1 2 2v11a2 2 0 0 0 2-2V8"/><rect x="4" y="5" width="13" height="14" rx="2"/><path d="M8 9h5M8 13h5M8 17h3"/></svg></span><span class="nd-txt"><b>Newsroom</b><span>파라메타 소식, 보도자료</span></span></a>\
+        <a href="#"><span class="nd-ico"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.8 2.8 0 0 1 4 4L8 20l-5 1 1-5z"/></svg></span><span class="nd-txt"><b>Blog</b><span>준비 중</span></span></a>\
       </div></div>\
     </div>';
     document.body.appendChild(mega);
@@ -129,7 +133,7 @@
           <li><a class="navmenu-item" href="company.html">About</a></li>\
           <li><button class="navmenu-item" data-subpanel="products" aria-haspopup="true">Products' + ARR_R + '</button></li>\
           <li><button class="navmenu-item" data-subpanel="solutions" aria-haspopup="true">Solutions' + ARR_R + '</button></li>\
-          <li><a class="navmenu-item" href="insights.html">Insights</a></li>\
+          <li><button class="navmenu-item" data-subpanel="insights" aria-haspopup="true">Insights' + ARR_R + '</button></li>\
           <li><a class="navmenu-item" href="contact.html">Contact</a></li>\
         </ul>\
       </nav>\
@@ -151,6 +155,13 @@
           <li><a href="solution-exchange.html">화이트라벨 거래소</a></li>\
           <li><a href="solution-data.html">데이터주권</a></li>\
           <li><a href="solution-settlement.html">결제·정산</a></li>\
+        </ul>\
+      </nav>\
+      <nav class="navmenu-l2" data-panel="insights" aria-label="Insights">\
+        <button class="navmenu-back" data-back>' + ARR_L + 'Insights</button>\
+        <ul>\
+          <li><a href="insights.html">Newsroom</a></li>\
+          <li><a href="#">Blog</a></li>\
         </ul>\
       </nav>\
     </div>';
