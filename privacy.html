@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<script src="assets/nav.js?v=26" defer></script>
+<script src="assets/nav.js?v=29" defer></script>
 <script src="assets/chatbot.js?v=4" defer></script>
 <style>
 /* ============ RESET / BASE ============ */
@@ -823,6 +823,14 @@ body.show-grid #dev-grid{ display:block }
   .modal-head h2{ font-size:var(--text-30) }
 }
 
+/* 태블릿(768~1023)에서만: 서브페이지 타입 토큰을 한 단계씩 아래 값으로 다운시프트(예: 14→12값, 36→32값). 기존 토큰 그리드 그대로. 여백 토큰·메인·타 해상도 무관 */
+@media (min-width:768px) and (max-width:1023px){ :root{
+  --text-14:0.75rem; --text-16:0.875rem; --text-18:1rem; --text-20:1.125rem;
+  --text-22:1.25rem; --text-24:1.375rem; --text-26:1.5rem; --text-28:1.625rem;
+  --text-30:1.75rem; --text-32:1.875rem; --text-36:2rem; --text-40:2.25rem;
+  --text-48:2.5rem; --text-56:3rem; --text-60:3.5rem; --text-72:3.75rem;
+  --text-76:4.5rem; --text-80:4.75rem; --text-96:5rem;
+} }
 /* ============ SUBPAGE HERO ============ */
 .phero{ position:relative; isolation:isolate; overflow:hidden; border-radius:0 0 var(--radius-card) var(--radius-card);
   background:linear-gradient(to bottom, var(--surface), var(--gray-200)) }
@@ -1010,26 +1018,21 @@ body.company .firsts .work-card::before{ content:''; flex:none; width:4.5rem; he
 body.company .firsts .work-card .work-bottom p{ margin-top:.25rem; font-size:var(--text-16) }  /* 타이틀-서브카피 간격 축소(.5rem→.25rem) + 한 토큰 업(14→16) */
 body.company .firsts .work-card .work-bottom h3{ font-size:var(--text-22) }
 body.company .firsts .work-card p:empty{ display:none }
-/* Track Record 카드: 대시보드(work-card t-gray) 카드와 동일 톤 — 라이트 그레이 채움·라운드·간격, 이미지 영역 없음 */
-body.company .tr-flush .num-card{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); border:none;
-  border-radius:var(--radius-card); padding:2rem; transition:transform .35s cubic-bezier(.2,.8,.2,1) }
-@media (hover:hover){ body.company .tr-flush .num-card:hover{ transform:scale(1.03) } }
-body.company .tr-flush .num-card p{ font-size:var(--text-18) }  /* 서브카피 한 토큰 업 (기본 text-16) */
-body.company .tr-flush .num-card .n{ font-size:var(--text-36) }  /* 숫자 한 토큰 다운 (기본 text-40) */
-body.company .tr-flush .num-card .cap{ margin-bottom:var(--space-24) }  /* 라벨-숫자 간격 2배 (기본 .75rem) */
-/* 좌측 일러스트 영역: 카드 높이만큼의 정사각형, 카드 모서리에 패딩 없이 밀착 — 마크업 변경 없이 그리드+pseudo */
-body.company .tr-flush .num-card{ display:grid; grid-template-columns:auto 1fr; grid-template-rows:auto auto auto; padding:0 }
-body.company .tr-flush .num-card::before{ content:''; grid-column:1; grid-row:1 / 4; height:100%; aspect-ratio:4/5;  /* 3:4에서 폭 소폭 확대 */
-  background-color:color-mix(in srgb, var(--ink) 12%, var(--white)); border-radius:var(--radius-card) 0 0 var(--radius-card);
-  background-repeat:no-repeat; background-position:center; background-size:3rem auto }
-/* 카드별 라인 아이콘 (기존 .icn 문법: 스트로크 1.4 · 라운드 캡 · 잉크 톤) — 순서: 깃발/코인 스택/추세 차트/메달 */
-body.company .tr-flush .cards-2 li:nth-child(1) .num-card::before{ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230E0C27' stroke-opacity='.55' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 21V3'/%3E%3Cpath d='M6 4h11l-2.5 3.5L17 11H6'/%3E%3C/svg%3E") }
-body.company .tr-flush .cards-2 li:nth-child(2) .num-card::before{ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230E0C27' stroke-opacity='.55' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cellipse cx='12' cy='6.5' rx='7' ry='3'/%3E%3Cpath d='M5 6.5v11c0 1.66 3.13 3 7 3s7-1.34 7-3v-11'/%3E%3Cpath d='M5 12c0 1.66 3.13 3 7 3s7-1.34 7-3'/%3E%3C/svg%3E") }
-body.company .tr-flush .cards-2 li:nth-child(3) .num-card::before{ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230E0C27' stroke-opacity='.55' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 4v16h16'/%3E%3Cpath d='M7.5 14.5l4-4 3 3 5.5-5.5'/%3E%3Cpath d='M16.5 8H20v3.5'/%3E%3C/svg%3E") }
-body.company .tr-flush .cards-2 li:nth-child(4) .num-card::before{ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230E0C27' stroke-opacity='.55' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='9.5' r='5.25'/%3E%3Cpath d='M9.75 13.9L8 21l4-2.25L16 21l-1.75-7.1'/%3E%3Cpath d='M10 9.5l1.5 1.5 2.75-2.75'/%3E%3C/svg%3E") }
-body.company .tr-flush .num-card > *{ grid-column:2; padding-inline:var(--space-24) var(--space-32) }  /* 좌측(이미지-텍스트 간격)만 한 토큰 축소 */
-body.company .tr-flush .num-card .cap{ padding-top:var(--space-32) }
-body.company .tr-flush .num-card p{ padding-bottom:var(--space-32) }
+/* Track Record 카드: work-card media 토큰 — 상단 아이콘 이미지 영역 + 하단 텍스트(숫자는 h3) */
+body.company .tr-flush .work-card.grouped{ min-height:0; padding:0; overflow:hidden;
+  background:color-mix(in srgb, var(--ink) 6%, var(--white)); border-radius:var(--radius-card) }
+body.company .tr-flush .work-card.grouped::before{ flex:none; width:100%; aspect-ratio:5/4; height:auto; margin:0; border-radius:0;
+  background-color:transparent; background-image:none;
+  background-repeat:no-repeat; background-position:center; background-size:cover }
+body.company .tr-flush .work-bottom{ padding:var(--space-32); margin-top:-2rem; position:relative; z-index:1 }   /* 텍스트가 이미지 영역 하단에 살짝 걸침 */
+body.company .tr-flush .work-meta{ color:var(--purple-500); font-weight:600; margin-bottom:var(--space-16) }   /* 라벨 3개 보라색 */
+body.company .tr-flush .work-card h3{ font-size:var(--text-36); font-weight:700; letter-spacing:-.01em; color:var(--ink) }
+body.company .tr-flush .work-bottom p{ margin-top:.5rem; font-size:var(--text-18); color:rgba(var(--ink-rgb),.6) }
+/* 카드별 라인 아이콘 (스트로크 1.4 · 잉크 톤) — 깃발/코인 스택/추세 차트 */
+body.company .tr-flush .cards-3 li:nth-child(1) .work-card.grouped::before{ background-image:url("assets/about/tr-1.svg") }
+body.company .tr-flush .cards-3 li:nth-child(2) .work-card.grouped::before{ background-image:url("assets/about/tr-2.svg") }
+body.company .tr-flush .cards-3 li:nth-child(3) .work-card.grouped::before{ background-image:url("assets/about/tr-3.svg") }
+@media (hover:hover){ body.company .tr-flush .work-card.static:hover{ transform:scale(1.03) } }
 /* Recognition 카드: 상단에 실제 인증 로고 들어갈 아이콘 영역 (플레이스홀더 원) — 오프셋은 공통 카드 패딩(1.5rem, ≥640px 2rem)과 동기화 */
 body.company .recog .work-card::before{ content:''; position:absolute; top:1.5rem; left:1.5rem;
   width:5rem; height:5rem; border-radius:50%; background:rgba(var(--ink-rgb),.08) }
@@ -1146,27 +1149,28 @@ body.company .vision-panel .sec-h2{ color:var(--white); font-size:var(--text-30)
 body.company .vision-panel .phero-lead{ color:rgba(var(--white-rgb),.68); font-size:var(--text-20) }
 @media (max-width:1023px){ body.company .vision-panel .phero-lead{ font-size:var(--text-18) } }
 /* wfd 다이어그램 다크 톤 */
-body.company .vision-panel .wfd{ background-color:transparent; padding:0; margin-top:4rem;
+body.company .vision-panel .wfd{ background-color:transparent; padding:0; margin-top:5.5rem;
   background-image:radial-gradient(rgba(var(--white-rgb),.04) 1px, transparent 1.5px); background-size:20px 20px }
 body.company .vision-panel .wfd-band{ background:var(--purple-400); box-shadow:none; position:relative; z-index:1;
-  box-sizing:border-box; border:1px solid var(--purple-300) }  /* 좌우 원: 밝은 퍼플 + 연보라(purple-300) 인사이드 보더 + 대시 위에 올려서 삐져나온 부분 가림 */
+  box-sizing:border-box; border:1px solid rgba(var(--white-rgb),.35) }  /* 좌우 원: 밝은 퍼플 + 반투명 흰 아웃라인 */
 body.company .vision-panel .wfd-t{ color:var(--white); font-size:var(--text-20) }  /* 좌우 타이틀: 코어보다 한 단계 작게 */
 body.company .vision-panel .wfd-t em{ color:var(--white) }
 body.company .vision-panel .wfd-d{ color:rgba(var(--white-rgb),.62) }
 body.company .vision-panel .wfd-d b{ color:var(--white) }
 body.company .vision-panel .wfd-s{ color:rgba(var(--white-rgb),.64) }
+body.company .vision-panel .wfd-side .wfd-d{ font-size:var(--text-16) }   /* 사이드 서브텍스트(금융기관·핀테크 등) 14→16 */
 body.company .vision-panel .wfd-core{ background:var(--white); border:1px solid var(--gray-400) }  /* WalletFi = 흰색 원, 보더는 purple-300과 비슷한 명도의 모노(gray-400) */
 body.company .vision-panel .wfd-core .wfd-t{ color:var(--purple-500); font-size:var(--text-24) }  /* 흰 원 위 글자 반전 */
 body.company .vision-panel .wfd-core .wfd-s{ color:rgba(var(--ink-rgb),.6) }
 /* TradFi·WalletFi·DeFi 셋 다 원 */
 body.company .vision-panel .wfd{ align-items:center }
 body.company .vision-panel .wfd-band{ aspect-ratio:1; border-radius:50%; padding:1.5rem;
-  justify-content:center; width:min(100%, 19rem); justify-self:center; margin-inline:auto }  /* 좌우도 코어와 동일 19rem */
+  justify-content:center; width:min(100%, 17rem); justify-self:center; margin-inline:auto }  /* 원 크기 19rem→17rem */
 /* 코어: 스케일 안 되는 래퍼(그리드 아이템, 커넥터 보유) + 안쪽 흰 원(호버 시 이것만 확대) */
 body.company .vision-panel .wfd-core-wrap{ grid-column:span 4; justify-self:center; position:relative;
-  width:min(100%, 19rem); aspect-ratio:1 }
+  width:min(100%, 19rem); aspect-ratio:1 }   /* 코어(WalletFi)만 사이드(17rem)보다 크게 */
 body.company .vision-panel .wfd-core{ width:100% }  /* 래퍼를 꽉 채움 */
-body.company .vision-panel .wfd-core .wfd-s{ max-width:13rem; font-size:var(--text-18) }
+body.company .vision-panel .wfd-core .wfd-s{ max-width:13rem; font-size:var(--text-16); line-height:1.5 }   /* 사이드 서브와 동일 토큰 16 + 행간 살짝 확장 */
 body.company .vision-panel .wfd-d{ max-width:13rem; font-size:var(--text-18) }  /* 좌우 서브카피도 코어와 동일 */
 /* 노드 점: 흰 원(코어) 양옆 모서리에 붙음 → 원과 함께 스케일 */
 body.company .vision-panel .wfd-core::before, body.company .vision-panel .wfd-core::after{
@@ -1187,10 +1191,19 @@ body.company .vision-panel .wfd-infra{ background:transparent; border:1px solid 
   /* 좌우 원 바깥 가장자리에 맞춤: 4칼럼 셀폭 − 19rem 원폭의 절반이 인셋 */
   margin-inline:calc(((100% - 11 * var(--grid-gap)) / 3 + 3 * var(--grid-gap) - 19rem) / 2) }
 /* 태블릿(768~1023): 원이 19rem보다 작아져 위 calc가 음수가 되므로, 밴드를 원 라인 안쪽으로 보정 */
-@media (min-width:768px) and (max-width:1023px){ body.company .vision-panel .wfd-infra{ margin-inline:1rem } }
+@media (min-width:768px) and (max-width:1023px){ body.company .vision-panel .wfd-infra{ margin-inline:1rem }
+  body.company .vision-panel .wfd{ margin-top:2.5rem }   /* 본문↔다이어그램 간격 축소 */
+  body.company .vision-panel .wfd-band{ width:min(100%, 13rem) }   /* 사이드 원 축소 */
+  body.company .vision-panel .wfd-core-wrap{ width:min(100%, 14.5rem) }   /* 코어 원 축소(사이드보다 살짝 크게) */
+  body.company .vision-panel .wfd-core{ width:100% }   /* 코어 밴드는 wrap(14.5rem) 꽉 채움 — 위 13rem 규칙 무효화 */
+  body.company .vision-panel .wfd-core .wfd-t{ font-size:var(--text-22) }   /* WalletFi 타이틀 한 단계 축소 */
+  body.company .vision-panel .wfd-side .wfd-t{ font-size:var(--text-18) }   /* 양옆 타이틀(TradFi/DeFi) 한 단계 축소 */
+  body.company .vision-panel .wfd-infra-t{ font-size:var(--text-16) }   /* Wallet Infrastructure 한 단계 축소 */
+  body.company .vision-panel .wfd-band{ gap:.5rem }   /* 원 안 타이틀↔서브텍스트 간격 살짝 축소 */
+}
 @media (max-width:767px){ body.company .vision-panel .wfd-infra{ margin-inline:0 } }   /* 모바일: calc 음수 방지(오버플로우) */
 /* 인프라 타이틀: 사이즈 키우고 웨이트 낮게 */
-body.company .vision-panel .wfd-infra-t{ font-size:var(--text-20); font-weight:500; letter-spacing:normal; color:var(--gray-400); margin-bottom:.625rem }
+body.company .vision-panel .wfd-infra-t{ font-size:var(--text-18); font-weight:500; letter-spacing:normal; color:var(--gray-400); margin-bottom:.625rem }   /* 20→18 (한 토큰↓) */
 /* ── Vision 다이어그램 순차 리빌: 코어 먼저 → 점선 좌우 확장 → 양옆 원 딱딱 ── */
 body.company .vision-panel .wfd-core, body.company .vision-panel .wfd-side{ opacity:0 }
 body.company .vision-panel .wfd.is-in .wfd-core{ opacity:1; animation:wfdPop .5s cubic-bezier(.16,1,.3,1) backwards }
@@ -1202,7 +1215,7 @@ body.company .vision-panel .wfd.is-in .wfd-side{ animation-delay:.55s }  /* 좌�
 body.company .vision-panel .wfd-infra{ transition:transform .35s cubic-bezier(.2,.8,.2,1) }
 @media (hover:hover){ body.company .vision-panel .wfd-infra:hover{ transform:scale(1.03) } }
 /* 항목: 알약 대신 · 구분 텍스트 (서브카피와 동일 톤) */
-body.company .vision-panel .wfd-chips{ display:block; font-size:var(--text-18); color:var(--white) }
+body.company .vision-panel .wfd-chips{ display:block; font-size:var(--text-20); font-weight:500; color:var(--white) }   /* 인프라 텍스트 20 · 웨이트 500 */
 /* 호버 리빌: 원만 scale — 커넥터는 wfd-core-wrap 소속이라 함께 안 커짐 */
 body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,.8,.2,1), background-color .35s }
 @media (hover:hover){ body.company .vision-panel .wfd-band:hover{ transform:scale(1.05) } }

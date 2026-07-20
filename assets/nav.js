@@ -210,9 +210,11 @@
   var heroEl = document.querySelector('#home') || document.querySelector('.phero');
   var ctaEl = document.querySelector('#home .hero-cta'); /* 메인: CTA 버튼 지나면 등장 */
   function stickThreshold(){
+    /* 태블릿·모바일(<1024): 히어로 전체 대신 약 1스크린만 내려가면 GNB 등장(트리거 앞당김) */
+    if (window.innerWidth < 1024) return Math.round(window.innerHeight * 0.5);
     if (ctaEl) return ctaEl.getBoundingClientRect().bottom + (window.scrollY || 0);
     if (!heroEl) return 240;
-    return heroEl.offsetTop + heroEl.offsetHeight - 64; /* 서브: 히어로 기준 */
+    return heroEl.offsetTop + heroEl.offsetHeight * 0.5; /* PC 서브: 히어로 절반 지점 */
   }
   var brandImg = header.querySelector('.brand-logo');
   var darkHero = document.body.classList.contains('hero-dark');
