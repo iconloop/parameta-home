@@ -118,33 +118,52 @@
     var nm = document.createElement('div');
     nm.id = 'navmenu';
     nm.setAttribute('aria-hidden', 'true');
+    var ARR_R = '<svg class="nav-arrow" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></svg>';
+    var ARR_L = '<svg class="nav-arrow" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M15 6l-6 6 6 6"/></svg>';
     nm.innerHTML = '\
-    <div class="shell navmenu-top">\
-      <div class="navmenu-brand"><img class="brand-logo" src="assets/brand/logo-horizontal-color-dark.svg" alt="PARAMETA"></div>\
-      <button class="navmenu-close" data-close-menu><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 4l16 16M20 4 4 20"/></svg>Close</button>\
+    <div class="navmenu-top">\
+      <button class="navmenu-close" data-close-menu><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 4l16 16M20 4 4 20"/></svg><span class="cls-word">Close</span></button>\
     </div>\
-    <nav class="shell navmenu-nav" aria-label="Overlay">\
-      <ul id="navmenuList">\
-        <li><a class="navmenu-item" style="transition-delay:80ms" href="company.html"><span class="nidx">01</span><span class="nlabel">About</span></a></li>\
-        <li><a class="navmenu-item" style="transition-delay:125ms" href="parasta.html"><span class="nidx">02</span><span class="nlabel">Products</span></a>\
-          <div class="navmenu-sub" style="transition-delay:185ms">\
-            <a href="parasta.html">ParaSta</a><a href="portx.html">Port X</a><a href="myid.html">MyID</a><a href="broof.html">Broof</a><a href="kbtf.html">KBTF</a>\
-          </div>\
-        </li>\
-        <li><a class="navmenu-item" style="transition-delay:170ms" href="solution-finance.html"><span class="nidx">03</span><span class="nlabel">Solutions</span></a>\
-          <div class="navmenu-sub" style="transition-delay:230ms">\
-            <a href="solution-finance.html">금융</a><a href="solution-gov.html">공공</a><a href="solution-cert.html">증명서</a><a href="solution-exchange.html">화이트라벨 거래소</a><a href="solution-data.html">데이터주권</a><a href="solution-settlement.html">결제·정산</a>\
-          </div>\
-        </li>\
-        <li><a class="navmenu-item" style="transition-delay:215ms" href="insights.html"><span class="nidx">04</span><span class="nlabel">Insights</span></a></li>\
-        <li><a class="navmenu-item" style="transition-delay:260ms" href="contact.html"><span class="nidx">05</span><span class="nlabel">Contact</span></a></li>\
-      </ul>\
-    </nav>\
-    <div class="shell navmenu-bottom">\
-      <span id="navmenuTime">Local time</span>\
-      <button class="navmenu-start" data-modal data-close-menu>Contact Us →</button>\
+    <div class="navmenu-body">\
+      <nav class="navmenu-l1" aria-label="Overlay">\
+        <ul>\
+          <li><a class="navmenu-item" href="company.html">About</a></li>\
+          <li><button class="navmenu-item" data-subpanel="products" aria-haspopup="true">Products' + ARR_R + '</button></li>\
+          <li><button class="navmenu-item" data-subpanel="solutions" aria-haspopup="true">Solutions' + ARR_R + '</button></li>\
+          <li><a class="navmenu-item" href="insights.html">Insights</a></li>\
+          <li><a class="navmenu-item" href="contact.html">Contact</a></li>\
+        </ul>\
+      </nav>\
+      <nav class="navmenu-l2" data-panel="products" aria-label="Products">\
+        <button class="navmenu-back" data-back>' + ARR_L + 'Products</button>\
+        <ul>\
+          <li><a href="parasta.html">ParaSta</a></li>\
+          <li><a href="portx.html">Port X</a></li>\
+          <li><a href="myid.html">MyID</a></li>\
+          <li><a href="broof.html">Broof</a></li>\
+          <li><a href="kbtf.html">KBTF</a></li>\
+        </ul>\
+      </nav>\
+      <nav class="navmenu-l2" data-panel="solutions" aria-label="Solutions">\
+        <button class="navmenu-back" data-back>' + ARR_L + 'Solutions</button>\
+        <ul>\
+          <li><a href="solution-finance.html">금융</a></li>\
+          <li><a href="solution-gov.html">공공</a></li>\
+          <li><a href="solution-cert.html">증명서</a></li>\
+          <li><a href="solution-exchange.html">화이트라벨 거래소</a></li>\
+          <li><a href="solution-data.html">데이터주권</a></li>\
+          <li><a href="solution-settlement.html">결제·정산</a></li>\
+        </ul>\
+      </nav>\
     </div>';
     document.body.appendChild(nm);
+    /* ---- 드릴다운: 항목 누르면 해당 패널 인, 뒤로가기로 아웃 ---- */
+    nm.querySelectorAll('[data-subpanel]').forEach(function(b){
+      b.addEventListener('click', function(){ nm.setAttribute('data-view', b.getAttribute('data-subpanel')); });
+    });
+    nm.querySelectorAll('[data-back]').forEach(function(b){
+      b.addEventListener('click', function(){ nm.removeAttribute('data-view'); });
+    });
   }
 
   /* ---- 시계 ---- */
