@@ -2208,8 +2208,8 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 
 /* ============ INSIGHTS — 블로그 탭 필터 + 카드 링크 ============ */
 .blog-tabs{ display:flex; flex-wrap:wrap; gap:.625rem; margin-bottom:2rem }
-.blog-tab{ padding:.625rem 1.25rem; border:1px solid var(--line); border-radius:var(--radius-pill);
-  background:transparent; font-size:var(--text-14); font-weight:var(--w-title); line-height:1; color:var(--c-body);
+.blog-tab{ padding:.75rem 1.5rem; border:1px solid var(--line); border-radius:var(--radius-pill);
+  background:transparent; font-size:var(--text-body); font-weight:var(--w-title); line-height:1; color:var(--c-body);
   cursor:pointer; transition:background .2s ease, color .2s ease, border-color .2s ease }
 @media (hover:hover){ .blog-tab:hover{ color:var(--ink); border-color:rgba(var(--ink-rgb),.4) } }
 .blog-tab.is-on{ background:var(--ink); color:var(--white); border-color:var(--ink) }
@@ -2234,29 +2234,49 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 /* ============ POST — 블로그 아티클 상세 ============ */
 .post-meta{ display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; padding:1.5rem 0;
   border-top:1px solid rgba(var(--ink-rgb),.1); border-bottom:1px solid rgba(var(--ink-rgb),.1) }
-.post-cat{ font-size:var(--text-12); font-weight:600; letter-spacing:.025em; text-transform:uppercase;
+.post-cat{ font-size:var(--text-cap); font-weight:var(--w-strong); letter-spacing:.025em; text-transform:uppercase;
   color:var(--accent); background:rgba(var(--accent-rgb),.08); border-radius:var(--radius-pill); padding:.375rem .875rem }
-.post-date, .post-read{ font-size:var(--text-14); color:rgba(var(--ink-rgb),.55) }
+.post-date, .post-read{ font-size:var(--text-cap); color:var(--c-mut) }
 .post-read{ margin-left:auto }
 .post-grid{ display:grid; grid-template-columns:1fr; gap:2.5rem }
 @media (min-width:1024px){
   .post-grid{ grid-template-columns:repeat(12,1fr); column-gap:var(--grid-gap) }
-  .post-body{ grid-column:1 / 9 }
-  .post-side{ grid-column:10 / 13; position:sticky; top:7.5rem; align-self:start } }
-.post-body .post-lead{ font-size:var(--text-20); line-height:var(--leading-body); font-weight:500;
-  color:rgba(var(--ink-rgb),.85); margin-bottom:2.5rem }
-.post-body h3{ font-size:var(--text-24); font-weight:600; line-height:var(--leading-heading); letter-spacing:-.01em;
-  margin:3.5rem 0 1rem; scroll-margin-top:6rem }
+  .post-body{ grid-column:2 / 9 }
+  .post-side{ grid-column:10 / 12; position:sticky; top:12rem; align-self:start } }
+.post-body>*+*{ margin-top:1.25rem }
+.post-body .post-lead{ font-size:var(--text-20); line-height:var(--lh-body); font-weight:var(--w-title);
+  color:var(--ink); margin-bottom:1.5rem }
+.post-body h3{ font-size:var(--text-24); font-weight:var(--w-strong); line-height:var(--lh-heading); letter-spacing:-.01em;
+  margin:3.5rem 0 1.25rem; scroll-margin-top:10rem }
 .post-body h3:first-of-type{ margin-top:0 }
 .post-body h3::before{ content:''; display:block; width:2rem; height:2px; background:var(--gray-300); margin-bottom:1.5rem }
-.post-body p{ font-size:var(--text-16); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.7); margin-bottom:1.125rem }
-.post-body p b{ color:var(--ink); font-weight:500 }
-.post-side ul{ list-style:none; margin-top:1rem; display:flex; flex-direction:column; gap:.25rem }
-.post-side a{ display:block; padding:.5rem 0 .5rem .875rem; border-left:1px solid rgba(var(--ink-rgb),.14);
-  font-size:var(--text-14); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.6); text-decoration:none;
+.post-body p{ font-size:var(--text-20); line-height:var(--lh-body); color:var(--c-body) }   /* 프레스 본문과 동일(20) */
+.post-body p b{ color:var(--ink); font-weight:var(--w-strong) }
+.post-body ul{ list-style:none; display:flex; flex-direction:column; gap:.75rem; padding-left:1.25rem }
+.post-body ul li{ position:relative; font-size:var(--text-body); line-height:var(--lh-body); color:var(--c-body) }
+.post-body ul li::before{ content:''; position:absolute; left:-1.25rem; top:.62em; width:.375rem; height:.375rem;
+  border-radius:50%; background:var(--accent) }
+.post-fig{ margin:2.5rem 0 }
+.post-fig img{ width:100%; height:auto; display:block; border-radius:var(--radius-card-sm) }
+.post-side ul{ list-style:none; margin-top:1rem; display:flex; flex-direction:column; gap:.25rem;
+  border-left:1px solid rgba(var(--ink-rgb),.12) }   /* 섹션 이동 레일 */
+.post-side a{ display:block; padding:.625rem 0 .625rem 1rem; margin-left:-1px; border-left:2px solid transparent;
+  font-size:var(--text-body); line-height:var(--lh-body); color:var(--c-mut); text-decoration:none;
   transition:color .2s ease, border-color .2s ease }
-@media (hover:hover){ .post-side a:hover{ color:var(--ink); border-color:var(--accent) } }
+@media (hover:hover){ .post-side a:hover{ color:var(--ink) } }
+.post-side a.is-active{ color:var(--accent); border-color:var(--accent); font-weight:var(--w-title) }   /* 현재 보고 있는 섹션 */
 @media (max-width:1023px){ .post-side{ border-top:1px solid rgba(var(--ink-rgb),.1); padding-top:2rem } }
+/* 목차 없는 아티클(h3<2): 히어로와 좌측 정렬(2칸부터) */
+@media (min-width:1024px){ .post-grid.solo .post-body{ grid-column:2 / 11 } }
+/* 블로그 상세 히어로 제목 — 장문 대응(좌측 정렬), 솔루션 히어로급 스케일 (높이·정렬은 body.press 공용) */
+body.blog .phero-h1{ font-size:var(--text-32); max-width:28ch }   /* 프레스 상세와 동일 스케일 */
+@media (min-width:640px){ body.blog .phero-h1{ font-size:var(--text-40) } }
+@media (min-width:768px){ body.blog .phero-h1{ font-size:var(--text-48) } }
+@media (min-width:1024px){ body.blog .phero-h1{ font-size:var(--text-60) } }
+/* 히어로 메타 — 카테고리·날짜·읽는시간(좌) 그룹 */
+.pdm-info{ display:flex; align-items:center; gap:1rem; flex-wrap:wrap }
+.pdm-read{ font-size:var(--text-body-sm); color:rgba(var(--white-rgb),.5) }
+body.blog .pd-hero-meta .post-cat{ background:rgba(var(--white-rgb),.14); color:var(--white) }   /* 다크 히어로 위 카테고리 칩 */
 
 /* ══ 검수 시안: ① Recognition 칩 통합(Track Record 하단) ② Industry Firsts 1st 앵커 재구성 ══ */
 /* ① 인증·수상 칩 — 독립 섹션 대신 Track Record 숫자 카드 아래 한 줄 증거 밴드 */
@@ -2616,14 +2636,20 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
 @media (min-width:640px){ .blog-grid{ grid-template-columns:repeat(2,1fr) } }
 @media (min-width:1024px){ .blog-grid{ grid-template-columns:repeat(3,1fr) } }
 .bf-card{ display:flex; flex-direction:column; align-items:flex-start; text-decoration:none; color:inherit }
-.bf-thumb{ width:100%; aspect-ratio:1/1; border-radius:var(--radius-card-sm); margin-bottom:1.25rem;
-  background:color-mix(in srgb, var(--ink) 6%, var(--white)); transition:transform .35s cubic-bezier(.2,.8,.2,1) }
+.bf-thumb{ width:100%; aspect-ratio:4/3; border-radius:var(--radius-card-sm); margin-bottom:1.25rem;
+  background:color-mix(in srgb, var(--ink) 6%, var(--white)) center/cover no-repeat;
+  transition:transform .35s cubic-bezier(.2,.8,.2,1) }
 @media (hover:hover){ .bf-card:hover .bf-thumb{ transform:translateY(-4px) } }
-.bf-title{ font-size:var(--text-20); font-weight:var(--w-strong); letter-spacing:-.01em; line-height:var(--lh-heading);
-  color:var(--ink); word-break:keep-all }
-.bf-desc{ margin-top:.5rem; font-size:var(--text-body-sm); line-height:var(--lh-body); color:var(--c-body) }
-.bf-tag{ margin-top:1rem; font-size:var(--text-14); line-height:1; padding:.375rem .875rem;
-  border:1px solid rgba(var(--ink-rgb),.15); border-radius:var(--radius-pill); color:var(--c-body) }
+.bf-thumb-empty{ display:grid; place-items:center; background:var(--ink) }
+.bf-thumb-empty .bf-mark{ width:12%; max-width:2.5rem; height:auto }
+.bf-title{ font-size:var(--text-22); font-weight:var(--w-strong); letter-spacing:-.01em; line-height:var(--lh-heading);
+  color:var(--ink); word-break:keep-all;
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden }
+.bf-desc{ margin-top:.5rem; font-size:var(--text-body); line-height:var(--lh-body); color:var(--c-body);
+  display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden }
+.bf-tag{ margin-top:1rem; font-size:var(--text-body-sm); font-weight:var(--w-title); line-height:1; padding:.625rem 1.25rem;
+  border-radius:var(--radius-pill); color:var(--c-body);
+  background:color-mix(in srgb, var(--ink) 6%, var(--white)) }   /* 연한 그레이 필(테두리 없음), 사이즈·패딩·웨이트500 파라스타 플래그 준용 */
 
 /* ============ RESOURCES — 로고 다운로드 (기존 t-gray grouped 카드 문법, 인쇄용·웹용 좌우) ============ */
 .res-logo{ display:grid; grid-template-columns:1fr; gap:1rem }
@@ -2671,7 +2697,7 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
   </section>
 
 <section><div class="shell sec pd-grid">
-  <article class="pd-body rvl">
+  <article class="pd-body">
     <h2 class="pd-title">아이콘루프, 블록체인 기반 디지털 신원증명 플랫폼 ‘마이아이디(MyID)’ 금융위원회 혁신금융서비스 규제개선 요청 통과</h2>
     
     <figure class="pd-fig"><img src="assets/press/post-pr-193/fig-1.png" alt="" loading="lazy"></figure><p>2022년 12월 27일, 서울 – 국내 대표 블록체인 기업 ㈜아이콘루프(ICONLOOP, 대표 김종협)가 자사 블록체인 기반 디지털 신원증명 플랫폼 ‘마이아이디(MyID)’에 대한 금융위원회 혁신금융서비스 규제개선 요청을 통과했다고 27일 밝혔다. 해당 건은 혁신금융사업자들이 지정 기간 만료 후에도 안정적으로 서비스를 제공할 수 있도록 2021년 7월 금융위원회가 규제개선 요청제를 도입한 이후 4번째 수용 사례로, 블록체인 관련 건으로서는 최초다.</p><p>아이콘루프는 지난 2019년 6월 마이아이디가 금융위원회의 금융규제 샌드박스 혁신금융서비스에 지정되어 비대면 실명확인 절차 간소화에 대한 특례가 적용된 이래, 보다 편리하고 신뢰할 수 있는 블록체인 DID(Decentralized Identifier, 탈중앙화 신원증명) 생태계를 조성하고자 활발히 관련 사업을 전개해 왔다.</p><p>특히 아이콘루프는 2020년 8월 마이아이디 기반의 신한은행 금융실명인증을 발급함으로써 국내 최초로 금융권 DID를 상용화하였으며, 이어 2021년 8월 NH농협은행 금융실명인증을 출시하며 비대면 실명확인 간소화라는 새로운 고객 경험을 제공해 왔다. 마이아이디에 대한 특례 적용은 비대면 실명확인 절차를 간소화하여 비대면 실명인증 과정을 본인인증 수준으로 간편하게 진행할 수 있게 되었다는 측면에서 큰 혁신을 불러왔다.</p><p>이러한 노력을 바탕으로 마이아이디는 2020년 11월 정부로부터 금융규제 샌드박스의 대표 성과 사례로 선정되기도 하였으며, 2020년 12월 마이아이디의 혁신금융서비스 지정 기간이 2년 연장되며 서비스의 가치와 혁신성을 인정받았다.</p><p>아이콘루프의 이번 규제개선 요청 통과는 금융규제 샌드박스 혁신금융서비스 지정 기간의 만료를 앞둔 현 시점에서 큰 의의를 지닌다. 혁신금융서비스 기간 동안 아이콘루프는 금융권 대표 기업들과의 실질적 협업을 통해 약 10만 3천 건의 이용 건수를 달성하며 원활히 서비스를 제공 및 운영해 왔고, 그 과정에서 보다 안전하고 효율적인 서비스를 만들기 위해 DID 기술 고도화는 물론 인프라 구축, 노하우 축적 등 다방면으로 심혈을 기울여 왔다.</p><p>그간의 서비스 운영성, 금융시장·질서의 안정성 및 소비자 보호 여부 등의 심사를 바탕으로 한 이번 규제개선 요청 통과는, 임시의 의미가 컸던 마이아이디가 정식 서비스로서 시장에 안착하는 데 큰 동력이 될 것으로 기대된다. 향후 아이콘루프는 DID 기반의 비대면 실명확인을 활용해 다양한 추가 서비스들을 선보이며 관련 사업을 본격적으로 확대해 갈 계획이다.</p><p>김종협 아이콘루프 대표는 “이번 혁신금융서비스 규제개선 요청 통과를 기점으로, 기 구축된 인프라를 통한 VC(Verified Certificate, 증명서)의 유통 활성화와 함께 본 혁신금융서비스의 목적과 의미에 대한 결실을 맺을 수 있게 될 것으로 기대한다”고 전하며, “국내 법제도권에서 인정하고 지원한 블록체인 기술 발전이라는 가치는 글로벌 기술 발전 트렌드와 어깨를 나란히 하는 기반이 될 것”이라 덧붙였다.</p><p>한편, 아이콘루프는 아이콘루프는 올 6월 자사의 기술력을 집대성한 자체 블록체인 프레임워크(Blockchain Framework) ‘파라메타(Parameta)’를 공개하며 새로운 형태의 비즈니스 또한 도모하고 있다.</p>
@@ -2689,10 +2715,10 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
     <button class="psm-close" type="button" data-psm-close aria-label="닫기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></button>
     <h2>공유하기</h2>
     <ul class="psm-grid">
-      <li><a class="psm-item" data-share="x" href="#" target="_blank" rel="noopener"><span class="psm-ico psm-x"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.451-6.231zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644z"/></svg></span>X</a></li>
-      <li><a class="psm-item" data-share="fb" href="#" target="_blank" rel="noopener"><span class="psm-ico psm-fb"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.397 20.997v-8.196h2.765l.411-3.209h-3.176V7.548c0-.926.258-1.56 1.587-1.56h1.684V3.127c-.291-.039-1.29-.126-2.453-.126-2.429 0-4.09 1.483-4.09 4.205v2.386H7.353v3.209h2.772v8.196h3.272z"/></svg></span>페이스북</a></li>
-      <li><a class="psm-item" data-share="line" href="#" target="_blank" rel="noopener"><span class="psm-ico psm-line"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg></span>라인</a></li>
-      <li><a class="psm-item" data-share="mail" href="#"><span class="psm-ico psm-mail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg></span>메일</a></li>
+      <li><a class="psm-item" data-share="x" href="press/post-pr-193.html#" target="_blank" rel="noopener"><span class="psm-ico psm-x"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.451-6.231zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644z"/></svg></span>X</a></li>
+      <li><a class="psm-item" data-share="fb" href="press/post-pr-193.html#" target="_blank" rel="noopener"><span class="psm-ico psm-fb"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.397 20.997v-8.196h2.765l.411-3.209h-3.176V7.548c0-.926.258-1.56 1.587-1.56h1.684V3.127c-.291-.039-1.29-.126-2.453-.126-2.429 0-4.09 1.483-4.09 4.205v2.386H7.353v3.209h2.772v8.196h3.272z"/></svg></span>페이스북</a></li>
+      <li><a class="psm-item" data-share="line" href="press/post-pr-193.html#" target="_blank" rel="noopener"><span class="psm-ico psm-line"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg></span>라인</a></li>
+      <li><a class="psm-item" data-share="mail" href="press/post-pr-193.html#"><span class="psm-ico psm-mail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg></span>메일</a></li>
     </ul>
     <div class="psm-url">
       <input type="text" readonly aria-label="페이지 주소">
@@ -3369,6 +3395,22 @@ if(blogSec){
   const pager = blogSec.querySelector('.pager');
   const PER = 9; let filter = 'all', cur = 1;  // 3열 × 3행
   const elig = () => posts.filter(p => filter === 'all' || p.dataset.cat === filter);
+  // 카드 타이틀 2줄 초과 시 가운데 생략(단어 경계, 앞·뒤 유지) — CSS로 불가해 측정 후 처리
+  function clampMiddle(el){
+    const full = el.dataset.full || (el.dataset.full = el.textContent.trim());
+    el.textContent = full;
+    const lh = parseFloat(getComputedStyle(el).lineHeight) || 28;
+    const max = lh * 2 + 2;
+    if(el.scrollHeight <= max) return;
+    const w = full.split(/\s+/);
+    for(let keep = w.length - 1; keep >= 2; keep--){
+      const head = Math.ceil(keep / 2), tail = keep - head;
+      el.textContent = w.slice(0, head).join(' ') + ' … ' + w.slice(w.length - tail).join(' ');
+      if(el.scrollHeight <= max) return;
+    }
+  }
+  const clampVisible = () => posts.filter(p => !p.classList.contains('hidden'))
+    .forEach(p => { const t = p.querySelector('.bf-title'); if(t) clampMiddle(t); });
   function paint(){
     const e = elig();
     const real = Math.max(1, Math.ceil(e.length / PER));
@@ -3376,6 +3418,7 @@ if(blogSec){
     posts.forEach(p => p.classList.add('hidden'));
     e.slice((cur-1)*PER, cur*PER).forEach(p => p.classList.remove('hidden'));
     if(pager) paintPager(pager, blogSec, cur, real, page => { cur = page; paint(); });
+    requestAnimationFrame(() => requestAnimationFrame(clampVisible));   // 레이아웃 확정 후 측정
   }
   tabs.forEach(t => {
     const f = t.dataset.filter;
@@ -3386,6 +3429,9 @@ if(blogSec){
     });
   });
   paint();
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(clampVisible);   // 웹폰트 스왑 후 재측정
+  addEventListener('load', clampVisible);
+  let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(clampVisible, 150); });
 }
 /* 공통 커스텀 드롭다운 (.drop) — 시스템 셀렉트 대체. 선택 시 data-value 갱신 + change 이벤트 */
 const drops = [...document.querySelectorAll('.drop')];
@@ -3549,6 +3595,48 @@ if(pdShare && psModal){
     copyBtn.textContent = '복사됨';
     setTimeout(() => { copyBtn.textContent = orig; }, 1500);
   });
+}
+
+/* 블로그 상세: On this page 스크롤스파이 — 스크롤 위치 기준 현재 섹션 하이라이트 */
+const postSide = document.querySelector('.post-side');
+if(postSide){
+  const links = [...postSide.querySelectorAll('a')];
+  const map = new Map();
+  links.forEach(a => { const id = (a.getAttribute('href') || '').split('#')[1]; const t = id && document.getElementById(id); if(t) map.set(a, t); });
+  const sections = [...map.values()];
+  const setActive = t => links.forEach(l => l.classList.toggle('is-active', map.get(l) === t));
+  function pick(){
+    const line = innerHeight * 0.4;   // 뷰포트 40% 지점 — 섹션이 화면 상단부에 들어오면 미리 활성(스크롤보다 앞서 전환)
+    let cur = sections[0];
+    for(const s of sections){ if(s.getBoundingClientRect().top <= line) cur = s; else break; }
+    setActive(cur);
+  }
+  if(sections.length){
+    pick();
+    addEventListener('scroll', pick, { passive: true });
+    addEventListener('resize', pick);
+    lenis.on('scroll', pick);   // Lenis 스무스 스크롤(휠) 대응
+    // 목차 클릭 → 헤더 오프셋 두고 부드럽게 이동 (페이저와 동일한 rAF 방식 — 프리뷰/Lenis 공존)
+    const HEAD = 124;   // GNB + CTA 밴드 여유
+    const smoothTo = (y) => {
+      const s = window.scrollY, d = y - s, t0 = performance.now(), dur = 640;
+      const step = now => {
+        const p = Math.min(1, (now - t0) / dur);
+        const e = p < 0.5 ? 4*p*p*p : 1 - Math.pow(-2*p + 2, 3) / 2;
+        window.scrollTo(0, Math.round(s + d * e));
+        if(p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+    links.forEach(a => a.addEventListener('click', e => {
+      const t = map.get(a);
+      if(!t) return;
+      e.preventDefault();
+      smoothTo(Math.max(0, t.getBoundingClientRect().top + window.scrollY - HEAD));
+      history.replaceState(null, '', a.getAttribute('href'));
+      setActive(t);
+    }));
+  }
 }
 
 /* dev grid toggle */

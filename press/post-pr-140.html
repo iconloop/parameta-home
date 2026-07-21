@@ -2208,8 +2208,8 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 
 /* ============ INSIGHTS — 블로그 탭 필터 + 카드 링크 ============ */
 .blog-tabs{ display:flex; flex-wrap:wrap; gap:.625rem; margin-bottom:2rem }
-.blog-tab{ padding:.625rem 1.25rem; border:1px solid var(--line); border-radius:var(--radius-pill);
-  background:transparent; font-size:var(--text-14); font-weight:var(--w-title); line-height:1; color:var(--c-body);
+.blog-tab{ padding:.75rem 1.5rem; border:1px solid var(--line); border-radius:var(--radius-pill);
+  background:transparent; font-size:var(--text-body); font-weight:var(--w-title); line-height:1; color:var(--c-body);
   cursor:pointer; transition:background .2s ease, color .2s ease, border-color .2s ease }
 @media (hover:hover){ .blog-tab:hover{ color:var(--ink); border-color:rgba(var(--ink-rgb),.4) } }
 .blog-tab.is-on{ background:var(--ink); color:var(--white); border-color:var(--ink) }
@@ -2234,29 +2234,49 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 /* ============ POST — 블로그 아티클 상세 ============ */
 .post-meta{ display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; padding:1.5rem 0;
   border-top:1px solid rgba(var(--ink-rgb),.1); border-bottom:1px solid rgba(var(--ink-rgb),.1) }
-.post-cat{ font-size:var(--text-12); font-weight:600; letter-spacing:.025em; text-transform:uppercase;
+.post-cat{ font-size:var(--text-cap); font-weight:var(--w-strong); letter-spacing:.025em; text-transform:uppercase;
   color:var(--accent); background:rgba(var(--accent-rgb),.08); border-radius:var(--radius-pill); padding:.375rem .875rem }
-.post-date, .post-read{ font-size:var(--text-14); color:rgba(var(--ink-rgb),.55) }
+.post-date, .post-read{ font-size:var(--text-cap); color:var(--c-mut) }
 .post-read{ margin-left:auto }
 .post-grid{ display:grid; grid-template-columns:1fr; gap:2.5rem }
 @media (min-width:1024px){
   .post-grid{ grid-template-columns:repeat(12,1fr); column-gap:var(--grid-gap) }
-  .post-body{ grid-column:1 / 9 }
-  .post-side{ grid-column:10 / 13; position:sticky; top:7.5rem; align-self:start } }
-.post-body .post-lead{ font-size:var(--text-20); line-height:var(--leading-body); font-weight:500;
-  color:rgba(var(--ink-rgb),.85); margin-bottom:2.5rem }
-.post-body h3{ font-size:var(--text-24); font-weight:600; line-height:var(--leading-heading); letter-spacing:-.01em;
-  margin:3.5rem 0 1rem; scroll-margin-top:6rem }
+  .post-body{ grid-column:2 / 9 }
+  .post-side{ grid-column:10 / 12; position:sticky; top:12rem; align-self:start } }
+.post-body>*+*{ margin-top:1.25rem }
+.post-body .post-lead{ font-size:var(--text-20); line-height:var(--lh-body); font-weight:var(--w-title);
+  color:var(--ink); margin-bottom:1.5rem }
+.post-body h3{ font-size:var(--text-24); font-weight:var(--w-strong); line-height:var(--lh-heading); letter-spacing:-.01em;
+  margin:3.5rem 0 1.25rem; scroll-margin-top:10rem }
 .post-body h3:first-of-type{ margin-top:0 }
 .post-body h3::before{ content:''; display:block; width:2rem; height:2px; background:var(--gray-300); margin-bottom:1.5rem }
-.post-body p{ font-size:var(--text-16); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.7); margin-bottom:1.125rem }
-.post-body p b{ color:var(--ink); font-weight:500 }
-.post-side ul{ list-style:none; margin-top:1rem; display:flex; flex-direction:column; gap:.25rem }
-.post-side a{ display:block; padding:.5rem 0 .5rem .875rem; border-left:1px solid rgba(var(--ink-rgb),.14);
-  font-size:var(--text-14); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.6); text-decoration:none;
+.post-body p{ font-size:var(--text-20); line-height:var(--lh-body); color:var(--c-body) }   /* 프레스 본문과 동일(20) */
+.post-body p b{ color:var(--ink); font-weight:var(--w-strong) }
+.post-body ul{ list-style:none; display:flex; flex-direction:column; gap:.75rem; padding-left:1.25rem }
+.post-body ul li{ position:relative; font-size:var(--text-body); line-height:var(--lh-body); color:var(--c-body) }
+.post-body ul li::before{ content:''; position:absolute; left:-1.25rem; top:.62em; width:.375rem; height:.375rem;
+  border-radius:50%; background:var(--accent) }
+.post-fig{ margin:2.5rem 0 }
+.post-fig img{ width:100%; height:auto; display:block; border-radius:var(--radius-card-sm) }
+.post-side ul{ list-style:none; margin-top:1rem; display:flex; flex-direction:column; gap:.25rem;
+  border-left:1px solid rgba(var(--ink-rgb),.12) }   /* 섹션 이동 레일 */
+.post-side a{ display:block; padding:.625rem 0 .625rem 1rem; margin-left:-1px; border-left:2px solid transparent;
+  font-size:var(--text-body); line-height:var(--lh-body); color:var(--c-mut); text-decoration:none;
   transition:color .2s ease, border-color .2s ease }
-@media (hover:hover){ .post-side a:hover{ color:var(--ink); border-color:var(--accent) } }
+@media (hover:hover){ .post-side a:hover{ color:var(--ink) } }
+.post-side a.is-active{ color:var(--accent); border-color:var(--accent); font-weight:var(--w-title) }   /* 현재 보고 있는 섹션 */
 @media (max-width:1023px){ .post-side{ border-top:1px solid rgba(var(--ink-rgb),.1); padding-top:2rem } }
+/* 목차 없는 아티클(h3<2): 히어로와 좌측 정렬(2칸부터) */
+@media (min-width:1024px){ .post-grid.solo .post-body{ grid-column:2 / 11 } }
+/* 블로그 상세 히어로 제목 — 장문 대응(좌측 정렬), 솔루션 히어로급 스케일 (높이·정렬은 body.press 공용) */
+body.blog .phero-h1{ font-size:var(--text-32); max-width:28ch }   /* 프레스 상세와 동일 스케일 */
+@media (min-width:640px){ body.blog .phero-h1{ font-size:var(--text-40) } }
+@media (min-width:768px){ body.blog .phero-h1{ font-size:var(--text-48) } }
+@media (min-width:1024px){ body.blog .phero-h1{ font-size:var(--text-60) } }
+/* 히어로 메타 — 카테고리·날짜·읽는시간(좌) 그룹 */
+.pdm-info{ display:flex; align-items:center; gap:1rem; flex-wrap:wrap }
+.pdm-read{ font-size:var(--text-body-sm); color:rgba(var(--white-rgb),.5) }
+body.blog .pd-hero-meta .post-cat{ background:rgba(var(--white-rgb),.14); color:var(--white) }   /* 다크 히어로 위 카테고리 칩 */
 
 /* ══ 검수 시안: ① Recognition 칩 통합(Track Record 하단) ② Industry Firsts 1st 앵커 재구성 ══ */
 /* ① 인증·수상 칩 — 독립 섹션 대신 Track Record 숫자 카드 아래 한 줄 증거 밴드 */
@@ -2616,14 +2636,20 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
 @media (min-width:640px){ .blog-grid{ grid-template-columns:repeat(2,1fr) } }
 @media (min-width:1024px){ .blog-grid{ grid-template-columns:repeat(3,1fr) } }
 .bf-card{ display:flex; flex-direction:column; align-items:flex-start; text-decoration:none; color:inherit }
-.bf-thumb{ width:100%; aspect-ratio:1/1; border-radius:var(--radius-card-sm); margin-bottom:1.25rem;
-  background:color-mix(in srgb, var(--ink) 6%, var(--white)); transition:transform .35s cubic-bezier(.2,.8,.2,1) }
+.bf-thumb{ width:100%; aspect-ratio:4/3; border-radius:var(--radius-card-sm); margin-bottom:1.25rem;
+  background:color-mix(in srgb, var(--ink) 6%, var(--white)) center/cover no-repeat;
+  transition:transform .35s cubic-bezier(.2,.8,.2,1) }
 @media (hover:hover){ .bf-card:hover .bf-thumb{ transform:translateY(-4px) } }
-.bf-title{ font-size:var(--text-20); font-weight:var(--w-strong); letter-spacing:-.01em; line-height:var(--lh-heading);
-  color:var(--ink); word-break:keep-all }
-.bf-desc{ margin-top:.5rem; font-size:var(--text-body-sm); line-height:var(--lh-body); color:var(--c-body) }
-.bf-tag{ margin-top:1rem; font-size:var(--text-14); line-height:1; padding:.375rem .875rem;
-  border:1px solid rgba(var(--ink-rgb),.15); border-radius:var(--radius-pill); color:var(--c-body) }
+.bf-thumb-empty{ display:grid; place-items:center; background:var(--ink) }
+.bf-thumb-empty .bf-mark{ width:12%; max-width:2.5rem; height:auto }
+.bf-title{ font-size:var(--text-22); font-weight:var(--w-strong); letter-spacing:-.01em; line-height:var(--lh-heading);
+  color:var(--ink); word-break:keep-all;
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden }
+.bf-desc{ margin-top:.5rem; font-size:var(--text-body); line-height:var(--lh-body); color:var(--c-body);
+  display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden }
+.bf-tag{ margin-top:1rem; font-size:var(--text-body-sm); font-weight:var(--w-title); line-height:1; padding:.625rem 1.25rem;
+  border-radius:var(--radius-pill); color:var(--c-body);
+  background:color-mix(in srgb, var(--ink) 6%, var(--white)) }   /* 연한 그레이 필(테두리 없음), 사이즈·패딩·웨이트500 파라스타 플래그 준용 */
 
 /* ============ RESOURCES — 로고 다운로드 (기존 t-gray grouped 카드 문법, 인쇄용·웹용 좌우) ============ */
 .res-logo{ display:grid; grid-template-columns:1fr; gap:1rem }
@@ -2671,7 +2697,7 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
   </section>
 
 <section><div class="shell sec pd-grid">
-  <article class="pd-body rvl">
+  <article class="pd-body">
     <h2 class="pd-title">아이콘루프, ‘블록체인 기반 선박검사관리 플랫폼’ 서비스 가동</h2>
     <ul class="pd-sum"><li>아이콘루프, ‘블록체인 기반 선박검사관리 플랫폼’ 서비스 가동</li><li>블록체인을 통한 검증으로 선박 관련 검사에 대한 정보를 투명하게 보관</li><li>각 기관에 분산되어 있던 정보 연계로 편리하고 체계적인 관리 및 활용 가능</li></ul>
     <figure class="pd-fig"><img src="assets/press/post-pr-140/fig-1.png" alt="" loading="lazy"></figure><p>2021년 10월 29일, 서울 – 국내 대표 블록체인 기업 ㈜아이콘루프(ICONLOOP, 대표 김종협)가 해양 안전 확보를 위한 ‘블록체인 기반 선박검사관리 플랫폼’ 서비스를 본격 가동한다고 29일 밝혔다.</p><p>본 플랫폼은 과학기술정보통신부와 한국인터넷진흥원(KISA) 주관 &lt;2021년 블록체인 선도 시범 사업&gt; 중 ‘해양 안전 확보를 위한 블록체인 기반 선박검사관리 플랫폼’ 사업을 토대로 구축되었다. 아이콘루프는 주관 사업자로서 독보적 블록체인 기술 및 NFT를 활용해 선박의 안전한 항해 환경을 조성하기 위한 선박검사관리 플랫폼을 기획·개발했다.</p><p>블록체인을 기반으로 새롭게 구축된 선박검사관리 플랫폼은 무선국 허가, 무선국 검사 등 선박 관련 검사에 대한 정보를 중앙전파관리소, 한국방송통신전파진흥원(이하 KCA), 수협이 투명하게 공유할 수 있도록 설계되었다. 우선 신뢰의 기술인 블록체인을 통한 검증으로 선박 관련 검사에 대한 정보의 위변조 가능성을 원천 차단해, 투명하고 안전하게 정보를 보관할 수 있다. 또한 각 기관에 분산된 선박 관련 검사 정보들을 연계해 체계적으로 관리함으로써, 각 기관 검사원들이 선박의 검사 현황 및 이력을 실시간으로 확인해 보다 신속하고 원활한 검사 진행이 가능하도록 한다.</p><p>더불어 선박별 NFT(Non-Fungible Token, 대체 불가능 토큰)를 발행, 선박 관련 검사 등의 이력을 통합해 지속적으로 쌓을 수 있다. 이를 통해 향후 선박 거래 및 보험 등 다양한 분야에 활용할 수 있는 정보 기반이 마련될 예정이다. NFT란 블록체인 기술을 활용해 디지털 콘텐츠에 고유한 인식 값을 부여한 것으로, 본 플랫폼에서는 각 선박의 ID와 선주를 결합하여 선박의 소유를 증명하는 NFT를 발행한다.</p><p>‘블록체인 기반 선박검사관리 플랫폼’ 서비스 이용을 위해서는 수협 조업정보알리미 앱 가입이 필요하다. 앱 내에서 선박 NTF를 발행할 수 있으며 이후 무선국 허가증 발급, 무선국 검사증 발급의 순서로 체계적인 선박검사관리 과정이 수행된다.</p><p>기존 선주들이 이용해 온 수협 조업정보알리미 앱에도 신규 기능들이 추가되어 편의를 높였다. ‘검사 갱신 기간 알림 기능’을 통해 조업 전 시기를 놓치지 않고 선박 관련 검사를 진행할 수 있으며, ‘검사 결과 알림 기능’으로 선박 관련 검사 완료 직후 해당 사항을 확인할 수 있다.</p><p>김종협 아이콘루프 대표는 “선박검사관리 플랫폼에 블록체인을 적용한 본 사업의 가능성을 인지한 기관들이 추가 참여를 이어가고 있다”며, “플랫폼의 가치를 높여 갈 여러 수요 기관과 함께 선주 및 기관 검사원들의 편의를 대폭 개선할 수 있도록 최선을 다할 것”이라 덧붙였다.</p><p>한편, 아이콘루프는 ‘블록체인 기반 선박검사관리 플랫폼’ 서비스 시작을 기념해 선박을 보유한 선주를 대상으로 이벤트를 실시한다. 수협 조업정보알리미 앱에서 내 선박 NFT를 발행하면 추첨을 통해 5만 원 상당의 주유권을 증정하며, 이벤트는 상품 소진 시까지 계속된다. 수협 조업정보알리미 앱은 구글 플레이스토어(안드로이드), 애플 앱스토어(iOS)에서 ‘조업정보알리미’를 검색해 다운로드 할 수 있다.</p><p># # #</p>
@@ -2689,10 +2715,10 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
     <button class="psm-close" type="button" data-psm-close aria-label="닫기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></button>
     <h2>공유하기</h2>
     <ul class="psm-grid">
-      <li><a class="psm-item" data-share="x" href="#" target="_blank" rel="noopener"><span class="psm-ico psm-x"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.451-6.231zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644z"/></svg></span>X</a></li>
-      <li><a class="psm-item" data-share="fb" href="#" target="_blank" rel="noopener"><span class="psm-ico psm-fb"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.397 20.997v-8.196h2.765l.411-3.209h-3.176V7.548c0-.926.258-1.56 1.587-1.56h1.684V3.127c-.291-.039-1.29-.126-2.453-.126-2.429 0-4.09 1.483-4.09 4.205v2.386H7.353v3.209h2.772v8.196h3.272z"/></svg></span>페이스북</a></li>
-      <li><a class="psm-item" data-share="line" href="#" target="_blank" rel="noopener"><span class="psm-ico psm-line"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg></span>라인</a></li>
-      <li><a class="psm-item" data-share="mail" href="#"><span class="psm-ico psm-mail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg></span>메일</a></li>
+      <li><a class="psm-item" data-share="x" href="press/post-pr-140.html#" target="_blank" rel="noopener"><span class="psm-ico psm-x"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.451-6.231zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644z"/></svg></span>X</a></li>
+      <li><a class="psm-item" data-share="fb" href="press/post-pr-140.html#" target="_blank" rel="noopener"><span class="psm-ico psm-fb"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.397 20.997v-8.196h2.765l.411-3.209h-3.176V7.548c0-.926.258-1.56 1.587-1.56h1.684V3.127c-.291-.039-1.29-.126-2.453-.126-2.429 0-4.09 1.483-4.09 4.205v2.386H7.353v3.209h2.772v8.196h3.272z"/></svg></span>페이스북</a></li>
+      <li><a class="psm-item" data-share="line" href="press/post-pr-140.html#" target="_blank" rel="noopener"><span class="psm-ico psm-line"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg></span>라인</a></li>
+      <li><a class="psm-item" data-share="mail" href="press/post-pr-140.html#"><span class="psm-ico psm-mail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg></span>메일</a></li>
     </ul>
     <div class="psm-url">
       <input type="text" readonly aria-label="페이지 주소">
@@ -3369,6 +3395,22 @@ if(blogSec){
   const pager = blogSec.querySelector('.pager');
   const PER = 9; let filter = 'all', cur = 1;  // 3열 × 3행
   const elig = () => posts.filter(p => filter === 'all' || p.dataset.cat === filter);
+  // 카드 타이틀 2줄 초과 시 가운데 생략(단어 경계, 앞·뒤 유지) — CSS로 불가해 측정 후 처리
+  function clampMiddle(el){
+    const full = el.dataset.full || (el.dataset.full = el.textContent.trim());
+    el.textContent = full;
+    const lh = parseFloat(getComputedStyle(el).lineHeight) || 28;
+    const max = lh * 2 + 2;
+    if(el.scrollHeight <= max) return;
+    const w = full.split(/\s+/);
+    for(let keep = w.length - 1; keep >= 2; keep--){
+      const head = Math.ceil(keep / 2), tail = keep - head;
+      el.textContent = w.slice(0, head).join(' ') + ' … ' + w.slice(w.length - tail).join(' ');
+      if(el.scrollHeight <= max) return;
+    }
+  }
+  const clampVisible = () => posts.filter(p => !p.classList.contains('hidden'))
+    .forEach(p => { const t = p.querySelector('.bf-title'); if(t) clampMiddle(t); });
   function paint(){
     const e = elig();
     const real = Math.max(1, Math.ceil(e.length / PER));
@@ -3376,6 +3418,7 @@ if(blogSec){
     posts.forEach(p => p.classList.add('hidden'));
     e.slice((cur-1)*PER, cur*PER).forEach(p => p.classList.remove('hidden'));
     if(pager) paintPager(pager, blogSec, cur, real, page => { cur = page; paint(); });
+    requestAnimationFrame(() => requestAnimationFrame(clampVisible));   // 레이아웃 확정 후 측정
   }
   tabs.forEach(t => {
     const f = t.dataset.filter;
@@ -3386,6 +3429,9 @@ if(blogSec){
     });
   });
   paint();
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(clampVisible);   // 웹폰트 스왑 후 재측정
+  addEventListener('load', clampVisible);
+  let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(clampVisible, 150); });
 }
 /* 공통 커스텀 드롭다운 (.drop) — 시스템 셀렉트 대체. 선택 시 data-value 갱신 + change 이벤트 */
 const drops = [...document.querySelectorAll('.drop')];
@@ -3549,6 +3595,48 @@ if(pdShare && psModal){
     copyBtn.textContent = '복사됨';
     setTimeout(() => { copyBtn.textContent = orig; }, 1500);
   });
+}
+
+/* 블로그 상세: On this page 스크롤스파이 — 스크롤 위치 기준 현재 섹션 하이라이트 */
+const postSide = document.querySelector('.post-side');
+if(postSide){
+  const links = [...postSide.querySelectorAll('a')];
+  const map = new Map();
+  links.forEach(a => { const id = (a.getAttribute('href') || '').split('#')[1]; const t = id && document.getElementById(id); if(t) map.set(a, t); });
+  const sections = [...map.values()];
+  const setActive = t => links.forEach(l => l.classList.toggle('is-active', map.get(l) === t));
+  function pick(){
+    const line = innerHeight * 0.4;   // 뷰포트 40% 지점 — 섹션이 화면 상단부에 들어오면 미리 활성(스크롤보다 앞서 전환)
+    let cur = sections[0];
+    for(const s of sections){ if(s.getBoundingClientRect().top <= line) cur = s; else break; }
+    setActive(cur);
+  }
+  if(sections.length){
+    pick();
+    addEventListener('scroll', pick, { passive: true });
+    addEventListener('resize', pick);
+    lenis.on('scroll', pick);   // Lenis 스무스 스크롤(휠) 대응
+    // 목차 클릭 → 헤더 오프셋 두고 부드럽게 이동 (페이저와 동일한 rAF 방식 — 프리뷰/Lenis 공존)
+    const HEAD = 124;   // GNB + CTA 밴드 여유
+    const smoothTo = (y) => {
+      const s = window.scrollY, d = y - s, t0 = performance.now(), dur = 640;
+      const step = now => {
+        const p = Math.min(1, (now - t0) / dur);
+        const e = p < 0.5 ? 4*p*p*p : 1 - Math.pow(-2*p + 2, 3) / 2;
+        window.scrollTo(0, Math.round(s + d * e));
+        if(p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+    links.forEach(a => a.addEventListener('click', e => {
+      const t = map.get(a);
+      if(!t) return;
+      e.preventDefault();
+      smoothTo(Math.max(0, t.getBoundingClientRect().top + window.scrollY - HEAD));
+      history.replaceState(null, '', a.getAttribute('href'));
+      setActive(t);
+    }));
+  }
 }
 
 /* dev grid toggle */

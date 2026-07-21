@@ -2208,8 +2208,8 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 
 /* ============ INSIGHTS — 블로그 탭 필터 + 카드 링크 ============ */
 .blog-tabs{ display:flex; flex-wrap:wrap; gap:.625rem; margin-bottom:2rem }
-.blog-tab{ padding:.625rem 1.25rem; border:1px solid var(--line); border-radius:var(--radius-pill);
-  background:transparent; font-size:var(--text-14); font-weight:var(--w-title); line-height:1; color:var(--c-body);
+.blog-tab{ padding:.75rem 1.5rem; border:1px solid var(--line); border-radius:var(--radius-pill);
+  background:transparent; font-size:var(--text-body); font-weight:var(--w-title); line-height:1; color:var(--c-body);
   cursor:pointer; transition:background .2s ease, color .2s ease, border-color .2s ease }
 @media (hover:hover){ .blog-tab:hover{ color:var(--ink); border-color:rgba(var(--ink-rgb),.4) } }
 .blog-tab.is-on{ background:var(--ink); color:var(--white); border-color:var(--ink) }
@@ -2234,29 +2234,49 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 /* ============ POST — 블로그 아티클 상세 ============ */
 .post-meta{ display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; padding:1.5rem 0;
   border-top:1px solid rgba(var(--ink-rgb),.1); border-bottom:1px solid rgba(var(--ink-rgb),.1) }
-.post-cat{ font-size:var(--text-12); font-weight:600; letter-spacing:.025em; text-transform:uppercase;
+.post-cat{ font-size:var(--text-cap); font-weight:var(--w-strong); letter-spacing:.025em; text-transform:uppercase;
   color:var(--accent); background:rgba(var(--accent-rgb),.08); border-radius:var(--radius-pill); padding:.375rem .875rem }
-.post-date, .post-read{ font-size:var(--text-14); color:rgba(var(--ink-rgb),.55) }
+.post-date, .post-read{ font-size:var(--text-cap); color:var(--c-mut) }
 .post-read{ margin-left:auto }
 .post-grid{ display:grid; grid-template-columns:1fr; gap:2.5rem }
 @media (min-width:1024px){
   .post-grid{ grid-template-columns:repeat(12,1fr); column-gap:var(--grid-gap) }
-  .post-body{ grid-column:1 / 9 }
-  .post-side{ grid-column:10 / 13; position:sticky; top:7.5rem; align-self:start } }
-.post-body .post-lead{ font-size:var(--text-20); line-height:var(--leading-body); font-weight:500;
-  color:rgba(var(--ink-rgb),.85); margin-bottom:2.5rem }
-.post-body h3{ font-size:var(--text-24); font-weight:600; line-height:var(--leading-heading); letter-spacing:-.01em;
-  margin:3.5rem 0 1rem; scroll-margin-top:6rem }
+  .post-body{ grid-column:2 / 9 }
+  .post-side{ grid-column:10 / 12; position:sticky; top:12rem; align-self:start } }
+.post-body>*+*{ margin-top:1.25rem }
+.post-body .post-lead{ font-size:var(--text-20); line-height:var(--lh-body); font-weight:var(--w-title);
+  color:var(--ink); margin-bottom:1.5rem }
+.post-body h3{ font-size:var(--text-24); font-weight:var(--w-strong); line-height:var(--lh-heading); letter-spacing:-.01em;
+  margin:3.5rem 0 1.25rem; scroll-margin-top:10rem }
 .post-body h3:first-of-type{ margin-top:0 }
 .post-body h3::before{ content:''; display:block; width:2rem; height:2px; background:var(--gray-300); margin-bottom:1.5rem }
-.post-body p{ font-size:var(--text-16); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.7); margin-bottom:1.125rem }
-.post-body p b{ color:var(--ink); font-weight:500 }
-.post-side ul{ list-style:none; margin-top:1rem; display:flex; flex-direction:column; gap:.25rem }
-.post-side a{ display:block; padding:.5rem 0 .5rem .875rem; border-left:1px solid rgba(var(--ink-rgb),.14);
-  font-size:var(--text-14); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.6); text-decoration:none;
+.post-body p{ font-size:var(--text-20); line-height:var(--lh-body); color:var(--c-body) }   /* 프레스 본문과 동일(20) */
+.post-body p b{ color:var(--ink); font-weight:var(--w-strong) }
+.post-body ul{ list-style:none; display:flex; flex-direction:column; gap:.75rem; padding-left:1.25rem }
+.post-body ul li{ position:relative; font-size:var(--text-body); line-height:var(--lh-body); color:var(--c-body) }
+.post-body ul li::before{ content:''; position:absolute; left:-1.25rem; top:.62em; width:.375rem; height:.375rem;
+  border-radius:50%; background:var(--accent) }
+.post-fig{ margin:2.5rem 0 }
+.post-fig img{ width:100%; height:auto; display:block; border-radius:var(--radius-card-sm) }
+.post-side ul{ list-style:none; margin-top:1rem; display:flex; flex-direction:column; gap:.25rem;
+  border-left:1px solid rgba(var(--ink-rgb),.12) }   /* 섹션 이동 레일 */
+.post-side a{ display:block; padding:.625rem 0 .625rem 1rem; margin-left:-1px; border-left:2px solid transparent;
+  font-size:var(--text-body); line-height:var(--lh-body); color:var(--c-mut); text-decoration:none;
   transition:color .2s ease, border-color .2s ease }
-@media (hover:hover){ .post-side a:hover{ color:var(--ink); border-color:var(--accent) } }
+@media (hover:hover){ .post-side a:hover{ color:var(--ink) } }
+.post-side a.is-active{ color:var(--accent); border-color:var(--accent); font-weight:var(--w-title) }   /* 현재 보고 있는 섹션 */
 @media (max-width:1023px){ .post-side{ border-top:1px solid rgba(var(--ink-rgb),.1); padding-top:2rem } }
+/* 목차 없는 아티클(h3<2): 히어로와 좌측 정렬(2칸부터) */
+@media (min-width:1024px){ .post-grid.solo .post-body{ grid-column:2 / 11 } }
+/* 블로그 상세 히어로 제목 — 장문 대응(좌측 정렬), 솔루션 히어로급 스케일 (높이·정렬은 body.press 공용) */
+body.blog .phero-h1{ font-size:var(--text-32); max-width:28ch }   /* 프레스 상세와 동일 스케일 */
+@media (min-width:640px){ body.blog .phero-h1{ font-size:var(--text-40) } }
+@media (min-width:768px){ body.blog .phero-h1{ font-size:var(--text-48) } }
+@media (min-width:1024px){ body.blog .phero-h1{ font-size:var(--text-60) } }
+/* 히어로 메타 — 카테고리·날짜·읽는시간(좌) 그룹 */
+.pdm-info{ display:flex; align-items:center; gap:1rem; flex-wrap:wrap }
+.pdm-read{ font-size:var(--text-body-sm); color:rgba(var(--white-rgb),.5) }
+body.blog .pd-hero-meta .post-cat{ background:rgba(var(--white-rgb),.14); color:var(--white) }   /* 다크 히어로 위 카테고리 칩 */
 
 /* ══ 검수 시안: ① Recognition 칩 통합(Track Record 하단) ② Industry Firsts 1st 앵커 재구성 ══ */
 /* ① 인증·수상 칩 — 독립 섹션 대신 Track Record 숫자 카드 아래 한 줄 증거 밴드 */
@@ -2616,14 +2636,20 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
 @media (min-width:640px){ .blog-grid{ grid-template-columns:repeat(2,1fr) } }
 @media (min-width:1024px){ .blog-grid{ grid-template-columns:repeat(3,1fr) } }
 .bf-card{ display:flex; flex-direction:column; align-items:flex-start; text-decoration:none; color:inherit }
-.bf-thumb{ width:100%; aspect-ratio:1/1; border-radius:var(--radius-card-sm); margin-bottom:1.25rem;
-  background:color-mix(in srgb, var(--ink) 6%, var(--white)); transition:transform .35s cubic-bezier(.2,.8,.2,1) }
+.bf-thumb{ width:100%; aspect-ratio:4/3; border-radius:var(--radius-card-sm); margin-bottom:1.25rem;
+  background:color-mix(in srgb, var(--ink) 6%, var(--white)) center/cover no-repeat;
+  transition:transform .35s cubic-bezier(.2,.8,.2,1) }
 @media (hover:hover){ .bf-card:hover .bf-thumb{ transform:translateY(-4px) } }
-.bf-title{ font-size:var(--text-20); font-weight:var(--w-strong); letter-spacing:-.01em; line-height:var(--lh-heading);
-  color:var(--ink); word-break:keep-all }
-.bf-desc{ margin-top:.5rem; font-size:var(--text-body-sm); line-height:var(--lh-body); color:var(--c-body) }
-.bf-tag{ margin-top:1rem; font-size:var(--text-14); line-height:1; padding:.375rem .875rem;
-  border:1px solid rgba(var(--ink-rgb),.15); border-radius:var(--radius-pill); color:var(--c-body) }
+.bf-thumb-empty{ display:grid; place-items:center; background:var(--ink) }
+.bf-thumb-empty .bf-mark{ width:12%; max-width:2.5rem; height:auto }
+.bf-title{ font-size:var(--text-22); font-weight:var(--w-strong); letter-spacing:-.01em; line-height:var(--lh-heading);
+  color:var(--ink); word-break:keep-all;
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden }
+.bf-desc{ margin-top:.5rem; font-size:var(--text-body); line-height:var(--lh-body); color:var(--c-body);
+  display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden }
+.bf-tag{ margin-top:1rem; font-size:var(--text-body-sm); font-weight:var(--w-title); line-height:1; padding:.625rem 1.25rem;
+  border-radius:var(--radius-pill); color:var(--c-body);
+  background:color-mix(in srgb, var(--ink) 6%, var(--white)) }   /* 연한 그레이 필(테두리 없음), 사이즈·패딩·웨이트500 파라스타 플래그 준용 */
 
 /* ============ RESOURCES — 로고 다운로드 (기존 t-gray grouped 카드 문법, 인쇄용·웹용 좌우) ============ */
 .res-logo{ display:grid; grid-template-columns:1fr; gap:1rem }
@@ -2671,7 +2697,7 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
   </section>
 
 <section><div class="shell sec pd-grid">
-  <article class="pd-body rvl">
+  <article class="pd-body">
     <h2 class="pd-title">파라메타, 자체 블록체인 코어 '루프체인(loopchain)'의 성능 측정 및 향상 방안 리포트 공개</h2>
     
     <figure class="pd-fig"><img src="assets/press/post-pr-218/fig-1.png" alt="" loading="lazy"></figure><p>2023년 9월 13일, 서울 – 웹3 인에이블러(Web3 Enabler) ㈜파라메타(PARAMETA, 구 아이콘루프, 대표 김종협)가 자체 블록체인 코어 ‘루프체인(loopchain)’의 성능 측정 및 향상 방안에 대한 내용을 담은 리포트를 공개한다고 밝혔다.</p><p>루프체인 성능 측정 및 향상 방안 리포트(PARAMETA Technical Report : Measure and Improve loopchain Performance)는 블록체인의 성능 향상에 필요한 기술과 해당 기술들이 루프체인에 어떻게 적용되어 어느 정도의 성능을 발휘하는지에 대해 시험한 결과를 다룬다. 본 리포트는 블록체인이 상용 서비스에 보다 많이 활용될 수 있기를 바라며, 생활 속 서비스들에 실질적으로 적용되어 편의를 제공할 수 있음을 보여 주기 위해 기획됐다. 특히 STO(토큰증권 발행) 등에서 단순히 잔액과 거래 내역을 저장하는 데만 사용되는 것이 아니라 청약, 배당, 거래 등 실제 업무 자체를 온체인에서 수행할 수 있도록 함으로써 블록체인 활용 효과를 극대화할 수 있음을 보여 주고자 했다.</p><p>본 리포트는 △트랜잭션의 병렬 실행을 가능하게 하는 기술을 통해 획기적 성능 향상을 실현하고 있는 타 블록체인 사례 △고성능 트랜잭션 처리를 위하여 루프체인 2.0(loopchain 2.0)에 적용된 트랜잭션 병렬 처리 기술 소개 및 루프체인에서의 성능 측정 결과 △획기적 성능 개선을 위해 루프체인 3.0(loopchain 3.0)에 적용할 기술 소개 및 프로토타입을 통한 목표 성능 예상 △향후 개발 및 지원 계획 등의 콘텐츠로 구성된다.</p><p>해당 리포트에서 소개하고 있는 루프체인의 트랜잭션 병렬 처리(Parallel Execution of Transactions)는 트랜잭션들이 관여하는 계정이 서로 독립적일 경우 이를 병렬로 실행할 수 있도록 함으로써 한 블록의 트랜잭션을 실행하는 데 소요되는 시간을 획기적으로 줄이는 처리 기술이다. 시험에 적합한 환경 세팅 후 루프체인에 본 기술을 적용해 측정한 결과, 최대 20K TPS(트랜잭션 처리 속도, 초당 트랜잭션 수)의 높은 성능을 확인할 수 있었다.</p><p>이어 리포트에서는 파라메타가 수만 TPS의 고성능 블록체인 코어를 목표로 현재 개발 진행 중인 루프체인 3.0에 대한 내용을 다룬다. 파라메타는 BlockSTM, WMT(Willow Merkle Tree), Spearmint Consensus(합의) 등의 기술을 적용하고 BTP(Blockchain Transmission Protocol, 블록체인 전송 프로토콜) 기반의 인터체인 및 솔리디티(Solidity) 스마트 컨트랙트(Smart Contract)를 지원할 루프체인 3.0을 통해, 최대 100K TPS 실현이라는 획기적 성능 개선을 목표로 하고 있다.</p><p>루프체인은 파라메타가 자체 개발한 블록체인 코어로서 PBFT(Practical Byzantine Fault Tolerance, 프랙티컬 비잔틴 장애 허용) 기반 합의 알고리즘, 자바(Java)와 파이썬(Python) 기반 스마트 컨트랙트, BTP 기반의 트러스트리스(Trustless) 인터체인, 그리고 높은 트랜잭션 처리 성능을 보여 주는 것이 그 특징이다. 루프체인은 퍼블릭 블록체인 네트워크인 아이콘(ICON)과 하바(HAVAH)에 적용, 활발히 사용되고 있으며 엔터프라이즈 영역에서도 금융, 공공, 인증 분야 등 다양한 사이트에 활용되고 있다.</p><p>루프체인 성능 측정 및 향상 방안 리포트 작성을 주도한 류혁곤 파라메타 CTO는 “블록체인 상용화에 있어 큰 걸림돌 중 하나는 실생활의 거래를 반영할 수 있을 정도의 수준까지 성능을 끌어올리지 못했던 것”이라 말하며, “파라메타는 이러한 이슈를 어느 정도 해결한 루프체인을 개발하였으며, 앞으로도 지속적인 연구를 통해 최고 성능의 블록체인을 개발하겠다”고 강조했다.</p><p>파라메타는 리포트와 더불어, 루프체인의 최대 성능 측정 시험에 이용된 모든 코드와 자료 또한 일반에 공개한다. 루프체인 성능 측정 및 향상 방안 리포트는 ‘파라메타 공식 홈페이지(https://bitly.ws/329Db)'에서 확인 및 다운로드 가능하며, 코드 및 자료에 대한 열람 권한은 ‘loopchain Test Code 신청 페이지(https://forms.gle/yeeewUwGLTB7yzs16)'를 통해 신청 후 제공받을 수 있다.</p>
@@ -2689,10 +2715,10 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
     <button class="psm-close" type="button" data-psm-close aria-label="닫기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></button>
     <h2>공유하기</h2>
     <ul class="psm-grid">
-      <li><a class="psm-item" data-share="x" href="#" target="_blank" rel="noopener"><span class="psm-ico psm-x"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.451-6.231zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644z"/></svg></span>X</a></li>
-      <li><a class="psm-item" data-share="fb" href="#" target="_blank" rel="noopener"><span class="psm-ico psm-fb"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.397 20.997v-8.196h2.765l.411-3.209h-3.176V7.548c0-.926.258-1.56 1.587-1.56h1.684V3.127c-.291-.039-1.29-.126-2.453-.126-2.429 0-4.09 1.483-4.09 4.205v2.386H7.353v3.209h2.772v8.196h3.272z"/></svg></span>페이스북</a></li>
-      <li><a class="psm-item" data-share="line" href="#" target="_blank" rel="noopener"><span class="psm-ico psm-line"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg></span>라인</a></li>
-      <li><a class="psm-item" data-share="mail" href="#"><span class="psm-ico psm-mail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg></span>메일</a></li>
+      <li><a class="psm-item" data-share="x" href="press/post-pr-218.html#" target="_blank" rel="noopener"><span class="psm-ico psm-x"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.451-6.231zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644z"/></svg></span>X</a></li>
+      <li><a class="psm-item" data-share="fb" href="press/post-pr-218.html#" target="_blank" rel="noopener"><span class="psm-ico psm-fb"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.397 20.997v-8.196h2.765l.411-3.209h-3.176V7.548c0-.926.258-1.56 1.587-1.56h1.684V3.127c-.291-.039-1.29-.126-2.453-.126-2.429 0-4.09 1.483-4.09 4.205v2.386H7.353v3.209h2.772v8.196h3.272z"/></svg></span>페이스북</a></li>
+      <li><a class="psm-item" data-share="line" href="press/post-pr-218.html#" target="_blank" rel="noopener"><span class="psm-ico psm-line"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg></span>라인</a></li>
+      <li><a class="psm-item" data-share="mail" href="press/post-pr-218.html#"><span class="psm-ico psm-mail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg></span>메일</a></li>
     </ul>
     <div class="psm-url">
       <input type="text" readonly aria-label="페이지 주소">
@@ -3369,6 +3395,22 @@ if(blogSec){
   const pager = blogSec.querySelector('.pager');
   const PER = 9; let filter = 'all', cur = 1;  // 3열 × 3행
   const elig = () => posts.filter(p => filter === 'all' || p.dataset.cat === filter);
+  // 카드 타이틀 2줄 초과 시 가운데 생략(단어 경계, 앞·뒤 유지) — CSS로 불가해 측정 후 처리
+  function clampMiddle(el){
+    const full = el.dataset.full || (el.dataset.full = el.textContent.trim());
+    el.textContent = full;
+    const lh = parseFloat(getComputedStyle(el).lineHeight) || 28;
+    const max = lh * 2 + 2;
+    if(el.scrollHeight <= max) return;
+    const w = full.split(/\s+/);
+    for(let keep = w.length - 1; keep >= 2; keep--){
+      const head = Math.ceil(keep / 2), tail = keep - head;
+      el.textContent = w.slice(0, head).join(' ') + ' … ' + w.slice(w.length - tail).join(' ');
+      if(el.scrollHeight <= max) return;
+    }
+  }
+  const clampVisible = () => posts.filter(p => !p.classList.contains('hidden'))
+    .forEach(p => { const t = p.querySelector('.bf-title'); if(t) clampMiddle(t); });
   function paint(){
     const e = elig();
     const real = Math.max(1, Math.ceil(e.length / PER));
@@ -3376,6 +3418,7 @@ if(blogSec){
     posts.forEach(p => p.classList.add('hidden'));
     e.slice((cur-1)*PER, cur*PER).forEach(p => p.classList.remove('hidden'));
     if(pager) paintPager(pager, blogSec, cur, real, page => { cur = page; paint(); });
+    requestAnimationFrame(() => requestAnimationFrame(clampVisible));   // 레이아웃 확정 후 측정
   }
   tabs.forEach(t => {
     const f = t.dataset.filter;
@@ -3386,6 +3429,9 @@ if(blogSec){
     });
   });
   paint();
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(clampVisible);   // 웹폰트 스왑 후 재측정
+  addEventListener('load', clampVisible);
+  let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(clampVisible, 150); });
 }
 /* 공통 커스텀 드롭다운 (.drop) — 시스템 셀렉트 대체. 선택 시 data-value 갱신 + change 이벤트 */
 const drops = [...document.querySelectorAll('.drop')];
@@ -3549,6 +3595,48 @@ if(pdShare && psModal){
     copyBtn.textContent = '복사됨';
     setTimeout(() => { copyBtn.textContent = orig; }, 1500);
   });
+}
+
+/* 블로그 상세: On this page 스크롤스파이 — 스크롤 위치 기준 현재 섹션 하이라이트 */
+const postSide = document.querySelector('.post-side');
+if(postSide){
+  const links = [...postSide.querySelectorAll('a')];
+  const map = new Map();
+  links.forEach(a => { const id = (a.getAttribute('href') || '').split('#')[1]; const t = id && document.getElementById(id); if(t) map.set(a, t); });
+  const sections = [...map.values()];
+  const setActive = t => links.forEach(l => l.classList.toggle('is-active', map.get(l) === t));
+  function pick(){
+    const line = innerHeight * 0.4;   // 뷰포트 40% 지점 — 섹션이 화면 상단부에 들어오면 미리 활성(스크롤보다 앞서 전환)
+    let cur = sections[0];
+    for(const s of sections){ if(s.getBoundingClientRect().top <= line) cur = s; else break; }
+    setActive(cur);
+  }
+  if(sections.length){
+    pick();
+    addEventListener('scroll', pick, { passive: true });
+    addEventListener('resize', pick);
+    lenis.on('scroll', pick);   // Lenis 스무스 스크롤(휠) 대응
+    // 목차 클릭 → 헤더 오프셋 두고 부드럽게 이동 (페이저와 동일한 rAF 방식 — 프리뷰/Lenis 공존)
+    const HEAD = 124;   // GNB + CTA 밴드 여유
+    const smoothTo = (y) => {
+      const s = window.scrollY, d = y - s, t0 = performance.now(), dur = 640;
+      const step = now => {
+        const p = Math.min(1, (now - t0) / dur);
+        const e = p < 0.5 ? 4*p*p*p : 1 - Math.pow(-2*p + 2, 3) / 2;
+        window.scrollTo(0, Math.round(s + d * e));
+        if(p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+    links.forEach(a => a.addEventListener('click', e => {
+      const t = map.get(a);
+      if(!t) return;
+      e.preventDefault();
+      smoothTo(Math.max(0, t.getBoundingClientRect().top + window.scrollY - HEAD));
+      history.replaceState(null, '', a.getAttribute('href'));
+      setActive(t);
+    }));
+  }
 }
 
 /* dev grid toggle */

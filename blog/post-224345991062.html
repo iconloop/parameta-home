@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
+<head><base href="../">
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>스테이블코인 사업, 무엇부터 시작할까 | PARAMETA</title>
-<meta name="description" content="디지털자산 사업을 시작할 때 필요한 인프라 구성요소 — 지갑, 토큰 발행, 온체인 KYC, 규제 대응. (샘플 아티클)" />
+<title>일본 SBI의 JPYSC 렌딩, 스테이블코인이 '결제 다음 단계'로 넘어갑니다 | PARAMETA</title>
+<meta name="description" content="일본 SBI VC Trade가 엔화 스테이블코인 JPYSC를 활용한 렌딩 서비스를 시작한다고 발표했습니다. 신청은 2026년 7월 16일부터, 실제 렌딩 시작은 …" />
 <meta name="theme-color" content="#0E0C27" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -2208,8 +2208,8 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 
 /* ============ INSIGHTS — 블로그 탭 필터 + 카드 링크 ============ */
 .blog-tabs{ display:flex; flex-wrap:wrap; gap:.625rem; margin-bottom:2rem }
-.blog-tab{ padding:.625rem 1.25rem; border:1px solid var(--line); border-radius:var(--radius-pill);
-  background:transparent; font-size:var(--text-14); font-weight:var(--w-title); line-height:1; color:var(--c-body);
+.blog-tab{ padding:.75rem 1.5rem; border:1px solid var(--line); border-radius:var(--radius-pill);
+  background:transparent; font-size:var(--text-body); font-weight:var(--w-title); line-height:1; color:var(--c-body);
   cursor:pointer; transition:background .2s ease, color .2s ease, border-color .2s ease }
 @media (hover:hover){ .blog-tab:hover{ color:var(--ink); border-color:rgba(var(--ink-rgb),.4) } }
 .blog-tab.is-on{ background:var(--ink); color:var(--white); border-color:var(--ink) }
@@ -2234,29 +2234,49 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 /* ============ POST — 블로그 아티클 상세 ============ */
 .post-meta{ display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; padding:1.5rem 0;
   border-top:1px solid rgba(var(--ink-rgb),.1); border-bottom:1px solid rgba(var(--ink-rgb),.1) }
-.post-cat{ font-size:var(--text-12); font-weight:600; letter-spacing:.025em; text-transform:uppercase;
+.post-cat{ font-size:var(--text-cap); font-weight:var(--w-strong); letter-spacing:.025em; text-transform:uppercase;
   color:var(--accent); background:rgba(var(--accent-rgb),.08); border-radius:var(--radius-pill); padding:.375rem .875rem }
-.post-date, .post-read{ font-size:var(--text-14); color:rgba(var(--ink-rgb),.55) }
+.post-date, .post-read{ font-size:var(--text-cap); color:var(--c-mut) }
 .post-read{ margin-left:auto }
 .post-grid{ display:grid; grid-template-columns:1fr; gap:2.5rem }
 @media (min-width:1024px){
   .post-grid{ grid-template-columns:repeat(12,1fr); column-gap:var(--grid-gap) }
-  .post-body{ grid-column:1 / 9 }
-  .post-side{ grid-column:10 / 13; position:sticky; top:7.5rem; align-self:start } }
-.post-body .post-lead{ font-size:var(--text-20); line-height:var(--leading-body); font-weight:500;
-  color:rgba(var(--ink-rgb),.85); margin-bottom:2.5rem }
-.post-body h3{ font-size:var(--text-24); font-weight:600; line-height:var(--leading-heading); letter-spacing:-.01em;
-  margin:3.5rem 0 1rem; scroll-margin-top:6rem }
+  .post-body{ grid-column:2 / 9 }
+  .post-side{ grid-column:10 / 12; position:sticky; top:12rem; align-self:start } }
+.post-body>*+*{ margin-top:1.25rem }
+.post-body .post-lead{ font-size:var(--text-20); line-height:var(--lh-body); font-weight:var(--w-title);
+  color:var(--ink); margin-bottom:1.5rem }
+.post-body h3{ font-size:var(--text-24); font-weight:var(--w-strong); line-height:var(--lh-heading); letter-spacing:-.01em;
+  margin:3.5rem 0 1.25rem; scroll-margin-top:10rem }
 .post-body h3:first-of-type{ margin-top:0 }
 .post-body h3::before{ content:''; display:block; width:2rem; height:2px; background:var(--gray-300); margin-bottom:1.5rem }
-.post-body p{ font-size:var(--text-16); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.7); margin-bottom:1.125rem }
-.post-body p b{ color:var(--ink); font-weight:500 }
-.post-side ul{ list-style:none; margin-top:1rem; display:flex; flex-direction:column; gap:.25rem }
-.post-side a{ display:block; padding:.5rem 0 .5rem .875rem; border-left:1px solid rgba(var(--ink-rgb),.14);
-  font-size:var(--text-14); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.6); text-decoration:none;
+.post-body p{ font-size:var(--text-20); line-height:var(--lh-body); color:var(--c-body) }   /* 프레스 본문과 동일(20) */
+.post-body p b{ color:var(--ink); font-weight:var(--w-strong) }
+.post-body ul{ list-style:none; display:flex; flex-direction:column; gap:.75rem; padding-left:1.25rem }
+.post-body ul li{ position:relative; font-size:var(--text-body); line-height:var(--lh-body); color:var(--c-body) }
+.post-body ul li::before{ content:''; position:absolute; left:-1.25rem; top:.62em; width:.375rem; height:.375rem;
+  border-radius:50%; background:var(--accent) }
+.post-fig{ margin:2.5rem 0 }
+.post-fig img{ width:100%; height:auto; display:block; border-radius:var(--radius-card-sm) }
+.post-side ul{ list-style:none; margin-top:1rem; display:flex; flex-direction:column; gap:.25rem;
+  border-left:1px solid rgba(var(--ink-rgb),.12) }   /* 섹션 이동 레일 */
+.post-side a{ display:block; padding:.625rem 0 .625rem 1rem; margin-left:-1px; border-left:2px solid transparent;
+  font-size:var(--text-body); line-height:var(--lh-body); color:var(--c-mut); text-decoration:none;
   transition:color .2s ease, border-color .2s ease }
-@media (hover:hover){ .post-side a:hover{ color:var(--ink); border-color:var(--accent) } }
+@media (hover:hover){ .post-side a:hover{ color:var(--ink) } }
+.post-side a.is-active{ color:var(--accent); border-color:var(--accent); font-weight:var(--w-title) }   /* 현재 보고 있는 섹션 */
 @media (max-width:1023px){ .post-side{ border-top:1px solid rgba(var(--ink-rgb),.1); padding-top:2rem } }
+/* 목차 없는 아티클(h3<2): 히어로와 좌측 정렬(2칸부터) */
+@media (min-width:1024px){ .post-grid.solo .post-body{ grid-column:2 / 11 } }
+/* 블로그 상세 히어로 제목 — 장문 대응(좌측 정렬), 솔루션 히어로급 스케일 (높이·정렬은 body.press 공용) */
+body.blog .phero-h1{ font-size:var(--text-32); max-width:28ch }   /* 프레스 상세와 동일 스케일 */
+@media (min-width:640px){ body.blog .phero-h1{ font-size:var(--text-40) } }
+@media (min-width:768px){ body.blog .phero-h1{ font-size:var(--text-48) } }
+@media (min-width:1024px){ body.blog .phero-h1{ font-size:var(--text-60) } }
+/* 히어로 메타 — 카테고리·날짜·읽는시간(좌) 그룹 */
+.pdm-info{ display:flex; align-items:center; gap:1rem; flex-wrap:wrap }
+.pdm-read{ font-size:var(--text-body-sm); color:rgba(var(--white-rgb),.5) }
+body.blog .pd-hero-meta .post-cat{ background:rgba(var(--white-rgb),.14); color:var(--white) }   /* 다크 히어로 위 카테고리 칩 */
 
 /* ══ 검수 시안: ① Recognition 칩 통합(Track Record 하단) ② Industry Firsts 1st 앵커 재구성 ══ */
 /* ① 인증·수상 칩 — 독립 섹션 대신 Track Record 숫자 카드 아래 한 줄 증거 밴드 */
@@ -2616,14 +2636,20 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
 @media (min-width:640px){ .blog-grid{ grid-template-columns:repeat(2,1fr) } }
 @media (min-width:1024px){ .blog-grid{ grid-template-columns:repeat(3,1fr) } }
 .bf-card{ display:flex; flex-direction:column; align-items:flex-start; text-decoration:none; color:inherit }
-.bf-thumb{ width:100%; aspect-ratio:1/1; border-radius:var(--radius-card-sm); margin-bottom:1.25rem;
-  background:color-mix(in srgb, var(--ink) 6%, var(--white)); transition:transform .35s cubic-bezier(.2,.8,.2,1) }
+.bf-thumb{ width:100%; aspect-ratio:4/3; border-radius:var(--radius-card-sm); margin-bottom:1.25rem;
+  background:color-mix(in srgb, var(--ink) 6%, var(--white)) center/cover no-repeat;
+  transition:transform .35s cubic-bezier(.2,.8,.2,1) }
 @media (hover:hover){ .bf-card:hover .bf-thumb{ transform:translateY(-4px) } }
-.bf-title{ font-size:var(--text-20); font-weight:var(--w-strong); letter-spacing:-.01em; line-height:var(--lh-heading);
-  color:var(--ink); word-break:keep-all }
-.bf-desc{ margin-top:.5rem; font-size:var(--text-body-sm); line-height:var(--lh-body); color:var(--c-body) }
-.bf-tag{ margin-top:1rem; font-size:var(--text-14); line-height:1; padding:.375rem .875rem;
-  border:1px solid rgba(var(--ink-rgb),.15); border-radius:var(--radius-pill); color:var(--c-body) }
+.bf-thumb-empty{ display:grid; place-items:center; background:var(--ink) }
+.bf-thumb-empty .bf-mark{ width:12%; max-width:2.5rem; height:auto }
+.bf-title{ font-size:var(--text-22); font-weight:var(--w-strong); letter-spacing:-.01em; line-height:var(--lh-heading);
+  color:var(--ink); word-break:keep-all;
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden }
+.bf-desc{ margin-top:.5rem; font-size:var(--text-body); line-height:var(--lh-body); color:var(--c-body);
+  display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden }
+.bf-tag{ margin-top:1rem; font-size:var(--text-body-sm); font-weight:var(--w-title); line-height:1; padding:.625rem 1.25rem;
+  border-radius:var(--radius-pill); color:var(--c-body);
+  background:color-mix(in srgb, var(--ink) 6%, var(--white)) }   /* 연한 그레이 필(테두리 없음), 사이즈·패딩·웨이트500 파라스타 플래그 준용 */
 
 /* ============ RESOURCES — 로고 다운로드 (기존 t-gray grouped 카드 문법, 인쇄용·웹용 좌우) ============ */
 .res-logo{ display:grid; grid-template-columns:1fr; gap:1rem }
@@ -2642,9 +2668,9 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
 .rl-btn:disabled{ opacity:.4; cursor:default }
 </style>
 </head>
-<body class="hero-dark hero-center">
+<body class="hero-dark press blog">
 
-<a href="#main" class="skip">본문으로 건너뛰기</a>
+<a href="blog/post-224345991062.html#main" class="skip">본문으로 건너뛰기</a>
 <!-- GNB — 단일 소스: assets/nav.js가 배너·헤더·오버레이 메뉴 주입 -->
 <header id="header" class="is-in" style="opacity:1; transform:none"></header>
 
@@ -2655,58 +2681,105 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
     <div class="phero-wm">PARAMETA</div>
     <div class="shell phero-inner">
       <div class="phero-text">
-        <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Blog</div>
-        <h1 class="phero-h1" data-line-stagger="120"><span class="rvl-line"><span>스테이블코인 사업,</span></span><span class="rvl-line"><span>무엇부터 시작할까</span></span></h1>
-        <p class="phero-lead rvl" style="--rvl-delay:250ms">샘플 아티클 · 2026</p>
+        
+        <h1 class="phero-h1" data-line-stagger="120"><span class="rvl-line"><span>일본 SBI의 JPYSC 렌딩, 스테이블코인이 '결제 다음 단계'로 넘어갑니다</span></span></h1>
+        <p class="phero-lead rvl" style="--rvl-delay:250ms"></p>
         
       </div>
       <div class="phero-visual" aria-hidden="true"></div>
       
     </div>
-    
+    <div class="pd-hero-meta"><div class="pdm-cell"><div class="pdm-info"><span class="pdm-date">2026.07.14</span><span class="post-cat">인사이트</span></div><button class="pd-share" type="button" aria-label="공유하기"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle vector-effect="non-scaling-stroke" cx="18" cy="5" r="3"/><circle vector-effect="non-scaling-stroke" cx="6" cy="12" r="3"/><circle vector-effect="non-scaling-stroke" cx="18" cy="19" r="3"/><line vector-effect="non-scaling-stroke" x1="8.6" y1="13.5" x2="15.4" y2="17.5"/><line vector-effect="non-scaling-stroke" x1="15.4" y1="6.5" x2="8.6" y2="10.5"/></svg></button></div></div>
     <div class="shell phero-status">
-      <span>Blog — Sample Post</span>
+      <span>Blog — Article</span>
       <span style="display:inline-flex; gap:.5rem">Scroll <span aria-hidden="true">↓</span></span>
     </div>
   </section>
 
 <section><div class="shell sec">
-  <div class="post-meta rvl">
-    <span class="post-cat">Stablecoin</span>
-    <span class="post-date">2026.06.18</span>
-    <span class="post-read">읽는 시간 약 5분</span>
-  </div>
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
   <div class="post-grid">
     <article class="post-body">
-      <p class="post-lead">디지털자산 사업을 처음 검토하는 기업이 가장 먼저 마주하는 질문은 "무엇부터 만들어야 하는가"입니다. 결제, 송금, 토큰 발행, 자산 토큰화 등 목표는 달라도, 그 밑에 필요한 기반은 대체로 비슷합니다.</p>
-      <h3 id="post-s1">필요한 네 가지 기반</h3>
-      <p><b>① 지갑</b>은 자산을 안전하게 보관하고 키를 관리하는 출발점입니다. 수탁형과 비수탁형 중 무엇을 택할지가 사업 구조를 좌우합니다.</p>
-      <p><b>② 토큰 발행·관리</b>는 어떤 자산을 어떤 규칙으로 발행하고, 락업·유통·정산을 어떻게 통제할지를 다룹니다.</p>
-      <p><b>③ 온체인 KYC와 거래 통제</b>는 규제 대응의 핵심입니다. 누가, 무엇을, 어떤 조건에서 거래할 수 있는지를 검증·기록해야 합니다.</p>
-      <p><b>④ 규제·감사 대응</b>은 위 모든 단계를 신뢰할 수 있게 남기는 일입니다. 위변조가 불가능한 기록과 추적이 있어야 감독기관과 고객 모두를 설득할 수 있습니다.</p>
-      <h3 id="post-s2">직접 만들 것인가, 인프라를 빌릴 것인가</h3>
-      <p>이 네 가지를 처음부터 직접 구축하면 시간과 비용이 크게 듭니다. 검증된 인프라 위에서 시작하면, 기업은 자기 사업과 고객 경험에 집중하고 복잡한 블록체인 기반은 파트너가 맡는 구조를 만들 수 있습니다.</p>
-      <p>파라메타는 지갑·발행·신원·거래에 필요한 인프라를 하나로 제공해, 디지털자산 사업의 진입 장벽을 낮춥니다.</p>
+      <p class="post-lead">일본 SBI VC Trade가 엔화 스테이블코인 JPYSC를 활용한 렌딩 서비스를 시작한다고 발표했습니다.</p>
+      <p>신청은 2026년 7월 16일부터, 실제 렌딩 시작은 7월 23일부터로 최초 모집은 12주 만기, 연 3% 수준의 이용료율을 제시했습니다.</p>
+      <p>단순히 보면 "엔화 스테이블코인으로 수익을 받을 수 있다"는 뉴스처럼 보입니다.</p>
+      <p>하지만 디지털금융 인프라 관점에서 더 중요한 지점은 따로 있습니다.</p>
+      <p>이번 사례는 스테이블코인이 단순 결제 수단을 넘어, 보유·대여·반환·리스크 고지·감사·통제까지 필요한 금융 운영 구조로 들어가기 시작했다는 신호입니다.</p>
+      <figure class="post-fig"><img src="assets/blog/post-224345991062/fig-1.png" alt="" loading="lazy"></figure>
+      <p>SBI VC Trade는 2026년 7월 13일, 일본 내 신탁형 엔화 스테이블코인인 JPYSC를 대상으로 렌딩 서비스를 시작한다고 공지했습니다. 서비스 구조는 이용자가 보유한 JPYSC를 일정 기간 SBI VC Trade에 빌려주고, 만기 때 같은 수량의 JPYSC와 이용료를 돌려받는 방식입니다.</p>
+      <p>공식 발표에서 확인되는 주요 조건은 다음과 같습니다.</p>
+      <p>신청 시작: 2026년 7월 16일</p>
+      <p>실제 렌딩 시작: 2026년 7월 23일</p>
+      <p>최초 모집 조건: 12주 만기, 연 3% 수준</p>
+      <p>통상 모집 예정 조건: 12주 만기, 연 1~3% 수준</p>
+      <p>반환 방식: 빌려준 JPYSC에 이용료를 더해 JPYSC로 반환</p>
+      <p>중도해지: 원칙적으로 불가</p>
+      <p>여기서 중요한 것은 수익률 숫자 자체가 아닙니다. 오히려 눈여겨볼 부분은 공식 발표가 함께 적어둔 리스크 고지입니다.</p>
+      <p>봐야 할 핵심은 수익률이 아닌 구조입니다</p>
+      <p>SBI VC Trade는 이번 JPYSC 렌딩이 엔화 예금이 아니며, 예금보험제도의 대상도 아니라고 명시했습니다.</p>
+      <p>또한 렌딩된 JPYSC는 이용자가 거래소에 빌려주는 구조이기 때문에, 대여 기간 중에는 매도·양도·담보 설정 같은 처분이 제한됩니다.</p>
+      <p>공식 PDF에는 더 중요한 문장도 들어 있습니다.</p>
+      <p>이용자가 SBI VC Trade에 빌려준 JPYSC는 자금결제법상 분별관리 대상이 아니며, 회사가 파산할 경우 일부 또는 전부를 돌려받지 못할 위험이 있다는 내용입니다.</p>
+      <p>즉, 이 서비스는 단순히 "스테이블코인에 이자가 붙는다"는 이야기가 아닙니다.</p>
+      <p>입장에서는 다음 질문이 함께 따라옵니다.</p>
+      <p>내가 맡긴 JPYSC는 어떤 법적 구조로 관리되는가</p>
+      <p>대여 기간 동안 처분 권한은 어떻게 제한되는가</p>
+      <p>거래소 파탄, 유동성 부족, 모집 중단 같은 상황은 어떻게 고지되는가</p>
+      <p>이용료 계산과 반환 기록은 어떻게 확인되는가</p>
+      <p>이용자 식별, 이상거래 감시, 세무·회계 처리는 어떻게 연결되는가</p>
+      <p>이 질문들이 바로 스테이블코인이 '실사용 금융상품'으로 들어갈 때 필요한 운영 레이어입니다.</p>
+      <h3 id="post-s1">결제에서 금융상품으로 — 스테이블코인의 질문이 바뀝니다</h3>
+      <figure class="post-fig"><img src="assets/blog/post-224345991062/fig-2.png" alt="" loading="lazy"></figure>
+      <p>그동안 스테이블코인 논의는 주로 세 가지 질문에 머물렀습니다.</p>
+      <ul><li>첫째, 누가 발행할 수 있는가.</li><li>둘째, 준비자산은 어떻게 보관되는가.</li><li>셋째, 결제나 송금에 쓸 수 있는가.</li></ul>
+      <ul><li>SBI의 이번 JPYSC 렌딩은 질문을 한 단계 더 들어갑니다.</li><li>이제는 "발행된 스테이블코인을 어떤 금융 서비스 안에서 운용할 수 있는가"</li><li>이 단계에 들어서면 필요한 것은 발행 기술만이 아닙니다.</li><li>대여 계약, 만기, 반환, 이용료, 이용자 고지, 자산 관리, 이상거래 탐지, 감사 가능한 기록이 함께 있어야 합니다.</li></ul>
+      <figure class="post-fig"><img src="assets/blog/post-224345991062/fig-3.png" alt="" loading="lazy"></figure>
+      <p>특히 엔화 스테이블코인처럼 법정통화와 1:1로 연결된 디지털 결제수단이 금융상품처럼 활용될 때는, 사용자 경험보다 뒤쪽의 운영 구조가 더 중요해집니다. 화면에서는 단순히 '렌딩 신청' 버튼 하나로 보일 수 있지만, 실제로는 권한·정산·회계·리스크·감사가 모두 붙어야 하기 때문입니다.</p>
+      <h3 id="post-s2">국내 금융권이 볼 포인트</h3>
+      <p>한국에서도 원화 스테이블코인, 예금토큰, 정산용 토큰, 토큰증권 등 디지털 금융 인프라 논의가 계속 이어지고 있습니다.</p>
+      <p>제도화 초기에는 발행 주체와 준비자산이 주목을 받지만, 시간이 지나면 결국 질문은 운영으로 이동합니다.</p>
+      <p>기관이 지금 봐야 할 포인트는 세 가지입니다.</p>
+      <p>1. 발행 다음의 사용처</p>
+      <p>스테이블코인은 결제 수단에 머물지 않을 가능성이 큽니다.</p>
+      <p>보관, 대여, 담보, 정산, 자동지급 같은 기능으로 확장될수록 운영 복잡도는 커집니다.</p>
+      <p>2. 이용자 보호와 리스크 고지</p>
+      <p>예금인지 아닌지, 예금보험 대상인지 아닌지, 분별관리 대상인지 아닌지처럼 이용자가 오해하기 쉬운 지점은 서비스 설계 단계에서 명확히 구분돼야 합니다.</p>
+      <p>3. 감사 가능한 운영 기록</p>
+      <p>만기, 반환, 이용료 산정, 중도해지 제한, 이상거래 대응은 모두 나중에 설명 가능한 기록으로 남아야 합니다.</p>
+      <p>금융기관과 규제 산업 기업에게는 이 부분이 실제 도입의 핵심입니다.</p>
+      <p>SBI의 JPYSC 렌딩은 스테이블코인이 "발행하면 끝"인 자산이 아니라는 점을 보여줍니다.</p>
+      <p>결제에 쓰이는 순간에는 지갑과 정산이 중요하고, 렌딩처럼 금융상품 구조로 들어가는 순간에는 권한, 리스크 고지, 회계, 감사, 이상거래 탐지가 함께 중요해집니다.</p>
+      <p>파라메타는 이러한 흐름에서 디지털자산 운영 인프라의 중요성에 주목합니다.</p>
+      <p>스테이블코인과 토큰화 자산은 기술적으로 발행될 수 있다는 사실만으로 충분하지 않습니다.</p>
+      <p>실제 금융기관과 기업 환경에서는 누가 보유하고, 누가 이전할 수 있으며, 어떤 조건에서 반환되고, 어떤 기록으로 설명할 수 있는지가 함께 설계돼야 합니다.</p>
+      <p>이는 DID/VC 기반 신원확인, 지갑, DLT, 온체인 기록, 정산·감사 체계가 함께 붙어야 하는 이유이기도 합니다.</p>
+      <p>이제는 '스테이블코인 운영'을 볼 때입니다</p>
+      <p>SBI의 JPYSC 렌딩은 일본 스테이블코인 시장에서 작은 상품 출시처럼 보일 수 있습니다.</p>
+      <p>하지만 더 넓게 보면, 스테이블코인이 결제 수단을 넘어 실제 금융 운영 안으로 들어가는 초기 장면입니다.</p>
+      <p>앞으로 국내에서도 디지털자산과 스테이블코인 논의가 진전될수록 비슷한 질문이 반복될 가능성이 큽니다.</p>
+      <p>"누가 발행하느냐"만큼 중요한 질문은 이제 이것입니다.</p>
+      <p>발행된 디지털자산을 어떻게 안전하게 운영하고, 통제하고, 설명할 것인가.</p>
+      <p>파라메타는 앞으로도 디지털 금융 인프라가 실제 시장에서 작동하기 위해 필요한 운영 신뢰 구조를 계속 살펴보겠습니다.</p>
     </article>
-    <aside class="post-side">
-      <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>On this page</div>
-      <ul>
-        <li><a href="#post-s1">필요한 네 가지 기반</a></li>
-        <li><a href="#post-s2">직접 만들 것인가, 인프라를 빌릴 것인가</a></li>
-      </ul>
-    </aside>
+    <aside class="post-side"><div class="eyebrow dark rvl rvl-op"><span class="dot"></span>On this page</div><ul><li><a href="blog/post-224345991062.html#post-s1">결제에서 금융상품으로 — 스테이블코인의 질문이 바뀝니다</a></li><li><a href="blog/post-224345991062.html#post-s2">국내 금융권이 볼 포인트</a></li></ul></aside>
   </div>
 </div></section>
-<section><div class="shell sec" style="padding-top:0">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Related Articles</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>함께 보면 좋은 아티클</span></span></h2>
-  <ul class="cards-3">
-    <li class="rvl" style="--rvl-y:40px"><a class="card-link" href="blog.html"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>DID</span></div><h3>금융권 DID 도입 체크리스트</h3><p>은행·증권사가 분산신원 인증을 도입하기 전에 확인할 항목을 정리합니다.</p></div></article></a></li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><a class="card-link" href="blog.html"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>COMPLIANCE</span></div><h3>온체인 KYC, 규제와 사용성 사이</h3><p>규제 요건을 지키면서도 사용자 경험을 해치지 않는 KYC 설계를 다룹니다.</p></div></article></a></li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><a class="card-link" href="blog.html"><article class="work-card static sm grouped"><div class="work-bottom"><div class="work-meta"><span>TECH</span></div><h3>loopchain은 왜 즉시 확정인가</h3><p>즉시 확정(Finality)이 왜 중요한지, 합의 방식과 함께 쉽게 풀어 봅니다.</p></div></article></a></li>
-  </ul>
-</div></section>
+<div id="pd-share-modal" role="dialog" aria-modal="true" aria-label="공유하기" aria-hidden="true">
+  <div class="psm-backdrop" data-psm-close></div>
+  <div class="psm-panel">
+    <button class="psm-close" type="button" data-psm-close aria-label="닫기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></button>
+    <h2>공유하기</h2>
+    <ul class="psm-grid">
+      <li><a class="psm-item" data-share="x" href="blog/post-224345991062.html#" target="_blank" rel="noopener"><span class="psm-ico psm-x"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.451-6.231zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644z"/></svg></span>X</a></li>
+      <li><a class="psm-item" data-share="fb" href="blog/post-224345991062.html#" target="_blank" rel="noopener"><span class="psm-ico psm-fb"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.397 20.997v-8.196h2.765l.411-3.209h-3.176V7.548c0-.926.258-1.56 1.587-1.56h1.684V3.127c-.291-.039-1.29-.126-2.453-.126-2.429 0-4.09 1.483-4.09 4.205v2.386H7.353v3.209h2.772v8.196h3.272z"/></svg></span>페이스북</a></li>
+      <li><a class="psm-item" data-share="line" href="blog/post-224345991062.html#" target="_blank" rel="noopener"><span class="psm-ico psm-line"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg></span>라인</a></li>
+      <li><a class="psm-item" data-share="mail" href="blog/post-224345991062.html#"><span class="psm-ico psm-mail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg></span>메일</a></li>
+    </ul>
+    <div class="psm-url">
+      <input type="text" readonly aria-label="페이지 주소">
+      <button class="psm-copy" type="button">URL 복사</button>
+    </div>
+  </div>
+</div>
 
 </main>
 
@@ -3376,6 +3449,22 @@ if(blogSec){
   const pager = blogSec.querySelector('.pager');
   const PER = 9; let filter = 'all', cur = 1;  // 3열 × 3행
   const elig = () => posts.filter(p => filter === 'all' || p.dataset.cat === filter);
+  // 카드 타이틀 2줄 초과 시 가운데 생략(단어 경계, 앞·뒤 유지) — CSS로 불가해 측정 후 처리
+  function clampMiddle(el){
+    const full = el.dataset.full || (el.dataset.full = el.textContent.trim());
+    el.textContent = full;
+    const lh = parseFloat(getComputedStyle(el).lineHeight) || 28;
+    const max = lh * 2 + 2;
+    if(el.scrollHeight <= max) return;
+    const w = full.split(/\s+/);
+    for(let keep = w.length - 1; keep >= 2; keep--){
+      const head = Math.ceil(keep / 2), tail = keep - head;
+      el.textContent = w.slice(0, head).join(' ') + ' … ' + w.slice(w.length - tail).join(' ');
+      if(el.scrollHeight <= max) return;
+    }
+  }
+  const clampVisible = () => posts.filter(p => !p.classList.contains('hidden'))
+    .forEach(p => { const t = p.querySelector('.bf-title'); if(t) clampMiddle(t); });
   function paint(){
     const e = elig();
     const real = Math.max(1, Math.ceil(e.length / PER));
@@ -3383,6 +3472,7 @@ if(blogSec){
     posts.forEach(p => p.classList.add('hidden'));
     e.slice((cur-1)*PER, cur*PER).forEach(p => p.classList.remove('hidden'));
     if(pager) paintPager(pager, blogSec, cur, real, page => { cur = page; paint(); });
+    requestAnimationFrame(() => requestAnimationFrame(clampVisible));   // 레이아웃 확정 후 측정
   }
   tabs.forEach(t => {
     const f = t.dataset.filter;
@@ -3393,6 +3483,9 @@ if(blogSec){
     });
   });
   paint();
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(clampVisible);   // 웹폰트 스왑 후 재측정
+  addEventListener('load', clampVisible);
+  let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(clampVisible, 150); });
 }
 /* 공통 커스텀 드롭다운 (.drop) — 시스템 셀렉트 대체. 선택 시 data-value 갱신 + change 이벤트 */
 const drops = [...document.querySelectorAll('.drop')];
@@ -3556,6 +3649,48 @@ if(pdShare && psModal){
     copyBtn.textContent = '복사됨';
     setTimeout(() => { copyBtn.textContent = orig; }, 1500);
   });
+}
+
+/* 블로그 상세: On this page 스크롤스파이 — 스크롤 위치 기준 현재 섹션 하이라이트 */
+const postSide = document.querySelector('.post-side');
+if(postSide){
+  const links = [...postSide.querySelectorAll('a')];
+  const map = new Map();
+  links.forEach(a => { const id = (a.getAttribute('href') || '').split('#')[1]; const t = id && document.getElementById(id); if(t) map.set(a, t); });
+  const sections = [...map.values()];
+  const setActive = t => links.forEach(l => l.classList.toggle('is-active', map.get(l) === t));
+  function pick(){
+    const line = innerHeight * 0.4;   // 뷰포트 40% 지점 — 섹션이 화면 상단부에 들어오면 미리 활성(스크롤보다 앞서 전환)
+    let cur = sections[0];
+    for(const s of sections){ if(s.getBoundingClientRect().top <= line) cur = s; else break; }
+    setActive(cur);
+  }
+  if(sections.length){
+    pick();
+    addEventListener('scroll', pick, { passive: true });
+    addEventListener('resize', pick);
+    lenis.on('scroll', pick);   // Lenis 스무스 스크롤(휠) 대응
+    // 목차 클릭 → 헤더 오프셋 두고 부드럽게 이동 (페이저와 동일한 rAF 방식 — 프리뷰/Lenis 공존)
+    const HEAD = 124;   // GNB + CTA 밴드 여유
+    const smoothTo = (y) => {
+      const s = window.scrollY, d = y - s, t0 = performance.now(), dur = 640;
+      const step = now => {
+        const p = Math.min(1, (now - t0) / dur);
+        const e = p < 0.5 ? 4*p*p*p : 1 - Math.pow(-2*p + 2, 3) / 2;
+        window.scrollTo(0, Math.round(s + d * e));
+        if(p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+    links.forEach(a => a.addEventListener('click', e => {
+      const t = map.get(a);
+      if(!t) return;
+      e.preventDefault();
+      smoothTo(Math.max(0, t.getBoundingClientRect().top + window.scrollY - HEAD));
+      history.replaceState(null, '', a.getAttribute('href'));
+      setActive(t);
+    }));
+  }
 }
 
 /* dev grid toggle */
