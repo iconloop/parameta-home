@@ -27,9 +27,10 @@
 
 #!/usr/bin/env python3
 # Build PARAMETA subpages from shared chrome + per-page content
-import re, os
+import re, os, json, glob
 
 ROOT = '/Users/sang/Desktop/Claude/test'
+DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')  # 보도자료 등 콘텐츠 데이터
 main = open(os.path.join(ROOT, 'parameta.html'), encoding='utf-8').read()
 CSS = re.search(r'<style>([\s\S]*?)</style>', main).group(1)
 
@@ -1758,8 +1759,17 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
 .pd-sum{ list-style:none; display:flex; flex-direction:column; gap:.5rem; margin-bottom:2.5rem;
   font-size:var(--text-20); font-weight:var(--w-title); color:var(--ink); line-height:var(--lh-body); word-break:keep-all }
 .pd-fig{ margin:0 0 2.5rem }
-.pd-img{ display:block; width:100%; aspect-ratio:16/9; border-radius:var(--radius-card-sm);
-  background:color-mix(in srgb, var(--ink) 6%, var(--white)) }  /* 대표 이미지 자리 */
+.pd-fig img{ display:block; width:100%; height:auto; border-radius:var(--radius-card-sm);
+  border:1px solid var(--line) }
+/* 본문 소제목·불릿 리스트 (원문 h3·pt-list 블록) */
+.pd-h3{ font-size:var(--text-24); font-weight:600; line-height:var(--leading-heading); letter-spacing:-.01em;
+  margin:3rem 0 1.25rem; color:var(--ink) }
+.pd-body ul.pt-list{ margin:0 0 1.5rem; padding:0; list-style:none; display:flex; flex-direction:column; gap:.625rem }
+.pd-body ul.pt-list li{ position:relative; padding-left:1.25rem; font-size:var(--text-18);
+  line-height:var(--leading-body); color:rgba(var(--ink-rgb),.75); word-break:keep-all }
+.pd-body ul.pt-list li b{ color:var(--ink); font-weight:600 }
+.pd-body ul.pt-list li::before{ content:""; position:absolute; left:.25rem; top:.7em;
+  width:.375rem; height:.375rem; border-radius:var(--radius-pill); background:var(--purple-400) }
 .pd-fig figcaption{ margin-top:.75rem; font-size:var(--text-16); color:var(--muted);
   text-align:center; line-height:var(--lh-body); word-break:keep-all }
 .pd-body > p{ font-size:var(--text-body); line-height:var(--lh-body); color:rgba(var(--ink-rgb),.75);
@@ -3429,25 +3439,23 @@ PAGES['company.html'] = dict(
 ''')
 
 # ---------------- insights.html (Newsroom) ----------------
-# 보도자료 데이터 — 피처드(최신 3)와 리스트가 공유 (최신순)
-# 일자(DD)는 임시값 — 실제 보도자료 날짜로 교체 예정
-PRESS_ITEMS = [
-    dict(date='2026.02.19', title="파라메타, ADB 주관 채권 포럼서 '온체인 KYC' 기반 국경 간 거래 표준 모델 발표"),
-    dict(date='2026.02.04', title='파라메타, 스테이블코인·STO 무료 컨설팅으로 디지털자산 사업 기회 확대 지원'),
-    dict(date='2023.11.16', title='김종협 파라메타 대표, 2023 블록체인 진흥주간에서 과학기술정보통신부 장관 표창 수상'),
-    dict(date='2023.09.12', title="파라메타, 기술신용평가 최고 등급 'TI-1' 획득 — 최상위 수준의 기술력 및 성장 가능성 인정"),
-    dict(date='2023.08.23', title='파라메타, 카스투게더·솔브릭코리아와 국내 최초 모빌리티·태양광 토큰증권 플랫폼 구축'),
-    dict(date='2023.07.05', title="파라메타, 플루토스파트너스와 국내 최초 '부동산 NPL 토큰증권 플랫폼' 구축 협력"),
-]
+# 보도자료 데이터 — _build/data/press/*.json (extract_press.py 산출, 120편) 로드
+# 피처드(최신 3)·리스트·상세 양산이 모두 이 데이터를 공유
+PRESS_DATA = []
+for _f in sorted(glob.glob(os.path.join(DATA_DIR, 'press', '*.json'))):
+    with open(_f, encoding='utf-8') as _fh:
+        PRESS_DATA.append(json.load(_fh))
+PRESS_DATA.sort(key=lambda d: -d['sort'])
+PRESS_ITEMS = [dict(date=d['date'], title=d['title'], href=f"press/{d['slug']}.html") for d in PRESS_DATA]
 
 def press_featured(items):
     """피처드 — 좌측 큰 카드 1(8col) + 우측 작은 카드 2 적층(4col). 클릭 시 상세로."""
     big, subs = items[0], items[1:3]
     big_card = card(big['title'], '', kicker=big['date'], media=True, sm=False)
-    side = ''.join(f'<a class="card-link" href="press-sample.html">'
+    side = ''.join(f'<a class="card-link" href="{s["href"]}">'
                    + card(s['title'], '', kicker=s['date']) + '</a>' for s in subs)
     return ('<div class="news-feat rvl" style="--rvl-y:40px">'
-            f'<div class="nf-big"><a class="card-link" href="press-sample.html">{big_card}</a></div>'
+            f'<div class="nf-big"><a class="card-link" href="{big["href"]}">{big_card}</a></div>'
             f'<div class="nf-side">{side}</div></div>')
 
 def drop(cls, options, aria):
@@ -3469,7 +3477,7 @@ def press_list(items):
     m_opts = [('all', '전체 월')] + [(f'{m:02d}', f'{m}월') for m in range(1, 13)]
     rows = ''.join(
         f'<li class="news-row press-item rvl" data-year="{it["date"][:4]}" data-month="{it["date"][5:7]}" style="--rvl-y:24px; --rvl-delay:{(i % 5) * 60}ms">'
-        f'<a class="nr-link" href="press-sample.html">'
+        f'<a class="nr-link" href="{it["href"]}">'
         f'<span class="nr-date">{it["date"]}</span>'
         f'<h3 class="nr-title">{it["title"]}</h3>'
         f'<span class="nr-thumb" aria-hidden="true"></span></a></li>'
@@ -3505,13 +3513,26 @@ PAGES['insights.html'] = dict(
 ''')
 
 # ---------------- 보도자료 상세 공통 템플릿 (네이버 뉴스룸 상세 포맷) ----------------
-def press_detail(fname, h1_lines, date, summary, caption, paras, hero_img='assets/parasta/body-test.avif', body_img='assets/parasta/body-test.avif'):
-    """보도자료 상세 페이지 등록 — 네이버 상세 포맷 그대로:
-    히어로(딤+이미지, 좌측 정렬, 날짜, 공유 버튼) / 본문(제목 반복, 요약 불릿, 사진+캡션, 문단, (끝)) / 액션 바.
-    summary: 요약 문장 리스트 / paras: 본문 문단(HTML 허용)"""
+def press_detail(fname, h1_lines, date, summary, blocks, hero_img=None):
+    """보도자료 상세 페이지 등록 — 네이버 상세 포맷:
+    히어로(딤+이미지, 좌측 정렬, 날짜, 공유 버튼) / 본문(제목 반복, 요약 불릿, 블록 시퀀스, (끝)) / 액션 바.
+    summary: 요약 문장 리스트(없으면 생략) / blocks: [{'t':'p'|'img'|'h3'|'list', ...}] 원문 순서 그대로"""
     title_flat = ' '.join(h1_lines)
-    sums = ''.join(f'<li>{x}</li>' for x in summary)
-    body = ''.join(f'<p>{x}</p>' for x in paras)
+    sums = f"<ul class=\"pd-sum\">{''.join(f'<li>{x}</li>' for x in summary)}</ul>" if summary else ''
+    parts = []
+    for bl in blocks:
+        t = bl['t']
+        if t == 'p':
+            parts.append(f"<p>{bl['html']}</p>")
+        elif t == 'img':
+            parts.append(f'<figure class="pd-fig"><img src="{bl["src"]}" alt="" loading="lazy"></figure>')
+        elif t == 'h3':
+            parts.append(f"<h3 class=\"pd-h3\">{bl['html']}</h3>")
+        elif t == 'list':
+            parts.append(bl['html'])
+    body = ''.join(parts)
+    if hero_img is None:
+        hero_img = 'assets/parasta/body-test.avif'  # 이미지 없는 기사 폴백
     PAGES[fname] = dict(
         title=f'{title_flat} | PARAMETA',
         desc=f'{title_flat} — 파라메타 보도자료.',
@@ -3531,11 +3552,7 @@ def press_detail(fname, h1_lines, date, summary, caption, paras, hero_img='asset
 <section><div class="shell sec pd-grid">
   <article class="pd-body rvl">
     <h2 class="pd-title">{title_flat}</h2>
-    <ul class="pd-sum">{sums}</ul>
-    <figure class="pd-fig">
-      <span class="pd-img" aria-hidden="true" data-img="{body_img}" style="background-image:url('{body_img}')"></span>
-      <figcaption>[사진] {caption}</figcaption>
-    </figure>
+    {sums}
     {body}
     <p class="pd-end">(끝)</p>
   </article>
@@ -3564,24 +3581,16 @@ def press_detail(fname, h1_lines, date, summary, caption, paras, hero_img='asset
 </div>
 ''')
 
-# 샘플 상세 — 본문·사진 캡션은 임시 카피, 실제 보도자료 원문으로 교체 예정
-press_detail(
-    'press-sample.html',
-    h1_lines=["파라메타, ADB 주관 채권 포럼서 '온체인 KYC' 기반 국경 간 거래 표준 모델 발표"],
-    date='2026.02.19',
-    summary=[
-        '- 아시아개발은행(ADB) 주관 채권 포럼에서 온체인 KYC 기반 국경 간 거래 표준 모델 발표',
-        '- 발행, 유통, 정산 전 과정에서 규제 요건을 검증하는 컴플라이언스 구조 제시',
-        '- 아시아 역내 금융기관들과 표준 모델 실증 논의 착수',
-    ],
-    caption='파라메타가 ADB 주관 채권 포럼에서 온체인 KYC 기반 국경 간 거래 표준 모델을 발표했다.',
-    paras=[
-        '파라메타가 아시아개발은행(ADB) 주관 채권 포럼에서 온체인 KYC를 기반으로 한 국경 간 거래 표준 모델을 발표했다.',
-        '이번 발표는 서로 다른 규제 환경을 가진 국가 간 채권 거래에서, 참여자 신원과 거래 자격을 온체인에서 검증하는 표준 절차를 제시한 것이 핵심이다. 발행, 유통, 정산 전 과정에 컴플라이언스 검증을 내장해 규제 대응과 거래 효율을 함께 확보할 수 있다.',
-        '파라메타는 포럼에 참여한 아시아 역내 금융기관들과 표준 모델의 실증 방안을 논의했으며, 후속 협력을 이어갈 계획이다.',
-        '파라메타 관계자는 "국경 간 거래에서 가장 큰 병목은 국가마다 다른 신원 검증 절차"라며 "온체인 KYC 표준 모델이 역내 디지털자산 시장의 신뢰 기반이 되길 기대한다"고 말했다.',
-    ],
-)
+# 보도자료 120편 양산 — _build/data/press/*.json → press/post-pr-NNN.html
+for _d in PRESS_DATA:
+    press_detail(
+        f"press/{_d['slug']}.html",
+        h1_lines=[_d['title']],
+        date=_d['date'],
+        summary=_d['summary'],
+        blocks=_d['blocks'],
+        hero_img=_d['hero_img'],
+    )
 
 # ---------------- blog.html ----------------
 # 블로그 아티클 데이터 — 카테고리 레일과 카드 피드가 공유
@@ -5038,7 +5047,15 @@ for fname, p in PAGES.items():
         .replace('__CONTENT__', p['content'])
         .replace('__FOOTER__', CHROME_FOOTER)
         .replace('__JS__', JS))
-    with open(os.path.join(ROOT, fname), 'w', encoding='utf-8') as f:
+    if '/' in fname:
+        # 하위 폴더 페이지: <base>로 상대경로(에셋·nav 링크·챗봇 로딩)를 루트 기준으로 해석
+        depth = fname.count('/')
+        out = out.replace('<head>', f'<head><base href="{"../" * depth}">', 1)
+        # base 영향으로 깨지는 문서 내 앵커는 자기 경로로 고정
+        out = out.replace('href="#main"', f'href="{fname}#main"')
+    outpath = os.path.join(ROOT, fname)
+    os.makedirs(os.path.dirname(outpath), exist_ok=True)
+    with open(outpath, 'w', encoding='utf-8') as f:
         f.write(out)
     print(f'wrote {fname} ({len(out)} bytes)')
 print('done')
