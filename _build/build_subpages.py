@@ -1454,18 +1454,18 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
   .post-body{ grid-column:2 / 9 }
   .post-side{ grid-column:10 / 12; position:sticky; top:12rem; align-self:start } }
 .post-body>*+*{ margin-top:1.25rem }
-.post-body .post-lead{ font-size:var(--text-20); line-height:var(--lh-body); font-weight:var(--w-title);
-  color:var(--ink); margin-bottom:1.5rem }
+.post-body .post-lead{ font-size:var(--text-30); font-weight:var(--w-num); letter-spacing:-.01em;
+  line-height:var(--lh-heading); color:var(--accent); margin-bottom:1.5rem }   /* 프레스 pd-title 스타일 이식(굵은 보라) */
 .post-body h3{ font-size:var(--text-24); font-weight:var(--w-strong); line-height:var(--lh-heading); letter-spacing:-.01em;
   margin:3.5rem 0 1.25rem; scroll-margin-top:10rem }
-.post-body h3:first-of-type{ margin-top:0 }
+.post-body > h3:first-child{ margin-top:0 }   /* h3가 리터럴 첫 요소일 때만 갭 제거(리드·도입문단 있으면 3.5rem 유지) */
 .post-body h3::before{ content:''; display:block; width:2rem; height:2px; background:var(--gray-300); margin-bottom:1.5rem }
 .post-body p{ font-size:var(--text-20); line-height:var(--lh-body); color:var(--c-body) }   /* 프레스 본문과 동일(20) */
 .post-body p b{ color:var(--ink); font-weight:var(--w-strong) }
 .post-body ul{ list-style:none; display:flex; flex-direction:column; gap:.75rem; padding-left:1.25rem }
-.post-body ul li{ position:relative; font-size:var(--text-body); line-height:var(--lh-body); color:var(--c-body) }
+.post-body ul li{ position:relative; font-size:var(--text-20); line-height:var(--lh-body); color:var(--c-body) }   /* 본문 문단(20)과 폰트 통일 */
 .post-body ul li::before{ content:''; position:absolute; left:-1.25rem; top:.62em; width:.375rem; height:.375rem;
-  border-radius:50%; background:var(--accent) }
+  border-radius:50%; background:currentColor }   /* 불릿 = 폰트와 같은 색 */
 .post-fig{ margin:2.5rem 0 }
 .post-fig img{ width:100%; height:auto; display:block; border-radius:var(--radius-card-sm) }
 .post-side ul{ list-style:none; margin-top:1rem; display:flex; flex-direction:column; gap:.25rem;
@@ -1478,6 +1478,7 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 @media (max-width:1023px){ .post-side{ border-top:1px solid rgba(var(--ink-rgb),.1); padding-top:2rem } }
 /* 목차 없는 아티클(h3<2): 히어로와 좌측 정렬(2칸부터) */
 @media (min-width:1024px){ .post-grid.solo .post-body{ grid-column:2 / 11 } }
+@media (min-width:1024px){ .post-grid .post-actions{ grid-column:2 / 9 } .post-grid.solo .post-actions{ grid-column:2 / 11 } }   /* 액션바: 본문 컬럼 정렬 */
 /* 블로그 상세 히어로 제목 — 장문 대응(좌측 정렬), 솔루션 히어로급 스케일 (높이·정렬은 body.press 공용) */
 body.blog .phero-h1{ font-size:var(--text-32); max-width:28ch }   /* 프레스 상세와 동일 스케일 */
 @media (min-width:640px){ body.blog .phero-h1{ font-size:var(--text-40) } }
@@ -2678,7 +2679,7 @@ if(pdCopy){
     }
   };
   pdCopy.addEventListener('click', async () => {
-    const bodyEl = document.querySelector('.pd-body');
+    const bodyEl = document.querySelector('.pd-body, .post-body');
     if(!bodyEl) return;
     const ok = await copyText(bodyEl.innerText);
     const label = pdCopy.querySelector('.pd-copy-label');
@@ -2694,7 +2695,7 @@ if(pdDl){
   let busy = false;
   pdDl.addEventListener('click', async () => {
     if(busy) return;
-    const bodyEl = document.querySelector('.pd-body');
+    const bodyEl = document.querySelector('.pd-body, .post-body');
     if(bodyEl == null) return;
     busy = true;
     const label = pdDl.querySelector('.hspring');
@@ -3828,6 +3829,22 @@ SHARE_MODAL = '''<div id="pd-share-modal" role="dialog" aria-modal="true" aria-l
   </div>
 </div>'''
 
+_KV_RE = re.compile(r'^[^:：.<\n]{1,24}[:：]\s')   # "라벨: 값" (짧은 라벨 + 콜론)
+def _group_kv_runs(blocks):
+    """연속된 '라벨: 값' 문단(2줄 이상)을 블릿 리스트로 묶는다 — 이런 key-value 나열은 자동으로 블릿 처리."""
+    out, run = [], []
+    def flush():
+        if len(run) >= 2: out.append({'t': 'list', 'items': run[:]})
+        else: out.extend({'t': 'p', 'html': x} for x in run)
+        run.clear()
+    for b in blocks:
+        if b['t'] == 'p' and _KV_RE.match(b.get('html', '')):
+            run.append(b['html'])
+        else:
+            flush(); out.append(b)
+    flush()
+    return out
+
 def post_blog(data):
     """블로그 아티클 상세 — 뉴스룸(프레스) 히어로 포맷 이식: 딤 히어로(좌측 정렬) +
     메타줄(카테고리·날짜·읽는시간 좌 / 공유 버튼 우) + 본문 블록/On this page 목차(h3 2개 이상)."""
@@ -3839,7 +3856,7 @@ def post_blog(data):
     if data.get('lead'):
         parts.append(f'<p class="post-lead">{data["lead"]}</p>')
     hn = 0
-    for bl in data['blocks']:
+    for bl in _group_kv_runs(data['blocks']):
         t = bl['t']
         if t == 'p':
             parts.append(f'<p>{bl["html"]}</p>')
@@ -3882,6 +3899,11 @@ def post_blog(data):
       {body}
     </article>
     {side}
+    <div class="pd-actions post-actions rvl">
+      <button class="pill outline no-arrow hs-scale" type="button" data-copy><span class="hspring"><span class="pd-copy-label">텍스트 복사</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span></button>
+      <button class="pill outline no-arrow hs-scale" type="button" data-dl-images><span class="hspring">전체 이미지 다운로드<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span></button>
+      <a class="pill dark no-arrow hs-scale pd-list" href="blog.html"><span class="hspring">목록보기</span></a>
+    </div>
   </div>
 </div></section>
 {SHARE_MODAL}
