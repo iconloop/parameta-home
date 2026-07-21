@@ -1686,22 +1686,24 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
 .psm-close svg{ width:1.125rem; height:1.125rem }
 .psm-grid{ list-style:none; display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-bottom:1.75rem }
 .psm-item{ display:flex; flex-direction:column; align-items:center; gap:.625rem; text-decoration:none;
-  font-size:var(--text-14); font-weight:500; color:rgba(var(--ink-rgb),.7) }
+  font-size:var(--text-16); font-weight:500; color:rgba(var(--ink-rgb),.7) }
 .psm-ico{ width:3.5rem; height:3.5rem; border-radius:var(--radius-control); display:grid; place-items:center;
-  font-weight:700; color:var(--white); border:1px solid var(--line);
+  color:var(--white); border:none;
   transition:transform .2s ease }
 @media (hover:hover){ .psm-item:hover .psm-ico{ transform:scale(1.06) } }
-.psm-x{ background:var(--ink); font-size:var(--text-20) }
-.psm-fb{ background:#1877F2; font-size:var(--text-24) }
-.psm-line{ background:#06C755; font-size:var(--text-12); letter-spacing:.02em }
+.psm-ico svg{ width:1.5rem; height:1.5rem }
+.psm-x{ background:var(--ink) }
+.psm-fb{ background:#1877F2 }
+.psm-fb svg{ width:1.75rem; height:1.75rem }
+.psm-line{ background:#06C755 }
+.psm-line svg{ width:1.75rem; height:1.75rem }
 .psm-mail{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); color:var(--ink) }
-.psm-mail svg{ width:1.5rem; height:1.5rem }
 .psm-url{ display:flex; gap:.5rem }
 .psm-url input{ flex:1; min-width:0; height:2.75rem; padding:0 1rem; border:1px solid rgba(var(--ink-rgb),.15);
-  border-radius:var(--radius-control); font-size:var(--text-14); color:var(--accent); background:var(--white) }
+  border-radius:var(--radius-control); font-size:var(--text-16); color:var(--accent); background:var(--white) }
 .psm-copy{ flex:none; height:2.75rem; padding:0 1rem; border:1px solid rgba(var(--ink-rgb),.15);
   border-radius:var(--radius-control); background:color-mix(in srgb, var(--ink) 6%, var(--white));
-  font-size:var(--text-14); font-weight:600; color:var(--ink); cursor:pointer; transition:background .2s ease }
+  font-size:var(--text-16); font-weight:600; color:var(--ink); cursor:pointer; transition:background .2s ease }
 @media (hover:hover){ .psm-copy:hover{ background:var(--gray-100) } }
 /* 본문: 중앙 단일 칼럼 — 제목 반복(브랜드 컬러) + 양쪽 정렬 문단 */
 .pd-grid{ display:grid; grid-template-columns:repeat(12,1fr); column-gap:var(--grid-gap) }
@@ -1711,7 +1713,7 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
 .pd-title{ font-size:var(--text-30); font-weight:700; letter-spacing:-.01em; line-height:var(--leading-heading);
   color:var(--accent); margin-bottom:1.5rem; word-break:keep-all }
 .pd-sum{ list-style:none; display:flex; flex-direction:column; gap:.5rem; margin-bottom:2.5rem;
-  font-size:var(--text-20); font-weight:600; color:var(--ink); line-height:var(--leading-body); word-break:keep-all }
+  font-size:var(--text-20); font-weight:500; color:var(--ink); line-height:var(--leading-body); word-break:keep-all }
 .pd-fig{ margin:0 0 2.5rem }
 .pd-img{ display:block; width:100%; aspect-ratio:16/9; border-radius:var(--radius-card-sm);
   background:color-mix(in srgb, var(--ink) 6%, var(--white)) }  /* 대표 이미지 자리 */
@@ -1722,10 +1724,13 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
 .pd-end{ color:var(--muted) }
 /* 액션 바: 텍스트 복사·이미지 다운로드(좌) + 목록보기(우, 다크) */
 .pd-actions{ margin-top:3rem; display:flex; align-items:center; gap:.75rem; flex-wrap:wrap;
-  padding-top:2rem; border-top:1px solid var(--line) }
-/* 액션 버튼 = 공통 pill 시스템 (hs-scale 호버 포함), 라벨은 hero-cta와 동일 16 */
-.pd-actions .hspring{ font-size:var(--text-16) }
-.pd-actions svg{ width:1.25rem; height:1.25rem }
+  padding-top:var(--space-48); border-top:1px solid var(--line) }  /* 디바이더↔버튼 간격 */
+/* 액션 버튼 = 공통 pill 시스템 (hs-scale 호버 포함) — 공통 컨트롤 토큰(--ctl-*) 재사용 */
+.pd-actions{ --ctl-h:3.25rem; --ctl-pad:1.25rem; --ctl-fs:var(--text-18); --ctl-ico:1.25rem }
+.pd-actions .pill.no-arrow .hspring{ min-height:var(--ctl-h); font-size:var(--ctl-fs); padding-inline:var(--ctl-pad);
+  gap:.5rem }  /* 공통 pill(.pill.no-arrow .hspring)보다 구체적으로 — 토큰이 이기게. gap은 아이콘↔텍스트 간격 */
+.pd-actions .pill.outline .hspring{ color:var(--gray-700) }  /* 아웃라인 버튼 텍스트·아이콘 — 진한 그레이 토큰 */
+.pd-actions svg{ width:var(--ctl-ico); height:var(--ctl-ico) }
 .pd-actions .pill:disabled{ opacity:.4; cursor:default }
 .pd-actions .pill:disabled .hspring{ transform:none }
 .pd-list{ margin-left:auto }
@@ -2567,24 +2572,39 @@ if(pdCopy){
     setTimeout(() => { label.textContent = orig; }, 1500);
   });
 }
-/* Press 상세: 전체 이미지 다운로드 — 본문 이미지(data-img·img) 순차 저장 */
+/* Press 상세: 전체 이미지 다운로드 — 본문 전체를 세로 긴 캡처 PNG 한 장으로 저장 (html2canvas 지연 로드) */
 const pdDl = document.querySelector('[data-dl-images]');
 if(pdDl){
+  let busy = false;
   pdDl.addEventListener('click', async () => {
-    const srcs = [...document.querySelectorAll('.pd-body [data-img]')].map(e => e.dataset.img)
-      .concat([...document.querySelectorAll('.pd-body img')].map(i => i.src));
-    const uniq = [...new Set(srcs)].filter(Boolean);
-    for(const src of uniq){
-      try{
-        const res = await fetch(src);
-        const blob = await res.blob();
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = src.split('/').pop().split('?')[0] || 'image';
-        document.body.appendChild(a); a.click(); a.remove();
-        URL.revokeObjectURL(a.href);
-      }catch(e){}
-    }
+    if(busy) return;
+    const bodyEl = document.querySelector('.pd-body');
+    if(bodyEl == null) return;
+    busy = true;
+    const label = pdDl.querySelector('.hspring');
+    const orig = label.childNodes[0].nodeValue;
+    label.childNodes[0].nodeValue = '저장 중... ';
+    try{
+      if(!window.htmlToImage){
+        await new Promise((res, rej) => {
+          const sc = document.createElement('script');
+          sc.src = 'https://unpkg.com/html-to-image@1.11.13/dist/html-to-image.js';
+          sc.onload = res; sc.onerror = rej;
+          document.head.appendChild(sc);
+        });
+      }
+      const blob = await htmlToImage.toBlob(bodyEl, {
+        backgroundColor: '#ffffff', pixelRatio: 2,
+        style: { padding: '3rem 2rem' }
+      });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = (document.title.split(' | ')[0] || 'press') + '.png';
+      document.body.appendChild(a); a.click(); a.remove();
+      URL.revokeObjectURL(a.href);
+    }catch(e){}
+    label.childNodes[0].nodeValue = orig;
+    busy = false;
   });
 }
 /* Press 상세: 공유하기 모달 — SNS 링크 + URL 복사 */
@@ -3439,7 +3459,7 @@ def press_detail(fname, h1_lines, date, summary, caption, paras, hero_img='asset
             f'<div class="pd-hero-bg" aria-hidden="true" style="background-image:url(\'{hero_img}\')"></div>'
             f'<div class="pd-hero-meta"><div class="pdm-cell"><span class="pdm-date">{date}</span>'
             '<button class="pd-share" type="button" aria-label="공유하기">'
-            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/><line x1="15.4" y1="6.5" x2="8.6" y2="10.5"/></svg>'
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle vector-effect="non-scaling-stroke" cx="18" cy="5" r="3"/><circle vector-effect="non-scaling-stroke" cx="6" cy="12" r="3"/><circle vector-effect="non-scaling-stroke" cx="18" cy="19" r="3"/><line vector-effect="non-scaling-stroke" x1="8.6" y1="13.5" x2="15.4" y2="17.5"/><line vector-effect="non-scaling-stroke" x1="15.4" y1="6.5" x2="8.6" y2="10.5"/></svg>'
             '</button></div></div>'),
         content=f'''
 <section><div class="shell sec pd-grid">
@@ -3454,8 +3474,8 @@ def press_detail(fname, h1_lines, date, summary, caption, paras, hero_img='asset
     <p class="pd-end">(끝)</p>
   </article>
   <div class="pd-actions rvl">
-    <button class="pill outline no-arrow hs-scale" type="button" data-copy><span class="hspring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="pd-copy-label">텍스트 복사</span></span></button>
-    <button class="pill outline no-arrow hs-scale" type="button" data-dl-images><span class="hspring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>전체 이미지 다운로드</span></button>
+    <button class="pill outline no-arrow hs-scale" type="button" data-copy><span class="hspring"><span class="pd-copy-label">텍스트 복사</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span></button>
+    <button class="pill outline no-arrow hs-scale" type="button" data-dl-images><span class="hspring">전체 이미지 다운로드<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span></button>
     <a class="pill dark no-arrow hs-scale pd-list" href="insights.html"><span class="hspring">목록보기</span></a>
   </div>
 </div></section>
@@ -3465,9 +3485,9 @@ def press_detail(fname, h1_lines, date, summary, caption, paras, hero_img='asset
     <button class="psm-close" type="button" data-psm-close aria-label="닫기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></button>
     <h2>공유하기</h2>
     <ul class="psm-grid">
-      <li><a class="psm-item" data-share="x" href="#" target="_blank" rel="noopener"><span class="psm-ico psm-x">X</span>X</a></li>
-      <li><a class="psm-item" data-share="fb" href="#" target="_blank" rel="noopener"><span class="psm-ico psm-fb">f</span>페이스북</a></li>
-      <li><a class="psm-item" data-share="line" href="#" target="_blank" rel="noopener"><span class="psm-ico psm-line">LINE</span>라인</a></li>
+      <li><a class="psm-item" data-share="x" href="#" target="_blank" rel="noopener"><span class="psm-ico psm-x"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.451-6.231zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644z"/></svg></span>X</a></li>
+      <li><a class="psm-item" data-share="fb" href="#" target="_blank" rel="noopener"><span class="psm-ico psm-fb"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.397 20.997v-8.196h2.765l.411-3.209h-3.176V7.548c0-.926.258-1.56 1.587-1.56h1.684V3.127c-.291-.039-1.29-.126-2.453-.126-2.429 0-4.09 1.483-4.09 4.205v2.386H7.353v3.209h2.772v8.196h3.272z"/></svg></span>페이스북</a></li>
+      <li><a class="psm-item" data-share="line" href="#" target="_blank" rel="noopener"><span class="psm-ico psm-line"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg></span>라인</a></li>
       <li><a class="psm-item" data-share="mail" href="#"><span class="psm-ico psm-mail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg></span>메일</a></li>
     </ul>
     <div class="psm-url">

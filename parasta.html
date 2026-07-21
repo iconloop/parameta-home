@@ -2477,22 +2477,24 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
 .psm-close svg{ width:1.125rem; height:1.125rem }
 .psm-grid{ list-style:none; display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-bottom:1.75rem }
 .psm-item{ display:flex; flex-direction:column; align-items:center; gap:.625rem; text-decoration:none;
-  font-size:var(--text-14); font-weight:500; color:rgba(var(--ink-rgb),.7) }
+  font-size:var(--text-16); font-weight:500; color:rgba(var(--ink-rgb),.7) }
 .psm-ico{ width:3.5rem; height:3.5rem; border-radius:var(--radius-control); display:grid; place-items:center;
-  font-weight:700; color:var(--white); border:1px solid var(--line);
+  color:var(--white); border:none;
   transition:transform .2s ease }
 @media (hover:hover){ .psm-item:hover .psm-ico{ transform:scale(1.06) } }
-.psm-x{ background:var(--ink); font-size:var(--text-20) }
-.psm-fb{ background:#1877F2; font-size:var(--text-24) }
-.psm-line{ background:#06C755; font-size:var(--text-12); letter-spacing:.02em }
+.psm-ico svg{ width:1.5rem; height:1.5rem }
+.psm-x{ background:var(--ink) }
+.psm-fb{ background:#1877F2 }
+.psm-fb svg{ width:1.75rem; height:1.75rem }
+.psm-line{ background:#06C755 }
+.psm-line svg{ width:1.75rem; height:1.75rem }
 .psm-mail{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); color:var(--ink) }
-.psm-mail svg{ width:1.5rem; height:1.5rem }
 .psm-url{ display:flex; gap:.5rem }
 .psm-url input{ flex:1; min-width:0; height:2.75rem; padding:0 1rem; border:1px solid rgba(var(--ink-rgb),.15);
-  border-radius:var(--radius-control); font-size:var(--text-14); color:var(--accent); background:var(--white) }
+  border-radius:var(--radius-control); font-size:var(--text-16); color:var(--accent); background:var(--white) }
 .psm-copy{ flex:none; height:2.75rem; padding:0 1rem; border:1px solid rgba(var(--ink-rgb),.15);
   border-radius:var(--radius-control); background:color-mix(in srgb, var(--ink) 6%, var(--white));
-  font-size:var(--text-14); font-weight:600; color:var(--ink); cursor:pointer; transition:background .2s ease }
+  font-size:var(--text-16); font-weight:600; color:var(--ink); cursor:pointer; transition:background .2s ease }
 @media (hover:hover){ .psm-copy:hover{ background:var(--gray-100) } }
 /* 본문: 중앙 단일 칼럼 — 제목 반복(브랜드 컬러) + 양쪽 정렬 문단 */
 .pd-grid{ display:grid; grid-template-columns:repeat(12,1fr); column-gap:var(--grid-gap) }
@@ -2502,7 +2504,7 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
 .pd-title{ font-size:var(--text-30); font-weight:700; letter-spacing:-.01em; line-height:var(--leading-heading);
   color:var(--accent); margin-bottom:1.5rem; word-break:keep-all }
 .pd-sum{ list-style:none; display:flex; flex-direction:column; gap:.5rem; margin-bottom:2.5rem;
-  font-size:var(--text-20); font-weight:600; color:var(--ink); line-height:var(--leading-body); word-break:keep-all }
+  font-size:var(--text-20); font-weight:500; color:var(--ink); line-height:var(--leading-body); word-break:keep-all }
 .pd-fig{ margin:0 0 2.5rem }
 .pd-img{ display:block; width:100%; aspect-ratio:16/9; border-radius:var(--radius-card-sm);
   background:color-mix(in srgb, var(--ink) 6%, var(--white)) }  /* 대표 이미지 자리 */
@@ -2513,10 +2515,13 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
 .pd-end{ color:var(--muted) }
 /* 액션 바: 텍스트 복사·이미지 다운로드(좌) + 목록보기(우, 다크) */
 .pd-actions{ margin-top:3rem; display:flex; align-items:center; gap:.75rem; flex-wrap:wrap;
-  padding-top:2rem; border-top:1px solid var(--line) }
-/* 액션 버튼 = 공통 pill 시스템 (hs-scale 호버 포함), 라벨은 hero-cta와 동일 16 */
-.pd-actions .hspring{ font-size:var(--text-16) }
-.pd-actions svg{ width:1.25rem; height:1.25rem }
+  padding-top:var(--space-48); border-top:1px solid var(--line) }  /* 디바이더↔버튼 간격 */
+/* 액션 버튼 = 공통 pill 시스템 (hs-scale 호버 포함) — 공통 컨트롤 토큰(--ctl-*) 재사용 */
+.pd-actions{ --ctl-h:3.25rem; --ctl-pad:1.25rem; --ctl-fs:var(--text-18); --ctl-ico:1.25rem }
+.pd-actions .pill.no-arrow .hspring{ min-height:var(--ctl-h); font-size:var(--ctl-fs); padding-inline:var(--ctl-pad);
+  gap:.5rem }  /* 공통 pill(.pill.no-arrow .hspring)보다 구체적으로 — 토큰이 이기게. gap은 아이콘↔텍스트 간격 */
+.pd-actions .pill.outline .hspring{ color:var(--gray-700) }  /* 아웃라인 버튼 텍스트·아이콘 — 진한 그레이 토큰 */
+.pd-actions svg{ width:var(--ctl-ico); height:var(--ctl-ico) }
 .pd-actions .pill:disabled{ opacity:.4; cursor:default }
 .pd-actions .pill:disabled .hspring{ transform:none }
 .pd-list{ margin-left:auto }
@@ -3505,24 +3510,39 @@ if(pdCopy){
     setTimeout(() => { label.textContent = orig; }, 1500);
   });
 }
-/* Press 상세: 전체 이미지 다운로드 — 본문 이미지(data-img·img) 순차 저장 */
+/* Press 상세: 전체 이미지 다운로드 — 본문 전체를 세로 긴 캡처 PNG 한 장으로 저장 (html2canvas 지연 로드) */
 const pdDl = document.querySelector('[data-dl-images]');
 if(pdDl){
+  let busy = false;
   pdDl.addEventListener('click', async () => {
-    const srcs = [...document.querySelectorAll('.pd-body [data-img]')].map(e => e.dataset.img)
-      .concat([...document.querySelectorAll('.pd-body img')].map(i => i.src));
-    const uniq = [...new Set(srcs)].filter(Boolean);
-    for(const src of uniq){
-      try{
-        const res = await fetch(src);
-        const blob = await res.blob();
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = src.split('/').pop().split('?')[0] || 'image';
-        document.body.appendChild(a); a.click(); a.remove();
-        URL.revokeObjectURL(a.href);
-      }catch(e){}
-    }
+    if(busy) return;
+    const bodyEl = document.querySelector('.pd-body');
+    if(bodyEl == null) return;
+    busy = true;
+    const label = pdDl.querySelector('.hspring');
+    const orig = label.childNodes[0].nodeValue;
+    label.childNodes[0].nodeValue = '저장 중... ';
+    try{
+      if(!window.htmlToImage){
+        await new Promise((res, rej) => {
+          const sc = document.createElement('script');
+          sc.src = 'https://unpkg.com/html-to-image@1.11.13/dist/html-to-image.js';
+          sc.onload = res; sc.onerror = rej;
+          document.head.appendChild(sc);
+        });
+      }
+      const blob = await htmlToImage.toBlob(bodyEl, {
+        backgroundColor: '#ffffff', pixelRatio: 2,
+        style: { padding: '3rem 2rem' }
+      });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = (document.title.split(' | ')[0] || 'press') + '.png';
+      document.body.appendChild(a); a.click(); a.remove();
+      URL.revokeObjectURL(a.href);
+    }catch(e){}
+    label.childNodes[0].nodeValue = orig;
+    busy = false;
   });
 }
 /* Press 상세: 공유하기 모달 — SNS 링크 + URL 복사 */
