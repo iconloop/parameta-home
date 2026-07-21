@@ -4057,11 +4057,6 @@ PAGES['parasta.html'] = dict(
       <p class="pn-note">퍼블릭 체인에서 축적한 코어 엔진과 오케스트레이션 경험,<br>스테이블코인 발행 이후를 뒷받침하는 기반.</p>
     </article>
   </div>
-  <div class="cert-row rvl" style="margin-top:5rem; --rvl-y:24px">
-    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">기술보증기금 TI-1</div></div>
-    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">CSAP 인증</div></div>
-    <div class="cert-item"><div class="cert-img"></div><div class="cert-txt">혁신금융서비스 지정</div></div>
-  </div>
 </div></section>
 ''')
 
