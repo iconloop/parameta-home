@@ -3,12 +3,11 @@
  "title": "파라메타, K-BTF 실증사업 ‘MyID2.0’ 블록체인 서비스 최초 CSAP 인증 획득",
  "date": "2025.05.12",
  "sort": 20250512,
- "summary": [],
+ "summary": [
+  "K-BTF 실증사업 ‘MyID 2.0’, 국내 최초 CSAP 인증 획득",
+  "도입 비용 90% 절감·기간 단축… 시민카드·출입증 등 서비스 확산 기대"
+ ],
  "blocks": [
-  {
-   "t": "list",
-   "html": "<ul class=\"pt-list\">\n        <li>K-BTF 실증사업 ‘MyID 2.0’, 국내 최초 CSAP 인증 획득</li>\n        <li>도입 비용 90% 절감·기간 단축… 시민카드·출입증 등 서비스 확산 기대</li>\n      </ul>"
-  },
   {
    "t": "img",
    "src": "assets/press/post-pr-227/fig-1.png"

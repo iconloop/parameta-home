@@ -38,11 +38,13 @@ def blocks_of(article):
             inner = re.sub(r'^<h3[^>]*>|</h3>$', '', html, flags=re.S).strip()
             out.append({'t': 'h3', 'html': STRIP(inner)})
         elif tag == 'ul':
-            out.append({'t': 'list', 'html': html})
+            items = [STRIP(x) for x in re.findall(r'<li[^>]*>(.*?)</li>', html, re.S)]
+            out.append({'t': 'list', 'items': [x for x in items if x]})
     return out
 
 def split_summary(blocks):
-    """post-lead 이후 첫 이미지/본문 시작('['로 여는 문단) 전의 짧은 문단들 = 요약."""
+    """post-lead 이후 첫 이미지/본문 시작('['로 여는 문단) 전의 짧은 문단·리스트 = 요약.
+    (일부 원문은 요약을 ul 리스트로 마크업 — 마크업 무관하게 내용만 요약으로 흡수)"""
     summary, rest = [], []
     in_summary = True
     for b in blocks:
@@ -53,6 +55,8 @@ def split_summary(blocks):
                 rest.append(b)
             else:
                 summary.append(text)
+        elif in_summary and b['t'] == 'list':
+            summary.extend(b['items'])
         else:
             in_summary = False
             rest.append(b)

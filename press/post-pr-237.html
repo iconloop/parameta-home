@@ -2388,7 +2388,8 @@ body.media .phero-inner{ padding-bottom:3rem }  /* 히어로 하단 6rem → 3re
 /* 큰 카드 이미지 영역: full-bleed, 남는 높이를 채움 */
 .nf-big .work-card.grouped::before{ flex:1 1 auto; height:auto; min-height:16rem;
   margin:-1.5rem -1.5rem 1.5rem; border-radius:0;
-  background:url('assets/parasta/body-test.avif') center/cover no-repeat }
+  background-image:var(--nf-img, url('assets/parasta/body-test.avif'));  /* 기사 대표 이미지, 없으면 폴백 */
+  background-size:cover; background-position:center; background-repeat:no-repeat }
 @media (min-width:640px){ .nf-big .work-card.grouped::before{ margin:-2rem -2rem 1.75rem } }
 .nf-side{ display:flex; flex-direction:column; gap:1rem }
 @media (min-width:768px){ .nf-side{ gap:var(--grid-gap) } }
@@ -2470,9 +2471,7 @@ body.media .phero-inner{ padding-bottom:3rem }  /* 히어로 하단 6rem → 3re
 @media (hover:hover){ .ns-btn:hover{ transform:scale(1.05) } }
 .ns-btn svg{ width:1.5rem; height:1.5rem }
 /* ============ PRESS DETAIL — 보도자료 상세 공통 (네이버 뉴스룸 상세 포맷) ============ */
-/* 히어로: 딤 깔린 대표 이미지 배경 + 좌측 정렬 타이틀·날짜 + 우측 공유 버튼 */
-.pd-hero-bg{ position:absolute; inset:0; z-index:0; background-size:cover; background-position:center }
-.pd-hero-bg::after{ content:''; position:absolute; inset:0; background:rgba(var(--ink-rgb),.82) }  /* 딤 */
+/* 히어로: 다크 배경 + 좌측 정렬 타이틀·날짜 + 우측 공유 버튼 */
 body.press .phero{ min-height:0 }  /* 100vh 해제 — 레퍼처럼 밴드형 히어로 */
 body.press .phero{ min-height:60vh; display:flex; flex-direction:column; justify-content:flex-end; padding-bottom:var(--space-40) }   /* 하단 기준 앵커 */  /* 화면 3/5 */
 body.press .phero-inner{ position:relative; z-index:1; width:100%;
@@ -2551,15 +2550,11 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
 .pd-fig{ margin:0 0 2.5rem }
 .pd-fig img{ display:block; width:100%; height:auto; border-radius:var(--radius-card-sm);
   border:1px solid var(--line) }
-/* 본문 소제목·불릿 리스트 (원문 h3·pt-list 블록) */
+/* 본문 소제목·리스트 블록 — 리스트는 요약(pd-sum)과 동일 폰트, 마커 없음 */
 .pd-h3{ font-size:var(--text-24); font-weight:600; line-height:var(--leading-heading); letter-spacing:-.01em;
   margin:3rem 0 1.25rem; color:var(--ink) }
-.pd-body ul.pt-list{ margin:0 0 1.5rem; padding:0; list-style:none; display:flex; flex-direction:column; gap:.625rem }
-.pd-body ul.pt-list li{ position:relative; padding-left:1.25rem; font-size:var(--text-18);
-  line-height:var(--leading-body); color:rgba(var(--ink-rgb),.75); word-break:keep-all }
-.pd-body ul.pt-list li b{ color:var(--ink); font-weight:600 }
-.pd-body ul.pt-list li::before{ content:""; position:absolute; left:.25rem; top:.7em;
-  width:.375rem; height:.375rem; border-radius:var(--radius-pill); background:var(--purple-400) }
+.pd-body ul.pd-list{ list-style:none; margin:0 0 1.5rem; padding:0; display:flex; flex-direction:column; gap:.5rem;
+  font-size:var(--text-20); font-weight:500; color:var(--ink); line-height:var(--leading-body); word-break:keep-all }
 .pd-fig figcaption{ margin-top:.75rem; font-size:var(--text-16); color:var(--muted);
   text-align:center; line-height:var(--lh-body); word-break:keep-all }
 .pd-body > p{ font-size:var(--text-body); line-height:var(--lh-body); color:rgba(var(--ink-rgb),.75);
@@ -2600,7 +2595,8 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
   color:var(--ink); word-break:keep-all }
 @media (min-width:640px){ .nr-title{ font-size:var(--text-24) } }
 .nr-thumb{ width:100%; aspect-ratio:3/2; border-radius:var(--radius-card-sm);
-  background:color-mix(in srgb, var(--ink) 6%, var(--white)) }
+  background-color:color-mix(in srgb, var(--ink) 6%, var(--white));
+  background-size:cover; background-position:center; background-repeat:no-repeat }
 @media (max-width:767px){
   .nr-link{ grid-template-columns:1fr; gap:.75rem; padding:1.25rem 1rem }
   .nr-date{ line-height:1 }
@@ -2667,7 +2663,7 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
       <div class="phero-visual" aria-hidden="true"></div>
       
     </div>
-    <div class="pd-hero-bg" aria-hidden="true" style="background-image:url('assets/press/post-pr-237/fig-1.png')"></div><div class="pd-hero-meta"><div class="pdm-cell"><span class="pdm-date">2026.02.13</span><button class="pd-share" type="button" aria-label="공유하기"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle vector-effect="non-scaling-stroke" cx="18" cy="5" r="3"/><circle vector-effect="non-scaling-stroke" cx="6" cy="12" r="3"/><circle vector-effect="non-scaling-stroke" cx="18" cy="19" r="3"/><line vector-effect="non-scaling-stroke" x1="8.6" y1="13.5" x2="15.4" y2="17.5"/><line vector-effect="non-scaling-stroke" x1="15.4" y1="6.5" x2="8.6" y2="10.5"/></svg></button></div></div>
+    <div class="pd-hero-meta"><div class="pdm-cell"><span class="pdm-date">2026.02.13</span><button class="pd-share" type="button" aria-label="공유하기"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle vector-effect="non-scaling-stroke" cx="18" cy="5" r="3"/><circle vector-effect="non-scaling-stroke" cx="6" cy="12" r="3"/><circle vector-effect="non-scaling-stroke" cx="18" cy="19" r="3"/><line vector-effect="non-scaling-stroke" x1="8.6" y1="13.5" x2="15.4" y2="17.5"/><line vector-effect="non-scaling-stroke" x1="15.4" y1="6.5" x2="8.6" y2="10.5"/></svg></button></div></div>
     <div class="shell phero-status">
       <span>Newsroom — Press</span>
       <span style="display:inline-flex; gap:.5rem">Scroll <span aria-hidden="true">↓</span></span>
@@ -2677,12 +2673,8 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
 <section><div class="shell sec pd-grid">
   <article class="pd-body rvl">
     <h2 class="pd-title">[보도자료] 파라메타, ADB 주관 채권 포럼서 ‘온체인 KYC’ 기반 국경 간 거래 표준 모델 발표</h2>
-    
-    <ul class="pt-list">
-        <li>아시아개발은행(ADB) 주관 ‘아세안+3 채권시장 포럼(ABMF)’에서 한국 대표로 블록체인 해법 제시</li>
-        <li>독자적 ‘온체인 KYC’ 기술로 자산 이동 없이 안전한 국경 간 투자 실현</li>
-        <li>스테이블코인 플랫폼 ‘파라스타(ParaSta)’ 기반 지갑 인증 기술 주목</li>
-      </ul><figure class="pd-fig"><img src="assets/press/post-pr-237/fig-1.png" alt="" loading="lazy"></figure><p>[서울, 2026년 2월 11일] 웹3 인에이블러 ㈜파라메타(PARAMETA, 대표 김종협)가 2월 2일부터 4일까지 인도네시아 요그야카르타에서 열린 ‘제45차 아세안+3 채권시장 포럼(ABMF) 및 관련 행사’에 공식 초청되어, 블록체인 기술을 활용한 국경 간 거래의 새로운 표준 모델을 발표했다고 5일 밝혔다.</p><p>이번 행사는 아시아개발은행(ADB)과 인도네시아 금융감독청(OJK)이 공동 주관하는 역내 최대 채권 시장 협의체로, 한·중·일 및 아세안 각국 재무부, 중앙은행, 예탁결제원(CSD) 등 핵심 금융 당국자들이 대거 참여했다.</p><p>파라메타는 이번 포럼의 핵심 분과인 ‘디지털 채권 시장 포럼(DBMF)’ 세션에서 한국을 대표하는 기술 기업으로 연단에 섰다. 특히 이번 회의는 한국예탁결제원 박중훈 본부장(CSIF 부의장 겸 의장 직무대행)과 연세대 현석 교수(DBMF 의장) 등 한국 인사들이 의장단을 맡아 아시아 금융 디지털 혁신 논의를 주도했다.</p><p>행사 마지막 날인 4일, 파라메타 이정훈 최고전략책임자(CSO)는 ‘국경 간 디지털 채권 참여를 위한 지갑 기반 적격성 레이어’를 주제로 발표했다.</p><p>발표 핵심은 파라메타의 ‘온체인 KYC(On-chain Know Your Customer)’ 기술로, 서로 다른 규제를 가진 국가 간 투자 장벽을 허물 방안을 제시했다. 기존에는 해외 채권 투자 시 복잡한 신원 인증 서류 제출과 자산 해외 이전 위험이 있었다. 파라메타는 이를 해결하기 위해 스테이블코인 플랫폼 ‘파라스타(ParaSta)’를 활용한 ‘지갑 인증(KYW, Know Your Wallet)’ 모델을 제안했다.</p><p>이 모델은 투자자의 자격 정보를 블록체인 지갑에 담아, 자산 이동 없이 투자자의 지갑 적격 여부를 증명한다. 이를 통해 글로벌 규제를 준수하며, 국내 금융서비스처럼 간편하게 국경 간 투자가 가능해진다.</p><p>파라메타는 그동안 국내 시장에서 블록체인 원천 기술과 스테이블코인 인프라를 구축하며, 금융 규제 요건에 부합하는 기술 표준을 정립해 왔다. 이번 발표는 한국의 토큰증권 및 디지털 자산 제도화 흐름에 맞춰 규제 요건을 충족하도록 설계된 파라메타 기술 모델을 아시아 역내 국가들의 국경 간 거래를 위한 공통 솔루션으로 제안했다는 점에서 주목받았다. 또한, 파트너사인 구조화 상품 설계·추천·헤지 전문 AI 기업 리스크엑스(RiskX) 와 협력하여 복잡한 구조화 채권에 해당 기술을 적용한 파일럿 모델도 함께 소개되어 큰 호응을 얻었다</p><p>파라메타 이정훈 CSO는 “지갑 하나로 전 세계 금융 상품에 안전하게 투자할 수 있는 세상을 만드는 것이 목표”라며, “이번 ADB 주관 포럼 발표를 계기로 파라메타 ‘온체인 KYC’ 기술이 아시아 디지털 금융 시장의 글로벌 표준이 되도록 노력하겠다”고 밝혔다.</p><figure class="pd-fig"><img src="assets/press/post-pr-237/fig-2.png" alt="" loading="lazy"></figure><figure class="pd-fig"><img src="assets/press/post-pr-237/fig-3.png" alt="" loading="lazy"></figure>
+    <ul class="pd-sum"><li>아시아개발은행(ADB) 주관 ‘아세안+3 채권시장 포럼(ABMF)’에서 한국 대표로 블록체인 해법 제시</li><li>독자적 ‘온체인 KYC’ 기술로 자산 이동 없이 안전한 국경 간 투자 실현</li><li>스테이블코인 플랫폼 ‘파라스타(ParaSta)’ 기반 지갑 인증 기술 주목</li></ul>
+    <figure class="pd-fig"><img src="assets/press/post-pr-237/fig-1.png" alt="" loading="lazy"></figure><p>[서울, 2026년 2월 11일] 웹3 인에이블러 ㈜파라메타(PARAMETA, 대표 김종협)가 2월 2일부터 4일까지 인도네시아 요그야카르타에서 열린 ‘제45차 아세안+3 채권시장 포럼(ABMF) 및 관련 행사’에 공식 초청되어, 블록체인 기술을 활용한 국경 간 거래의 새로운 표준 모델을 발표했다고 5일 밝혔다.</p><p>이번 행사는 아시아개발은행(ADB)과 인도네시아 금융감독청(OJK)이 공동 주관하는 역내 최대 채권 시장 협의체로, 한·중·일 및 아세안 각국 재무부, 중앙은행, 예탁결제원(CSD) 등 핵심 금융 당국자들이 대거 참여했다.</p><p>파라메타는 이번 포럼의 핵심 분과인 ‘디지털 채권 시장 포럼(DBMF)’ 세션에서 한국을 대표하는 기술 기업으로 연단에 섰다. 특히 이번 회의는 한국예탁결제원 박중훈 본부장(CSIF 부의장 겸 의장 직무대행)과 연세대 현석 교수(DBMF 의장) 등 한국 인사들이 의장단을 맡아 아시아 금융 디지털 혁신 논의를 주도했다.</p><p>행사 마지막 날인 4일, 파라메타 이정훈 최고전략책임자(CSO)는 ‘국경 간 디지털 채권 참여를 위한 지갑 기반 적격성 레이어’를 주제로 발표했다.</p><p>발표 핵심은 파라메타의 ‘온체인 KYC(On-chain Know Your Customer)’ 기술로, 서로 다른 규제를 가진 국가 간 투자 장벽을 허물 방안을 제시했다. 기존에는 해외 채권 투자 시 복잡한 신원 인증 서류 제출과 자산 해외 이전 위험이 있었다. 파라메타는 이를 해결하기 위해 스테이블코인 플랫폼 ‘파라스타(ParaSta)’를 활용한 ‘지갑 인증(KYW, Know Your Wallet)’ 모델을 제안했다.</p><p>이 모델은 투자자의 자격 정보를 블록체인 지갑에 담아, 자산 이동 없이 투자자의 지갑 적격 여부를 증명한다. 이를 통해 글로벌 규제를 준수하며, 국내 금융서비스처럼 간편하게 국경 간 투자가 가능해진다.</p><p>파라메타는 그동안 국내 시장에서 블록체인 원천 기술과 스테이블코인 인프라를 구축하며, 금융 규제 요건에 부합하는 기술 표준을 정립해 왔다. 이번 발표는 한국의 토큰증권 및 디지털 자산 제도화 흐름에 맞춰 규제 요건을 충족하도록 설계된 파라메타 기술 모델을 아시아 역내 국가들의 국경 간 거래를 위한 공통 솔루션으로 제안했다는 점에서 주목받았다. 또한, 파트너사인 구조화 상품 설계·추천·헤지 전문 AI 기업 리스크엑스(RiskX) 와 협력하여 복잡한 구조화 채권에 해당 기술을 적용한 파일럿 모델도 함께 소개되어 큰 호응을 얻었다</p><p>파라메타 이정훈 CSO는 “지갑 하나로 전 세계 금융 상품에 안전하게 투자할 수 있는 세상을 만드는 것이 목표”라며, “이번 ADB 주관 포럼 발표를 계기로 파라메타 ‘온체인 KYC’ 기술이 아시아 디지털 금융 시장의 글로벌 표준이 되도록 노력하겠다”고 밝혔다.</p><figure class="pd-fig"><img src="assets/press/post-pr-237/fig-2.png" alt="" loading="lazy"></figure><figure class="pd-fig"><img src="assets/press/post-pr-237/fig-3.png" alt="" loading="lazy"></figure>
     <p class="pd-end">(끝)</p>
   </article>
   <div class="pd-actions rvl">
