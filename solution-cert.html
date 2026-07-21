@@ -2398,15 +2398,15 @@ body.media .phero-inner{ padding-bottom:3rem }  /* 히어로 하단 6rem → 3re
   --ctl-fs:var(--text-18);                     /* 컨트롤 텍스트 */
   height:var(--ctl-h); border:1px solid rgba(var(--ink-rgb),.15); border-radius:var(--radius-pill);
   background-color:transparent; font-size:var(--ctl-fs); color:var(--ink) }
-.select-pill{ padding:0 calc(var(--ctl-pad) + 1rem) 0 var(--ctl-pad); font-weight:500; cursor:pointer; appearance:none;
+.select-pill{ padding:0 calc(var(--ctl-pad) + 1rem) 0 var(--ctl-pad); font-weight:var(--w-title); cursor:pointer; appearance:none;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
   background-repeat:no-repeat; background-position:right .875rem center; background-size:var(--ctl-ico) }
 .input-pill{ display:flex; align-items:center; gap:.5rem; padding:0 var(--ctl-pad) }
 .input-pill svg{ width:var(--ctl-ico); height:var(--ctl-ico); color:rgba(var(--ink-rgb),.45); flex:none }
 .input-pill input{ border:none; background:transparent; outline:none; min-width:0;
   font-size:var(--ctl-fs); color:var(--ink) }
-.input-pill input::placeholder{ color:rgba(var(--ink-rgb),.4) }
-@media (hover:hover){ .select-pill:hover, .input-pill:hover{ border-color:rgba(var(--ink-rgb),.4) } }
+.input-pill input::placeholder{ color:var(--c-mut) }
+@media (hover:hover){ .select-pill:hover, .input-pill:hover{ border-color:var(--c-mut) } }
 .select-pill:focus-visible, .input-pill:focus-within{ border-color:var(--ink) }
 /* 커스텀 드롭다운 — 트리거는 select-pill 그대로, 패널은 카드 문법 */
 .drop{ position:relative }
@@ -2418,11 +2418,11 @@ body.media .phero-inner{ padding-bottom:3rem }  /* 히어로 하단 6rem → 3re
   opacity:0; visibility:hidden; transform:translateY(-4px);
   transition:opacity .2s ease, transform .2s ease, visibility .2s }
 .drop.open .drop-menu{ opacity:1; visibility:visible; transform:none }
-.drop-menu li{ padding:.875rem 1.25rem; border-radius:.5rem; font-size:var(--text-20); font-weight:500;
+.drop-menu li{ padding:.875rem 1.25rem; border-radius:.5rem; font-size:var(--text-20); font-weight:var(--w-title);
   color:rgba(var(--ink-rgb),.45); white-space:nowrap; cursor:pointer;
   transition:background .2s ease, color .2s ease }
 @media (hover:hover){ .drop-menu li:hover{ background:rgba(var(--surface-rgb),1); color:var(--ink) } }
-.drop-menu li.is-on{ color:var(--ink); font-weight:600 }
+.drop-menu li.is-on{ color:var(--ink); font-weight:var(--w-strong) }
 /* 패널 스크롤바 — 레퍼처럼 얇은 회색 썸 */
 .drop-menu::-webkit-scrollbar{ width:.375rem }
 .drop-menu::-webkit-scrollbar-thumb{ background:rgba(var(--ink-rgb),.25); border-radius:var(--radius-pill) }
@@ -2434,7 +2434,7 @@ body.media .phero-inner{ padding-bottom:3rem }  /* 히어로 하단 6rem → 3re
   position:relative; z-index:40 }  /* rvl transform 스태킹 위로 — 드롭 패널이 리스트에 안 뚫리게 */
 /* 드롭 트리거: 필 대신 텍스트형 — 기본(전체)은 그레이, 선택·열림은 잉크 */
 .news-controls .drop-btn{ height:auto; padding:0; border:none; background-image:none;
-  font-size:var(--text-20); font-weight:600; color:rgba(var(--ink-rgb),.4);
+  font-size:var(--text-20); font-weight:var(--w-strong); color:var(--c-mut);
   transition:color .2s ease }
 .news-controls .drop-btn::after{ content:''; width:1.125rem; height:1.125rem; margin-left:.375rem; background:currentColor;
   -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") center/contain no-repeat;
@@ -2447,7 +2447,7 @@ body.media .phero-inner{ padding-bottom:3rem }  /* 히어로 하단 6rem → 3re
   height:3.5rem; padding:0 .25rem 0 1rem; border:none;
   border-radius:var(--radius-control); background:color-mix(in srgb, var(--ink) 6%, var(--white)) }
 .news-search input{ flex:1; width:16rem; min-width:0; border:none; outline:none; background:transparent;
-  font-size:var(--text-20); font-weight:500; color:var(--ink) }
+  font-size:var(--text-20); font-weight:var(--w-title); color:var(--ink) }
 .news-search input::placeholder{ color:var(--subtle) }
 .news-search input::-webkit-search-cancel-button{ display:none }
 .ns-clear{ width:1.5rem; height:1.5rem; flex:none; border:none; padding:0; cursor:pointer;
@@ -2485,7 +2485,7 @@ body.press .phero-text{ align-items:flex-start; text-align:left;
   grid-column:1 / -1; max-width:none; margin:0 }
 @media (min-width:1024px){ body.press .phero-text{ grid-column:2 / 12 } }  /* 본문과 동일: 2~11칸 */
 body.press .phero-h1{ max-width:none; font-size:var(--text-32);
-  line-height:var(--leading-heading) }  /* 긴 뉴스 제목 — display(.98) 대신 heading(1.25) 토큰 */
+  line-height:var(--lh-heading) }  /* 긴 뉴스 제목 — display(.98) 대신 heading(1.25) 토큰 */
 @media (min-width:640px){ body.press .phero-h1{ font-size:var(--text-40) } }
 @media (min-width:768px){ body.press .phero-h1{ font-size:var(--text-48) } }
 @media (min-width:1024px){ body.press .phero-h1{ font-size:var(--text-60) } }
@@ -2505,14 +2505,14 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
 .psm-panel{ position:relative; width:calc(100% - 2.5rem); max-width:26rem; background:var(--white);
   border-radius:var(--radius-card); padding:2rem; transform:translateY(12px); transition:transform .25s ease }
 #pd-share-modal.open .psm-panel{ transform:none }
-.psm-panel h2{ text-align:center; font-size:var(--text-22); font-weight:600; margin-bottom:1.75rem }
+.psm-panel h2{ text-align:center; font-size:var(--text-22); font-weight:var(--w-strong); margin-bottom:1.75rem }
 .psm-close{ position:absolute; right:1rem; top:1rem; width:2.25rem; height:2.25rem; border:none; background:transparent;
   color:rgba(var(--ink-rgb),.55); cursor:pointer; display:grid; place-items:center; border-radius:var(--radius-pill) }
 @media (hover:hover){ .psm-close:hover{ background:var(--surface); color:var(--ink) } }
 .psm-close svg{ width:1.125rem; height:1.125rem }
 .psm-grid{ list-style:none; display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-bottom:1.75rem }
 .psm-item{ display:flex; flex-direction:column; align-items:center; gap:.625rem; text-decoration:none;
-  font-size:var(--text-16); font-weight:500; color:rgba(var(--ink-rgb),.7) }
+  font-size:var(--text-16); font-weight:var(--w-title); color:rgba(var(--ink-rgb),.7) }
 .psm-ico{ width:3.5rem; height:3.5rem; border-radius:var(--radius-control); display:grid; place-items:center;
   color:var(--white); border:none;
   transition:transform .2s ease }
@@ -2529,23 +2529,23 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
   border-radius:var(--radius-control); font-size:var(--text-16); color:var(--accent); background:var(--white) }
 .psm-copy{ flex:none; height:2.75rem; padding:0 1rem; border:1px solid rgba(var(--ink-rgb),.15);
   border-radius:var(--radius-control); background:color-mix(in srgb, var(--ink) 6%, var(--white));
-  font-size:var(--text-16); font-weight:600; color:var(--ink); cursor:pointer; transition:background .2s ease }
+  font-size:var(--text-16); font-weight:var(--w-strong); color:var(--ink); cursor:pointer; transition:background .2s ease }
 @media (hover:hover){ .psm-copy:hover{ background:var(--gray-100) } }
 /* 본문: 중앙 단일 칼럼 — 제목 반복(브랜드 컬러) + 양쪽 정렬 문단 */
 .pd-grid{ display:grid; grid-template-columns:repeat(12,1fr); column-gap:var(--grid-gap) }
 .pd-grid > *{ grid-column:1 / -1 }
 @media (min-width:1024px){ .pd-grid > *{ grid-column:2 / 12 } }  /* 본문 10칸 중앙 */
 .pd-body{ min-width:0 }
-.pd-title{ font-size:var(--text-30); font-weight:700; letter-spacing:-.01em; line-height:var(--leading-heading);
+.pd-title{ font-size:var(--text-30); font-weight:var(--w-num); letter-spacing:-.01em; line-height:var(--lh-heading);
   color:var(--accent); margin-bottom:1.5rem; word-break:keep-all }
 .pd-sum{ list-style:none; display:flex; flex-direction:column; gap:.5rem; margin-bottom:2.5rem;
-  font-size:var(--text-20); font-weight:500; color:var(--ink); line-height:var(--leading-body); word-break:keep-all }
+  font-size:var(--text-20); font-weight:var(--w-title); color:var(--ink); line-height:var(--lh-body); word-break:keep-all }
 .pd-fig{ margin:0 0 2.5rem }
 .pd-img{ display:block; width:100%; aspect-ratio:16/9; border-radius:var(--radius-card-sm);
   background:color-mix(in srgb, var(--ink) 6%, var(--white)) }  /* 대표 이미지 자리 */
 .pd-fig figcaption{ margin-top:.75rem; font-size:var(--text-16); color:var(--muted);
-  text-align:center; line-height:var(--leading-body); word-break:keep-all }
-.pd-body > p{ font-size:var(--text-20); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.75);
+  text-align:center; line-height:var(--lh-body); word-break:keep-all }
+.pd-body > p{ font-size:var(--text-20); line-height:var(--lh-body); color:rgba(var(--ink-rgb),.75);
   margin-bottom:1.5rem; word-break:keep-all; text-align:justify }
 .pd-end{ color:var(--muted) }
 /* 액션 바: 텍스트 복사·이미지 다운로드(좌) + 목록보기(우, 다크) */
@@ -2569,7 +2569,7 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
   background:color-mix(in srgb, var(--ink) 6%, var(--white)); color:var(--subtle);
   display:grid; place-items:center }
 .ne-ico svg{ width:2.25rem; height:2.25rem }
-.news-empty p{ font-size:var(--text-22); font-weight:500; color:var(--muted) }
+.news-empty p{ font-size:var(--text-22); font-weight:var(--w-title); color:var(--muted) }
 /* 리스트 — 날짜 | 제목 | 썸네일 영역 (타이포·호버는 FAQ 행과 동일, 클릭 시 상세 이동) */
 .news-list{ list-style:none }
 .news-row{ border-bottom:1px solid var(--line) }
@@ -2577,9 +2577,9 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
   padding:1.5rem; border-radius:var(--radius-card-sm); text-decoration:none; color:inherit;
   background:rgba(var(--surface-rgb),0); transition:background .45s cubic-bezier(.45,0,.55,1) }
 @media (hover:hover){ .nr-link:hover{ background:rgba(var(--surface-rgb),1) } }
-.nr-date{ font-size:var(--text-14); font-weight:500; color:rgba(var(--ink-rgb),.4);
+.nr-date{ font-size:var(--text-14); font-weight:var(--w-title); color:var(--c-mut);
   line-height:2.25rem; font-variant-numeric:tabular-nums }
-.nr-title{ font-size:var(--text-20); font-weight:500; letter-spacing:-.01em; line-height:2.25rem;
+.nr-title{ font-size:var(--text-20); font-weight:var(--w-title); letter-spacing:-.01em; line-height:2.25rem;
   color:var(--ink); word-break:keep-all }
 @media (min-width:640px){ .nr-title{ font-size:var(--text-24) } }
 .nr-thumb{ width:100%; aspect-ratio:3/2; border-radius:var(--radius-card-sm);
@@ -2587,7 +2587,7 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
 @media (max-width:767px){
   .nr-link{ grid-template-columns:1fr; gap:.75rem; padding:1.25rem 1rem }
   .nr-date{ line-height:1 }
-  .nr-title{ font-size:var(--text-18); line-height:var(--leading-heading) }
+  .nr-title{ font-size:var(--text-18); line-height:var(--lh-heading) }
   .nr-thumb{ max-width:20rem }
   .news-search{ margin-left:0; flex:1 } }
 
@@ -2606,11 +2606,11 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
 .bf-thumb{ width:100%; aspect-ratio:1/1; border-radius:var(--radius-card-sm); margin-bottom:1.25rem;
   background:color-mix(in srgb, var(--ink) 6%, var(--white)); transition:transform .35s cubic-bezier(.2,.8,.2,1) }
 @media (hover:hover){ .bf-card:hover .bf-thumb{ transform:translateY(-4px) } }
-.bf-title{ font-size:var(--text-20); font-weight:600; letter-spacing:-.01em; line-height:var(--leading-heading);
+.bf-title{ font-size:var(--text-20); font-weight:var(--w-strong); letter-spacing:-.01em; line-height:var(--lh-heading);
   color:var(--ink); word-break:keep-all }
-.bf-desc{ margin-top:.5rem; font-size:var(--text-14); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.6) }
+.bf-desc{ margin-top:.5rem; font-size:var(--text-14); line-height:var(--lh-body); color:var(--c-body) }
 .bf-tag{ margin-top:1rem; font-size:var(--text-14); line-height:1; padding:.375rem .875rem;
-  border:1px solid rgba(var(--ink-rgb),.15); border-radius:var(--radius-pill); color:rgba(var(--ink-rgb),.6) }
+  border:1px solid rgba(var(--ink-rgb),.15); border-radius:var(--radius-pill); color:var(--c-body) }
 
 /* ============ RESOURCES — 로고 다운로드 (기존 t-gray grouped 카드 문법, 인쇄용·웹용 좌우) ============ */
 .res-logo{ display:grid; grid-template-columns:1fr; gap:1rem }
@@ -2623,7 +2623,7 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
 @media (min-width:640px){ .res-logo .work-card.grouped::before{ margin:-2rem -2rem 1.75rem } }
 .rl-actions{ display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1.25rem }
 .rl-btn{ height:2.75rem; padding:0 1.5rem; border:1px solid rgba(var(--ink-rgb),.15); border-radius:var(--radius-pill);
-  background:transparent; font-size:var(--text-14); font-weight:500; color:var(--ink); cursor:pointer;
+  background:transparent; font-size:var(--text-14); font-weight:var(--w-title); color:var(--ink); cursor:pointer;
   transition:background .2s ease, color .2s ease, border-color .2s ease }
 @media (hover:hover){ .rl-btn:not(:disabled):hover{ background:var(--ink); color:var(--white); border-color:var(--ink) } }
 .rl-btn:disabled{ opacity:.4; cursor:default }
