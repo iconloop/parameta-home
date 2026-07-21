@@ -1533,6 +1533,12 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 .ht2 .ht2-yr{ flex:none; font-weight:var(--w-title); color:var(--c-mut); margin-right:var(--space-16); font-variant-numeric:tabular-nums }   /* 연도: 별도 박스 */
 .ht2 .ht2-tt{ flex:1; min-width:0 }   /* 줄바꿈은 텍스트 시작점 기준 */
 .ht2 .faq-t-bottom .ht2-tt{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap }   /* 닫힘 타이틀 말줄임 (flex 구조로 이관) */
+/* History 전용: 공통 FAQ 롤업 모션 제거 — 타이틀 제자리 고정, 월 리스트만 아래로 펼침 */
+.ht2 .faq-content{ max-height:none !important; overflow:visible }   /* JS 인라인 maxHeight·클립 무력화 */
+.ht2 .faq-inner, .ht2 .faq-item.open .faq-inner{ transform:none }   /* translateY 롤업 제거 */
+.ht2 .faq-t-top{ display:none }   /* 열림·닫힘 타이틀 동일 → 중복 제거, bottom 하나만 정적 사용 */
+.ht2 .faq-t-bottom{ margin-top:0; max-height:none; opacity:1 !important; transform:none !important }
+.ht2 .faq-item.open .faq-t-bottom .ht2-tt{ white-space:normal; overflow:visible; text-overflow:clip }   /* 열리면 전체 표시(줄바꿈) */
 .ht2 .faq-content{ contain:inline-size }   /* nowrap 타이틀의 min-content 전파 차단 (모바일 가로 오버플로우 방지) */
 .ht2 .faq-item.open .ht2-yr{ color:var(--purple-500) }   /* 열리면 연도 보라 */
 @media (hover:hover){ .ht2 .faq-row:hover{ background:transparent } }   /* 호버 배경 제거 */
@@ -1547,6 +1553,7 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
   .ht2 .ht2-faq > .faq-li:first-child{ padding-top:0 }   /* 맨 위 행 위 패딩 삭제 */
   .ht2 .ht2-faq > .faq-li:last-child{ padding-bottom:0 }   /* 맨 아래 행 아래 패딩 삭제 */
   .ht2 .ht2-rows{ padding-block:var(--space-16) }
+  .ht2 .faq-t, .ht2 .ht2-yr{ font-weight:var(--w-strong) }   /* PC 카드 타이틀(연도+문장) 웨이트 업 500→600 */
 }
 .ht2 .faq-item.open .ht2-subwrap{ grid-template-rows:1fr }
 .ht2-rows{ list-style:none; margin:0; padding:0 }
