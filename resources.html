@@ -2377,6 +2377,100 @@ body.media .phero-inner{ padding-bottom:3rem }  /* 히어로 하단 6rem → 3re
   display:grid; place-items:center; transition:transform .2s ease }  /* 박스 R(control) - 인셋 4px = 동심원 정렬 */
 @media (hover:hover){ .ns-btn:hover{ transform:scale(1.05) } }
 .ns-btn svg{ width:1.5rem; height:1.5rem }
+/* ============ PRESS DETAIL — 보도자료 상세 공통 (네이버 뉴스룸 상세 포맷) ============ */
+/* 히어로: 딤 깔린 대표 이미지 배경 + 좌측 정렬 타이틀·날짜 + 우측 공유 버튼 */
+.pd-hero-bg{ position:absolute; inset:0; z-index:0; background-size:cover; background-position:center }
+.pd-hero-bg::after{ content:''; position:absolute; inset:0; background:rgba(var(--ink-rgb),.82) }  /* 딤 */
+body.press .phero{ min-height:0 }  /* 100vh 해제 — 레퍼처럼 밴드형 히어로 */
+body.press .phero{ min-height:60vh; display:flex; flex-direction:column; justify-content:center }  /* 화면 3/5 */
+body.press .phero-inner{ position:relative; z-index:1; width:100%;
+  grid-template-columns:repeat(12,1fr); column-gap:var(--grid-gap);
+  min-height:0; padding:11rem var(--shell-pad) 0 }  /* 상단 GNB 보정, 하단은 메타 줄이 담당 */
+@media (min-width:640px){ body.press .phero-inner{ padding-inline:2rem } }  /* 섹션·오버레이 패딩과 동기화 */
+/* 히어로 메타 줄 — 날짜(좌)·공유(우) 한 줄, 콘텐츠 그리드 정렬 */
+.pd-hero-meta{ position:relative; z-index:1; width:100%; max-width:var(--container-shell);
+  margin:4rem auto 0; padding-inline:var(--shell-pad);
+  display:grid; grid-template-columns:repeat(12,1fr); column-gap:var(--grid-gap) }
+@media (min-width:640px){ .pd-hero-meta{ padding-inline:2rem } }
+.pdm-cell{ grid-column:1 / -1; display:flex; justify-content:space-between; align-items:center }
+@media (min-width:1024px){ .pdm-cell{ grid-column:2 / 12 } }
+.pdm-date{ font-size:var(--text-18); color:rgba(var(--white-rgb),.6) }
+body.press .phero-visual{ display:none }
+body.press .phero-text{ align-items:flex-start; text-align:left;
+  grid-column:1 / -1; max-width:none; margin:0 }
+@media (min-width:1024px){ body.press .phero-text{ grid-column:2 / 12 } }  /* 본문과 동일: 2~11칸 */
+body.press .phero-h1{ max-width:none; font-size:var(--text-32);
+  line-height:var(--leading-heading) }  /* 긴 뉴스 제목 — display(.98) 대신 heading(1.25) 토큰 */
+@media (min-width:640px){ body.press .phero-h1{ font-size:var(--text-40) } }
+@media (min-width:768px){ body.press .phero-h1{ font-size:var(--text-48) } }
+@media (min-width:1024px){ body.press .phero-h1{ font-size:var(--text-60) } }
+body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
+/* 공유 버튼 — 아이콘만: 평소 죽은 흰색, 호버 시 흰색 + 확대 */
+.pd-share{ width:44px; height:44px; flex:none; padding:0; cursor:pointer; border:none; background:transparent;
+  color:rgba(var(--white-rgb),.55);
+  display:grid; place-items:center; will-change:transform;
+  transition:color .22s ease, transform .4s cubic-bezier(.2,.8,.2,1) }
+@media (hover:hover){ .pd-share:hover{ color:var(--white); transform:scale(1.15) } }
+.pd-share svg{ width:1.75rem; height:1.75rem }
+/* 공유 모달 — 기존 modal-panel 문법 준용 */
+#pd-share-modal{ position:fixed; inset:0; z-index:120; display:flex; align-items:center; justify-content:center;
+  opacity:0; pointer-events:none; transition:opacity .25s ease }
+#pd-share-modal.open{ opacity:1; pointer-events:auto }
+.psm-backdrop{ position:absolute; inset:0; background:rgba(var(--ink-rgb),.5) }
+.psm-panel{ position:relative; width:calc(100% - 2.5rem); max-width:26rem; background:var(--white);
+  border-radius:var(--radius-card); padding:2rem; transform:translateY(12px); transition:transform .25s ease }
+#pd-share-modal.open .psm-panel{ transform:none }
+.psm-panel h2{ text-align:center; font-size:var(--text-22); font-weight:600; margin-bottom:1.75rem }
+.psm-close{ position:absolute; right:1rem; top:1rem; width:2.25rem; height:2.25rem; border:none; background:transparent;
+  color:rgba(var(--ink-rgb),.55); cursor:pointer; display:grid; place-items:center; border-radius:var(--radius-pill) }
+@media (hover:hover){ .psm-close:hover{ background:var(--surface); color:var(--ink) } }
+.psm-close svg{ width:1.125rem; height:1.125rem }
+.psm-grid{ list-style:none; display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-bottom:1.75rem }
+.psm-item{ display:flex; flex-direction:column; align-items:center; gap:.625rem; text-decoration:none;
+  font-size:var(--text-14); font-weight:500; color:rgba(var(--ink-rgb),.7) }
+.psm-ico{ width:3.5rem; height:3.5rem; border-radius:var(--radius-control); display:grid; place-items:center;
+  font-weight:700; color:var(--white); border:1px solid var(--line);
+  transition:transform .2s ease }
+@media (hover:hover){ .psm-item:hover .psm-ico{ transform:scale(1.06) } }
+.psm-x{ background:var(--ink); font-size:var(--text-20) }
+.psm-fb{ background:#1877F2; font-size:var(--text-24) }
+.psm-line{ background:#06C755; font-size:var(--text-12); letter-spacing:.02em }
+.psm-mail{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); color:var(--ink) }
+.psm-mail svg{ width:1.5rem; height:1.5rem }
+.psm-url{ display:flex; gap:.5rem }
+.psm-url input{ flex:1; min-width:0; height:2.75rem; padding:0 1rem; border:1px solid rgba(var(--ink-rgb),.15);
+  border-radius:var(--radius-control); font-size:var(--text-14); color:var(--accent); background:var(--white) }
+.psm-copy{ flex:none; height:2.75rem; padding:0 1rem; border:1px solid rgba(var(--ink-rgb),.15);
+  border-radius:var(--radius-control); background:color-mix(in srgb, var(--ink) 6%, var(--white));
+  font-size:var(--text-14); font-weight:600; color:var(--ink); cursor:pointer; transition:background .2s ease }
+@media (hover:hover){ .psm-copy:hover{ background:var(--gray-100) } }
+/* 본문: 중앙 단일 칼럼 — 제목 반복(브랜드 컬러) + 양쪽 정렬 문단 */
+.pd-grid{ display:grid; grid-template-columns:repeat(12,1fr); column-gap:var(--grid-gap) }
+.pd-grid > *{ grid-column:1 / -1 }
+@media (min-width:1024px){ .pd-grid > *{ grid-column:2 / 12 } }  /* 본문 10칸 중앙 */
+.pd-body{ min-width:0 }
+.pd-title{ font-size:var(--text-30); font-weight:700; letter-spacing:-.01em; line-height:var(--leading-heading);
+  color:var(--accent); margin-bottom:1.5rem; word-break:keep-all }
+.pd-sum{ list-style:none; display:flex; flex-direction:column; gap:.5rem; margin-bottom:2.5rem;
+  font-size:var(--text-20); font-weight:600; color:var(--ink); line-height:var(--leading-body); word-break:keep-all }
+.pd-fig{ margin:0 0 2.5rem }
+.pd-img{ display:block; width:100%; aspect-ratio:16/9; border-radius:var(--radius-card-sm);
+  background:color-mix(in srgb, var(--ink) 6%, var(--white)) }  /* 대표 이미지 자리 */
+.pd-fig figcaption{ margin-top:.75rem; font-size:var(--text-16); color:var(--muted);
+  text-align:center; line-height:var(--leading-body); word-break:keep-all }
+.pd-body > p{ font-size:var(--text-20); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.75);
+  margin-bottom:1.5rem; word-break:keep-all; text-align:justify }
+.pd-end{ color:var(--muted) }
+/* 액션 바: 텍스트 복사·이미지 다운로드(좌) + 목록보기(우, 다크) */
+.pd-actions{ margin-top:3rem; display:flex; align-items:center; gap:.75rem; flex-wrap:wrap;
+  padding-top:2rem; border-top:1px solid var(--line) }
+/* 액션 버튼 = 공통 pill 시스템 (hs-scale 호버 포함), 라벨은 hero-cta와 동일 16 */
+.pd-actions .hspring{ font-size:var(--text-16) }
+.pd-actions svg{ width:1.25rem; height:1.25rem }
+.pd-actions .pill:disabled{ opacity:.4; cursor:default }
+.pd-actions .pill:disabled .hspring{ transform:none }
+.pd-list{ margin-left:auto }
+
 /* 검색 결과 없음 — 아이콘 + 안내 문구 */
 .news-empty{ display:flex; flex-direction:column; align-items:center; gap:1.25rem;
   padding:5rem 0; border-bottom:1px solid rgba(var(--ink-rgb),.1) }
@@ -2654,6 +2748,25 @@ const lineObserver = new IntersectionObserver((entries) => {
     }
   });
 }, { threshold: 0.2 });
+/* Press 상세: 히어로 제목을 렌더 줄 단위로 분해 — 자연 줄바꿈도 줄별 스태거 리빌 */
+(function(){
+  const h1 = document.querySelector('body.press .phero-h1');
+  if(!h1) return;
+  const lines = h1.querySelectorAll('.rvl-line');
+  if(lines.length !== 1) return;
+  const src = lines[0].querySelector('span');
+  const text = src.textContent;
+  src.innerHTML = text.split(' ').map(w => '<i class="pdw">' + w + '</i>').join(' ');
+  const words = [...src.querySelectorAll('.pdw')];
+  const rows = [];
+  let top = null;
+  words.forEach(w => {
+    if(w.offsetTop !== top){ rows.push([]); top = w.offsetTop; }
+    rows[rows.length - 1].push(w.textContent);
+  });
+  if(rows.length < 2){ src.textContent = text; return; }
+  h1.innerHTML = rows.map(r => '<span class="rvl-line"><span>' + r.join(' ') + '</span></span>').join('');
+})();
 document.querySelectorAll('[data-line-reveal], [data-line-stagger]').forEach(el => { initLineReveal(el); lineObserver.observe(el); });
 
 /* Track Record 숫자 카운트업 (0→목표, 접두·접미 텍스트 보존) — company 전용 */
@@ -3221,6 +3334,79 @@ if(pressSec){
     inp.value = ''; clearBtn.hidden = true; kw = ''; cur = 1; paintP(); inp.focus();
   });
   paintP();
+}
+/* Press 상세: 본문 텍스트 복사 (clipboard API + execCommand 폴백) */
+const pdCopy = document.querySelector('[data-copy]');
+if(pdCopy){
+  const copyText = async txt => {
+    try { await navigator.clipboard.writeText(txt); return true; }
+    catch(e){
+      const ta = document.createElement('textarea');
+      ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      const ok = document.execCommand('copy'); ta.remove(); return ok;
+    }
+  };
+  pdCopy.addEventListener('click', async () => {
+    const bodyEl = document.querySelector('.pd-body');
+    if(!bodyEl) return;
+    const ok = await copyText(bodyEl.innerText);
+    const label = pdCopy.querySelector('.pd-copy-label');
+    if(!label) return;
+    const orig = label.textContent;
+    label.textContent = ok ? '복사되었습니다' : '복사 실패';
+    setTimeout(() => { label.textContent = orig; }, 1500);
+  });
+}
+/* Press 상세: 전체 이미지 다운로드 — 본문 이미지(data-img·img) 순차 저장 */
+const pdDl = document.querySelector('[data-dl-images]');
+if(pdDl){
+  pdDl.addEventListener('click', async () => {
+    const srcs = [...document.querySelectorAll('.pd-body [data-img]')].map(e => e.dataset.img)
+      .concat([...document.querySelectorAll('.pd-body img')].map(i => i.src));
+    const uniq = [...new Set(srcs)].filter(Boolean);
+    for(const src of uniq){
+      try{
+        const res = await fetch(src);
+        const blob = await res.blob();
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = src.split('/').pop().split('?')[0] || 'image';
+        document.body.appendChild(a); a.click(); a.remove();
+        URL.revokeObjectURL(a.href);
+      }catch(e){}
+    }
+  });
+}
+/* Press 상세: 공유하기 모달 — SNS 링크 + URL 복사 */
+const pdShare = document.querySelector('.pd-share');
+const psModal = document.getElementById('pd-share-modal');
+if(pdShare && psModal){
+  const urlInput = psModal.querySelector('.psm-url input');
+  const copyBtn = psModal.querySelector('.psm-copy');
+  const links = {
+    x:    u => 'https://twitter.com/intent/tweet?url=' + u + '&text=' + encodeURIComponent(document.title),
+    fb:   u => 'https://www.facebook.com/sharer/sharer.php?u=' + u,
+    line: u => 'https://social-plugins.line.me/lineit/share?url=' + u,
+    mail: u => 'mailto:?subject=' + encodeURIComponent(document.title) + '&body=' + u,
+  };
+  const openM = () => {
+    const u = encodeURIComponent(location.href);
+    psModal.querySelectorAll('[data-share]').forEach(a => { a.href = links[a.dataset.share](u); });
+    urlInput.value = location.href;
+    psModal.classList.add('open'); psModal.setAttribute('aria-hidden', 'false');
+  };
+  const closeM = () => { psModal.classList.remove('open'); psModal.setAttribute('aria-hidden', 'true'); };
+  pdShare.addEventListener('click', openM);
+  psModal.querySelectorAll('[data-psm-close]').forEach(el => el.addEventListener('click', closeM));
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') closeM(); });
+  if(copyBtn) copyBtn.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(urlInput.value); }
+    catch(e){ urlInput.select(); document.execCommand('copy'); }
+    const orig = copyBtn.textContent;
+    copyBtn.textContent = '복사됨';
+    setTimeout(() => { copyBtn.textContent = orig; }, 1500);
+  });
 }
 
 /* dev grid toggle */
