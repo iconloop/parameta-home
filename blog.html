@@ -2208,7 +2208,7 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
   --pager-ico:1.5rem;          /* 화살표 아이콘 24px */
   --pager-gap:.5rem;
   display:flex; justify-content:center; align-items:center; gap:var(--pager-gap); margin-top:var(--space-48) }
-.pager button{ min-width:var(--pager-btn); height:var(--pager-btn); padding:0 .5rem; border:none; background:transparent;
+.pager button{ width:var(--pager-btn); height:var(--pager-btn); padding:0; border:none; background:transparent;  /* 고정 원 — 호버·셀렉티드 동일 */
   border-radius:var(--radius-pill); font-size:var(--text-18); font-weight:500; line-height:1;
   color:rgba(var(--ink-rgb),.55); cursor:pointer;
   display:inline-flex; align-items:center; justify-content:center;
@@ -2464,7 +2464,7 @@ body.press .phero-inner{ position:relative; z-index:1; width:100%;
 @media (min-width:640px){ .pd-hero-meta{ padding-inline:2rem } }
 .pdm-cell{ grid-column:1 / -1; display:flex; justify-content:space-between; align-items:center }
 @media (min-width:1024px){ .pdm-cell{ grid-column:2 / 12 } }
-.pdm-date{ font-size:var(--text-18); color:rgba(var(--white-rgb),.6) }
+.pdm-date{ font-size:var(--text-20); color:rgba(var(--white-rgb),.6) }
 body.press .phero-visual{ display:none }
 body.press .phero-text{ align-items:flex-start; text-align:left;
   grid-column:1 / -1; max-width:none; margin:0 }
@@ -2536,7 +2536,7 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
   font-size:var(--text-20); font-weight:500; color:var(--ink); line-height:var(--leading-body); word-break:keep-all }
 .pd-fig figcaption{ margin-top:.75rem; font-size:var(--text-16); color:var(--muted);
   text-align:center; line-height:var(--lh-body); word-break:keep-all }
-.pd-body > p{ font-size:var(--text-body); line-height:var(--lh-body); color:rgba(var(--ink-rgb),.75);
+.pd-body > p{ font-size:var(--text-body); line-height:var(--lh-body); color:rgba(var(--ink-rgb),.75);  /* 시맨틱 토큰(오리진 공통) 준수 */
   margin-bottom:1.5rem; word-break:keep-all; text-align:justify }
 .pd-end{ color:var(--muted) }
 /* 액션 바: 텍스트 복사·이미지 다운로드(좌) + 목록보기(우, 다크) */
@@ -2564,20 +2564,22 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
 /* 리스트 — 날짜 | 제목 | 썸네일 영역 (타이포·호버는 FAQ 행과 동일, 클릭 시 상세 이동) */
 .news-list{ list-style:none }
 .news-row{ border-bottom:1px solid var(--line) }
-.nr-link{ display:grid; grid-template-columns:6rem 1fr 15rem; align-items:center; gap:var(--grid-gap);
-  padding:1.5rem; border-radius:var(--radius-card-sm); text-decoration:none; color:inherit;
+.nr-link{ display:grid; grid-template-columns:7rem 1fr 15rem; align-items:center; gap:var(--grid-gap);  /* 날짜 칼럼 +1rem — 제목과 간격 */
+  padding:1.5rem 0; border-radius:var(--radius-card-sm); text-decoration:none; color:inherit;
   background:rgba(var(--surface-rgb),0); transition:background .45s cubic-bezier(.45,0,.55,1) }
-@media (hover:hover){ .nr-link:hover{ background:rgba(var(--surface-rgb),1) } }
-.nr-date{ font-size:var(--text-14); font-weight:var(--w-title); color:var(--c-mut);
+/* 행 호버: 배경 필 대신 제목 색 전환 */
+@media (hover:hover){ .nr-link:hover .nr-title{ color:var(--accent) } }
+.nr-date{ font-size:var(--text-16); font-weight:var(--w-title); color:var(--c-mut);
   line-height:2.25rem; font-variant-numeric:tabular-nums }
 .nr-title{ font-size:var(--text-20); font-weight:var(--w-title); letter-spacing:-.01em; line-height:2.25rem;
+  transition:color .2s ease;
   color:var(--ink); word-break:keep-all }
 @media (min-width:640px){ .nr-title{ font-size:var(--text-24) } }
 .nr-thumb{ width:100%; aspect-ratio:3/2; border-radius:var(--radius-card-sm);
   background-color:color-mix(in srgb, var(--ink) 6%, var(--white));
   background-size:cover; background-position:center; background-repeat:no-repeat }
 @media (max-width:767px){
-  .nr-link{ grid-template-columns:1fr; gap:.75rem; padding:1.25rem 1rem }
+  .nr-link{ grid-template-columns:1fr; gap:.75rem; padding:1.25rem 0 }
   .nr-date{ line-height:1 }
   .nr-title{ font-size:var(--text-18); line-height:var(--lh-heading) }
   .nr-thumb{ max-width:20rem }
@@ -3290,8 +3292,8 @@ function paintPager(pager, sec, cur, real, go){
   };
   const dots = () => { const sp = document.createElement('span'); sp.className = 'pager-dots'; sp.textContent = '…'; pager.appendChild(sp); };
   mk('prev', cur-1, false, cur <= 1);
-  /* 슬라이딩 윈도 5개 + … + 마지막 (예: 2 3 4 5 6 … 12). 5페이지 이하는 기존처럼 빈 페이지 disabled */
-  let start = Math.max(1, cur - 3);
+  /* 슬라이딩 윈도 5개 + … + 마지막 — 현재 페이지가 창 가운데 (예: 6 → 4 5 6 7 8 … 12) */
+  let start = Math.max(1, cur - 2);
   if(real > 5) start = Math.min(start, real - 4);
   for(let n = start; n <= start + 4; n++){
     if(n > real && real > 5) break;
