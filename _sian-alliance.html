@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>시안 v2 — Alliance (1st 패널 맥락 포함)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{ --ink:#0E0C27; --ink-rgb:14,12,39; --purple:#6100FF; --line:rgba(14,12,39,.12); --muted:rgba(14,12,39,.55) }
+*{ box-sizing:border-box; margin:0 }
+body{ font-family:'Onest','Pretendard Variable',Pretendard,sans-serif; color:var(--ink); background:#fff; padding:48px 32px 120px; word-break:keep-all }
+.sian{ max-width:1100px; margin:0 auto 120px }
+.tag{ display:inline-block; font-size:13px; font-weight:700; color:var(--purple); border:1px solid currentColor; border-radius:999px; padding:6px 14px; margin-bottom:12px }
+.note{ font-size:14px; color:var(--muted); margin-bottom:28px }
+
+/* ── 공통: 1st 패널 축약 목업 (맥락용) ── */
+.ctx{ background-color:rgba(var(--ink-rgb),.04); border-radius:24px; padding:40px;
+  background-image:radial-gradient(rgba(var(--ink-rgb),.06) 1px, transparent 1.5px); background-size:20px 20px;
+  display:grid; grid-template-columns:1.2fr 2.8fr; gap:48px; align-items:center; opacity:.55 }
+.ctx .n{ font-size:96px; font-weight:700; letter-spacing:-.04em; text-align:center; line-height:.9 }
+.ctx .n i{ font-style:normal; font-size:.38em }
+.ctx .cap{ text-align:center; font-size:15px; font-weight:500; color:var(--muted); margin-top:8px }
+.ctx li{ list-style:none; display:flex; gap:12px; align-items:center; padding:10px 0; font-size:15px; font-weight:500 }
+.ctx li + li{ border-top:1px solid rgba(var(--ink-rgb),.09) }
+.ctx .chip{ font-size:12px; font-weight:500; padding:5px 12px; border-radius:999px; background:rgba(97,0,255,.09); color:#4A00C4 }
+
+/* ── 공통: 로고 마퀴 목업 ── */
+.mq{ display:flex; gap:40px; align-items:center; overflow:hidden; padding:28px 0; -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent) }
+.mq span{ flex:none; width:112px; height:30px; border-radius:6px; background:rgba(var(--ink-rgb),.12) }
+
+.h-sent{ font-size:22px; font-weight:700; line-height:1.35 }
+
+/* 시안 A: 좌 문장 / 우 메타 */
+.a-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:40px; margin:56px 0 8px }
+.a-meta{ text-align:right; font-size:15px; color:var(--muted); line-height:1.9 }
+.a-meta b{ color:var(--ink); font-weight:600 }
+
+/* 시안 B: 문장 → 마퀴 → 캡션 */
+.b-head{ margin:56px 0 8px }
+.b-cap{ display:flex; justify-content:center; gap:28px; flex-wrap:wrap; font-size:15px; color:var(--muted); padding-top:20px; border-top:1px solid rgba(var(--ink-rgb),.08); margin-top:4px }
+.b-cap b{ color:var(--ink); font-weight:600 }
+
+/* 시안 C: 카피 통합 */
+.c-head{ margin:56px 0 8px; max-width:760px }
+.c-head .h-big{ font-size:28px; font-weight:600; line-height:1.45 }
+.c-head .h-big em{ font-style:normal; font-weight:700; color:var(--purple) }
+
+/* 시안 D: 문장 + 미니 필 */
+.d-head{ display:flex; justify-content:space-between; align-items:center; gap:40px; margin:56px 0 8px }
+.d-pills{ display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end }
+.d-pill{ font-size:14px; font-weight:500; border:1px solid var(--line); border-radius:999px; padding:9px 16px; white-space:nowrap }
+.d-pill b{ font-weight:600 }
+.d-pill i{ font-style:normal; color:var(--muted); margin-left:6px }
+.mq-label{ font-size:13px; font-weight:500; letter-spacing:.06em; color:var(--muted); margin:40px 0 -12px }
+
+@media (max-width:767px){
+  .ctx{ grid-template-columns:1fr; gap:24px } .ctx .n{ font-size:64px }
+  .a-head,.d-head{ flex-direction:column; align-items:flex-start } .a-meta{ text-align:left }
+  .d-pills{ justify-content:flex-start }
+}
+</style>
+</head>
+<body>
+
+<div class="sian">
+  <span class="tag">시안 A — 좌 문장 / 우 텍스트 메타</span>
+  <p class="note">얼라이언스를 도형 없이 순수 텍스트 메타로. 1st 패널과 경쟁하는 시각 요소 제로 — 마퀴가 곧바로 증거 역할.</p>
+  <div class="ctx"><div><div class="n">1<i>st</i></div><div class="cap">세계·국내 최초 4건</div></div><ul style="padding:0"><li><span class="chip">세계 최초</span>블록체인 공동인증 상용화</li><li><span class="chip">국내 최초</span>금융권 DID 실명인증 상용화</li><li><span class="chip">국내 최초</span>블록체인 서비스 CSAP 인증</li><li><span class="chip">국내 최초</span>W3C DID Method Registry 등재</li></ul></div>
+  <div class="a-head">
+    <p class="h-sent">주요 얼라이언스 파트너와 함께<br>블록체인 생태계를 만들어갑니다</p>
+    <div class="a-meta">
+      <div><b>Stablecoin Alliance</b> 초대 의장사</div>
+      <div><b>MyID Alliance</b> 의장사</div>
+      <div><b>86+</b> 파트너사</div>
+    </div>
+  </div>
+  <div class="mq"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+</div>
+
+<div class="sian">
+  <span class="tag">시안 B — 문장 → 마퀴 → 하단 캡션</span>
+  <p class="note">마퀴를 먼저 보여주고, 협의체·86+는 마퀴 아래 한 줄 캡션으로. 로고(증거) 먼저, 타이틀(주장)은 나중 — 편집 리듬이 달라짐.</p>
+  <div class="ctx"><div><div class="n">1<i>st</i></div><div class="cap">세계·국내 최초 4건</div></div><ul style="padding:0"><li><span class="chip">세계 최초</span>블록체인 공동인증 상용화</li><li><span class="chip">국내 최초</span>금융권 DID 실명인증 상용화</li><li><span class="chip">국내 최초</span>블록체인 서비스 CSAP 인증</li><li><span class="chip">국내 최초</span>W3C DID Method Registry 등재</li></ul></div>
+  <div class="b-head"><p class="h-sent">주요 얼라이언스 파트너와 함께<br>블록체인 생태계를 만들어갑니다</p></div>
+  <div class="mq"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+  <div class="b-cap">
+    <span><b>Stablecoin Alliance</b> 초대 의장사</span>
+    <span><b>MyID Alliance</b> 의장사</span>
+    <span><b>86+</b> 파트너사</span>
+  </div>
+</div>
+
+<div class="sian">
+  <span class="tag">시안 C — 카피에 전부 통합</span>
+  <p class="note">문장 하나가 협의체·86+를 다 품음 (하이라이트만 보라). 별도 요소 완전 제로 — 문장 → 마퀴 끝. 제일 과감한 미니멀.</p>
+  <div class="ctx"><div><div class="n">1<i>st</i></div><div class="cap">세계·국내 최초 4건</div></div><ul style="padding:0"><li><span class="chip">세계 최초</span>블록체인 공동인증 상용화</li><li><span class="chip">국내 최초</span>금융권 DID 실명인증 상용화</li><li><span class="chip">국내 최초</span>블록체인 서비스 CSAP 인증</li><li><span class="chip">국내 최초</span>W3C DID Method Registry 등재</li></ul></div>
+  <div class="c-head">
+    <p class="h-big">Stablecoin·MyID 얼라이언스 <em>의장사</em>로서,<br><em>86개 이상의 파트너</em>와 함께 블록체인 생태계를 만들어갑니다</p>
+  </div>
+  <div class="mq"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+</div>
+
+<div class="sian">
+  <span class="tag">시안 D — 문장 + 미니 필 + 마퀴 라벨</span>
+  <p class="note">협의체는 아주 작은 필 2개(우측), 86+는 마퀴 위 라벨("PARTNERS 86+")로 분리 — 각 정보가 제일 조용한 자리로 흩어짐.</p>
+  <div class="ctx"><div><div class="n">1<i>st</i></div><div class="cap">세계·국내 최초 4건</div></div><ul style="padding:0"><li><span class="chip">세계 최초</span>블록체인 공동인증 상용화</li><li><span class="chip">국내 최초</span>금융권 DID 실명인증 상용화</li><li><span class="chip">국내 최초</span>블록체인 서비스 CSAP 인증</li><li><span class="chip">국내 최초</span>W3C DID Method Registry 등재</li></ul></div>
+  <div class="d-head">
+    <p class="h-sent">주요 얼라이언스 파트너와 함께<br>블록체인 생태계를 만들어갑니다</p>
+    <div class="d-pills">
+      <span class="d-pill"><b>Stablecoin Alliance</b><i>초대 의장사</i></span>
+      <span class="d-pill"><b>MyID Alliance</b><i>의장사</i></span>
+    </div>
+  </div>
+  <div class="mq-label">PARTNERS — 86+ 파트너사</div>
+  <div class="mq"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+</div>
+
+</body>
+</html>

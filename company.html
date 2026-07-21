@@ -887,7 +887,14 @@ body.show-grid #dev-grid{ display:block }
 }
 /* 공통 서브타이틀(.sub-t): 섹션 내 소제목 — Alliance(.ally-num)와 동일 스타일.
    마크업: <span class="sub-t" data-line-reveal><span class="rvl-line"><span>텍스트</span></span></span> → 스크롤 인 시 줄 마스크 리빌 */
-.sub-t{ display:block; font-size:var(--text-22); font-weight:700; color:var(--ink); line-height:1 }
+.sub-t{ display:block; font-size:var(--text-26); font-weight:700; color:var(--ink); line-height:var(--leading-heading) }   /* 서브타이틀 22→26, 행간 1.25 */
+/* 공통 메타 라벨(.meta-t): 섹션 내 소소한 구분 라벨 (마퀴 라벨 등).
+   ※ 기존 유사 스타일(rc-label 옛 정의 등)은 타 페이지 사용 중 — 전 페이지 이관 완료 후 제거 예정 */
+.meta-t{ display:block; font-size:var(--text-14); font-weight:500; letter-spacing:.06em;
+  color:rgba(var(--ink-rgb),.55); text-transform:uppercase }
+/* 모바일 전용 줄바꿈: <br class="br-m"> — ≤639에서만 개행 */
+.br-m{ display:none }
+@media (max-width:639px){ .br-m{ display:inline } }
 /* ============ SUBPAGE HERO ============ */
 .phero{ position:relative; isolation:isolate; overflow:hidden; border-radius:0 0 var(--radius-card) var(--radius-card);
   background:linear-gradient(to bottom, var(--surface), var(--gray-200)) }
@@ -1077,9 +1084,9 @@ body.company .firsts .chair-badge .pm-mark img{ height:4rem; width:auto; max-wid
 body.company .firsts .chair-badge i{ font-size:var(--text-20); font-style:normal; font-weight:500; color:var(--ink) }  /* 본문 검정(잉크)과 동일 토큰 + 한 토큰 업 */
 /* firsts 카드: ParaSta ps-flow 밴드 스타일 — 화이트 + 소프트 보더 + 그림자 */
 body.company .firsts .work-card{ min-height:0; border-radius:var(--radius-card-sm); padding:1.75rem 2rem;
-  background:var(--white); border:1px solid rgba(var(--ink-rgb),.14); box-shadow:0 8px 24px rgba(var(--ink-rgb),.06);
-  transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s }
-@media (hover:hover){ body.company .firsts .work-card:hover{ transform:scale(1.03); box-shadow:0 16px 40px rgba(var(--ink-rgb),.1) } }
+  background:var(--white); border:1px solid rgba(var(--ink-rgb),.14);
+  transition:transform .35s cubic-bezier(.2,.8,.2,1) }   /* 쉐도우 없음 — firsts 전용 처리 */
+@media (hover:hover){ body.company .firsts .work-card:hover{ transform:scale(1.03) } }
 body.company .firsts .work-card .work-bottom{ position:static; inset:auto }  /* 이미지 카드용 하단 고정 해제 → 일반 패딩 */
 /* 얼라이언스 노드: 좌측 아이콘 영역 (로고 플레이스홀더 원) */
 body.company .firsts .work-card{ display:flex; align-items:center; gap:var(--space-20) }
@@ -1112,7 +1119,7 @@ body.company .tr-flush .cards-3 li:nth-child(3) .work-card.grouped::before{ back
 /* ≤767: 이미지 제거, 3개를 한 박스 안 3칸(스탯 바)으로 */
 @media (max-width:767px){
   body.company .tr-flush .cards-3{ grid-template-columns:repeat(3,1fr); gap:0;
-    background-color:rgba(var(--ink-rgb),.04); border-radius:var(--radius-card-sm); padding:var(--space-24) 0;
+    background-color:rgba(var(--ink-rgb),.04); border-radius:var(--radius-card-sm); padding:clamp(var(--space-24), 5.5vw, var(--space-40)) 0;   /* 위아래 여유: 화면 폭 가변 */
     background-image:radial-gradient(rgba(var(--ink-rgb),.06) 1px, transparent 1.5px); background-size:20px 20px }  /* firsts 패널과 동일한 그레이+닷 */
   body.company .tr-flush .cards-3 > li + li{ position:relative }
   body.company .tr-flush .cards-3 > li + li::before{ content:''; position:absolute; left:0; top:50%;
@@ -1120,13 +1127,18 @@ body.company .tr-flush .cards-3 li:nth-child(3) .work-card.grouped::before{ back
   body.company .tr-flush .work-card.grouped{ background:transparent; border-radius:0; overflow:visible }
   body.company .tr-flush .work-card.grouped::before{ display:none }   /* 이미지 영역 제거 */
   body.company .tr-flush .work-bottom{ margin-top:0; padding:0 var(--space-16); text-align:center }
-  body.company .tr-flush .work-meta{ margin-bottom:var(--space-8); justify-content:center }  /* Since 2016 센터 (기본 flex space-between 해제) */
-  body.company .tr-flush .work-card h3{ font-size:var(--text-22) }   /* 640~767: 한 토큰 다운(24→22) */
-  body.company .tr-flush .work-bottom p{ font-size:var(--text-14) }
+  body.company .tr-flush .work-meta{ margin-bottom:var(--space-8); justify-content:center; font-size:clamp(var(--text-14), 2.5vw, var(--text-16)) }  /* Since 2016 센터 + 가변 */
+  body.company .tr-flush .work-card h3{ font-size:clamp(var(--text-24), 4.2vw, var(--text-36)) }   /* 640~767: 화면 폭 가변(vw), 토큰으로 상하한 */
+  body.company .tr-flush .work-bottom p{ font-size:clamp(var(--text-14), 2.2vw, var(--text-16)) }   /* 설명: 화면 폭 가변 */
 }
 @media (max-width:639px){
-  body.company .tr-flush .work-card h3{ font-size:var(--text-20); white-space:nowrap }   /* 수치 두 토큰 다운 + 줄바꿈 금지 */
-  body.company .tr-flush .work-bottom{ padding:0 var(--space-8) }   /* 좁은 칸: 안쪽 패딩 축소 */
+  body.company .tr-flush .cards-3{ grid-template-columns:1fr; padding:var(--space-16) var(--space-24) }   /* 가로 3칸 → 세로 리스트, 좌우 패딩 추가 */
+  body.company .tr-flush .cards-3 > li{ padding-block:var(--space-20) }
+  body.company .tr-flush .work-bottom{ text-align:left; padding:0 }   /* 리스트: 좌측정렬, 좌우 패딩 제거(박스 패딩만) */
+  body.company .tr-flush .work-meta{ justify-content:flex-start; font-size:clamp(var(--text-16), 2.5vw, var(--text-18)) }
+  body.company .tr-flush .work-bottom p{ font-size:clamp(var(--text-18), 2.2vw, var(--text-20)) }   /* 설명 한 토큰 업 */
+  body.company .tr-flush .cards-3 > li + li::before{ top:0; left:0; transform:none; width:100%; height:1px }   /* 디바이더 풀폭 */
+  body.company .tr-flush .cards-3 .work-card h3{ font-size:clamp(var(--text-26), 4.2vw, var(--text-30)); white-space:nowrap }   /* 수치 한 토큰 업 */
 }   /* base 뒤에 있어야 이김 (특이도 동일) */
 /* Recognition 카드: 상단에 실제 인증 로고 들어갈 아이콘 영역 (플레이스홀더 원) — 오프셋은 공통 카드 패딩(1.5rem, ≥640px 2rem)과 동기화 */
 body.company .recog .work-card::before{ content:''; position:absolute; top:1.5rem; left:1.5rem;
@@ -1446,8 +1458,8 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 @media (min-width:640px){ .sec-h2{ font-size:var(--text-40) } }   /* 태블릿: 데스크톱보다 한 단계 작게 */
 /* 태블릿·모바일(≤1023): 섹션 리드(및 리드 없는 타이틀) 아래 간격 축소 3rem→2rem — 전 서브페이지 공통 */
 @media (max-width:1023px){
-  .sec-lead, .sh-center .sec-lead{ margin-bottom:2rem }
-  .sec-h2:not(.has-lead){ margin-bottom:2rem }
+  .sec-lead, .sh-center .sec-lead{ margin-bottom:clamp(var(--space-16), 4.5vw, var(--space-32)) }   /* 화면 폭 가변 (4.5vw 사용자 확정) */
+  .sec-h2:not(.has-lead){ margin-bottom:clamp(var(--space-16), 2.5vw, var(--space-32)) }
 }
 @media (min-width:1024px){ .sec-h2{ font-size:var(--text-48) } }
 /* 태블릿 이하: 서브카피·바디카피 한 톤 작게 (text-20 → text-18) */
@@ -1747,12 +1759,10 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
   font-size:var(--text-16); font-weight:600; color:var(--ink) }
 .chair-badge .chair-div{ width:1px; height:1rem; background:rgba(var(--ink-rgb),.2); flex:none }
 /* 얼라이언스 마퀴: 타이틀(좌) + 로고 마퀴(우) */
-.ally-marquee-wrap{ display:grid; grid-template-columns:auto minmax(0,1fr); align-items:center; gap:2rem;
-  margin-top:3.5rem }
+.ally-marquee-wrap{ display:block; margin-top:3.5rem }   /* 시안 D: 라벨 위 / 마퀴 아래 세로 배치 (옛 2열 그리드 폐기) */
 .ally-num{ display:block; font-size:var(--text-28); font-weight:700; color:var(--ink); line-height:1 }
 .ally-cap{ display:block; font-size:var(--text-16); color:rgba(var(--ink-rgb),.55); margin-top:.375rem }
 .ally-logos, .ally-marquee-wrap .pt-marquee{ margin:0 }
-@media (max-width:639px){ .ally-marquee-wrap{ grid-template-columns:1fr; gap:1.25rem } }
 /* History 타임라인 (C안): 좌측 레일 + 노드 + 큰 연도 + 그레이 카드 */
 .ht-list{ list-style:none; margin:0; padding:0 0 0 2rem; position:relative }
 .ht-list::before{ content:''; position:absolute; left:5px; top:.5rem; bottom:.5rem; width:2px; background:var(--gray-100) }
@@ -2199,10 +2209,9 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 
 /* ══ 검수 시안: ① Recognition 칩 통합(Track Record 하단) ② Industry Firsts 1st 앵커 재구성 ══ */
 /* ① 인증·수상 칩 — 독립 섹션 대신 Track Record 숫자 카드 아래 한 줄 증거 밴드 */
-.recog-chips{ margin-top:var(--space-80) }   /* 디바이더 삭제, 위 간격 48→80 */
-@media (min-width:768px) and (max-width:1023px){ .recog-chips{ margin-top:var(--space-48) } }   /* 태블릿: 카드↔인증수상 간격 축소 */
-.recog-chips .rc-label{ margin-bottom:var(--space-40) }   /* 스타일은 .sub-t 공통 토큰, 로고와 간격 24→40 */
-@media (min-width:768px) and (max-width:1023px){ .recog-chips .rc-label{ margin-bottom:var(--space-32) } }   /* 태블릿: 타이틀↔아이콘 간격 축소 */
+.recog-chips{ margin-top:clamp(var(--space-24), 5.2vw, var(--space-80)) }   /* 위 간격: 화면 폭 가변 (768≈40, 1440≈75, 상한 80) */
+@media (max-width:767px){ .recog-chips{ margin-top:clamp(var(--space-24), 4.7vw, var(--space-40)) } }   /* 모바일: 가변 (375≈23, 640≈30) */
+.recog-chips .rc-label{ margin-bottom:clamp(var(--space-12), 3.125vw, var(--space-40)) }   /* 타이틀↔로고: 화면 폭 가변 (640≈20px, 상한 40) */
 /* 인증·수상 무한 스와이프 — [로고 위 / 수상명 아래] 셀, 기존 ptScroll 재사용 */
 .aw-marquee{ overflow:hidden;
   mask-image:linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
@@ -2211,12 +2220,12 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 .aw-marquee:hover .pt-track{ animation-play-state:paused }
 
 .aw-set{ display:flex; align-items:flex-start; gap:0; padding-right:0 }
-.aw-item{ display:flex; flex-direction:column; align-items:center; gap:1.25rem;
-  width:12.5rem; margin:0 1.25rem; text-align:center }
-.aw-logo{ position:relative; width:4.75rem; height:4.75rem; border-radius:1.125rem;
-  background:#fff; border:1px solid var(--line);
-  display:flex; align-items:center; justify-content:center }
-.aw-logo img{ max-width:68%; max-height:68%; width:auto; height:auto; object-fit:contain }
+.aw-item{ display:flex; flex-direction:column; align-items:center; gap:1rem;
+  width:12.5rem; margin:0 .75rem; text-align:center }   /* 아이템 사이 간격 축소 (40→24px) */
+.aw-logo{ position:relative; width:4.75rem; height:4.75rem;
+  display:flex; align-items:center; justify-content:center }  /* 박스 제거 — 로고 SVG가 자체 완결형 */
+.aw-logo img{ max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain }  /* 68%→100% */
+@media (max-width:639px){ .aw-logo{ width:3.5rem; height:3.5rem } }   /* 모바일: 로고 축소 (4.75→3.5rem) — base 뒤 */
 .aw-logo img:not([style*="none"]) + i{ display:none } /* 로고 파일 있으면 약칭 숨김 */
 .aw-logo i{ font-style:normal; font-family:'Departure Mono',monospace; font-size:var(--text-14);
   font-weight:400; color:var(--gray-400); letter-spacing:.02em }
@@ -2226,23 +2235,23 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 @media (max-width:640px){ .aw-item{ width:10rem; margin:0 .875rem } }
 
 /* ② Industry Firsts — 집계(1st)를 크게, 개별 항목은 작게 */
-.firsts-hero{ display:grid; grid-template-columns:auto 1fr; align-items:center; gap:clamp(2.5rem,6vw,5.5rem);
+.firsts-hero{ display:grid; grid-template-columns:1.2fr 2.8fr; align-items:center; gap:clamp(2.5rem,6vw,5.5rem);   /* 1st 영역 확장 (auto→30%) */
   background-color:rgba(var(--ink-rgb),.04); border-radius:var(--radius-card);
   padding:3rem clamp(1.5rem,4vw,3.5rem);
   background-image:radial-gradient(rgba(var(--ink-rgb),.06) 1px, transparent 1.5px); background-size:20px 20px }
 .fh-big{ display:flex; flex-direction:column; align-items:center; gap:.75rem }
 .fh-num{ font-weight:700; line-height:.85; color:var(--ink); letter-spacing:-.04em; font-size:clamp(6rem,11vw,9.5rem) }
-.fh-num .st{ font-size:.38em; font-weight:700; color:var(--accent); vertical-align:1.05em; letter-spacing:0; margin-left:.04em }
-.fh-cap{ font-size:var(--text-14); color:var(--muted); white-space:nowrap }
+.fh-num .st{ font-size:.38em; font-weight:700; color:var(--ink); vertical-align:baseline; letter-spacing:0; margin-left:.04em }   /* st를 1 하단(베이스라인)에 정렬 */
+.fh-cap{ font-size:var(--text-18); font-weight:500; color:var(--muted); white-space:nowrap }   /* 2토큰 업(14→18) + 웨이트 500 */
 .fh-list li{ display:flex; align-items:center; gap:.9rem; padding-block:1rem;
-  font-size:var(--text-16); font-weight:500; color:var(--ink); line-height:1.4 }
+  font-size:var(--text-20); font-weight:500; color:var(--ink); line-height:1.4 }   /* 두 토큰 업(16→20) */
 .fh-list li + li{ border-top:1px solid rgba(var(--ink-rgb),.09) }
-.fh-chip{ flex:none; font-size:var(--text-12); font-weight:700; letter-spacing:.02em;
-  padding:.3rem .7rem; border-radius:999px; background:rgba(97,0,255,.09); color:var(--purple-600) }
+.fh-chip{ flex:none; font-size:var(--text-16); font-weight:500; letter-spacing:.02em;   /* 두 토큰 업(12→16), 웨이트 500 */
+  padding:.5rem 1rem; border-radius:999px; background:rgba(97,0,255,.09); color:var(--purple-600) }   /* 알약 확대 (.3/.7→.5/1rem) */
 .fh-chip.world{ background:var(--purple-500); color:#fff }
 .fh-chip.lead{ background:rgba(var(--ink-rgb),.07); color:var(--ink) }
 .fh-list li.fh-ally{ margin-top:.5rem; padding-top:1.5rem }
-.fh-sub{ margin-left:auto; padding-left:1rem; font-size:var(--text-14); font-weight:400; color:var(--muted); white-space:nowrap }
+.fh-sub{ margin-left:auto; padding-left:1rem; font-size:var(--text-18); font-weight:400; color:var(--muted); white-space:nowrap }   /* 두 토큰 업(14→18) */
 @media (max-width:767px){
   .firsts-hero{ grid-template-columns:1fr; gap:1.75rem; padding:2rem 1.25rem }
   .fh-num{ font-size:5.5rem }
@@ -2256,7 +2265,20 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 @media (max-width:767px){ .ht-era-label{ white-space:normal } }  /* 긴 라벨이 뷰포트 밖으로 밀려 가로 스크롤 만드는 것 방지 */
 .ht-sub li .m{ color:var(--muted); margin-right:.6rem; font-variant-numeric:tabular-nums; white-space:nowrap }
 /* Alliance 소절 카드 위 여백 */
-.firsts-eco .cards-2{ margin-top:var(--space-16) }
+/* 시안 D: 좌 문장(.sub-t) / 우 미니 필 2개, 86+는 마퀴 라벨 */
+.firsts-eco .eco-head{ display:flex; justify-content:space-between; align-items:center; gap:var(--space-40) }
+.firsts-eco .eco-pills{ display:flex; gap:var(--space-8); flex-wrap:wrap; justify-content:flex-end }
+.firsts-eco .eco-pill{ font-size:var(--text-16); border:1px solid rgba(var(--ink-rgb),.12); border-radius:var(--radius-pill);
+  padding:.625rem 1.125rem; white-space:nowrap; color:var(--ink) }
+.firsts-eco .eco-pill b{ font-weight:600 }
+.firsts-eco .eco-pill i{ font-style:normal; color:rgba(var(--ink-rgb),.55); margin-left:.375rem }
+@media (max-width:767px){
+  .firsts-eco .eco-head{ flex-direction:column; align-items:flex-start; gap:var(--space-20) }
+  .firsts-eco .eco-pills{ justify-content:flex-start }
+}
+body.company .firsts-eco .ally-head{ text-align:left }   /* 얼라이언스 문장 좌측 정렬 (스탯 로우 확정 후 변경) */
+.firsts-eco{ margin-top:clamp(var(--space-24), 5.2vw, var(--space-80)) }   /* 인증수상(recog-chips)과 동일 가변 커브 */
+@media (max-width:767px){ .firsts-eco{ margin-top:clamp(var(--space-24), 4.7vw, var(--space-40)) } }
 
 /* ============ MEDIA 공통(newsroom·blog·resources) — 첫 섹션을 히어로에 붙임 (contact 방식) ============ */
 body.media .phero + section .sec{ padding-top:var(--space-32) }
@@ -2469,7 +2491,7 @@ body.media .phero-inner{ padding-bottom:3rem }  /* 히어로 하단 6rem → 3re
   </section>
 
 <section class="tr-flush"><div class="shell sec">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Track Record</div><h2 class="sec-h2 has-lead" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>10년의 트랙레코드, 숫자로 증명한 신뢰</span></span></h2><p class="phero-lead sec-lead rvl">2016년부터 쌓아온 실적이 파라메타의 기술을 증명합니다.</p>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Track Record</div><h2 class="sec-h2 has-lead" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>10년의 트랙레코드,<br class="br-m"> 숫자로 증명한 신뢰</span></span></h2><p class="phero-lead sec-lead rvl">2016년부터 쌓아온 실적이 파라메타의 기술을 증명합니다.</p>
   <ul class="cards-3"><li class="rvl" style="--rvl-delay:0ms"><article class="work-card static grouped t-gray"><div class="work-bottom"><div class="work-meta"><span>Since 2016</span></div><h3 data-count-from="0">10 Years</h3><p>국내 1세대 Web3 인프라 기업</p></div></article></li><li class="rvl" style="--rvl-delay:90ms"><article class="work-card static grouped t-gray"><div class="work-bottom"><div class="work-meta"><span>Investment</span></div><h3 data-count-from="240">250억 원</h3><p>누적 투자유치</p></div></article></li><li class="rvl" style="--rvl-delay:180ms"><article class="work-card static grouped t-gray"><div class="work-bottom"><div class="work-meta"><span>Revenue</span></div><h3 data-count-from="740">750억 원+</h3><p>누적 매출 (2016~2025)</p></div></article></li></ul>
   <script>/* Track Record 수치 카운트업: 스크롤 인 시 data-count-from → 원래 숫자로 (접미어 유지) */
   (function(){
@@ -2500,24 +2522,24 @@ body.media .phero-inner{ padding-bottom:3rem }  /* 히어로 하단 6rem → 3re
     <div class="aw-marquee rvl" style="--rvl-y:40px; --rvl-delay:150ms" aria-label="인증 수상 목록">
       <div class="pt-track">
         <div class="aw-set">
-          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-gs.png" alt="" onerror="this.style.display='none'"><i>GS</i></span><figcaption><b>GS인증 1등급</b><span>loopchain SW품질</span></figcaption></figure>
-          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-tcb.png" alt="" onerror="this.style.display='none'"><i>TI-1</i></span><figcaption><b>기술평가 TI-1</b><span>최고 등급</span></figcaption></figure>
-          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-csap.png" alt="" onerror="this.style.display='none'"><i>CSAP</i></span><figcaption><b>CSAP 인증</b><span>블록체인 최초</span></figcaption></figure>
-          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-msit.png" alt="" onerror="this.style.display='none'"><i>MSIT</i></span><figcaption><b>과기정통부 장관 표창</b><span>과학기술정보통신부 2018</span></figcaption></figure>
-          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-kisa.png" alt="" onerror="this.style.display='none'"><i>KISA</i></span><figcaption><b>기술특례상장 A등급</b><span>KISA 2년 연속</span></figcaption></figure>
-          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-fsc.png" alt="" onerror="this.style.display='none'"><i>FSC</i></span><figcaption><b>혁신금융서비스 지정</b><span>금융위원회 2019</span></figcaption></figure>
-          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-swaward.png" alt="" onerror="this.style.display='none'"><i>SW</i></span><figcaption><b>SW품질대상 최우수상</b><span>과기정통부 2019</span></figcaption></figure>
-          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-jeju.png" alt="" onerror="this.style.display='none'"><i>JEJU</i></span><figcaption><b>제주특별자치도 표창</b><span>제주안심코드 2021</span></figcaption></figure>
+          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-gs.svg" alt="" onerror="this.style.display='none'"><i>GS</i></span><figcaption><b>GS인증 1등급</b><span>loopchain SW품질</span></figcaption></figure>
+          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-tcb.svg" alt="" onerror="this.style.display='none'"><i>TI-1</i></span><figcaption><b>기술평가 TI-1</b><span>최고 등급</span></figcaption></figure>
+          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-csap.svg" alt="" onerror="this.style.display='none'"><i>CSAP</i></span><figcaption><b>CSAP 인증</b><span>블록체인 최초</span></figcaption></figure>
+          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-msit.svg" alt="" onerror="this.style.display='none'"><i>MSIT</i></span><figcaption><b>과기정통부 장관 표창</b><span>과학기술정보통신부 2018</span></figcaption></figure>
+          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-kisa.svg" alt="" onerror="this.style.display='none'"><i>KISA</i></span><figcaption><b>기술특례상장 A등급</b><span>KISA 2년 연속</span></figcaption></figure>
+          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-fsc.svg" alt="" onerror="this.style.display='none'"><i>FSC</i></span><figcaption><b>혁신금융서비스 지정</b><span>금융위원회 2019</span></figcaption></figure>
+          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-swaward.svg" alt="" onerror="this.style.display='none'"><i>SW</i></span><figcaption><b>SW품질대상 최우수상</b><span>과기정통부 2019</span></figcaption></figure>
+          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-jeju.svg" alt="" onerror="this.style.display='none'"><i>JEJU</i></span><figcaption><b>제주특별자치도 표창</b><span>제주안심코드 2021</span></figcaption></figure>
         </div>
         <div class="aw-set" aria-hidden="true">
-          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-gs.png" alt="" onerror="this.style.display='none'"><i>GS</i></span><figcaption><b>GS인증 1등급</b><span>loopchain SW품질</span></figcaption></figure>
-          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-tcb.png" alt="" onerror="this.style.display='none'"><i>TI-1</i></span><figcaption><b>기술평가 TI-1</b><span>최고 등급</span></figcaption></figure>
-          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-csap.png" alt="" onerror="this.style.display='none'"><i>CSAP</i></span><figcaption><b>CSAP 인증</b><span>블록체인 최초</span></figcaption></figure>
-          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-msit.png" alt="" onerror="this.style.display='none'"><i>MSIT</i></span><figcaption><b>과기정통부 장관 표창</b><span>과학기술정보통신부 2018</span></figcaption></figure>
-          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-kisa.png" alt="" onerror="this.style.display='none'"><i>KISA</i></span><figcaption><b>기술특례상장 A등급</b><span>KISA 2년 연속</span></figcaption></figure>
-          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-fsc.png" alt="" onerror="this.style.display='none'"><i>FSC</i></span><figcaption><b>혁신금융서비스 지정</b><span>금융위원회 2019</span></figcaption></figure>
-          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-swaward.png" alt="" onerror="this.style.display='none'"><i>SW</i></span><figcaption><b>SW품질대상 최우수상</b><span>과기정통부 2019</span></figcaption></figure>
-          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-jeju.png" alt="" onerror="this.style.display='none'"><i>JEJU</i></span><figcaption><b>제주특별자치도 표창</b><span>제주안심코드 2021</span></figcaption></figure>
+          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-gs.svg" alt="" onerror="this.style.display='none'"><i>GS</i></span><figcaption><b>GS인증 1등급</b><span>loopchain SW품질</span></figcaption></figure>
+          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-tcb.svg" alt="" onerror="this.style.display='none'"><i>TI-1</i></span><figcaption><b>기술평가 TI-1</b><span>최고 등급</span></figcaption></figure>
+          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-csap.svg" alt="" onerror="this.style.display='none'"><i>CSAP</i></span><figcaption><b>CSAP 인증</b><span>블록체인 최초</span></figcaption></figure>
+          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-msit.svg" alt="" onerror="this.style.display='none'"><i>MSIT</i></span><figcaption><b>과기정통부 장관 표창</b><span>과학기술정보통신부 2018</span></figcaption></figure>
+          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-kisa.svg" alt="" onerror="this.style.display='none'"><i>KISA</i></span><figcaption><b>기술특례상장 A등급</b><span>KISA 2년 연속</span></figcaption></figure>
+          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-fsc.svg" alt="" onerror="this.style.display='none'"><i>FSC</i></span><figcaption><b>혁신금융서비스 지정</b><span>금융위원회 2019</span></figcaption></figure>
+          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-swaward.svg" alt="" onerror="this.style.display='none'"><i>SW</i></span><figcaption><b>SW품질대상 최우수상</b><span>과기정통부 2019</span></figcaption></figure>
+          <figure class="aw-item"><span class="aw-logo"><img src="assets/awards/logo-jeju.svg" alt="" onerror="this.style.display='none'"><i>JEJU</i></span><figcaption><b>제주특별자치도 표창</b><span>제주안심코드 2021</span></figcaption></figure>
         </div>
       </div>
     </div>
@@ -2538,12 +2560,17 @@ body.media .phero-inner{ padding-bottom:3rem }  /* 히어로 하단 6rem → 3re
   
   
   
-  <div class="rvl firsts-eco" style="margin-top:var(--space-48)">
-    <div class="ally-head"><span class="ally-num" style="font-size:var(--text-22)">Alliance</span><span class="ally-cap">주요 얼라이언스 파트너와 함께 블록체인 생태계를 만들어갑니다</span></div>
-    <ul class="cards-2"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="work-card static sm t-gray"><div class="work-bottom"><h3>Stablecoin Alliance</h3><p>스테이블코인 생태계 협의체 · 초대 의장사</p></div></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm t-gray"><div class="work-bottom"><h3>MyID Alliance</h3><p>DID 신원인증 생태계 협의체 · 의장사</p></div></article></li></ul>
+  <div class="rvl firsts-eco">
+    <div class="eco-head">
+      <div class="ally-head"><span class="sub-t">주요 얼라이언스 파트너와 함께<br>블록체인 생태계를 만들어갑니다</span></div>
+      <div class="eco-pills">
+        <span class="eco-pill"><b>Stablecoin Alliance</b><i>초대 의장사</i></span>
+        <span class="eco-pill"><b>MyID Alliance</b><i>의장사</i></span>
+      </div>
+    </div>
   </div>
   <div class="rvl ally-marquee-wrap" style="margin-top:var(--space-48)">
-    <div class="ally-head"><span class="ally-num">86+</span><span class="ally-cap">파트너사</span></div>
+    <div class="meta-t" style="margin-bottom:var(--space-16)">PARTNERS — 86+ 파트너사</div>
     <div class="pt-marquee ally-logos" aria-label="파트너 로고"><div class="pt-track"><div class="pt-set" aria-hidden="false"><img src="assets/partners/logo-shinhan.png" alt="신한" loading="lazy"><img src="assets/partners/logo-samsung-securities.png" alt="삼성증권" loading="lazy"><img src="assets/partners/logo-nh-securities.png" alt="NH투자증권" loading="lazy"><img src="assets/partners/logo-mirae.png" alt="미래에셋" loading="lazy"><img src="assets/partners/logo-samsung.png" alt="삼성" loading="lazy"><img src="assets/partners/logo-nh.png" alt="NH농협" loading="lazy"><img src="assets/partners/logo-ibk.png" alt="IBK기업은행" loading="lazy"><img src="assets/partners/logo-kb.png" alt="KB" loading="lazy"></div><div class="pt-set" aria-hidden="true"><img src="assets/partners/logo-shinhan.png" alt="신한" loading="lazy"><img src="assets/partners/logo-samsung-securities.png" alt="삼성증권" loading="lazy"><img src="assets/partners/logo-nh-securities.png" alt="NH투자증권" loading="lazy"><img src="assets/partners/logo-mirae.png" alt="미래에셋" loading="lazy"><img src="assets/partners/logo-samsung.png" alt="삼성" loading="lazy"><img src="assets/partners/logo-nh.png" alt="NH농협" loading="lazy"><img src="assets/partners/logo-ibk.png" alt="IBK기업은행" loading="lazy"><img src="assets/partners/logo-kb.png" alt="KB" loading="lazy"></div></div></div>
   </div>
 </div></section>
