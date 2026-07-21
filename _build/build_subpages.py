@@ -877,6 +877,8 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .uc-flag{ flex:none; display:inline-flex; align-items:center; padding:.375rem .875rem;
   background:rgba(var(--ink-rgb),.07); border-radius:var(--radius-pill);
   font-size:var(--text-16); font-weight:600; color:rgba(var(--ink-rgb),.45) }  /* 그레이 필 + 연그레이 텍스트 */
+.uc-slide > .uc-flag{ margin-bottom:.875rem }   /* 타이틀 위 카테고리 킥커 */
+.uc-num{ display:block; font-size:var(--text-14); font-weight:600; letter-spacing:.04em; color:rgba(var(--ink-rgb),.3); margin-bottom:1.25rem; font-variant-numeric:tabular-nums }   /* 카드 넘버링 01 / 11 */
 @media (max-width:639px){ .uc-row{ flex-direction:column; align-items:flex-start; gap:.375rem } }
 .uc-thumb video, .uc-thumb img{ width:100%; height:100%; object-fit:cover; display:block; border-radius:inherit }
 .uc-slide h3{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em; margin-bottom:.75rem; color:var(--ink) }
@@ -1072,6 +1074,8 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .pv-stats.on-light .stat-num .pv-hl{ color:var(--purple-500) }
 .pv-stats.on-light .stat-label{ color:rgba(var(--ink-rgb),.55) }
 @media (min-width:1024px){ .pv-stats.on-light .stat-label{ font-size:var(--text-20) } }
+.pv-stats.on-light .stat-kicker{ font-size:var(--text-14); font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:rgba(var(--ink-rgb),.4); margin-bottom:.75rem }   /* 스탯 상단 킥커(Users·Verifications) */
+@media (min-width:768px){ .stats-grid.pv-stats.on-light.pv-2{ grid-template-columns:repeat(2,1fr) } }   /* 2개 스탯은 2열 */
 /* Core Technology 행: 화살표(페이지 이동) 제거 + 제목 한 토큰 작게 */
 .ct-rows .service-badge{ display:none }
 .ct-rows .service-row h3{ font-size:var(--text-26) }
@@ -2889,6 +2893,24 @@ def icon_card(icon_svg, title, desc):
             f'<span class="ic" aria-hidden="true">{icon_svg}</span>'
             f'<h3>{title}</h3><p>{desc}</p></article>')
 
+def usecase_carousel(items, label='사례 선택'):
+    # Use Cases 캐러셀 포맷(portx) 재사용 — 슬라이드: 썸네일 + 카테고리 플래그 + 타이틀 + 본문. items:[dict(cat,title,desc)]
+    ap = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5L8 12l7 7"/></svg>'
+    an = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>'
+    total = len(items)
+    slides = []
+    for i, it in enumerate(items):
+        flag = f'<span class="uc-flag">{it["cat"]}</span>' if it.get('cat') else ''
+        active = ' is-active' if i == 0 else ''
+        num = f'<span class="uc-num">{i + 1:02d} / {total:02d}</span>'
+        slides.append(f'<article class="uc-slide{active}">{num}<div class="uc-thumb" aria-hidden="true"></div>{flag}<h3>{it["title"]}</h3><p>{it["desc"]}</p></article>')
+    return ('<div class="uc-carousel">'
+            f'<button class="uc-arrow uc-prev rvl rvl-op" type="button" aria-label="이전 사례">{ap}</button>'
+            f'<div class="uc-slides rvl" style="--rvl-y:40px">{"".join(slides)}</div>'
+            f'<div class="uc-dots" aria-label="{label}"></div>'
+            f'<button class="uc-arrow uc-next rvl rvl-op" type="button" aria-label="다음 사례">{an}</button>'
+            '</div>')
+
 def exchange_card(name, logo=None, brand=None, dark_text=False, desc=None, num=None, gray=False, logo_dark=False):
     # 거래소 카드: 원형 로고 자리 + 이름. brand=호버 시 카드가 그 브랜드 컬러로 (dark_text=밝은 브랜드용)
     # desc=타이틀 아래 서브카피, num=타이틀 위 번호 (기능 카드 겸용), gray=라이트 그레이 채움 변형
@@ -4065,20 +4087,19 @@ PAGES['myid.html'] = dict(
     lead='블록체인 기술로 신뢰는 그대로 유지하면서, 신원확인 단계를 줄이고 개인정보는 사용자가 직접 관리합니다. 수많은 적용 사례와 검증된 보안성을 바탕으로 구축형부터 공공 SaaS까지 제공합니다.',
     crumb='Products — MyID',
     hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
-      <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">무료 컨설팅 신청</span></a>
-      <a class="pill outline no-arrow hs-scale" href="#lineup"><span class="hspring">라인업 · 요금 보기</span></a>
+      <a class="pill light no-arrow hs-scale" href="contact.html"><span class="hspring">Talk to Sales</span></a>
     </div>''',
     hero_visual='<img class="fit-contain" src="assets/myid/hero-test.avif" alt="" loading="eager" fetchpriority="high">',
     content=f"""
 <section><div class="shell sec">
   {eyebrow('Trusted by')}
+  <ul class="stats-grid pv-stats on-light pv-2">
+    <li class="rvl" style="--rvl-y:20px"><div class="stat-kicker">Users</div><div class="stat-num">약 <span class="pv-hl">370만</span></div><div class="stat-label">MyID, DID 누적 이용자 수</div></li>
+    <li class="rvl" style="--rvl-y:20px; --rvl-delay:90ms"><div class="stat-kicker">Verifications</div><div class="stat-num"><span class="pv-hl">9,100만+</span></div><div class="stat-label">제주안심코드 누적 인증 건수</div></li>
+  </ul>
   <div class="pt-marquee rvl" aria-label="함께한 파트너 로고">
     <div class="pt-track">{partner_logos(MYID_TRUST_LOGOS)}{partner_logos(MYID_TRUST_LOGOS)}</div>
   </div>
-  <ul class="cards-2">
-    <li class="rvl"><div class="light-card num-card"><span class="cap">Users</span><div class="n">약 370만</div><p>MyID · DID 누적 이용자 수</p></div></li>
-    <li class="rvl" style="--rvl-delay:90ms"><div class="light-card num-card"><span class="cap">Verifications</span><div class="n">9,100만<small>+</small></div><p>제주안심코드 누적 인증 건수</p></div></li>
-  </ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
   {sec_head('Milestones', '국내외 최초 기록을 만들어온 DID')}
@@ -4131,19 +4152,19 @@ PAGES['myid.html'] = dict(
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
   {sec_head('References', '금융·공공·기업이 검증한 적용 사례')}
-  {rows([
-    dict(idx='Finance', title='신한은행 · NH농협은행 금융실명인증', desc='기존 실명확인 3단계를 MyID 1단계로 통합해 비대면 실명인증을 간소화했습니다. NH농협은행은 올원뱅크 올원PASS 발급·재발급, 송금 이체한도 상향 등에 적용했습니다.'),
-    dict(idx='Public', title='제주안심코드', desc='제주도청과 함께 개발한 전자출입명부 서비스로, QR 스캔만으로 출입 정보를 남길 수 있게 했습니다. 설치 업장 6만 개, 앱 설치 218만 건, 누적 인증 9,100만 건을 기록했습니다.'),
-    dict(idx='Public', title='질병관리청 백신접종증명', desc='질병관리청 시스템과 연동해 백신 접종 정보를 신원증명서(VC)로 발급하고, 제주안심코드 전자출입명부와 결합해 제출할 수 있게 했습니다.'),
-    dict(idx='Public', title='강원도 나야나', desc='강원도 행정·경제·복지 통합 서비스에 DID 기반 신원인증을 적용했습니다.'),
-    dict(idx='Public · Healthcare', title='강원도 만성질환 통합관리 플랫폼', desc='과기정통부·KISA 2020 블록체인 공공선도 시범사업(의료 부문)으로, DID 기반 사용자 인증과 건강정보 자기주권 관리 체계를 구축했습니다. 심뇌혈관 만성질환자의 건강정보를 안전하게 관리하고 AI 분석·IoMT 측정 데이터를 모바일로 제공합니다.'),
-    dict(idx='Public', title='경상북도 모이소', desc='행정안전부 우수 서비스로 선정된 도민 앱입니다. 경북도청과 함께 도민증 발급부터 복지급여 신청, 공공 마이데이터 연계, 관광 QR까지 하나로 제공했습니다.'),
-    dict(idx='Public', title='부산시 배터리여권 플랫폼 (DPP)', desc='전기차 배터리의 제조·운행·정비·재활용 데이터를 DID·VC·PDS로 연결해, EU 배터리 규제(DPP)에 맞춰 출처·이력·무결성을 증명하는 데이터 플랫폼입니다.'),
-    dict(idx='Public', title='KCA 블록체인 선박검사 관리 플랫폼', desc='KISA 블록체인 시범사업으로, 중앙전파관리소·KCA·KOMSA·수협에 흩어진 무선국 허가·선박검사 증서를 블록체인으로 연계·조회하고 검사 증서를 NFT로 발행합니다. 서류 위·변조와 분실 위험을 낮춰 해양안전 데이터의 신뢰성을 높입니다.'),
-    dict(idx='Public', title='KOMSA 선박 전자증서 검증', desc='연 약 56만 회 반복 검증되는 선박검사 전자증서에 DID·VC 발급·검증과 PDS를 결합해, 위·변조 확인 부담을 줄이는 검증체계를 구축했습니다.'),
-    dict(idx='Enterprise', title='WattEver 배터리 잔존수명 인증서', desc='중고·재사용 배터리 거래에서 잔존수명 인증 데이터를 PDS 기반으로 저장·검증해, 위·변조 없이 신뢰할 수 있게 합니다.'),
-    dict(idx='Enterprise', title='포스코 체인지업그라운드', desc='출입통제부터 방문자 초대, 사무기기 이용, 공간 예약, 주차관리까지 DID 신원인증 하나로 처리했습니다. 포스코·포스텍·RIST 구성원은 소속 증명만으로 시설을 이용했습니다.'),
-  ], meta=True)}
+  {usecase_carousel([
+    dict(cat='Finance', title='신한은행, NH농협은행 금융실명인증', desc='기존 실명확인 3단계를 MyID 1단계로 통합해 비대면 실명인증을 간소화했습니다. NH농협은행은 올원뱅크 올원PASS 발급, 재발급, 송금 이체한도 상향 등에 적용했습니다.'),
+    dict(cat='Public', title='제주안심코드', desc='제주도청과 함께 개발한 전자출입명부 서비스로, QR 스캔만으로 출입 정보를 남길 수 있게 했습니다. 설치 업장 6만 개, 앱 설치 218만 건, 누적 인증 9,100만 건을 기록했습니다.'),
+    dict(cat='Public', title='질병관리청 백신접종증명', desc='질병관리청 시스템과 연동해 백신 접종 정보를 신원증명서(VC)로 발급하고, 제주안심코드 전자출입명부와 결합해 제출할 수 있게 했습니다.'),
+    dict(cat='Public', title='강원도 나야나', desc='강원도 행정, 경제, 복지 통합 서비스에 DID 기반 신원인증을 적용했습니다.'),
+    dict(cat='Public, Healthcare', title='강원도 만성질환 통합관리 플랫폼', desc='과기정통부, KISA 2020 블록체인 공공선도 시범사업(의료 부문)으로, DID 기반 사용자 인증과 건강정보 자기주권 관리 체계를 구축했습니다. 심뇌혈관 만성질환자의 건강정보를 안전하게 관리하고 AI 분석, IoMT 측정 데이터를 모바일로 제공합니다.'),
+    dict(cat='Public', title='경상북도 모이소', desc='행정안전부 우수 서비스로 선정된 도민 앱입니다. 경북도청과 함께 도민증 발급부터 복지급여 신청, 공공 마이데이터 연계, 관광 QR까지 하나로 제공했습니다.'),
+    dict(cat='Public', title='부산시 배터리여권 플랫폼 (DPP)', desc='전기차 배터리의 제조, 운행, 정비, 재활용 데이터를 DID, VC, PDS로 연결해, EU 배터리 규제(DPP)에 맞춰 출처, 이력, 무결성을 증명하는 데이터 플랫폼입니다.'),
+    dict(cat='Public', title='KCA 블록체인 선박검사 관리 플랫폼', desc='KISA 블록체인 시범사업으로, 중앙전파관리소, KCA, KOMSA, 수협에 흩어진 무선국 허가, 선박검사 증서를 블록체인으로 연계, 조회하고 검사 증서를 NFT로 발행합니다. 서류 위변조와 분실 위험을 낮춰 해양안전 데이터의 신뢰성을 높입니다.'),
+    dict(cat='Public', title='KOMSA 선박 전자증서 검증', desc='연 약 56만 회 반복 검증되는 선박검사 전자증서에 DID, VC 발급, 검증과 PDS를 결합해, 위변조 확인 부담을 줄이는 검증체계를 구축했습니다.'),
+    dict(cat='Enterprise', title='WattEver 배터리 잔존수명 인증서', desc='중고, 재사용 배터리 거래에서 잔존수명 인증 데이터를 PDS 기반으로 저장, 검증해, 위변조 없이 신뢰할 수 있게 합니다.'),
+    dict(cat='Enterprise', title='포스코 체인지업그라운드', desc='출입통제부터 방문자 초대, 사무기기 이용, 공간 예약, 주차관리까지 DID 신원인증 하나로 처리했습니다. 포스코, 포스텍, RIST 구성원은 소속 증명만으로 시설을 이용했습니다.'),
+  ])}
 </div></section>
 """)
 
