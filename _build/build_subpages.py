@@ -1405,8 +1405,8 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 
 /* ============ INSIGHTS — 블로그 탭 필터 + 카드 링크 ============ */
 .blog-tabs{ display:flex; flex-wrap:wrap; gap:.625rem; margin-bottom:2rem }
-.blog-tab{ padding:.625rem 1.25rem; border:1px solid rgba(var(--ink-rgb),.15); border-radius:var(--radius-pill);
-  background:transparent; font-size:var(--text-14); font-weight:500; line-height:1; color:rgba(var(--ink-rgb),.6);
+.blog-tab{ padding:.625rem 1.25rem; border:1px solid var(--line); border-radius:var(--radius-pill);
+  background:transparent; font-size:var(--text-14); font-weight:var(--w-title); line-height:1; color:var(--c-body);
   cursor:pointer; transition:background .2s ease, color .2s ease, border-color .2s ease }
 @media (hover:hover){ .blog-tab:hover{ color:var(--ink); border-color:rgba(var(--ink-rgb),.4) } }
 .blog-tab.is-on{ background:var(--ink); color:var(--white); border-color:var(--ink) }
@@ -1762,7 +1762,7 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
   background:color-mix(in srgb, var(--ink) 6%, var(--white)) }  /* 대표 이미지 자리 */
 .pd-fig figcaption{ margin-top:.75rem; font-size:var(--text-16); color:var(--muted);
   text-align:center; line-height:var(--lh-body); word-break:keep-all }
-.pd-body > p{ font-size:var(--text-20); line-height:var(--lh-body); color:rgba(var(--ink-rgb),.75);
+.pd-body > p{ font-size:var(--text-body); line-height:var(--lh-body); color:rgba(var(--ink-rgb),.75);
   margin-bottom:1.5rem; word-break:keep-all; text-align:justify }
 .pd-end{ color:var(--muted) }
 /* 액션 바: 텍스트 복사·이미지 다운로드(좌) + 목록보기(우, 다크) */
@@ -1825,7 +1825,7 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
 @media (hover:hover){ .bf-card:hover .bf-thumb{ transform:translateY(-4px) } }
 .bf-title{ font-size:var(--text-20); font-weight:var(--w-strong); letter-spacing:-.01em; line-height:var(--lh-heading);
   color:var(--ink); word-break:keep-all }
-.bf-desc{ margin-top:.5rem; font-size:var(--text-14); line-height:var(--lh-body); color:var(--c-body) }
+.bf-desc{ margin-top:.5rem; font-size:var(--text-body-sm); line-height:var(--lh-body); color:var(--c-body) }
 .bf-tag{ margin-top:1rem; font-size:var(--text-14); line-height:1; padding:.375rem .875rem;
   border:1px solid rgba(var(--ink-rgb),.15); border-radius:var(--radius-pill); color:var(--c-body) }
 
@@ -1833,13 +1833,13 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
 .res-logo{ display:grid; grid-template-columns:1fr; gap:1rem }
 @media (min-width:768px){ .res-logo{ grid-template-columns:repeat(2,1fr); gap:var(--grid-gap) } }
 .res-logo .work-card.grouped{ min-height:0 }
-/* 이미지 영역 full-bleed 그레이 (상세페이지 grouped 카드와 동일 문법 — 로고 파일 들어올 자리)
-   카드 몸통(잉크 6%)과 구분되게 한 단계 진한 10% */
+/* 라인 카드: 그레이 몸통 제거, 테두리만 — 이미지 영역(로고 자리)은 잉크 6% 플레이스홀더 유지 */
+.res-logo .work-card.rl-card{ background:transparent; border:1px solid var(--line) }
 .res-logo .work-card.grouped::before{ margin:-1.5rem -1.5rem 1.5rem; border-radius:0;
-  background:color-mix(in srgb, var(--ink) 10%, var(--white)) }
+  background:color-mix(in srgb, var(--ink) 6%, var(--white)) }
 @media (min-width:640px){ .res-logo .work-card.grouped::before{ margin:-2rem -2rem 1.75rem } }
 .rl-actions{ display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1.25rem }
-.rl-btn{ height:2.75rem; padding:0 1.5rem; border:1px solid rgba(var(--ink-rgb),.15); border-radius:var(--radius-pill);
+.rl-btn{ min-height:3rem; padding:0 1.75rem; border:1px solid var(--line); border-radius:var(--radius-pill);
   background:transparent; font-size:var(--text-14); font-weight:var(--w-title); color:var(--ink); cursor:pointer;
   transition:background .2s ease, color .2s ease, border-color .2s ease }
 @media (hover:hover){ .rl-btn:not(:disabled):hover{ background:var(--ink); color:var(--white); border-color:var(--ink) } }
