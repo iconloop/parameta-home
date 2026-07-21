@@ -1329,15 +1329,20 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 .blog-tab.is-on{ background:var(--ink); color:var(--white); border-color:var(--ink) }
 .card-link{ display:flex; text-decoration:none; color:inherit }
 .blog-item.hidden, .press-item.hidden{ display:none }
-/* 페이지네이션 (보도자료·블로그 공용) */
-.pager{ display:flex; justify-content:center; align-items:center; gap:.5rem; margin-top:3rem }
-.pager button{ min-width:2rem; height:2.25rem; padding:0 .375rem; border:none; background:transparent;
-  font-size:var(--text-14); font-weight:500; line-height:1; color:rgba(var(--ink-rgb),.55); cursor:pointer;
-  display:inline-flex; align-items:center; justify-content:center; transition:color .2s ease, opacity .2s ease }
-@media (hover:hover){ .pager button:hover:not(:disabled){ color:var(--ink) } }
-.pager button.is-on{ color:var(--ink); font-weight:700 }
+/* 페이지네이션 (보도자료·블로그 공용) — 공통 토큰: --pager-* 로 단일 조정 */
+.pager{ --pager-btn:2.75rem;   /* 버튼 지름 44px */
+  --pager-ico:1.25rem;         /* 화살표 아이콘 20px */
+  --pager-gap:.5rem;
+  display:flex; justify-content:center; align-items:center; gap:var(--pager-gap); margin-top:var(--space-48) }
+.pager button{ min-width:var(--pager-btn); height:var(--pager-btn); padding:0 .5rem; border:none; background:transparent;
+  border-radius:var(--radius-pill); font-size:var(--text-16); font-weight:500; line-height:1;
+  color:rgba(var(--ink-rgb),.55); cursor:pointer;
+  display:inline-flex; align-items:center; justify-content:center;
+  transition:color .2s ease, background .2s ease, opacity .2s ease }
+@media (hover:hover){ .pager button:hover:not(:disabled):not(.is-on){ color:var(--ink); background:rgba(var(--surface-rgb),1) } }
+.pager button.is-on{ background:var(--ink); color:var(--white); font-weight:600 }
 .pager button:disabled{ opacity:.3; cursor:default }
-.pager button svg{ width:1rem; height:1rem; display:block }
+.pager button svg{ width:var(--pager-ico); height:var(--pager-ico); display:block }
 
 /* ============ POST — 블로그 아티클 상세 ============ */
 .post-meta{ display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; padding:1.5rem 0;
@@ -1424,12 +1429,17 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 /* Alliance 소절 카드 위 여백 */
 .firsts-eco .cards-2{ margin-top:var(--space-16) }
 
+/* ============ MEDIA 공통(newsroom·blog·resources) — 첫 섹션을 히어로에 붙임 (contact 방식) ============ */
+body.media .phero + section .sec{ padding-top:var(--space-32) }
+body.media .phero-inner{ padding-bottom:3rem }  /* 히어로 하단 6rem → 3rem (media 스코프만) */
+
 /* ============ NEWSROOM — 피처드(1큰카드+2적층) + 보도자료 리스트 ============ */
 .news-feat{ display:grid; grid-template-columns:1fr; gap:1rem; margin-bottom:var(--space-64) }
 @media (min-width:768px){
   .news-feat{ grid-template-columns:repeat(12,1fr); gap:var(--grid-gap) }
   .nf-big{ grid-column:1 / 9 } .nf-side{ grid-column:9 / 13 } }
 .nf-big{ display:flex }
+.nf-big .card-link{ flex:1 1 auto; min-width:0 }  /* 상세 링크 래퍼도 높이 전달 */
 .nf-big .work-card{ flex:1 1 auto; min-width:0; min-height:0 }
 /* 큰 카드 이미지 영역: full-bleed, 남는 높이를 채움 */
 .nf-big .work-card.grouped::before{ flex:1 1 auto; height:auto; min-height:16rem;
@@ -1438,36 +1448,100 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 @media (min-width:640px){ .nf-big .work-card.grouped::before{ margin:-2rem -2rem 1.75rem } }
 .nf-side{ display:flex; flex-direction:column; gap:1rem }
 @media (min-width:768px){ .nf-side{ gap:var(--grid-gap) } }
+.nf-side > .card-link{ flex:1 1 0; display:flex }  /* 앵커 래퍼가 높이를 반씩 나눠 큰 카드와 합 맞춤 */
 /* 적층 카드: 킥커→제목 플로우 배치 (절대배치 해제 — 긴 제목이 킥커를 덮지 않게) */
 .nf-side .work-card{ flex:1 1 0; min-height:11rem; display:flex; flex-direction:column }
 .nf-side .work-card .work-bottom{ position:static; inset:auto; margin-top:auto; padding-top:.875rem }
 .nf-side .work-card .work-bottom h3{ font-size:var(--text-20) }
-/* 컨트롤 — 연도 드롭다운 + 검색창 */
-.news-controls{ display:flex; align-items:center; gap:.75rem; flex-wrap:wrap;
-  padding-bottom:1.25rem; border-bottom:1px solid rgba(var(--ink-rgb),.14) }
-.news-select{ height:2.75rem; padding:0 2.25rem 0 1.25rem; border:1px solid rgba(var(--ink-rgb),.15);
-  border-radius:var(--radius-pill); background:transparent; font-size:var(--text-14); font-weight:500;
-  color:var(--ink); cursor:pointer; appearance:none;
+/* ============ 공통 컨트롤 — 필 인풋·드롭다운 (페이저처럼 --ctl-* 토큰으로 단일 조정) ============ */
+.select-pill, .input-pill{ --ctl-h:2.75rem;   /* 컨트롤 높이 44px */
+  --ctl-pad:1.25rem;                           /* 좌우 패딩 20px */
+  --ctl-ico:1.25rem;                           /* 아이콘 20px (페이저 화살표와 동일) */
+  --ctl-fs:var(--text-18);                     /* 컨트롤 텍스트 */
+  height:var(--ctl-h); border:1px solid rgba(var(--ink-rgb),.15); border-radius:var(--radius-pill);
+  background-color:transparent; font-size:var(--ctl-fs); color:var(--ink) }
+.select-pill{ padding:0 calc(var(--ctl-pad) + 1rem) 0 var(--ctl-pad); font-weight:500; cursor:pointer; appearance:none;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
-  background-repeat:no-repeat; background-position:right .875rem center; background-size:1rem }
-.news-search{ display:flex; align-items:center; gap:.5rem; margin-left:auto;
-  height:2.75rem; padding:0 1.25rem; border:1px solid rgba(var(--ink-rgb),.15); border-radius:var(--radius-pill) }
-.news-search svg{ width:1rem; height:1rem; color:rgba(var(--ink-rgb),.45); flex:none }
-.news-search input{ border:none; background:transparent; outline:none; min-width:0; width:11rem;
-  font-size:var(--text-14); color:var(--ink) }
+  background-repeat:no-repeat; background-position:right .875rem center; background-size:var(--ctl-ico) }
+.input-pill{ display:flex; align-items:center; gap:.5rem; padding:0 var(--ctl-pad) }
+.input-pill svg{ width:var(--ctl-ico); height:var(--ctl-ico); color:rgba(var(--ink-rgb),.45); flex:none }
+.input-pill input{ border:none; background:transparent; outline:none; min-width:0;
+  font-size:var(--ctl-fs); color:var(--ink) }
+.input-pill input::placeholder{ color:rgba(var(--ink-rgb),.4) }
+@media (hover:hover){ .select-pill:hover, .input-pill:hover{ border-color:rgba(var(--ink-rgb),.4) } }
+.select-pill:focus-visible, .input-pill:focus-within{ border-color:var(--ink) }
+/* 커스텀 드롭다운 — 트리거는 select-pill 그대로, 패널은 카드 문법 */
+.drop{ position:relative }
+.drop-btn{ display:inline-flex; align-items:center; text-align:left }
+.drop.open .drop-btn{ border-color:var(--ink) }
+.drop-menu{ position:absolute; top:calc(100% + 1rem); left:0; min-width:16rem; max-height:22rem; z-index:30;
+  overflow-y:auto; list-style:none; padding:1rem .75rem; background:var(--white); border:none;
+  border-radius:1rem; box-shadow:0 8px 40px rgba(var(--ink-rgb),.14);
+  opacity:0; visibility:hidden; transform:translateY(-4px);
+  transition:opacity .2s ease, transform .2s ease, visibility .2s }
+.drop.open .drop-menu{ opacity:1; visibility:visible; transform:none }
+.drop-menu li{ padding:.875rem 1.25rem; border-radius:.5rem; font-size:var(--text-20); font-weight:500;
+  color:rgba(var(--ink-rgb),.45); white-space:nowrap; cursor:pointer;
+  transition:background .2s ease, color .2s ease }
+@media (hover:hover){ .drop-menu li:hover{ background:rgba(var(--surface-rgb),1); color:var(--ink) } }
+.drop-menu li.is-on{ color:var(--ink); font-weight:600 }
+/* 패널 스크롤바 — 레퍼처럼 얇은 회색 썸 */
+.drop-menu::-webkit-scrollbar{ width:.375rem }
+.drop-menu::-webkit-scrollbar-thumb{ background:rgba(var(--ink-rgb),.25); border-radius:var(--radius-pill) }
+.drop-menu::-webkit-scrollbar-track{ background:transparent }
+
+/* 뉴스룸 컨트롤 — 네이버 뉴스룸형: 텍스트 드롭다운 + 라운드 검색박스 */
+.news-controls{ display:flex; align-items:center; gap:2rem; flex-wrap:wrap;
+  padding-bottom:1.25rem; border-bottom:1px solid rgba(var(--ink-rgb),.14);
+  position:relative; z-index:40 }  /* rvl transform 스태킹 위로 — 드롭 패널이 리스트에 안 뚫리게 */
+/* 드롭 트리거: 필 대신 텍스트형 — 기본(전체)은 그레이, 선택·열림은 잉크 */
+.news-controls .drop-btn{ height:auto; padding:0; border:none; background-image:none;
+  font-size:var(--text-20); font-weight:600; color:rgba(var(--ink-rgb),.4);
+  transition:color .2s ease }
+.news-controls .drop-btn::after{ content:''; width:1.125rem; height:1.125rem; margin-left:.375rem; background:currentColor;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") center/contain no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") center/contain no-repeat }
+@media (hover:hover){ .news-controls .drop-btn:hover{ color:var(--ink) } }
+.news-controls .drop.open .drop-btn,
+.news-controls .drop:not([data-value="all"]) .drop-btn{ color:var(--ink) }
+/* 검색박스: 라운드 렉트 + 지우기(x)·돋보기 버튼 */
+.news-search{ margin-left:auto; display:flex; align-items:center; gap:.25rem;
+  height:3rem; padding:0 .5rem 0 1.25rem; border:1px solid rgba(var(--ink-rgb),.15);
+  border-radius:.75rem; background:var(--white); transition:border-color .2s ease }
+.news-search:focus-within{ border-color:var(--ink) }
+.news-search input{ flex:1; width:12rem; min-width:0; border:none; outline:none; background:transparent;
+  font-size:var(--text-16); color:var(--ink) }
 .news-search input::placeholder{ color:rgba(var(--ink-rgb),.4) }
-/* 리스트 — 날짜 | 제목 | 썸네일 영역 */
+.news-search input::-webkit-search-cancel-button{ display:none }
+.ns-clear{ width:1.25rem; height:1.25rem; flex:none; border:none; padding:0; cursor:pointer;
+  border-radius:var(--radius-pill); background:rgba(var(--ink-rgb),.25); color:var(--white);
+  display:grid; place-items:center; transition:background .2s ease }
+@media (hover:hover){ .ns-clear:hover{ background:rgba(var(--ink-rgb),.45) } }
+.ns-clear svg{ width:.625rem; height:.625rem }
+.ns-btn{ width:2.25rem; height:2.25rem; flex:none; border:none; padding:0; background:transparent;
+  color:var(--ink); cursor:pointer; display:grid; place-items:center }
+.ns-btn svg{ width:1.25rem; height:1.25rem }
+/* 검색 결과 없음 */
+.news-empty{ padding:4rem 0; text-align:center; font-size:var(--text-18); color:rgba(var(--ink-rgb),.55);
+  border-bottom:1px solid rgba(var(--ink-rgb),.1) }
+/* 리스트 — 날짜 | 제목 | 썸네일 영역 (타이포·호버는 FAQ 행과 동일, 클릭 시 상세 이동) */
 .news-list{ list-style:none }
-.news-row{ display:grid; grid-template-columns:6rem 1fr 15rem; align-items:center; gap:var(--grid-gap);
-  padding-block:1.5rem; border-bottom:1px solid rgba(var(--ink-rgb),.1) }
-.nr-date{ font-size:var(--text-14); color:rgba(var(--ink-rgb),.5); font-variant-numeric:tabular-nums }
-.nr-title{ font-size:var(--text-20); font-weight:500; letter-spacing:-.01em; line-height:var(--leading-heading);
+.news-row{ border-bottom:1px solid var(--line) }
+.nr-link{ display:grid; grid-template-columns:6rem 1fr 15rem; align-items:center; gap:var(--grid-gap);
+  padding:2rem 1.5rem; border-radius:var(--radius-card-sm); text-decoration:none; color:inherit;
+  background:rgba(var(--surface-rgb),0); transition:background .45s cubic-bezier(.45,0,.55,1) }
+@media (hover:hover){ .nr-link:hover{ background:rgba(var(--surface-rgb),1) } }
+.nr-date{ font-size:var(--text-14); font-weight:500; color:rgba(var(--ink-rgb),.4);
+  line-height:2.25rem; font-variant-numeric:tabular-nums }
+.nr-title{ font-size:var(--text-22); font-weight:500; letter-spacing:-.01em; line-height:2.25rem;
   color:var(--ink); word-break:keep-all }
+@media (min-width:640px){ .nr-title{ font-size:var(--text-26) } }
 .nr-thumb{ width:100%; aspect-ratio:3/2; border-radius:var(--radius-card-sm);
   background:color-mix(in srgb, var(--ink) 6%, var(--white)) }
 @media (max-width:767px){
-  .news-row{ grid-template-columns:1fr; gap:.75rem; padding-block:1.25rem }
-  .nr-title{ font-size:var(--text-18) }
+  .nr-link{ grid-template-columns:1fr; gap:.75rem; padding:1.25rem 1rem }
+  .nr-date{ line-height:1 }
+  .nr-title{ font-size:var(--text-18); line-height:var(--leading-heading) }
   .nr-thumb{ max-width:20rem }
   .news-search{ margin-left:0; flex:1 } }
 
@@ -1492,20 +1566,21 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 .bf-tag{ margin-top:1rem; font-size:var(--text-14); line-height:1; padding:.375rem .875rem;
   border:1px solid rgba(var(--ink-rgb),.15); border-radius:var(--radius-pill); color:rgba(var(--ink-rgb),.6) }
 
-/* ============ RESOURCES — 로고 다운로드 ============ */
-.res-logo{ display:grid; grid-template-columns:1fr; gap:1.5rem }
-@media (min-width:768px){
-  .res-logo{ grid-template-columns:repeat(12,1fr); column-gap:var(--grid-gap) }
-  .rl-preview{ grid-column:1 / 9 } .rl-actions{ grid-column:9 / 13; align-self:center } }
-.rl-preview{ aspect-ratio:3/1; border-radius:var(--radius-card);
-  background:color-mix(in srgb, var(--ink) 6%, var(--white)) }
-.rl-actions{ display:flex; flex-direction:column; align-items:flex-start; gap:.75rem }
+/* ============ RESOURCES — 로고 다운로드 (기존 t-gray grouped 카드 문법, 인쇄용·웹용 좌우) ============ */
+.res-logo{ display:grid; grid-template-columns:1fr; gap:1rem }
+@media (min-width:768px){ .res-logo{ grid-template-columns:repeat(2,1fr); gap:var(--grid-gap) } }
+.res-logo .work-card.grouped{ min-height:0 }
+/* 이미지 영역 full-bleed 그레이 (상세페이지 grouped 카드와 동일 문법 — 로고 파일 들어올 자리)
+   카드 몸통(잉크 6%)과 구분되게 한 단계 진한 10% */
+.res-logo .work-card.grouped::before{ margin:-1.5rem -1.5rem 1.5rem; border-radius:0;
+  background:color-mix(in srgb, var(--ink) 10%, var(--white)) }
+@media (min-width:640px){ .res-logo .work-card.grouped::before{ margin:-2rem -2rem 1.75rem } }
+.rl-actions{ display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1.25rem }
 .rl-btn{ height:2.75rem; padding:0 1.5rem; border:1px solid rgba(var(--ink-rgb),.15); border-radius:var(--radius-pill);
   background:transparent; font-size:var(--text-14); font-weight:500; color:var(--ink); cursor:pointer;
   transition:background .2s ease, color .2s ease, border-color .2s ease }
 @media (hover:hover){ .rl-btn:not(:disabled):hover{ background:var(--ink); color:var(--white); border-color:var(--ink) } }
 .rl-btn:disabled{ opacity:.4; cursor:default }
-.rl-note{ font-size:var(--text-14); color:rgba(var(--ink-rgb),.5) }
 """
 
 CHROME_HEADER = """
@@ -2140,7 +2215,7 @@ if(blogSec){
   const tabs = [...blogSec.querySelectorAll('.blog-tab')];
   const posts = [...blogSec.querySelectorAll('.blog-item')];
   const pager = blogSec.querySelector('.pager');
-  const PER = 6; let filter = 'all', cur = 1;
+  const PER = 9; let filter = 'all', cur = 1;  // 3열 × 3행
   const elig = () => posts.filter(p => filter === 'all' || p.dataset.cat === filter);
   function paint(){
     const e = elig();
@@ -2160,6 +2235,33 @@ if(blogSec){
   });
   paint();
 }
+/* 공통 커스텀 드롭다운 (.drop) — 시스템 셀렉트 대체. 선택 시 data-value 갱신 + change 이벤트 */
+const drops = [...document.querySelectorAll('.drop')];
+if(drops.length){
+  drops.forEach(drop => {
+    const btn = drop.querySelector('.drop-btn');
+    const label = drop.querySelector('.drop-label');
+    const opts = [...drop.querySelectorAll('.drop-menu li')];
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const willOpen = !drop.classList.contains('open');
+      drops.forEach(d => { d.classList.remove('open'); d.querySelector('.drop-btn').setAttribute('aria-expanded', 'false'); });
+      drop.classList.toggle('open', willOpen);
+      btn.setAttribute('aria-expanded', String(willOpen));
+    });
+    opts.forEach(o => o.addEventListener('click', () => {
+      opts.forEach(x => x.classList.toggle('is-on', x === o));
+      drop.dataset.value = o.dataset.value;
+      label.textContent = o.textContent;
+      drop.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      drop.dispatchEvent(new CustomEvent('change'));
+    }));
+  });
+  const closeAll = () => drops.forEach(d => { d.classList.remove('open'); d.querySelector('.drop-btn').setAttribute('aria-expanded', 'false'); });
+  document.addEventListener('click', e => { if(!e.target.closest('.drop')) closeAll(); });
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') closeAll(); });
+}
 /* Insights(Newsroom): 보도자료 리스트 — 연도·검색 필터 + 페이지네이션(10개씩) */
 const pressSec = document.querySelector('[data-press]');
 if(pressSec){
@@ -2168,6 +2270,9 @@ if(pressSec){
   const selY = pressSec.querySelector('.news-sel-year');
   const selM = pressSec.querySelector('.news-sel-month');
   const inp = pressSec.querySelector('.news-search input');
+  const clearBtn = pressSec.querySelector('.ns-clear');
+  const searchBtn = pressSec.querySelector('.ns-btn');
+  const emptyEl = pressSec.querySelector('.news-empty');
   const PER = 10; let year = 'all', month = 'all', kw = '', cur = 1;
   const elig = () => items.filter(r =>
     (year === 'all' || r.dataset.year === year) &&
@@ -2179,11 +2284,30 @@ if(pressSec){
     if(cur > real) cur = real;
     items.forEach(r => r.classList.add('hidden'));
     e.slice((cur-1)*PER, cur*PER).forEach(r => r.classList.remove('hidden'));
-    if(pager) paintPager(pager, pressSec, cur, real, page => { cur = page; paintP(); });
+    if(emptyEl) emptyEl.hidden = e.length > 0;
+    if(pager){
+      pager.style.display = e.length ? '' : 'none';
+      paintPager(pager, pressSec, cur, real, page => { cur = page; paintP(); });
+    }
   }
-  if(selY) selY.addEventListener('change', () => { year = selY.value; cur = 1; paintP(); });
-  if(selM) selM.addEventListener('change', () => { month = selM.value; cur = 1; paintP(); });
-  if(inp) inp.addEventListener('input', () => { kw = inp.value.trim().toLowerCase(); cur = 1; paintP(); });
+  function applyKw(){
+    kw = inp.value.trim().toLowerCase(); cur = 1;
+    paintP();
+  }
+  if(selY) selY.addEventListener('change', () => { year = selY.dataset.value; cur = 1; paintP(); });
+  if(selM) selM.addEventListener('change', () => { month = selM.dataset.value; cur = 1; paintP(); });
+  if(inp){
+    /* 입력 중엔 필터하지 않음 — X 버튼 표시만 갱신, 검색은 Enter·돋보기에서 실행 */
+    inp.addEventListener('input', () => {
+      if(clearBtn) clearBtn.hidden = !inp.value;
+      if(!inp.value && kw){ kw = ''; cur = 1; paintP(); }  /* 전부 지우면 필터 해제 */
+    });
+    inp.addEventListener('keydown', e => { if(e.key === 'Enter') applyKw(); });
+  }
+  if(searchBtn) searchBtn.addEventListener('click', applyKw);
+  if(clearBtn) clearBtn.addEventListener('click', () => {
+    inp.value = ''; clearBtn.hidden = true; kw = ''; cur = 1; paintP(); inp.focus();
+  });
   paintP();
 }
 
@@ -2852,45 +2976,106 @@ PRESS_ITEMS = [
 ]
 
 def press_featured(items):
-    """피처드 — 좌측 큰 카드 1(8col) + 우측 작은 카드 2 적층(4col)."""
+    """피처드 — 좌측 큰 카드 1(8col) + 우측 작은 카드 2 적층(4col). 클릭 시 상세로."""
     big, subs = items[0], items[1:3]
     big_card = card(big['title'], '', kicker='PRESS · ' + big['date'], media=True, sm=False)
-    side = ''.join(card(s['title'], '', kicker='PRESS · ' + s['date']) for s in subs)
+    side = ''.join(f'<a class="card-link" href="press-sample.html">'
+                   + card(s['title'], '', kicker='PRESS · ' + s['date']) + '</a>' for s in subs)
     return ('<div class="news-feat rvl" style="--rvl-y:40px">'
-            f'<div class="nf-big">{big_card}</div>'
+            f'<div class="nf-big"><a class="card-link" href="press-sample.html">{big_card}</a></div>'
             f'<div class="nf-side">{side}</div></div>')
+
+def drop(cls, options, aria):
+    """커스텀 드롭다운 (시스템 셀렉트 대체) — options: [(value, label)], 첫 항목이 기본값."""
+    v0, l0 = options[0]
+    on = ' class="is-on"'
+    lis = ''.join(
+        f'<li role="option" data-value="{v}"{on if i == 0 else ""}>{l}</li>'
+        for i, (v, l) in enumerate(options))
+    return (f'<div class="drop {cls}" data-value="{v0}">'
+            f'<button class="select-pill drop-btn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="{aria}">'
+            f'<span class="drop-label">{l0}</span></button>'
+            f'<ul class="drop-menu" role="listbox" data-lenis-prevent>{lis}</ul></div>')
 
 def press_list(items):
     """보도자료 리스트 — 날짜 | 제목 | 썸네일 영역(placeholder)."""
     years = sorted({it['date'][:4] for it in items}, reverse=True)
-    y_opts = '<option value="all">전체 연도</option>' + ''.join(f'<option value="{y}">{y}</option>' for y in years)
-    m_opts = '<option value="all">전체 월</option>' + ''.join(f'<option value="{m:02d}">{m}월</option>' for m in range(1, 13))
+    y_opts = [('all', '전체 연도')] + [(y, y) for y in years]
+    m_opts = [('all', '전체 월')] + [(f'{m:02d}', f'{m}월') for m in range(1, 13)]
     rows = ''.join(
         f'<li class="news-row press-item rvl" data-year="{it["date"][:4]}" data-month="{it["date"][5:7]}" style="--rvl-y:24px; --rvl-delay:{(i % 5) * 60}ms">'
+        f'<a class="nr-link" href="press-sample.html">'
         f'<span class="nr-date">{it["date"]}</span>'
         f'<h3 class="nr-title">{it["title"]}</h3>'
-        f'<span class="nr-thumb" aria-hidden="true"></span></li>'
+        f'<span class="nr-thumb" aria-hidden="true"></span></a></li>'
         for i, it in enumerate(items))
     return (f'<div class="news-controls rvl">'
-            f'<select class="news-select news-sel-year" aria-label="연도 필터">{y_opts}</select>'
-            f'<select class="news-select news-sel-month" aria-label="월 필터">{m_opts}</select>'
-            f'<div class="news-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>'
-            f'<input type="search" placeholder="보도자료 검색" aria-label="보도자료 검색"></div></div>'
-            f'<ul class="news-list">{rows}</ul>')
+            f'{drop("news-sel-year", y_opts, "연도 필터")}'
+            f'{drop("news-sel-month", m_opts, "월 필터")}'
+            f'<div class="news-search">'
+            f'<input type="search" placeholder="보도자료 검색" aria-label="보도자료 검색">'
+            f'<button class="ns-clear" type="button" aria-label="검색어 지우기" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="7" y1="7" x2="17" y2="17"/><line x1="17" y1="7" x2="7" y2="17"/></svg></button>'
+            f'<button class="ns-btn" type="button" aria-label="검색"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg></button>'
+            f'</div></div>'
+            f'<ul class="news-list">{rows}</ul>'
+            f'<p class="news-empty" hidden>검색 결과가 없습니다.</p>')
 
 PAGES['insights.html'] = dict(
     title='Newsroom | PARAMETA',
     desc='파라메타의 사업, 파트너십, 인증, 수상 소식을 한곳에서 확인할 수 있습니다.',
-    eyebrow='Newsroom',
+    eyebrow='',
     h1_lines=['Newsroom'],
     lead='',
     crumb='Newsroom — 보도자료',
+    body_class='media',
     content=f'''
 <section data-press><div class="shell sec">
   {sec_head('Press Release', '보도자료')}
   {press_featured(PRESS_ITEMS)}
   {press_list(PRESS_ITEMS)}
   <div class="pager" role="navigation" aria-label="보도자료 페이지"></div>
+</div></section>
+''')
+
+# ---------------- press-sample.html (보도자료 상세 샘플) ----------------
+PAGES['press-sample.html'] = dict(
+    title="파라메타, ADB 주관 채권 포럼서 '온체인 KYC' 기반 국경 간 거래 표준 모델 발표 | PARAMETA",
+    desc="파라메타가 ADB 주관 채권 포럼에서 온체인 KYC 기반 국경 간 거래 표준 모델을 발표했습니다. (샘플 상세)",
+    eyebrow='Newsroom',
+    h1_lines=["파라메타, ADB 주관 채권 포럼서", "'온체인 KYC' 기반", "국경 간 거래 표준 모델 발표"],
+    lead='샘플 보도자료 · 2026',
+    crumb='Newsroom — Press',
+    body_class='hero-dark hero-center',
+    hero_cta='',
+    content=f'''
+<section><div class="shell sec">
+  <div class="post-meta rvl">
+    <span class="post-cat">Press</span>
+    <span class="post-date">2026.02</span>
+  </div>
+</div></section>
+<section><div class="shell sec" style="padding-top:0">
+  <div class="post-grid">
+    <article class="post-body">
+      <p class="post-lead">파라메타가 ADB(아시아개발은행) 주관 채권 포럼에서 온체인 KYC를 기반으로 한 국경 간 거래 표준 모델을 발표했습니다. (본문은 샘플입니다 — 실제 보도자료 원문으로 교체 예정)</p>
+      <h3 id="press-s1">본문 준비 중</h3>
+      <p>이 페이지는 보도자료 상세 화면의 레이아웃 확인용 샘플입니다. 실제 보도자료 본문, 이미지, 인용문이 들어갈 자리입니다.</p>
+    </article>
+    <aside class="post-side">
+      {eyebrow('On this page')}
+      <ul>
+        <li><a href="#press-s1">본문 준비 중</a></li>
+      </ul>
+    </aside>
+  </div>
+</div></section>
+<section><div class="shell sec" style="padding-top:0">
+  {sec_head('More Press', '다른 보도자료')}
+  <ul class="cards-3">
+    <li class="rvl" style="--rvl-y:40px"><a class="card-link" href="insights.html">{dark_card('PRESS · 2026.02', '파라메타, 스테이블코인·STO 무료 컨설팅으로 디지털자산 사업 기회 확대 지원', '', grouped=True)}</a></li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><a class="card-link" href="insights.html">{dark_card('PRESS · 2023.11', '김종협 파라메타 대표, 2023 블록체인 진흥주간에서 과학기술정보통신부 장관 표창 수상', '', grouped=True)}</a></li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><a class="card-link" href="insights.html">{dark_card('PRESS · 2023.09', "파라메타, 기술신용평가 최고 등급 'TI-1' 획득 — 최상위 수준의 기술력 및 성장 가능성 인정", '', grouped=True)}</a></li>
+  </ul>
 </div></section>
 ''')
 
@@ -2925,13 +3110,14 @@ def blog_feed(items, cats):
 PAGES['blog.html'] = dict(
     title='Blog | PARAMETA',
     desc='디지털자산 시장을 읽는 인사이트를 확인할 수 있습니다.',
-    eyebrow='Blog',
+    eyebrow='',
     h1_lines=['Blog'],
     lead='',
     crumb='Blog — 디지털자산 인사이트',
+    body_class='media',
     content=f'''
 <section data-blog><div class="shell sec">
-  {sec_head('Blog', '디지털자산 시장을 읽는 인사이트')}
+  {sec_head('Articles', '디지털자산 시장을 읽는 인사이트')}
   {blog_feed(BLOG_ITEMS, BLOG_CATS)}
 </div></section>
 ''')
@@ -2940,24 +3126,33 @@ PAGES['blog.html'] = dict(
 PAGES['resources.html'] = dict(
     title='Resources | PARAMETA',
     desc='블록체인 용어정리, 자주 묻는 질문, 로고 등 브랜드 자료를 한곳에서 확인할 수 있습니다.',
-    eyebrow='Resources',
+    eyebrow='',
     h1_lines=['Resources'],
     lead='',
     crumb='Resources — 자료실',
+    body_class='media',
     content=f'''
 <section><div class="shell sec">
   {sec_head('Logo', '로고 다운로드')}
   <div class="res-logo rvl" style="--rvl-y:24px">
-    <div class="rl-preview" aria-hidden="true"></div>
-    <div class="rl-actions">
-      <button class="rl-btn" type="button" disabled>AI 다운로드</button>
-      <button class="rl-btn" type="button" disabled>PNG 다운로드</button>
-      <p class="rl-note">로고 파일은 준비 중입니다.</p>
-    </div>
+    <article class="work-card static grouped t-gray rl-card">
+      <div class="work-bottom"><h3>AI (인쇄·출판용)</h3>
+        <div class="rl-actions">
+          <button class="rl-btn" type="button" disabled>AI 다운로드</button>
+        </div>
+      </div>
+    </article>
+    <article class="work-card static grouped t-gray rl-card">
+      <div class="work-bottom"><h3>PNG (웹·화면용)</h3>
+        <div class="rl-actions">
+          <button class="rl-btn" type="button" disabled>PNG 다운로드</button>
+        </div>
+      </div>
+    </article>
   </div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
-  {sec_head('Blockchain 101', '용어정리')}
+  {sec_head('Glossary', '용어정리')}
   {faq([
     dict(q='DID (Decentralized Identifier, 분산아이디)', a='외부 인증기관 없이 사용자가 자신의 디지털 서명으로 신원을 직접 증명하는 분산형 신원 체계. 필요한 정보만 선택적으로 공개할 수 있고, W3C 표준을 따릅니다. 자기주권신원(SSI)을 구현하는 핵심 기술입니다.'),
     dict(q='SSI (Self-Sovereign Identity, 자기주권신원)', a='개인이 자신의 신원 정보를 스스로 소유·관리하는 신원 모델. 중앙 발급기관이 아닌 사용자가 인증·공개 범위·이력을 직접 제어합니다. DID 기술이 SSI를 가능하게 합니다.'),
@@ -4243,7 +4438,7 @@ __HEADER__
     <div class="phero-wm">PARAMETA</div>
     <div class="shell phero-inner">
       <div class="phero-text">
-        <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>__EYEBROW__</div>
+        __EYEBROW__
         <h1 class="phero-h1" data-line-stagger="120">__H1__</h1>
         <p class="phero-lead rvl" style="--rvl-delay:250ms">__LEAD__</p>
         __HERO_CTA__
@@ -4318,6 +4513,9 @@ def resolve_hero(fname, p):
 for fname, p in PAGES.items():
     h1 = ''.join(f'<span class="rvl-line"><span>{l}</span></span>' for l in p['h1_lines'])
     _body, _cta = resolve_hero(fname, p)
+    # eyebrow 비면 div 자체를 생략 (dot·괄호 잔재 방지)
+    _eyebrow = (f'<div class="eyebrow dark rvl rvl-op"><span class="dot"></span>{p["eyebrow"]}</div>'
+                if p['eyebrow'] else '')
     out = (SHELL
         .replace('__BODYCLASS__', _body)
         .replace('__TITLE__', p['title'])
@@ -4325,7 +4523,7 @@ for fname, p in PAGES.items():
         .replace('__CSS__', CSS)
         .replace('__EXTRA_CSS__', EXTRA_CSS)
         .replace('__HEADER__', CHROME_HEADER)
-        .replace('__EYEBROW__', p['eyebrow'])
+        .replace('__EYEBROW__', _eyebrow)
         .replace('__H1__', h1)
         .replace('__LEAD__', p['lead'])
         .replace('__CRUMB__', p['crumb'])
