@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
+<head><base href="../">
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>파라메타, ADB 주관 채권 포럼서 '온체인 KYC' 기반 국경 간 거래 표준 모델 발표 | PARAMETA</title>
-<meta name="description" content="파라메타, ADB 주관 채권 포럼서 '온체인 KYC' 기반 국경 간 거래 표준 모델 발표 — 파라메타 보도자료." />
+<title>아이콘루프, 포스코그룹 거점 오피스에 블록체인 DID 기반 출입인증 시스템 적용 | PARAMETA</title>
+<meta name="description" content="아이콘루프, 포스코그룹 거점 오피스에 블록체인 DID 기반 출입인증 시스템 적용 — 파라메타 보도자료." />
 <meta name="theme-color" content="#0E0C27" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -2204,12 +2204,12 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 .card-link{ display:flex; text-decoration:none; color:inherit }
 .blog-item.hidden, .press-item.hidden{ display:none }
 /* 페이지네이션 (보도자료·블로그 공용) — 공통 토큰: --pager-* 로 단일 조정 */
-.pager{ --pager-btn:2.75rem;   /* 버튼 지름 44px */
-  --pager-ico:1.25rem;         /* 화살표 아이콘 20px */
+.pager{ --pager-btn:3rem;      /* 버튼 지름 48px */
+  --pager-ico:1.5rem;          /* 화살표 아이콘 24px */
   --pager-gap:.5rem;
   display:flex; justify-content:center; align-items:center; gap:var(--pager-gap); margin-top:var(--space-48) }
-.pager button{ min-width:var(--pager-btn); height:var(--pager-btn); padding:0 .5rem; border:none; background:transparent;
-  border-radius:var(--radius-pill); font-size:var(--text-16); font-weight:500; line-height:1;
+.pager button{ width:var(--pager-btn); height:var(--pager-btn); padding:0; border:none; background:transparent;  /* 고정 원 — 호버·셀렉티드 동일 */
+  border-radius:var(--radius-pill); font-size:var(--text-18); font-weight:500; line-height:1;
   color:rgba(var(--ink-rgb),.55); cursor:pointer;
   display:inline-flex; align-items:center; justify-content:center;
   transition:color .2s ease, background .2s ease, opacity .2s ease }
@@ -2217,6 +2217,7 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 .pager button.is-on{ background:var(--ink); color:var(--white); font-weight:600 }
 .pager button:disabled{ opacity:.3; cursor:default }
 .pager button svg{ width:var(--pager-ico); height:var(--pager-ico); display:block }
+.pager-dots{ min-width:1.5rem; text-align:center; font-size:var(--text-18); color:rgba(var(--ink-rgb),.4); user-select:none }
 
 /* ============ POST — 블로그 아티클 상세 ============ */
 .post-meta{ display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; padding:1.5rem 0;
@@ -2383,28 +2384,7 @@ body.company .firsts-eco .ally-head{ text-align:left }
 body.media .phero + section .sec{ padding-top:var(--space-32) }
 body.media .phero-inner{ padding-bottom:3rem }  /* 히어로 하단 6rem → 3rem (media 스코프만) */
 
-/* ============ NEWSROOM — 피처드(1큰카드+2적층) + 보도자료 리스트 ============ */
-.news-feat{ display:grid; grid-template-columns:1fr; gap:1rem; margin-bottom:var(--space-80) }
-@media (min-width:768px){
-  .news-feat{ grid-template-columns:repeat(12,1fr); gap:var(--grid-gap) }
-  .nf-big{ grid-column:1 / 9 } .nf-side{ grid-column:9 / 13 } }
-.news-feat .work-meta{ font-size:var(--text-16) }  /* 킥커(PRESS · 날짜) 한 토큰 업 */
-.nf-big{ display:flex }
-.nf-big .card-link{ flex:1 1 auto; min-width:0 }  /* 상세 링크 래퍼도 높이 전달 */
-.nf-big .work-card{ flex:1 1 auto; min-width:0; min-height:0 }
-/* 큰 카드 이미지 영역: full-bleed, 남는 높이를 채움 */
-.nf-big .work-card.grouped::before{ flex:1 1 auto; height:auto; min-height:16rem;
-  margin:-1.5rem -1.5rem 1.5rem; border-radius:0;
-  background:url('assets/parasta/body-test.avif') center/cover no-repeat }
-@media (min-width:640px){ .nf-big .work-card.grouped::before{ margin:-2rem -2rem 1.75rem } }
-.nf-side{ display:flex; flex-direction:column; gap:1rem }
-@media (min-width:768px){ .nf-side{ gap:var(--grid-gap) } }
-.nf-side > .card-link{ flex:1 1 0; display:flex }  /* 앵커 래퍼가 높이를 반씩 나눠 큰 카드와 합 맞춤 */
-/* 적층 카드: 텍스트만 — 큰 카드(이미지)와 위계 구분. 킥커는 보라 통일 */
-.nf-side .work-card{ flex:1 1 0; min-height:11rem; display:flex; flex-direction:column }
-.nf-side .work-card .work-meta{ color:var(--purple-300) }
-.nf-side .work-card .work-bottom{ position:static; inset:auto; margin-top:auto; padding-top:.875rem }
-.nf-side .work-card .work-bottom h3{ font-size:var(--text-22) }
+/* ============ NEWSROOM — 보도자료 리스트 ============ */
 /* ============ 공통 컨트롤 — 필 인풋·드롭다운 (페이저처럼 --ctl-* 토큰으로 단일 조정) ============ */
 .select-pill, .input-pill{ --ctl-h:2.75rem;   /* 컨트롤 높이 44px */
   --ctl-pad:1.25rem;                           /* 좌우 패딩 20px */
@@ -2477,9 +2457,7 @@ body.media .phero-inner{ padding-bottom:3rem }  /* 히어로 하단 6rem → 3re
 @media (hover:hover){ .ns-btn:hover{ transform:scale(1.05) } }
 .ns-btn svg{ width:1.5rem; height:1.5rem }
 /* ============ PRESS DETAIL — 보도자료 상세 공통 (네이버 뉴스룸 상세 포맷) ============ */
-/* 히어로: 딤 깔린 대표 이미지 배경 + 좌측 정렬 타이틀·날짜 + 우측 공유 버튼 */
-.pd-hero-bg{ position:absolute; inset:0; z-index:0; background-size:cover; background-position:center }
-.pd-hero-bg::after{ content:''; position:absolute; inset:0; background:rgba(var(--ink-rgb),.82) }  /* 딤 */
+/* 히어로: 다크 배경 + 좌측 정렬 타이틀·날짜 + 우측 공유 버튼 */
 body.press .phero{ min-height:0 }  /* 100vh 해제 — 레퍼처럼 밴드형 히어로 */
 body.press .phero{ min-height:60vh; display:flex; flex-direction:column; justify-content:flex-end; padding-bottom:var(--space-40) }   /* 하단 기준 앵커 */  /* 화면 3/5 */
 body.press .phero-inner{ position:relative; z-index:1; width:100%;
@@ -2493,7 +2471,7 @@ body.press .phero-inner{ position:relative; z-index:1; width:100%;
 @media (min-width:640px){ .pd-hero-meta{ padding-inline:2rem } }
 .pdm-cell{ grid-column:1 / -1; display:flex; justify-content:space-between; align-items:center }
 @media (min-width:1024px){ .pdm-cell{ grid-column:2 / 12 } }
-.pdm-date{ font-size:var(--text-18); color:rgba(var(--white-rgb),.6) }
+.pdm-date{ font-size:var(--text-20); color:rgba(var(--white-rgb),.6) }
 body.press .phero-visual{ display:none }
 body.press .phero-text{ align-items:flex-start; text-align:left;
   grid-column:1 / -1; max-width:none; margin:0 }
@@ -2556,11 +2534,16 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
 .pd-sum{ list-style:none; display:flex; flex-direction:column; gap:.5rem; margin-bottom:2.5rem;
   font-size:var(--text-20); font-weight:var(--w-title); color:var(--ink); line-height:var(--lh-body); word-break:keep-all }
 .pd-fig{ margin:0 0 2.5rem }
-.pd-img{ display:block; width:100%; aspect-ratio:16/9; border-radius:var(--radius-card-sm);
-  background:color-mix(in srgb, var(--ink) 6%, var(--white)) }  /* 대표 이미지 자리 */
+.pd-fig img{ display:block; width:100%; height:auto; border-radius:var(--radius-card-sm);
+  border:1px solid var(--line) }
+/* 본문 소제목·리스트 블록 — 시맨틱 토큰층 준수(--lh-*·--w-*), 리스트는 본문 문단과 동일 크기 */
+.pd-h3{ font-size:var(--text-24); font-weight:var(--w-strong); line-height:var(--lh-heading); letter-spacing:-.01em;
+  margin:3rem 0 1.25rem; color:var(--ink) }
+.pd-body ul.pd-list{ list-style:none; margin:0 0 1.5rem; padding:0; display:flex; flex-direction:column; gap:.5rem;
+  font-size:var(--text-body); font-weight:var(--w-title); color:var(--ink); line-height:var(--lh-body); word-break:keep-all }
 .pd-fig figcaption{ margin-top:.75rem; font-size:var(--text-16); color:var(--muted);
   text-align:center; line-height:var(--lh-body); word-break:keep-all }
-.pd-body > p{ font-size:var(--text-body); line-height:var(--lh-body); color:rgba(var(--ink-rgb),.75);
+.pd-body > p{ font-size:var(--text-body); line-height:var(--lh-body); color:rgba(var(--ink-rgb),.75);  /* 시맨틱 토큰(오리진 공통) 준수 */
   margin-bottom:1.5rem; word-break:keep-all; text-align:justify }
 .pd-end{ color:var(--muted) }
 /* 액션 바: 텍스트 복사·이미지 다운로드(좌) + 목록보기(우, 다크) */
@@ -2588,19 +2571,22 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
 /* 리스트 — 날짜 | 제목 | 썸네일 영역 (타이포·호버는 FAQ 행과 동일, 클릭 시 상세 이동) */
 .news-list{ list-style:none }
 .news-row{ border-bottom:1px solid var(--line) }
-.nr-link{ display:grid; grid-template-columns:6rem 1fr 15rem; align-items:center; gap:var(--grid-gap);
-  padding:1.5rem; border-radius:var(--radius-card-sm); text-decoration:none; color:inherit;
+.nr-link{ display:grid; grid-template-columns:7rem 1fr 15rem; align-items:center; gap:var(--grid-gap);  /* 날짜 칼럼 +1rem — 제목과 간격 */
+  padding:1.5rem 0; border-radius:var(--radius-card-sm); text-decoration:none; color:inherit;
   background:rgba(var(--surface-rgb),0); transition:background .45s cubic-bezier(.45,0,.55,1) }
-@media (hover:hover){ .nr-link:hover{ background:rgba(var(--surface-rgb),1) } }
-.nr-date{ font-size:var(--text-14); font-weight:var(--w-title); color:var(--c-mut);
+/* 행 호버: 배경 필 대신 제목 색 전환 */
+@media (hover:hover){ .nr-link:hover .nr-title{ color:var(--accent) } }
+.nr-date{ font-size:var(--text-16); font-weight:var(--w-title); color:var(--c-mut);
   line-height:2.25rem; font-variant-numeric:tabular-nums }
 .nr-title{ font-size:var(--text-20); font-weight:var(--w-title); letter-spacing:-.01em; line-height:2.25rem;
+  transition:color .2s ease;
   color:var(--ink); word-break:keep-all }
 @media (min-width:640px){ .nr-title{ font-size:var(--text-24) } }
 .nr-thumb{ width:100%; aspect-ratio:3/2; border-radius:var(--radius-card-sm);
-  background:color-mix(in srgb, var(--ink) 6%, var(--white)) }
+  background-color:color-mix(in srgb, var(--ink) 6%, var(--white));
+  background-size:cover; background-position:center; background-repeat:no-repeat }
 @media (max-width:767px){
-  .nr-link{ grid-template-columns:1fr; gap:.75rem; padding:1.25rem 1rem }
+  .nr-link{ grid-template-columns:1fr; gap:.75rem; padding:1.25rem 0 }
   .nr-date{ line-height:1 }
   .nr-title{ font-size:var(--text-18); line-height:var(--lh-heading) }
   .nr-thumb{ max-width:20rem }
@@ -2646,7 +2632,7 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
 </head>
 <body class="hero-dark press">
 
-<a href="#main" class="skip">본문으로 건너뛰기</a>
+<a href="press/post-pr-143.html#main" class="skip">본문으로 건너뛰기</a>
 <!-- GNB — 단일 소스: assets/nav.js가 배너·헤더·오버레이 메뉴 주입 -->
 <header id="header" class="is-in" style="opacity:1; transform:none"></header>
 
@@ -2658,14 +2644,14 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
     <div class="shell phero-inner">
       <div class="phero-text">
         
-        <h1 class="phero-h1" data-line-stagger="120"><span class="rvl-line"><span>파라메타, ADB 주관 채권 포럼서 '온체인 KYC' 기반 국경 간 거래 표준 모델 발표</span></span></h1>
+        <h1 class="phero-h1" data-line-stagger="120"><span class="rvl-line"><span>아이콘루프, 포스코그룹 거점 오피스에 블록체인 DID 기반 출입인증 시스템 적용</span></span></h1>
         <p class="phero-lead rvl" style="--rvl-delay:250ms"></p>
         
       </div>
       <div class="phero-visual" aria-hidden="true"></div>
       
     </div>
-    <div class="pd-hero-bg" aria-hidden="true" style="background-image:url('assets/parasta/body-test.avif')"></div><div class="pd-hero-meta"><div class="pdm-cell"><span class="pdm-date">2026.02.19</span><button class="pd-share" type="button" aria-label="공유하기"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle vector-effect="non-scaling-stroke" cx="18" cy="5" r="3"/><circle vector-effect="non-scaling-stroke" cx="6" cy="12" r="3"/><circle vector-effect="non-scaling-stroke" cx="18" cy="19" r="3"/><line vector-effect="non-scaling-stroke" x1="8.6" y1="13.5" x2="15.4" y2="17.5"/><line vector-effect="non-scaling-stroke" x1="15.4" y1="6.5" x2="8.6" y2="10.5"/></svg></button></div></div>
+    <div class="pd-hero-meta"><div class="pdm-cell"><span class="pdm-date">2021.12.06</span><button class="pd-share" type="button" aria-label="공유하기"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle vector-effect="non-scaling-stroke" cx="18" cy="5" r="3"/><circle vector-effect="non-scaling-stroke" cx="6" cy="12" r="3"/><circle vector-effect="non-scaling-stroke" cx="18" cy="19" r="3"/><line vector-effect="non-scaling-stroke" x1="8.6" y1="13.5" x2="15.4" y2="17.5"/><line vector-effect="non-scaling-stroke" x1="15.4" y1="6.5" x2="8.6" y2="10.5"/></svg></button></div></div>
     <div class="shell phero-status">
       <span>Newsroom — Press</span>
       <span style="display:inline-flex; gap:.5rem">Scroll <span aria-hidden="true">↓</span></span>
@@ -2674,13 +2660,9 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
 
 <section><div class="shell sec pd-grid">
   <article class="pd-body rvl">
-    <h2 class="pd-title">파라메타, ADB 주관 채권 포럼서 '온체인 KYC' 기반 국경 간 거래 표준 모델 발표</h2>
-    <ul class="pd-sum"><li>- 아시아개발은행(ADB) 주관 채권 포럼에서 온체인 KYC 기반 국경 간 거래 표준 모델 발표</li><li>- 발행, 유통, 정산 전 과정에서 규제 요건을 검증하는 컴플라이언스 구조 제시</li><li>- 아시아 역내 금융기관들과 표준 모델 실증 논의 착수</li></ul>
-    <figure class="pd-fig">
-      <span class="pd-img" aria-hidden="true" data-img="assets/parasta/body-test.avif" style="background-image:url('assets/parasta/body-test.avif')"></span>
-      <figcaption>[사진] 파라메타가 ADB 주관 채권 포럼에서 온체인 KYC 기반 국경 간 거래 표준 모델을 발표했다.</figcaption>
-    </figure>
-    <p>파라메타가 아시아개발은행(ADB) 주관 채권 포럼에서 온체인 KYC를 기반으로 한 국경 간 거래 표준 모델을 발표했다.</p><p>이번 발표는 서로 다른 규제 환경을 가진 국가 간 채권 거래에서, 참여자 신원과 거래 자격을 온체인에서 검증하는 표준 절차를 제시한 것이 핵심이다. 발행, 유통, 정산 전 과정에 컴플라이언스 검증을 내장해 규제 대응과 거래 효율을 함께 확보할 수 있다.</p><p>파라메타는 포럼에 참여한 아시아 역내 금융기관들과 표준 모델의 실증 방안을 논의했으며, 후속 협력을 이어갈 계획이다.</p><p>파라메타 관계자는 "국경 간 거래에서 가장 큰 병목은 국가마다 다른 신원 검증 절차"라며 "온체인 KYC 표준 모델이 역내 디지털자산 시장의 신뢰 기반이 되길 기대한다"고 말했다.</p>
+    <h2 class="pd-title">아이콘루프, 포스코그룹 거점 오피스에 블록체인 DID 기반 출입인증 시스템 적용</h2>
+    
+    <figure class="pd-fig"><img src="assets/press/post-pr-143/fig-1.png" alt="" loading="lazy"></figure><p>2021년 12월 6일, 서울 – 국내 대표 블록체인 기업 ㈜아이콘루프(ICONLOOP, 대표 김종협)가 포스코(POSCO)그룹 거점 오피스에 블록체인 DID(Decentralized Identifier, 분산신원인증) 기반 출입인증 시스템을 적용했다고 밝혔다.</p><p>최근 코로나19를 거치며 정착된 원격 근무를 유지하고 유연한 근무 환경을 조성하기 위하여 기업들의 거점 오피스 마련이 이어지고 있는 가운데 기업 차원에서는 각 계열사 및 소속의 상이한 관리 체계로 인한 운영의 어려움이, 직원 입장에서는 건물마다 각기 다른 출입 시스템으로 인해 카드를 여러 장 소지해야 하는 등의 번거로움이 존재해 왔다. 이러한 문제를 해소하기 위해서는 여러 오피스의 출입통제를 통합적으로 관리할 수 있는 시스템이 필요한 상황이었다.</p><p>아이콘루프는 서울 여의도 파크원과 을지로 금세기빌딩에 위치한 포스코그룹의 공유형 거점 오피스 ‘위드 포스코 워크 스테이션(With POSCO Work Station)’에 블록체인 DID 기반 출입인증 시스템을 적용, 출입통제를 통합 관리할 수 있는 스마트 오피스를 구현했다. 이를 통해 포스코 그룹사 직원들은 별도의 건물별 카드 없이 모바일만으로 손쉽게 직원임을 인증하고 거점 오피스에 출입할 수 있게 되었으며, 시스템 관리 및 운영 또한 용이해졌다.</p><p>본 시스템에 적용된 DID 기술은 비대면 환경에서 신원인증을 제공하고 개인정보를 이용자가 직접 관리할 수 있는 비대면 맞춤형 기술이다. 이를 통해 그룹사 직원 본인이 소속정보 등을 바탕으로 자신임을 직접 증명 후 건물에 출입함으로써, 자신의 정보를 스스로 통제 및 관리할 수 있게 된다.</p><p>김종협 아이콘루프 대표는 “비대면 시대의 도래로 기업들의 원격 근무지 마련이 점차 늘어날 것으로 보이는 가운데, 신뢰할 수 있는 통합 관리 시스템은 선택이 아닌 필수가 될 것”이라고 강조하며, “앞으로도 아이콘루프는 보다 편리하고 안전한 시설 출입 및 이용이 가능하도록 다양한 곳에 DID 기반 인증 시스템을 적용해 나갈 예정이다”라 덧붙였다.</p><p>앞서 아이콘루프는 포항 체인지업 그라운드(CHANGeUP GROUND)에 블록체인 DID 기반 통합 신원인증 시스템을 구축, 건물 및 입주사 전반에 걸친 DID 적용 사례를 만든 바 있다. 체인지업 그라운드는 포스코가 벤처기업 육성을 위해 운영하는 스타트업 공간으로, 해당 시스템의 전면 도입을 통해 입주 기업들이 안심하고 혁신 기술 개발에 매진할 수 있도록 기술 보안을 강화했다.</p>
     <p class="pd-end">(끝)</p>
   </article>
   <div class="pd-actions rvl">
@@ -3331,7 +3313,6 @@ const PAGER_ARR = {
   next:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg>'
 };
 function paintPager(pager, sec, cur, real, go){
-  const pages = Math.max(5, real);
   pager.innerHTML = '';
   const mk = (label, page, on, dis) => {
     const b = document.createElement('button'); b.type = 'button';
@@ -3339,11 +3320,23 @@ function paintPager(pager, sec, cur, real, go){
     else b.textContent = label;
     if(on) b.classList.add('is-on');
     if(dis) b.disabled = true;
-    b.addEventListener('click', () => { go(page); sec.scrollIntoView({behavior:'smooth', block:'start'}); });
+    b.addEventListener('click', () => { go(page); });   /* 페이저는 제자리 — 섹션 최상단 스크롤(위로 점프) 제거 */
     pager.appendChild(b);
   };
+  const dots = () => { const sp = document.createElement('span'); sp.className = 'pager-dots'; sp.textContent = '…'; pager.appendChild(sp); };
   mk('prev', cur-1, false, cur <= 1);
-  for(let n = 1; n <= pages; n++) mk(String(n), n, n === cur, n > real);
+  /* 슬라이딩 윈도 5개 + … + 마지막 — 현재 페이지가 창 가운데 (예: 6 → 4 5 6 7 8 … 12) */
+  let start = Math.max(1, cur - 2);
+  if(real > 5) start = Math.min(start, real - 4);
+  for(let n = start; n <= start + 4; n++){
+    if(n > real && real > 5) break;
+    mk(String(n), n, n === cur, n > real);
+  }
+  const end = Math.min(start + 4, real);
+  if(real > 5 && end < real){
+    if(end < real - 1) dots();
+    mk(String(real), real, cur === real, false);
+  }
   mk('next', cur+1, false, cur >= real);
 }
 /* Insights: 블로그 탭 필터 + 페이지네이션 */

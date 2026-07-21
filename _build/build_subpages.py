@@ -27,9 +27,10 @@
 
 #!/usr/bin/env python3
 # Build PARAMETA subpages from shared chrome + per-page content
-import re, os
+import re, os, json, glob
 
 ROOT = '/Users/sang/Desktop/Claude/test'
+DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')  # 보도자료 등 콘텐츠 데이터
 main = open(os.path.join(ROOT, 'parameta.html'), encoding='utf-8').read()
 CSS = re.search(r'<style>([\s\S]*?)</style>', main).group(1)
 
@@ -1413,12 +1414,12 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 .card-link{ display:flex; text-decoration:none; color:inherit }
 .blog-item.hidden, .press-item.hidden{ display:none }
 /* 페이지네이션 (보도자료·블로그 공용) — 공통 토큰: --pager-* 로 단일 조정 */
-.pager{ --pager-btn:2.75rem;   /* 버튼 지름 44px */
-  --pager-ico:1.25rem;         /* 화살표 아이콘 20px */
+.pager{ --pager-btn:3rem;      /* 버튼 지름 48px */
+  --pager-ico:1.5rem;          /* 화살표 아이콘 24px */
   --pager-gap:.5rem;
   display:flex; justify-content:center; align-items:center; gap:var(--pager-gap); margin-top:var(--space-48) }
-.pager button{ min-width:var(--pager-btn); height:var(--pager-btn); padding:0 .5rem; border:none; background:transparent;
-  border-radius:var(--radius-pill); font-size:var(--text-16); font-weight:500; line-height:1;
+.pager button{ width:var(--pager-btn); height:var(--pager-btn); padding:0; border:none; background:transparent;  /* 고정 원 — 호버·셀렉티드 동일 */
+  border-radius:var(--radius-pill); font-size:var(--text-18); font-weight:500; line-height:1;
   color:rgba(var(--ink-rgb),.55); cursor:pointer;
   display:inline-flex; align-items:center; justify-content:center;
   transition:color .2s ease, background .2s ease, opacity .2s ease }
@@ -1426,6 +1427,7 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 .pager button.is-on{ background:var(--ink); color:var(--white); font-weight:600 }
 .pager button:disabled{ opacity:.3; cursor:default }
 .pager button svg{ width:var(--pager-ico); height:var(--pager-ico); display:block }
+.pager-dots{ min-width:1.5rem; text-align:center; font-size:var(--text-18); color:rgba(var(--ink-rgb),.4); user-select:none }
 
 /* ============ POST — 블로그 아티클 상세 ============ */
 .post-meta{ display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; padding:1.5rem 0;
@@ -1592,28 +1594,7 @@ body.company .firsts-eco .ally-head{ text-align:left }
 body.media .phero + section .sec{ padding-top:var(--space-32) }
 body.media .phero-inner{ padding-bottom:3rem }  /* 히어로 하단 6rem → 3rem (media 스코프만) */
 
-/* ============ NEWSROOM — 피처드(1큰카드+2적층) + 보도자료 리스트 ============ */
-.news-feat{ display:grid; grid-template-columns:1fr; gap:1rem; margin-bottom:var(--space-80) }
-@media (min-width:768px){
-  .news-feat{ grid-template-columns:repeat(12,1fr); gap:var(--grid-gap) }
-  .nf-big{ grid-column:1 / 9 } .nf-side{ grid-column:9 / 13 } }
-.news-feat .work-meta{ font-size:var(--text-16) }  /* 킥커(PRESS · 날짜) 한 토큰 업 */
-.nf-big{ display:flex }
-.nf-big .card-link{ flex:1 1 auto; min-width:0 }  /* 상세 링크 래퍼도 높이 전달 */
-.nf-big .work-card{ flex:1 1 auto; min-width:0; min-height:0 }
-/* 큰 카드 이미지 영역: full-bleed, 남는 높이를 채움 */
-.nf-big .work-card.grouped::before{ flex:1 1 auto; height:auto; min-height:16rem;
-  margin:-1.5rem -1.5rem 1.5rem; border-radius:0;
-  background:url('assets/parasta/body-test.avif') center/cover no-repeat }
-@media (min-width:640px){ .nf-big .work-card.grouped::before{ margin:-2rem -2rem 1.75rem } }
-.nf-side{ display:flex; flex-direction:column; gap:1rem }
-@media (min-width:768px){ .nf-side{ gap:var(--grid-gap) } }
-.nf-side > .card-link{ flex:1 1 0; display:flex }  /* 앵커 래퍼가 높이를 반씩 나눠 큰 카드와 합 맞춤 */
-/* 적층 카드: 텍스트만 — 큰 카드(이미지)와 위계 구분. 킥커는 보라 통일 */
-.nf-side .work-card{ flex:1 1 0; min-height:11rem; display:flex; flex-direction:column }
-.nf-side .work-card .work-meta{ color:var(--purple-300) }
-.nf-side .work-card .work-bottom{ position:static; inset:auto; margin-top:auto; padding-top:.875rem }
-.nf-side .work-card .work-bottom h3{ font-size:var(--text-22) }
+/* ============ NEWSROOM — 보도자료 리스트 ============ */
 /* ============ 공통 컨트롤 — 필 인풋·드롭다운 (페이저처럼 --ctl-* 토큰으로 단일 조정) ============ */
 .select-pill, .input-pill{ --ctl-h:2.75rem;   /* 컨트롤 높이 44px */
   --ctl-pad:1.25rem;                           /* 좌우 패딩 20px */
@@ -1686,9 +1667,7 @@ body.media .phero-inner{ padding-bottom:3rem }  /* 히어로 하단 6rem → 3re
 @media (hover:hover){ .ns-btn:hover{ transform:scale(1.05) } }
 .ns-btn svg{ width:1.5rem; height:1.5rem }
 /* ============ PRESS DETAIL — 보도자료 상세 공통 (네이버 뉴스룸 상세 포맷) ============ */
-/* 히어로: 딤 깔린 대표 이미지 배경 + 좌측 정렬 타이틀·날짜 + 우측 공유 버튼 */
-.pd-hero-bg{ position:absolute; inset:0; z-index:0; background-size:cover; background-position:center }
-.pd-hero-bg::after{ content:''; position:absolute; inset:0; background:rgba(var(--ink-rgb),.82) }  /* 딤 */
+/* 히어로: 다크 배경 + 좌측 정렬 타이틀·날짜 + 우측 공유 버튼 */
 body.press .phero{ min-height:0 }  /* 100vh 해제 — 레퍼처럼 밴드형 히어로 */
 body.press .phero{ min-height:60vh; display:flex; flex-direction:column; justify-content:flex-end; padding-bottom:var(--space-40) }   /* 하단 기준 앵커 */  /* 화면 3/5 */
 body.press .phero-inner{ position:relative; z-index:1; width:100%;
@@ -1702,7 +1681,7 @@ body.press .phero-inner{ position:relative; z-index:1; width:100%;
 @media (min-width:640px){ .pd-hero-meta{ padding-inline:2rem } }
 .pdm-cell{ grid-column:1 / -1; display:flex; justify-content:space-between; align-items:center }
 @media (min-width:1024px){ .pdm-cell{ grid-column:2 / 12 } }
-.pdm-date{ font-size:var(--text-18); color:rgba(var(--white-rgb),.6) }
+.pdm-date{ font-size:var(--text-20); color:rgba(var(--white-rgb),.6) }
 body.press .phero-visual{ display:none }
 body.press .phero-text{ align-items:flex-start; text-align:left;
   grid-column:1 / -1; max-width:none; margin:0 }
@@ -1765,11 +1744,16 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
 .pd-sum{ list-style:none; display:flex; flex-direction:column; gap:.5rem; margin-bottom:2.5rem;
   font-size:var(--text-20); font-weight:var(--w-title); color:var(--ink); line-height:var(--lh-body); word-break:keep-all }
 .pd-fig{ margin:0 0 2.5rem }
-.pd-img{ display:block; width:100%; aspect-ratio:16/9; border-radius:var(--radius-card-sm);
-  background:color-mix(in srgb, var(--ink) 6%, var(--white)) }  /* 대표 이미지 자리 */
+.pd-fig img{ display:block; width:100%; height:auto; border-radius:var(--radius-card-sm);
+  border:1px solid var(--line) }
+/* 본문 소제목·리스트 블록 — 시맨틱 토큰층 준수(--lh-*·--w-*), 리스트는 본문 문단과 동일 크기 */
+.pd-h3{ font-size:var(--text-24); font-weight:var(--w-strong); line-height:var(--lh-heading); letter-spacing:-.01em;
+  margin:3rem 0 1.25rem; color:var(--ink) }
+.pd-body ul.pd-list{ list-style:none; margin:0 0 1.5rem; padding:0; display:flex; flex-direction:column; gap:.5rem;
+  font-size:var(--text-body); font-weight:var(--w-title); color:var(--ink); line-height:var(--lh-body); word-break:keep-all }
 .pd-fig figcaption{ margin-top:.75rem; font-size:var(--text-16); color:var(--muted);
   text-align:center; line-height:var(--lh-body); word-break:keep-all }
-.pd-body > p{ font-size:var(--text-body); line-height:var(--lh-body); color:rgba(var(--ink-rgb),.75);
+.pd-body > p{ font-size:var(--text-body); line-height:var(--lh-body); color:rgba(var(--ink-rgb),.75);  /* 시맨틱 토큰(오리진 공통) 준수 */
   margin-bottom:1.5rem; word-break:keep-all; text-align:justify }
 .pd-end{ color:var(--muted) }
 /* 액션 바: 텍스트 복사·이미지 다운로드(좌) + 목록보기(우, 다크) */
@@ -1797,19 +1781,22 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
 /* 리스트 — 날짜 | 제목 | 썸네일 영역 (타이포·호버는 FAQ 행과 동일, 클릭 시 상세 이동) */
 .news-list{ list-style:none }
 .news-row{ border-bottom:1px solid var(--line) }
-.nr-link{ display:grid; grid-template-columns:6rem 1fr 15rem; align-items:center; gap:var(--grid-gap);
-  padding:1.5rem; border-radius:var(--radius-card-sm); text-decoration:none; color:inherit;
+.nr-link{ display:grid; grid-template-columns:7rem 1fr 15rem; align-items:center; gap:var(--grid-gap);  /* 날짜 칼럼 +1rem — 제목과 간격 */
+  padding:1.5rem 0; border-radius:var(--radius-card-sm); text-decoration:none; color:inherit;
   background:rgba(var(--surface-rgb),0); transition:background .45s cubic-bezier(.45,0,.55,1) }
-@media (hover:hover){ .nr-link:hover{ background:rgba(var(--surface-rgb),1) } }
-.nr-date{ font-size:var(--text-14); font-weight:var(--w-title); color:var(--c-mut);
+/* 행 호버: 배경 필 대신 제목 색 전환 */
+@media (hover:hover){ .nr-link:hover .nr-title{ color:var(--accent) } }
+.nr-date{ font-size:var(--text-16); font-weight:var(--w-title); color:var(--c-mut);
   line-height:2.25rem; font-variant-numeric:tabular-nums }
 .nr-title{ font-size:var(--text-20); font-weight:var(--w-title); letter-spacing:-.01em; line-height:2.25rem;
+  transition:color .2s ease;
   color:var(--ink); word-break:keep-all }
 @media (min-width:640px){ .nr-title{ font-size:var(--text-24) } }
 .nr-thumb{ width:100%; aspect-ratio:3/2; border-radius:var(--radius-card-sm);
-  background:color-mix(in srgb, var(--ink) 6%, var(--white)) }
+  background-color:color-mix(in srgb, var(--ink) 6%, var(--white));
+  background-size:cover; background-position:center; background-repeat:no-repeat }
 @media (max-width:767px){
-  .nr-link{ grid-template-columns:1fr; gap:.75rem; padding:1.25rem 1rem }
+  .nr-link{ grid-template-columns:1fr; gap:.75rem; padding:1.25rem 0 }
   .nr-date{ line-height:1 }
   .nr-title{ font-size:var(--text-18); line-height:var(--lh-heading) }
   .nr-thumb{ max-width:20rem }
@@ -2483,7 +2470,6 @@ const PAGER_ARR = {
   next:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg>'
 };
 function paintPager(pager, sec, cur, real, go){
-  const pages = Math.max(5, real);
   pager.innerHTML = '';
   const mk = (label, page, on, dis) => {
     const b = document.createElement('button'); b.type = 'button';
@@ -2491,11 +2477,23 @@ function paintPager(pager, sec, cur, real, go){
     else b.textContent = label;
     if(on) b.classList.add('is-on');
     if(dis) b.disabled = true;
-    b.addEventListener('click', () => { go(page); sec.scrollIntoView({behavior:'smooth', block:'start'}); });
+    b.addEventListener('click', () => { go(page); });   /* 페이저는 제자리 — 섹션 최상단 스크롤(위로 점프) 제거 */
     pager.appendChild(b);
   };
+  const dots = () => { const sp = document.createElement('span'); sp.className = 'pager-dots'; sp.textContent = '\u2026'; pager.appendChild(sp); };
   mk('prev', cur-1, false, cur <= 1);
-  for(let n = 1; n <= pages; n++) mk(String(n), n, n === cur, n > real);
+  /* 슬라이딩 윈도 5개 + … + 마지막 — 현재 페이지가 창 가운데 (예: 6 → 4 5 6 7 8 … 12) */
+  let start = Math.max(1, cur - 2);
+  if(real > 5) start = Math.min(start, real - 4);
+  for(let n = start; n <= start + 4; n++){
+    if(n > real && real > 5) break;
+    mk(String(n), n, n === cur, n > real);
+  }
+  const end = Math.min(start + 4, real);
+  if(real > 5 && end < real){
+    if(end < real - 1) dots();
+    mk(String(real), real, cur === real, false);
+  }
   mk('next', cur+1, false, cur >= real);
 }
 /* Insights: 블로그 탭 필터 + 페이지네이션 */
@@ -3436,26 +3434,14 @@ PAGES['company.html'] = dict(
 ''')
 
 # ---------------- insights.html (Newsroom) ----------------
-# 보도자료 데이터 — 피처드(최신 3)와 리스트가 공유 (최신순)
-# 일자(DD)는 임시값 — 실제 보도자료 날짜로 교체 예정
-PRESS_ITEMS = [
-    dict(date='2026.02.19', title="파라메타, ADB 주관 채권 포럼서 '온체인 KYC' 기반 국경 간 거래 표준 모델 발표"),
-    dict(date='2026.02.04', title='파라메타, 스테이블코인·STO 무료 컨설팅으로 디지털자산 사업 기회 확대 지원'),
-    dict(date='2023.11.16', title='김종협 파라메타 대표, 2023 블록체인 진흥주간에서 과학기술정보통신부 장관 표창 수상'),
-    dict(date='2023.09.12', title="파라메타, 기술신용평가 최고 등급 'TI-1' 획득 — 최상위 수준의 기술력 및 성장 가능성 인정"),
-    dict(date='2023.08.23', title='파라메타, 카스투게더·솔브릭코리아와 국내 최초 모빌리티·태양광 토큰증권 플랫폼 구축'),
-    dict(date='2023.07.05', title="파라메타, 플루토스파트너스와 국내 최초 '부동산 NPL 토큰증권 플랫폼' 구축 협력"),
-]
-
-def press_featured(items):
-    """피처드 — 좌측 큰 카드 1(8col) + 우측 작은 카드 2 적층(4col). 클릭 시 상세로."""
-    big, subs = items[0], items[1:3]
-    big_card = card(big['title'], '', kicker=big['date'], media=True, sm=False)
-    side = ''.join(f'<a class="card-link" href="press-sample.html">'
-                   + card(s['title'], '', kicker=s['date']) + '</a>' for s in subs)
-    return ('<div class="news-feat rvl" style="--rvl-y:40px">'
-            f'<div class="nf-big"><a class="card-link" href="press-sample.html">{big_card}</a></div>'
-            f'<div class="nf-side">{side}</div></div>')
+# 보도자료 데이터 — _build/data/press/*.json (extract_press.py 산출, 120편) 로드
+# 피처드(최신 3)·리스트·상세 양산이 모두 이 데이터를 공유
+PRESS_DATA = []
+for _f in sorted(glob.glob(os.path.join(DATA_DIR, 'press', '*.json'))):
+    with open(_f, encoding='utf-8') as _fh:
+        PRESS_DATA.append(json.load(_fh))
+PRESS_DATA.sort(key=lambda d: -d['sort'])
+PRESS_ITEMS = [dict(date=d['date'], title=d['title'], href=f"press/{d['slug']}.html", img=d.get('hero_img')) for d in PRESS_DATA]
 
 def drop(cls, options, aria):
     """커스텀 드롭다운 (시스템 셀렉트 대체) — options: [(value, label)], 첫 항목이 기본값."""
@@ -3476,10 +3462,11 @@ def press_list(items):
     m_opts = [('all', '전체 월')] + [(f'{m:02d}', f'{m}월') for m in range(1, 13)]
     rows = ''.join(
         f'<li class="news-row press-item rvl" data-year="{it["date"][:4]}" data-month="{it["date"][5:7]}" style="--rvl-y:24px; --rvl-delay:{(i % 5) * 60}ms">'
-        f'<a class="nr-link" href="press-sample.html">'
+        f'<a class="nr-link" href="{it["href"]}">'
         f'<span class="nr-date">{it["date"]}</span>'
         f'<h3 class="nr-title">{it["title"]}</h3>'
-        f'<span class="nr-thumb" aria-hidden="true"></span></a></li>'
+        + (f'<span class="nr-thumb" aria-hidden="true" style="background-image:url(\'{it["img"]}\')"></span>' if it.get('img') else '<span class="nr-thumb" aria-hidden="true"></span>')
+        + '</a></li>'
         for i, it in enumerate(items))
     return (f'<div class="news-controls rvl">'
             f'{drop("news-sel-year", y_opts, "연도 필터")}'
@@ -3505,20 +3492,31 @@ PAGES['insights.html'] = dict(
     content=f'''
 <section data-press><div class="shell sec">
   {sec_head('Press Release', '보도자료')}
-  {press_featured(PRESS_ITEMS)}
   {press_list(PRESS_ITEMS)}
   <div class="pager" role="navigation" aria-label="보도자료 페이지"></div>
 </div></section>
 ''')
 
 # ---------------- 보도자료 상세 공통 템플릿 (네이버 뉴스룸 상세 포맷) ----------------
-def press_detail(fname, h1_lines, date, summary, caption, paras, hero_img='assets/parasta/body-test.avif', body_img='assets/parasta/body-test.avif'):
-    """보도자료 상세 페이지 등록 — 네이버 상세 포맷 그대로:
-    히어로(딤+이미지, 좌측 정렬, 날짜, 공유 버튼) / 본문(제목 반복, 요약 불릿, 사진+캡션, 문단, (끝)) / 액션 바.
-    summary: 요약 문장 리스트 / paras: 본문 문단(HTML 허용)"""
+def press_detail(fname, h1_lines, date, summary, blocks):
+    """보도자료 상세 페이지 등록 — 네이버 상세 포맷:
+    히어로(딤+이미지, 좌측 정렬, 날짜, 공유 버튼) / 본문(제목 반복, 요약 불릿, 블록 시퀀스, (끝)) / 액션 바.
+    summary: 요약 문장 리스트(없으면 생략) / blocks: [{'t':'p'|'img'|'h3'|'list', ...}] 원문 순서 그대로"""
     title_flat = ' '.join(h1_lines)
-    sums = ''.join(f'<li>{x}</li>' for x in summary)
-    body = ''.join(f'<p>{x}</p>' for x in paras)
+    sums = f"<ul class=\"pd-sum\">{''.join(f'<li>{x}</li>' for x in summary)}</ul>" if summary else ''
+    parts = []
+    for bl in blocks:
+        t = bl['t']
+        if t == 'p':
+            parts.append(f"<p>{bl['html']}</p>")
+        elif t == 'img':
+            parts.append(f'<figure class="pd-fig"><img src="{bl["src"]}" alt="" loading="lazy"></figure>')
+        elif t == 'h3':
+            parts.append(f"<h3 class=\"pd-h3\">{bl['html']}</h3>")
+        elif t == 'list':
+            lis = ''.join(f'<li>{x}</li>' for x in bl.get('items', []))
+            parts.append(f'<ul class="pd-list">{lis}</ul>')
+    body = ''.join(parts)
     PAGES[fname] = dict(
         title=f'{title_flat} | PARAMETA',
         desc=f'{title_flat} — 파라메타 보도자료.',
@@ -3529,7 +3527,6 @@ def press_detail(fname, h1_lines, date, summary, caption, paras, hero_img='asset
         body_class='hero-dark press',
         hero_cta='',
         hero_extra=(
-            f'<div class="pd-hero-bg" aria-hidden="true" style="background-image:url(\'{hero_img}\')"></div>'
             f'<div class="pd-hero-meta"><div class="pdm-cell"><span class="pdm-date">{date}</span>'
             '<button class="pd-share" type="button" aria-label="공유하기">'
             '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle vector-effect="non-scaling-stroke" cx="18" cy="5" r="3"/><circle vector-effect="non-scaling-stroke" cx="6" cy="12" r="3"/><circle vector-effect="non-scaling-stroke" cx="18" cy="19" r="3"/><line vector-effect="non-scaling-stroke" x1="8.6" y1="13.5" x2="15.4" y2="17.5"/><line vector-effect="non-scaling-stroke" x1="15.4" y1="6.5" x2="8.6" y2="10.5"/></svg>'
@@ -3538,11 +3535,7 @@ def press_detail(fname, h1_lines, date, summary, caption, paras, hero_img='asset
 <section><div class="shell sec pd-grid">
   <article class="pd-body rvl">
     <h2 class="pd-title">{title_flat}</h2>
-    <ul class="pd-sum">{sums}</ul>
-    <figure class="pd-fig">
-      <span class="pd-img" aria-hidden="true" data-img="{body_img}" style="background-image:url('{body_img}')"></span>
-      <figcaption>[사진] {caption}</figcaption>
-    </figure>
+    {sums}
     {body}
     <p class="pd-end">(끝)</p>
   </article>
@@ -3571,24 +3564,15 @@ def press_detail(fname, h1_lines, date, summary, caption, paras, hero_img='asset
 </div>
 ''')
 
-# 샘플 상세 — 본문·사진 캡션은 임시 카피, 실제 보도자료 원문으로 교체 예정
-press_detail(
-    'press-sample.html',
-    h1_lines=["파라메타, ADB 주관 채권 포럼서 '온체인 KYC' 기반 국경 간 거래 표준 모델 발표"],
-    date='2026.02.19',
-    summary=[
-        '- 아시아개발은행(ADB) 주관 채권 포럼에서 온체인 KYC 기반 국경 간 거래 표준 모델 발표',
-        '- 발행, 유통, 정산 전 과정에서 규제 요건을 검증하는 컴플라이언스 구조 제시',
-        '- 아시아 역내 금융기관들과 표준 모델 실증 논의 착수',
-    ],
-    caption='파라메타가 ADB 주관 채권 포럼에서 온체인 KYC 기반 국경 간 거래 표준 모델을 발표했다.',
-    paras=[
-        '파라메타가 아시아개발은행(ADB) 주관 채권 포럼에서 온체인 KYC를 기반으로 한 국경 간 거래 표준 모델을 발표했다.',
-        '이번 발표는 서로 다른 규제 환경을 가진 국가 간 채권 거래에서, 참여자 신원과 거래 자격을 온체인에서 검증하는 표준 절차를 제시한 것이 핵심이다. 발행, 유통, 정산 전 과정에 컴플라이언스 검증을 내장해 규제 대응과 거래 효율을 함께 확보할 수 있다.',
-        '파라메타는 포럼에 참여한 아시아 역내 금융기관들과 표준 모델의 실증 방안을 논의했으며, 후속 협력을 이어갈 계획이다.',
-        '파라메타 관계자는 "국경 간 거래에서 가장 큰 병목은 국가마다 다른 신원 검증 절차"라며 "온체인 KYC 표준 모델이 역내 디지털자산 시장의 신뢰 기반이 되길 기대한다"고 말했다.',
-    ],
-)
+# 보도자료 120편 양산 — _build/data/press/*.json → press/post-pr-NNN.html
+for _d in PRESS_DATA:
+    press_detail(
+        f"press/{_d['slug']}.html",
+        h1_lines=[_d['title']],
+        date=_d['date'],
+        summary=_d['summary'],
+        blocks=_d['blocks'],
+    )
 
 # ---------------- blog.html ----------------
 # 블로그 아티클 데이터 — 카테고리 레일과 카드 피드가 공유
@@ -5045,7 +5029,15 @@ for fname, p in PAGES.items():
         .replace('__CONTENT__', p['content'])
         .replace('__FOOTER__', CHROME_FOOTER)
         .replace('__JS__', JS))
-    with open(os.path.join(ROOT, fname), 'w', encoding='utf-8') as f:
+    if '/' in fname:
+        # 하위 폴더 페이지: <base>로 상대경로(에셋·nav 링크·챗봇 로딩)를 루트 기준으로 해석
+        depth = fname.count('/')
+        out = out.replace('<head>', f'<head><base href="{"../" * depth}">', 1)
+        # base 영향으로 깨지는 문서 내 앵커는 자기 경로로 고정
+        out = out.replace('href="#main"', f'href="{fname}#main"')
+    outpath = os.path.join(ROOT, fname)
+    os.makedirs(os.path.dirname(outpath), exist_ok=True)
+    with open(outpath, 'w', encoding='utf-8') as f:
         f.write(out)
     print(f'wrote {fname} ({len(out)} bytes)')
 print('done')
