@@ -522,14 +522,14 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 .faq-li{ border-top:1px solid var(--line) }
 .faq-li:first-of-type{ border-top:none }
 .faq-row{ display:flex; align-items:flex-start; gap:1rem; border-radius:var(--radius-card-sm); text-align:left;
-  padding:2rem 1.5rem; cursor:pointer; user-select:none; background:rgba(var(--surface-rgb),0);
+  padding:var(--space-32) var(--space-24); cursor:pointer; user-select:none; background:rgba(var(--surface-rgb),0);
   transition:background .45s cubic-bezier(.45,0,.55,1), padding .45s cubic-bezier(.45,0,.55,1) }
 @media (hover:hover){ .faq-row:hover{ background:rgba(var(--surface-rgb),1) } }
 .faq-item.open .faq-row{ padding-top:2.25rem; padding-bottom:2.5rem }
 .faq-idx{ width:1.75rem; flex:none; font-size:var(--text-14); font-weight:500; color:rgba(var(--ink-rgb),.4);
   line-height:2.25rem; transition:color .3s }
 .faq-item.open .faq-idx{ color:var(--accent) }
-.faq-content{ flex:1; overflow:hidden; max-height:2.25rem;
+.faq-content{ flex:1; min-width:0; overflow:hidden; max-height:2.25rem;   /* nowrap 타이틀이 행을 밀어내지 않게 */
   transition:max-height .45s cubic-bezier(.45,0,.55,1) }
 .faq-inner{ display:flex; flex-direction:column; transform:translateY(calc(-100% + 2.25rem));
   transition:transform .45s cubic-bezier(.45,0,.55,1) }
@@ -835,15 +835,20 @@ body.show-grid #dev-grid{ display:block }
   --text-30:1.75rem; --text-32:1.875rem; --text-36:2rem; --text-40:2.25rem;
   --text-48:2.5rem; --text-56:3rem; --text-60:3.5rem; --text-72:3.75rem;
   --text-76:4.5rem; --text-80:4.75rem; --text-96:5rem;
-  --space-32:1.5rem;   /* 카드류 패딩 한 단계 다운 (32→24 값) */
+  --space-12:.5rem; --space-16:.75rem; --space-20:1rem; --space-24:1.25rem; --space-32:1.5rem;
+  --space-40:2rem; --space-48:2.5rem; --space-64:3rem; --space-80:4rem;
+  --space-120:5rem; --space-144:7.5rem; --space-160:9rem;   /* 스페이싱 전체 한 단계 다운 (8은 4배수 유지 위해 제외) */
 } }
-/* sm(≤767)에서도: 서브페이지 타입 토큰을 한 단계씩 다운시프트(태블릿과 동일). 메인·여백 토큰 무관 */
+/* sm(≤767)에서도: 타입+스페이싱 토큰 한 단계 다운시프트(태블릿과 동일 문법). 메인 무관 */
 @media (max-width:767px){ :root{
   --text-14:0.75rem; --text-16:0.875rem; --text-18:1rem; --text-20:1.125rem;
   --text-22:1.25rem; --text-24:1.375rem; --text-26:1.5rem; --text-28:1.625rem;
   --text-30:1.75rem; --text-32:1.875rem; --text-36:2rem; --text-40:2.25rem;
   --text-48:2.5rem; --text-56:3rem; --text-60:3.5rem; --text-72:3.75rem;
   --text-76:4.5rem; --text-80:4.75rem; --text-96:5rem;
+  --space-12:.5rem; --space-16:.75rem; --space-20:1rem; --space-24:1.25rem; --space-32:1.5rem;
+  --space-40:2rem; --space-48:2.5rem; --space-64:3rem; --space-80:4rem;
+  --space-120:5rem; --space-144:7.5rem; --space-160:9rem;   /* 스페이싱 전체 한 단계 다운 (8은 4배수 유지 위해 제외) */
 } }
 /* 챗봇 전체(FAB+패널): 메인과 동일 렌더 보장.
    - 641~1023: 서브만 루트가 유동이라 px 고정(메인 루트 16px 환산값)
@@ -885,13 +890,31 @@ body.show-grid #dev-grid{ display:block }
   .pc-input input{ font-size:.875rem }
   .pc-send .icn{ font-size:1rem }
 }
+/* ══ 시맨틱 토큰 — 새 작업은 무조건 이 층만 사용 (원시 토큰 직접 사용 지양) ══ */
+:root{
+  /* 폰트 사이즈 */
+  --text-body:var(--text-18);          /* 본문 */
+  --text-body-sm:var(--text-16);       /* 작은 본문(카드 서브) */
+  --text-cap:var(--text-14);           /* 캡션·메타 서브 (최소) */
+  /* 폰트 컬러 */
+  --c-body:rgba(var(--ink-rgb),.6);    /* 본문 */
+  --c-mut:rgba(var(--ink-rgb),.4);     /* 뮤트(라벨·연도·월) */
+  /* 웨이트 */
+  --w-title:500; --w-strong:600; --w-num:700;
+  /* 라인하이트 (기존 leading 토큰 참조) */
+  --lh-display:var(--leading-display,.98); --lh-heading:var(--leading-heading,1.25); --lh-body:var(--leading-body,1.6);
+  /* 여백 */
+  --pad-panel-y:var(--space-48); --pad-panel-x:clamp(1.5rem,4vw,3rem);   /* 그레이 패널 공통 */
+  --gap-unit:var(--space-24);          /* 컴포넌트 내부 기준 간격 */
+}
+.body-t{ font-size:var(--text-body); line-height:var(--lh-body) }
 /* 공통 서브타이틀(.sub-t): 섹션 내 소제목 — Alliance(.ally-num)와 동일 스타일.
    마크업: <span class="sub-t" data-line-reveal><span class="rvl-line"><span>텍스트</span></span></span> → 스크롤 인 시 줄 마스크 리빌 */
 .sub-t{ display:block; font-size:var(--text-26); font-weight:700; color:var(--ink); line-height:var(--leading-heading) }   /* 서브타이틀 22→26, 행간 1.25 */
 /* 공통 메타 라벨(.meta-t): 섹션 내 소소한 구분 라벨 (마퀴 라벨 등).
    ※ 기존 유사 스타일(rc-label 옛 정의 등)은 타 페이지 사용 중 — 전 페이지 이관 완료 후 제거 예정 */
 .meta-t{ display:block; font-size:var(--text-16); font-weight:600; letter-spacing:.06em;
-  color:rgba(var(--ink-rgb),.55); text-transform:uppercase }
+  color:var(--c-body); text-transform:uppercase }
 /* 모바일 전용 줄바꿈: <br class="br-m"> — ≤639에서만 개행 */
 .br-m{ display:none }
 @media (max-width:639px){ .br-m{ display:inline } }
@@ -1882,9 +1905,15 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .light-card p{ font-size:var(--text-16); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.6) }
 .light-card .cap{ font-size:var(--text-14); font-weight:500; text-transform:uppercase; letter-spacing:.05em;
   color:var(--accent); margin-bottom:.75rem; display:block }
-.addr-list{ display:flex; flex-direction:column; gap:1.25rem }
-.addr-list .k{ font-size:var(--text-14); font-weight:500; text-transform:uppercase; letter-spacing:.05em; color:rgba(var(--ink-rgb),.45) }
-.addr-list .v{ margin-top:.25rem; font-size:var(--text-16); line-height:var(--leading-body) }
+body.company .about-grid{ padding-bottom:var(--space-32) }   /* 지도와의 간격 축소 */
+.addr-list{ display:flex; flex-direction:column; gap:var(--gap-unit) }
+@media (min-width:1024px){
+  .about-grid{ grid-template-columns:repeat(var(--grid-cols),minmax(0,1fr)); gap:var(--grid-gap) }
+  .about-globe{ grid-column:1 / 6 }
+  .about-right{ grid-column:6 / 13 }   /* 어드레스: 6번 칼럼부터 */
+}
+.addr-list .k{ font-size:var(--text-16); font-weight:500; text-transform:uppercase; letter-spacing:.05em; color:rgba(var(--ink-rgb),.45) }   /* 14→16 */
+.addr-list .v{ margin-top:.25rem; font-size:var(--text-body); line-height:var(--leading-body) }   /* 본문 토큰 */
 .legal-body{ max-width:48rem }
 .legal-body h3{ font-size:var(--text-18); font-weight:600; margin:2.5rem 0 .75rem }
 .legal-body h3:first-child{ margin-top:0 }
@@ -2218,7 +2247,7 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 
 /* ══ 검수 시안: ① Recognition 칩 통합(Track Record 하단) ② Industry Firsts 1st 앵커 재구성 ══ */
 /* ① 인증·수상 칩 — 독립 섹션 대신 Track Record 숫자 카드 아래 한 줄 증거 밴드 */
-.recog-chips{ margin-top:clamp(var(--space-24), 5.2vw, var(--space-80)) }   /* 위 간격: 화면 폭 가변 (768≈40, 1440≈75, 상한 80) */
+.recog-chips{ margin-top:clamp(var(--space-24), 4.2vw, var(--space-64)) }   /* 위 간격: 화면 폭 가변 (1440≈60, 상한 64) */
 @media (max-width:767px){ .recog-chips{ margin-top:clamp(var(--space-24), 4.7vw, var(--space-40)) } }   /* 모바일: 가변 (375≈23, 640≈30) */
 .recog-chips .rc-label{ margin-bottom:clamp(var(--space-12), 3.125vw, var(--space-40)) }   /* 타이틀↔로고: 화면 폭 가변 (640≈20px, 상한 40) */
 /* 인증·수상 무한 스와이프 — [로고 위 / 수상명 아래] 셀, 기존 ptScroll 재사용 */
@@ -2239,28 +2268,28 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 .aw-logo i{ font-style:normal; font-family:'Departure Mono',monospace; font-size:var(--text-14);
   font-weight:400; color:var(--gray-400); letter-spacing:.02em }
 .aw-item figcaption{ display:flex; flex-direction:column; gap:.3rem }
-.aw-item b{ font-size:var(--text-18); font-weight:500; color:var(--ink); line-height:1.35; word-break:keep-all }   /* 14→16→18 */
-.aw-item figcaption span{ font-size:var(--text-16); color:var(--muted) }   /* 12→14→16 */
+.aw-item b{ font-size:var(--text-body); font-weight:var(--w-title); color:var(--ink); line-height:var(--lh-heading); word-break:keep-all }   /* 14→16→18 */
+.aw-item figcaption span{ font-size:var(--text-body-sm); color:var(--c-body) }   /* 12→14→16 */
 @media (max-width:640px){ .aw-item{ width:10rem; margin:0 .875rem } }
 
 /* ② Industry Firsts — 집계(1st)를 크게, 개별 항목은 작게 */
 .firsts-hero{ display:grid; grid-template-columns:1.2fr 2.8fr; align-items:center; gap:clamp(2.5rem,6vw,5.5rem);   /* 1st 영역 확장 (auto→30%) */
   background-color:rgba(var(--ink-rgb),.04); border-radius:var(--radius-card);
-  padding:3rem clamp(1.5rem,4vw,3.5rem);
+  padding:var(--pad-panel-y) var(--pad-panel-x);   /* 그레이 패널 공통 토큰 */
   background-image:radial-gradient(rgba(var(--ink-rgb),.06) 1px, transparent 1.5px); background-size:20px 20px }
 .fh-big{ display:flex; flex-direction:column; align-items:center; gap:.75rem }
 .fh-num{ font-weight:700; line-height:.85; color:var(--ink); letter-spacing:-.04em; font-size:clamp(6rem,11vw,9.5rem) }
 .fh-num .st{ font-size:.38em; font-weight:700; color:var(--ink); vertical-align:baseline; letter-spacing:0; margin-left:.04em }   /* st를 1 하단(베이스라인)에 정렬 */
 .fh-cap{ font-size:var(--text-18); font-weight:500; color:var(--muted); white-space:nowrap }   /* 2토큰 업(14→18) + 웨이트 500 */
 .fh-list li{ display:flex; align-items:center; gap:.9rem; padding-block:1rem;
-  font-size:var(--text-20); font-weight:500; color:var(--ink); line-height:1.4 }   /* 두 토큰 업(16→20) */
+  font-size:var(--text-20); font-weight:var(--w-title); color:var(--ink); line-height:var(--lh-heading) }   /* 두 토큰 업(16→20) */
 .fh-list li + li{ border-top:1px solid rgba(var(--ink-rgb),.09) }
 .fh-chip{ flex:none; font-size:var(--text-16); font-weight:500; letter-spacing:.02em;   /* 두 토큰 업(12→16), 웨이트 500 */
   padding:.5rem 1rem; border-radius:999px; background:rgba(97,0,255,.09); color:var(--purple-600) }   /* 알약 확대 (.3/.7→.5/1rem) */
 .fh-chip.world{ background:var(--purple-500); color:#fff }
 .fh-chip.lead{ background:rgba(var(--ink-rgb),.07); color:var(--ink) }
 .fh-list li.fh-ally{ margin-top:.5rem; padding-top:1.5rem }
-.fh-sub{ margin-left:auto; padding-left:1rem; font-size:var(--text-18); font-weight:400; color:rgba(var(--ink-rgb),.6); white-space:nowrap }   /* 두 토큰 업(14→18) */
+.fh-sub{ margin-left:auto; padding-left:1rem; font-size:var(--text-body); font-weight:400; color:var(--c-body); white-space:nowrap }   /* 두 토큰 업(14→18) */
 @media (max-width:767px){
   .firsts-hero{ grid-template-columns:1fr; gap:1.75rem; padding:2rem 1.25rem }
   .fh-num{ font-size:3.75rem }
@@ -2274,43 +2303,49 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 @media (max-width:767px){ .ht-era-label{ white-space:normal } }  /* 긴 라벨이 뷰포트 밖으로 밀려 가로 스크롤 만드는 것 방지 */
 .ht-sub li .m{ color:var(--muted); margin-right:.6rem; font-variant-numeric:tabular-nums; white-space:nowrap }
 /* ══ History B-lite v2: 고정 사이드(스크롤 시 페이드 전환) + 연속 리스트, 디바이더 없음 ══ */
-@media (min-width:900px){ .ht2 .ht2-body{ grid-column:6 / 13 } }
+@media (min-width:900px){ .ht2 .cm-head{ grid-column:1 / 6 } .ht2 .ht2-body{ grid-column:6 / 13 } }   /* 타이틀 칼럼 4→5개 */
 .ht2-fade{ display:grid; margin-top:var(--space-8) }
 .ht2-layer .sec-h2{ margin:var(--space-8) 0 0 }
 .ht2-layer{ grid-area:1 / 1; opacity:0; transition:opacity .45s cubic-bezier(.4,0,.2,1); pointer-events:none }
 .ht2-layer.on{ opacity:1 }
 .ht2-group{ background:rgba(var(--ink-rgb),.04); border-radius:var(--radius-card);
-  padding:var(--space-16) var(--space-32) }   /* 시대별 그레이 카드로 묶음 */
+  padding:var(--pad-panel-y) var(--pad-panel-x) }   /* 그레이 패널 공통 토큰 */
 .ht2-group + .ht2-group{ margin-top:var(--space-32) }
 @media (min-width:900px){
   .ht2-group{ opacity:.45; transition:opacity .6s cubic-bezier(.4,0,.2,1) }
   .ht2-group.ht2-on{ opacity:1 }
 }
 .ht2-era-head{ display:none }
-.ht2-era-head .ht2-t{ font-size:var(--text-26); font-weight:700; line-height:var(--leading-heading); margin-top:var(--space-8) }
-.ht2-yrin{ flex:none; min-width:4.5rem; font-size:var(--text-24); font-weight:700; font-variant-numeric:tabular-nums }   /* 22→24 */
-.ht2-acc summary > span{ flex:1 }
-.ht2-acc summary{ display:flex; justify-content:space-between; align-items:center; gap:var(--space-16);
-  font-size:var(--text-20); font-weight:600; color:var(--ink); padding:var(--space-20) 0; cursor:pointer;
-  list-style:none; border-top:1px solid rgba(var(--ink-rgb),.09) }   /* 폰트 18→20, 여백 12→20 */
-.ht2-acc:first-of-type summary{ border-top:0 }
-.ht2-acc summary::-webkit-details-marker{ display:none }
-.ht2-chev{ flex:none; width:.625rem; height:.625rem; margin-top:-.25rem;
-  border-right:2px solid rgba(var(--ink-rgb),.45); border-bottom:2px solid rgba(var(--ink-rgb),.45);
-  transform:rotate(45deg); transition:transform .45s cubic-bezier(.16,1,.3,1), border-color .2s }   /* 기존 ht-chev 컨벤션 */
-.ht2-acc[open] .ht2-chev{ transform:rotate(225deg); margin-top:.25rem; border-color:var(--purple-500) }
-@media (hover:hover){
-  .ht2-acc summary{ transition:color .2s }
-  .ht2-acc summary:hover{ color:var(--purple-500) }
-  .ht2-acc summary:hover .ht2-chev{ border-color:var(--purple-500) }
+.ht2-era-head .ht2-t{ font-size:var(--text-26); font-weight:var(--w-num); line-height:var(--lh-heading); margin:0 }   /* 마진 제거 (웨이트 700 유지) */
+.ht2-faq{ list-style:none; margin:0; padding:0 }
+.ht2 .faq-row{ padding:var(--space-24) 0 }   /* 좌우는 카드 인셋만 */
+.ht2 .faq-item.open .faq-row{ padding:var(--space-24) 0 }   /* 열림 상태도 동일 (공유 2.25rem 오버라이드 무력화) */
+.ht2 .faq-t{ display:flex; align-items:baseline }
+.ht2 .ht2-yr{ flex:none; font-weight:var(--w-title); color:var(--c-mut); margin-right:var(--space-16); font-variant-numeric:tabular-nums }   /* 연도: 별도 박스 */
+.ht2 .ht2-tt{ flex:1; min-width:0 }   /* 줄바꿈은 텍스트 시작점 기준 */
+.ht2 .faq-t-bottom .ht2-tt{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap }   /* 닫힘 타이틀 말줄임 (flex 구조로 이관) */
+.ht2 .faq-content{ contain:inline-size }   /* nowrap 타이틀의 min-content 전파 차단 (모바일 가로 오버플로우 방지) */
+.ht2 .faq-item.open .ht2-yr{ color:var(--purple-500) }   /* 열리면 연도 보라 */
+@media (hover:hover){ .ht2 .faq-row:hover{ background:transparent } }   /* 호버 배경 제거 */
+.ht2 .faq-t{ font-size:var(--text-20); font-weight:var(--w-title) }
+.ht2 .faq-ans{ display:none }   /* 본문은 faq-content 밖(ht2-subwrap)에서 풀폭으로 */
+.ht2-subwrap{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s cubic-bezier(.45,0,.55,1) }
+.ht2-subwrap .ht2-subin{ overflow:hidden }   /* 좌우는 카드 인셋만 */
+.ht2 .faq-item.open .ht2-subwrap{ grid-template-rows:1fr }
+.ht2-rows{ list-style:none; margin:0; padding:0 }
+.ht2-rows li .m, .ht2-rows li > span:last-child{ transform-origin:left center; transition:transform .3s cubic-bezier(.2,.8,.2,1) }
+@media (hover:hover){   /* 호버는 줄 단위, 확대는 각자 제자리에서 */
+  .ht2-rows li:hover .m{ transform:scale(1.015) }
+  .ht2-rows li:hover > span:last-child{ transform:scale(1.015) }
 }
-.ht2-rows{ list-style:none; margin:0; padding:0 0 var(--space-16) }
-.ht2-rows li{ display:flex; gap:var(--space-12); border-top:1px solid rgba(var(--ink-rgb),.06);
-  padding:var(--space-12) 0; font-size:var(--text-16); font-weight:500; color:var(--ink); line-height:var(--leading-body) }
-.ht2-rows li .m{ flex:none; min-width:2.75rem; color:rgba(var(--ink-rgb),.4); font-weight:400; font-variant-numeric:tabular-nums }
+.ht2-rows li:first-child{ padding-top:0 }   /* 첫 행 위 간격 제거 */
+.ht2-rows li:last-child{ padding-bottom:var(--space-24) }   /* 마지막 행 아래 = 기준 단위 */
+.ht2-rows li{ display:flex; gap:var(--space-16);   /* 디바이더 없이 패딩으로만 그룹핑, 갭은 연도와 동일 16 */
+  padding:var(--space-12) 0; font-size:var(--text-body); font-weight:var(--w-title); color:var(--c-body); line-height:var(--lh-body) }   /* 본문 한 단계 밝게(c-body) */
+.ht2-rows li .m{ flex:none; min-width:3rem; color:var(--c-mut); font-weight:400 }   /* 월 그레이·볼드 */
 @media (max-width:899px){
   .ht2 .cm-head{ display:none }
-  .ht2-era-head{ display:block; margin-bottom:var(--space-16) }
+  .ht2-era-head{ display:block; margin-bottom:0; padding:0 }   /* 위 간격 제거 (카드 패딩이 담당) */
 }
 /* Alliance 소절 카드 위 여백 */
 /* 시안 D: 좌 문장(.sub-t) / 우 미니 필 2개, 86+는 마퀴 라벨 */
@@ -2320,14 +2355,14 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
   font-size:var(--text-18); border:1px solid rgba(var(--ink-rgb),.12); border-radius:var(--radius-pill);
   padding:.875rem 1.25rem; white-space:nowrap; color:var(--ink) }
 .firsts-eco .eco-pill b{ font-weight:600; transition:color .25s }
-.firsts-eco .eco-pill i{ font-style:normal; color:rgba(var(--ink-rgb),.55); margin-left:.375rem }
+.firsts-eco .eco-pill i{ font-style:normal; color:var(--c-body); margin-left:.375rem }
 @media (max-width:767px){
   .firsts-eco .eco-head{ flex-direction:column; align-items:flex-start; gap:var(--space-20) }
   .firsts-eco .eco-pills{ justify-content:flex-start }
 }
 body.company .firsts-eco .ally-head{ text-align:left }
 @media (hover:hover){ .firsts-eco .eco-pill:hover{ transform:scale(1.05) } .firsts-eco .eco-pill:hover b{ color:var(--purple-500) } }   /* 얼라이언스 문장 좌측 정렬 (스탯 로우 확정 후 변경) */
-.firsts-eco{ margin-top:clamp(var(--space-24), 5.2vw, var(--space-80)) }   /* 인증수상(recog-chips)과 동일 가변 커브 */
+.firsts-eco{ margin-top:clamp(var(--space-24), 4.2vw, var(--space-64)) }   /* 인증수상(recog-chips)과 동일 가변 커브 */
 @media (max-width:767px){ .firsts-eco{ margin-top:clamp(var(--space-24), 4.7vw, var(--space-40)) } }
 
 /* ============ MEDIA 공통(newsroom·blog·resources) — 첫 섹션을 히어로에 붙임 (contact 방식) ============ */
@@ -2739,9 +2774,9 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
       <div class="cm-head-in rvl" style="--rvl-y:20px">
         <div class="eyebrow dark"><span class="dot"></span>History</div>
         <div class="ht2-fade">
-          <div class="ht2-layer on"><h2 class="sec-h2" style="max-width:14ch">2023 — 2026<br>디지털자산 인프라 확장</h2></div>
-          <div class="ht2-layer"><h2 class="sec-h2" style="max-width:14ch">2019 — 2022<br>DID 상용화와 공공 확산, Web2 → Web3 전환 확대</h2></div>
-          <div class="ht2-layer"><h2 class="sec-h2" style="max-width:14ch">2016 — 2018<br>기술 기반 구축</h2></div>
+          <div class="ht2-layer on"><h2 class="sec-h2" style="max-width:24ch">2023 — 2026<br>디지털자산 인프라 확장</h2></div>
+          <div class="ht2-layer"><h2 class="sec-h2" style="max-width:24ch">2019 — 2022<br>DID 상용화와 공공 확산</h2></div>
+          <div class="ht2-layer"><h2 class="sec-h2" style="max-width:24ch">2016 — 2018<br>기술 기반 구축</h2></div>
         </div>
       </div>
     </div>
@@ -2750,13 +2785,13 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
     <div class="ht2-group rvl" style="--rvl-y:24px" data-rng="2023 — 2026" data-title="디지털자산 인프라 확장">
       <div class="ht2-era-head"><h3 class="ht2-t">2023 — 2026<br>디지털자산 인프라 확장</h3></div>
 
-    <details class="ht2-acc"><summary><b class="ht2-yrin">2026</b><span>APAC 확장 — ADB 채권 포럼 국경 간 거래 표준모델 발표 등 시장 확대</span><span class="ht2-chev" aria-hidden="true"></span></summary><ul class="ht2-rows">
+    <ul class="ht2-faq"><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:0ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top"><b class="ht2-yr">2026</b><span class="ht2-tt">APAC 확장, ADB 채권 포럼 국경 간 거래 표준모델 발표 등 시장 확대</span></h3><div class="faq-ans"></div><h3 class="faq-t faq-t-bottom"><b class="ht2-yr">2026</b><span class="ht2-tt">APAC 확장, ADB 채권 포럼 국경 간 거래 표준모델 발표 등 시장 확대</span></h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div><div class="ht2-subwrap"><div class="ht2-subin"><ul class="ht2-rows">
       <li><span class="m">06월</span><span>인도네시아 HARA와 전략적 업무협약 체결, APAC 사업 확장 본격화</span></li>
       <li><span class="m">02월</span><span>'스테이블코인·STO 무료 컨설팅' 실시, 디지털자산 사업 기회 확대 지원</span></li>
       <li><span class="m">02월</span><span>ADB 주관 채권 포럼(ABMF)에서 온체인 KYC 기반 국경 간 거래 표준 모델 발표</span></li>
       <li><span class="m">01월</span><span>리스크엑스(RiskX)와 스테이블코인 기반 글로벌 디지털 자산·금융 사업 협력</span></li>
-    </ul></details>
-    <details class="ht2-acc"><summary><b class="ht2-yrin">2025</b><span>Stablecoin Alliance 초대 의장사 선임</span><span class="ht2-chev" aria-hidden="true"></span></summary><ul class="ht2-rows">
+    </ul></div></div></li>
+    <li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:60ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top"><b class="ht2-yr">2025</b><span class="ht2-tt">Stablecoin Alliance 초대 의장사 선임</span></h3><div class="faq-ans"></div><h3 class="faq-t faq-t-bottom"><b class="ht2-yr">2025</b><span class="ht2-tt">Stablecoin Alliance 초대 의장사 선임</span></h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div><div class="ht2-subwrap"><div class="ht2-subin"><ul class="ht2-rows">
       <li><span class="m">12월</span><span>Stablecoin Alliance 출범, 초대 의장사 선임</span></li>
       <li><span class="m">12월</span><span>코스포·네이버클라우드·네이버 아라비아 3자 MOU, broof로 블록체인에 영구 기록</span></li>
       <li><span class="m">11월</span><span>국가AI전략위원회 위촉증, 블록체인 증명서 broof로 발급</span></li>
@@ -2765,13 +2800,13 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
       <li><span class="m">09월</span><span>하나테크와 글로벌 스테이블코인 결제지원 MoU 체결</span></li>
       <li><span class="m">08월</span><span>국내 최초 유럽 DPP 대응 '블록체인 기반 배터리 여권 플랫폼' 구축 수주</span></li>
       <li><span class="m">05월</span><span>DID 플랫폼 'MyID 2.0', 블록체인 서비스 최초 CSAP 인증 획득</span></li>
-    </ul></details>
-    <details class="ht2-acc"><summary><b class="ht2-yrin">2024</b><span>K-BTF 공공 블록체인 공동인프라 사업자 선정</span><span class="ht2-chev" aria-hidden="true"></span></summary><ul class="ht2-rows">
+    </ul></div></div></li>
+    <li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:120ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top"><b class="ht2-yr">2024</b><span class="ht2-tt">K-BTF 공공 블록체인 공동인프라 사업자 선정</span></h3><div class="faq-ans"></div><h3 class="faq-t faq-t-bottom"><b class="ht2-yr">2024</b><span class="ht2-tt">K-BTF 공공 블록체인 공동인프라 사업자 선정</span></h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div><div class="ht2-subwrap"><div class="ht2-subin"><ul class="ht2-rows">
       <li><span class="m">11월</span><span>Web3Auth와 블록체인 신원인증 글로벌 확대 MoU 체결</span></li>
       <li><span class="m">06월</span><span>국내 최초·유일 CSAP 기반 공공용 블록체인 서비스(K-BTF) 사업자 선정</span></li>
       <li><span class="m">03월</span><span>90억 원 규모 추가 투자 유치, 누적 투자금 250억 원 달성</span></li>
-    </ul></details>
-    <details class="ht2-acc"><summary><b class="ht2-yrin">2023</b><span>PARAMETA 리브랜딩, 디지털자산 인프라 기업 전환</span><span class="ht2-chev" aria-hidden="true"></span></summary><ul class="ht2-rows">
+    </ul></div></div></li>
+    <li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:180ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top"><b class="ht2-yr">2023</b><span class="ht2-tt">PARAMETA 리브랜딩, 디지털자산 인프라 기업 전환</span></h3><div class="faq-ans"></div><h3 class="faq-t faq-t-bottom"><b class="ht2-yr">2023</b><span class="ht2-tt">PARAMETA 리브랜딩, 디지털자산 인프라 기업 전환</span></h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div><div class="ht2-subwrap"><div class="ht2-subin"><ul class="ht2-rows">
       <li><span class="m">12월</span><span>핑거랩스·블로코엑스와이지와 웹3 생태계 확장 MOU 체결</span></li>
       <li><span class="m">11월</span><span>2023 블록체인 진흥주간 과학기술정보통신부 장관 표창 수상 (김종협 대표)</span></li>
       <li><span class="m">11월</span><span>신한EZ손해보험·피엠그로우와 전기차 배터리 잔존 수명 인증 생태계 구축 파트너십 체결</span></li>
@@ -2797,13 +2832,13 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
       <li><span class="m">02월</span><span>시지온과 웹3 데이터 프로토콜 '퍼미(Perme)' 구축 전략적 파트너십 체결</span></li>
       <li><span class="m">02월</span><span>피에스엑스와 토큰증권 플랫폼 공동 개발 전략적 파트너십 체결</span></li>
       <li><span class="m">01월</span><span>인텔렉추얼브릿지와 지식재산권 NFT 플랫폼 사업 구축 MOU 체결</span></li>
-    </ul></details>
+    </ul></div></div></li></ul>
   
     </div>
-    <div class="ht2-group rvl" style="--rvl-y:24px" data-rng="2019 — 2022" data-title="DID 상용화와 공공 확산, Web2 → Web3 전환 확대">
-      <div class="ht2-era-head"><h3 class="ht2-t">2019 — 2022<br>DID 상용화와 공공 확산, Web2 → Web3 전환 확대</h3></div>
+    <div class="ht2-group rvl" style="--rvl-y:24px" data-rng="2019 — 2022" data-title="DID 상용화와 공공 확산">
+      <div class="ht2-era-head"><h3 class="ht2-t">2019 — 2022<br>DID 상용화와 공공 확산</h3></div>
 
-    <details class="ht2-acc"><summary><b class="ht2-yrin">2022</b><span>블록체인 프레임워크 'Parameta Framework' 공개</span><span class="ht2-chev" aria-hidden="true"></span></summary><ul class="ht2-rows">
+    <ul class="ht2-faq"><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:0ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top"><b class="ht2-yr">2022</b><span class="ht2-tt">블록체인 프레임워크 'Parameta Framework' 공개</span></h3><div class="faq-ans"></div><h3 class="faq-t faq-t-bottom"><b class="ht2-yr">2022</b><span class="ht2-tt">블록체인 프레임워크 'Parameta Framework' 공개</span></h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div><div class="ht2-subwrap"><div class="ht2-subin"><ul class="ht2-rows">
       <li><span class="m">12월</span><span>마이아이디, 금융위원회 혁신금융서비스 규제개선 요청 통과</span></li>
       <li><span class="m">08월</span><span>1세대 마이데이터 사업자 '깃플'과 블록체인 기반 마이데이터 사업 협약 체결</span></li>
       <li><span class="m">07월</span><span>'경상북도 디지털 신원인증 마이데이터 플랫폼' 구축 사업 수주</span></li>
@@ -2811,8 +2846,8 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
       <li><span class="m">06월</span><span>broof로 제26회 제주국제관광마라톤축제 블록체인 완주증 발급</span></li>
       <li><span class="m">04월</span><span>국내 최초 블록체인 기반 통합 서비스 플랫폼 강원도 '나야나'에 DID 기술 적용</span></li>
       <li><span class="m">01월</span><span>아이콘재단·투바이트와 인터체인 NFT 플랫폼 '하바(HAVAH)' 구축 전략적 파트너십 체결</span></li>
-    </ul></details>
-    <details class="ht2-acc"><summary><b class="ht2-yrin">2021</b><span>NH농협은행 DID 실명인증 출시, 금융·기업·공공으로 적용 확산</span><span class="ht2-chev" aria-hidden="true"></span></summary><ul class="ht2-rows">
+    </ul></div></div></li>
+    <li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:60ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top"><b class="ht2-yr">2021</b><span class="ht2-tt">NH농협은행 DID 실명인증 출시, 금융·기업·공공으로 적용 확산</span></h3><div class="faq-ans"></div><h3 class="faq-t faq-t-bottom"><b class="ht2-yr">2021</b><span class="ht2-tt">NH농협은행 DID 실명인증 출시, 금융·기업·공공으로 적용 확산</span></h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div><div class="ht2-subwrap"><div class="ht2-subin"><ul class="ht2-rows">
       <li><span class="m">12월</span><span>제주안심코드, 제주특별자치도 표창패 수여</span></li>
       <li><span class="m">12월</span><span>신한카드와 블록체인·DID 사업 전략적 제휴</span></li>
       <li><span class="m">12월</span><span>포스코그룹 거점 오피스에 블록체인 DID 기반 출입인증 시스템 적용</span></li>
@@ -2824,8 +2859,8 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
       <li><span class="m">08월</span><span>NH농협은행 DID 금융실명인증 서비스 출시</span></li>
       <li><span class="m">06월</span><span>포항 체인지업 그라운드에 블록체인 DID 기반 통합 신원인증 시스템 구축</span></li>
       <li><span class="m">01월</span><span>블록체인 기반 '모바일 운전면허증 서비스' ICT 규제 샌드박스 임시허가</span></li>
-    </ul></details>
-    <details class="ht2-acc"><summary><b class="ht2-yrin">2020</b><span>신한은행 국내 최초 금융권 DID 실명인증 상용화</span><span class="ht2-chev" aria-hidden="true"></span></summary><ul class="ht2-rows">
+    </ul></div></div></li>
+    <li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:120ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top"><b class="ht2-yr">2020</b><span class="ht2-tt">신한은행 국내 최초 금융권 DID 실명인증 상용화</span></h3><div class="faq-ans"></div><h3 class="faq-t faq-t-bottom"><b class="ht2-yr">2020</b><span class="ht2-tt">신한은행 국내 최초 금융권 DID 실명인증 상용화</span></h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div><div class="ht2-subwrap"><div class="ht2-subin"><ul class="ht2-rows">
       <li><span class="m">12월</span><span>제주형 관광방역 시스템 '제주안심코드' 공식 출시 (이후 누적 이용자 218만 명)</span></li>
       <li><span class="m">12월</span><span>서울블록체인지원센터와 블록체인 연동형(DID) 방문객 관리 시스템 공동개발 협약</span></li>
       <li><span class="m">12월</span><span>강원도 정부혁신 분야 공로 표창장 수상</span></li>
@@ -2842,8 +2877,8 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
       <li><span class="m">04월</span><span>고성능 합의 알고리즘 'LFT2' 공개</span></li>
       <li><span class="m">02월</span><span>포스텍과 국내 최초 전체 졸업생 대상 블록체인 학위기 발급</span></li>
       <li><span class="m">01월</span><span>사람인HR과 블록체인 기반 인사 채용 생태계 구축 MOU 체결</span></li>
-    </ul></details>
-    <details class="ht2-acc"><summary><b class="ht2-yrin">2019</b><span>분산ID 'MyID' 혁신금융서비스 지정</span><span class="ht2-chev" aria-hidden="true"></span></summary><ul class="ht2-rows">
+    </ul></div></div></li>
+    <li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:180ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top"><b class="ht2-yr">2019</b><span class="ht2-tt">분산ID 'MyID' 혁신금융서비스 지정</span></h3><div class="faq-ans"></div><h3 class="faq-t faq-t-bottom"><b class="ht2-yr">2019</b><span class="ht2-tt">분산ID 'MyID' 혁신금융서비스 지정</span></h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div><div class="ht2-subwrap"><div class="ht2-subin"><ul class="ht2-rows">
       <li><span class="m">11월</span><span>'마이아이디 얼라이언스(MyID Alliance)' 출범, 의장사 선임</span></li>
       <li><span class="m">11월</span><span>대한민국 SW제품 품질대상 최우수상 수상</span></li>
       <li><span class="m">10월</span><span>100억 원 규모 시리즈 A 투자 유치</span></li>
@@ -2856,13 +2891,13 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
       <li><span class="m">04월</span><span>UN 산하 국제전기통신연합(ITU)과 업무협약 체결</span></li>
       <li><span class="m">04월</span><span>SBI저축은행 블록체인 개인인증 서비스 출시</span></li>
       <li><span class="m">02월</span><span>AWS 파트너 네트워크(APN) 어드밴스드 기술 파트너 선정</span></li>
-    </ul></details>
+    </ul></div></div></li></ul>
   
     </div>
     <div class="ht2-group rvl" style="--rvl-y:24px" data-rng="2016 — 2018" data-title="기술 기반 구축">
       <div class="ht2-era-head"><h3 class="ht2-t">2016 — 2018<br>기술 기반 구축</h3></div>
 
-    <details class="ht2-acc"><summary><b class="ht2-yrin">2018</b><span>라인과 블록체인 합작법인 설립</span><span class="ht2-chev" aria-hidden="true"></span></summary><ul class="ht2-rows">
+    <ul class="ht2-faq"><li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:0ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top"><b class="ht2-yr">2018</b><span class="ht2-tt">라인과 블록체인 합작법인 설립</span></h3><div class="faq-ans"></div><h3 class="faq-t faq-t-bottom"><b class="ht2-yr">2018</b><span class="ht2-tt">라인과 블록체인 합작법인 설립</span></h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div><div class="ht2-subwrap"><div class="ht2-subin"><ul class="ht2-rows">
       <li><span class="m">11월</span><span>블록체인 발전 기여 공로, 과학기술정보통신부 장관 표창 수상</span></li>
       <li><span class="m">11월</span><span>AWS 마켓플레이스에 'ICON Development Network' 론칭</span></li>
       <li><span class="m">09월</span><span>서울시 블록체인 기반 단위업무 정보전략계획(ISP) 수립 사업자 선정</span></li>
@@ -2874,41 +2909,44 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
       <li><span class="m">05월</span><span>'CHAIN ID'-삼성패스 연계 운영 업무 협약 체결</span></li>
       <li><span class="m">03월</span><span>기업부설연구소 설립 인정</span></li>
       <li><span class="m">01월</span><span>1세대 퍼블릭 메인넷 ICON 출시에 기술 파트너로 참여, 코어 엔진 loopchain 제공</span></li>
-    </ul></details>
-    <details class="ht2-acc"><summary><b class="ht2-yrin">2017</b><span>세계 최초 블록체인 공동인증 'CHAIN ID' 상용화</span><span class="ht2-chev" aria-hidden="true"></span></summary><ul class="ht2-rows">
+    </ul></div></div></li>
+    <li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:60ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top"><b class="ht2-yr">2017</b><span class="ht2-tt">세계 최초 블록체인 공동인증 'CHAIN ID' 상용화</span></h3><div class="faq-ans"></div><h3 class="faq-t faq-t-bottom"><b class="ht2-yr">2017</b><span class="ht2-tt">세계 최초 블록체인 공동인증 'CHAIN ID' 상용화</span></h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div><div class="ht2-subwrap"><div class="ht2-subin"><ul class="ht2-rows">
       <li><span class="m">12월</span><span>U-Coin·위비코인 파일럿 서비스 출시</span></li>
       <li><span class="m">11월</span><span>교보생명과 블록체인 기반 보험금 자동청구 서비스 출시</span></li>
       <li><span class="m">11월</span><span>금융투자업권 개인정보노출자 사고정보 시스템 출시</span></li>
-      <li><span class="m">10월</span><span>금융투자업권 공동인증 서비스 'CHAIN ID' 출시 — 증권사 26개사 참여</span></li>
+      <li><span class="m">10월</span><span>금융투자업권 공동인증 서비스 'CHAIN ID' 출시, 증권사 26개사 참여</span></li>
       <li><span class="m">09월</span><span>국가전략 프로젝트 'P-HIS 컨소시엄' 기술 파트너 참여</span></li>
-    </ul></details>
-    <details class="ht2-acc"><summary><b class="ht2-yrin">2016</b><span>(주)더루프 설립, 국내 1세대 Web3 인프라 기업 출발</span><span class="ht2-chev" aria-hidden="true"></span></summary><ul class="ht2-rows">
+    </ul></div></div></li>
+    <li class="faq-li faq-item rvl" style="--rvl-y:24px; --rvl-delay:120ms"><div class="faq-row" role="button" tabindex="0" aria-expanded="false"><div class="faq-content"><div class="faq-inner"><h3 class="faq-t faq-t-top"><b class="ht2-yr">2016</b><span class="ht2-tt">(주)더루프 설립, 국내 1세대 Web3 인프라 기업 출발</span></h3><div class="faq-ans"></div><h3 class="faq-t faq-t-bottom"><b class="ht2-yr">2016</b><span class="ht2-tt">(주)더루프 설립, 국내 1세대 Web3 인프라 기업 출발</span></h3></div></div><span class="faq-badge2" aria-hidden="true"></span></div><div class="ht2-subwrap"><div class="ht2-subin"><ul class="ht2-rows">
       <li><span class="m">12월</span><span>'금융투자업권 블록체인 컨소시엄' 출범</span></li>
       <li><span class="m">08월</span><span>서강대학교 내 블록체인 기반 디지털화폐 PoC 완료</span></li>
       <li><span class="m">06월</span><span>서울시 S-coin 시범사업 추진</span></li>
       <li><span class="m">05월</span><span>(주)더루프 설립</span></li>
       <li><span class="m">05월</span><span>서강대학교와 블록체인 공동사업화 업무협약 체결</span></li>
-    </ul></details>
+    </ul></div></div></li></ul>
   
     </div>
   </div>
 </div>
-</div><script>/* History: 아코디언 하나만 열림 + 스크롤 시 좌측 시대 페이드 전환 */
-document.querySelectorAll('.ht2-acc').forEach(function(d){
-  d.addEventListener('toggle', function(){
-    if (d.open) document.querySelectorAll('.ht2-acc[open]').forEach(function(o){ if (o !== d) o.open = false; });
-  });
-});
+</div><script>/* History: 스크롤 시 좌측 시대 페이드 전환 (아코디언은 공통 FAQ JS) */
 (function(){
   var layers=document.querySelectorAll('.ht2-layer');
   var groups=document.querySelectorAll('.ht2-group');
   if(!layers.length || !('IntersectionObserver' in window)) return;
+  var curIdx=-1;
   function setEra(g){
     var idx=[].indexOf.call(groups, g);
     layers.forEach(function(l,i){ l.classList.toggle('on', i===idx); });
     groups.forEach(function(x){ x.classList.toggle('ht2-on', x===g); });
+    if(idx!==curIdx){
+      curIdx=idx;
+      var first=g.querySelector('.faq-item');
+      if(first && !first.classList.contains('open')){
+        var row=first.querySelector('.faq-row'); if(row) row.click();   /* 공유 FAQ 핸들러 재사용 */
+      }
+    }
   }
-  if(groups[0]) groups[0].classList.add('ht2-on');
+  if(groups[0]){ groups[0].classList.add('ht2-on'); window.addEventListener('load', function(){ setEra(groups[0]); }); }   /* 모든 스크립트 바인딩 후 초기 오픈 */
   var io=new IntersectionObserver(function(es){
     es.forEach(function(e){ if(e.isIntersecting) setEra(e.target); });
   }, { rootMargin:'-40% 0px -55% 0px' });
@@ -2919,10 +2957,6 @@ document.querySelectorAll('.ht2-acc').forEach(function(d){
   <div class="about-globe">
     <svg class="icn about-globe-bg" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9.25" stroke="currentColor" stroke-width="1.4"/><ellipse cx="12" cy="12" rx="4.2" ry="9.25" stroke="currentColor" stroke-width="1.4"/><path stroke="currentColor" stroke-width="1.4" stroke-linecap="round" d="M2.75 12h18.5"/></svg>
     <div class="eyebrow dark" style="position:relative"><span class="dot"></span>Company</div>
-    <div class="about-globe-bottom rvl" style="--rvl-y:12px">
-      <svg class="icn" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9.25" stroke="currentColor" stroke-width="1.4"/><ellipse cx="12" cy="12" rx="4.2" ry="9.25" stroke="currentColor" stroke-width="1.4"/><path stroke="currentColor" stroke-width="1.4" stroke-linecap="round" d="M2.75 12h18.5"/></svg>
-      <span>오시는 길 — (주)파라메타</span>
-    </div>
   </div>
   <div class="about-right">
     <div class="addr-list rvl">
@@ -3535,7 +3569,7 @@ function faqToggle(li, list){
 document.querySelectorAll('.faq-item').forEach(li => {
   const row = li.querySelector('.faq-row');
   if (!row) return;
-  const list = li.closest('ul');
+  const list = li.closest('.ht2-body') || li.closest('ul');   /* 히스토리: 시대 3그룹 통합 스코프 */
   row.addEventListener('click', () => faqToggle(li, list));
   row.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); faqToggle(li, list); }

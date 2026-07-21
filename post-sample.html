@@ -522,14 +522,14 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 .faq-li{ border-top:1px solid var(--line) }
 .faq-li:first-of-type{ border-top:none }
 .faq-row{ display:flex; align-items:flex-start; gap:1rem; border-radius:var(--radius-card-sm); text-align:left;
-  padding:2rem 1.5rem; cursor:pointer; user-select:none; background:rgba(var(--surface-rgb),0);
+  padding:var(--space-32) var(--space-24); cursor:pointer; user-select:none; background:rgba(var(--surface-rgb),0);
   transition:background .45s cubic-bezier(.45,0,.55,1), padding .45s cubic-bezier(.45,0,.55,1) }
 @media (hover:hover){ .faq-row:hover{ background:rgba(var(--surface-rgb),1) } }
 .faq-item.open .faq-row{ padding-top:2.25rem; padding-bottom:2.5rem }
 .faq-idx{ width:1.75rem; flex:none; font-size:var(--text-14); font-weight:500; color:rgba(var(--ink-rgb),.4);
   line-height:2.25rem; transition:color .3s }
 .faq-item.open .faq-idx{ color:var(--accent) }
-.faq-content{ flex:1; overflow:hidden; max-height:2.25rem;
+.faq-content{ flex:1; min-width:0; overflow:hidden; max-height:2.25rem;   /* nowrap 타이틀이 행을 밀어내지 않게 */
   transition:max-height .45s cubic-bezier(.45,0,.55,1) }
 .faq-inner{ display:flex; flex-direction:column; transform:translateY(calc(-100% + 2.25rem));
   transition:transform .45s cubic-bezier(.45,0,.55,1) }
@@ -835,15 +835,20 @@ body.show-grid #dev-grid{ display:block }
   --text-30:1.75rem; --text-32:1.875rem; --text-36:2rem; --text-40:2.25rem;
   --text-48:2.5rem; --text-56:3rem; --text-60:3.5rem; --text-72:3.75rem;
   --text-76:4.5rem; --text-80:4.75rem; --text-96:5rem;
-  --space-32:1.5rem;   /* 카드류 패딩 한 단계 다운 (32→24 값) */
+  --space-12:.5rem; --space-16:.75rem; --space-20:1rem; --space-24:1.25rem; --space-32:1.5rem;
+  --space-40:2rem; --space-48:2.5rem; --space-64:3rem; --space-80:4rem;
+  --space-120:5rem; --space-144:7.5rem; --space-160:9rem;   /* 스페이싱 전체 한 단계 다운 (8은 4배수 유지 위해 제외) */
 } }
-/* sm(≤767)에서도: 서브페이지 타입 토큰을 한 단계씩 다운시프트(태블릿과 동일). 메인·여백 토큰 무관 */
+/* sm(≤767)에서도: 타입+스페이싱 토큰 한 단계 다운시프트(태블릿과 동일 문법). 메인 무관 */
 @media (max-width:767px){ :root{
   --text-14:0.75rem; --text-16:0.875rem; --text-18:1rem; --text-20:1.125rem;
   --text-22:1.25rem; --text-24:1.375rem; --text-26:1.5rem; --text-28:1.625rem;
   --text-30:1.75rem; --text-32:1.875rem; --text-36:2rem; --text-40:2.25rem;
   --text-48:2.5rem; --text-56:3rem; --text-60:3.5rem; --text-72:3.75rem;
   --text-76:4.5rem; --text-80:4.75rem; --text-96:5rem;
+  --space-12:.5rem; --space-16:.75rem; --space-20:1rem; --space-24:1.25rem; --space-32:1.5rem;
+  --space-40:2rem; --space-48:2.5rem; --space-64:3rem; --space-80:4rem;
+  --space-120:5rem; --space-144:7.5rem; --space-160:9rem;   /* 스페이싱 전체 한 단계 다운 (8은 4배수 유지 위해 제외) */
 } }
 /* 챗봇 전체(FAB+패널): 메인과 동일 렌더 보장.
    - 641~1023: 서브만 루트가 유동이라 px 고정(메인 루트 16px 환산값)
@@ -885,13 +890,31 @@ body.show-grid #dev-grid{ display:block }
   .pc-input input{ font-size:.875rem }
   .pc-send .icn{ font-size:1rem }
 }
+/* ══ 시맨틱 토큰 — 새 작업은 무조건 이 층만 사용 (원시 토큰 직접 사용 지양) ══ */
+:root{
+  /* 폰트 사이즈 */
+  --text-body:var(--text-18);          /* 본문 */
+  --text-body-sm:var(--text-16);       /* 작은 본문(카드 서브) */
+  --text-cap:var(--text-14);           /* 캡션·메타 서브 (최소) */
+  /* 폰트 컬러 */
+  --c-body:rgba(var(--ink-rgb),.6);    /* 본문 */
+  --c-mut:rgba(var(--ink-rgb),.4);     /* 뮤트(라벨·연도·월) */
+  /* 웨이트 */
+  --w-title:500; --w-strong:600; --w-num:700;
+  /* 라인하이트 (기존 leading 토큰 참조) */
+  --lh-display:var(--leading-display,.98); --lh-heading:var(--leading-heading,1.25); --lh-body:var(--leading-body,1.6);
+  /* 여백 */
+  --pad-panel-y:var(--space-48); --pad-panel-x:clamp(1.5rem,4vw,3rem);   /* 그레이 패널 공통 */
+  --gap-unit:var(--space-24);          /* 컴포넌트 내부 기준 간격 */
+}
+.body-t{ font-size:var(--text-body); line-height:var(--lh-body) }
 /* 공통 서브타이틀(.sub-t): 섹션 내 소제목 — Alliance(.ally-num)와 동일 스타일.
    마크업: <span class="sub-t" data-line-reveal><span class="rvl-line"><span>텍스트</span></span></span> → 스크롤 인 시 줄 마스크 리빌 */
 .sub-t{ display:block; font-size:var(--text-26); font-weight:700; color:var(--ink); line-height:var(--leading-heading) }   /* 서브타이틀 22→26, 행간 1.25 */
 /* 공통 메타 라벨(.meta-t): 섹션 내 소소한 구분 라벨 (마퀴 라벨 등).
    ※ 기존 유사 스타일(rc-label 옛 정의 등)은 타 페이지 사용 중 — 전 페이지 이관 완료 후 제거 예정 */
 .meta-t{ display:block; font-size:var(--text-16); font-weight:600; letter-spacing:.06em;
-  color:rgba(var(--ink-rgb),.55); text-transform:uppercase }
+  color:var(--c-body); text-transform:uppercase }
 /* 모바일 전용 줄바꿈: <br class="br-m"> — ≤639에서만 개행 */
 .br-m{ display:none }
 @media (max-width:639px){ .br-m{ display:inline } }
@@ -1882,9 +1905,15 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .light-card p{ font-size:var(--text-16); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.6) }
 .light-card .cap{ font-size:var(--text-14); font-weight:500; text-transform:uppercase; letter-spacing:.05em;
   color:var(--accent); margin-bottom:.75rem; display:block }
-.addr-list{ display:flex; flex-direction:column; gap:1.25rem }
-.addr-list .k{ font-size:var(--text-14); font-weight:500; text-transform:uppercase; letter-spacing:.05em; color:rgba(var(--ink-rgb),.45) }
-.addr-list .v{ margin-top:.25rem; font-size:var(--text-16); line-height:var(--leading-body) }
+body.company .about-grid{ padding-bottom:var(--space-32) }   /* 지도와의 간격 축소 */
+.addr-list{ display:flex; flex-direction:column; gap:var(--gap-unit) }
+@media (min-width:1024px){
+  .about-grid{ grid-template-columns:repeat(var(--grid-cols),minmax(0,1fr)); gap:var(--grid-gap) }
+  .about-globe{ grid-column:1 / 6 }
+  .about-right{ grid-column:6 / 13 }   /* 어드레스: 6번 칼럼부터 */
+}
+.addr-list .k{ font-size:var(--text-16); font-weight:500; text-transform:uppercase; letter-spacing:.05em; color:rgba(var(--ink-rgb),.45) }   /* 14→16 */
+.addr-list .v{ margin-top:.25rem; font-size:var(--text-body); line-height:var(--leading-body) }   /* 본문 토큰 */
 .legal-body{ max-width:48rem }
 .legal-body h3{ font-size:var(--text-18); font-weight:600; margin:2.5rem 0 .75rem }
 .legal-body h3:first-child{ margin-top:0 }
@@ -2218,7 +2247,7 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 
 /* ══ 검수 시안: ① Recognition 칩 통합(Track Record 하단) ② Industry Firsts 1st 앵커 재구성 ══ */
 /* ① 인증·수상 칩 — 독립 섹션 대신 Track Record 숫자 카드 아래 한 줄 증거 밴드 */
-.recog-chips{ margin-top:clamp(var(--space-24), 5.2vw, var(--space-80)) }   /* 위 간격: 화면 폭 가변 (768≈40, 1440≈75, 상한 80) */
+.recog-chips{ margin-top:clamp(var(--space-24), 4.2vw, var(--space-64)) }   /* 위 간격: 화면 폭 가변 (1440≈60, 상한 64) */
 @media (max-width:767px){ .recog-chips{ margin-top:clamp(var(--space-24), 4.7vw, var(--space-40)) } }   /* 모바일: 가변 (375≈23, 640≈30) */
 .recog-chips .rc-label{ margin-bottom:clamp(var(--space-12), 3.125vw, var(--space-40)) }   /* 타이틀↔로고: 화면 폭 가변 (640≈20px, 상한 40) */
 /* 인증·수상 무한 스와이프 — [로고 위 / 수상명 아래] 셀, 기존 ptScroll 재사용 */
@@ -2239,28 +2268,28 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 .aw-logo i{ font-style:normal; font-family:'Departure Mono',monospace; font-size:var(--text-14);
   font-weight:400; color:var(--gray-400); letter-spacing:.02em }
 .aw-item figcaption{ display:flex; flex-direction:column; gap:.3rem }
-.aw-item b{ font-size:var(--text-18); font-weight:500; color:var(--ink); line-height:1.35; word-break:keep-all }   /* 14→16→18 */
-.aw-item figcaption span{ font-size:var(--text-16); color:var(--muted) }   /* 12→14→16 */
+.aw-item b{ font-size:var(--text-body); font-weight:var(--w-title); color:var(--ink); line-height:var(--lh-heading); word-break:keep-all }   /* 14→16→18 */
+.aw-item figcaption span{ font-size:var(--text-body-sm); color:var(--c-body) }   /* 12→14→16 */
 @media (max-width:640px){ .aw-item{ width:10rem; margin:0 .875rem } }
 
 /* ② Industry Firsts — 집계(1st)를 크게, 개별 항목은 작게 */
 .firsts-hero{ display:grid; grid-template-columns:1.2fr 2.8fr; align-items:center; gap:clamp(2.5rem,6vw,5.5rem);   /* 1st 영역 확장 (auto→30%) */
   background-color:rgba(var(--ink-rgb),.04); border-radius:var(--radius-card);
-  padding:3rem clamp(1.5rem,4vw,3.5rem);
+  padding:var(--pad-panel-y) var(--pad-panel-x);   /* 그레이 패널 공통 토큰 */
   background-image:radial-gradient(rgba(var(--ink-rgb),.06) 1px, transparent 1.5px); background-size:20px 20px }
 .fh-big{ display:flex; flex-direction:column; align-items:center; gap:.75rem }
 .fh-num{ font-weight:700; line-height:.85; color:var(--ink); letter-spacing:-.04em; font-size:clamp(6rem,11vw,9.5rem) }
 .fh-num .st{ font-size:.38em; font-weight:700; color:var(--ink); vertical-align:baseline; letter-spacing:0; margin-left:.04em }   /* st를 1 하단(베이스라인)에 정렬 */
 .fh-cap{ font-size:var(--text-18); font-weight:500; color:var(--muted); white-space:nowrap }   /* 2토큰 업(14→18) + 웨이트 500 */
 .fh-list li{ display:flex; align-items:center; gap:.9rem; padding-block:1rem;
-  font-size:var(--text-20); font-weight:500; color:var(--ink); line-height:1.4 }   /* 두 토큰 업(16→20) */
+  font-size:var(--text-20); font-weight:var(--w-title); color:var(--ink); line-height:var(--lh-heading) }   /* 두 토큰 업(16→20) */
 .fh-list li + li{ border-top:1px solid rgba(var(--ink-rgb),.09) }
 .fh-chip{ flex:none; font-size:var(--text-16); font-weight:500; letter-spacing:.02em;   /* 두 토큰 업(12→16), 웨이트 500 */
   padding:.5rem 1rem; border-radius:999px; background:rgba(97,0,255,.09); color:var(--purple-600) }   /* 알약 확대 (.3/.7→.5/1rem) */
 .fh-chip.world{ background:var(--purple-500); color:#fff }
 .fh-chip.lead{ background:rgba(var(--ink-rgb),.07); color:var(--ink) }
 .fh-list li.fh-ally{ margin-top:.5rem; padding-top:1.5rem }
-.fh-sub{ margin-left:auto; padding-left:1rem; font-size:var(--text-18); font-weight:400; color:rgba(var(--ink-rgb),.6); white-space:nowrap }   /* 두 토큰 업(14→18) */
+.fh-sub{ margin-left:auto; padding-left:1rem; font-size:var(--text-body); font-weight:400; color:var(--c-body); white-space:nowrap }   /* 두 토큰 업(14→18) */
 @media (max-width:767px){
   .firsts-hero{ grid-template-columns:1fr; gap:1.75rem; padding:2rem 1.25rem }
   .fh-num{ font-size:3.75rem }
@@ -2274,43 +2303,49 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 @media (max-width:767px){ .ht-era-label{ white-space:normal } }  /* 긴 라벨이 뷰포트 밖으로 밀려 가로 스크롤 만드는 것 방지 */
 .ht-sub li .m{ color:var(--muted); margin-right:.6rem; font-variant-numeric:tabular-nums; white-space:nowrap }
 /* ══ History B-lite v2: 고정 사이드(스크롤 시 페이드 전환) + 연속 리스트, 디바이더 없음 ══ */
-@media (min-width:900px){ .ht2 .ht2-body{ grid-column:6 / 13 } }
+@media (min-width:900px){ .ht2 .cm-head{ grid-column:1 / 6 } .ht2 .ht2-body{ grid-column:6 / 13 } }   /* 타이틀 칼럼 4→5개 */
 .ht2-fade{ display:grid; margin-top:var(--space-8) }
 .ht2-layer .sec-h2{ margin:var(--space-8) 0 0 }
 .ht2-layer{ grid-area:1 / 1; opacity:0; transition:opacity .45s cubic-bezier(.4,0,.2,1); pointer-events:none }
 .ht2-layer.on{ opacity:1 }
 .ht2-group{ background:rgba(var(--ink-rgb),.04); border-radius:var(--radius-card);
-  padding:var(--space-16) var(--space-32) }   /* 시대별 그레이 카드로 묶음 */
+  padding:var(--pad-panel-y) var(--pad-panel-x) }   /* 그레이 패널 공통 토큰 */
 .ht2-group + .ht2-group{ margin-top:var(--space-32) }
 @media (min-width:900px){
   .ht2-group{ opacity:.45; transition:opacity .6s cubic-bezier(.4,0,.2,1) }
   .ht2-group.ht2-on{ opacity:1 }
 }
 .ht2-era-head{ display:none }
-.ht2-era-head .ht2-t{ font-size:var(--text-26); font-weight:700; line-height:var(--leading-heading); margin-top:var(--space-8) }
-.ht2-yrin{ flex:none; min-width:4.5rem; font-size:var(--text-24); font-weight:700; font-variant-numeric:tabular-nums }   /* 22→24 */
-.ht2-acc summary > span{ flex:1 }
-.ht2-acc summary{ display:flex; justify-content:space-between; align-items:center; gap:var(--space-16);
-  font-size:var(--text-20); font-weight:600; color:var(--ink); padding:var(--space-20) 0; cursor:pointer;
-  list-style:none; border-top:1px solid rgba(var(--ink-rgb),.09) }   /* 폰트 18→20, 여백 12→20 */
-.ht2-acc:first-of-type summary{ border-top:0 }
-.ht2-acc summary::-webkit-details-marker{ display:none }
-.ht2-chev{ flex:none; width:.625rem; height:.625rem; margin-top:-.25rem;
-  border-right:2px solid rgba(var(--ink-rgb),.45); border-bottom:2px solid rgba(var(--ink-rgb),.45);
-  transform:rotate(45deg); transition:transform .45s cubic-bezier(.16,1,.3,1), border-color .2s }   /* 기존 ht-chev 컨벤션 */
-.ht2-acc[open] .ht2-chev{ transform:rotate(225deg); margin-top:.25rem; border-color:var(--purple-500) }
-@media (hover:hover){
-  .ht2-acc summary{ transition:color .2s }
-  .ht2-acc summary:hover{ color:var(--purple-500) }
-  .ht2-acc summary:hover .ht2-chev{ border-color:var(--purple-500) }
+.ht2-era-head .ht2-t{ font-size:var(--text-26); font-weight:var(--w-num); line-height:var(--lh-heading); margin:0 }   /* 마진 제거 (웨이트 700 유지) */
+.ht2-faq{ list-style:none; margin:0; padding:0 }
+.ht2 .faq-row{ padding:var(--space-24) 0 }   /* 좌우는 카드 인셋만 */
+.ht2 .faq-item.open .faq-row{ padding:var(--space-24) 0 }   /* 열림 상태도 동일 (공유 2.25rem 오버라이드 무력화) */
+.ht2 .faq-t{ display:flex; align-items:baseline }
+.ht2 .ht2-yr{ flex:none; font-weight:var(--w-title); color:var(--c-mut); margin-right:var(--space-16); font-variant-numeric:tabular-nums }   /* 연도: 별도 박스 */
+.ht2 .ht2-tt{ flex:1; min-width:0 }   /* 줄바꿈은 텍스트 시작점 기준 */
+.ht2 .faq-t-bottom .ht2-tt{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap }   /* 닫힘 타이틀 말줄임 (flex 구조로 이관) */
+.ht2 .faq-content{ contain:inline-size }   /* nowrap 타이틀의 min-content 전파 차단 (모바일 가로 오버플로우 방지) */
+.ht2 .faq-item.open .ht2-yr{ color:var(--purple-500) }   /* 열리면 연도 보라 */
+@media (hover:hover){ .ht2 .faq-row:hover{ background:transparent } }   /* 호버 배경 제거 */
+.ht2 .faq-t{ font-size:var(--text-20); font-weight:var(--w-title) }
+.ht2 .faq-ans{ display:none }   /* 본문은 faq-content 밖(ht2-subwrap)에서 풀폭으로 */
+.ht2-subwrap{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .45s cubic-bezier(.45,0,.55,1) }
+.ht2-subwrap .ht2-subin{ overflow:hidden }   /* 좌우는 카드 인셋만 */
+.ht2 .faq-item.open .ht2-subwrap{ grid-template-rows:1fr }
+.ht2-rows{ list-style:none; margin:0; padding:0 }
+.ht2-rows li .m, .ht2-rows li > span:last-child{ transform-origin:left center; transition:transform .3s cubic-bezier(.2,.8,.2,1) }
+@media (hover:hover){   /* 호버는 줄 단위, 확대는 각자 제자리에서 */
+  .ht2-rows li:hover .m{ transform:scale(1.015) }
+  .ht2-rows li:hover > span:last-child{ transform:scale(1.015) }
 }
-.ht2-rows{ list-style:none; margin:0; padding:0 0 var(--space-16) }
-.ht2-rows li{ display:flex; gap:var(--space-12); border-top:1px solid rgba(var(--ink-rgb),.06);
-  padding:var(--space-12) 0; font-size:var(--text-16); font-weight:500; color:var(--ink); line-height:var(--leading-body) }
-.ht2-rows li .m{ flex:none; min-width:2.75rem; color:rgba(var(--ink-rgb),.4); font-weight:400; font-variant-numeric:tabular-nums }
+.ht2-rows li:first-child{ padding-top:0 }   /* 첫 행 위 간격 제거 */
+.ht2-rows li:last-child{ padding-bottom:var(--space-24) }   /* 마지막 행 아래 = 기준 단위 */
+.ht2-rows li{ display:flex; gap:var(--space-16);   /* 디바이더 없이 패딩으로만 그룹핑, 갭은 연도와 동일 16 */
+  padding:var(--space-12) 0; font-size:var(--text-body); font-weight:var(--w-title); color:var(--c-body); line-height:var(--lh-body) }   /* 본문 한 단계 밝게(c-body) */
+.ht2-rows li .m{ flex:none; min-width:3rem; color:var(--c-mut); font-weight:400 }   /* 월 그레이·볼드 */
 @media (max-width:899px){
   .ht2 .cm-head{ display:none }
-  .ht2-era-head{ display:block; margin-bottom:var(--space-16) }
+  .ht2-era-head{ display:block; margin-bottom:0; padding:0 }   /* 위 간격 제거 (카드 패딩이 담당) */
 }
 /* Alliance 소절 카드 위 여백 */
 /* 시안 D: 좌 문장(.sub-t) / 우 미니 필 2개, 86+는 마퀴 라벨 */
@@ -2320,14 +2355,14 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
   font-size:var(--text-18); border:1px solid rgba(var(--ink-rgb),.12); border-radius:var(--radius-pill);
   padding:.875rem 1.25rem; white-space:nowrap; color:var(--ink) }
 .firsts-eco .eco-pill b{ font-weight:600; transition:color .25s }
-.firsts-eco .eco-pill i{ font-style:normal; color:rgba(var(--ink-rgb),.55); margin-left:.375rem }
+.firsts-eco .eco-pill i{ font-style:normal; color:var(--c-body); margin-left:.375rem }
 @media (max-width:767px){
   .firsts-eco .eco-head{ flex-direction:column; align-items:flex-start; gap:var(--space-20) }
   .firsts-eco .eco-pills{ justify-content:flex-start }
 }
 body.company .firsts-eco .ally-head{ text-align:left }
 @media (hover:hover){ .firsts-eco .eco-pill:hover{ transform:scale(1.05) } .firsts-eco .eco-pill:hover b{ color:var(--purple-500) } }   /* 얼라이언스 문장 좌측 정렬 (스탯 로우 확정 후 변경) */
-.firsts-eco{ margin-top:clamp(var(--space-24), 5.2vw, var(--space-80)) }   /* 인증수상(recog-chips)과 동일 가변 커브 */
+.firsts-eco{ margin-top:clamp(var(--space-24), 4.2vw, var(--space-64)) }   /* 인증수상(recog-chips)과 동일 가변 커브 */
 @media (max-width:767px){ .firsts-eco{ margin-top:clamp(var(--space-24), 4.7vw, var(--space-40)) } }
 
 /* ============ MEDIA 공통(newsroom·blog·resources) — 첫 섹션을 히어로에 붙임 (contact 방식) ============ */
@@ -3252,7 +3287,7 @@ function faqToggle(li, list){
 document.querySelectorAll('.faq-item').forEach(li => {
   const row = li.querySelector('.faq-row');
   if (!row) return;
-  const list = li.closest('ul');
+  const list = li.closest('.ht2-body') || li.closest('ul');   /* 히스토리: 시대 3그룹 통합 스코프 */
   row.addEventListener('click', () => faqToggle(li, list));
   row.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); faqToggle(li, list); }
