@@ -1109,6 +1109,25 @@ body.company .tr-flush .cards-3 li:nth-child(2) .work-card.grouped::before{ back
 body.company .tr-flush .cards-3 li:nth-child(3) .work-card.grouped::before{ background-image:url("assets/about/tr-3.svg"),
   linear-gradient(to bottom, rgba(var(--white-rgb),0) 55%, color-mix(in srgb, var(--ink) 6%, var(--white)) 96%) }
 @media (hover:hover){ body.company .tr-flush .work-card.static:hover{ transform:scale(1.03) } }
+/* ≤767: 이미지 제거, 3개를 한 박스 안 3칸(스탯 바)으로 */
+@media (max-width:767px){
+  body.company .tr-flush .cards-3{ grid-template-columns:repeat(3,1fr); gap:0;
+    background-color:rgba(var(--ink-rgb),.04); border-radius:var(--radius-card-sm); padding:var(--space-24) 0;
+    background-image:radial-gradient(rgba(var(--ink-rgb),.06) 1px, transparent 1.5px); background-size:20px 20px }  /* firsts 패널과 동일한 그레이+닷 */
+  body.company .tr-flush .cards-3 > li + li{ position:relative }
+  body.company .tr-flush .cards-3 > li + li::before{ content:''; position:absolute; left:0; top:50%;
+    transform:translateY(-50%); width:1px; height:56%; background:rgba(var(--ink-rgb),.08) }  /* 칸 사이 디바이더: 세로 중앙 56%만 */
+  body.company .tr-flush .work-card.grouped{ background:transparent; border-radius:0; overflow:visible }
+  body.company .tr-flush .work-card.grouped::before{ display:none }   /* 이미지 영역 제거 */
+  body.company .tr-flush .work-bottom{ margin-top:0; padding:0 var(--space-16); text-align:center }
+  body.company .tr-flush .work-meta{ margin-bottom:var(--space-8); justify-content:center }  /* Since 2016 센터 (기본 flex space-between 해제) */
+  body.company .tr-flush .work-card h3{ font-size:var(--text-22) }   /* 640~767: 한 토큰 다운(24→22) */
+  body.company .tr-flush .work-bottom p{ font-size:var(--text-14) }
+}
+@media (max-width:639px){
+  body.company .tr-flush .work-card h3{ font-size:var(--text-20); white-space:nowrap }   /* 수치 두 토큰 다운 + 줄바꿈 금지 */
+  body.company .tr-flush .work-bottom{ padding:0 var(--space-8) }   /* 좁은 칸: 안쪽 패딩 축소 */
+}   /* base 뒤에 있어야 이김 (특이도 동일) */
 /* Recognition 카드: 상단에 실제 인증 로고 들어갈 아이콘 영역 (플레이스홀더 원) — 오프셋은 공통 카드 패딩(1.5rem, ≥640px 2rem)과 동기화 */
 body.company .recog .work-card::before{ content:''; position:absolute; top:1.5rem; left:1.5rem;
   width:5rem; height:5rem; border-radius:50%; background:rgba(var(--ink-rgb),.08) }
@@ -1425,8 +1444,8 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .sh-center .sec-lead{ margin-bottom:3rem }
 .sec-h2{ margin:1.25rem 0 3rem; max-width:24ch; font-size:var(--text-32); font-weight:600; letter-spacing:-.02em; line-height:var(--leading-heading) }
 @media (min-width:640px){ .sec-h2{ font-size:var(--text-40) } }   /* 태블릿: 데스크톱보다 한 단계 작게 */
-/* 태블릿: 섹션 리드(및 리드 없는 타이틀) 아래 간격 축소 3rem→2rem — 전 서브페이지 공통 */
-@media (min-width:768px) and (max-width:1023px){
+/* 태블릿·모바일(≤1023): 섹션 리드(및 리드 없는 타이틀) 아래 간격 축소 3rem→2rem — 전 서브페이지 공통 */
+@media (max-width:1023px){
   .sec-lead, .sh-center .sec-lead{ margin-bottom:2rem }
   .sec-h2:not(.has-lead){ margin-bottom:2rem }
 }
