@@ -1,0 +1,72 @@
+{
+ "slug": "post-222602568353",
+ "title": "‘쯩’으로 쉽게 코로나19 예방접종 정보 발급 받으세요.",
+ "date": "2021.12.23",
+ "sort": 1640224467161,
+ "cat": "insight",
+ "topics": [
+  "did"
+ ],
+ "desc": "코로나19 예방접종을 맞으셨다면 ‘쯩’으로 쉽게 코로나19 예방접종 정보 발급 받으세요. DID란? DID(Decentralized Identifier)란 개인",
+ "lead": "코로나19 예방접종을 맞으셨다면",
+ "hero_img": "assets/blog/post-222602568353/fig-1.png",
+ "read_min": 1,
+ "blocks": [
+  {
+   "t": "p",
+   "html": "‘쯩’으로 쉽게 코로나19 예방접종 정보"
+  },
+  {
+   "t": "p",
+   "html": "발급 받으세요."
+  },
+  {
+   "t": "img",
+   "src": "assets/blog/post-222602568353/fig-1.png"
+  },
+  {
+   "t": "p",
+   "html": "DID란?"
+  },
+  {
+   "t": "p",
+   "html": "DID(Decentralized Identifier)란 개인정보를 사용자의 단말에만 저장해두고 인증이 필요한 정보만 간편히 제출할 수 있는 블록체인 기반의 신원증명 기술입니다."
+  },
+  {
+   "t": "p",
+   "html": "제주안심코드 QR 체크인 X 백신 접종 정보"
+  },
+  {
+   "t": "p",
+   "html": "제주도의 전자출입명부인 ‘제주안심코드’를 쯩으로 이용하실 때 발급받으신 백신 접종 정보를 같이 인증할 수 있어요!"
+  },
+  {
+   "t": "img",
+   "src": "assets/blog/post-222602568353/fig-2.png"
+  },
+  {
+   "t": "h3",
+   "html": "쯩으로 코로나19 예방접종 정보 활용하는 법"
+  },
+  {
+   "t": "img",
+   "src": "assets/blog/post-222602568353/fig-3.png"
+  },
+  {
+   "t": "p",
+   "html": "다운로드"
+  },
+  {
+   "t": "p",
+   "html": "Android : https://play.google.com/store/apps/details?id=com.iconloop.zzeung"
+  },
+  {
+   "t": "p",
+   "html": "iOS : https://apps.apple.com/app/id1512732128"
+  },
+  {
+   "t": "img",
+   "src": "assets/blog/post-222602568353/fig-4.png"
+  }
+ ]
+}

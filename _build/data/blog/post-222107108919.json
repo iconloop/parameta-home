@@ -1,0 +1,40 @@
+{
+ "slug": "post-222107108919",
+ "title": "[100% 당첨] 국내 최초 금융권 DID 서비스 론칭 기념 이벤트 (마감)",
+ "date": "2020.10.05",
+ "sort": 1601865327106,
+ "cat": "insight",
+ "topics": [
+  "did"
+ ],
+ "desc": "",
+ "lead": "\"쯩\"이 뭐지하고 궁금하시다구요?",
+ "hero_img": "assets/blog/post-222107108919/fig-1.png",
+ "read_min": 1,
+ "blocks": [
+  {
+   "t": "img",
+   "src": "assets/blog/post-222107108919/fig-1.png"
+  },
+  {
+   "t": "img",
+   "src": "assets/blog/post-222107108919/fig-2.png"
+  },
+  {
+   "t": "p",
+   "html": "DID 신원인증 \"쯩\" 알아보기"
+  },
+  {
+   "t": "p",
+   "html": "https://blog.naver.com/hello_iconloop/222071491871"
+  },
+  {
+   "t": "img",
+   "src": "assets/blog/post-222107108919/fig-3.png"
+  },
+  {
+   "t": "img",
+   "src": "assets/blog/post-222107108919/fig-4.png"
+  }
+ ]
+}

@@ -1,0 +1,155 @@
+{
+ "slug": "post-222893477334",
+ "title": "BTP, 코인마켓캡 용어집에 등록 :)",
+ "date": "2022.10.06",
+ "sort": 1665044034157,
+ "cat": "news",
+ "topics": [
+  "broof",
+  "did",
+  "myid",
+  "tech"
+ ],
+ "desc": "안녕하세요, 아이콘루프입니다. CMC (CoinMarketCap) 용어집에 아이콘루프가 개발한 인터체인 기술인 BTP (Blockchain Tranmission …",
+ "lead": "안녕하세요, 아이콘루프입니다.",
+ "hero_img": "assets/blog/post-222893477334/fig-1.png",
+ "read_min": 8,
+ "blocks": [
+  {
+   "t": "img",
+   "src": "assets/blog/post-222893477334/fig-1.png"
+  },
+  {
+   "t": "p",
+   "html": "CMC (CoinMarketCap) 용어집에 아이콘루프가 개발한 인터체인 기술인 BTP (Blockchain Tranmission Protocol)이 등록되었습니다."
+  },
+  {
+   "t": "p",
+   "html": "BTP는 스마트컨트랙트가 지원되는 블록체인이면 동종 블록체인 뿐만 아닌 ETH, BNB, DOT 등 이종 블록체인까지 모두 연결이 가능한 인터체인 프로토콜로 글로벌 인터체인 프로젝트 ICON 및 블록체인 프레임워크 Parameta에 적용되어 다양한 체인을 연결해 나갈 예정입니다."
+  },
+  {
+   "t": "p",
+   "html": "체인에 구애없는 자유로운 블록체인 세상! BTP가 만들어갑니다 :)"
+  },
+  {
+   "t": "p",
+   "html": "CMC Tweet"
+  },
+  {
+   "t": "h3",
+   "html": "CMC Glossary :"
+  },
+  {
+   "t": "img",
+   "src": "assets/blog/post-222893477334/fig-2.png"
+  },
+  {
+   "t": "p",
+   "html": "Blockchain Transmission Protocol (BTP)"
+  },
+  {
+   "t": "p",
+   "html": "Blockchain Transmission Protocol (BTP) enables isolated blockchains to operate as a fully decentralized settlement layer by securely anchoring transactions using a protocol that is universal."
+  },
+  {
+   "t": "p",
+   "html": "What Is the Blockchain Transmission Protocol (BTP)?"
+  },
+  {
+   "t": "p",
+   "html": "BTP is a technology that allows diverse blockchains, even those with wholly distinct algorithms and consensus models, to be compatible, enabling service invocation, value transfer, and data exchange."
+  },
+  {
+   "t": "p",
+   "html": "Token exchanges across multiple blockchains are a good application for BTP since BTP permits such exchanges directly via smart contracts through one blockchain to the next without the need for an intermediate trading platform."
+  },
+  {
+   "t": "p",
+   "html": "Furthermore, BTP enables data transfers across partners powered by ICONLOOP, for example, MyID apps. The MyID program verifies Decentralized ID (DID) credentials on the open ICON Network, allowing its user to send messages to any private or public network which is interconnected through BTP, without needing to submit their DID credentials and key to each blockchain."
+  },
+  {
+   "t": "p",
+   "html": "BTP can also streamline the issuance of certificates for blockchains. Broof is a public ICON network service that lets users create and store validated certificates on its chain. BTP can trigger the issuance mechanism of a smart contract on the ICON Network."
+  },
+  {
+   "t": "p",
+   "html": "What Is the ICON Network?"
+  },
+  {
+   "t": "p",
+   "html": "The majority of recent decentralized applications and blockchain projects have operated in isolation. As a result, the blockchain industry has disintegrated into a hodgepodge of fragmented blockchains."
+  },
+  {
+   "t": "p",
+   "html": "The ICON Network aims to connect these blockchains such that they are interoperable. The platform that allows for this to happen is known as Blockchain Transmission Protocol (BTP)."
+  },
+  {
+   "t": "p",
+   "html": "The Building Blocks of Blockchain Transmission Protocol"
+  },
+  {
+   "t": "p",
+   "html": "BTP follows a set of functions and standards that must be followed in order to properly transfer data and maintain its validity and integrity. These standards include message specifications, message relayers, message verifiers, and service smart contracts."
+  },
+  {
+   "t": "p",
+   "html": "Message Specifications"
+  },
+  {
+   "t": "p",
+   "html": "All messages should have recipient, sender, serial number, service name, and service data."
+  },
+  {
+   "t": "p",
+   "html": "Message Relayers"
+  },
+  {
+   "t": "p",
+   "html": "This is the application that retrieves and delivers BTP messages."
+  },
+  {
+   "t": "p",
+   "html": "Message Verifiers"
+  },
+  {
+   "t": "p",
+   "html": "Data gathered from relayers is validated by message verifiers."
+  },
+  {
+   "t": "p",
+   "html": "Service Smart Contract (SSC)"
+  },
+  {
+   "t": "p",
+   "html": "BTP messages that are verified are forwarded to SSC, which then executes the transmission from the smart contract of the source blockchain to the smart contract of the destination blockchain."
+  },
+  {
+   "t": "p",
+   "html": "How Does Blockchain Transmission Protocol Work?"
+  },
+  {
+   "t": "p",
+   "html": "BTP only links two chains, but the linked chains can additionally link to more chains, forming a network of interconnected and interoperable blockchains."
+  },
+  {
+   "t": "p",
+   "html": "Furthermore, because BTP validates external data through smart contracts, all validation operations are easily accessible and open to audit and verification."
+  },
+  {
+   "t": "p",
+   "html": "In an asynchronous network, the relayer/sender blockchain may halt delivering data if there is a momentary connection disruption, but they can later be recovered and re-sent when the connection is repaired, suffering no data loss."
+  },
+  {
+   "t": "p",
+   "html": "Blockchain Transmission Protocol is designed to be versatile, meaning it allows blockchains that don't enable smart contracts to halfway participate in BTP transactions, such that the blockchain that doesn’t support smart contracts can’t participate as a receiver chain, but can be the sender chain."
+  },
+  {
+   "t": "p",
+   "html": "감사합니다."
+  },
+  {
+   "t": "p",
+   "html": "Life Meets Blockchain, ICONLOOP"
+  }
+ ]
+}

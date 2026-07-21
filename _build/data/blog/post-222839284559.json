@@ -1,0 +1,26 @@
+{
+ "slug": "post-222839284559",
+ "title": "아이콘루프, Connecting Chains. Connecting Communities 행사 발표 예정",
+ "date": "2022.08.04",
+ "sort": 1659581823155,
+ "cat": "news",
+ "topics": [],
+ "desc": "감사합니다. Life Meets Blockchain, ICONLOOP",
+ "lead": "감사합니다.",
+ "hero_img": "assets/blog/post-222839284559/fig-1.png",
+ "read_min": 1,
+ "blocks": [
+  {
+   "t": "img",
+   "src": "assets/blog/post-222839284559/fig-1.png"
+  },
+  {
+   "t": "img",
+   "src": "assets/blog/post-222839284559/fig-2.png"
+  },
+  {
+   "t": "p",
+   "html": "Life Meets Blockchain, ICONLOOP"
+  }
+ ]
+}

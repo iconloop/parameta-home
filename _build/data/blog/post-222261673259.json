@@ -1,0 +1,41 @@
+{
+ "slug": "post-222261673259",
+ "title": "마이아이디 얼라이언스 신규파트너 소개 (3월 2일)",
+ "date": "2021.03.02",
+ "sort": 1614655936879,
+ "cat": "insight",
+ "topics": [
+  "did",
+  "myid"
+ ],
+ "desc": "안녕하세요, 마이아이디 얼라이언스입니다. 마이아이디 얼라이언스 에코시스템 파트너 (Ecosystem Partner)로 NH투자증권, 교보라이프플래닛, 현대차증권 …",
+ "lead": "안녕하세요, 마이아이디 얼라이언스입니다.",
+ "hero_img": "assets/blog/post-222261673259/fig-1.png",
+ "read_min": 1,
+ "blocks": [
+  {
+   "t": "img",
+   "src": "assets/blog/post-222261673259/fig-1.png"
+  },
+  {
+   "t": "p",
+   "html": "마이아이디 얼라이언스 에코시스템 파트너 (Ecosystem Partner)로 NH투자증권, 교보라이프플래닛, 현대차증권 등이 새로이 합류하며 마이아이디 얼라이언스가 86개 파트너 연합으로 확장되었습니다."
+  },
+  {
+   "t": "img",
+   "src": "assets/blog/post-222261673259/fig-2.png"
+  },
+  {
+   "t": "img",
+   "src": "assets/blog/post-222261673259/fig-3.png"
+  },
+  {
+   "t": "p",
+   "html": "현대차증권 임직원들은 이러한 도전에 맞서 과감한 추진력과 창조적 사고를 바탕으로 고객 여러분과 동반 성장하고 있습니다."
+  },
+  {
+   "t": "img",
+   "src": "assets/blog/post-222261673259/fig-4.png"
+  }
+ ]
+}

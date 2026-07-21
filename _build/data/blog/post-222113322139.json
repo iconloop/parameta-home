@@ -1,0 +1,41 @@
+{
+ "slug": "post-222113322139",
+ "title": "마이아이디 얼라이언스 신규파트너 소개 (10월 12일)",
+ "date": "2020.10.12",
+ "sort": 1602472113542,
+ "cat": "insight",
+ "topics": [
+  "did",
+  "myid"
+ ],
+ "desc": "안녕하세요, 마이아이디 얼라이언스입니다. 마이아이디 얼라이언스 성장 파트너(Growth)로 SGI서울보증, 다날핀테크, 엘리시아 등이 새로이 합류하며 마이아이디 …",
+ "lead": "안녕하세요, 마이아이디 얼라이언스입니다.",
+ "hero_img": "assets/blog/post-222113322139/fig-1.png",
+ "read_min": 1,
+ "blocks": [
+  {
+   "t": "img",
+   "src": "assets/blog/post-222113322139/fig-1.png"
+  },
+  {
+   "t": "p",
+   "html": "마이아이디 얼라이언스 성장 파트너(Growth)로 SGI서울보증, 다날핀테크, 엘리시아 등이 새로이 합류하며 마이아이디 얼라이언스가 81개 파트너 연합으로 확장되었습니다."
+  },
+  {
+   "t": "img",
+   "src": "assets/blog/post-222113322139/fig-2.png"
+  },
+  {
+   "t": "img",
+   "src": "assets/blog/post-222113322139/fig-3.png"
+  },
+  {
+   "t": "img",
+   "src": "assets/blog/post-222113322139/fig-4.png"
+  },
+  {
+   "t": "img",
+   "src": "assets/blog/post-222113322139/fig-5.png"
+  }
+ ]
+}

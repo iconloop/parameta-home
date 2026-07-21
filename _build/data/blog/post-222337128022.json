@@ -1,0 +1,68 @@
+{
+ "slug": "post-222337128022",
+ "title": "ICT Convergence Korea 2021: 블록체인의 보안 이슈 및 대응 기술 (류혁곤CTO)",
+ "date": "2021.05.04",
+ "sort": 1620093484320,
+ "cat": "insight",
+ "topics": [
+  "tech"
+ ],
+ "desc": "안녕하세요, 아이콘루프입니다. 지난 3월 'ICT 융합 혁신으로 열어가는 포스트 코로나시대'라는 주제로 국내 유수의 유관기관과 함께 한국통신학회가 개최한 ICT …",
+ "lead": "안녕하세요, 아이콘루프입니다.",
+ "hero_img": "assets/blog/post-222337128022/fig-1.png",
+ "read_min": 2,
+ "blocks": [
+  {
+   "t": "img",
+   "src": "assets/blog/post-222337128022/fig-1.png"
+  },
+  {
+   "t": "p",
+   "html": "지난 3월 'ICT 융합 혁신으로 열어가는 포스트 코로나시대'라는 주제로 국내 유수의 유관기관과 함께 한국통신학회가 개최한 ICT Convergence Korea 2021에서 아이콘루프 류혁곤 CTO 가"
+  },
+  {
+   "t": "p",
+   "html": "\"블록체인의 보안 이슈 및 대응 기술\"이라는 주제로 발표한 영상이 공개되었습니다."
+  },
+  {
+   "t": "p",
+   "html": "아이콘루프 설립시부터 독자적으로 블록체인을 개발해 온 경험과 기술을 바탕으로 블록체인 기술 소개, 블록체인에서의 주요 보안위협은 무엇인지 등 블록체인의 보안 이슈에 대해 알아보고 그에 따른 대응 기술에 대해 살펴보았습니다."
+  },
+  {
+   "t": "p",
+   "html": "100% 18:07 ICT Convergence Korea 2021 : 류혁곤CTO 재생 36 좋아요 0 접기/펴기 ICT Convergence Korea 2021 : 류혁곤CTO"
+  },
+  {
+   "t": "p",
+   "html": "출처 : KICS한국통신학회Youtube ( https://youtu.be/E46gHUUTM70 )"
+  },
+  {
+   "t": "p",
+   "html": "류혁곤 ( Edward Ryu ) ICONLOOP CTO"
+  },
+  {
+   "t": "p",
+   "html": "현 ICONLOOP의 CTO이며, 포항공과대학교 전자계산학과 학사와 동 대학원 컴퓨터공학을 졸업했다."
+  },
+  {
+   "t": "p",
+   "html": "Selvas Healthcare, Infraware Technology, XCE, LG Electronics 등에서 15년 이상 CTO, 팀장, 시니어 매니저로서 소프트웨어 디자인 및 개발 경험을 보유하고 있다."
+  },
+  {
+   "t": "p",
+   "html": "전 Selvas Healthcare Senior Director (09/2015 ~ 10/2018)"
+  },
+  {
+   "t": "p",
+   "html": "전 Infraware Technology, Inc. CTO (01/2009 ~ 09/2015)"
+  },
+  {
+   "t": "p",
+   "html": "전 XCE, Co., Ltd. Senior Software Engineer (07/2001 ~ 12/2008)"
+  },
+  {
+   "t": "p",
+   "html": "전 LG Electronics Software Engineer (03/1999 ~ 06/2001)"
+  }
+ ]
+}

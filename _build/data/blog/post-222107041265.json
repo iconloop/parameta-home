@@ -1,0 +1,40 @@
+{
+ "slug": "post-222107041265",
+ "title": "쯩 신한은행 실명인증 발급 기념 이벤트 (마감)",
+ "date": "2020.10.05",
+ "sort": 1601860595117,
+ "cat": "insight",
+ "topics": [
+  "did"
+ ],
+ "desc": "안드로이드 이벤트 참여하기 ▼ iOS 이벤트 참여하기 ▼",
+ "lead": "",
+ "hero_img": "assets/blog/post-222107041265/fig-1.png",
+ "read_min": 1,
+ "blocks": [
+  {
+   "t": "img",
+   "src": "assets/blog/post-222107041265/fig-1.png"
+  },
+  {
+   "t": "img",
+   "src": "assets/blog/post-222107041265/fig-2.png"
+  },
+  {
+   "t": "h3",
+   "html": "안드로이드 이벤트 참여하기 ▼"
+  },
+  {
+   "t": "img",
+   "src": "assets/blog/post-222107041265/fig-3.png"
+  },
+  {
+   "t": "h3",
+   "html": "iOS 이벤트 참여하기 ▼"
+  },
+  {
+   "t": "img",
+   "src": "assets/blog/post-222107041265/fig-4.png"
+  }
+ ]
+}

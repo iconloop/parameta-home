@@ -1,0 +1,68 @@
+{
+ "slug": "post-222856984357",
+ "title": "하바, 인터체인 인프라로 NFT 한계 극복 시도 ( KB증권 애널리스트 분석보고서 ‘NFT, 새로운 마케팅의 해법' )",
+ "date": "2022.08.24",
+ "sort": 1661322668577,
+ "cat": "insight",
+ "topics": [
+  "tech"
+ ],
+ "desc": "안녕하세요, 아이콘루프 입니다. 아이콘루프의 블록체인 프레임워크 '파라메타(Parameta)'가 적용되는 Interchain NFT Playground 하바(Ha…",
+ "lead": "안녕하세요, 아이콘루프 입니다.",
+ "hero_img": "assets/blog/post-222856984357/fig-1.png",
+ "read_min": 2,
+ "blocks": [
+  {
+   "t": "img",
+   "src": "assets/blog/post-222856984357/fig-1.png"
+  },
+  {
+   "t": "p",
+   "html": "아이콘루프의 블록체인 프레임워크 '파라메타(Parameta)'가 적용되는 Interchain NFT Playground 하바(Havah)가 KB증권 애널리스트 분석보고서 ‘NFT, 새로운 마케팅의 해법-22.08.23’ 에 소개되었습니다. (P23,24)"
+  },
+  {
+   "t": "p",
+   "html": "( 전체 리포트 보기 &gt; https://rcv.kbsec.com/streamdocs/pdfview?id=B520190322125512762443&amp;url=aHR0cDovL3JkYXRhLmtic2VjLmNvbS9wZGZfZGF0YS8yMDIyMDgyMzE1MjQwOTk4MEsucGRm )"
+  },
+  {
+   "t": "h3",
+   "html": "하바 (HAVAH) 프로젝트를 비롯해 인터체인 인프라로 NFT 한계 극복 시도"
+  },
+  {
+   "t": "p",
+   "html": "현재의 NFT는 이더리움, 클레이튼, 솔라나 등 각각의 메인넷 네트워크에서만 사용되고 있어 활용성에 한계가 존재한다. 다만 향후에는 인터체인 인프라의 발전으로 체인을 넘나들며 다양한 NFT 결합이 나타나는 환경이 조성될 것으로 예상된다. 그리드 연합에 참여하는 하바 (HAVAH)는 다양한 체인에서 발행된 NFT를 연결해주는 플랫폼으로 네트워크 제약 없이 NFT를 다양하게 활용할 수 있는 기술을 제공한다. 예를들어 클레이튼 기반 NFT와 솔라나 기반 NFT를 한군데로 모아 동일한 프로젝트들을 구축할 수도 있다. 특정 체인에서만 사용할 수 있었던 NFT의 한계가 해결될 경우 NFT의 대중화가 더욱 앞당겨질 가능성에 주목한다."
+  },
+  {
+   "t": "img",
+   "src": "assets/blog/post-222856984357/fig-2.png"
+  },
+  {
+   "t": "p",
+   "html": "하바프로젝트는 'NFT를 좀 더 다양하게 사용하려면 어떻게 해야할까?'라는 질문에서 시작된 프로젝트입니다."
+  },
+  {
+   "t": "p",
+   "html": "그 질문에 대한 답으로 NFT가 Chain을 넘나들며 (Interchain NFT Transmission Protocol) 자유롭게 쓰일 수 있는 NFT 특화 생태계이자 플레이 그라운드인 하바였습니다."
+  },
+  {
+   "t": "p",
+   "html": "하바는 다가올 디지털 자산화와 메타버스 흐름 속에서 인터체인 프로토콜을 통해 NFT를 경계 없이 사용할 수 있는 미래를 준비하고 있습니다. NFT 특화 생태계이자 플레이 그라운드인 하바를 시작으로 그 미래를 열어 나갈 예정이니 많은 관심과 응원을 부탁드립니다 :)"
+  },
+  {
+   "t": "p",
+   "html": "⬇ 아래 이미지를 클릭하시면 KB증권 'NFT, 새로운 마케팅의 해법' 리포트 전체를 확인하실 수 있습니다."
+  },
+  {
+   "t": "img",
+   "src": "assets/blog/post-222856984357/fig-3.png"
+  },
+  {
+   "t": "p",
+   "html": "감사합니다."
+  },
+  {
+   "t": "p",
+   "html": "Life Meets Blockchain, ICONLOOP"
+  }
+ ]
+}

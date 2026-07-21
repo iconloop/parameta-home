@@ -1,0 +1,54 @@
+{
+ "slug": "post-222147661702",
+ "title": "The Era of My Data: Data Sovereignty with DID - Korea Blockchain Week 2020 발표 (김종협 대표)",
+ "date": "2020.11.18",
+ "sort": 1605679075659,
+ "cat": "insight",
+ "topics": [
+  "did",
+  "myid",
+  "stablecoin"
+ ],
+ "desc": "안녕하세요, 아이콘루프입니다. 지난 13일 개막해 진행 중인 '코리아블록체인위크(KBW) 2020'에서 아이콘루프가 발표를 진행했습니다. 업계 전문가와 함께 지식…",
+ "lead": "안녕하세요, 아이콘루프입니다.",
+ "hero_img": "assets/blog/post-222147661702/fig-1.png",
+ "read_min": 2,
+ "blocks": [
+  {
+   "t": "img",
+   "src": "assets/blog/post-222147661702/fig-1.png"
+  },
+  {
+   "t": "p",
+   "html": "지난 13일 개막해 진행 중인 '코리아블록체인위크(KBW) 2020'에서 아이콘루프가 발표를 진행했습니다. 업계 전문가와 함께 지식을 교류하고 미래 발전 방향을 모색하고자 개최된 본 행사에서는 DID, De-Fi, NFT, CBDC 등 최근 화두가 되고 있는 블록체인 산업의 기술 트렌드와 주요 업체들의 동향, 미래 발전 방향, 정부 정책 등이 다뤄지고 있습니다."
+  },
+  {
+   "t": "p",
+   "html": "아이콘루프의 발표는 '코리아블록체인위크 2020' 중 'Platform / Protocol 세션'에서 'The Era of My Data: Data Sovereignty with DID'라는 주제로 진행되었습니다. 발표자인 김종협 아이콘루프 대표는 현존하는 여러 개인정보 관련 문제에 대한 해법으로 DID를 제시하며, 아이콘루프의 '마이아이디(MyID)' 플랫폼 기반 DID 서비스 '쯩'을 소개했습니다. 나아가 다양한 기관 및 기업과 협업하는 생태계 속에서 새로운 패러다임의 디지털 거래 플랫폼으로 발전해 갈 마이아이디의 청사진 또한 제시했습니다."
+  },
+  {
+   "t": "p",
+   "html": "본 컨퍼런스는 코로나19 사태의 장기화에 따라 세계 각국 블록체인 전문가 50여 명이 키노트 스피커로 참여하는 동영상 스트리밍 방식으로 진행되고 있습니다. 김종협 아이콘루프 대표의 '코리아블록체인위크 2020' 발표 전체 내용을 아래 영상에서 확인해 보시기 바랍니다."
+  },
+  {
+   "t": "p",
+   "html": "Korea Blockchain Week 2020"
+  },
+  {
+   "t": "p",
+   "html": "The Era of My Data: Data Sovereignty with DID"
+  },
+  {
+   "t": "p",
+   "html": "발표자: 김종협 아이콘루프 대표"
+  },
+  {
+   "t": "p",
+   "html": "참여 방법: 코리아블록체인위크2020 웹사이트 및 유튜브 채널"
+  },
+  {
+   "t": "p",
+   "html": "https://koreablockchainweek.com/watch/-MLvlsUZCxTHFeVmf-Zc"
+  }
+ ]
+}

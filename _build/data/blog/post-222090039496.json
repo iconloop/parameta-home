@@ -1,0 +1,68 @@
+{
+ "slug": "post-222090039496",
+ "title": "CIO Summit 2020 : DID를 통한 데이터 주권 회복 (류혁곤 CTO)",
+ "date": "2020.09.15",
+ "sort": 1600145354127,
+ "cat": "insight",
+ "topics": [
+  "did"
+ ],
+ "desc": "안녕하세요, 아이콘루프입니다. 지난 4일, 매년 기업 내 CxO 임원을 대상으로 비즈니스 운영에 필요한 최신 IT·디지털 트렌드를 소개하는 CIO Summit 2…",
+ "lead": "안녕하세요, 아이콘루프입니다.",
+ "hero_img": "assets/blog/post-222090039496/fig-1.png",
+ "read_min": 2,
+ "blocks": [
+  {
+   "t": "p",
+   "html": "지난 4일, 매년 기업 내 CxO 임원을 대상으로 비즈니스 운영에 필요한 최신 IT·디지털 트렌드를 소개하는 CIO Summit 2020에서 아이콘루프 류혁곤 CTO가 “DID를 통한 데이터 주권 회복” 이라는 주제로 발표를 진행했습니다."
+  },
+  {
+   "t": "img",
+   "src": "assets/blog/post-222090039496/fig-1.png"
+  },
+  {
+   "t": "p",
+   "html": "플랫폼의 시대를 맞이하여 플랫폼들의 독점으로 인한 다양한 문제점들이 제기되고 있습니다. 이러한 플랫폼은 자신의 생태계 내에 사용자와 데이터를 가둬두고 통제하게 됩니다. 블록체인 기반의 탈중앙화가 이에 대한 대안으로 떠오르고 있는 가운데 플랫폼에 종속된 데이터 주권을 사용자에게 돌려주기 위한 도구로서 DID가 주목을 받고 있습니다. 본 발표를 통해 탈중앙화의 의미와 그 과정에서 근본적인 토대가 될 DID에 대해 살펴보았습니다."
+  },
+  {
+   "t": "p",
+   "html": "CIO Summit 2020"
+  },
+  {
+   "t": "img",
+   "src": "assets/blog/post-222090039496/fig-2.png"
+  },
+  {
+   "t": "p",
+   "html": "https://youtu.be/zIeptIM0qBA"
+  },
+  {
+   "t": "p",
+   "html": "류혁곤 ( Edward Ryu ) ICONLOOP CTO"
+  },
+  {
+   "t": "p",
+   "html": "현 ICONLOOP의 CTO이며, 포항공과대학교 전자계산학과 학사와 동 대학원 컴퓨터공학을 졸업했다."
+  },
+  {
+   "t": "p",
+   "html": "Selvas Healthcare, Infraware Technology, XCE, LG Electronics 등에서 15년 이상 CTO, 팀장, 시니어 매니저로서 소프트웨어 디자인 및 개발 경험을 보유하고 있다."
+  },
+  {
+   "t": "p",
+   "html": "전 Selvas Healthcare Senior Director (09/2015 ~ 10/2018)"
+  },
+  {
+   "t": "p",
+   "html": "전 Infraware Technology, Inc. CTO (01/2009 ~ 09/2015)"
+  },
+  {
+   "t": "p",
+   "html": "전 XCE, Co., Ltd. Senior Software Engineer (07/2001 ~ 12/2008)"
+  },
+  {
+   "t": "p",
+   "html": "전 LG Electronics Software Engineer (03/1999 ~ 06/2001)"
+  }
+ ]
+}
