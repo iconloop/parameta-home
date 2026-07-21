@@ -2540,10 +2540,10 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
 .pd-h3{ font-size:var(--text-24); font-weight:var(--w-strong); line-height:var(--lh-heading); letter-spacing:-.01em;
   margin:3rem 0 1.25rem; color:var(--ink) }
 .pd-body ul.pd-list{ list-style:none; margin:0 0 1.5rem; padding:0; display:flex; flex-direction:column; gap:.5rem;
-  font-size:var(--text-body); font-weight:var(--w-title); color:var(--ink); line-height:var(--lh-body); word-break:keep-all }
+  font-size:var(--text-20); font-weight:var(--w-title); color:var(--ink); line-height:var(--lh-body); word-break:keep-all }
 .pd-fig figcaption{ margin-top:.75rem; font-size:var(--text-16); color:var(--muted);
   text-align:center; line-height:var(--lh-body); word-break:keep-all }
-.pd-body > p{ font-size:var(--text-body); line-height:var(--lh-body); color:rgba(var(--ink-rgb),.75);  /* 시맨틱 토큰(오리진 공통) 준수 */
+.pd-body > p{ font-size:var(--text-20); line-height:var(--lh-body); color:rgba(var(--ink-rgb),.75);  /* 장문 기사 본문 — 본문 토큰보다 한 단계 큰 20 (해상도별 다운시프트 동일 적용) */
   margin-bottom:1.5rem; word-break:keep-all; text-align:justify }
 .pd-end{ color:var(--muted) }
 /* 액션 바: 텍스트 복사·이미지 다운로드(좌) + 목록보기(우, 다크) */
@@ -3351,6 +3351,18 @@ const PAGER_ARR = {
   prev:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 6 9 12 15 18"/></svg>',
   next:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg>'
 };
+/* 페이지 최상단으로 부드럽게 — 네이티브 behavior:'smooth'가 안 먹는 환경(프리뷰 등) 대비 rAF 수동 애니메이션 */
+function pagerScrollTop(){
+  const start = window.scrollY; if(start <= 0) return;
+  const t0 = performance.now(), dur = 620;
+  const step = now => {
+    const p = Math.min(1, (now - t0) / dur);
+    const e = p < 0.5 ? 4*p*p*p : 1 - Math.pow(-2*p + 2, 3) / 2;   /* easeInOutCubic — 시작·끝 부드럽게 */
+    window.scrollTo(0, Math.round(start * (1 - e)));
+    if(p < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
 function paintPager(pager, sec, cur, real, go){
   pager.innerHTML = '';
   const mk = (label, page, on, dis) => {
@@ -3359,22 +3371,20 @@ function paintPager(pager, sec, cur, real, go){
     else b.textContent = label;
     if(on) b.classList.add('is-on');
     if(dis) b.disabled = true;
-    b.addEventListener('click', () => { go(page); });   /* 페이저는 제자리 — 섹션 최상단 스크롤(위로 점프) 제거 */
+    b.addEventListener('click', () => { go(page); pagerScrollTop(); });   /* 페이지 최상단으로 스르륵 */
     pager.appendChild(b);
   };
   const dots = () => { const sp = document.createElement('span'); sp.className = 'pager-dots'; sp.textContent = '…'; pager.appendChild(sp); };
   mk('prev', cur-1, false, cur <= 1);
-  /* 슬라이딩 윈도 5개 + … + 마지막 — 현재 페이지가 창 가운데 (예: 6 → 4 5 6 7 8 … 12) */
-  let start = Math.max(1, cur - 2);
-  if(real > 5) start = Math.min(start, real - 4);
-  for(let n = start; n <= start + 4; n++){
-    if(n > real && real > 5) break;
-    mk(String(n), n, n === cur, n > real);
-  }
-  const end = Math.min(start + 4, real);
-  if(real > 5 && end < real){
-    if(end < real - 1) dots();
-    mk(String(real), real, cur === real, false);
+  /* 중간 윈도 5개 + 첫·끝 페이지 고정, 사이 간격은 … (총 6~7개). 예: 6 → 1 … 4 5 6 7 8 … 12 */
+  if(real <= 7){
+    for(let n = 1; n <= real; n++) mk(String(n), n, n === cur, false);
+  } else {
+    const start = Math.min(Math.max(1, cur - 2), real - 4);   // 윈도 5개, 가장자리 클램프
+    const end = start + 4;
+    if(start > 1){ mk('1', 1, cur === 1, false); if(start > 2) dots(); }   // 앞쪽 첫 페이지 + 간격
+    for(let n = start; n <= end; n++) mk(String(n), n, n === cur, false);
+    if(end < real){ if(end < real - 1) dots(); mk(String(real), real, cur === real, false); }   // 뒤쪽 간격 + 끝 페이지
   }
   mk('next', cur+1, false, cur >= real);
 }
