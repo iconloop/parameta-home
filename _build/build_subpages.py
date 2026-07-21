@@ -1414,12 +1414,12 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 .card-link{ display:flex; text-decoration:none; color:inherit }
 .blog-item.hidden, .press-item.hidden{ display:none }
 /* 페이지네이션 (보도자료·블로그 공용) — 공통 토큰: --pager-* 로 단일 조정 */
-.pager{ --pager-btn:2.75rem;   /* 버튼 지름 44px */
-  --pager-ico:1.25rem;         /* 화살표 아이콘 20px */
+.pager{ --pager-btn:3rem;      /* 버튼 지름 48px */
+  --pager-ico:1.5rem;          /* 화살표 아이콘 24px */
   --pager-gap:.5rem;
   display:flex; justify-content:center; align-items:center; gap:var(--pager-gap); margin-top:var(--space-48) }
 .pager button{ min-width:var(--pager-btn); height:var(--pager-btn); padding:0 .5rem; border:none; background:transparent;
-  border-radius:var(--radius-pill); font-size:var(--text-16); font-weight:500; line-height:1;
+  border-radius:var(--radius-pill); font-size:var(--text-18); font-weight:500; line-height:1;
   color:rgba(var(--ink-rgb),.55); cursor:pointer;
   display:inline-flex; align-items:center; justify-content:center;
   transition:color .2s ease, background .2s ease, opacity .2s ease }
@@ -1427,6 +1427,7 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 .pager button.is-on{ background:var(--ink); color:var(--white); font-weight:600 }
 .pager button:disabled{ opacity:.3; cursor:default }
 .pager button svg{ width:var(--pager-ico); height:var(--pager-ico); display:block }
+.pager-dots{ min-width:1.5rem; text-align:center; font-size:var(--text-18); color:rgba(var(--ink-rgb),.4); user-select:none }
 
 /* ============ POST — 블로그 아티클 상세 ============ */
 .post-meta{ display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; padding:1.5rem 0;
@@ -1586,29 +1587,7 @@ body.company .firsts-eco .ally-head{ text-align:left }
 body.media .phero + section .sec{ padding-top:var(--space-32) }
 body.media .phero-inner{ padding-bottom:3rem }  /* 히어로 하단 6rem → 3rem (media 스코프만) */
 
-/* ============ NEWSROOM — 피처드(1큰카드+2적층) + 보도자료 리스트 ============ */
-.news-feat{ display:grid; grid-template-columns:1fr; gap:1rem; margin-bottom:var(--space-80) }
-@media (min-width:768px){
-  .news-feat{ grid-template-columns:repeat(12,1fr); gap:var(--grid-gap) }
-  .nf-big{ grid-column:1 / 9 } .nf-side{ grid-column:9 / 13 } }
-.news-feat .work-meta{ font-size:var(--text-16) }  /* 킥커(PRESS · 날짜) 한 토큰 업 */
-.nf-big{ display:flex }
-.nf-big .card-link{ flex:1 1 auto; min-width:0 }  /* 상세 링크 래퍼도 높이 전달 */
-.nf-big .work-card{ flex:1 1 auto; min-width:0; min-height:0 }
-/* 큰 카드 이미지 영역: full-bleed, 남는 높이를 채움 */
-.nf-big .work-card.grouped::before{ flex:1 1 auto; height:auto; min-height:16rem;
-  margin:-1.5rem -1.5rem 1.5rem; border-radius:0;
-  background-image:var(--nf-img, url('assets/parasta/body-test.avif'));  /* 기사 대표 이미지, 없으면 폴백 */
-  background-size:cover; background-position:center; background-repeat:no-repeat }
-@media (min-width:640px){ .nf-big .work-card.grouped::before{ margin:-2rem -2rem 1.75rem } }
-.nf-side{ display:flex; flex-direction:column; gap:1rem }
-@media (min-width:768px){ .nf-side{ gap:var(--grid-gap) } }
-.nf-side > .card-link{ flex:1 1 0; display:flex }  /* 앵커 래퍼가 높이를 반씩 나눠 큰 카드와 합 맞춤 */
-/* 적층 카드: 텍스트만 — 큰 카드(이미지)와 위계 구분. 킥커는 보라 통일 */
-.nf-side .work-card{ flex:1 1 0; min-height:11rem; display:flex; flex-direction:column }
-.nf-side .work-card .work-meta{ color:var(--purple-300) }
-.nf-side .work-card .work-bottom{ position:static; inset:auto; margin-top:auto; padding-top:.875rem }
-.nf-side .work-card .work-bottom h3{ font-size:var(--text-22) }
+/* ============ NEWSROOM — 보도자료 리스트 ============ */
 /* ============ 공통 컨트롤 — 필 인풋·드롭다운 (페이저처럼 --ctl-* 토큰으로 단일 조정) ============ */
 .select-pill, .input-pill{ --ctl-h:2.75rem;   /* 컨트롤 높이 44px */
   --ctl-pad:1.25rem;                           /* 좌우 패딩 20px */
@@ -2482,7 +2461,6 @@ const PAGER_ARR = {
   next:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg>'
 };
 function paintPager(pager, sec, cur, real, go){
-  const pages = Math.max(5, real);
   pager.innerHTML = '';
   const mk = (label, page, on, dis) => {
     const b = document.createElement('button'); b.type = 'button';
@@ -2493,8 +2471,20 @@ function paintPager(pager, sec, cur, real, go){
     b.addEventListener('click', () => { go(page); sec.scrollIntoView({behavior:'smooth', block:'start'}); });
     pager.appendChild(b);
   };
+  const dots = () => { const sp = document.createElement('span'); sp.className = 'pager-dots'; sp.textContent = '\u2026'; pager.appendChild(sp); };
   mk('prev', cur-1, false, cur <= 1);
-  for(let n = 1; n <= pages; n++) mk(String(n), n, n === cur, n > real);
+  /* 슬라이딩 윈도 5개 + … + 마지막 (예: 2 3 4 5 6 … 12). 5페이지 이하는 기존처럼 빈 페이지 disabled */
+  let start = Math.max(1, cur - 3);
+  if(real > 5) start = Math.min(start, real - 4);
+  for(let n = start; n <= start + 4; n++){
+    if(n > real && real > 5) break;
+    mk(String(n), n, n === cur, n > real);
+  }
+  const end = Math.min(start + 4, real);
+  if(real > 5 && end < real){
+    if(end < real - 1) dots();
+    mk(String(real), real, cur === real, false);
+  }
   mk('next', cur+1, false, cur >= real);
 }
 /* Insights: 블로그 탭 필터 + 페이지네이션 */
@@ -3444,17 +3434,6 @@ for _f in sorted(glob.glob(os.path.join(DATA_DIR, 'press', '*.json'))):
 PRESS_DATA.sort(key=lambda d: -d['sort'])
 PRESS_ITEMS = [dict(date=d['date'], title=d['title'], href=f"press/{d['slug']}.html", img=d.get('hero_img')) for d in PRESS_DATA]
 
-def press_featured(items):
-    """피처드 — 좌측 큰 카드 1(8col) + 우측 작은 카드 2 적층(4col). 클릭 시 상세로."""
-    big, subs = items[0], items[1:3]
-    big_card = card(big['title'], '', kicker=big['date'], media=True, sm=False)
-    side = ''.join(f'<a class="card-link" href="{s["href"]}">'
-                   + card(s['title'], '', kicker=s['date']) + '</a>' for s in subs)
-    big_style = f' style="--nf-img:url(\'{big["img"]}\')"' if big.get('img') else ''
-    return ('<div class="news-feat rvl" style="--rvl-y:40px">'
-            f'<div class="nf-big"><a class="card-link" href="{big["href"]}"{big_style}>{big_card}</a></div>'
-            f'<div class="nf-side">{side}</div></div>')
-
 def drop(cls, options, aria):
     """커스텀 드롭다운 (시스템 셀렉트 대체) — options: [(value, label)], 첫 항목이 기본값."""
     v0, l0 = options[0]
@@ -3504,7 +3483,6 @@ PAGES['insights.html'] = dict(
     content=f'''
 <section data-press><div class="shell sec">
   {sec_head('Press Release', '보도자료')}
-  {press_featured(PRESS_ITEMS)}
   {press_list(PRESS_ITEMS)}
   <div class="pager" role="navigation" aria-label="보도자료 페이지"></div>
 </div></section>
