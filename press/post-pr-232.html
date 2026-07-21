@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<script src="assets/nav.js?v=31" defer></script>
+<script src="assets/nav.js?v=33" defer></script>
 <script src="assets/chatbot.js?v=4" defer></script>
 <style>
 /* ============ RESET / BASE ============ */
@@ -1460,6 +1460,7 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .px-mini .mi-head{ display:flex; align-items:center; gap:.5rem; font-size:var(--text-14); font-weight:600; color:var(--ink); margin-bottom:.375rem }
 .px-mini .mi-head svg{ width:1.125rem; height:1.125rem; flex:none; color:var(--purple-500) }
 .px-mini p{ font-size:var(--text-14); color:rgba(var(--ink-rgb),.55); line-height:1.4 !important; word-break:keep-all }  /* 행간 토큰 예외(사용자 승인): 다이어그램 미니카드만 타이트하게 */
+.px-mini p.pm-break{ word-break:break-all }  /* 이 카드 문단만: 줄을 꽉 채워 끊기(사용자 지정, 여기만) */
 @media (max-width:480px){ .px-duo{ grid-template-columns:1fr } }
 /* ============ SUBPAGE UTILITIES ============ */
 .sec{ padding:5rem 1.25rem }
@@ -1715,6 +1716,12 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
   .ex-card[style*="--brand"]:hover{ background:var(--brand); color:var(--brand-txt) }
   .ex-card[style*="--brand"]:hover .ex-ico{ background:rgba(255,255,255,.4) } }
 .ex-card .ex-ico{ display:block; width:3.5rem; height:3.5rem; margin-bottom:2rem; background:rgba(var(--white-rgb),.08) }
+/* 로고: 기본은 원본 색·영역 중앙 정렬, 어두운 심볼(ex-logo-inv)만 반대색(흰색), 호버 시 전부 흰색 */
+.ex-card .ex-ico.ex-logo{ background:transparent; display:grid; place-items:center; padding:0 }
+.ex-card .ex-ico.ex-logo img{ width:2.25rem; height:2.25rem; object-fit:contain; display:block; margin:auto; transition:filter .35s ease }   /* 정사각 마스크·중앙·축소(56→36) */
+.ex-card .ex-ico.ex-logo-inv img{ filter:brightness(0) invert(1) }
+@media (hover:hover){ .ex-card:hover .ex-ico.ex-logo img{ filter:brightness(0) invert(1) } }
+@media (hover:hover){ .ex-card[style*="--brand"]:hover .ex-ico.ex-logo{ background:transparent } }   /* 로고 칸은 호버 흰 배경 제거 */
 .ex-card h3{ margin-bottom:0 }
 .ex-card .ex-num{ display:block; font-size:var(--text-14); font-weight:500; color:rgba(var(--white-rgb),.5); margin-bottom:.5rem }  /* 기능 카드 번호 */
 .ex-card h3 + p{ margin-top:.75rem; font-size:var(--text-18) }  /* 서브카피 달릴 때만 간격 + 한 단계 업 */
@@ -1857,8 +1864,8 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 @media (min-width:1024px){ .pv-stats.on-light .stat-label{ font-size:var(--text-20) } }
 /* Core Technology 행: 화살표(페이지 이동) 제거 + 제목 한 토큰 작게 */
 .ct-rows .service-badge{ display:none }
-.ct-rows .service-row h3{ font-size:var(--text-24) }
-.ct-rows .service-desc{ display:block; font-size:var(--text-16); max-width:34rem; margin-right:5rem }
+.ct-rows .service-row h3{ font-size:var(--text-26) }
+.ct-rows .service-desc{ display:block; font-size:var(--text-body); max-width:34rem; margin-right:5rem }
 /* <1024: 행 리스트 본문을 타이틀 아래로 (사라지지 않게) — 전 서브페이지 공통 */
 @media (max-width:1023px){
   .sec .service-row{ position:relative; padding-right:4.5rem; flex-wrap:wrap; row-gap:.5rem }
@@ -2044,6 +2051,7 @@ table.cmp th.hl.hl-hover, table.cmp td.hl.hl-hover{ transform:scale(1.03); z-ind
 /* 비교표 헤더 플래그 배지 */
 .cmp-flag{ display:inline-block; margin-left:.5rem; padding:.25rem .625rem; border-radius:var(--radius-pill);
   background:rgba(var(--accent-rgb),.1); color:var(--accent); font-size:var(--text-14); font-weight:600; vertical-align:middle }
+.cmp-flag.cmp-flag-gray{ background:rgba(var(--ink-rgb),.08); color:var(--c-body) }   /* 그레이 플래그 변형 */
 .cmpt-btn .cmp-flag{ margin-left:.375rem; padding:.125rem .5rem }
 .cmpt-btn.active .cmp-flag{ background:rgba(255,255,255,.22); color:var(--white) }
 table.cmp .mk{ font-weight:700; margin-right:.375rem }
