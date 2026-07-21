@@ -890,7 +890,7 @@ body.show-grid #dev-grid{ display:block }
 .sub-t{ display:block; font-size:var(--text-26); font-weight:700; color:var(--ink); line-height:var(--leading-heading) }   /* 서브타이틀 22→26, 행간 1.25 */
 /* 공통 메타 라벨(.meta-t): 섹션 내 소소한 구분 라벨 (마퀴 라벨 등).
    ※ 기존 유사 스타일(rc-label 옛 정의 등)은 타 페이지 사용 중 — 전 페이지 이관 완료 후 제거 예정 */
-.meta-t{ display:block; font-size:var(--text-14); font-weight:500; letter-spacing:.06em;
+.meta-t{ display:block; font-size:var(--text-16); font-weight:600; letter-spacing:.06em;
   color:rgba(var(--ink-rgb),.55); text-transform:uppercase }
 /* 모바일 전용 줄바꿈: <br class="br-m"> — ≤639에서만 개행 */
 .br-m{ display:none }
@@ -1763,6 +1763,15 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .ally-num{ display:block; font-size:var(--text-28); font-weight:700; color:var(--ink); line-height:1 }
 .ally-cap{ display:block; font-size:var(--text-16); color:rgba(var(--ink-rgb),.55); margin-top:.375rem }
 .ally-logos, .ally-marquee-wrap .pt-marquee{ margin:0 }
+.ally-logos .pt-track{ animation-duration:42s }   /* 인증수상 마퀴와 동일 속도 */
+.ally-logos:hover .pt-track{ animation-play-state:paused }   /* 호버 시 정지 */
+/* 시안 D 마퀴 문법: 좌우 페이드 */
+.ally-logos{ padding-block:var(--space-24);
+  -webkit-mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent) }
+.ally-logos .pt-set{ gap:0; padding-right:0 }
+.ally-logos .pt-set img{ height:5.25rem }
+@media (max-width:639px){ .ally-logos .pt-set img{ height:3.5rem } }
 /* History 타임라인 (C안): 좌측 레일 + 노드 + 큰 연도 + 그레이 카드 */
 .ht-list{ list-style:none; margin:0; padding:0 0 0 2rem; position:relative }
 .ht-list::before{ content:''; position:absolute; left:5px; top:.5rem; bottom:.5rem; width:2px; background:var(--gray-100) }
@@ -2251,12 +2260,12 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 .fh-chip.world{ background:var(--purple-500); color:#fff }
 .fh-chip.lead{ background:rgba(var(--ink-rgb),.07); color:var(--ink) }
 .fh-list li.fh-ally{ margin-top:.5rem; padding-top:1.5rem }
-.fh-sub{ margin-left:auto; padding-left:1rem; font-size:var(--text-18); font-weight:400; color:var(--muted); white-space:nowrap }   /* 두 토큰 업(14→18) */
+.fh-sub{ margin-left:auto; padding-left:1rem; font-size:var(--text-18); font-weight:400; color:rgba(var(--ink-rgb),.6); white-space:nowrap }   /* 두 토큰 업(14→18) */
 @media (max-width:767px){
   .firsts-hero{ grid-template-columns:1fr; gap:1.75rem; padding:2rem 1.25rem }
-  .fh-num{ font-size:5.5rem }
-  .fh-list li{ flex-wrap:wrap; row-gap:.35rem }
-  .fh-sub{ margin-left:0; padding-left:0; flex-basis:100% }
+  .fh-num{ font-size:3.75rem }
+  .fh-list li{ display:grid; grid-template-columns:auto 1fr; column-gap:.9rem; row-gap:0; align-items:center }
+  .fh-sub{ grid-column:2; margin-left:0; padding-left:0; justify-self:start }
 }
 .ht-era{ list-style:none; display:flex; align-items:center; gap:.6rem; padding:2.25rem 0 .75rem }
 .ht-era:first-child{ padding-top:0 }
@@ -2264,19 +2273,60 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 .ht-era-label{ font-size:var(--text-13, .8125rem); font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--subtle); white-space:nowrap }
 @media (max-width:767px){ .ht-era-label{ white-space:normal } }  /* 긴 라벨이 뷰포트 밖으로 밀려 가로 스크롤 만드는 것 방지 */
 .ht-sub li .m{ color:var(--muted); margin-right:.6rem; font-variant-numeric:tabular-nums; white-space:nowrap }
+/* ══ History B-lite v2: 고정 사이드(스크롤 시 페이드 전환) + 연속 리스트, 디바이더 없음 ══ */
+@media (min-width:900px){ .ht2 .ht2-body{ grid-column:6 / 13 } }
+.ht2-fade{ display:grid; margin-top:var(--space-8) }
+.ht2-layer .sec-h2{ margin:var(--space-8) 0 0 }
+.ht2-layer{ grid-area:1 / 1; opacity:0; transition:opacity .45s cubic-bezier(.4,0,.2,1); pointer-events:none }
+.ht2-layer.on{ opacity:1 }
+.ht2-group{ background:rgba(var(--ink-rgb),.04); border-radius:var(--radius-card);
+  padding:var(--space-16) var(--space-32) }   /* 시대별 그레이 카드로 묶음 */
+.ht2-group + .ht2-group{ margin-top:var(--space-32) }
+@media (min-width:900px){
+  .ht2-group{ opacity:.45; transition:opacity .6s cubic-bezier(.4,0,.2,1) }
+  .ht2-group.ht2-on{ opacity:1 }
+}
+.ht2-era-head{ display:none }
+.ht2-era-head .ht2-t{ font-size:var(--text-26); font-weight:700; line-height:var(--leading-heading); margin-top:var(--space-8) }
+.ht2-yrin{ flex:none; min-width:4.5rem; font-size:var(--text-24); font-weight:700; font-variant-numeric:tabular-nums }   /* 22→24 */
+.ht2-acc summary > span{ flex:1 }
+.ht2-acc summary{ display:flex; justify-content:space-between; align-items:center; gap:var(--space-16);
+  font-size:var(--text-20); font-weight:600; color:var(--ink); padding:var(--space-20) 0; cursor:pointer;
+  list-style:none; border-top:1px solid rgba(var(--ink-rgb),.09) }   /* 폰트 18→20, 여백 12→20 */
+.ht2-acc:first-of-type summary{ border-top:0 }
+.ht2-acc summary::-webkit-details-marker{ display:none }
+.ht2-chev{ flex:none; width:.625rem; height:.625rem; margin-top:-.25rem;
+  border-right:2px solid rgba(var(--ink-rgb),.45); border-bottom:2px solid rgba(var(--ink-rgb),.45);
+  transform:rotate(45deg); transition:transform .45s cubic-bezier(.16,1,.3,1), border-color .2s }   /* 기존 ht-chev 컨벤션 */
+.ht2-acc[open] .ht2-chev{ transform:rotate(225deg); margin-top:.25rem; border-color:var(--purple-500) }
+@media (hover:hover){
+  .ht2-acc summary{ transition:color .2s }
+  .ht2-acc summary:hover{ color:var(--purple-500) }
+  .ht2-acc summary:hover .ht2-chev{ border-color:var(--purple-500) }
+}
+.ht2-rows{ list-style:none; margin:0; padding:0 0 var(--space-16) }
+.ht2-rows li{ display:flex; gap:var(--space-12); border-top:1px solid rgba(var(--ink-rgb),.06);
+  padding:var(--space-12) 0; font-size:var(--text-16); font-weight:500; color:var(--ink); line-height:var(--leading-body) }
+.ht2-rows li .m{ flex:none; min-width:2.75rem; color:rgba(var(--ink-rgb),.4); font-weight:400; font-variant-numeric:tabular-nums }
+@media (max-width:899px){
+  .ht2 .cm-head{ display:none }
+  .ht2-era-head{ display:block; margin-bottom:var(--space-16) }
+}
 /* Alliance 소절 카드 위 여백 */
 /* 시안 D: 좌 문장(.sub-t) / 우 미니 필 2개, 86+는 마퀴 라벨 */
 .firsts-eco .eco-head{ display:flex; justify-content:space-between; align-items:center; gap:var(--space-40) }
-.firsts-eco .eco-pills{ display:flex; gap:var(--space-8); flex-wrap:wrap; justify-content:flex-end }
-.firsts-eco .eco-pill{ font-size:var(--text-16); border:1px solid rgba(var(--ink-rgb),.12); border-radius:var(--radius-pill);
-  padding:.625rem 1.125rem; white-space:nowrap; color:var(--ink) }
-.firsts-eco .eco-pill b{ font-weight:600 }
+.firsts-eco .eco-pills{ display:flex; gap:var(--space-12); flex-wrap:wrap; justify-content:flex-end }
+.firsts-eco .eco-pill{ transition:transform .35s cubic-bezier(.2,.8,.2,1);
+  font-size:var(--text-18); border:1px solid rgba(var(--ink-rgb),.12); border-radius:var(--radius-pill);
+  padding:.875rem 1.25rem; white-space:nowrap; color:var(--ink) }
+.firsts-eco .eco-pill b{ font-weight:600; transition:color .25s }
 .firsts-eco .eco-pill i{ font-style:normal; color:rgba(var(--ink-rgb),.55); margin-left:.375rem }
 @media (max-width:767px){
   .firsts-eco .eco-head{ flex-direction:column; align-items:flex-start; gap:var(--space-20) }
   .firsts-eco .eco-pills{ justify-content:flex-start }
 }
-body.company .firsts-eco .ally-head{ text-align:left }   /* 얼라이언스 문장 좌측 정렬 (스탯 로우 확정 후 변경) */
+body.company .firsts-eco .ally-head{ text-align:left }
+@media (hover:hover){ .firsts-eco .eco-pill:hover{ transform:scale(1.05) } .firsts-eco .eco-pill:hover b{ color:var(--purple-500) } }   /* 얼라이언스 문장 좌측 정렬 (스탯 로우 확정 후 변경) */
 .firsts-eco{ margin-top:clamp(var(--space-24), 5.2vw, var(--space-80)) }   /* 인증수상(recog-chips)과 동일 가변 커브 */
 @media (max-width:767px){ .firsts-eco{ margin-top:clamp(var(--space-24), 4.7vw, var(--space-40)) } }
 

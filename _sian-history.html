@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>시안 — History 시대 구분 3종 (PC)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{ --ink:#0E0C27; --ink-rgb:14,12,39; --purple:#6100FF; --purple-300:#B49AFF; --line:rgba(14,12,39,.12); --muted:rgba(14,12,39,.55) }
+*{ box-sizing:border-box; margin:0 }
+body{ font-family:'Onest','Pretendard Variable',Pretendard,sans-serif; color:var(--ink); background:#fff; padding:48px 32px 120px; word-break:keep-all }
+.sian{ max-width:1100px; margin:0 auto 120px }
+.tag{ display:inline-block; font-size:13px; font-weight:700; color:var(--purple); border:1px solid currentColor; border-radius:999px; padding:6px 14px; margin-bottom:12px }
+.note{ font-size:14px; color:var(--muted); margin-bottom:28px }
+.card{ background:rgba(var(--ink-rgb),.04); border-radius:16px; padding:18px 24px; font-size:16px; font-weight:500 }
+.card small{ display:block; font-size:13px; color:var(--muted); font-weight:400; margin-top:4px }
+
+/* ── A: 챕터 헤더형 ── */
+.a .era{ display:grid; grid-template-columns:220px 1fr; gap:48px; padding:40px 0 8px; border-top:2px solid var(--ink); margin-top:40px }
+.a .era:first-child{ margin-top:0 }
+.a .era .rng{ font-size:15px; font-weight:600; letter-spacing:.04em; color:var(--purple) }
+.a .era h4{ font-size:26px; font-weight:700; margin-top:6px; line-height:1.3 }
+.a .era p{ font-size:16px; color:var(--muted); line-height:1.7; max-width:560px }
+.a .items{ display:grid; grid-template-columns:220px 1fr; gap:48px; padding:20px 0 }
+.a .yr{ font-size:32px; font-weight:700; color:rgba(var(--ink-rgb),.25) }
+.a .items > div:last-child{ display:flex; flex-direction:column; gap:12px }
+
+/* ── B: 좌 스티키 시대 / 우 리스트 ── */
+.b .wrap{ display:grid; grid-template-columns:340px 1fr; gap:64px; align-items:start }
+.b .side{ position:sticky; top:24px; border-left:3px solid var(--purple); padding-left:24px }
+.b .side .rng{ font-size:15px; font-weight:600; letter-spacing:.04em; color:var(--purple) }
+.b .side h4{ font-size:30px; font-weight:700; margin:8px 0 12px; line-height:1.25 }
+.b .side p{ font-size:16px; color:var(--muted); line-height:1.7 }
+.b .side .idx{ margin-top:24px; display:flex; flex-direction:column; gap:8px; font-size:14px; color:var(--muted) }
+.b .side .idx b{ color:var(--ink) }
+.b .list{ display:flex; flex-direction:column; gap:14px }
+.b .list .yr{ font-size:22px; font-weight:700; margin:14px 0 2px }
+
+/* ── C: 시대 인트로 카드 + 기존 레일 ── */
+.c .intro{ background:var(--ink); color:#fff; border-radius:20px; padding:32px 36px; display:grid; grid-template-columns:auto 1fr; gap:40px; align-items:center; margin:40px 0 24px }
+.c .intro:first-child{ margin-top:0 }
+.c .intro .rng{ font-size:36px; font-weight:700; letter-spacing:-.02em; white-space:nowrap }
+.c .intro .rng small{ display:block; font-size:14px; font-weight:500; color:var(--purple-300); letter-spacing:.06em; margin-bottom:6px }
+.c .intro h4{ font-size:20px; font-weight:600; margin-bottom:6px }
+.c .intro p{ font-size:15px; color:rgba(255,255,255,.65); line-height:1.7 }
+.c .rail{ position:relative; padding-left:32px; display:flex; flex-direction:column; gap:14px }
+.c .rail::before{ content:''; position:absolute; left:5px; top:8px; bottom:8px; width:2px; background:rgba(var(--ink-rgb),.1) }
+.c .rail .yr{ position:relative; font-size:26px; font-weight:700; margin-top:10px }
+.c .rail .yr::before{ content:''; position:absolute; left:-32px; top:12px; width:12px; height:12px; border-radius:50%; background:var(--purple) }
+</style>
+</head>
+<body>
+
+<div class="sian a">
+  <span class="tag">시안 A — 챕터 헤더형</span>
+  <p class="note">시대가 굵은 챕터 디바이더로 흐름을 확실히 끊음. 좌측 칼럼(범위·타이틀·설명) / 우측 연도·항목. 편집 디자인 느낌, 스크롤 리듬이 생김.</p>
+  <div class="era">
+    <div><div class="rng">2023 — 2026</div><h4>디지털자산<br>인프라 확장</h4></div>
+    <p>스테이블코인, RWA 등 디지털자산 시장의 제도화 흐름에 맞춰 금융 인프라 전반으로 사업을 확장한 시기입니다.</p>
+  </div>
+  <div class="items">
+    <div class="yr">2025</div>
+    <div>
+      <div class="card">MyID 2.0, 블록체인 서비스 최초 CSAP 인증<small>11월 · 공공 클라우드 진출 기반 확보</small></div>
+      <div class="card">ADB 주관 채권 포럼, 온체인 KYC 표준 모델 발표</div>
+    </div>
+  </div>
+  <div class="items">
+    <div class="yr">2024</div>
+    <div><div class="card">Stablecoin Alliance 초대 의장사 선임</div></div>
+  </div>
+  <div class="era">
+    <div><div class="rng">2019 — 2022</div><h4>DID 상용화와<br>공공 확산</h4></div>
+    <p>금융권 최초 DID 실명인증을 상용화하고, 공공·민간으로 신원인증 생태계를 넓힌 시기입니다.</p>
+  </div>
+  <div class="items">
+    <div class="yr">2020</div>
+    <div><div class="card">금융권 최초 DID 실명인증 상용화</div></div>
+  </div>
+</div>
+
+<div class="sian b">
+  <span class="tag">시안 B-lite — 시대별 그리드 + 구간 스티키 (JS 제로)</span>
+  <p class="note">시대마다 독립 그리드. 좌측 요약은 자기 시대 안에서만 스티키로 따라오다가, 다음 시대에 밀려 올라가며 자연 교체. 우측은 연도 헤딩 + 라인 리스트로 다이어트.</p>
+
+  <div style="display:grid; grid-template-columns:340px 1fr; gap:64px; align-items:start; padding:40px 0; border-top:2px solid var(--ink)">
+    <div style="position:sticky; top:24px">
+      <div style="font-size:15px; font-weight:600; letter-spacing:.04em; color:var(--purple)">2023 — 2026</div>
+      <h4 style="font-size:30px; font-weight:700; margin:8px 0 12px; line-height:1.25">디지털자산<br>인프라 확장</h4>
+      <p style="font-size:16px; color:var(--muted); line-height:1.7">스테이블코인, RWA 등 디지털자산 시장의 제도화 흐름에 맞춰 금융 인프라 전반으로 확장한 시기입니다.</p>
+    </div>
+    <div>
+      <div style="font-size:22px; font-weight:700; padding-bottom:12px">2025</div>
+      <div style="border-top:1px solid var(--line); padding:14px 0; font-size:16px; font-weight:500">MyID 2.0, 블록체인 서비스 최초 CSAP 인증 <span style="color:var(--muted); font-weight:400; margin-left:8px">11월</span></div>
+      <div style="border-top:1px solid var(--line); padding:14px 0 28px; font-size:16px; font-weight:500">ADB 주관 채권 포럼, 온체인 KYC 표준 모델 발표 <span style="color:var(--muted); font-weight:400; margin-left:8px">9월</span></div>
+      <div style="font-size:22px; font-weight:700; padding-bottom:12px">2024</div>
+      <div style="border-top:1px solid var(--line); padding:14px 0 28px; font-size:16px; font-weight:500">Stablecoin Alliance 초대 의장사 선임</div>
+      <div style="font-size:22px; font-weight:700; padding-bottom:12px">2023</div>
+      <div style="border-top:1px solid var(--line); padding:14px 0; font-size:16px; font-weight:500">파라메타 사명 변경, WalletFi 비전 선포</div>
+      <div style="border-top:1px solid var(--line); padding:14px 0; font-size:16px; font-weight:500">디지털자산 커스터디 인프라 구축</div>
+      <div style="border-top:1px solid var(--line); padding:14px 0; font-size:16px; font-weight:500">RWA 토큰화 PoC 3건 수행</div>
+    </div>
+  </div>
+
+  <div style="display:grid; grid-template-columns:340px 1fr; gap:64px; align-items:start; padding:40px 0; border-top:2px solid var(--ink)">
+    <div style="position:sticky; top:24px">
+      <div style="font-size:15px; font-weight:600; letter-spacing:.04em; color:var(--purple)">2019 — 2022</div>
+      <h4 style="font-size:30px; font-weight:700; margin:8px 0 12px; line-height:1.25">DID 상용화와<br>공공 확산</h4>
+      <p style="font-size:16px; color:var(--muted); line-height:1.7">금융권 최초 DID 실명인증을 상용화하고, 공공·민간으로 신원인증 생태계를 넓힌 시기입니다.</p>
+    </div>
+    <div>
+      <div style="font-size:22px; font-weight:700; padding-bottom:12px">2020</div>
+      <div style="border-top:1px solid var(--line); padding:14px 0; font-size:16px; font-weight:500">금융권 최초 DID 실명인증 상용화</div>
+      <div style="border-top:1px solid var(--line); padding:14px 0; font-size:16px; font-weight:500">제주안심코드 출시</div>
+    </div>
+  </div>
+</div>
+
+<div class="sian">
+  <span class="tag">시안 B-lite ③ — 대표 문구 라인 + 클릭 펼침 (아코디언 유지)</span>
+  <p class="note">우측은 연도 + 대표 문구 한 줄. 행 클릭 시 월별 세부가 아래로 펼쳐짐 (기존 아코디언 로직 재사용, 껍데기만 라인 스타일). 첫 행을 클릭해봐.</p>
+
+  <div style="display:grid; grid-template-columns:340px 1fr; gap:64px; align-items:start; padding:40px 0; border-top:2px solid var(--ink)">
+    <div style="position:sticky; top:24px">
+      <div style="font-size:15px; font-weight:600; letter-spacing:.04em; color:var(--purple)">2023 — 2026</div>
+      <h4 style="font-size:30px; font-weight:700; margin:8px 0 0; line-height:1.25">디지털자산<br>인프라 확장</h4>
+    </div>
+    <div>
+      <div style="font-size:22px; font-weight:700; padding-bottom:12px">2025</div>
+      <details style="border-top:1px solid var(--line)">
+        <summary style="padding:14px 0; font-size:16px; font-weight:500; cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center">MyID 2.0, 블록체인 서비스 최초 CSAP 인증<span style="color:var(--muted); font-size:13px">∨</span></summary>
+        <ul style="list-style:none; padding:4px 0 18px 16px; display:flex; flex-direction:column; gap:10px; font-size:15px; color:var(--muted)">
+          <li><span style="color:rgba(14,12,39,.4); margin-right:10px">11월</span>MyID 2.0 CSAP 인증 획득, 공공 클라우드 진출 기반 확보</li>
+          <li><span style="color:rgba(14,12,39,.4); margin-right:10px">09월</span>ADB 주관 채권 포럼, 온체인 KYC 표준 모델 발표</li>
+          <li><span style="color:rgba(14,12,39,.4); margin-right:10px">05월</span>W3C DID Method Registry 등재</li>
+        </ul>
+      </details>
+      <div style="font-size:22px; font-weight:700; padding:16px 0 12px">2024</div>
+      <details style="border-top:1px solid var(--line)">
+        <summary style="padding:14px 0; font-size:16px; font-weight:500; cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center">Stablecoin Alliance 초대 의장사 선임<span style="color:var(--muted); font-size:13px">∨</span></summary>
+        <ul style="list-style:none; padding:4px 0 18px 16px; display:flex; flex-direction:column; gap:10px; font-size:15px; color:var(--muted)">
+          <li><span style="color:rgba(14,12,39,.4); margin-right:10px">12월</span>스테이블코인 생태계 협의체 출범, 초대 의장사</li>
+        </ul>
+      </details>
+    </div>
+  </div>
+</div>
+
+<div class="sian c">
+  <span class="tag">시안 C — 시대 인트로 카드 + 기존 레일 유지</span>
+  <p class="note">기존 타임라인 레일은 그대로 두고, 시대 경계마다 다크 인트로 카드를 삽입. 변화 최소로 "구간별 설명" 요구를 충족 — Vision 다크 카드와 톤 호응.</p>
+  <div class="intro">
+    <div class="rng"><small>CHAPTER 3</small>2023 — 2026</div>
+    <div><h4>디지털자산 인프라 확장</h4><p>스테이블코인, RWA 등 디지털자산 시장의 제도화 흐름에 맞춰 금융 인프라 전반으로 사업을 확장한 시기입니다.</p></div>
+  </div>
+  <div class="rail">
+    <div class="yr">2025</div>
+    <div class="card">MyID 2.0, 블록체인 서비스 최초 CSAP 인증</div>
+    <div class="yr">2024</div>
+    <div class="card">Stablecoin Alliance 초대 의장사 선임</div>
+  </div>
+  <div class="intro">
+    <div class="rng"><small>CHAPTER 2</small>2019 — 2022</div>
+    <div><h4>DID 상용화와 공공 확산</h4><p>금융권 최초 DID 실명인증을 상용화하고, 공공·민간으로 신원인증 생태계를 넓힌 시기입니다.</p></div>
+  </div>
+  <div class="rail">
+    <div class="yr">2020</div>
+    <div class="card">금융권 최초 DID 실명인증 상용화</div>
+  </div>
+</div>
+
+</body>
+</html>
