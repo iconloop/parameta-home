@@ -1494,10 +1494,11 @@ body.media .phero + section .sec{ padding-top:var(--space-32) }
 body.media .phero-inner{ padding-bottom:3rem }  /* 히어로 하단 6rem → 3rem (media 스코프만) */
 
 /* ============ NEWSROOM — 피처드(1큰카드+2적층) + 보도자료 리스트 ============ */
-.news-feat{ display:grid; grid-template-columns:1fr; gap:1rem; margin-bottom:var(--space-64) }
+.news-feat{ display:grid; grid-template-columns:1fr; gap:1rem; margin-bottom:var(--space-80) }
 @media (min-width:768px){
   .news-feat{ grid-template-columns:repeat(12,1fr); gap:var(--grid-gap) }
   .nf-big{ grid-column:1 / 9 } .nf-side{ grid-column:9 / 13 } }
+.news-feat .work-meta{ font-size:var(--text-16) }  /* 킥커(PRESS · 날짜) 한 토큰 업 */
 .nf-big{ display:flex }
 .nf-big .card-link{ flex:1 1 auto; min-width:0 }  /* 상세 링크 래퍼도 높이 전달 */
 .nf-big .work-card{ flex:1 1 auto; min-width:0; min-height:0 }
@@ -1509,10 +1510,11 @@ body.media .phero-inner{ padding-bottom:3rem }  /* 히어로 하단 6rem → 3re
 .nf-side{ display:flex; flex-direction:column; gap:1rem }
 @media (min-width:768px){ .nf-side{ gap:var(--grid-gap) } }
 .nf-side > .card-link{ flex:1 1 0; display:flex }  /* 앵커 래퍼가 높이를 반씩 나눠 큰 카드와 합 맞춤 */
-/* 적층 카드: 킥커→제목 플로우 배치 (절대배치 해제 — 긴 제목이 킥커를 덮지 않게) */
+/* 적층 카드: 텍스트만 — 큰 카드(이미지)와 위계 구분. 킥커는 보라 통일 */
 .nf-side .work-card{ flex:1 1 0; min-height:11rem; display:flex; flex-direction:column }
+.nf-side .work-card .work-meta{ color:var(--purple-300) }
 .nf-side .work-card .work-bottom{ position:static; inset:auto; margin-top:auto; padding-top:.875rem }
-.nf-side .work-card .work-bottom h3{ font-size:var(--text-20) }
+.nf-side .work-card .work-bottom h3{ font-size:var(--text-22) }
 /* ============ 공통 컨트롤 — 필 인풋·드롭다운 (페이저처럼 --ctl-* 토큰으로 단일 조정) ============ */
 .select-pill, .input-pill{ --ctl-h:2.75rem;   /* 컨트롤 높이 44px */
   --ctl-pad:1.25rem;                           /* 좌우 패딩 20px */
@@ -1564,38 +1566,47 @@ body.media .phero-inner{ padding-bottom:3rem }  /* 히어로 하단 6rem → 3re
 @media (hover:hover){ .news-controls .drop-btn:hover{ color:var(--ink) } }
 .news-controls .drop.open .drop-btn,
 .news-controls .drop:not([data-value="all"]) .drop-btn{ color:var(--ink) }
-/* 검색박스: 라운드 렉트 + 지우기(x)·돋보기 버튼 */
-.news-search{ margin-left:auto; display:flex; align-items:center; gap:.25rem;
-  height:3rem; padding:0 .5rem 0 1.25rem; border:1px solid rgba(var(--ink-rgb),.15);
-  border-radius:.75rem; background:var(--white); transition:border-color .2s ease }
-.news-search:focus-within{ border-color:var(--ink) }
-.news-search input{ flex:1; width:12rem; min-width:0; border:none; outline:none; background:transparent;
-  font-size:var(--text-16); color:var(--ink) }
-.news-search input::placeholder{ color:rgba(var(--ink-rgb),.4) }
+/* 검색박스: 레퍼(네이버)형 — 보더 없는 그레이 필 + 우측 화이트 라운드 사각 돋보기 (컬러·R값 토큰) */
+.news-search{ margin-left:auto; display:flex; align-items:center; gap:.5rem;
+  height:3.5rem; padding:0 .25rem 0 1rem; border:none;
+  border-radius:var(--radius-control); background:color-mix(in srgb, var(--ink) 6%, var(--white)) }
+.news-search input{ flex:1; width:16rem; min-width:0; border:none; outline:none; background:transparent;
+  font-size:var(--text-20); font-weight:500; color:var(--ink) }
+.news-search input::placeholder{ color:var(--subtle) }
 .news-search input::-webkit-search-cancel-button{ display:none }
-.ns-clear{ width:1.25rem; height:1.25rem; flex:none; border:none; padding:0; cursor:pointer;
-  border-radius:var(--radius-pill); background:rgba(var(--ink-rgb),.25); color:var(--white);
+.ns-clear{ width:1.5rem; height:1.5rem; flex:none; border:none; padding:0; cursor:pointer;
+  margin-right:.25rem;  /* 돋보기와 살짝 간격 */
+  border-radius:var(--radius-pill); background:var(--gray-300); color:var(--white);
   display:grid; place-items:center; transition:background .2s ease }
-@media (hover:hover){ .ns-clear:hover{ background:rgba(var(--ink-rgb),.45) } }
-.ns-clear svg{ width:.625rem; height:.625rem }
-.ns-btn{ width:2.25rem; height:2.25rem; flex:none; border:none; padding:0; background:transparent;
-  color:var(--ink); cursor:pointer; display:grid; place-items:center }
-.ns-btn svg{ width:1.25rem; height:1.25rem }
-/* 검색 결과 없음 */
-.news-empty{ padding:4rem 0; text-align:center; font-size:var(--text-18); color:rgba(var(--ink-rgb),.55);
-  border-bottom:1px solid rgba(var(--ink-rgb),.1) }
+.ns-clear[hidden]{ visibility:hidden }  /* 자리는 유지 — 나타날 때 인풋 폭이 안 변하게 */
+@media (hover:hover){ .ns-clear:hover{ background:var(--gray-400) } }
+.ns-clear svg{ width:.75rem; height:.75rem }
+.ns-btn{ width:3rem; height:3rem; flex:none; border:none; padding:0;
+  background:var(--white); border-radius:calc(var(--radius-control) - .25rem); color:rgba(var(--ink-rgb),.72); cursor:pointer;
+  display:grid; place-items:center; transition:transform .2s ease }  /* 박스 R(control) - 인셋 4px = 동심원 정렬 */
+@media (hover:hover){ .ns-btn:hover{ transform:scale(1.05) } }
+.ns-btn svg{ width:1.5rem; height:1.5rem }
+/* 검색 결과 없음 — 아이콘 + 안내 문구 */
+.news-empty{ display:flex; flex-direction:column; align-items:center; gap:1.25rem;
+  padding:5rem 0; border-bottom:1px solid rgba(var(--ink-rgb),.1) }
+.news-empty[hidden]{ display:none }
+.ne-ico{ width:5rem; height:5rem; border-radius:var(--radius-pill);
+  background:color-mix(in srgb, var(--ink) 6%, var(--white)); color:var(--subtle);
+  display:grid; place-items:center }
+.ne-ico svg{ width:2.25rem; height:2.25rem }
+.news-empty p{ font-size:var(--text-22); font-weight:500; color:var(--muted) }
 /* 리스트 — 날짜 | 제목 | 썸네일 영역 (타이포·호버는 FAQ 행과 동일, 클릭 시 상세 이동) */
 .news-list{ list-style:none }
 .news-row{ border-bottom:1px solid var(--line) }
 .nr-link{ display:grid; grid-template-columns:6rem 1fr 15rem; align-items:center; gap:var(--grid-gap);
-  padding:2rem 1.5rem; border-radius:var(--radius-card-sm); text-decoration:none; color:inherit;
+  padding:1.5rem; border-radius:var(--radius-card-sm); text-decoration:none; color:inherit;
   background:rgba(var(--surface-rgb),0); transition:background .45s cubic-bezier(.45,0,.55,1) }
 @media (hover:hover){ .nr-link:hover{ background:rgba(var(--surface-rgb),1) } }
 .nr-date{ font-size:var(--text-14); font-weight:500; color:rgba(var(--ink-rgb),.4);
   line-height:2.25rem; font-variant-numeric:tabular-nums }
-.nr-title{ font-size:var(--text-22); font-weight:500; letter-spacing:-.01em; line-height:2.25rem;
+.nr-title{ font-size:var(--text-20); font-weight:500; letter-spacing:-.01em; line-height:2.25rem;
   color:var(--ink); word-break:keep-all }
-@media (min-width:640px){ .nr-title{ font-size:var(--text-26) } }
+@media (min-width:640px){ .nr-title{ font-size:var(--text-24) } }
 .nr-thumb{ width:100%; aspect-ratio:3/2; border-radius:var(--radius-card-sm);
   background:color-mix(in srgb, var(--ink) 6%, var(--white)) }
 @media (max-width:767px){
@@ -3055,21 +3066,22 @@ document.querySelectorAll('.ht-acc input').forEach(function(i){
 
 # ---------------- insights.html (Newsroom) ----------------
 # 보도자료 데이터 — 피처드(최신 3)와 리스트가 공유 (최신순)
+# 일자(DD)는 임시값 — 실제 보도자료 날짜로 교체 예정
 PRESS_ITEMS = [
-    dict(date='2026.02', title="파라메타, ADB 주관 채권 포럼서 '온체인 KYC' 기반 국경 간 거래 표준 모델 발표"),
-    dict(date='2026.02', title='파라메타, 스테이블코인·STO 무료 컨설팅으로 디지털자산 사업 기회 확대 지원'),
-    dict(date='2023.11', title='김종협 파라메타 대표, 2023 블록체인 진흥주간에서 과학기술정보통신부 장관 표창 수상'),
-    dict(date='2023.09', title="파라메타, 기술신용평가 최고 등급 'TI-1' 획득 — 최상위 수준의 기술력 및 성장 가능성 인정"),
-    dict(date='2023.08', title='파라메타, 카스투게더·솔브릭코리아와 국내 최초 모빌리티·태양광 토큰증권 플랫폼 구축'),
-    dict(date='2023.07', title="파라메타, 플루토스파트너스와 국내 최초 '부동산 NPL 토큰증권 플랫폼' 구축 협력"),
+    dict(date='2026.02.19', title="파라메타, ADB 주관 채권 포럼서 '온체인 KYC' 기반 국경 간 거래 표준 모델 발표"),
+    dict(date='2026.02.04', title='파라메타, 스테이블코인·STO 무료 컨설팅으로 디지털자산 사업 기회 확대 지원'),
+    dict(date='2023.11.16', title='김종협 파라메타 대표, 2023 블록체인 진흥주간에서 과학기술정보통신부 장관 표창 수상'),
+    dict(date='2023.09.12', title="파라메타, 기술신용평가 최고 등급 'TI-1' 획득 — 최상위 수준의 기술력 및 성장 가능성 인정"),
+    dict(date='2023.08.23', title='파라메타, 카스투게더·솔브릭코리아와 국내 최초 모빌리티·태양광 토큰증권 플랫폼 구축'),
+    dict(date='2023.07.05', title="파라메타, 플루토스파트너스와 국내 최초 '부동산 NPL 토큰증권 플랫폼' 구축 협력"),
 ]
 
 def press_featured(items):
     """피처드 — 좌측 큰 카드 1(8col) + 우측 작은 카드 2 적층(4col). 클릭 시 상세로."""
     big, subs = items[0], items[1:3]
-    big_card = card(big['title'], '', kicker='PRESS · ' + big['date'], media=True, sm=False)
+    big_card = card(big['title'], '', kicker=big['date'], media=True, sm=False)
     side = ''.join(f'<a class="card-link" href="press-sample.html">'
-                   + card(s['title'], '', kicker='PRESS · ' + s['date']) + '</a>' for s in subs)
+                   + card(s['title'], '', kicker=s['date']) + '</a>' for s in subs)
     return ('<div class="news-feat rvl" style="--rvl-y:40px">'
             f'<div class="nf-big"><a class="card-link" href="press-sample.html">{big_card}</a></div>'
             f'<div class="nf-side">{side}</div></div>')
@@ -3104,10 +3116,12 @@ def press_list(items):
             f'<div class="news-search">'
             f'<input type="search" placeholder="보도자료 검색" aria-label="보도자료 검색">'
             f'<button class="ns-clear" type="button" aria-label="검색어 지우기" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="7" y1="7" x2="17" y2="17"/><line x1="17" y1="7" x2="7" y2="17"/></svg></button>'
-            f'<button class="ns-btn" type="button" aria-label="검색"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg></button>'
+            f'<button class="ns-btn" type="button" aria-label="검색"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg></button>'
             f'</div></div>'
             f'<ul class="news-list">{rows}</ul>'
-            f'<p class="news-empty" hidden>검색 결과가 없습니다.</p>')
+            f'<div class="news-empty" hidden>'
+            f'<span class="ne-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/><line x1="8" y1="11" x2="8" y2="11"/><line x1="11" y1="11" x2="11" y2="11"/><line x1="14" y1="11" x2="14" y2="11"/></svg></span>'
+            f'<p>검색 결과가 없습니다.</p></div>')
 
 PAGES['insights.html'] = dict(
     title='Newsroom | PARAMETA',
@@ -3140,7 +3154,7 @@ PAGES['press-sample.html'] = dict(
 <section><div class="shell sec">
   <div class="post-meta rvl">
     <span class="post-cat">Press</span>
-    <span class="post-date">2026.02</span>
+    <span class="post-date">2026.02.19</span>
   </div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
@@ -3161,9 +3175,9 @@ PAGES['press-sample.html'] = dict(
 <section><div class="shell sec" style="padding-top:0">
   {sec_head('More Press', '다른 보도자료')}
   <ul class="cards-3">
-    <li class="rvl" style="--rvl-y:40px"><a class="card-link" href="insights.html">{dark_card('PRESS · 2026.02', '파라메타, 스테이블코인·STO 무료 컨설팅으로 디지털자산 사업 기회 확대 지원', '', grouped=True)}</a></li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><a class="card-link" href="insights.html">{dark_card('PRESS · 2023.11', '김종협 파라메타 대표, 2023 블록체인 진흥주간에서 과학기술정보통신부 장관 표창 수상', '', grouped=True)}</a></li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><a class="card-link" href="insights.html">{dark_card('PRESS · 2023.09', "파라메타, 기술신용평가 최고 등급 'TI-1' 획득 — 최상위 수준의 기술력 및 성장 가능성 인정", '', grouped=True)}</a></li>
+    <li class="rvl" style="--rvl-y:40px"><a class="card-link" href="insights.html">{dark_card('2026.02.04', '파라메타, 스테이블코인·STO 무료 컨설팅으로 디지털자산 사업 기회 확대 지원', '', grouped=True)}</a></li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><a class="card-link" href="insights.html">{dark_card('2023.11.16', '김종협 파라메타 대표, 2023 블록체인 진흥주간에서 과학기술정보통신부 장관 표창 수상', '', grouped=True)}</a></li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><a class="card-link" href="insights.html">{dark_card('2023.09.12', "파라메타, 기술신용평가 최고 등급 'TI-1' 획득 — 최상위 수준의 기술력 및 성장 가능성 인정", '', grouped=True)}</a></li>
   </ul>
 </div></section>
 ''')
