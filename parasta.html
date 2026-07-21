@@ -2155,15 +2155,20 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 .blog-tab.is-on{ background:var(--ink); color:var(--white); border-color:var(--ink) }
 .card-link{ display:flex; text-decoration:none; color:inherit }
 .blog-item.hidden, .press-item.hidden{ display:none }
-/* 페이지네이션 (보도자료·블로그 공용) */
-.pager{ display:flex; justify-content:center; align-items:center; gap:.5rem; margin-top:3rem }
-.pager button{ min-width:2rem; height:2.25rem; padding:0 .375rem; border:none; background:transparent;
-  font-size:var(--text-14); font-weight:500; line-height:1; color:rgba(var(--ink-rgb),.55); cursor:pointer;
-  display:inline-flex; align-items:center; justify-content:center; transition:color .2s ease, opacity .2s ease }
-@media (hover:hover){ .pager button:hover:not(:disabled){ color:var(--ink) } }
-.pager button.is-on{ color:var(--ink); font-weight:700 }
+/* 페이지네이션 (보도자료·블로그 공용) — 공통 토큰: --pager-* 로 단일 조정 */
+.pager{ --pager-btn:2.75rem;   /* 버튼 지름 44px */
+  --pager-ico:1.25rem;         /* 화살표 아이콘 20px */
+  --pager-gap:.5rem;
+  display:flex; justify-content:center; align-items:center; gap:var(--pager-gap); margin-top:var(--space-48) }
+.pager button{ min-width:var(--pager-btn); height:var(--pager-btn); padding:0 .5rem; border:none; background:transparent;
+  border-radius:var(--radius-pill); font-size:var(--text-16); font-weight:500; line-height:1;
+  color:rgba(var(--ink-rgb),.55); cursor:pointer;
+  display:inline-flex; align-items:center; justify-content:center;
+  transition:color .2s ease, background .2s ease, opacity .2s ease }
+@media (hover:hover){ .pager button:hover:not(:disabled):not(.is-on){ color:var(--ink); background:rgba(var(--surface-rgb),1) } }
+.pager button.is-on{ background:var(--ink); color:var(--white); font-weight:600 }
 .pager button:disabled{ opacity:.3; cursor:default }
-.pager button svg{ width:1rem; height:1rem; display:block }
+.pager button svg{ width:var(--pager-ico); height:var(--pager-ico); display:block }
 
 /* ============ POST — 블로그 아티클 상세 ============ */
 .post-meta{ display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; padding:1.5rem 0;
@@ -2253,12 +2258,17 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 /* Alliance 소절 카드 위 여백 */
 .firsts-eco .cards-2{ margin-top:var(--space-16) }
 
+/* ============ MEDIA 공통(newsroom·blog·resources) — 첫 섹션을 히어로에 붙임 (contact 방식) ============ */
+body.media .phero + section .sec{ padding-top:var(--space-32) }
+body.media .phero-inner{ padding-bottom:3rem }  /* 히어로 하단 6rem → 3rem (media 스코프만) */
+
 /* ============ NEWSROOM — 피처드(1큰카드+2적층) + 보도자료 리스트 ============ */
 .news-feat{ display:grid; grid-template-columns:1fr; gap:1rem; margin-bottom:var(--space-64) }
 @media (min-width:768px){
   .news-feat{ grid-template-columns:repeat(12,1fr); gap:var(--grid-gap) }
   .nf-big{ grid-column:1 / 9 } .nf-side{ grid-column:9 / 13 } }
 .nf-big{ display:flex }
+.nf-big .card-link{ flex:1 1 auto; min-width:0 }  /* 상세 링크 래퍼도 높이 전달 */
 .nf-big .work-card{ flex:1 1 auto; min-width:0; min-height:0 }
 /* 큰 카드 이미지 영역: full-bleed, 남는 높이를 채움 */
 .nf-big .work-card.grouped::before{ flex:1 1 auto; height:auto; min-height:16rem;
@@ -2267,36 +2277,100 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 @media (min-width:640px){ .nf-big .work-card.grouped::before{ margin:-2rem -2rem 1.75rem } }
 .nf-side{ display:flex; flex-direction:column; gap:1rem }
 @media (min-width:768px){ .nf-side{ gap:var(--grid-gap) } }
+.nf-side > .card-link{ flex:1 1 0; display:flex }  /* 앵커 래퍼가 높이를 반씩 나눠 큰 카드와 합 맞춤 */
 /* 적층 카드: 킥커→제목 플로우 배치 (절대배치 해제 — 긴 제목이 킥커를 덮지 않게) */
 .nf-side .work-card{ flex:1 1 0; min-height:11rem; display:flex; flex-direction:column }
 .nf-side .work-card .work-bottom{ position:static; inset:auto; margin-top:auto; padding-top:.875rem }
 .nf-side .work-card .work-bottom h3{ font-size:var(--text-20) }
-/* 컨트롤 — 연도 드롭다운 + 검색창 */
-.news-controls{ display:flex; align-items:center; gap:.75rem; flex-wrap:wrap;
-  padding-bottom:1.25rem; border-bottom:1px solid rgba(var(--ink-rgb),.14) }
-.news-select{ height:2.75rem; padding:0 2.25rem 0 1.25rem; border:1px solid rgba(var(--ink-rgb),.15);
-  border-radius:var(--radius-pill); background:transparent; font-size:var(--text-14); font-weight:500;
-  color:var(--ink); cursor:pointer; appearance:none;
+/* ============ 공통 컨트롤 — 필 인풋·드롭다운 (페이저처럼 --ctl-* 토큰으로 단일 조정) ============ */
+.select-pill, .input-pill{ --ctl-h:2.75rem;   /* 컨트롤 높이 44px */
+  --ctl-pad:1.25rem;                           /* 좌우 패딩 20px */
+  --ctl-ico:1.25rem;                           /* 아이콘 20px (페이저 화살표와 동일) */
+  --ctl-fs:var(--text-18);                     /* 컨트롤 텍스트 */
+  height:var(--ctl-h); border:1px solid rgba(var(--ink-rgb),.15); border-radius:var(--radius-pill);
+  background-color:transparent; font-size:var(--ctl-fs); color:var(--ink) }
+.select-pill{ padding:0 calc(var(--ctl-pad) + 1rem) 0 var(--ctl-pad); font-weight:500; cursor:pointer; appearance:none;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
-  background-repeat:no-repeat; background-position:right .875rem center; background-size:1rem }
-.news-search{ display:flex; align-items:center; gap:.5rem; margin-left:auto;
-  height:2.75rem; padding:0 1.25rem; border:1px solid rgba(var(--ink-rgb),.15); border-radius:var(--radius-pill) }
-.news-search svg{ width:1rem; height:1rem; color:rgba(var(--ink-rgb),.45); flex:none }
-.news-search input{ border:none; background:transparent; outline:none; min-width:0; width:11rem;
-  font-size:var(--text-14); color:var(--ink) }
+  background-repeat:no-repeat; background-position:right .875rem center; background-size:var(--ctl-ico) }
+.input-pill{ display:flex; align-items:center; gap:.5rem; padding:0 var(--ctl-pad) }
+.input-pill svg{ width:var(--ctl-ico); height:var(--ctl-ico); color:rgba(var(--ink-rgb),.45); flex:none }
+.input-pill input{ border:none; background:transparent; outline:none; min-width:0;
+  font-size:var(--ctl-fs); color:var(--ink) }
+.input-pill input::placeholder{ color:rgba(var(--ink-rgb),.4) }
+@media (hover:hover){ .select-pill:hover, .input-pill:hover{ border-color:rgba(var(--ink-rgb),.4) } }
+.select-pill:focus-visible, .input-pill:focus-within{ border-color:var(--ink) }
+/* 커스텀 드롭다운 — 트리거는 select-pill 그대로, 패널은 카드 문법 */
+.drop{ position:relative }
+.drop-btn{ display:inline-flex; align-items:center; text-align:left }
+.drop.open .drop-btn{ border-color:var(--ink) }
+.drop-menu{ position:absolute; top:calc(100% + 1rem); left:0; min-width:16rem; max-height:22rem; z-index:30;
+  overflow-y:auto; list-style:none; padding:1rem .75rem; background:var(--white); border:none;
+  border-radius:1rem; box-shadow:0 8px 40px rgba(var(--ink-rgb),.14);
+  opacity:0; visibility:hidden; transform:translateY(-4px);
+  transition:opacity .2s ease, transform .2s ease, visibility .2s }
+.drop.open .drop-menu{ opacity:1; visibility:visible; transform:none }
+.drop-menu li{ padding:.875rem 1.25rem; border-radius:.5rem; font-size:var(--text-20); font-weight:500;
+  color:rgba(var(--ink-rgb),.45); white-space:nowrap; cursor:pointer;
+  transition:background .2s ease, color .2s ease }
+@media (hover:hover){ .drop-menu li:hover{ background:rgba(var(--surface-rgb),1); color:var(--ink) } }
+.drop-menu li.is-on{ color:var(--ink); font-weight:600 }
+/* 패널 스크롤바 — 레퍼처럼 얇은 회색 썸 */
+.drop-menu::-webkit-scrollbar{ width:.375rem }
+.drop-menu::-webkit-scrollbar-thumb{ background:rgba(var(--ink-rgb),.25); border-radius:var(--radius-pill) }
+.drop-menu::-webkit-scrollbar-track{ background:transparent }
+
+/* 뉴스룸 컨트롤 — 네이버 뉴스룸형: 텍스트 드롭다운 + 라운드 검색박스 */
+.news-controls{ display:flex; align-items:center; gap:2rem; flex-wrap:wrap;
+  padding-bottom:1.25rem; border-bottom:1px solid rgba(var(--ink-rgb),.14);
+  position:relative; z-index:40 }  /* rvl transform 스태킹 위로 — 드롭 패널이 리스트에 안 뚫리게 */
+/* 드롭 트리거: 필 대신 텍스트형 — 기본(전체)은 그레이, 선택·열림은 잉크 */
+.news-controls .drop-btn{ height:auto; padding:0; border:none; background-image:none;
+  font-size:var(--text-20); font-weight:600; color:rgba(var(--ink-rgb),.4);
+  transition:color .2s ease }
+.news-controls .drop-btn::after{ content:''; width:1.125rem; height:1.125rem; margin-left:.375rem; background:currentColor;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") center/contain no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") center/contain no-repeat }
+@media (hover:hover){ .news-controls .drop-btn:hover{ color:var(--ink) } }
+.news-controls .drop.open .drop-btn,
+.news-controls .drop:not([data-value="all"]) .drop-btn{ color:var(--ink) }
+/* 검색박스: 라운드 렉트 + 지우기(x)·돋보기 버튼 */
+.news-search{ margin-left:auto; display:flex; align-items:center; gap:.25rem;
+  height:3rem; padding:0 .5rem 0 1.25rem; border:1px solid rgba(var(--ink-rgb),.15);
+  border-radius:.75rem; background:var(--white); transition:border-color .2s ease }
+.news-search:focus-within{ border-color:var(--ink) }
+.news-search input{ flex:1; width:12rem; min-width:0; border:none; outline:none; background:transparent;
+  font-size:var(--text-16); color:var(--ink) }
 .news-search input::placeholder{ color:rgba(var(--ink-rgb),.4) }
-/* 리스트 — 날짜 | 제목 | 썸네일 영역 */
+.news-search input::-webkit-search-cancel-button{ display:none }
+.ns-clear{ width:1.25rem; height:1.25rem; flex:none; border:none; padding:0; cursor:pointer;
+  border-radius:var(--radius-pill); background:rgba(var(--ink-rgb),.25); color:var(--white);
+  display:grid; place-items:center; transition:background .2s ease }
+@media (hover:hover){ .ns-clear:hover{ background:rgba(var(--ink-rgb),.45) } }
+.ns-clear svg{ width:.625rem; height:.625rem }
+.ns-btn{ width:2.25rem; height:2.25rem; flex:none; border:none; padding:0; background:transparent;
+  color:var(--ink); cursor:pointer; display:grid; place-items:center }
+.ns-btn svg{ width:1.25rem; height:1.25rem }
+/* 검색 결과 없음 */
+.news-empty{ padding:4rem 0; text-align:center; font-size:var(--text-18); color:rgba(var(--ink-rgb),.55);
+  border-bottom:1px solid rgba(var(--ink-rgb),.1) }
+/* 리스트 — 날짜 | 제목 | 썸네일 영역 (타이포·호버는 FAQ 행과 동일, 클릭 시 상세 이동) */
 .news-list{ list-style:none }
-.news-row{ display:grid; grid-template-columns:6rem 1fr 15rem; align-items:center; gap:var(--grid-gap);
-  padding-block:1.5rem; border-bottom:1px solid rgba(var(--ink-rgb),.1) }
-.nr-date{ font-size:var(--text-14); color:rgba(var(--ink-rgb),.5); font-variant-numeric:tabular-nums }
-.nr-title{ font-size:var(--text-20); font-weight:500; letter-spacing:-.01em; line-height:var(--leading-heading);
+.news-row{ border-bottom:1px solid var(--line) }
+.nr-link{ display:grid; grid-template-columns:6rem 1fr 15rem; align-items:center; gap:var(--grid-gap);
+  padding:2rem 1.5rem; border-radius:var(--radius-card-sm); text-decoration:none; color:inherit;
+  background:rgba(var(--surface-rgb),0); transition:background .45s cubic-bezier(.45,0,.55,1) }
+@media (hover:hover){ .nr-link:hover{ background:rgba(var(--surface-rgb),1) } }
+.nr-date{ font-size:var(--text-14); font-weight:500; color:rgba(var(--ink-rgb),.4);
+  line-height:2.25rem; font-variant-numeric:tabular-nums }
+.nr-title{ font-size:var(--text-22); font-weight:500; letter-spacing:-.01em; line-height:2.25rem;
   color:var(--ink); word-break:keep-all }
+@media (min-width:640px){ .nr-title{ font-size:var(--text-26) } }
 .nr-thumb{ width:100%; aspect-ratio:3/2; border-radius:var(--radius-card-sm);
   background:color-mix(in srgb, var(--ink) 6%, var(--white)) }
 @media (max-width:767px){
-  .news-row{ grid-template-columns:1fr; gap:.75rem; padding-block:1.25rem }
-  .nr-title{ font-size:var(--text-18) }
+  .nr-link{ grid-template-columns:1fr; gap:.75rem; padding:1.25rem 1rem }
+  .nr-date{ line-height:1 }
+  .nr-title{ font-size:var(--text-18); line-height:var(--leading-heading) }
   .nr-thumb{ max-width:20rem }
   .news-search{ margin-left:0; flex:1 } }
 
@@ -2321,20 +2395,21 @@ table.cmp .mk.off{ color:rgba(var(--ink-rgb),.3) }
 .bf-tag{ margin-top:1rem; font-size:var(--text-14); line-height:1; padding:.375rem .875rem;
   border:1px solid rgba(var(--ink-rgb),.15); border-radius:var(--radius-pill); color:rgba(var(--ink-rgb),.6) }
 
-/* ============ RESOURCES — 로고 다운로드 ============ */
-.res-logo{ display:grid; grid-template-columns:1fr; gap:1.5rem }
-@media (min-width:768px){
-  .res-logo{ grid-template-columns:repeat(12,1fr); column-gap:var(--grid-gap) }
-  .rl-preview{ grid-column:1 / 9 } .rl-actions{ grid-column:9 / 13; align-self:center } }
-.rl-preview{ aspect-ratio:3/1; border-radius:var(--radius-card);
-  background:color-mix(in srgb, var(--ink) 6%, var(--white)) }
-.rl-actions{ display:flex; flex-direction:column; align-items:flex-start; gap:.75rem }
+/* ============ RESOURCES — 로고 다운로드 (기존 t-gray grouped 카드 문법, 인쇄용·웹용 좌우) ============ */
+.res-logo{ display:grid; grid-template-columns:1fr; gap:1rem }
+@media (min-width:768px){ .res-logo{ grid-template-columns:repeat(2,1fr); gap:var(--grid-gap) } }
+.res-logo .work-card.grouped{ min-height:0 }
+/* 이미지 영역 full-bleed 그레이 (상세페이지 grouped 카드와 동일 문법 — 로고 파일 들어올 자리)
+   카드 몸통(잉크 6%)과 구분되게 한 단계 진한 10% */
+.res-logo .work-card.grouped::before{ margin:-1.5rem -1.5rem 1.5rem; border-radius:0;
+  background:color-mix(in srgb, var(--ink) 10%, var(--white)) }
+@media (min-width:640px){ .res-logo .work-card.grouped::before{ margin:-2rem -2rem 1.75rem } }
+.rl-actions{ display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1.25rem }
 .rl-btn{ height:2.75rem; padding:0 1.5rem; border:1px solid rgba(var(--ink-rgb),.15); border-radius:var(--radius-pill);
   background:transparent; font-size:var(--text-14); font-weight:500; color:var(--ink); cursor:pointer;
   transition:background .2s ease, color .2s ease, border-color .2s ease }
 @media (hover:hover){ .rl-btn:not(:disabled):hover{ background:var(--ink); color:var(--white); border-color:var(--ink) } }
 .rl-btn:disabled{ opacity:.4; cursor:default }
-.rl-note{ font-size:var(--text-14); color:rgba(var(--ink-rgb),.5) }
 </style>
 </head>
 <body class="hero-dark">
@@ -3116,7 +3191,7 @@ if(blogSec){
   const tabs = [...blogSec.querySelectorAll('.blog-tab')];
   const posts = [...blogSec.querySelectorAll('.blog-item')];
   const pager = blogSec.querySelector('.pager');
-  const PER = 6; let filter = 'all', cur = 1;
+  const PER = 9; let filter = 'all', cur = 1;  // 3열 × 3행
   const elig = () => posts.filter(p => filter === 'all' || p.dataset.cat === filter);
   function paint(){
     const e = elig();
@@ -3136,6 +3211,33 @@ if(blogSec){
   });
   paint();
 }
+/* 공통 커스텀 드롭다운 (.drop) — 시스템 셀렉트 대체. 선택 시 data-value 갱신 + change 이벤트 */
+const drops = [...document.querySelectorAll('.drop')];
+if(drops.length){
+  drops.forEach(drop => {
+    const btn = drop.querySelector('.drop-btn');
+    const label = drop.querySelector('.drop-label');
+    const opts = [...drop.querySelectorAll('.drop-menu li')];
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const willOpen = !drop.classList.contains('open');
+      drops.forEach(d => { d.classList.remove('open'); d.querySelector('.drop-btn').setAttribute('aria-expanded', 'false'); });
+      drop.classList.toggle('open', willOpen);
+      btn.setAttribute('aria-expanded', String(willOpen));
+    });
+    opts.forEach(o => o.addEventListener('click', () => {
+      opts.forEach(x => x.classList.toggle('is-on', x === o));
+      drop.dataset.value = o.dataset.value;
+      label.textContent = o.textContent;
+      drop.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      drop.dispatchEvent(new CustomEvent('change'));
+    }));
+  });
+  const closeAll = () => drops.forEach(d => { d.classList.remove('open'); d.querySelector('.drop-btn').setAttribute('aria-expanded', 'false'); });
+  document.addEventListener('click', e => { if(!e.target.closest('.drop')) closeAll(); });
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') closeAll(); });
+}
 /* Insights(Newsroom): 보도자료 리스트 — 연도·검색 필터 + 페이지네이션(10개씩) */
 const pressSec = document.querySelector('[data-press]');
 if(pressSec){
@@ -3144,6 +3246,9 @@ if(pressSec){
   const selY = pressSec.querySelector('.news-sel-year');
   const selM = pressSec.querySelector('.news-sel-month');
   const inp = pressSec.querySelector('.news-search input');
+  const clearBtn = pressSec.querySelector('.ns-clear');
+  const searchBtn = pressSec.querySelector('.ns-btn');
+  const emptyEl = pressSec.querySelector('.news-empty');
   const PER = 10; let year = 'all', month = 'all', kw = '', cur = 1;
   const elig = () => items.filter(r =>
     (year === 'all' || r.dataset.year === year) &&
@@ -3155,11 +3260,30 @@ if(pressSec){
     if(cur > real) cur = real;
     items.forEach(r => r.classList.add('hidden'));
     e.slice((cur-1)*PER, cur*PER).forEach(r => r.classList.remove('hidden'));
-    if(pager) paintPager(pager, pressSec, cur, real, page => { cur = page; paintP(); });
+    if(emptyEl) emptyEl.hidden = e.length > 0;
+    if(pager){
+      pager.style.display = e.length ? '' : 'none';
+      paintPager(pager, pressSec, cur, real, page => { cur = page; paintP(); });
+    }
   }
-  if(selY) selY.addEventListener('change', () => { year = selY.value; cur = 1; paintP(); });
-  if(selM) selM.addEventListener('change', () => { month = selM.value; cur = 1; paintP(); });
-  if(inp) inp.addEventListener('input', () => { kw = inp.value.trim().toLowerCase(); cur = 1; paintP(); });
+  function applyKw(){
+    kw = inp.value.trim().toLowerCase(); cur = 1;
+    paintP();
+  }
+  if(selY) selY.addEventListener('change', () => { year = selY.dataset.value; cur = 1; paintP(); });
+  if(selM) selM.addEventListener('change', () => { month = selM.dataset.value; cur = 1; paintP(); });
+  if(inp){
+    /* 입력 중엔 필터하지 않음 — X 버튼 표시만 갱신, 검색은 Enter·돋보기에서 실행 */
+    inp.addEventListener('input', () => {
+      if(clearBtn) clearBtn.hidden = !inp.value;
+      if(!inp.value && kw){ kw = ''; cur = 1; paintP(); }  /* 전부 지우면 필터 해제 */
+    });
+    inp.addEventListener('keydown', e => { if(e.key === 'Enter') applyKw(); });
+  }
+  if(searchBtn) searchBtn.addEventListener('click', applyKw);
+  if(clearBtn) clearBtn.addEventListener('click', () => {
+    inp.value = ''; clearBtn.hidden = true; kw = ''; cur = 1; paintP(); inp.focus();
+  });
   paintP();
 }
 
