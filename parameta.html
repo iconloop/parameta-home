@@ -522,14 +522,14 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 .faq-li{ border-top:1px solid var(--line) }
 .faq-li:first-of-type{ border-top:none }
 .faq-row{ display:flex; align-items:flex-start; gap:1rem; border-radius:var(--radius-card-sm); text-align:left;
-  padding:var(--space-32) var(--space-24); cursor:pointer; user-select:none; background:rgba(var(--surface-rgb),0);
+  padding:2rem 1.5rem; cursor:pointer; user-select:none; background:rgba(var(--surface-rgb),0);
   transition:background .45s cubic-bezier(.45,0,.55,1), padding .45s cubic-bezier(.45,0,.55,1) }
 @media (hover:hover){ .faq-row:hover{ background:rgba(var(--surface-rgb),1) } }
 .faq-item.open .faq-row{ padding-top:2.25rem; padding-bottom:2.5rem }
 .faq-idx{ width:1.75rem; flex:none; font-size:var(--text-14); font-weight:500; color:rgba(var(--ink-rgb),.4);
   line-height:2.25rem; transition:color .3s }
 .faq-item.open .faq-idx{ color:var(--accent) }
-.faq-content{ flex:1; min-width:0; overflow:hidden; max-height:2.25rem;   /* nowrap 타이틀이 행을 밀어내지 않게 */
+.faq-content{ flex:1; overflow:hidden; max-height:2.25rem;
   transition:max-height .45s cubic-bezier(.45,0,.55,1) }
 .faq-inner{ display:flex; flex-direction:column; transform:translateY(calc(-100% + 2.25rem));
   transition:transform .45s cubic-bezier(.45,0,.55,1) }
