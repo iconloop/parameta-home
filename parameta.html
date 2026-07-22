@@ -444,6 +444,7 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 .works-head{ display:flex; flex-direction:column; align-items:center; text-align:center; gap:1.25rem; margin-bottom:2.5rem }
 .eyebrow.bordered{ border:1px solid var(--line); border-radius:var(--radius-pill); padding:.375rem 1rem }
 .works-h2{ font-size:var(--text-32); font-weight:600; letter-spacing:-.02em; width:fit-content }
+.works-h2 .wh-sub{ display:block; font-size:var(--text-20); font-weight:500; color:var(--muted); margin-top:.75rem }
 .works-grid{ display:grid; grid-template-columns:1fr; gap:1.5rem }
 .work-card{ position:relative; min-height:22rem; overflow:hidden; border-radius:var(--radius-card); background:var(--ink);
   padding:1.5rem; color:var(--white); box-shadow:0 0 0 1px rgba(var(--white-rgb),.05);
@@ -542,6 +543,34 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 .faq-t-top{ opacity:0; margin-bottom:.5rem; transition:opacity .4s cubic-bezier(.45,0,.55,1) }
 .faq-item.open .faq-t-top{ opacity:1 }
 .faq-ans{ max-width:44rem; font-size:var(--text-20); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.6) }
+/* Cases 가로 캐러셀 (full-bleed) */
+.cases-head{ padding:5rem var(--shell-pad) var(--space-40) }
+@media (min-width:640px){ .cases-head{ padding-inline:2rem } }
+@media (min-width:1024px){ .cases-head{ padding-top:7rem } }
+#faq .cases-rail{ overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch; padding-bottom:5rem }
+#faq .cases-rail::-webkit-scrollbar{ display:none }
+#faq .cases-track{ display:flex; gap:var(--space-24); width:max-content; padding-inline:calc((100% - min(100%, var(--container-shell)))/2 + var(--shell-pad)) }
+@media (min-width:640px){ #faq .cases-track{ padding-inline:calc((100% - min(100%, var(--container-shell)))/2 + 2rem) } }
+#faq .case-card{ flex:0 0 clamp(17rem, 80vw, 22rem); display:flex; flex-direction:column; border-radius:var(--radius-card-sm); background:var(--surface); overflow:hidden; transition:transform .35s cubic-bezier(.2,.8,.2,1) }
+@media (hover:hover){ #faq .case-card:hover{ transform:translateY(-4px) } }
+#faq .case-shot{ height:14rem; background:var(--ink); display:grid; place-items:center }   /* 블로그 디폴트 썸네일과 동일 — 남색 + 흰 심볼 */
+#faq .case-mark{ width:16%; max-width:2.75rem; height:auto }
+#faq .case-body{ display:flex; flex-direction:column; gap:.75rem; padding:var(--space-24) }
+#faq .case-top{ display:flex; align-items:center; gap:.6rem; flex-wrap:wrap }
+#faq .case-org{ font-size:var(--text-20); font-weight:600; letter-spacing:-.01em }
+#faq .case-cat{ flex:none; display:inline-flex; align-items:center; border-radius:var(--radius-pill); padding:.3rem .75rem; font-size:var(--text-14); font-weight:500; background:rgba(97,0,255,.08); color:var(--accent) }
+#faq .case-desc{ font-size:var(--text-16); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.6) }
+.cases-ctrl{ display:flex; align-items:center; gap:1.5rem; margin-top:var(--space-32); padding-inline:var(--shell-pad) }
+@media (min-width:640px){ .cases-ctrl{ padding-inline:2rem } }
+#faq .cases-prog{ flex:1; position:relative; height:2px; background:rgba(var(--ink-rgb),.12); border-radius:var(--radius-pill) }
+#faq .cases-prog-thumb{ position:absolute; top:0; left:0; height:100%; width:30%; background:var(--ink); border-radius:var(--radius-pill); cursor:grab; touch-action:none; transition:width .2s ease }
+#faq .cases-prog-thumb::before{ content:''; position:absolute; inset:-10px 0 }   /* 드래그 그립 영역 확대 */
+#faq .cases-prog-thumb:active{ cursor:grabbing }
+#faq .cases-arrows{ display:flex; gap:.5rem; flex:none }
+#faq .cases-arw{ width:2.75rem; height:2.75rem; border-radius:var(--radius-pill); border:1px solid var(--line); display:grid; place-items:center; color:var(--ink); background:var(--white); transition:all .25s }
+#faq .cases-arw svg{ width:1.125rem; height:1.125rem }
+#faq .cases-arw:disabled{ opacity:.3; cursor:default }
+@media (hover:hover){ #faq .cases-arw:not(:disabled):hover{ background:var(--ink); border-color:transparent; color:var(--white) } }
 .faq-t-bottom{ margin-top:1.25rem; max-height:2.25rem; overflow:hidden; white-space:nowrap;
   text-overflow:ellipsis; opacity:1; transform:translateY(0);
   transition:opacity .4s cubic-bezier(.45,0,.55,1), transform .45s cubic-bezier(.45,0,.55,1) }
@@ -734,15 +763,15 @@ body.show-grid #dev-grid{ display:block }
 .footer-cols{ display:grid; grid-template-columns:1fr; gap:3rem; padding-block:4rem }
 .footer-brand{ display:flex; align-items:center; gap:.5rem; font-size:var(--text-18); font-weight:600; letter-spacing:.02em }
 .footer-brand .icn{ font-size:var(--text-20) }
-.footer-tagline{ max-width:20rem; font-size:var(--text-16); color:rgba(var(--white-rgb),.55); margin-top:1rem; line-height:var(--leading-body) }
-.footer-addr{ max-width:20rem; font-size:var(--text-16); color:rgba(var(--white-rgb),.4); margin-top:1rem; line-height:var(--leading-body) }
+.footer-tagline{ max-width:20rem; font-size:var(--text-18); color:rgba(var(--white-rgb),.55); margin-top:1rem; line-height:var(--leading-body) }
+.footer-addr{ max-width:20rem; font-size:var(--text-18); color:rgba(var(--white-rgb),.4); margin-top:1rem; line-height:var(--leading-body) }
 .footer-col-title{ font-size:var(--text-14); text-transform:uppercase; letter-spacing:.025em; color:rgba(var(--white-rgb),.4); margin-bottom:1rem }
 .footer-col ul{ display:flex; flex-direction:column; gap:.75rem }
-.footer-col a, .footer-col button{ font-size:var(--text-16) }
+.footer-col a, .footer-col button{ font-size:var(--text-18) }
 .alink{ display:inline-flex; transition:transform .34s cubic-bezier(.2,.8,.2,1), opacity .34s cubic-bezier(.2,.8,.2,1); opacity:.65 }
 @media (hover:hover){ .alink-wrap:hover .alink{ transform:translateX(4px); opacity:1 } }
 .footer-legal{ display:flex; flex-direction:column; align-items:center; justify-content:space-between; gap:1rem;
-  border-top:1px solid rgba(var(--white-rgb),.1); padding-top:2rem; font-size:var(--text-16); color:rgba(var(--white-rgb),.45) }
+  border-top:1px solid rgba(var(--white-rgb),.1); padding-top:2rem; font-size:var(--text-18); color:rgba(var(--white-rgb),.45) }
 .footer-legal-links{ display:flex; gap:1.5rem }
 .alink.legal{ opacity:.7 }
 @media (hover:hover){ .footer-legal-links a:hover .alink.legal{ transform:translateX(3px); opacity:1 } }
@@ -944,7 +973,7 @@ body.show-grid #dev-grid{ display:block }
     <div class="shell works-shell">
       <div class="works-head">
         <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Products</div>
-        <h2 class="works-h2" id="worksH2"><span class="rvl-line"><span>무엇을 만드시나요?</span></span></h2>
+        <h2 class="works-h2" id="worksH2" data-line-stagger="90"><span class="rvl-line"><span>무엇을 만드시나요?</span></span><span class="rvl-line"><span class="wh-sub">서비스에 필요한 제품을 도입해 사업을 확장하세요.</span></span></h2>
       </div>
       <ul class="works-grid" id="worksGrid"></ul>
     </div>
@@ -1000,10 +1029,17 @@ body.show-grid #dev-grid{ display:block }
 
   <!-- ============ FAQ ============ -->
   <section id="faq">
-    <div class="shell faq-shell">
-      <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>FAQ</div>
-      <h2 class="faq-h2" id="faqH2"><span class="rvl-line"><span>자주 묻는 질문</span></span></h2>
-      <ul id="faqList"></ul>
+    <div class="shell cases-head">
+      <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Cases</div>
+      <h2 class="faq-h2" id="faqH2"><span class="rvl-line"><span>현장에서 검증된 사례</span></span></h2>
+    </div>
+    <div class="cases-rail rvl" style="--rvl-y:24px"><div class="cases-track" id="casesTrack"></div></div>
+    <div class="shell cases-ctrl rvl" style="--rvl-y:16px; --rvl-delay:120ms">
+      <div class="cases-prog"><span class="cases-prog-thumb" id="casesProgThumb"></span></div>
+      <div class="cases-arrows">
+        <button class="cases-arw" id="casesPrev" aria-label="이전 사례"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M15 6l-6 6 6 6"/></svg></button>
+        <button class="cases-arw" id="casesNext" aria-label="다음 사례"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></svg></button>
+      </div>
     </div>
   </section>
 </main>
@@ -1210,11 +1246,16 @@ const wordObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.2 });
 
 /* ---------- HERO CARD CAROUSEL ---------- */
-const HC_ITEMS = [
-  { caption:'Stablecoin', title:'스테이블코인을 발행하고 싶다면?', link:'solution-finance.html' },
-  { caption:'Perpetual DEX', title:'서비스에 가상자산 선물 거래 기능을 도입하고 싶다면?', link:'portx.html' },
-  { caption:'Deposit Token', title:'은행 예금을 토큰화해 서비스에 활용하고 싶다면?', link:'parasta.html' },
+const HC_ALL = [
+  { caption:'Stablecoin', title:'스테이블코인을 발행하고 싶다면?', link:'solution-finance.html', on:true },
+  { caption:'Perpetual DEX', title:'서비스에 가상자산 선물 거래 기능을 도입하고 싶다면?', link:'portx.html', on:true },
+  { caption:'Deposit Token', title:'은행 예금을 토큰화해 서비스에 활용하고 싶다면?', link:'parasta.html', on:true },
 ];
+const HC_ITEMS = HC_ALL.filter(i => i.on !== false);
+/* 히어로 배너 카드 전체 ON/OFF — 켜려면 true */
+const HERO_CARD_ON = false;
+const heroCardEl = document.getElementById('heroCard');
+if (heroCardEl && !HERO_CARD_ON) heroCardEl.style.display = 'none';
 let hcIndex = 0;
 const hcSlot = document.getElementById('hcSlot');
 const hcDots = document.getElementById('hcDots');
@@ -1365,82 +1406,77 @@ addEventListener('resize', updateStats);
 updateStats();
 
 /* ---------- FAQ ---------- */
-const FAQS = [
-  { q:'파라메타는 어떤 회사인가요?', a:'파라메타는 블록체인 기반 디지털자산 인프라를 만드는 Web3 기술 기업입니다. 금융·기업·공공 서비스에 필요한 지갑, 토큰 발행, 신원인증, 온체인 KYC, 상호운용 기술을 제공합니다.' },
-  { q:'ParaSta 솔루션으로 무엇을 할 수 있나요?', a:'ParaSta는 지갑, 토큰 발행, RWA, 온체인 KYC, 거래 관리 등 디지털자산 서비스의 핵심 기능을 하나의 플랫폼으로 제공합니다. 개발 부담을 줄이고, SaaS 또는 온프레미스 환경에서 빠르게 서비스를 구축할 수 있습니다.' },
-  { q:'MyID와 K-BTF는 무엇이 다른가요?', a:'MyID는 DID 기반 신원인증 서비스이며, K-BTF는 이를 공공·기업 환경에서 안정적으로 활용할 수 있도록 지원하는 공동 인프라입니다. 기관은 별도 인프라 구축 부담을 줄이고, 보안 기준에 맞는 디지털 신원 인증을 빠르게 도입할 수 있습니다.' },
-  { q:'파라메타는 자체 블록체인 엔진을 보유하고 있나요?', a:'네. 파라메타는 금융·공공 환경에 필요한 거래 확정성과 운영 안정성을 제공하는 자체 블록체인 엔진을 보유하고 있습니다. PBFT 계열 합의 구조와 LFT 알고리즘을 기반으로, 디지털자산 인프라 구축에 필요한 안정적인 블록체인 기반을 제공합니다.' },
-  { q:'PortX는 어떤 서비스인가요?', a:'PortX는 기존 서비스에 디지털자산 거래 기능을 빠르게 도입할 수 있도록 지원하는 화이트라벨 거래소 솔루션입니다. 개발 부담을 줄이고, 자체 브랜드 환경에서 거래 서비스를 제공할 수 있습니다.' },
+/* CASES — 가로 캐러셀 카드 (full-bleed) */
+const CASES = [
+  { org:'신한은행, NH농협은행', cat:'금융', desc:'금융권 DID 실명인증을 상용화해, 반복 인증 절차를 줄였습니다.', href:'solution-finance.html' },
+  { org:'RiskX', cat:'금융', desc:"자산을 옮기지 않고 지갑의 적격성만 전파하는 'Wallet-Based Eligibility Layer'를 국제 무대에서 공동 발표하고, 크로스보더 디지털 채권 파일럿을 설계하고 있습니다.", href:'solution-finance.html' },
+  { org:'Supercycl', cat:'거래', desc:'CEX, DEX 유동성을 통합한 거래 서비스를 자사 브랜드 안에 구현했습니다.', href:'solution-exchange.html' },
+  { org:'피엠그로우', cat:'데이터', desc:"전기차 배터리 잔존수명을 위변조 없이 인증하는 배터리 증명 서비스 'Wattever'를 구축했습니다.", href:'solution-data.html' },
+  { org:'제주특별자치도', cat:'공공', desc:'제주안심코드, 누적 이용자 218만 명, 인증 9,100만 건 규모의 DID 방역 서비스를 운영했습니다.', href:'solution-gov.html' },
+  { org:'부산광역시', cat:'공공', desc:'배터리 제조, 운행, 정비 데이터를 EU DPP 규정에 맞춰 연결하고 검증하는 배터리여권 플랫폼을 구축했습니다.', href:'solution-gov.html' },
+  { org:'경상북도', cat:'공공', desc:'도민증 서비스 「모이소」를 블록체인 기반으로 구축해 행정안전부 우수 서비스로 선정됐습니다.', href:'solution-gov.html' },
+  { org:'POSTECH', cat:'증명', desc:'졸업증명서, 교육 수료증을 블록체인으로 발급했고, 2019년부터 이어진 최장기 운영 사례입니다.', href:'solution-cert.html' },
 ];
-/* FAQ — 원본(reasons) 아코디언 모션: 패딩 확장 + 콘텐츠 롤업(타이틀 상하 복제) + 토글 360° 스핀 */
-const faqList = document.getElementById('faqList');
-function faqSetH(item, open){
-  const content = item.querySelector('.faq-content');
-  const inner = item.querySelector('.faq-inner');
-  const bottom = item.querySelector('.faq-t-bottom');
-  if (!content || !inner || !bottom) return;
-  const closed = bottom.offsetHeight;
-  if (open){
-    const mt = parseFloat(getComputedStyle(bottom).marginTop) || 0;
-    content.style.maxHeight = Math.max(0, inner.scrollHeight - closed - mt) + 'px';
-  } else {
-    content.style.maxHeight = closed + 'px';
-  }
-}
-function faqSpin(item){
-  const b = item.querySelector('.faq-badge2');
-  if (!b) return;
-  const cur = (parseFloat(b.dataset.rot || '0')) + 360;
-  b.dataset.rot = cur;
-  b.style.transform = 'rotate(' + cur + 'deg)';
-}
-function faqToggle(li, list){
-  const isOpen = li.classList.contains('open');
-  list.querySelectorAll('.faq-item.open').forEach(o => {
-    if (o === li) return;
-    o.classList.remove('open');
-    o.querySelector('.faq-row').setAttribute('aria-expanded', 'false');
-    faqSetH(o, false);
-    faqSpin(o);
-  });
-  li.classList.toggle('open', !isOpen);
-  li.querySelector('.faq-row').setAttribute('aria-expanded', String(!isOpen));
-  faqSetH(li, !isOpen);
-  faqSpin(li);
-}
-FAQS.forEach((f, i) => {
-  const li = document.createElement('li');
-  li.className = 'faq-li faq-item rvl';
-  li.style.setProperty('--rvl-y', '24px');
-  li.style.setProperty('--rvl-delay', (i * 80) + 'ms');
-  li.innerHTML =
-    '<div class="faq-row" role="button" tabindex="0" aria-expanded="false">' +
-      '<span class="faq-idx">Q' + (i + 1) + '</span>' +
-      '<div class="faq-content"><div class="faq-inner">' +
-        '<h3 class="faq-t faq-t-top">' + f.q + '</h3>' +
-        '<div class="faq-ans">' + f.a + '</div>' +
-        '<h3 class="faq-t faq-t-bottom">' + f.q + '</h3>' +
-      '</div></div>' +
-      '<span class="faq-badge2" aria-hidden="true"></span>' +
+const casesTrack = document.getElementById('casesTrack');
+CASES.forEach((c, i) => {
+  const a = document.createElement('a');
+  a.className = 'case-card rvl';
+  a.href = c.href;
+  a.style.setProperty('--rvl-y', '24px');
+  a.style.setProperty('--rvl-delay', (i * 60) + 'ms');
+  a.innerHTML =
+    '<div class="case-shot" aria-hidden="true"><img class="case-mark" src="assets/brand/logo-symbol-white.svg" alt=""></div>' +
+    '<div class="case-body">' +
+      '<div class="case-top"><b class="case-org">' + c.org + '</b><span class="case-cat">' + c.cat + '</span></div>' +
+      '<p class="case-desc">' + c.desc + '</p>' +
     '</div>';
-  const row = li.querySelector('.faq-row');
-  row.addEventListener('click', () => faqToggle(li, faqList));
-  row.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); faqToggle(li, faqList); }
-  });
-  faqList.appendChild(li);
-  faqSetH(li, false);
+  casesTrack.appendChild(a);
 });
-/* 첫 항목은 열린 상태로 시작 (원본과 동일) */
-if (faqList.firstElementChild){
-  const first = faqList.firstElementChild;
-  first.classList.add('open');
-  first.querySelector('.faq-row').setAttribute('aria-expanded', 'true');
-  faqSetH(first, true);
+/* Cases 진행바 + 화살표 */
+const casesRail = document.querySelector('#faq .cases-rail');
+const casesProgThumb = document.getElementById('casesProgThumb');
+const casesPrev = document.getElementById('casesPrev');
+const casesNext = document.getElementById('casesNext');
+function casesUpdate(){
+  const sw = casesRail.scrollWidth, cw = casesRail.clientWidth, sl = casesRail.scrollLeft;
+  const max = sw - cw;
+  const thumbW = Math.min(100, cw / sw * 100);
+  casesProgThumb.style.width = thumbW + '%';
+  casesProgThumb.style.left = (max > 0 ? (sl / max) * (100 - thumbW) : 0) + '%';
+  casesPrev.disabled = sl <= 2;
+  casesNext.disabled = sl >= max - 2;
 }
-addEventListener('resize', () => {
-  faqList.querySelectorAll('.faq-item.open').forEach(o => faqSetH(o, true));
+function casesStep(dir){
+  const card = casesRail.querySelector('.case-card');
+  const step = card ? card.getBoundingClientRect().width + 24 : casesRail.clientWidth * 0.8;
+  casesRail.scrollBy({ left: dir * step, behavior: 'smooth' });
+}
+casesPrev.addEventListener('click', () => casesStep(-1));
+casesNext.addEventListener('click', () => casesStep(1));
+casesRail.addEventListener('scroll', casesUpdate, { passive: true });
+addEventListener('resize', casesUpdate);
+casesRail.scrollLeft = 0;   /* 항상 1번 카드부터 시작 */
+casesUpdate();
+/* 스크롤바 드래그 (NAVER swiper-scrollbar 방식) */
+const casesProg = document.querySelector('#faq .cases-prog');
+let cDrag = false, cX0 = 0, cL0 = 0;
+function casesDragMove(e){
+  if (!cDrag) return;
+  const track = casesProg.clientWidth - casesProgThumb.offsetWidth;
+  const max = casesRail.scrollWidth - casesRail.clientWidth;
+  if (track <= 0) return;
+  const x = (e.touches ? e.touches[0].clientX : e.clientX);
+  casesRail.scrollLeft = cL0 + (x - cX0) / track * max;
+}
+function casesDragEnd(){ cDrag = false; document.body.style.userSelect = ''; }
+casesProgThumb.addEventListener('pointerdown', (e) => {
+  cDrag = true; cX0 = e.clientX; cL0 = casesRail.scrollLeft;
+  document.body.style.userSelect = 'none';
+  try { casesProgThumb.setPointerCapture(e.pointerId); } catch(_){}
+  e.preventDefault();
 });
+window.addEventListener('pointermove', casesDragMove);
+window.addEventListener('pointerup', casesDragEnd);
 
 /* ---------- NAV MENU (마크업은 nav.js 주입) ---------- */
 const navmenu = document.getElementById('navmenu');
