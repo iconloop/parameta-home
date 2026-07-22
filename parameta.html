@@ -754,30 +754,30 @@ body.show-grid #dev-grid{ display:block }
 @media (prefers-reduced-motion:reduce){ #clients .mq-track{ animation:none; flex-wrap:wrap; justify-content:center; row-gap:var(--space-24) } }
 
 #footer{ position:relative; overflow:hidden; border-radius:var(--radius-card) var(--radius-card) 0 0; background:var(--ink); color:var(--white) }
-.footer-shell{ position:relative; z-index:10; padding:5rem 1.25rem 2.5rem }
-.footer-cta{ display:flex; flex-direction:column; gap:2rem; border-bottom:1px solid rgba(var(--white-rgb),.1); padding-bottom:4rem }
+.footer-shell{ position:relative; z-index:10; padding:var(--space-80) var(--space-20) var(--space-40) }
+.footer-cta{ display:flex; flex-direction:column; gap:var(--space-32); border-bottom:1px solid rgba(var(--white-rgb),.1); padding-bottom:var(--space-64) }
 .footer-cta .pill .hspring{ font-size:var(--text-16); gap:.875rem; padding:.5rem .5rem .5rem 1.75rem }   /* 히어로 Let's Talk 버튼과 동일 사이징 */
 .footer-cta .pill-badge{ width:2.5rem; height:2.5rem; font-size:var(--text-18) }
 .footer-h2{ max-width:18ch; font-size:var(--text-28); font-weight:700; letter-spacing:-.02em }
-.footer-cols{ display:grid; grid-template-columns:1fr; gap:3rem; padding-block:4rem }
-.footer-brand{ display:flex; align-items:center; gap:.5rem; font-size:var(--text-18); font-weight:600; letter-spacing:.02em }
+.footer-cols{ display:grid; grid-template-columns:1fr; gap:var(--space-48); padding-block:var(--space-64) }
+.footer-brand{ display:flex; align-items:center; gap:var(--space-8); font-size:var(--text-18); font-weight:600; letter-spacing:.02em }
 .footer-brand .icn{ font-size:var(--text-20) }
-.footer-tagline{ max-width:20rem; font-size:var(--text-16); color:rgba(var(--white-rgb),.85); margin-top:1rem; line-height:var(--leading-body) }
-.footer-addr{ max-width:20rem; font-size:var(--text-16); color:rgba(var(--white-rgb),.4); margin-top:1rem; line-height:var(--leading-body) }
-.footer-col-title{ font-size:var(--text-14); text-transform:uppercase; letter-spacing:.025em; color:rgba(var(--white-rgb),.4); margin-bottom:1rem }
-.footer-col ul{ display:flex; flex-direction:column; gap:.75rem }
+.footer-tagline{ max-width:20rem; font-size:var(--text-16); color:rgba(var(--white-rgb),.85); margin-top:var(--space-16); line-height:var(--leading-body) }
+.footer-addr{ max-width:20rem; font-size:var(--text-16); color:rgba(var(--white-rgb),.4); margin-top:var(--space-16); line-height:var(--leading-body) }
+.footer-col-title{ font-size:var(--text-14); text-transform:uppercase; letter-spacing:.025em; color:rgba(var(--white-rgb),.4); margin-bottom:var(--space-16) }
+.footer-col ul{ display:flex; flex-direction:column; gap:var(--space-12) }
 .footer-col a, .footer-col button{ font-size:var(--text-16) }
 .alink{ display:inline-flex; transition:transform .34s cubic-bezier(.2,.8,.2,1), opacity .34s cubic-bezier(.2,.8,.2,1); opacity:.65 }
 @media (hover:hover){ .alink-wrap:hover .alink{ transform:translateX(4px); opacity:1 } }
-.footer-legal{ display:flex; flex-direction:column; align-items:center; justify-content:space-between; gap:1rem;
-  border-top:1px solid rgba(var(--white-rgb),.1); padding-top:2rem; font-size:var(--text-16); color:rgba(var(--white-rgb),.45) }
-.footer-legal-links{ display:flex; gap:1.5rem }
+.footer-legal{ display:flex; flex-direction:column; align-items:center; justify-content:space-between; gap:var(--space-16);
+  border-top:1px solid rgba(var(--white-rgb),.1); padding-top:var(--space-32); font-size:var(--text-16); color:rgba(var(--white-rgb),.45) }
+.footer-legal-links{ display:flex; gap:var(--space-24) }
 .alink.legal{ color:rgba(var(--white-rgb),.45); opacity:1; transition:color .25s, transform .34s cubic-bezier(.2,.8,.2,1) }   /* 저작권 문구와 완전 동일 톤(.45) — 공용 .alink opacity:.65 덮음 */
 @media (hover:hover){ .footer-legal-links a:hover .alink.legal{ transform:scale(1.04); color:rgba(var(--white-rgb),.9) } }
 .footer-wm{ position:absolute; inset-inline:0; bottom:-1.5rem; z-index:0; text-align:center;
   pointer-events:none; user-select:none }
 .footer-wm img{ width:72rem; max-width:92%; height:auto; display:inline-block; opacity:.05 }
-@media (min-width:640px){ .footer-shell{ padding-left:2rem; padding-right:2rem }
+@media (min-width:640px){ .footer-shell{ padding-left:var(--space-32); padding-right:var(--space-32) }
   .footer-h2{ font-size:var(--text-36) }
   .footer-legal{ flex-direction:row } }
 @media (min-width:768px){ .footer-h2{ font-size:var(--text-40) } .footer-cols{ grid-template-columns:repeat(2,1fr) } }

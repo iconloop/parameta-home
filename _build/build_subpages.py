@@ -940,8 +940,7 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
   -webkit-mask:var(--logo) center/contain no-repeat; mask:var(--logo) center/contain no-repeat;
   transition:background .35s ease }
 @media (hover:hover){
-  .ex-card:hover .ex-ico.ex-logo{ background:var(--ink) }   /* 호버 시 잉크(남색) */
-  .ex-card:hover .ex-ico.ex-logo-inv{ background:var(--white) } }   /* OKX만 예외: 흰색 유지 */
+  .ex-card[style*="--brand"]:hover .ex-ico.ex-logo{ background:var(--white) } }   /* 호버 시 로고 흰색 100% (반투명 흰색 .ex-ico 룰 덮음) */
 .ex-card h3{ margin-bottom:0 }
 .ex-card .ex-num{ display:block; font-size:var(--text-14); font-weight:500; color:rgba(var(--white-rgb),.5); margin-bottom:.5rem }  /* 기능 카드 번호 */
 .ex-card h3 + p{ margin-top:.75rem; font-size:var(--text-18) }  /* 서브카피 달릴 때만 간격 + 한 단계 업 */
@@ -4265,19 +4264,19 @@ PAGES['myid.html'] = dict(
   </div>
 </div></section>
 <section id="lineup"><div class="shell sec" style="padding-top:0">
-  {sec_head('Lineup', 'MyID vs MyID 2.0 (K-BTF)', '같은 DID 플랫폼을 대상에 맞게 두 갈래로 제공합니다. 민간은 MyID, 공공기관은 K-BTF 공동 인프라 기반 MyID 2.0으로 도입합니다.')}
+  {sec_head('Lineup', 'MyID vs MyID 2.0', '같은 DID 플랫폼을 대상에 맞게 두 갈래로 제공합니다. 민간은 MyID, 공공기관은 K-BTF 공동 인프라 기반 MyID 2.0으로 도입합니다.')}
   <ul class="cards-2">
     <li class="rvl" style="--rvl-y:40px">{dark_card('민간 · 기업 · 금융', 'MyID', '기업·금융·민간 서비스가 자체 신원인증을 구축합니다. 도입 방식은 구축형과 서비스형 두 가지 중에서 선택합니다.', ['구축형 (On-Premise)','서비스형 (SaaS)'], grouped=True)}</li>
     <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms">{dark_card('공공기관 전용', 'MyID 2.0 (K-BTF)', '공공기관은 CSAP 보안인증을 받은 서비스만 이용할 수 있습니다. MyID 2.0은 블록체인 서비스 최초 CSAP 인증 SaaS로, 과기정통부·KISA 주관 K-BTF 공동 인프라 위에서 별도 구축 없이 도입합니다.', ['공동 인프라 구독형 SaaS','CSAP 인증'], grouped=True)}</li>
   </ul>
-  {compare_table(['', 'MyID', 'MyID 2.0 (K-BTF)'], [
+  <div class="why-table" style="margin-top:var(--space-40)">{compare_table(['', 'MyID', 'MyID 2.0 (K-BTF)'], [
     dict(label='대상', cells=['기업 · 금융 · 민간 서비스', '공공기관 · 지자체']),
     dict(label='도입 방식', cells=['구축형(On-Premise) · 서비스형(SaaS)', 'K-BTF 공동 인프라 구독형 SaaS']),
     dict(label='인증', cells=['W3C 표준 DID · 금융권 KYC 상용화', '블록체인 서비스 최초 CSAP 인증 — 공공기관 도입 요건 충족']),
     dict(label='도입 기간', cells=['규모·방식에 따라 협의', '최대 1주일']),
     dict(label='예상 비용', cells=['도입 방식·규모별 협의', '월 200만원~ + 건당 과금']),
     dict(label='', cells=['<a href="contact.html">도입·요금 상담 신청</a>', '<a href="https://zzeung.kr/" target="_blank" rel="noopener">K-BTF 홈페이지 →</a>']),
-  ], hl=2, tabs=True)}
+  ], hl=2, tabs=True)}</div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
   {sec_head('Platform', '개인정보는 쌓지 않고, 신원은 사용자가 통제합니다', 'MyID는 블록체인 기반 DID 플랫폼입니다. 신원증명(VC)을 사용자 지갑에 보관하고 필요한 정보만 선택 제출하며, W3C 표준 기반으로 발급·검증·연동을 제공합니다. 아래 4가지 구성으로 서비스에 바로 붙일 수 있습니다.')}
