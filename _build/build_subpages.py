@@ -935,14 +935,13 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
   .ex-card[style*="--brand"]:hover{ background:var(--brand); color:var(--brand-txt) }
   .ex-card[style*="--brand"]:hover .ex-ico{ background:rgba(255,255,255,.4) } }
 .ex-card .ex-ico{ display:block; width:3.5rem; height:3.5rem; margin-bottom:2rem; background:rgba(var(--white-rgb),.08) }
-/* 로고: 기본은 원본 브랜드색, 호버 시 잉크(남색)로 덮음. 흰색 심볼(ex-logo-inv=OKX)만 항상 흰색 */
-.ex-card .ex-ico.ex-logo{ background:transparent; display:grid; place-items:center; padding:0 }
-.ex-card .ex-ico.ex-logo img{ width:100%; height:100%; display:block; transition:filter .35s ease }   /* 로고를 56px 영역에 스케일 없이 1:1 (SVG가 이미 56 기준 제작) */
-.ex-card .ex-ico.ex-logo-inv img{ filter:brightness(0) invert(1) }   /* OKX: 흰색 심볼 그대로 */
+/* 로고: 논호버=연보라 단색 실루엣(mask), 호버=잉크(남색). OKX(ex-logo-inv)만 호버 시 흰색. 로고별 URL은 --logo 인라인 변수 */
+.ex-card .ex-ico.ex-logo{ background:var(--purple-300); padding:0;
+  -webkit-mask:var(--logo) center/contain no-repeat; mask:var(--logo) center/contain no-repeat;
+  transition:background .35s ease }
 @media (hover:hover){
-  .ex-card:hover .ex-ico.ex-logo img{ filter:brightness(0) }   /* 호버 시 로고를 잉크(남색)로 */
-  .ex-card:hover .ex-ico.ex-logo-inv img{ filter:brightness(0) invert(1) } }   /* OKX만 예외: 흰색 유지 */
-@media (hover:hover){ .ex-card[style*="--brand"]:hover .ex-ico.ex-logo{ background:transparent } }   /* 로고 칸은 호버 흰 배경 제거 */
+  .ex-card:hover .ex-ico.ex-logo{ background:var(--ink) }   /* 호버 시 잉크(남색) */
+  .ex-card:hover .ex-ico.ex-logo-inv{ background:var(--white) } }   /* OKX만 예외: 흰색 유지 */
 .ex-card h3{ margin-bottom:0 }
 .ex-card .ex-num{ display:block; font-size:var(--text-14); font-weight:500; color:rgba(var(--white-rgb),.5); margin-bottom:.5rem }  /* 기능 카드 번호 */
 .ex-card h3 + p{ margin-top:.75rem; font-size:var(--text-18) }  /* 서브카피 달릴 때만 간격 + 한 단계 업 */
@@ -1899,8 +1898,8 @@ CHROME_FOOTER = """
   <div class="shell footer-shell">
     <div class="footer-cta">
       <h2 class="footer-h2" id="footerH2" data-line-stagger="100">
-        <span class="rvl-line"><span>Talk to</span></span>
-        <span class="rvl-line"><span>our team.</span></span>
+        <span class="rvl-line"><span>디지털자산 사업</span></span>
+        <span class="rvl-line"><span>파라메타와 시작하세요</span></span>
       </h2>
       <button class="pill light with-arrow arw-up hs-scale" data-modal>
         <span class="hspring">Contact Us<span class="pill-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></span>
@@ -3014,7 +3013,7 @@ def exchange_card(name, logo=None, brand=None, dark_text=False, desc=None, num=N
     # desc=타이틀 아래 서브카피, num=타이틀 위 번호 (기능 카드 겸용), gray=라이트 그레이 채움 변형
     # logo_dark=어두운 심볼(기본 상태에서 반대색=흰색으로 반전, 다크 카드에서 보이게)
     cls_ico = 'ex-ico' + (' ex-logo' if logo else '') + (' ex-logo-inv' if (logo and logo_dark) else '')
-    ico = f'<span class="{cls_ico}">{f"<img src={chr(34)}{logo}{chr(34)} alt={chr(34)}{chr(34)} loading={chr(34)}lazy{chr(34)}>" if logo else ""}</span>'
+    ico = f'<span class="{cls_ico}"{f" style={chr(34)}--logo:url({chr(39)}{logo}{chr(39)}){chr(34)}" if logo else ""}></span>'
     style = f' style="--brand:{brand}; --brand-txt:{"var(--ink)" if dark_text else "var(--white)"}"' if (brand and not gray) else ''
     cls = 'ico-card ex-card' + (' ex-gray' if gray else '')
     n = f'<span class="ex-num">{num}</span>' if num else ''

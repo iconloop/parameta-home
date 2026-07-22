@@ -440,7 +440,7 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 
 /* ============ SOLUTIONS (works) ============ */
 #works{ background:var(--white) }
-.works-shell{ padding:2.5rem 1.25rem 5rem }
+.works-shell{ padding:5rem 1.25rem }
 .works-head{ display:flex; flex-direction:column; align-items:center; text-align:center; gap:1.25rem; margin-bottom:2.5rem }
 .eyebrow.bordered{ border:1px solid var(--line); border-radius:var(--radius-pill); padding:.375rem 1rem }
 .works-h2{ font-size:var(--text-32); font-weight:600; letter-spacing:-.02em; width:fit-content }
@@ -461,6 +461,7 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 .work-bottom{ position:absolute; inset-inline:1.5rem; bottom:1.5rem }
 .work-bottom h3{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em; line-height:var(--leading-heading) }
 .work-bottom p{ margin-top:.5rem; max-width:28rem; font-size:var(--text-14); color:rgba(var(--white-rgb),.55); line-height:var(--leading-body) }
+#works .work-bottom p{ font-size:var(--text-16) }   /* 메인 제품카드 본문만 키움 (서브 work-card 영향 없음) */
 .work-tags{ margin-top:1.25rem; display:flex; flex-wrap:wrap; gap:.5rem }
 .tag{ display:inline-flex; border:1px solid rgba(var(--white-rgb),.25); color:var(--white); border-radius:var(--radius-pill);
   padding:.5rem 1rem; font-size:var(--text-14) }
@@ -469,7 +470,7 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
   .work-card{ min-height:26rem; padding:2rem } .work-bottom{ inset-inline:2rem; bottom:2rem }
   .work-bottom h3{ font-size:var(--text-30) } }
 @media (min-width:768px){ .works-grid{ grid-template-columns:repeat(2,1fr) } }
-@media (min-width:1024px){ .works-shell{ padding-bottom:7rem } }
+@media (min-width:1024px){ .works-shell{ padding-block:7rem } }
 
 /* ============ FEATURES (services) ============ */
 #services{ background:var(--white) }
@@ -483,9 +484,11 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 @media (hover:hover){ .service-row:hover{ background:rgba(var(--surface-rgb),1); padding-left:2rem; padding-right:1.25rem } }
 .service-idx{ width:1.75rem; font-size:var(--text-14); font-weight:500; color:rgba(var(--ink-rgb),.4); flex:none }
 .service-row h3{ flex:1; font-size:var(--text-24); font-weight:500; letter-spacing:-.01em }
+#services .service-row h3{ font-size:var(--text-22) }   /* 메인 Solutions: 자묻질(.faq-t)과 동일 크기 */
 .service-desc{ display:none; max-width:20rem; font-size:var(--text-14); color:rgba(var(--ink-rgb),.55) }
 .service-badge{ width:2.5rem; height:2.5rem; display:grid; place-items:center; border-radius:var(--radius-pill);
   background:var(--ink); color:var(--white); flex:none; transition:transform .35s cubic-bezier(.2,.8,.2,1) }
+#services .service-badge .icn{ font-size:var(--text-22) }   /* 메인 Solutions 화살표 키움 (1em→22) */
 @media (hover:hover){ .service-row:hover .service-badge{ transform:translateX(5px) } }
 @media (min-width:640px){ .services-shell{ padding-left:2rem; padding-right:2rem }
   .services-h2{ margin-bottom:3.5rem; font-size:var(--text-48) }
@@ -493,7 +496,7 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
   .service-idx{ width:2.5rem }
   .service-row h3{ font-size:var(--text-30) }
   .service-badge{ width:3rem; height:3rem } }
-@media (min-width:768px){ .service-row h3{ font-size:var(--text-36) } }
+@media (min-width:768px){ .service-row h3{ font-size:var(--text-36) } #services .service-row h3{ font-size:var(--text-26) } }
 @media (min-width:1024px){ .services-shell{ padding-block:7rem } .service-desc{ display:block } }
 /* 공통 토큰 동작: <1024 행 본문 타이틀 아래 + 화살표 우측 고정 */
 @media (max-width:1023px){
@@ -509,6 +512,7 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 .stats-h2{ margin-top:1rem; max-width:20ch; font-size:var(--text-30); font-weight:500; letter-spacing:-.01em }
 .stats-grid{ margin-top:3.5rem; display:grid; grid-template-columns:repeat(2,1fr); column-gap:2rem; row-gap:3rem }
 .stat-num{ font-size:var(--text-48); font-weight:600; letter-spacing:-.02em }
+#why .stat-num small{ font-size:.5em; font-weight:600; letter-spacing:-.01em }   /* 단위(년+·만+) 축소 */
 .stat-label{ margin-top:.75rem; font-size:var(--text-14); color:rgba(var(--white-rgb),.55) }
 @media (min-width:640px){ .stats-shell{ padding-left:2rem; padding-right:2rem }
   .stats-panel{ padding:4rem 2rem } .stat-num{ font-size:var(--text-60) } }
@@ -538,6 +542,34 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 .faq-t-top{ opacity:0; margin-bottom:.5rem; transition:opacity .4s cubic-bezier(.45,0,.55,1) }
 .faq-item.open .faq-t-top{ opacity:1 }
 .faq-ans{ max-width:44rem; font-size:var(--text-20); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.6) }
+/* Cases 가로 캐러셀 (full-bleed) */
+.cases-head{ padding:5rem var(--shell-pad) var(--space-40) }
+@media (min-width:640px){ .cases-head{ padding-inline:2rem } }
+@media (min-width:1024px){ .cases-head{ padding-top:7rem } }
+#faq .cases-rail{ overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch; padding-bottom:5rem }
+#faq .cases-rail::-webkit-scrollbar{ display:none }
+#faq .cases-track{ display:flex; gap:var(--space-24); width:max-content; padding-inline:calc((100% - min(100%, var(--container-shell)))/2 + var(--shell-pad)) }
+@media (min-width:640px){ #faq .cases-track{ padding-inline:calc((100% - min(100%, var(--container-shell)))/2 + 2rem) } }
+#faq .case-card{ flex:0 0 clamp(17rem, 80vw, 22rem); display:flex; flex-direction:column; border-radius:var(--radius-card-sm); background:var(--surface); overflow:hidden; transition:transform .35s cubic-bezier(.2,.8,.2,1) }
+@media (hover:hover){ #faq .case-card:hover{ transform:translateY(-4px) } }
+#faq .case-shot{ height:14rem; background:var(--ink); display:grid; place-items:center }   /* 블로그 디폴트 썸네일과 동일 — 남색 + 흰 심볼 */
+#faq .case-mark{ width:16%; max-width:2.75rem; height:auto }
+#faq .case-body{ display:flex; flex-direction:column; gap:.75rem; padding:var(--space-24) }
+#faq .case-top{ display:flex; align-items:center; gap:.6rem; flex-wrap:wrap }
+#faq .case-org{ font-size:var(--text-20); font-weight:600; letter-spacing:-.01em }
+#faq .case-cat{ flex:none; display:inline-flex; align-items:center; border-radius:var(--radius-pill); padding:.3rem .75rem; font-size:var(--text-14); font-weight:500; background:rgba(97,0,255,.08); color:var(--accent) }
+#faq .case-desc{ font-size:var(--text-16); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.6) }
+.cases-ctrl{ display:flex; align-items:center; gap:1.5rem; margin-top:var(--space-32); padding-inline:var(--shell-pad) }
+@media (min-width:640px){ .cases-ctrl{ padding-inline:2rem } }
+#faq .cases-prog{ flex:1; position:relative; height:2px; background:rgba(var(--ink-rgb),.12); border-radius:var(--radius-pill) }
+#faq .cases-prog-thumb{ position:absolute; top:0; left:0; height:100%; width:30%; background:var(--ink); border-radius:var(--radius-pill); cursor:grab; touch-action:none; transition:width .2s ease }
+#faq .cases-prog-thumb::before{ content:''; position:absolute; inset:-10px 0 }   /* 드래그 그립 영역 확대 */
+#faq .cases-prog-thumb:active{ cursor:grabbing }
+#faq .cases-arrows{ display:flex; gap:.5rem; flex:none }
+#faq .cases-arw{ width:2.75rem; height:2.75rem; border-radius:var(--radius-pill); border:1px solid var(--line); display:grid; place-items:center; color:var(--ink); background:var(--white); transition:all .25s }
+#faq .cases-arw svg{ width:1.125rem; height:1.125rem }
+#faq .cases-arw:disabled{ opacity:.3; cursor:default }
+@media (hover:hover){ #faq .cases-arw:not(:disabled):hover{ background:var(--ink); border-color:transparent; color:var(--white) } }
 .faq-t-bottom{ margin-top:1.25rem; max-height:2.25rem; overflow:hidden; white-space:nowrap;
   text-overflow:ellipsis; opacity:1; transform:translateY(0);
   transition:opacity .4s cubic-bezier(.45,0,.55,1), transform .45s cubic-bezier(.45,0,.55,1) }
@@ -710,32 +742,45 @@ body.show-grid #dev-grid{ display:block }
 @media (max-width:640px){ .pc-panel{ width:100% } html.chat-open{ padding-right:0 } html.chat-open #header{ right:0 } }
 
 /* ============ FOOTER ============ */
+/* ============ CLIENTS 마퀴 ============ */
+#clients{ padding:var(--space-64) 0 }
+#clients .mq{ overflow:hidden; -webkit-mask-image:linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); mask-image:linear-gradient(to right, transparent, #000 8%, #000 92%, transparent) }
+#clients .mq-track{ display:flex; align-items:center; gap:var(--space-64); width:max-content; animation:mq-scroll 40s linear infinite }
+@keyframes mq-scroll{ to{ transform:translateX(-50%) } }
+#clients .mq-logo{ flex:none; height:5rem; display:flex; align-items:center }
+@media (max-width:639px){ #clients .mq-logo{ height:3.5rem } #clients .mq-track{ gap:var(--space-40) } }
+#clients .mq-logo img{ height:100%; width:auto; object-fit:contain }
+@media (hover:hover){ #clients .mq:hover .mq-track{ animation-play-state:paused } }
+@media (prefers-reduced-motion:reduce){ #clients .mq-track{ animation:none; flex-wrap:wrap; justify-content:center; row-gap:var(--space-24) } }
+
 #footer{ position:relative; overflow:hidden; border-radius:var(--radius-card) var(--radius-card) 0 0; background:var(--ink); color:var(--white) }
 .footer-shell{ position:relative; z-index:10; padding:5rem 1.25rem 2.5rem }
 .footer-cta{ display:flex; flex-direction:column; gap:2rem; border-bottom:1px solid rgba(var(--white-rgb),.1); padding-bottom:4rem }
-.footer-h2{ max-width:18ch; font-size:var(--text-36); font-weight:600; letter-spacing:-.02em }
+.footer-cta .pill .hspring{ font-size:var(--text-16); gap:.875rem; padding:.5rem .5rem .5rem 1.75rem }   /* 히어로 Let's Talk 버튼과 동일 사이징 */
+.footer-cta .pill-badge{ width:2.5rem; height:2.5rem; font-size:var(--text-18) }
+.footer-h2{ max-width:18ch; font-size:var(--text-28); font-weight:700; letter-spacing:-.02em }
 .footer-cols{ display:grid; grid-template-columns:1fr; gap:3rem; padding-block:4rem }
 .footer-brand{ display:flex; align-items:center; gap:.5rem; font-size:var(--text-18); font-weight:600; letter-spacing:.02em }
 .footer-brand .icn{ font-size:var(--text-20) }
-.footer-tagline{ max-width:20rem; font-size:var(--text-14); color:rgba(var(--white-rgb),.55); margin-top:1rem; line-height:var(--leading-body) }
-.footer-addr{ max-width:20rem; font-size:var(--text-14); color:rgba(var(--white-rgb),.4); margin-top:1rem; line-height:var(--leading-body) }
+.footer-tagline{ max-width:20rem; font-size:var(--text-16); color:rgba(var(--white-rgb),.85); margin-top:1rem; line-height:var(--leading-body) }
+.footer-addr{ max-width:20rem; font-size:var(--text-16); color:rgba(var(--white-rgb),.4); margin-top:1rem; line-height:var(--leading-body) }
 .footer-col-title{ font-size:var(--text-14); text-transform:uppercase; letter-spacing:.025em; color:rgba(var(--white-rgb),.4); margin-bottom:1rem }
 .footer-col ul{ display:flex; flex-direction:column; gap:.75rem }
-.footer-col a, .footer-col button{ font-size:var(--text-14) }
+.footer-col a, .footer-col button{ font-size:var(--text-16) }
 .alink{ display:inline-flex; transition:transform .34s cubic-bezier(.2,.8,.2,1), opacity .34s cubic-bezier(.2,.8,.2,1); opacity:.65 }
 @media (hover:hover){ .alink-wrap:hover .alink{ transform:translateX(4px); opacity:1 } }
 .footer-legal{ display:flex; flex-direction:column; align-items:center; justify-content:space-between; gap:1rem;
-  border-top:1px solid rgba(var(--white-rgb),.1); padding-top:2rem; font-size:var(--text-14); color:rgba(var(--white-rgb),.45) }
+  border-top:1px solid rgba(var(--white-rgb),.1); padding-top:2rem; font-size:var(--text-16); color:rgba(var(--white-rgb),.45) }
 .footer-legal-links{ display:flex; gap:1.5rem }
-.alink.legal{ opacity:.7 }
-@media (hover:hover){ .footer-legal-links a:hover .alink.legal{ transform:translateX(3px); opacity:1 } }
+.alink.legal{ color:rgba(var(--white-rgb),.45); opacity:1; transition:color .25s, transform .34s cubic-bezier(.2,.8,.2,1) }   /* 저작권 문구와 완전 동일 톤(.45) — 공용 .alink opacity:.65 덮음 */
+@media (hover:hover){ .footer-legal-links a:hover .alink.legal{ transform:scale(1.04); color:rgba(var(--white-rgb),.9) } }
 .footer-wm{ position:absolute; inset-inline:0; bottom:-1.5rem; z-index:0; text-align:center;
   pointer-events:none; user-select:none }
 .footer-wm img{ width:72rem; max-width:92%; height:auto; display:inline-block; opacity:.05 }
 @media (min-width:640px){ .footer-shell{ padding-left:2rem; padding-right:2rem }
-  .footer-h2{ font-size:var(--text-48) }
+  .footer-h2{ font-size:var(--text-36) }
   .footer-legal{ flex-direction:row } }
-@media (min-width:768px){ .footer-h2{ font-size:var(--text-60) } .footer-cols{ grid-template-columns:repeat(2,1fr) } }
+@media (min-width:768px){ .footer-h2{ font-size:var(--text-40) } .footer-cols{ grid-template-columns:repeat(2,1fr) } }
 @media (min-width:1024px){ .footer-shell{ padding-top:6rem }
   .footer-cta{ flex-direction:row; align-items:flex-end; justify-content:space-between }
   .footer-cols{ grid-template-columns:repeat(4,1fr) } }
@@ -1725,14 +1770,13 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
   .ex-card[style*="--brand"]:hover{ background:var(--brand); color:var(--brand-txt) }
   .ex-card[style*="--brand"]:hover .ex-ico{ background:rgba(255,255,255,.4) } }
 .ex-card .ex-ico{ display:block; width:3.5rem; height:3.5rem; margin-bottom:2rem; background:rgba(var(--white-rgb),.08) }
-/* 로고: 기본은 원본 브랜드색, 호버 시 잉크(남색)로 덮음. 흰색 심볼(ex-logo-inv=OKX)만 항상 흰색 */
-.ex-card .ex-ico.ex-logo{ background:transparent; display:grid; place-items:center; padding:0 }
-.ex-card .ex-ico.ex-logo img{ width:100%; height:100%; display:block; transition:filter .35s ease }   /* 로고를 56px 영역에 스케일 없이 1:1 (SVG가 이미 56 기준 제작) */
-.ex-card .ex-ico.ex-logo-inv img{ filter:brightness(0) invert(1) }   /* OKX: 흰색 심볼 그대로 */
+/* 로고: 논호버=연보라 단색 실루엣(mask), 호버=잉크(남색). OKX(ex-logo-inv)만 호버 시 흰색. 로고별 URL은 --logo 인라인 변수 */
+.ex-card .ex-ico.ex-logo{ background:var(--purple-300); padding:0;
+  -webkit-mask:var(--logo) center/contain no-repeat; mask:var(--logo) center/contain no-repeat;
+  transition:background .35s ease }
 @media (hover:hover){
-  .ex-card:hover .ex-ico.ex-logo img{ filter:brightness(0) }   /* 호버 시 로고를 잉크(남색)로 */
-  .ex-card:hover .ex-ico.ex-logo-inv img{ filter:brightness(0) invert(1) } }   /* OKX만 예외: 흰색 유지 */
-@media (hover:hover){ .ex-card[style*="--brand"]:hover .ex-ico.ex-logo{ background:transparent } }   /* 로고 칸은 호버 흰 배경 제거 */
+  .ex-card:hover .ex-ico.ex-logo{ background:var(--ink) }   /* 호버 시 잉크(남색) */
+  .ex-card:hover .ex-ico.ex-logo-inv{ background:var(--white) } }   /* OKX만 예외: 흰색 유지 */
 .ex-card h3{ margin-bottom:0 }
 .ex-card .ex-num{ display:block; font-size:var(--text-14); font-weight:500; color:rgba(var(--white-rgb),.5); margin-bottom:.5rem }  /* 기능 카드 번호 */
 .ex-card h3 + p{ margin-top:.75rem; font-size:var(--text-18) }  /* 서브카피 달릴 때만 간격 + 한 단계 업 */
@@ -2783,8 +2827,8 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
   <div class="shell footer-shell">
     <div class="footer-cta">
       <h2 class="footer-h2" id="footerH2" data-line-stagger="100">
-        <span class="rvl-line"><span>Talk to</span></span>
-        <span class="rvl-line"><span>our team.</span></span>
+        <span class="rvl-line"><span>디지털자산 사업</span></span>
+        <span class="rvl-line"><span>파라메타와 시작하세요</span></span>
       </h2>
       <button class="pill light with-arrow arw-up hs-scale" data-modal>
         <span class="hspring">Contact Us<span class="pill-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></span>
