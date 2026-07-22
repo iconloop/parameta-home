@@ -205,7 +205,9 @@ body.hero-dark .phero-inner{ min-height:100vh; display:grid; grid-template-colum
   align-items:center; column-gap:var(--grid-gap); padding-top:6rem; padding-bottom:3rem }
 body.hero-dark .phero-text{ grid-column:1 / 6; align-self:center; gap:1rem }
 body.hero-dark .phero-cta{ margin-top:.5rem }  /* 리드↔버튼 살짝만 */
-body.hero-dark .phero-visual{ grid-column:6 / 13; display:block; align-self:stretch; min-height:62vh;
+body.hero-dark .phero-visual{ grid-column:7 / 13; display:block; align-self:stretch; min-height:56vh;
+  width:calc(100% + (100% - 5 * var(--grid-gap)) / 12 + var(--grid-gap) / 2);
+  margin-left:calc(-1 * ((100% - 5 * var(--grid-gap)) / 12 + var(--grid-gap) / 2));  /* 왼쪽으로 반칸만 확장 */
   position:relative; overflow:hidden;
   border-radius:var(--radius-card); border:1px solid rgba(var(--white-rgb),.12);
   background:radial-gradient(120% 90% at 70% 18%, rgba(var(--accent-rgb),.2), transparent 60%), rgba(var(--white-rgb),.03) }
@@ -218,7 +220,11 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
   body.hero-dark .phero, body.hero-dark .phero-inner{ min-height:auto }
   body.hero-dark .phero-inner{ grid-template-columns:1fr; padding-top:6.25rem; padding-bottom:3rem; row-gap:2rem }
   body.hero-dark .phero-text, body.hero-dark .phero-visual{ grid-column:auto }
-  body.hero-dark .phero-visual{ min-height:40vh } }  /* 이미지: 텍스트 아래 (자연 순서) */
+  body.hero-dark .phero-visual{ min-height:40vh; width:auto; margin-left:0 } }  /* 모바일 포함 기본 (원래대로) */
+/* 태블릿 전용(640~1023): 이미지 우측 걸침 크롭 + full-bleed. 모바일(≤639)은 위 기본 유지 */
+@media (min-width:640px) and (max-width:1023px){
+  body.hero-dark .phero-visual{ min-height:52vh; margin-inline:-2rem; margin-bottom:-3rem; border-top-left-radius:0; border-top-right-radius:0 }
+  body.hero-dark .phero-visual img.fit-contain{ inset:auto; right:-40px; bottom:-15%; width:auto; height:130%; max-width:none; object-fit:contain } }
 /* ---- 콘텐츠형 히어로(hero-center): 이미지 영역 없음 + 텍스트 중앙정렬 ---- */
 body.hero-center .phero-inner{ grid-template-columns:1fr; place-items:center; text-align:center }
 body.hero-center .phero-visual{ display:none }
