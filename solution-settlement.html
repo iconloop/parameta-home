@@ -1655,7 +1655,7 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 @media (hover:hover){ .uc-arrow:hover{ background:var(--accent); border-color:transparent; color:var(--white); transform:scale(1.06) } }
 /* 슬라이드를 그리드 1칸에 겹쳐 쌓아 컨테이너 높이 = 가장 긴 슬라이드 (전환 시 높이 안 튐) */
 .uc-slides{ display:grid }
-.uc-slide{ grid-area:1 / 1; opacity:0; visibility:hidden; transition:opacity .4s ease, transform .35s cubic-bezier(.2,.8,.2,1);
+.uc-slide{ grid-area:1 / 1; position:relative; opacity:0; visibility:hidden; transition:opacity .4s ease, transform .35s cubic-bezier(.2,.8,.2,1);
   background:color-mix(in srgb, var(--ink) 6%, var(--white)); color:var(--ink); border-radius:var(--radius-card); padding:3rem;
   display:flex; flex-direction:column }
 .uc-slide.is-active{ opacity:1; visibility:visible;
@@ -1673,11 +1673,12 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .uc-flag{ flex:none; display:inline-flex; align-items:center; padding:.375rem .875rem;
   background:rgba(var(--ink-rgb),.07); border-radius:var(--radius-pill);
   font-size:var(--text-16); font-weight:600; color:rgba(var(--ink-rgb),.45) }  /* 그레이 필 + 연그레이 텍스트 */
-.uc-slide > .uc-flag{ margin-bottom:.875rem }   /* 타이틀 위 카테고리 킥커 */
-.uc-num{ display:block; font-size:var(--text-14); font-weight:600; letter-spacing:.04em; color:rgba(var(--ink-rgb),.3); margin-bottom:1.25rem; font-variant-numeric:tabular-nums }   /* 카드 넘버링 01 / 11 */
+.uc-title{ display:flex; align-items:center; gap:.75rem; flex-wrap:wrap; margin-bottom:.75rem }   /* 타이틀 + 플래그 한 행 */
+.uc-num{ position:absolute; right:3rem; bottom:2.25rem; font-size:var(--text-14); font-weight:600; letter-spacing:.04em; color:rgba(var(--ink-rgb),.3); font-variant-numeric:tabular-nums }   /* 카드 우하단 넘버링 */
+.uc-num b{ color:var(--ink); font-weight:700 }   /* 현재 번호 진한색 */
 @media (max-width:639px){ .uc-row{ flex-direction:column; align-items:flex-start; gap:.375rem } }
 .uc-thumb video, .uc-thumb img{ width:100%; height:100%; object-fit:cover; display:block; border-radius:inherit }
-.uc-slide h3{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em; margin-bottom:.75rem; color:var(--ink) }
+.uc-slide h3{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em; margin-bottom:0; color:var(--ink) }
 @media (min-width:640px){ .uc-slide h3{ font-size:var(--text-30) } }
 .uc-slide > p{ font-size:var(--text-18); color:rgba(var(--ink-rgb),.6); line-height:var(--leading-body); word-break:keep-all }
 .uc-testimonial{ margin-top:2.5rem; padding-top:2rem; border-top:1px solid rgba(var(--ink-rgb),.12);
@@ -1760,7 +1761,7 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
   mask-image:linear-gradient(to right, transparent, #000 10%, #000 90%, transparent) }
 .pt-track{ display:flex; width:max-content; animation:ptScroll 32s linear infinite }
 .pt-set{ display:flex; align-items:center; gap:0; padding-right:0 }
-.pt-set img{ height:7.5rem; width:auto; flex:none }  /* ≈120px, 로고 PNG 자체 여백만으로 간격 */
+.pt-set img{ height:7.5rem; width:auto; flex:none }  /* ≈120px, 로고 여백만으로 간격 (svg 원본 컬러) */
 @keyframes ptScroll{ to{ transform:translateX(-50%) } }
 @media (max-width:639px){ .pt-set img{ height:5.5rem } }
 /* 인증·수상 마퀴: 로고(위) + 텍스트(아래) 아이템 순환 */
@@ -2691,7 +2692,7 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
     <div class="shell phero-inner">
       <div class="phero-text">
         <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Solutions — 결제·정산</div>
-        <h1 class="phero-h1" data-line-stagger="120"><span class="rvl-line"><span>복잡한 정산,</span></span><span class="rvl-line"><span>한 번에 자동 처리합니다</span></span></h1>
+        <h1 class="phero-h1" data-line-stagger="120"><span class="rvl-line"><span>기존 결제망 그대로,</span></span><span class="rvl-line"><span>정산, 대사는 온체인으로 자동화합니다</span></span></h1>
         <p class="phero-lead rvl" style="--rvl-delay:250ms">ParaSta는 은행망과 블록체인을 연결해 환전, 송금, 정산을 단일 API로 처리합니다. 기존 결제망은 유지하면서 정산, 대사, 통제 기능을 더하고, 폐쇄형 정산토큰부터 스테이블코인까지 규제와 사업 환경에 맞춰 단계적으로 확장할 수 있습니다.</p>
         <div class="phero-rel rvl" style="--rvl-delay:600ms">
       <p class="phero-rel-t">관련 제품 살펴보기</p>
@@ -2715,7 +2716,7 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
 </div></section>
 <section><div class="shell sec">
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Problem</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>결제·정산의 반복 문제, 이렇게 해결합니다</span></span></h2>
-  <div class="ww rvl" style="--rvl-y:40px"><div class="ww-col ww-now"><span class="ww-cap">지금</span><div class="ww-t">정산마다 수작업 대사가 반복됩니다</div><ul><li><span class="ww-mk">✕</span><div><b>정산 데이터 불일치</b><p>거래 원장과 결제사 데이터가 어긋나 수작업 대사가 필요합니다.</p></div></li><li><span class="ww-mk">✕</span><div><b>환불, 취소 재정산</b><p>환불, 취소, 차지백이 생기면 정산을 다시 맞춰야 합니다.</p></div></li><li><span class="ww-mk">✕</span><div><b>다자 분배와 정산</b><p>여러 파트너가 얽힌 분배와 정산은 대사와 통제가 복잡합니다.</p></div></li><li><span class="ww-mk">✕</span><div><b>권한, 감사 부담</b><p>누가 무엇을 언제 바꿨는지 추적하고 감사에 대응해야 합니다.</p></div></li></ul></div><div class="ww-col ww-after"><span class="ww-cap">도입 후</span><div class="ww-t">복잡한 정산을 한 번에 처리합니다</div><ul><li><span class="ww-mk">✓</span><div><b>데이터를 자동으로 맞춤</b><p>거래와 결제 데이터를 자동으로 대사해, 어긋난 건만 확인하면 됩니다.</p></div></li><li><span class="ww-mk">✓</span><div><b>바뀌어도 자동으로 다시 정산</b><p>환불, 취소가 생겨도 정산이 실시간으로 다시 맞춰집니다.</p></div></li><li><span class="ww-mk">✓</span><div><b>규칙대로 자동 분배</b><p>여러 파트너의 몫이 정해진 규칙대로 자동 분배, 정산됩니다.</p></div></li><li><span class="ww-mk">✓</span><div><b>모든 변경을 자동 기록</b><p>누가 언제 무엇을 바꿨는지 모두 기록돼, 감사 대응이 간단해집니다.</p></div></li></ul></div></div>
+  <div class="ww rvl" style="--rvl-y:40px"><div class="ww-col ww-now"><span class="ww-cap">지금</span><div class="ww-t">정산마다 수작업 대사가 반복됩니다</div><ul><li><span class="ww-mk">✕</span><div><b>정산 데이터 불일치</b><p>거래 원장과 결제사 데이터가 어긋나 수작업 대사가 필요합니다.</p></div></li><li><span class="ww-mk">✕</span><div><b>환불, 취소 재정산</b><p>환불, 취소, 차지백이 생기면 정산을 다시 맞춰야 합니다.</p></div></li><li><span class="ww-mk">✕</span><div><b>다자 분배와 정산</b><p>여러 파트너가 얽힌 분배와 정산은 대사와 통제가 복잡합니다.</p></div></li><li><span class="ww-mk">✕</span><div><b>권한, 감사 부담</b><p>누가 무엇을 언제 바꿨는지 추적하고 감사에 대응해야 합니다.</p></div></li></ul></div><div class="ww-col ww-after"><span class="ww-cap">도입 후</span><div class="ww-t">정산, 대사를 온체인으로 자동화합니다</div><ul><li><span class="ww-mk">✓</span><div><b>수작업 없이 자동 대사</b><p>확인만 하세요. 거래와 결제 데이터를 온체인 기록 기준으로 자동 대사합니다.</p></div></li><li><span class="ww-mk">✓</span><div><b>바뀌어도 자동으로 다시 정산</b><p>환불, 취소가 생겨도 정산이 실시간으로 다시 맞춰집니다.</p></div></li><li><span class="ww-mk">✓</span><div><b>규칙대로 자동 분배</b><p>여러 파트너의 몫이 정해진 규칙대로 자동 분배, 정산됩니다.</p></div></li><li><span class="ww-mk">✓</span><div><b>모든 변경을 자동 기록</b><p>누가 언제 무엇을 바꿨는지 모두 기록돼, 감사 대응이 간단해집니다.</p></div></li></ul></div></div>
 </div></section>
 <section><div class="shell sec">
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Features</div><h2 class="sec-h2 has-lead" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>정산·대사·통제를 한 레이어로</span></span></h2><p class="phero-lead sec-lead rvl">기존 결제 레일 위에 정산·통제 레이어만 얹어, 도입 부담을 낮추고 자금 흐름을 자동화합니다.</p>

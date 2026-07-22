@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>공공 블록체인 솔루션 | PARAMETA</title>
-<meta name="description" content="공공기관용 CSAP 인증 블록체인 SaaS. DID·지갑·개인데이터저장소(PDS)·분산저장(BFS)을 직접 구축 없이 구독형으로. 신청 4단계, 최대 1주일 내 적용." />
+<meta name="description" content="1년 걸리던 공공 블록체인을 1주일 만에 도입. 블록체인 서비스 최초 CSAP 인증 SaaS로 DID, 지갑, 개인데이터저장소(PDS), 분산저장(BFS)을 직접 구축 없이 구독형으로. 신청 4단계, 최대 1주일 내 적용." />
 <meta name="theme-color" content="#0E0C27" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1655,7 +1655,7 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 @media (hover:hover){ .uc-arrow:hover{ background:var(--accent); border-color:transparent; color:var(--white); transform:scale(1.06) } }
 /* 슬라이드를 그리드 1칸에 겹쳐 쌓아 컨테이너 높이 = 가장 긴 슬라이드 (전환 시 높이 안 튐) */
 .uc-slides{ display:grid }
-.uc-slide{ grid-area:1 / 1; opacity:0; visibility:hidden; transition:opacity .4s ease, transform .35s cubic-bezier(.2,.8,.2,1);
+.uc-slide{ grid-area:1 / 1; position:relative; opacity:0; visibility:hidden; transition:opacity .4s ease, transform .35s cubic-bezier(.2,.8,.2,1);
   background:color-mix(in srgb, var(--ink) 6%, var(--white)); color:var(--ink); border-radius:var(--radius-card); padding:3rem;
   display:flex; flex-direction:column }
 .uc-slide.is-active{ opacity:1; visibility:visible;
@@ -1673,11 +1673,12 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .uc-flag{ flex:none; display:inline-flex; align-items:center; padding:.375rem .875rem;
   background:rgba(var(--ink-rgb),.07); border-radius:var(--radius-pill);
   font-size:var(--text-16); font-weight:600; color:rgba(var(--ink-rgb),.45) }  /* 그레이 필 + 연그레이 텍스트 */
-.uc-slide > .uc-flag{ margin-bottom:.875rem }   /* 타이틀 위 카테고리 킥커 */
-.uc-num{ display:block; font-size:var(--text-14); font-weight:600; letter-spacing:.04em; color:rgba(var(--ink-rgb),.3); margin-bottom:1.25rem; font-variant-numeric:tabular-nums }   /* 카드 넘버링 01 / 11 */
+.uc-title{ display:flex; align-items:center; gap:.75rem; flex-wrap:wrap; margin-bottom:.75rem }   /* 타이틀 + 플래그 한 행 */
+.uc-num{ position:absolute; right:3rem; bottom:2.25rem; font-size:var(--text-14); font-weight:600; letter-spacing:.04em; color:rgba(var(--ink-rgb),.3); font-variant-numeric:tabular-nums }   /* 카드 우하단 넘버링 */
+.uc-num b{ color:var(--ink); font-weight:700 }   /* 현재 번호 진한색 */
 @media (max-width:639px){ .uc-row{ flex-direction:column; align-items:flex-start; gap:.375rem } }
 .uc-thumb video, .uc-thumb img{ width:100%; height:100%; object-fit:cover; display:block; border-radius:inherit }
-.uc-slide h3{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em; margin-bottom:.75rem; color:var(--ink) }
+.uc-slide h3{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em; margin-bottom:0; color:var(--ink) }
 @media (min-width:640px){ .uc-slide h3{ font-size:var(--text-30) } }
 .uc-slide > p{ font-size:var(--text-18); color:rgba(var(--ink-rgb),.6); line-height:var(--leading-body); word-break:keep-all }
 .uc-testimonial{ margin-top:2.5rem; padding-top:2rem; border-top:1px solid rgba(var(--ink-rgb),.12);
@@ -1760,7 +1761,7 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
   mask-image:linear-gradient(to right, transparent, #000 10%, #000 90%, transparent) }
 .pt-track{ display:flex; width:max-content; animation:ptScroll 32s linear infinite }
 .pt-set{ display:flex; align-items:center; gap:0; padding-right:0 }
-.pt-set img{ height:7.5rem; width:auto; flex:none }  /* ≈120px, 로고 PNG 자체 여백만으로 간격 */
+.pt-set img{ height:7.5rem; width:auto; flex:none }  /* ≈120px, 로고 여백만으로 간격 (svg 원본 컬러) */
 @keyframes ptScroll{ to{ transform:translateX(-50%) } }
 @media (max-width:639px){ .pt-set img{ height:5.5rem } }
 /* 인증·수상 마퀴: 로고(위) + 텍스트(아래) 아이템 순환 */
@@ -2691,8 +2692,8 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
     <div class="shell phero-inner">
       <div class="phero-text">
         <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Solutions — 공공</div>
-        <h1 class="phero-h1" data-line-stagger="120"><span class="rvl-line"><span>공공기관용 CSAP 인증</span></span><span class="rvl-line"><span>블록체인 SaaS</span></span></h1>
-        <p class="phero-lead rvl" style="--rvl-delay:250ms">DID·지갑·개인데이터저장소(PDS)·분산저장(BFS) 기반 서비스를 직접 구축하지 않고 구독형으로 도입합니다. 신청 4단계, 최대 1주일 내 적용.</p>
+        <h1 class="phero-h1" data-line-stagger="120"><span class="rvl-line"><span>1년 걸리던 공공 블록체인,</span></span><span class="rvl-line"><span>1주일 만에 도입합니다</span></span></h1>
+        <p class="phero-lead rvl" style="--rvl-delay:250ms"><b>블록체인 서비스 최초 CSAP 인증 SaaS</b><br>DID·지갑·개인데이터저장소(PDS)·분산저장(BFS) 기반 서비스를 직접 구축하지 않고 구독형으로 도입합니다. 신청 4단계, 최대 1주일 내 적용.</p>
         <div class="phero-rel rvl" style="--rvl-delay:600ms">
       <p class="phero-rel-t">관련 제품 살펴보기</p>
       <a class="phero-rel-flag" href="myid.html#lineup">MyID 2.0</a>
@@ -2718,14 +2719,14 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
 </div></section>
 <section><div class="shell sec">
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Features</div><h2 class="sec-h2 has-lead" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>직접 구축 없이 도입합니다</span></span></h2><p class="phero-lead sec-lead rvl">CSAP 인증을 받은 공동 인프라를 구독형으로 도입해, 예산·기간·운영 부담을 덜고 시작합니다.</p>
-  <ul class="cards-4"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="ico-card ex-card ex-gray"><span class="ex-ico"></span><h3>직접 구축 없이 도입</h3><p>예산·기간·보안·운영 부담을 덜고 구독형으로 시작합니다.</p></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="ico-card ex-card ex-gray"><span class="ex-ico"></span><h3>블록체인 서비스 최초 CSAP</h3><p>클라우드 보안인증을 획득하고 조달에 등록돼 있습니다.</p></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="ico-card ex-card ex-gray"><span class="ex-ico"></span><h3>최대 1주일 내 적용</h3><p>신청 4단계를 거쳐 최대 1주일 안에 서비스를 적용합니다.</p></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms"><article class="ico-card ex-card ex-gray"><span class="ex-ico"></span><h3>반복 구축 축소</h3><p>기관마다 흩어진 앱·인프라를 공통 인프라로 통합합니다.</p></article></li></ul>
+  <ul class="cards-4"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="ico-card ex-card ex-gray"><span class="ex-ico"></span><h3>서비스형(SaaS) 도입</h3><p>수억 원대 초기 개발비와 긴 구축 기간 없이, 구독형으로 즉시 시작합니다.</p></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="ico-card ex-card ex-gray"><span class="ex-ico"></span><h3>블록체인 서비스 최초 CSAP</h3><p>클라우드 보안인증을 획득하고 조달에 등록돼 있습니다.</p></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="ico-card ex-card ex-gray"><span class="ex-ico"></span><h3>최대 1주일 내 적용</h3><p>신청 4단계를 거쳐 최대 1주일 안에 서비스를 적용합니다.</p></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms"><article class="ico-card ex-card ex-gray"><span class="ex-ico"></span><h3>반복 구축 축소</h3><p>기관마다 흩어진 앱·인프라를 공통 인프라로 통합합니다.</p></article></li></ul>
 </div></section>
 <section><div class="shell sec">
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Platform</div><h2 class="sec-h2 has-lead" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>기본 제공 기능</span></span></h2><p class="phero-lead sec-lead rvl">사용자는 필요한 정보만 선택 공개(Selective Disclosure)로 제출할 수 있으며, 개인 데이터는 사용자 단말과 분산 환경에 저장해 기관의 보관 부담을 줄입니다. 이를 바탕으로 발급·보유·검증으로 이어지는 표준화된 신원 흐름을 구현합니다.</p>
   <ul class="cards-4"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="ico-card ex-card ex-gray"><span class="ex-ico"></span><h3>신원 DID / VC / VP</h3></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="ico-card ex-card ex-gray"><span class="ex-ico"></span><h3>지갑</h3></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="ico-card ex-card ex-gray"><span class="ex-ico"></span><h3>개인데이터저장소 PDS</h3></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms"><article class="ico-card ex-card ex-gray"><span class="ex-ico"></span><h3>분산저장 BFS</h3></article></li></ul>
 </div></section>
 <section><div class="shell sec">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>How to Adopt</div><h2 class="sec-h2 has-lead" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>같은 서비스를 여는 데 걸리는 시간</span></span></h2><p class="phero-lead sec-lead rvl">개별 구축과 공동 인프라 도입의 소요 시간을 비교했습니다.</p>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>How to Adopt</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>서비스 도입 시간 비교</span></span></h2>
   <div class="adopt-compare rvl"><div class="ac-row"><div class="ac-meta"><h3>기존 개별 구축</h3><span class="ac-time">최소 1년+</span></div><div class="ac-track slow"><div class="ac-step"><span class="ac-dot"></span><span class="ac-lbl">예산 산정</span></div><div class="ac-step"><span class="ac-dot"></span><span class="ac-lbl">업체 선정</span></div><div class="ac-step"><span class="ac-dot"></span><span class="ac-lbl">견적</span></div><div class="ac-step"><span class="ac-dot"></span><span class="ac-lbl">계약</span></div><div class="ac-step"><span class="ac-dot"></span><span class="ac-lbl">구축</span></div></div></div><div class="ac-row ac-hi"><div class="ac-meta"><h3>MyID 2.0 공동 인프라</h3><span class="ac-time">1주일</span></div><div class="ac-track fast"><div class="ac-step"><span class="ac-dot"></span><span class="ac-lbl">가입 승인</span></div><div class="ac-step"><span class="ac-dot"></span><span class="ac-lbl">결제수단 등록</span></div><div class="ac-step"><span class="ac-dot"></span><span class="ac-lbl">회원가입·설정</span></div></div></div></div>
 </div></section>
 <!-- By the Numbers: 다크 스탯 패널 -->

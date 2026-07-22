@@ -865,7 +865,7 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 @media (hover:hover){ .uc-arrow:hover{ background:var(--accent); border-color:transparent; color:var(--white); transform:scale(1.06) } }
 /* 슬라이드를 그리드 1칸에 겹쳐 쌓아 컨테이너 높이 = 가장 긴 슬라이드 (전환 시 높이 안 튐) */
 .uc-slides{ display:grid }
-.uc-slide{ grid-area:1 / 1; opacity:0; visibility:hidden; transition:opacity .4s ease, transform .35s cubic-bezier(.2,.8,.2,1);
+.uc-slide{ grid-area:1 / 1; position:relative; opacity:0; visibility:hidden; transition:opacity .4s ease, transform .35s cubic-bezier(.2,.8,.2,1);
   background:color-mix(in srgb, var(--ink) 6%, var(--white)); color:var(--ink); border-radius:var(--radius-card); padding:3rem;
   display:flex; flex-direction:column }
 .uc-slide.is-active{ opacity:1; visibility:visible;
@@ -883,11 +883,12 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .uc-flag{ flex:none; display:inline-flex; align-items:center; padding:.375rem .875rem;
   background:rgba(var(--ink-rgb),.07); border-radius:var(--radius-pill);
   font-size:var(--text-16); font-weight:600; color:rgba(var(--ink-rgb),.45) }  /* 그레이 필 + 연그레이 텍스트 */
-.uc-slide > .uc-flag{ margin-bottom:.875rem }   /* 타이틀 위 카테고리 킥커 */
-.uc-num{ display:block; font-size:var(--text-14); font-weight:600; letter-spacing:.04em; color:rgba(var(--ink-rgb),.3); margin-bottom:1.25rem; font-variant-numeric:tabular-nums }   /* 카드 넘버링 01 / 11 */
+.uc-title{ display:flex; align-items:center; gap:.75rem; flex-wrap:wrap; margin-bottom:.75rem }   /* 타이틀 + 플래그 한 행 */
+.uc-num{ position:absolute; right:3rem; bottom:2.25rem; font-size:var(--text-14); font-weight:600; letter-spacing:.04em; color:rgba(var(--ink-rgb),.3); font-variant-numeric:tabular-nums }   /* 카드 우하단 넘버링 */
+.uc-num b{ color:var(--ink); font-weight:700 }   /* 현재 번호 진한색 */
 @media (max-width:639px){ .uc-row{ flex-direction:column; align-items:flex-start; gap:.375rem } }
 .uc-thumb video, .uc-thumb img{ width:100%; height:100%; object-fit:cover; display:block; border-radius:inherit }
-.uc-slide h3{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em; margin-bottom:.75rem; color:var(--ink) }
+.uc-slide h3{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em; margin-bottom:0; color:var(--ink) }
 @media (min-width:640px){ .uc-slide h3{ font-size:var(--text-30) } }
 .uc-slide > p{ font-size:var(--text-18); color:rgba(var(--ink-rgb),.6); line-height:var(--leading-body); word-break:keep-all }
 .uc-testimonial{ margin-top:2.5rem; padding-top:2rem; border-top:1px solid rgba(var(--ink-rgb),.12);
@@ -970,7 +971,7 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
   mask-image:linear-gradient(to right, transparent, #000 10%, #000 90%, transparent) }
 .pt-track{ display:flex; width:max-content; animation:ptScroll 32s linear infinite }
 .pt-set{ display:flex; align-items:center; gap:0; padding-right:0 }
-.pt-set img{ height:7.5rem; width:auto; flex:none }  /* ≈120px, 로고 PNG 자체 여백만으로 간격 */
+.pt-set img{ height:7.5rem; width:auto; flex:none }  /* ≈120px, 로고 여백만으로 간격 (svg 원본 컬러) */
 @keyframes ptScroll{ to{ transform:translateX(-50%) } }
 @media (max-width:639px){ .pt-set img{ height:5.5rem } }
 /* 인증·수상 마퀴: 로고(위) + 텍스트(아래) 아이템 순환 */
@@ -2999,8 +3000,8 @@ def usecase_carousel(items, label='사례 선택'):
     for i, it in enumerate(items):
         flag = f'<span class="uc-flag">{it["cat"]}</span>' if it.get('cat') else ''
         active = ' is-active' if i == 0 else ''
-        num = f'<span class="uc-num">{i + 1:02d} / {total:02d}</span>'
-        slides.append(f'<article class="uc-slide{active}">{num}<div class="uc-thumb" aria-hidden="true"></div>{flag}<h3>{it["title"]}</h3><p>{it["desc"]}</p></article>')
+        num = f'<span class="uc-num"><b>{i + 1:02d}</b> / {total:02d}</span>'
+        slides.append(f'<article class="uc-slide{active}"><div class="uc-thumb" aria-hidden="true"></div><div class="uc-title"><h3>{it["title"]}</h3>{flag}</div><p>{it["desc"]}</p>{num}</article>')
     return ('<div class="uc-carousel">'
             f'<button class="uc-arrow uc-prev rvl rvl-op" type="button" aria-label="이전 사례">{ap}</button>'
             f'<div class="uc-slides rvl" style="--rvl-y:40px">{"".join(slides)}</div>'
@@ -3040,7 +3041,7 @@ def partner_logos(logos=None):
     logos = logos or [('logo-shinhan', '신한은행'), ('logo-nh', 'NH농협은행'), ('logo-nh-securities', 'NH투자증권'),
                       ('logo-samsung-securities', '삼성증권'), ('logo-samsung', '삼성'), ('logo-kb', 'KB'),
                       ('logo-ibk', 'IBK기업은행'), ('logo-hanwha', '한화')]
-    imgs = ''.join(f'<img src="assets/partners/{f}.png" alt="{name}" loading="lazy">' for f, name in logos)
+    imgs = ''.join(f'<img src="assets/partners/{f}.svg" alt="{name}" loading="lazy">' for f, name in logos)
     return f'<div class="pt-set" aria-hidden="false">{imgs}</div>'
 
 def cert_marquee(items):
@@ -4246,14 +4247,10 @@ PAGES['myid.html'] = dict(
     hero_visual='<img class="fit-contain" src="assets/myid/hero-test.avif" alt="" loading="eager" fetchpriority="high">',
     content=f"""
 <section><div class="shell sec">
-  {eyebrow('Trusted by')}
   <ul class="stats-grid pv-stats on-light pv-2">
-    <li class="rvl" style="--rvl-y:20px"><div class="stat-kicker">Users</div><div class="stat-num">약 <span class="pv-hl">370만</span></div><div class="stat-label">MyID, DID 누적 이용자 수</div></li>
-    <li class="rvl" style="--rvl-y:20px; --rvl-delay:90ms"><div class="stat-kicker">Verifications</div><div class="stat-num"><span class="pv-hl">9,100만+</span></div><div class="stat-label">제주안심코드 누적 인증 건수</div></li>
+    <li class="rvl" style="--rvl-y:20px"><div class="stat-num">약 <span class="pv-hl"><span class="pv-val" data-val="370" data-from="360">360</span>만</span></div><div class="stat-label">MyID, DID 누적 이용자 수</div></li>
+    <li class="rvl" style="--rvl-y:20px; --rvl-delay:90ms"><div class="stat-num">인증 <span class="pv-hl"><span class="pv-val" data-val="9100" data-from="9090">9,090</span>만+</span></div><div class="stat-label">제주안심코드 누적 인증 건수</div></li>
   </ul>
-  <div class="pt-marquee rvl" aria-label="함께한 파트너 로고">
-    <div class="pt-track">{partner_logos(MYID_TRUST_LOGOS)}{partner_logos(MYID_TRUST_LOGOS)}</div>
-  </div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
   {sec_head('Milestones', '국내외 최초 기록을 만들어온 DID')}
@@ -4304,8 +4301,13 @@ PAGES['myid.html'] = dict(
     <li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms">{dark_card('Tech 04', 'Issuer Privacy — 발급자 비식별', '검증 과정에서 어느 기관이 발급했는지까지 감춰, 발급 이력이 불필요하게 노출되지 않도록 보호합니다.', ['프라이버시'], grouped=True)}</li>
   </ul>
 </div></section>
+<section><div class="shell sec">
+  <div class="pt-marquee rvl" aria-label="함께한 파트너 로고">
+    <div class="pt-track">{partner_logos(MYID_TRUST_LOGOS)}{partner_logos(MYID_TRUST_LOGOS)}</div>
+  </div>
+</div></section>
 <section><div class="shell sec" style="padding-top:0">
-  {sec_head('References', '금융·공공·기업이 검증한 적용 사례')}
+  {sec_head('References', '금융·공공·기업이 검증한 적용 사례', layout='center')}
   {usecase_carousel([
     dict(cat='Finance', title='신한은행, NH농협은행 금융실명인증', desc='기존 실명확인 3단계를 MyID 1단계로 통합해 비대면 실명인증을 간소화했습니다. NH농협은행은 올원뱅크 올원PASS 발급, 재발급, 송금 이체한도 상향 등에 적용했습니다.'),
     dict(cat='Public', title='제주안심코드', desc='제주도청과 함께 개발한 전자출입명부 서비스로, QR 스캔만으로 출입 정보를 남길 수 있게 했습니다. 설치 업장 6만 개, 앱 설치 218만 건, 누적 인증 9,100만 건을 기록했습니다.'),
@@ -4492,7 +4494,7 @@ PAGES['solution-finance.html'] = dict(
     title='금융 디지털자산 솔루션 | PARAMETA',
     desc='규제 환경에 맞춘 엔터프라이즈 디지털자산 금융 플랫폼. 발행·지갑·오케스트레이션·온체인 KYC·통합관제를 하나로. 스테이블코인·예금토큰·RWA·토큰증권까지 단계적 확장.',
     eyebrow='Solutions — 금융',
-    h1_lines=['디지털자산 금융의', '모든 단계를 연결합니다'],
+    h1_lines=['규제 대응부터 정산, 상환까지,', '금융기관의 디지털자산 인프라'],
     lead='발행, 지갑, 오케스트레이션, 온체인 KYC, 통합 관리를 하나로 연결합니다. 스테이블코인부터 예금토큰, RWA, 토큰증권까지 규제와 사업 환경에 맞춰 단계적으로 확장할 수 있습니다.',
     crumb='Solutions — 금융',
     hero_cta='''<div class="phero-rel rvl" style="--rvl-delay:600ms">
@@ -4605,10 +4607,10 @@ PAGES['solution-finance.html'] = dict(
 # ---------------- solution-gov.html ----------------
 PAGES['solution-gov.html'] = dict(
     title='공공 블록체인 솔루션 | PARAMETA',
-    desc='공공기관용 CSAP 인증 블록체인 SaaS. DID·지갑·개인데이터저장소(PDS)·분산저장(BFS)을 직접 구축 없이 구독형으로. 신청 4단계, 최대 1주일 내 적용.',
+    desc='1년 걸리던 공공 블록체인을 1주일 만에 도입. 블록체인 서비스 최초 CSAP 인증 SaaS로 DID, 지갑, 개인데이터저장소(PDS), 분산저장(BFS)을 직접 구축 없이 구독형으로. 신청 4단계, 최대 1주일 내 적용.',
     eyebrow='Solutions — 공공',
-    h1_lines=['공공기관용 CSAP 인증', '블록체인 SaaS'],
-    lead='DID·지갑·개인데이터저장소(PDS)·분산저장(BFS) 기반 서비스를 직접 구축하지 않고 구독형으로 도입합니다. 신청 4단계, 최대 1주일 내 적용.',
+    h1_lines=['1년 걸리던 공공 블록체인,', '1주일 만에 도입합니다'],
+    lead='<b>블록체인 서비스 최초 CSAP 인증 SaaS</b><br>DID·지갑·개인데이터저장소(PDS)·분산저장(BFS) 기반 서비스를 직접 구축하지 않고 구독형으로 도입합니다. 신청 4단계, 최대 1주일 내 적용.',
     crumb='Solutions — 공공',
     hero_cta='''<div class="phero-rel rvl" style="--rvl-delay:600ms">
       <p class="phero-rel-t">관련 제품 살펴보기</p>
@@ -4642,7 +4644,7 @@ PAGES['solution-gov.html'] = dict(
 <section><div class="shell sec">
   {sec_head('Features', '직접 구축 없이 도입합니다', 'CSAP 인증을 받은 공동 인프라를 구독형으로 도입해, 예산·기간·운영 부담을 덜고 시작합니다.')}
   {cards_wrap([
-    exchange_card('직접 구축 없이 도입', gray=True, desc='예산·기간·보안·운영 부담을 덜고 구독형으로 시작합니다.'),
+    exchange_card('서비스형(SaaS) 도입', gray=True, desc='수억 원대 초기 개발비와 긴 구축 기간 없이, 구독형으로 즉시 시작합니다.'),
     exchange_card('블록체인 서비스 최초 CSAP', gray=True, desc='클라우드 보안인증을 획득하고 조달에 등록돼 있습니다.'),
     exchange_card('최대 1주일 내 적용', gray=True, desc='신청 4단계를 거쳐 최대 1주일 안에 서비스를 적용합니다.'),
     exchange_card('반복 구축 축소', gray=True, desc='기관마다 흩어진 앱·인프라를 공통 인프라로 통합합니다.'),
@@ -4658,7 +4660,7 @@ PAGES['solution-gov.html'] = dict(
   ], cols=4)}
 </div></section>
 <section><div class="shell sec">
-  {sec_head('How to Adopt', '같은 서비스를 여는 데 걸리는 시간', '개별 구축과 공동 인프라 도입의 소요 시간을 비교했습니다.')}
+  {sec_head('How to Adopt', '서비스 도입 시간 비교')}
   {adopt_compare([
     ('기존 개별 구축', '최소 1년+', ['예산 산정', '업체 선정', '견적', '계약', '구축'], False),
     ('MyID 2.0 공동 인프라', '1주일', ['가입 승인', '결제수단 등록', '회원가입·설정'], True),
@@ -4721,7 +4723,7 @@ PAGES['solution-cert.html'] = dict(
     title='디지털 증명 솔루션 | PARAMETA',
     desc='발급부터 공유, 제출처 검증까지 끝내는 블록체인 증명 솔루션. 표준 SaaS 증명은 broof형과 DID·VC 기반 자격증명 MyID형, 두 가지 형태로 제공합니다.',
     eyebrow='Solutions — 증명서',
-    h1_lines=['발급부터 검증까지', '하나로 연결합니다'],
+    h1_lines=['발급만 하세요.', '검증, 재발급은 솔루션이 처리합니다'],
     lead='위촉장, 수료증, MOU, 디지털 배지부터 자격·신원 증명까지, 두 가지 형태로 발급, 공유, 검증하는 블록체인 기반 증명 솔루션입니다. 웹에서 바로 발급하는 broof형과, 사용자가 직접 관리하는 신원(DID)과 검증 가능한 자격증명(VC)으로 기관에 맞춰 설계하는 MyID형을 제공합니다.',
     crumb='Solutions — 증명서',
     hero_cta='''<div class="phero-rel rvl" style="--rvl-delay:600ms">
@@ -4752,7 +4754,7 @@ PAGES['solution-cert.html'] = dict(
   {sec_head('Problem &amp; Solution', '발급기관 문제와 해결 방식', '발급기관이 반복해서 겪는 네 가지 문제를 두 가지 형태로 해결합니다. 웹에서 바로 발급하는 broof형과, DID, VC 기반으로 기관에 맞춰 설계하는 MyID형입니다.')}
   {ww_compare('발급 이후가 더 부담입니다', '발급 이후는 솔루션이 처리합니다', [
     ('발급 이후 운영 지속', '검증 문의, 재발급, 서버, 보안 운영이 발급 후에도 계속됩니다.',
-     '발급 이후 운영을 솔루션이 처리', '검증 문의, 재발급, 서버, 보안 운영을 솔루션이 처리하고, 기관은 발급만 하면 됩니다.'),
+     '발급 이후 운영을 솔루션이 처리', '발급만 하세요. 검증 문의, 재발급, 서버, 보안 운영을 솔루션이 전부 처리합니다.'),
     ('위변조 확인 어려움', 'PDF, 이미지 증명서는 제출처가 원본 여부를 확인하기 어렵습니다.',
      '제출처가 원본을 직접 확인', 'QR코드, 검증 링크(broof형)나 검증 가능한 디지털 자격증명(VC, MyID형)으로 제출처가 원본이 맞는지 바로 확인합니다.'),
     ('검증 시스템 구축 부담', '증명마다 검증 시스템을 따로 만들어 유지해야 합니다.',
@@ -4832,7 +4834,7 @@ PAGES['solution-exchange.html'] = dict(
     title='디지털자산 거래 솔루션 | PARAMETA',
     desc='직접 거래소를 만들지 않아도 자사 서비스 안에 거래 기능을 넣습니다. 외부 거래소 유동성과 거래 화면을 브랜드 안에 연결하는 디지털자산 거래 솔루션.',
     eyebrow='Solutions — 디지털자산 거래',
-    h1_lines=['거래소 구축 없이', '거래를 더합니다'],
+    h1_lines=['거래소 구축 없이,', '자사 서비스에서 바로 거래를 시작합니다'],
     lead='PortX는 여러 거래소의 유동성과 거래 화면을 자사 서비스에 그대로 연결하는 솔루션입니다. 매칭엔진, 유동성, 지갑, 보안을 직접 만들지 않아도, 자사 브랜드를 단 디지털자산 거래 서비스를 빠르게 시작할 수 있습니다.',
     crumb='Solutions — 디지털자산 거래',
     hero_cta='''<div class="phero-rel rvl" style="--rvl-delay:600ms">
@@ -4855,11 +4857,11 @@ PAGES['solution-exchange.html'] = dict(
 </div></section>
 <section><div class="shell sec">
   {sec_head('Problem', '거래소 사업의 고민, 이렇게 해결합니다')}
-  {ww_compare('사용자가 외부 거래소로 빠져나갑니다', '거래소 구축 없이 거래를 더합니다', [
+  {ww_compare('사용자가 외부 거래소로 빠져나갑니다', '자사 서비스 안에서 바로 거래를 시작합니다', [
     ('사용자 외부 이탈', '거래하려는 사용자가 외부 거래소로 빠져 수수료와 관계를 잃습니다.',
      '자사 서비스 안에서 거래', '외부 거래소의 시세와 유동성을 서비스 안에 연결해, 사용자가 자사 서비스 안에서 계속 거래하고 활동합니다.'),
     ('직접 구축 부담', '거래소 자체 구축 시 유동성, API, 지갑, 보안을 전부 직접 감당해야 합니다.',
-     '만들지 않고 연결만', '매칭엔진, 유동성, 지갑, 보안을 직접 만들지 않고 연결만 하면 됩니다.'),
+     '개발 대신 연결', '매칭엔진, 유동성, 지갑, 보안을 직접 개발할 것 없이, 검증된 API 연결로 바로 시작합니다.'),
     ('온보딩 마찰', 'API 키 발급과 입력 과정에서 사용자가 이탈합니다.',
      'QR 한 번으로 연결', 'API 키 입력 없이 QR 한 번으로 거래소가 연결됩니다.'),
     ('체인, 거래소 파편화', '여러 체인과 거래소를 각각 연동하고 유지해야 합니다.',
@@ -4956,7 +4958,7 @@ PAGES['solution-data.html'] = dict(
   {sec_head('Problem', '개인정보를 다루는 부담, 이렇게 해결합니다')}
   {ww_compare('개인정보를 직접 떠안아야 합니다', '개인정보를 떠안지 않는 구조로 바꿉니다', [
     ('보관 리스크', '개인정보를 직접 쌓아둘수록 유출 사고와 과징금, 신뢰 하락 부담이 커집니다.',
-     '사용자가 직접 보관', '정보를 사용자 저장소에 두어, 기관이 직접 쌓아둘 필요가 없습니다.'),
+     '개인정보 유출 리스크 원천 차단', '개인정보를 기업 서버가 아닌 사용자 저장소(PDS)에 보관하여, 유출 사고와 과징금 부담을 근본적으로 해소합니다.'),
     ('반복 수집과 동의 관리', '서비스마다 같은 정보를 다시 받고 동의를 관리하는 비용이 쌓입니다.',
      '한 번 발급해 다시 사용', '한 번 검증한 정보를 여러 서비스에서 다시 사용해, 매번 새로 받지 않아도 됩니다.'),
     ('사용자 통제 요구', '전송요구권 등 사용자가 자기 데이터를 옮기거나 지워 달라는 요구에 대응해야 합니다.',
@@ -5016,7 +5018,7 @@ PAGES['solution-settlement.html'] = dict(
     title='결제·정산 솔루션 | PARAMETA',
     desc='결제·정산을 자동화하고 자금 흐름을 통제합니다. 은행망과 블록체인을 잇는 미들웨어 ParaSta. Dual-Rail 도입, 폐쇄형 정산토큰에서 스테이블코인으로 2단계 전환.',
     eyebrow='Solutions — 결제·정산',
-    h1_lines=['복잡한 정산,', '한 번에 자동 처리합니다'],
+    h1_lines=['기존 결제망 그대로,', '정산, 대사는 온체인으로 자동화합니다'],
     lead='ParaSta는 은행망과 블록체인을 연결해 환전, 송금, 정산을 단일 API로 처리합니다. 기존 결제망은 유지하면서 정산, 대사, 통제 기능을 더하고, 폐쇄형 정산토큰부터 스테이블코인까지 규제와 사업 환경에 맞춰 단계적으로 확장할 수 있습니다.',
     crumb='Solutions — 결제·정산',
     hero_cta='''<div class="phero-rel rvl" style="--rvl-delay:600ms">
@@ -5039,9 +5041,9 @@ PAGES['solution-settlement.html'] = dict(
 </div></section>
 <section><div class="shell sec">
   {sec_head('Problem', '결제·정산의 반복 문제, 이렇게 해결합니다')}
-  {ww_compare('정산마다 수작업 대사가 반복됩니다', '복잡한 정산을 한 번에 처리합니다', [
+  {ww_compare('정산마다 수작업 대사가 반복됩니다', '정산, 대사를 온체인으로 자동화합니다', [
     ('정산 데이터 불일치', '거래 원장과 결제사 데이터가 어긋나 수작업 대사가 필요합니다.',
-     '데이터를 자동으로 맞춤', '거래와 결제 데이터를 자동으로 대사해, 어긋난 건만 확인하면 됩니다.'),
+     '수작업 없이 자동 대사', '확인만 하세요. 거래와 결제 데이터를 온체인 기록 기준으로 자동 대사합니다.'),
     ('환불, 취소 재정산', '환불, 취소, 차지백이 생기면 정산을 다시 맞춰야 합니다.',
      '바뀌어도 자동으로 다시 정산', '환불, 취소가 생겨도 정산이 실시간으로 다시 맞춰집니다.'),
     ('다자 분배와 정산', '여러 파트너가 얽힌 분배와 정산은 대사와 통제가 복잡합니다.',

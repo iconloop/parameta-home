@@ -1655,7 +1655,7 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 @media (hover:hover){ .uc-arrow:hover{ background:var(--accent); border-color:transparent; color:var(--white); transform:scale(1.06) } }
 /* 슬라이드를 그리드 1칸에 겹쳐 쌓아 컨테이너 높이 = 가장 긴 슬라이드 (전환 시 높이 안 튐) */
 .uc-slides{ display:grid }
-.uc-slide{ grid-area:1 / 1; opacity:0; visibility:hidden; transition:opacity .4s ease, transform .35s cubic-bezier(.2,.8,.2,1);
+.uc-slide{ grid-area:1 / 1; position:relative; opacity:0; visibility:hidden; transition:opacity .4s ease, transform .35s cubic-bezier(.2,.8,.2,1);
   background:color-mix(in srgb, var(--ink) 6%, var(--white)); color:var(--ink); border-radius:var(--radius-card); padding:3rem;
   display:flex; flex-direction:column }
 .uc-slide.is-active{ opacity:1; visibility:visible;
@@ -1673,11 +1673,12 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .uc-flag{ flex:none; display:inline-flex; align-items:center; padding:.375rem .875rem;
   background:rgba(var(--ink-rgb),.07); border-radius:var(--radius-pill);
   font-size:var(--text-16); font-weight:600; color:rgba(var(--ink-rgb),.45) }  /* 그레이 필 + 연그레이 텍스트 */
-.uc-slide > .uc-flag{ margin-bottom:.875rem }   /* 타이틀 위 카테고리 킥커 */
-.uc-num{ display:block; font-size:var(--text-14); font-weight:600; letter-spacing:.04em; color:rgba(var(--ink-rgb),.3); margin-bottom:1.25rem; font-variant-numeric:tabular-nums }   /* 카드 넘버링 01 / 11 */
+.uc-title{ display:flex; align-items:center; gap:.75rem; flex-wrap:wrap; margin-bottom:.75rem }   /* 타이틀 + 플래그 한 행 */
+.uc-num{ position:absolute; right:3rem; bottom:2.25rem; font-size:var(--text-14); font-weight:600; letter-spacing:.04em; color:rgba(var(--ink-rgb),.3); font-variant-numeric:tabular-nums }   /* 카드 우하단 넘버링 */
+.uc-num b{ color:var(--ink); font-weight:700 }   /* 현재 번호 진한색 */
 @media (max-width:639px){ .uc-row{ flex-direction:column; align-items:flex-start; gap:.375rem } }
 .uc-thumb video, .uc-thumb img{ width:100%; height:100%; object-fit:cover; display:block; border-radius:inherit }
-.uc-slide h3{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em; margin-bottom:.75rem; color:var(--ink) }
+.uc-slide h3{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em; margin-bottom:0; color:var(--ink) }
 @media (min-width:640px){ .uc-slide h3{ font-size:var(--text-30) } }
 .uc-slide > p{ font-size:var(--text-18); color:rgba(var(--ink-rgb),.6); line-height:var(--leading-body); word-break:keep-all }
 .uc-testimonial{ margin-top:2.5rem; padding-top:2rem; border-top:1px solid rgba(var(--ink-rgb),.12);
@@ -1760,7 +1761,7 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
   mask-image:linear-gradient(to right, transparent, #000 10%, #000 90%, transparent) }
 .pt-track{ display:flex; width:max-content; animation:ptScroll 32s linear infinite }
 .pt-set{ display:flex; align-items:center; gap:0; padding-right:0 }
-.pt-set img{ height:7.5rem; width:auto; flex:none }  /* ≈120px, 로고 PNG 자체 여백만으로 간격 */
+.pt-set img{ height:7.5rem; width:auto; flex:none }  /* ≈120px, 로고 여백만으로 간격 (svg 원본 컬러) */
 @keyframes ptScroll{ to{ transform:translateX(-50%) } }
 @media (max-width:639px){ .pt-set img{ height:5.5rem } }
 /* 인증·수상 마퀴: 로고(위) + 텍스트(아래) 아이템 순환 */
@@ -2691,7 +2692,7 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
     <div class="shell phero-inner">
       <div class="phero-text">
         <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Solutions — 디지털자산 거래</div>
-        <h1 class="phero-h1" data-line-stagger="120"><span class="rvl-line"><span>거래소 구축 없이</span></span><span class="rvl-line"><span>거래를 더합니다</span></span></h1>
+        <h1 class="phero-h1" data-line-stagger="120"><span class="rvl-line"><span>거래소 구축 없이,</span></span><span class="rvl-line"><span>자사 서비스에서 바로 거래를 시작합니다</span></span></h1>
         <p class="phero-lead rvl" style="--rvl-delay:250ms">PortX는 여러 거래소의 유동성과 거래 화면을 자사 서비스에 그대로 연결하는 솔루션입니다. 매칭엔진, 유동성, 지갑, 보안을 직접 만들지 않아도, 자사 브랜드를 단 디지털자산 거래 서비스를 빠르게 시작할 수 있습니다.</p>
         <div class="phero-rel rvl" style="--rvl-delay:600ms">
       <p class="phero-rel-t">관련 제품 살펴보기</p>
@@ -2715,7 +2716,7 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
 </div></section>
 <section><div class="shell sec">
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Problem</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>거래소 사업의 고민, 이렇게 해결합니다</span></span></h2>
-  <div class="ww rvl" style="--rvl-y:40px"><div class="ww-col ww-now"><span class="ww-cap">지금</span><div class="ww-t">사용자가 외부 거래소로 빠져나갑니다</div><ul><li><span class="ww-mk">✕</span><div><b>사용자 외부 이탈</b><p>거래하려는 사용자가 외부 거래소로 빠져 수수료와 관계를 잃습니다.</p></div></li><li><span class="ww-mk">✕</span><div><b>직접 구축 부담</b><p>거래소 자체 구축 시 유동성, API, 지갑, 보안을 전부 직접 감당해야 합니다.</p></div></li><li><span class="ww-mk">✕</span><div><b>온보딩 마찰</b><p>API 키 발급과 입력 과정에서 사용자가 이탈합니다.</p></div></li><li><span class="ww-mk">✕</span><div><b>체인, 거래소 파편화</b><p>여러 체인과 거래소를 각각 연동하고 유지해야 합니다.</p></div></li></ul></div><div class="ww-col ww-after"><span class="ww-cap">PortX 도입 후</span><div class="ww-t">거래소 구축 없이 거래를 더합니다</div><ul><li><span class="ww-mk">✓</span><div><b>자사 서비스 안에서 거래</b><p>외부 거래소의 시세와 유동성을 서비스 안에 연결해, 사용자가 자사 서비스 안에서 계속 거래하고 활동합니다.</p></div></li><li><span class="ww-mk">✓</span><div><b>만들지 않고 연결만</b><p>매칭엔진, 유동성, 지갑, 보안을 직접 만들지 않고 연결만 하면 됩니다.</p></div></li><li><span class="ww-mk">✓</span><div><b>QR 한 번으로 연결</b><p>API 키 입력 없이 QR 한 번으로 거래소가 연결됩니다.</p></div></li><li><span class="ww-mk">✓</span><div><b>여러 곳을 한 번에 연결</b><p>여러 체인과 거래소를 하나로 연결해 따로 관리할 필요가 없습니다.</p></div></li></ul></div></div>
+  <div class="ww rvl" style="--rvl-y:40px"><div class="ww-col ww-now"><span class="ww-cap">지금</span><div class="ww-t">사용자가 외부 거래소로 빠져나갑니다</div><ul><li><span class="ww-mk">✕</span><div><b>사용자 외부 이탈</b><p>거래하려는 사용자가 외부 거래소로 빠져 수수료와 관계를 잃습니다.</p></div></li><li><span class="ww-mk">✕</span><div><b>직접 구축 부담</b><p>거래소 자체 구축 시 유동성, API, 지갑, 보안을 전부 직접 감당해야 합니다.</p></div></li><li><span class="ww-mk">✕</span><div><b>온보딩 마찰</b><p>API 키 발급과 입력 과정에서 사용자가 이탈합니다.</p></div></li><li><span class="ww-mk">✕</span><div><b>체인, 거래소 파편화</b><p>여러 체인과 거래소를 각각 연동하고 유지해야 합니다.</p></div></li></ul></div><div class="ww-col ww-after"><span class="ww-cap">PortX 도입 후</span><div class="ww-t">자사 서비스 안에서 바로 거래를 시작합니다</div><ul><li><span class="ww-mk">✓</span><div><b>자사 서비스 안에서 거래</b><p>외부 거래소의 시세와 유동성을 서비스 안에 연결해, 사용자가 자사 서비스 안에서 계속 거래하고 활동합니다.</p></div></li><li><span class="ww-mk">✓</span><div><b>개발 대신 연결</b><p>매칭엔진, 유동성, 지갑, 보안을 직접 개발할 것 없이, 검증된 API 연결로 바로 시작합니다.</p></div></li><li><span class="ww-mk">✓</span><div><b>QR 한 번으로 연결</b><p>API 키 입력 없이 QR 한 번으로 거래소가 연결됩니다.</p></div></li><li><span class="ww-mk">✓</span><div><b>여러 곳을 한 번에 연결</b><p>여러 체인과 거래소를 하나로 연결해 따로 관리할 필요가 없습니다.</p></div></li></ul></div></div>
 </div></section>
 <section><div class="shell sec">
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Features</div><h2 class="sec-h2 has-lead" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>거래 경험을 서비스 안으로</span></span></h2><p class="phero-lead sec-lead rvl">외부 거래소의 유동성과 거래 기능을 자사 브랜드 안에 연결합니다. 전체 도입이 아니라, 필요한 기능만 모듈로 골라 도입할 수 있습니다.</p>

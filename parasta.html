@@ -1655,7 +1655,7 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 @media (hover:hover){ .uc-arrow:hover{ background:var(--accent); border-color:transparent; color:var(--white); transform:scale(1.06) } }
 /* 슬라이드를 그리드 1칸에 겹쳐 쌓아 컨테이너 높이 = 가장 긴 슬라이드 (전환 시 높이 안 튐) */
 .uc-slides{ display:grid }
-.uc-slide{ grid-area:1 / 1; opacity:0; visibility:hidden; transition:opacity .4s ease, transform .35s cubic-bezier(.2,.8,.2,1);
+.uc-slide{ grid-area:1 / 1; position:relative; opacity:0; visibility:hidden; transition:opacity .4s ease, transform .35s cubic-bezier(.2,.8,.2,1);
   background:color-mix(in srgb, var(--ink) 6%, var(--white)); color:var(--ink); border-radius:var(--radius-card); padding:3rem;
   display:flex; flex-direction:column }
 .uc-slide.is-active{ opacity:1; visibility:visible;
@@ -1673,11 +1673,12 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .uc-flag{ flex:none; display:inline-flex; align-items:center; padding:.375rem .875rem;
   background:rgba(var(--ink-rgb),.07); border-radius:var(--radius-pill);
   font-size:var(--text-16); font-weight:600; color:rgba(var(--ink-rgb),.45) }  /* 그레이 필 + 연그레이 텍스트 */
-.uc-slide > .uc-flag{ margin-bottom:.875rem }   /* 타이틀 위 카테고리 킥커 */
-.uc-num{ display:block; font-size:var(--text-14); font-weight:600; letter-spacing:.04em; color:rgba(var(--ink-rgb),.3); margin-bottom:1.25rem; font-variant-numeric:tabular-nums }   /* 카드 넘버링 01 / 11 */
+.uc-title{ display:flex; align-items:center; gap:.75rem; flex-wrap:wrap; margin-bottom:.75rem }   /* 타이틀 + 플래그 한 행 */
+.uc-num{ position:absolute; right:3rem; bottom:2.25rem; font-size:var(--text-14); font-weight:600; letter-spacing:.04em; color:rgba(var(--ink-rgb),.3); font-variant-numeric:tabular-nums }   /* 카드 우하단 넘버링 */
+.uc-num b{ color:var(--ink); font-weight:700 }   /* 현재 번호 진한색 */
 @media (max-width:639px){ .uc-row{ flex-direction:column; align-items:flex-start; gap:.375rem } }
 .uc-thumb video, .uc-thumb img{ width:100%; height:100%; object-fit:cover; display:block; border-radius:inherit }
-.uc-slide h3{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em; margin-bottom:.75rem; color:var(--ink) }
+.uc-slide h3{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em; margin-bottom:0; color:var(--ink) }
 @media (min-width:640px){ .uc-slide h3{ font-size:var(--text-30) } }
 .uc-slide > p{ font-size:var(--text-18); color:rgba(var(--ink-rgb),.6); line-height:var(--leading-body); word-break:keep-all }
 .uc-testimonial{ margin-top:2.5rem; padding-top:2rem; border-top:1px solid rgba(var(--ink-rgb),.12);
@@ -1760,7 +1761,7 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
   mask-image:linear-gradient(to right, transparent, #000 10%, #000 90%, transparent) }
 .pt-track{ display:flex; width:max-content; animation:ptScroll 32s linear infinite }
 .pt-set{ display:flex; align-items:center; gap:0; padding-right:0 }
-.pt-set img{ height:7.5rem; width:auto; flex:none }  /* ≈120px, 로고 PNG 자체 여백만으로 간격 */
+.pt-set img{ height:7.5rem; width:auto; flex:none }  /* ≈120px, 로고 여백만으로 간격 (svg 원본 컬러) */
 @keyframes ptScroll{ to{ transform:translateX(-50%) } }
 @media (max-width:639px){ .pt-set img{ height:5.5rem } }
 /* 인증·수상 마퀴: 로고(위) + 텍스트(아래) 아이템 순환 */
@@ -2796,7 +2797,7 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
 <section><div class="shell sec" style="padding-top:0">
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Partners</div><h2 class="sec-h2 has-lead" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>함께한 파트너</span></span></h2><p class="phero-lead sec-lead rvl">ParaSta는 금융, 공공, 민간기관부터 Web3 블록체인 프로젝트까지,<br>다양한 현장에서 검증된 코어 기술을 기반으로 합니다.</p>
   <div class="pt-marquee rvl" aria-label="함께한 파트너 로고">
-    <div class="pt-track"><div class="pt-set" aria-hidden="false"><img src="assets/partners/logo-shinhan.png" alt="신한은행" loading="lazy"><img src="assets/partners/logo-nh.png" alt="NH농협은행" loading="lazy"><img src="assets/partners/logo-nh-securities.png" alt="NH투자증권" loading="lazy"><img src="assets/partners/logo-samsung-securities.png" alt="삼성증권" loading="lazy"><img src="assets/partners/logo-samsung.png" alt="삼성" loading="lazy"><img src="assets/partners/logo-kb.png" alt="KB" loading="lazy"><img src="assets/partners/logo-ibk.png" alt="IBK기업은행" loading="lazy"><img src="assets/partners/logo-hanwha.png" alt="한화" loading="lazy"></div><div class="pt-set" aria-hidden="false"><img src="assets/partners/logo-shinhan.png" alt="신한은행" loading="lazy"><img src="assets/partners/logo-nh.png" alt="NH농협은행" loading="lazy"><img src="assets/partners/logo-nh-securities.png" alt="NH투자증권" loading="lazy"><img src="assets/partners/logo-samsung-securities.png" alt="삼성증권" loading="lazy"><img src="assets/partners/logo-samsung.png" alt="삼성" loading="lazy"><img src="assets/partners/logo-kb.png" alt="KB" loading="lazy"><img src="assets/partners/logo-ibk.png" alt="IBK기업은행" loading="lazy"><img src="assets/partners/logo-hanwha.png" alt="한화" loading="lazy"></div></div>
+    <div class="pt-track"><div class="pt-set" aria-hidden="false"><img src="assets/partners/logo-shinhan.svg" alt="신한은행" loading="lazy"><img src="assets/partners/logo-nh.svg" alt="NH농협은행" loading="lazy"><img src="assets/partners/logo-nh-securities.svg" alt="NH투자증권" loading="lazy"><img src="assets/partners/logo-samsung-securities.svg" alt="삼성증권" loading="lazy"><img src="assets/partners/logo-samsung.svg" alt="삼성" loading="lazy"><img src="assets/partners/logo-kb.svg" alt="KB" loading="lazy"><img src="assets/partners/logo-ibk.svg" alt="IBK기업은행" loading="lazy"><img src="assets/partners/logo-hanwha.svg" alt="한화" loading="lazy"></div><div class="pt-set" aria-hidden="false"><img src="assets/partners/logo-shinhan.svg" alt="신한은행" loading="lazy"><img src="assets/partners/logo-nh.svg" alt="NH농협은행" loading="lazy"><img src="assets/partners/logo-nh-securities.svg" alt="NH투자증권" loading="lazy"><img src="assets/partners/logo-samsung-securities.svg" alt="삼성증권" loading="lazy"><img src="assets/partners/logo-samsung.svg" alt="삼성" loading="lazy"><img src="assets/partners/logo-kb.svg" alt="KB" loading="lazy"><img src="assets/partners/logo-ibk.svg" alt="IBK기업은행" loading="lazy"><img src="assets/partners/logo-hanwha.svg" alt="한화" loading="lazy"></div></div>
   </div>
   <div class="pn-grid">
     <article class="pn-card rvl" style="--rvl-y:24px">

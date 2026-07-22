@@ -1655,7 +1655,7 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 @media (hover:hover){ .uc-arrow:hover{ background:var(--accent); border-color:transparent; color:var(--white); transform:scale(1.06) } }
 /* 슬라이드를 그리드 1칸에 겹쳐 쌓아 컨테이너 높이 = 가장 긴 슬라이드 (전환 시 높이 안 튐) */
 .uc-slides{ display:grid }
-.uc-slide{ grid-area:1 / 1; opacity:0; visibility:hidden; transition:opacity .4s ease, transform .35s cubic-bezier(.2,.8,.2,1);
+.uc-slide{ grid-area:1 / 1; position:relative; opacity:0; visibility:hidden; transition:opacity .4s ease, transform .35s cubic-bezier(.2,.8,.2,1);
   background:color-mix(in srgb, var(--ink) 6%, var(--white)); color:var(--ink); border-radius:var(--radius-card); padding:3rem;
   display:flex; flex-direction:column }
 .uc-slide.is-active{ opacity:1; visibility:visible;
@@ -1673,11 +1673,12 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .uc-flag{ flex:none; display:inline-flex; align-items:center; padding:.375rem .875rem;
   background:rgba(var(--ink-rgb),.07); border-radius:var(--radius-pill);
   font-size:var(--text-16); font-weight:600; color:rgba(var(--ink-rgb),.45) }  /* 그레이 필 + 연그레이 텍스트 */
-.uc-slide > .uc-flag{ margin-bottom:.875rem }   /* 타이틀 위 카테고리 킥커 */
-.uc-num{ display:block; font-size:var(--text-14); font-weight:600; letter-spacing:.04em; color:rgba(var(--ink-rgb),.3); margin-bottom:1.25rem; font-variant-numeric:tabular-nums }   /* 카드 넘버링 01 / 11 */
+.uc-title{ display:flex; align-items:center; gap:.75rem; flex-wrap:wrap; margin-bottom:.75rem }   /* 타이틀 + 플래그 한 행 */
+.uc-num{ position:absolute; right:3rem; bottom:2.25rem; font-size:var(--text-14); font-weight:600; letter-spacing:.04em; color:rgba(var(--ink-rgb),.3); font-variant-numeric:tabular-nums }   /* 카드 우하단 넘버링 */
+.uc-num b{ color:var(--ink); font-weight:700 }   /* 현재 번호 진한색 */
 @media (max-width:639px){ .uc-row{ flex-direction:column; align-items:flex-start; gap:.375rem } }
 .uc-thumb video, .uc-thumb img{ width:100%; height:100%; object-fit:cover; display:block; border-radius:inherit }
-.uc-slide h3{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em; margin-bottom:.75rem; color:var(--ink) }
+.uc-slide h3{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em; margin-bottom:0; color:var(--ink) }
 @media (min-width:640px){ .uc-slide h3{ font-size:var(--text-30) } }
 .uc-slide > p{ font-size:var(--text-18); color:rgba(var(--ink-rgb),.6); line-height:var(--leading-body); word-break:keep-all }
 .uc-testimonial{ margin-top:2.5rem; padding-top:2rem; border-top:1px solid rgba(var(--ink-rgb),.12);
@@ -1760,7 +1761,7 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
   mask-image:linear-gradient(to right, transparent, #000 10%, #000 90%, transparent) }
 .pt-track{ display:flex; width:max-content; animation:ptScroll 32s linear infinite }
 .pt-set{ display:flex; align-items:center; gap:0; padding-right:0 }
-.pt-set img{ height:7.5rem; width:auto; flex:none }  /* ≈120px, 로고 PNG 자체 여백만으로 간격 */
+.pt-set img{ height:7.5rem; width:auto; flex:none }  /* ≈120px, 로고 여백만으로 간격 (svg 원본 컬러) */
 @keyframes ptScroll{ to{ transform:translateX(-50%) } }
 @media (max-width:639px){ .pt-set img{ height:5.5rem } }
 /* 인증·수상 마퀴: 로고(위) + 텍스트(아래) 아이템 순환 */
@@ -2691,7 +2692,7 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
     <div class="shell phero-inner">
       <div class="phero-text">
         <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Solutions — 증명서</div>
-        <h1 class="phero-h1" data-line-stagger="120"><span class="rvl-line"><span>발급부터 검증까지</span></span><span class="rvl-line"><span>하나로 연결합니다</span></span></h1>
+        <h1 class="phero-h1" data-line-stagger="120"><span class="rvl-line"><span>발급만 하세요.</span></span><span class="rvl-line"><span>검증, 재발급은 솔루션이 처리합니다</span></span></h1>
         <p class="phero-lead rvl" style="--rvl-delay:250ms">위촉장, 수료증, MOU, 디지털 배지부터 자격·신원 증명까지, 두 가지 형태로 발급, 공유, 검증하는 블록체인 기반 증명 솔루션입니다. 웹에서 바로 발급하는 broof형과, 사용자가 직접 관리하는 신원(DID)과 검증 가능한 자격증명(VC)으로 기관에 맞춰 설계하는 MyID형을 제공합니다.</p>
         <div class="phero-rel rvl" style="--rvl-delay:600ms">
       <p class="phero-rel-t">관련 제품 살펴보기</p>
@@ -2725,7 +2726,7 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
 </div></section>
 <section><div class="shell sec">
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Problem &amp; Solution</div><h2 class="sec-h2 has-lead" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>발급기관 문제와 해결 방식</span></span></h2><p class="phero-lead sec-lead rvl">발급기관이 반복해서 겪는 네 가지 문제를 두 가지 형태로 해결합니다. 웹에서 바로 발급하는 broof형과, DID, VC 기반으로 기관에 맞춰 설계하는 MyID형입니다.</p>
-  <div class="ww rvl" style="--rvl-y:40px"><div class="ww-col ww-now"><span class="ww-cap">지금</span><div class="ww-t">발급 이후가 더 부담입니다</div><ul><li><span class="ww-mk">✕</span><div><b>발급 이후 운영 지속</b><p>검증 문의, 재발급, 서버, 보안 운영이 발급 후에도 계속됩니다.</p></div></li><li><span class="ww-mk">✕</span><div><b>위변조 확인 어려움</b><p>PDF, 이미지 증명서는 제출처가 원본 여부를 확인하기 어렵습니다.</p></div></li><li><span class="ww-mk">✕</span><div><b>검증 시스템 구축 부담</b><p>증명마다 검증 시스템을 따로 만들어 유지해야 합니다.</p></div></li><li><span class="ww-mk">✕</span><div><b>종이 발급, 배부 비용</b><p>인쇄, 배부, 인건비가 건마다 쌓입니다.</p></div></li></ul></div><div class="ww-col ww-after"><span class="ww-cap">도입 후</span><div class="ww-t">발급 이후는 솔루션이 처리합니다</div><ul><li><span class="ww-mk">✓</span><div><b>발급 이후 운영을 솔루션이 처리</b><p>검증 문의, 재발급, 서버, 보안 운영을 솔루션이 처리하고, 기관은 발급만 하면 됩니다.</p></div></li><li><span class="ww-mk">✓</span><div><b>제출처가 원본을 직접 확인</b><p>QR코드, 검증 링크(broof형)나 검증 가능한 디지털 자격증명(VC, MyID형)으로 제출처가 원본이 맞는지 바로 확인합니다.</p></div></li><li><span class="ww-mk">✓</span><div><b>검증 시스템을 직접 만들지 않음</b><p>broof형은 웹 서비스로, MyID형은 신원, 자격증명 인프라 연결로 별도 구축과 운영 부담을 줄입니다.</p></div></li><li><span class="ww-mk">✓</span><div><b>웹 발급으로 종이 비용 제거</b><p>인쇄, 배부, 인건비가 드는 종이 발급을 웹 발급으로 대체합니다.</p></div></li></ul></div></div>
+  <div class="ww rvl" style="--rvl-y:40px"><div class="ww-col ww-now"><span class="ww-cap">지금</span><div class="ww-t">발급 이후가 더 부담입니다</div><ul><li><span class="ww-mk">✕</span><div><b>발급 이후 운영 지속</b><p>검증 문의, 재발급, 서버, 보안 운영이 발급 후에도 계속됩니다.</p></div></li><li><span class="ww-mk">✕</span><div><b>위변조 확인 어려움</b><p>PDF, 이미지 증명서는 제출처가 원본 여부를 확인하기 어렵습니다.</p></div></li><li><span class="ww-mk">✕</span><div><b>검증 시스템 구축 부담</b><p>증명마다 검증 시스템을 따로 만들어 유지해야 합니다.</p></div></li><li><span class="ww-mk">✕</span><div><b>종이 발급, 배부 비용</b><p>인쇄, 배부, 인건비가 건마다 쌓입니다.</p></div></li></ul></div><div class="ww-col ww-after"><span class="ww-cap">도입 후</span><div class="ww-t">발급 이후는 솔루션이 처리합니다</div><ul><li><span class="ww-mk">✓</span><div><b>발급 이후 운영을 솔루션이 처리</b><p>발급만 하세요. 검증 문의, 재발급, 서버, 보안 운영을 솔루션이 전부 처리합니다.</p></div></li><li><span class="ww-mk">✓</span><div><b>제출처가 원본을 직접 확인</b><p>QR코드, 검증 링크(broof형)나 검증 가능한 디지털 자격증명(VC, MyID형)으로 제출처가 원본이 맞는지 바로 확인합니다.</p></div></li><li><span class="ww-mk">✓</span><div><b>검증 시스템을 직접 만들지 않음</b><p>broof형은 웹 서비스로, MyID형은 신원, 자격증명 인프라 연결로 별도 구축과 운영 부담을 줄입니다.</p></div></li><li><span class="ww-mk">✓</span><div><b>웹 발급으로 종이 비용 제거</b><p>인쇄, 배부, 인건비가 드는 종이 발급을 웹 발급으로 대체합니다.</p></div></li></ul></div></div>
 </div></section>
 <section><div class="shell sec">
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Compare</div><h2 class="sec-h2 has-lead" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>필요에 맞는 형태를 고르세요</span></span></h2><p class="phero-lead sec-lead rvl">정해진 양식으로 빠르게 발급하면 되는 경우엔 broof형, DID·VC 기반으로 검증 이후 서비스 연동까지 필요하면 MyID형이 맞습니다.</p>
