@@ -440,7 +440,7 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 
 /* ============ SOLUTIONS (works) ============ */
 #works{ background:var(--white) }
-.works-shell{ padding:2.5rem 1.25rem 5rem }
+.works-shell{ padding:5rem 1.25rem }
 .works-head{ display:flex; flex-direction:column; align-items:center; text-align:center; gap:1.25rem; margin-bottom:2.5rem }
 .eyebrow.bordered{ border:1px solid var(--line); border-radius:var(--radius-pill); padding:.375rem 1rem }
 .works-h2{ font-size:var(--text-32); font-weight:600; letter-spacing:-.02em; width:fit-content }
@@ -461,6 +461,7 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 .work-bottom{ position:absolute; inset-inline:1.5rem; bottom:1.5rem }
 .work-bottom h3{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em; line-height:var(--leading-heading) }
 .work-bottom p{ margin-top:.5rem; max-width:28rem; font-size:var(--text-14); color:rgba(var(--white-rgb),.55); line-height:var(--leading-body) }
+#works .work-bottom p{ font-size:var(--text-16) }   /* 메인 제품카드 본문만 키움 (서브 work-card 영향 없음) */
 .work-tags{ margin-top:1.25rem; display:flex; flex-wrap:wrap; gap:.5rem }
 .tag{ display:inline-flex; border:1px solid rgba(var(--white-rgb),.25); color:var(--white); border-radius:var(--radius-pill);
   padding:.5rem 1rem; font-size:var(--text-14) }
@@ -469,7 +470,7 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
   .work-card{ min-height:26rem; padding:2rem } .work-bottom{ inset-inline:2rem; bottom:2rem }
   .work-bottom h3{ font-size:var(--text-30) } }
 @media (min-width:768px){ .works-grid{ grid-template-columns:repeat(2,1fr) } }
-@media (min-width:1024px){ .works-shell{ padding-bottom:7rem } }
+@media (min-width:1024px){ .works-shell{ padding-block:7rem } }
 
 /* ============ FEATURES (services) ============ */
 #services{ background:var(--white) }
@@ -483,9 +484,11 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 @media (hover:hover){ .service-row:hover{ background:rgba(var(--surface-rgb),1); padding-left:2rem; padding-right:1.25rem } }
 .service-idx{ width:1.75rem; font-size:var(--text-14); font-weight:500; color:rgba(var(--ink-rgb),.4); flex:none }
 .service-row h3{ flex:1; font-size:var(--text-24); font-weight:500; letter-spacing:-.01em }
+#services .service-row h3{ font-size:var(--text-22) }   /* 메인 Solutions: 자묻질(.faq-t)과 동일 크기 */
 .service-desc{ display:none; max-width:20rem; font-size:var(--text-14); color:rgba(var(--ink-rgb),.55) }
 .service-badge{ width:2.5rem; height:2.5rem; display:grid; place-items:center; border-radius:var(--radius-pill);
   background:var(--ink); color:var(--white); flex:none; transition:transform .35s cubic-bezier(.2,.8,.2,1) }
+#services .service-badge .icn{ font-size:var(--text-22) }   /* 메인 Solutions 화살표 키움 (1em→22) */
 @media (hover:hover){ .service-row:hover .service-badge{ transform:translateX(5px) } }
 @media (min-width:640px){ .services-shell{ padding-left:2rem; padding-right:2rem }
   .services-h2{ margin-bottom:3.5rem; font-size:var(--text-48) }
@@ -493,7 +496,7 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
   .service-idx{ width:2.5rem }
   .service-row h3{ font-size:var(--text-30) }
   .service-badge{ width:3rem; height:3rem } }
-@media (min-width:768px){ .service-row h3{ font-size:var(--text-36) } }
+@media (min-width:768px){ .service-row h3{ font-size:var(--text-36) } #services .service-row h3{ font-size:var(--text-26) } }
 @media (min-width:1024px){ .services-shell{ padding-block:7rem } .service-desc{ display:block } }
 /* 공통 토큰 동작: <1024 행 본문 타이틀 아래 + 화살표 우측 고정 */
 @media (max-width:1023px){
@@ -509,6 +512,7 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 .stats-h2{ margin-top:1rem; max-width:20ch; font-size:var(--text-30); font-weight:500; letter-spacing:-.01em }
 .stats-grid{ margin-top:3.5rem; display:grid; grid-template-columns:repeat(2,1fr); column-gap:2rem; row-gap:3rem }
 .stat-num{ font-size:var(--text-48); font-weight:600; letter-spacing:-.02em }
+#why .stat-num small{ font-size:.5em; font-weight:600; letter-spacing:-.01em }   /* 단위(년+·만+) 축소 */
 .stat-label{ margin-top:.75rem; font-size:var(--text-14); color:rgba(var(--white-rgb),.55) }
 @media (min-width:640px){ .stats-shell{ padding-left:2rem; padding-right:2rem }
   .stats-panel{ padding:4rem 2rem } .stat-num{ font-size:var(--text-60) } }
@@ -710,22 +714,35 @@ body.show-grid #dev-grid{ display:block }
 @media (max-width:640px){ .pc-panel{ width:100% } html.chat-open{ padding-right:0 } html.chat-open #header{ right:0 } }
 
 /* ============ FOOTER ============ */
+/* ============ CLIENTS 마퀴 ============ */
+#clients{ padding:var(--space-64) 0 }
+#clients .mq{ overflow:hidden; -webkit-mask-image:linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); mask-image:linear-gradient(to right, transparent, #000 8%, #000 92%, transparent) }
+#clients .mq-track{ display:flex; align-items:center; gap:var(--space-64); width:max-content; animation:mq-scroll 40s linear infinite }
+@keyframes mq-scroll{ to{ transform:translateX(-50%) } }
+#clients .mq-logo{ flex:none; height:5rem; display:flex; align-items:center }
+@media (max-width:639px){ #clients .mq-logo{ height:3.5rem } #clients .mq-track{ gap:var(--space-40) } }
+#clients .mq-logo img{ height:100%; width:auto; object-fit:contain }
+@media (hover:hover){ #clients .mq:hover .mq-track{ animation-play-state:paused } }
+@media (prefers-reduced-motion:reduce){ #clients .mq-track{ animation:none; flex-wrap:wrap; justify-content:center; row-gap:var(--space-24) } }
+
 #footer{ position:relative; overflow:hidden; border-radius:var(--radius-card) var(--radius-card) 0 0; background:var(--ink); color:var(--white) }
 .footer-shell{ position:relative; z-index:10; padding:5rem 1.25rem 2.5rem }
 .footer-cta{ display:flex; flex-direction:column; gap:2rem; border-bottom:1px solid rgba(var(--white-rgb),.1); padding-bottom:4rem }
-.footer-h2{ max-width:18ch; font-size:var(--text-36); font-weight:600; letter-spacing:-.02em }
+.footer-cta .pill .hspring{ font-size:var(--text-16); gap:.875rem; padding:.5rem .5rem .5rem 1.75rem }   /* 히어로 Let's Talk 버튼과 동일 사이징 */
+.footer-cta .pill-badge{ width:2.5rem; height:2.5rem; font-size:var(--text-18) }
+.footer-h2{ max-width:18ch; font-size:var(--text-30); font-weight:600; letter-spacing:-.02em }
 .footer-cols{ display:grid; grid-template-columns:1fr; gap:3rem; padding-block:4rem }
 .footer-brand{ display:flex; align-items:center; gap:.5rem; font-size:var(--text-18); font-weight:600; letter-spacing:.02em }
 .footer-brand .icn{ font-size:var(--text-20) }
-.footer-tagline{ max-width:20rem; font-size:var(--text-14); color:rgba(var(--white-rgb),.55); margin-top:1rem; line-height:var(--leading-body) }
-.footer-addr{ max-width:20rem; font-size:var(--text-14); color:rgba(var(--white-rgb),.4); margin-top:1rem; line-height:var(--leading-body) }
+.footer-tagline{ max-width:20rem; font-size:var(--text-16); color:rgba(var(--white-rgb),.55); margin-top:1rem; line-height:var(--leading-body) }
+.footer-addr{ max-width:20rem; font-size:var(--text-16); color:rgba(var(--white-rgb),.4); margin-top:1rem; line-height:var(--leading-body) }
 .footer-col-title{ font-size:var(--text-14); text-transform:uppercase; letter-spacing:.025em; color:rgba(var(--white-rgb),.4); margin-bottom:1rem }
 .footer-col ul{ display:flex; flex-direction:column; gap:.75rem }
-.footer-col a, .footer-col button{ font-size:var(--text-14) }
+.footer-col a, .footer-col button{ font-size:var(--text-16) }
 .alink{ display:inline-flex; transition:transform .34s cubic-bezier(.2,.8,.2,1), opacity .34s cubic-bezier(.2,.8,.2,1); opacity:.65 }
 @media (hover:hover){ .alink-wrap:hover .alink{ transform:translateX(4px); opacity:1 } }
 .footer-legal{ display:flex; flex-direction:column; align-items:center; justify-content:space-between; gap:1rem;
-  border-top:1px solid rgba(var(--white-rgb),.1); padding-top:2rem; font-size:var(--text-14); color:rgba(var(--white-rgb),.45) }
+  border-top:1px solid rgba(var(--white-rgb),.1); padding-top:2rem; font-size:var(--text-16); color:rgba(var(--white-rgb),.45) }
 .footer-legal-links{ display:flex; gap:1.5rem }
 .alink.legal{ opacity:.7 }
 @media (hover:hover){ .footer-legal-links a:hover .alink.legal{ transform:translateX(3px); opacity:1 } }
@@ -733,9 +750,9 @@ body.show-grid #dev-grid{ display:block }
   pointer-events:none; user-select:none }
 .footer-wm img{ width:72rem; max-width:92%; height:auto; display:inline-block; opacity:.05 }
 @media (min-width:640px){ .footer-shell{ padding-left:2rem; padding-right:2rem }
-  .footer-h2{ font-size:var(--text-48) }
+  .footer-h2{ font-size:var(--text-40) }
   .footer-legal{ flex-direction:row } }
-@media (min-width:768px){ .footer-h2{ font-size:var(--text-60) } .footer-cols{ grid-template-columns:repeat(2,1fr) } }
+@media (min-width:768px){ .footer-h2{ font-size:var(--text-48) } .footer-cols{ grid-template-columns:repeat(2,1fr) } }
 @media (min-width:1024px){ .footer-shell{ padding-top:6rem }
   .footer-cta{ flex-direction:row; align-items:flex-end; justify-content:space-between }
   .footer-cols{ grid-template-columns:repeat(4,1fr) } }
@@ -895,17 +912,17 @@ body.show-grid #dev-grid{ display:block }
     <div class="shell about-grid">
       <div class="about-globe">
         <svg class="icn about-globe-bg" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9.25" stroke="currentColor" stroke-width="1.4"/><ellipse cx="12" cy="12" rx="4.2" ry="9.25" stroke="currentColor" stroke-width="1.4"/><path stroke="currentColor" stroke-width="1.4" stroke-linecap="round" d="M2.75 12h18.5"/></svg>
-        <div class="eyebrow dark" style="position:relative"><span class="dot"></span>The Company</div>
+        <div class="eyebrow dark" style="position:relative"><span class="dot"></span>About</div>
         <div class="about-globe-bottom rvl" style="--rvl-y:12px">
           <svg class="icn" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9.25" stroke="currentColor" stroke-width="1.4"/><ellipse cx="12" cy="12" rx="4.2" ry="9.25" stroke="currentColor" stroke-width="1.4"/><path stroke="currentColor" stroke-width="1.4" stroke-linecap="round" d="M2.75 12h18.5"/></svg>
-          <span>규제 영역과 Web3 시장을 모두 경험한 팀입니다.</span>
+          <span>규제 산업과 Web3 시장, 양쪽을 겪어온 팀입니다.</span>
         </div>
       </div>
       <div class="about-right">
-        <h2 class="about-h2" id="aboutH2" data-word-reveal>금융, 공공, 기업까지 — 디지털자산을 움직이는 <span class="mut">인프라를 만듭니다. 블록체인에 정확히 남기고, 기록은 되돌릴 수 없게.</span></h2>
+        <h2 class="about-h2" id="aboutH2" data-word-reveal>Web2의 경험과 이해 위에 Web3 기술을 더합니다. <span class="mut">금융, 공공, 기업의 디지털자산을 움직이는 지갑 중심 WalletFi 생태계를 만듭니다.</span></h2>
         <div class="about-footer rvl" style="--rvl-y:12px; --rvl-delay:200ms">
           <a class="pill outline with-arrow arw-right hs-scale" href="company.html">
-            <span class="hspring">회사 소개<span class="pill-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+            <span class="hspring">About<span class="pill-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
           </a>
         </div>
       </div>
@@ -915,10 +932,10 @@ body.show-grid #dev-grid{ display:block }
   <!-- ============ CREATE BAND ============ -->
   <section id="create">
     <ul class="shell create-list">
-      <li class="rvl" style="--rvl-y:28px; --rvl-delay:0ms"><div class="create-tile light">기록은</div></li>
-      <li class="rvl" style="--rvl-y:28px; --rvl-delay:120ms"><div class="create-tile accent">되돌릴 수</div></li>
+      <li class="rvl" style="--rvl-y:28px; --rvl-delay:0ms"><div class="create-tile light">디지털자산</div></li>
+      <li class="rvl" style="--rvl-y:28px; --rvl-delay:120ms"><div class="create-tile accent">파라메타에</div></li>
       <li class="rvl" style="--rvl-y:28px; --rvl-delay:240ms"><div class="create-tile dark"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg></div></li>
-      <li class="rvl" style="--rvl-y:28px; --rvl-delay:360ms"><div class="create-tile ghost">없게</div></li>
+      <li class="rvl" style="--rvl-y:28px; --rvl-delay:360ms"><div class="create-tile ghost">맡기세요</div></li>
     </ul>
   </section>
 
@@ -926,8 +943,8 @@ body.show-grid #dev-grid{ display:block }
   <section id="works">
     <div class="shell works-shell">
       <div class="works-head">
-        <div class="eyebrow dark bordered rvl rvl-op"><span class="dot"></span>Solutions</div>
-        <h2 class="works-h2" id="worksH2"><span class="rvl-line"><span>한 곳에서 완성하는 디지털자산 인프라</span></span></h2>
+        <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Products</div>
+        <h2 class="works-h2" id="worksH2"><span class="rvl-line"><span>무엇을 만드시나요?</span></span></h2>
       </div>
       <ul class="works-grid" id="worksGrid"></ul>
     </div>
@@ -936,8 +953,8 @@ body.show-grid #dev-grid{ display:block }
   <!-- ============ FEATURES ============ -->
   <section id="services">
     <div class="shell services-shell">
-      <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Features</div>
-      <h2 class="services-h2" id="servicesH2"><span class="rvl-line"><span>시작부터 운영까지, 필요한 기능을 한 번에</span></span></h2>
+      <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Solutions</div>
+      <h2 class="services-h2" id="servicesH2"><span class="rvl-line"><span>어떤 문제를 풀고 계신가요?</span></span></h2>
       <ul id="servicesList"></ul>
     </div>
   </section>
@@ -947,8 +964,36 @@ body.show-grid #dev-grid{ display:block }
     <div class="shell stats-shell">
       <div class="stats-panel rvl" style="--rvl-y:40px; --rvl-s:.99">
         <div class="eyebrow light"><span class="dot"></span>Why Parameta</div>
-        <h2 class="stats-h2" id="statsH2"><span class="rvl-line"><span>신뢰를 만드는 기준 — 9년의 현장에서.</span></span></h2>
+        <h2 class="stats-h2" id="statsH2"><span class="rvl-line"><span>숫자가 말해주는 이유</span></span></h2>
         <ul class="stats-grid" id="statsGrid"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CLIENTS 마퀴 ============ -->
+  <section id="clients" aria-label="함께한 기관·기업">
+    <div class="mq">
+      <div class="mq-track">
+        <span class="mq-logo"><img src="assets/partners/logo-shinhan.svg" alt="신한은행" loading="lazy"></span>
+        <span class="mq-logo"><img src="assets/partners/logo-nh.svg" alt="NH농협은행" loading="lazy"></span>
+        <span class="mq-logo"><img src="assets/partners/logo-kb.svg" alt="KB금융" loading="lazy"></span>
+        <span class="mq-logo"><img src="assets/partners/logo-ibk.svg" alt="IBK기업은행" loading="lazy"></span>
+        <span class="mq-logo"><img src="assets/partners/logo-nh-securities.svg" alt="NH투자증권" loading="lazy"></span>
+        <span class="mq-logo"><img src="assets/partners/logo-samsung.svg" alt="삼성" loading="lazy"></span>
+        <span class="mq-logo"><img src="assets/partners/logo-samsung-securities.svg" alt="삼성증권" loading="lazy"></span>
+        <span class="mq-logo"><img src="assets/partners/logo-mirae.svg" alt="미래에셋" loading="lazy"></span>
+        <span class="mq-logo"><img src="assets/partners/logo-hyundai.svg" alt="현대" loading="lazy"></span>
+        <span class="mq-logo"><img src="assets/partners/logo-hanwha.svg" alt="한화" loading="lazy"></span>
+        <span class="mq-logo" aria-hidden="true"><img src="assets/partners/logo-shinhan.svg" alt="" loading="lazy"></span>
+        <span class="mq-logo" aria-hidden="true"><img src="assets/partners/logo-nh.svg" alt="" loading="lazy"></span>
+        <span class="mq-logo" aria-hidden="true"><img src="assets/partners/logo-kb.svg" alt="" loading="lazy"></span>
+        <span class="mq-logo" aria-hidden="true"><img src="assets/partners/logo-ibk.svg" alt="" loading="lazy"></span>
+        <span class="mq-logo" aria-hidden="true"><img src="assets/partners/logo-nh-securities.svg" alt="" loading="lazy"></span>
+        <span class="mq-logo" aria-hidden="true"><img src="assets/partners/logo-samsung.svg" alt="" loading="lazy"></span>
+        <span class="mq-logo" aria-hidden="true"><img src="assets/partners/logo-samsung-securities.svg" alt="" loading="lazy"></span>
+        <span class="mq-logo" aria-hidden="true"><img src="assets/partners/logo-mirae.svg" alt="" loading="lazy"></span>
+        <span class="mq-logo" aria-hidden="true"><img src="assets/partners/logo-hyundai.svg" alt="" loading="lazy"></span>
+        <span class="mq-logo" aria-hidden="true"><img src="assets/partners/logo-hanwha.svg" alt="" loading="lazy"></span>
       </div>
     </div>
   </section>
@@ -968,8 +1013,8 @@ body.show-grid #dev-grid{ display:block }
   <div class="shell footer-shell">
     <div class="footer-cta">
       <h2 class="footer-h2" id="footerH2" data-line-stagger="100">
-        <span class="rvl-line"><span>Talk to</span></span>
-        <span class="rvl-line"><span>our team.</span></span>
+        <span class="rvl-line"><span>디지털자산 사업,</span></span>
+        <span class="rvl-line"><span>파라메타와 시작하세요</span></span>
       </h2>
       <button class="pill light with-arrow arw-up hs-scale" data-modal>
         <span class="hspring">Contact Us<span class="pill-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg></span></span>
@@ -1226,6 +1271,7 @@ const WORKS = [
   { name:'ParaSta', cat:'Platform', year:'2026', href:'parasta.html', desc:'발행부터 지갑, 신원확인, 오케스트레이션까지 디지털자산 서비스의 핵심 기능을 하나의 플랫폼에서 제공합니다.', tags:['토큰 발행','지갑','온체인 KYC'] },
   { name:'Port X', cat:'Exchange', year:'2026', href:'portx.html', desc:'거래소 구축에 필요한 핵심 기능을 하나의 솔루션으로 제공해, 개발 부담을 줄이고 빠른 출시를 지원합니다.', tags:['화이트라벨','거래 연동','빠른 출시'] },
   { name:'MyID', cat:'Identity', year:'2026', href:'myid.html', desc:'고객사의 서비스 환경에 맞는 DID 기반 신원확인 체계를 쉽고 유연하게 구축할 수 있도록 지원합니다.', tags:['DID','신원인증','CSAP 인증'] },
+  { name:'MyID 2.0', cat:'Public', year:'2026', href:'myid.html', desc:'공공기관이 개별 인프라를 구축하지 않고, 구독형으로 DID, 지갑, 검증 서비스를 시작합니다.', tags:['K-BTF','CSAP 인증','공공 SaaS'] },
 ];
 const logoMark = '<svg class="icn" viewBox="0 0 48 48" aria-hidden="true"><path fill="currentColor" d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z"/></svg>';
 const arrowUpRight = '<svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg>';
@@ -1251,10 +1297,12 @@ WORKS.forEach((w, i) => {
 
 /* ---------- FEATURES (services) ---------- */
 const SERVICES = [
-  { idx:'01', title:'시작부터 운영까지 한 번에', desc:'토큰 발행, 지갑, 신원인증, 체인 연결, 거래 연동까지 안정적으로 도입합니다.' },
-  { idx:'02', title:'확장은 더 자유롭게', desc:'멀티체인, 멀티자산 환경에서도 자산과 데이터를 유연하게 활용합니다.' },
-  { idx:'03', title:'금융 수준의 보안', desc:'금융·공공 서비스에 요구되는 보안 기준의 운영 환경을 제공합니다.' },
-  { idx:'04', title:'운영 관리는 한곳에서', desc:'토큰, 사용자, 거래, 서비스 상태를 어드민 콘솔에서 통합 관리합니다.' },
+  { idx:'01', title:'규제에 맞는 디지털자산 금융을 시작하세요', desc:'발행, 지갑, 온체인 KYC, 통합관제까지, 스테이블코인부터 토큰증권까지 단계적으로 확장합니다.', href:'solution-finance.html' },
+  { idx:'02', title:'복잡한 정산을 자동으로 처리하세요', desc:'은행망과 블록체인을 잇는 미들웨어로 환전, 송금, 정산을 자동화합니다.', href:'solution-settlement.html' },
+  { idx:'03', title:'거래소를 만들지 않고 거래 기능을 더하세요', desc:'외부 CEX, DEX 유동성과 거래 화면을 자사 브랜드 안에 연결합니다.', href:'solution-exchange.html' },
+  { idx:'04', title:'개인정보를 쌓지 않고 서비스를 운영하세요', desc:'PDS와 선택적 공개로 통제권은 사용자에게 두고, 보관 부담은 덜어냅니다.', href:'solution-data.html' },
+  { idx:'05', title:'구축 없이 1주일 내 블록체인 SaaS를 도입하세요', desc:'CSAP 인증 공공 클라우드에서 DID, 지갑, 검증을 구독형으로 시작합니다.', href:'solution-gov.html' },
+  { idx:'06', title:'발급한 증명서, 검증까지 맡기세요', desc:'받는 사람이 보관, 공유하고 제출처가 원본 여부를 바로 확인합니다.', href:'solution-cert.html' },
 ];
 const servicesList = document.getElementById('servicesList');
 SERVICES.forEach((s, i) => {
@@ -1263,7 +1311,7 @@ SERVICES.forEach((s, i) => {
   li.style.setProperty('--rvl-y', '24px');
   li.style.setProperty('--rvl-delay', (i * 80) + 'ms');
   li.innerHTML =
-    '<a class="service-link" href="#services">' +
+    '<a class="service-link" href="' + s.href + '">' +
       '<div class="service-row">' +
         '<span class="service-idx">' + s.idx + '</span>' +
         '<h3>' + s.title + '</h3>' +
@@ -1276,10 +1324,10 @@ SERVICES.forEach((s, i) => {
 
 /* ---------- STATS ---------- */
 const STATS = [
-  { value:9, suffix:'', label:'년의 현장 경험' },
-  { value:3, suffix:'', label:'코어 프로덕트' },
-  { value:10, suffix:'+', label:'산업 솔루션' },
-  { value:4, suffix:'', label:'고객 도메인 — 금융·공공·기업·Web3' },
+  { value:10, suffix:'년+', label:'블록체인 트랙레코드' },
+  { value:100, suffix:'+', label:'파트너, 클라이언트' },
+  { value:370, suffix:'만+', label:'파라메타 서비스 이용자' },
+  { text:'TI-1', label:'기술신용등급 최상위' },
 ];
 const statsGrid = document.getElementById('statsGrid');
 const statNumEls = [];
@@ -1288,9 +1336,13 @@ STATS.forEach((s, i) => {
   li.className = 'rvl';
   li.style.setProperty('--rvl-y', '20px');
   li.style.setProperty('--rvl-delay', (i * 90) + 'ms');
-  li.innerHTML = '<div class="stat-num"><span class="stat-val">0</span>' + s.suffix + '</div><div class="stat-label">' + s.label + '</div>';
+  if (s.text){
+    li.innerHTML = '<div class="stat-num">' + s.text + '</div><div class="stat-label">' + s.label + '</div>';
+  } else {
+    li.innerHTML = '<div class="stat-num"><span class="stat-val">0</span><small>' + s.suffix + '</small></div><div class="stat-label">' + s.label + '</div>';
+    statNumEls.push({ el: li.querySelector('.stat-val'), value: s.value });
+  }
   statsGrid.appendChild(li);
-  statNumEls.push({ el: li.querySelector('.stat-val'), value: s.value });
 });
 let lastStatUpdate = 0;
 function updateStats(){

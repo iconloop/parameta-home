@@ -4254,13 +4254,16 @@ PAGES['myid.html'] = dict(
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
   {sec_head('Milestones', '국내외 최초 기록을 만들어온 DID')}
-  {rows([
-    dict(idx='국내 최초', title='DID Method Registry 등록'),
-    dict(idx='국내 최초', title='DID 기반 혁신금융서비스 지정'),
-    dict(idx='국내 최초', title='금융권 KYC DID 상용화'),
-    dict(idx='세계 최초', title='블록체인 공동인증 — 증권사 26개사'),
-    dict(idx='블록체인 최초', title='블록체인 서비스 최초 CSAP 인증'),
-  ], sm=True, meta=True)}
+  <div class="firsts-hero rvl">
+    <div class="fh-big" aria-hidden="true"><span class="fh-num">5<span class="st">건</span></span><span class="fh-cap">국내외 DID 최초</span></div>
+    <ul class="fh-list">
+      <li><span class="fh-chip world">세계 최초</span>블록체인 공동인증, 증권사 26개사</li>
+      <li><span class="fh-chip">블록체인 최초</span>블록체인 서비스 최초 CSAP 인증</li>
+      <li><span class="fh-chip">국내 최초</span>금융권 KYC DID 상용화</li>
+      <li><span class="fh-chip">국내 최초</span>DID 기반 혁신금융서비스 지정</li>
+      <li><span class="fh-chip">국내 최초</span>DID Method Registry 등록</li>
+    </ul>
+  </div>
 </div></section>
 <section id="lineup"><div class="shell sec" style="padding-top:0">
   {sec_head('Lineup', 'MyID vs MyID 2.0 (K-BTF)', '같은 DID 플랫폼을 대상에 맞게 두 갈래로 제공합니다. 민간은 MyID, 공공기관은 K-BTF 공동 인프라 기반 MyID 2.0으로 도입합니다.')}
