@@ -928,11 +928,13 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
   .ex-card[style*="--brand"]:hover{ background:var(--brand); color:var(--brand-txt) }
   .ex-card[style*="--brand"]:hover .ex-ico{ background:rgba(255,255,255,.4) } }
 .ex-card .ex-ico{ display:block; width:3.5rem; height:3.5rem; margin-bottom:2rem; background:rgba(var(--white-rgb),.08) }
-/* 로고: 기본은 원본 색·영역 중앙 정렬, 어두운 심볼(ex-logo-inv)만 반대색(흰색), 호버 시 전부 흰색 */
+/* 로고: 기본은 원본 브랜드색, 호버 시 잉크(남색)로 덮음. 흰색 심볼(ex-logo-inv=OKX)만 항상 흰색 */
 .ex-card .ex-ico.ex-logo{ background:transparent; display:grid; place-items:center; padding:0 }
-.ex-card .ex-ico.ex-logo img{ width:2.25rem; height:2.25rem; object-fit:contain; display:block; margin:auto; transition:filter .35s ease }   /* 정사각 마스크·중앙·축소(56→36) */
-.ex-card .ex-ico.ex-logo-inv img{ filter:brightness(0) invert(1) }
-@media (hover:hover){ .ex-card:hover .ex-ico.ex-logo img{ filter:brightness(0) invert(1) } }
+.ex-card .ex-ico.ex-logo img{ width:100%; height:100%; display:block; transition:filter .35s ease }   /* 로고를 56px 영역에 스케일 없이 1:1 (SVG가 이미 56 기준 제작) */
+.ex-card .ex-ico.ex-logo-inv img{ filter:brightness(0) invert(1) }   /* OKX: 흰색 심볼 그대로 */
+@media (hover:hover){
+  .ex-card:hover .ex-ico.ex-logo img{ filter:brightness(0) }   /* 호버 시 로고를 잉크(남색)로 */
+  .ex-card:hover .ex-ico.ex-logo-inv img{ filter:brightness(0) invert(1) } }   /* OKX만 예외: 흰색 유지 */
 @media (hover:hover){ .ex-card[style*="--brand"]:hover .ex-ico.ex-logo{ background:transparent } }   /* 로고 칸은 호버 흰 배경 제거 */
 .ex-card h3{ margin-bottom:0 }
 .ex-card .ex-num{ display:block; font-size:var(--text-14); font-weight:500; color:rgba(var(--white-rgb),.5); margin-bottom:.5rem }  /* 기능 카드 번호 */
@@ -1503,7 +1505,7 @@ body.blog .pd-hero-meta .post-cat{ background:rgba(var(--white-rgb),.14); color:
 
 .aw-set{ display:flex; align-items:flex-start; gap:0; padding-right:0 }
 .aw-item{ display:flex; flex-direction:column; align-items:center; gap:1rem;
-  width:12.5rem; margin:0 .75rem; text-align:center }   /* 아이템 사이 간격 축소 (40→24px) */
+  width:12.5rem; margin:0 1rem; text-align:center }   /* 아이템 사이 간격 (24→32px) */
 .aw-logo{ position:relative; width:4.75rem; height:4.75rem;
   display:flex; align-items:center; justify-content:center }  /* 박스 제거 — 로고 SVG가 자체 완결형 */
 .aw-logo img{ max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain }  /* 68%→100% */
@@ -4120,12 +4122,12 @@ PAGES['portx.html'] = dict(
     exchange_card('Binance', logo='assets/exchanges/binance.svg', brand='#F0B90B', dark_text=True),
     exchange_card('OKX', logo='assets/exchanges/okx.svg', brand='#000000', logo_dark=True),
     exchange_card('Bybit', logo='assets/exchanges/bybit.svg', brand='#F7A600', dark_text=True),
-    exchange_card('Bitget', logo='assets/exchanges/bitget.svg', brand='#00F0FF', dark_text=True, logo_dark=True),
+    exchange_card('Bitget', logo='assets/exchanges/bitget.svg', brand='#00F0FF', dark_text=True),
     exchange_card('Gate.io', logo='assets/exchanges/gate.svg', brand='#2354E6'),
-    exchange_card('Hyperliquid', logo='assets/exchanges/hyperliquid.svg', brand='#97FCE4', dark_text=True, logo_dark=True),
+    exchange_card('Hyperliquid', logo='assets/exchanges/hyperliquid.svg', brand='#97FCE4', dark_text=True),
     exchange_card('Bithumb', logo='assets/exchanges/bithumb.svg', brand='#F37321'),
     exchange_card('bitFlyer', logo='assets/exchanges/bitflyer.svg', brand='#00A0E9'),
-    exchange_card('bitbank', logo='assets/exchanges/bitbank.svg', brand='#00C29E', dark_text=True, logo_dark=True),
+    exchange_card('bitbank', logo='assets/exchanges/bitbank.svg', brand='#00C29E', dark_text=True),
   ], cols=3)}
 </div></section>
 <section><div class="shell sec">
