@@ -4070,7 +4070,7 @@ PAGES['portx.html'] = dict(
     h1_lines=['PortX'],
     lead='PortX는 여러 거래소(CEX, DEX)를 API로 연동해, 자사 브랜드의 디지털자산 거래 서비스를 만들 수 있게 하는 화이트라벨 솔루션입니다. 필요한 기능만 모듈로 골라 도입하고, 거래부터 운영까지 하나로 연결합니다.',
     crumb='Products — Port X',
-    hero_visual='<img class="fit-contain" src="assets/portx/hero-test.avif" alt="" loading="eager" fetchpriority="high">',
+    hero_visual='<img class="fit-contain" src="assets/portx/portx-hero.png" alt="" loading="eager" fetchpriority="high">',
     content=f'''
 <section><div class="shell sec">
   <div class="whatis-grid">
