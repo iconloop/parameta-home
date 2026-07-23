@@ -1002,8 +1002,11 @@ body.hero-dark .phero-text .phero-lead{ color:rgba(var(--white-rgb),.7); font-si
 .phero-cta .pill .hspring{ font-size:var(--text-16) }
 /* 히어로 CTA 스왑(공통): 새 Talk to Sales(cta-talk)는 기본 숨김 → PortX만 노출, 기존(cta-legacy)은 PortX에서 숨김. 나머지 페이지는 부활 전까지 기존 유지 */
 .phero-cta .cta-talk{ display:none }
-body.portx .phero-cta .cta-talk{ display:inline-block }
-body.portx .phero-cta .cta-legacy{ display:none }
+body.portx .phero-cta .cta-talk, body.parasta .phero-cta .cta-talk, body.broof .phero-cta .cta-talk{ display:inline-block }
+body.portx .phero-cta .cta-legacy, body.parasta .phero-cta .cta-legacy{ display:none }
+/* 새 버튼 사이징을 메인 히어로 Let's Talk와 동일하게 */
+.phero-cta .cta-talk .hspring{ gap:.875rem }
+.phero-cta .cta-talk .pill-badge{ width:2.5rem; height:2.5rem; font-size:var(--text-18) }
 /* light 버튼(View Demo) 호버: 텍스트 purple-500 */
 .phero-cta .pill.light .hspring{ transition:color .25s ease, transform .3s cubic-bezier(.2,.8,.2,1) }
 @media (hover:hover){ .phero-cta .pill.light:hover .hspring{ color:var(--purple-500) } }
@@ -1046,7 +1049,7 @@ body.hero-dark .phero-wm{ display:none }
 body.hero-dark .phero-inner{ min-height:100vh; display:grid; grid-template-columns:repeat(12,1fr);
   align-items:center; column-gap:var(--grid-gap); padding-top:6rem; padding-bottom:3rem }
 body.hero-dark .phero-text{ grid-column:1 / 6; align-self:center; gap:1rem }
-body.hero-dark .phero-cta{ margin-top:.5rem }  /* 리드↔버튼 살짝만 */
+body.hero-dark .phero-cta{ margin-top:var(--space-16) }  /* 리드↔버튼 간격 (8→16) */
 body.hero-dark .phero-visual{ grid-column:7 / 13; display:block; align-self:stretch; min-height:56vh;
   width:calc(100% + (100% - 5 * var(--grid-gap)) / 12 + var(--grid-gap) / 2);
   margin-left:calc(-1 * ((100% - 5 * var(--grid-gap)) / 12 + var(--grid-gap) / 2));  /* 왼쪽으로 반칸만 확장 */
@@ -1066,7 +1069,7 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 /* 태블릿 전용(640~1023): 이미지 우측 걸침 크롭 + full-bleed. 모바일(≤639)은 위 기본 유지 */
 @media (min-width:640px) and (max-width:1023px){
   body.hero-dark .phero-visual{ min-height:52vh; margin-inline:-2rem; margin-bottom:-3rem; border-top-left-radius:0; border-top-right-radius:0 }
-  body.hero-dark .phero-visual img.fit-contain{ inset:auto; right:-40px; bottom:-15%; width:auto; height:130%; max-width:none; object-fit:contain } }
+  body.hero-dark .phero-visual img.fit-contain{ inset:auto; right:-20px; bottom:-50%; width:auto; height:156%; max-width:none; object-fit:contain } }
 /* ---- 콘텐츠형 히어로(hero-center): 이미지 영역 없음 + 텍스트 중앙정렬 ---- */
 body.hero-center .phero-inner{ grid-template-columns:1fr; place-items:center; text-align:center }
 body.hero-center .phero-visual{ display:none }
@@ -1751,6 +1754,26 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .uc-avatar video, .uc-avatar img{ width:100%; height:100%; object-fit:cover; display:block }
 .uc-quote{ font-size:var(--text-20); font-weight:500; color:rgba(var(--ink-rgb),.85) }
 .uc-name{ margin-top:.25rem; font-size:var(--text-16); font-weight:600; color:var(--purple-500) }
+/* Use Cases 탭바(parasta) — 캐러셀 위 카테고리 전환 */
+.uc-tabbar{ display:flex; justify-content:center; gap:.5rem; margin-bottom:var(--space-24) }
+.uc-tabbtn{ padding:.625rem 1.25rem; border-radius:var(--radius-pill); border:1px solid var(--line); background:var(--white); color:rgba(var(--ink-rgb),.55); font-size:var(--text-16); font-weight:500; cursor:pointer; transition:background .25s ease, color .25s ease, border-color .25s ease }
+@media (hover:hover){ .uc-tabbtn:hover{ color:var(--ink) } }
+.uc-tabbtn.is-active{ background:var(--ink); border-color:transparent; color:var(--white) }
+.uc-tabpanel{ display:none }
+.uc-tabpanel.is-active{ display:block }
+.uc-tabsub{ text-align:center; font-size:var(--text-16); color:rgba(var(--ink-rgb),.5); margin-bottom:var(--space-32) }
+.uc-tabnote{ text-align:center; font-size:var(--text-16); color:rgba(var(--ink-rgb),.6); line-height:var(--leading-body); margin-top:var(--space-32) }
+/* Broof Applied Cases — 2단 슬라이드(증명서 이미지 + 인용/로고) */
+.bc-cases .uc-slide{ display:grid; grid-template-columns:minmax(0,40%) 1fr; gap:var(--space-48); align-items:center }
+.bc-cert{ border-radius:var(--radius-card-sm); overflow:hidden; background:color-mix(in srgb, var(--ink) 5%, var(--white)) }
+.bc-cert img{ width:100%; height:auto; display:block }
+.bc-body{ display:flex; flex-direction:column; gap:var(--space-48) }
+.bc-quote{ font-size:var(--text-30); font-weight:500; line-height:var(--leading-heading); letter-spacing:-.01em; color:var(--ink); word-break:keep-all }
+@media (min-width:768px){ .bc-quote{ font-size:var(--text-36) } }
+.bc-org{ display:flex; flex-direction:column; gap:var(--space-12) }
+.bc-lead{ font-size:var(--text-16); color:rgba(var(--ink-rgb),.5) }
+.bc-logo{ font-size:var(--text-20); font-weight:700; letter-spacing:-.01em; color:var(--ink) }
+@media (max-width:767px){ .bc-cases .uc-slide{ grid-template-columns:1fr; gap:var(--space-32) } .bc-quote{ font-size:var(--text-24) } }
 /* 탭(640~1023): 카드 패딩을 위 grouped 카드(2rem)와 통일 — 하단은 유지 */
 @media (min-width:640px) and (max-width:1023px){ .uc-slide{ padding:2rem 2rem 3rem } }
 .uc-dots{ display:none }
@@ -1853,6 +1876,7 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .pt-track{ display:flex; width:max-content; animation:ptScroll 32s linear infinite }
 .pt-set{ display:flex; align-items:center; gap:0; padding-right:0 }
 .pt-set img{ height:7.5rem; width:auto; flex:none }  /* ≈120px, 로고 여백만으로 간격 (svg 원본 컬러) */
+body.parasta .pt-set img{ height:5rem }   /* parasta 마퀴 로고 축소(120→80px) */
 @keyframes ptScroll{ to{ transform:translateX(-50%) } }
 @media (max-width:639px){ .pt-set img{ height:5.5rem } }
 /* 인증·수상 마퀴: 로고(위) + 텍스트(아래) 아이템 순환 */
@@ -3344,45 +3368,54 @@ document.querySelectorAll('.cmpt-barwrap').forEach(bw => {
   next.addEventListener('click', () => bar.scrollBy({ left:180, behavior:'smooth' }));
 });
 
-/* Use Cases 캐러셀 (portx) */
-const ucSlides = document.querySelectorAll('.uc-carousel .uc-slide');
-if (ucSlides.length){
-  let ucIdx = 0;
-  let ucShow = i => { ucSlides.forEach((s, n) => s.classList.toggle('is-active', n === i)); ucIdx = i; };
-  document.querySelector('.uc-carousel .uc-prev')?.addEventListener('click', () => ucShow((ucIdx - 1 + ucSlides.length) % ucSlides.length));
-  document.querySelector('.uc-carousel .uc-next')?.addEventListener('click', () => ucShow((ucIdx + 1) % ucSlides.length));
-  // 닷 인디케이터 (모바일 전용 노출) — 슬라이드 수만큼 생성, ucShow와 동기화
-  const ucDots = document.querySelector('.uc-carousel .uc-dots');
-  if (ucDots){
-    ucSlides.forEach((_, i) => {
+/* Use Cases 캐러셀 (portx·parasta 등) — 인스턴스별 스코프로 한 페이지 여러 개 지원 */
+document.querySelectorAll('.uc-carousel').forEach(uc => {
+  const slides = uc.querySelectorAll('.uc-slide');
+  if (!slides.length) return;
+  let idx = 0;
+  const dots = uc.querySelector('.uc-dots');
+  const sync = i => dots?.querySelectorAll('.uc-dot').forEach((d, n) => d.classList.toggle('is-active', n === i));
+  const show = i => { slides.forEach((s, n) => s.classList.toggle('is-active', n === i)); idx = i; sync(i); };
+  uc.querySelector('.uc-prev')?.addEventListener('click', () => show((idx - 1 + slides.length) % slides.length));
+  uc.querySelector('.uc-next')?.addEventListener('click', () => show((idx + 1) % slides.length));
+  // 닷 인디케이터 (모바일 전용 노출)
+  if (dots){
+    slides.forEach((_, i) => {
       const b = document.createElement('button');
       b.type = 'button'; b.className = 'uc-dot' + (i === 0 ? ' is-active' : '');
       b.setAttribute('aria-label', (i + 1) + '번째 사례');
-      b.addEventListener('click', () => ucShow(i));
-      ucDots.appendChild(b);
+      b.addEventListener('click', () => show(i));
+      dots.appendChild(b);
     });
   }
-  const ucSync = i => ucDots?.querySelectorAll('.uc-dot').forEach((d, n) => d.classList.toggle('is-active', n === i));
-  const _ucShow = ucShow;
-  ucShow = i => { _ucShow(i); ucSync(i); };
   // 모바일 스와이프(플리킹)
-  const ucWrap = document.querySelector('.uc-carousel .uc-slides');
-  let ucX = null;
-  ucWrap?.addEventListener('touchstart', e => { ucX = e.touches[0].clientX; }, { passive:true });
-  ucWrap?.addEventListener('touchend', e => {
-    if (ucX === null) return;
-    const dx = e.changedTouches[0].clientX - ucX; ucX = null;
+  const wrap = uc.querySelector('.uc-slides');
+  let x = null;
+  wrap?.addEventListener('touchstart', e => { x = e.touches[0].clientX; }, { passive:true });
+  wrap?.addEventListener('touchend', e => {
+    if (x === null) return;
+    const dx = e.changedTouches[0].clientX - x; x = null;
     if (Math.abs(dx) < 40) return;
-    ucShow(dx < 0 ? (ucIdx + 1) % ucSlides.length : (ucIdx - 1 + ucSlides.length) % ucSlides.length);
+    show(dx < 0 ? (idx + 1) % slides.length : (idx - 1 + slides.length) % slides.length);
   }, { passive:true });
-  // 모션: 슬라이드 안 모든 <video muted loop playsinline>(썸네일·아바타 등)를 카드 호버 시 재생
-  ucSlides.forEach(sl => {
+  // 슬라이드 안 <video>를 카드 호버 시 재생
+  slides.forEach(sl => {
     const vids = sl.querySelectorAll('video');
     if (!vids.length) return;
     sl.addEventListener('mouseenter', () => vids.forEach(v => v.play()));
     sl.addEventListener('mouseleave', () => vids.forEach(v => { v.pause(); v.currentTime = 0; }));
   });
-}
+});
+/* Use Cases 탭 (parasta) — 탭바 버튼으로 패널(캐러셀) 전환 */
+document.querySelectorAll('.uc-tabbar').forEach(bar => {
+  const btns = [...bar.querySelectorAll('.uc-tabbtn')];
+  const scope = bar.closest('.sec') || document;
+  const panels = [...scope.querySelectorAll('.uc-tabpanel')];
+  btns.forEach((b, i) => b.addEventListener('click', () => {
+    btns.forEach((x, n) => x.classList.toggle('is-active', n === i));
+    panels.forEach((p, n) => p.classList.toggle('is-active', n === i));
+  }));
+});
 
 /* global click routing — 메인(parameta.html)과 동일 */
 document.addEventListener('click', (e) => {

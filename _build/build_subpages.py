@@ -164,8 +164,11 @@ body.hero-dark .phero-text .phero-lead{ color:rgba(var(--white-rgb),.7); font-si
 .phero-cta .pill .hspring{ font-size:var(--text-16) }
 /* 히어로 CTA 스왑(공통): 새 Talk to Sales(cta-talk)는 기본 숨김 → PortX만 노출, 기존(cta-legacy)은 PortX에서 숨김. 나머지 페이지는 부활 전까지 기존 유지 */
 .phero-cta .cta-talk{ display:none }
-body.portx .phero-cta .cta-talk{ display:inline-block }
-body.portx .phero-cta .cta-legacy{ display:none }
+body.portx .phero-cta .cta-talk, body.parasta .phero-cta .cta-talk, body.broof .phero-cta .cta-talk{ display:inline-block }
+body.portx .phero-cta .cta-legacy, body.parasta .phero-cta .cta-legacy{ display:none }
+/* 새 버튼 사이징을 메인 히어로 Let's Talk와 동일하게 */
+.phero-cta .cta-talk .hspring{ gap:.875rem }
+.phero-cta .cta-talk .pill-badge{ width:2.5rem; height:2.5rem; font-size:var(--text-18) }
 /* light 버튼(View Demo) 호버: 텍스트 purple-500 */
 .phero-cta .pill.light .hspring{ transition:color .25s ease, transform .3s cubic-bezier(.2,.8,.2,1) }
 @media (hover:hover){ .phero-cta .pill.light:hover .hspring{ color:var(--purple-500) } }
@@ -208,7 +211,7 @@ body.hero-dark .phero-wm{ display:none }
 body.hero-dark .phero-inner{ min-height:100vh; display:grid; grid-template-columns:repeat(12,1fr);
   align-items:center; column-gap:var(--grid-gap); padding-top:6rem; padding-bottom:3rem }
 body.hero-dark .phero-text{ grid-column:1 / 6; align-self:center; gap:1rem }
-body.hero-dark .phero-cta{ margin-top:.5rem }  /* 리드↔버튼 살짝만 */
+body.hero-dark .phero-cta{ margin-top:var(--space-16) }  /* 리드↔버튼 간격 (8→16) */
 body.hero-dark .phero-visual{ grid-column:7 / 13; display:block; align-self:stretch; min-height:56vh;
   width:calc(100% + (100% - 5 * var(--grid-gap)) / 12 + var(--grid-gap) / 2);
   margin-left:calc(-1 * ((100% - 5 * var(--grid-gap)) / 12 + var(--grid-gap) / 2));  /* 왼쪽으로 반칸만 확장 */
@@ -228,7 +231,7 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 /* 태블릿 전용(640~1023): 이미지 우측 걸침 크롭 + full-bleed. 모바일(≤639)은 위 기본 유지 */
 @media (min-width:640px) and (max-width:1023px){
   body.hero-dark .phero-visual{ min-height:52vh; margin-inline:-2rem; margin-bottom:-3rem; border-top-left-radius:0; border-top-right-radius:0 }
-  body.hero-dark .phero-visual img.fit-contain{ inset:auto; right:-40px; bottom:-15%; width:auto; height:130%; max-width:none; object-fit:contain } }
+  body.hero-dark .phero-visual img.fit-contain{ inset:auto; right:-20px; bottom:-50%; width:auto; height:156%; max-width:none; object-fit:contain } }
 /* ---- 콘텐츠형 히어로(hero-center): 이미지 영역 없음 + 텍스트 중앙정렬 ---- */
 body.hero-center .phero-inner{ grid-template-columns:1fr; place-items:center; text-align:center }
 body.hero-center .phero-visual{ display:none }
@@ -913,6 +916,26 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .uc-avatar video, .uc-avatar img{ width:100%; height:100%; object-fit:cover; display:block }
 .uc-quote{ font-size:var(--text-20); font-weight:500; color:rgba(var(--ink-rgb),.85) }
 .uc-name{ margin-top:.25rem; font-size:var(--text-16); font-weight:600; color:var(--purple-500) }
+/* Use Cases 탭바(parasta) — 캐러셀 위 카테고리 전환 */
+.uc-tabbar{ display:flex; justify-content:center; gap:.5rem; margin-bottom:var(--space-24) }
+.uc-tabbtn{ padding:.625rem 1.25rem; border-radius:var(--radius-pill); border:1px solid var(--line); background:var(--white); color:rgba(var(--ink-rgb),.55); font-size:var(--text-16); font-weight:500; cursor:pointer; transition:background .25s ease, color .25s ease, border-color .25s ease }
+@media (hover:hover){ .uc-tabbtn:hover{ color:var(--ink) } }
+.uc-tabbtn.is-active{ background:var(--ink); border-color:transparent; color:var(--white) }
+.uc-tabpanel{ display:none }
+.uc-tabpanel.is-active{ display:block }
+.uc-tabsub{ text-align:center; font-size:var(--text-16); color:rgba(var(--ink-rgb),.5); margin-bottom:var(--space-32) }
+.uc-tabnote{ text-align:center; font-size:var(--text-16); color:rgba(var(--ink-rgb),.6); line-height:var(--leading-body); margin-top:var(--space-32) }
+/* Broof Applied Cases — 2단 슬라이드(증명서 이미지 + 인용/로고) */
+.bc-cases .uc-slide{ display:grid; grid-template-columns:minmax(0,40%) 1fr; gap:var(--space-48); align-items:center }
+.bc-cert{ border-radius:var(--radius-card-sm); overflow:hidden; background:color-mix(in srgb, var(--ink) 5%, var(--white)) }
+.bc-cert img{ width:100%; height:auto; display:block }
+.bc-body{ display:flex; flex-direction:column; gap:var(--space-48) }
+.bc-quote{ font-size:var(--text-30); font-weight:500; line-height:var(--leading-heading); letter-spacing:-.01em; color:var(--ink); word-break:keep-all }
+@media (min-width:768px){ .bc-quote{ font-size:var(--text-36) } }
+.bc-org{ display:flex; flex-direction:column; gap:var(--space-12) }
+.bc-lead{ font-size:var(--text-16); color:rgba(var(--ink-rgb),.5) }
+.bc-logo{ font-size:var(--text-20); font-weight:700; letter-spacing:-.01em; color:var(--ink) }
+@media (max-width:767px){ .bc-cases .uc-slide{ grid-template-columns:1fr; gap:var(--space-32) } .bc-quote{ font-size:var(--text-24) } }
 /* 탭(640~1023): 카드 패딩을 위 grouped 카드(2rem)와 통일 — 하단은 유지 */
 @media (min-width:640px) and (max-width:1023px){ .uc-slide{ padding:2rem 2rem 3rem } }
 .uc-dots{ display:none }
@@ -1015,6 +1038,7 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .pt-track{ display:flex; width:max-content; animation:ptScroll 32s linear infinite }
 .pt-set{ display:flex; align-items:center; gap:0; padding-right:0 }
 .pt-set img{ height:7.5rem; width:auto; flex:none }  /* ≈120px, 로고 여백만으로 간격 (svg 원본 컬러) */
+body.parasta .pt-set img{ height:5rem }   /* parasta 마퀴 로고 축소(120→80px) */
 @keyframes ptScroll{ to{ transform:translateX(-50%) } }
 @media (max-width:639px){ .pt-set img{ height:5.5rem } }
 /* 인증·수상 마퀴: 로고(위) + 텍스트(아래) 아이템 순환 */
@@ -2436,45 +2460,54 @@ document.querySelectorAll('.cmpt-barwrap').forEach(bw => {
   next.addEventListener('click', () => bar.scrollBy({ left:180, behavior:'smooth' }));
 });
 
-/* Use Cases 캐러셀 (portx) */
-const ucSlides = document.querySelectorAll('.uc-carousel .uc-slide');
-if (ucSlides.length){
-  let ucIdx = 0;
-  let ucShow = i => { ucSlides.forEach((s, n) => s.classList.toggle('is-active', n === i)); ucIdx = i; };
-  document.querySelector('.uc-carousel .uc-prev')?.addEventListener('click', () => ucShow((ucIdx - 1 + ucSlides.length) % ucSlides.length));
-  document.querySelector('.uc-carousel .uc-next')?.addEventListener('click', () => ucShow((ucIdx + 1) % ucSlides.length));
-  // 닷 인디케이터 (모바일 전용 노출) — 슬라이드 수만큼 생성, ucShow와 동기화
-  const ucDots = document.querySelector('.uc-carousel .uc-dots');
-  if (ucDots){
-    ucSlides.forEach((_, i) => {
+/* Use Cases 캐러셀 (portx·parasta 등) — 인스턴스별 스코프로 한 페이지 여러 개 지원 */
+document.querySelectorAll('.uc-carousel').forEach(uc => {
+  const slides = uc.querySelectorAll('.uc-slide');
+  if (!slides.length) return;
+  let idx = 0;
+  const dots = uc.querySelector('.uc-dots');
+  const sync = i => dots?.querySelectorAll('.uc-dot').forEach((d, n) => d.classList.toggle('is-active', n === i));
+  const show = i => { slides.forEach((s, n) => s.classList.toggle('is-active', n === i)); idx = i; sync(i); };
+  uc.querySelector('.uc-prev')?.addEventListener('click', () => show((idx - 1 + slides.length) % slides.length));
+  uc.querySelector('.uc-next')?.addEventListener('click', () => show((idx + 1) % slides.length));
+  // 닷 인디케이터 (모바일 전용 노출)
+  if (dots){
+    slides.forEach((_, i) => {
       const b = document.createElement('button');
       b.type = 'button'; b.className = 'uc-dot' + (i === 0 ? ' is-active' : '');
       b.setAttribute('aria-label', (i + 1) + '번째 사례');
-      b.addEventListener('click', () => ucShow(i));
-      ucDots.appendChild(b);
+      b.addEventListener('click', () => show(i));
+      dots.appendChild(b);
     });
   }
-  const ucSync = i => ucDots?.querySelectorAll('.uc-dot').forEach((d, n) => d.classList.toggle('is-active', n === i));
-  const _ucShow = ucShow;
-  ucShow = i => { _ucShow(i); ucSync(i); };
   // 모바일 스와이프(플리킹)
-  const ucWrap = document.querySelector('.uc-carousel .uc-slides');
-  let ucX = null;
-  ucWrap?.addEventListener('touchstart', e => { ucX = e.touches[0].clientX; }, { passive:true });
-  ucWrap?.addEventListener('touchend', e => {
-    if (ucX === null) return;
-    const dx = e.changedTouches[0].clientX - ucX; ucX = null;
+  const wrap = uc.querySelector('.uc-slides');
+  let x = null;
+  wrap?.addEventListener('touchstart', e => { x = e.touches[0].clientX; }, { passive:true });
+  wrap?.addEventListener('touchend', e => {
+    if (x === null) return;
+    const dx = e.changedTouches[0].clientX - x; x = null;
     if (Math.abs(dx) < 40) return;
-    ucShow(dx < 0 ? (ucIdx + 1) % ucSlides.length : (ucIdx - 1 + ucSlides.length) % ucSlides.length);
+    show(dx < 0 ? (idx + 1) % slides.length : (idx - 1 + slides.length) % slides.length);
   }, { passive:true });
-  // 모션: 슬라이드 안 모든 <video muted loop playsinline>(썸네일·아바타 등)를 카드 호버 시 재생
-  ucSlides.forEach(sl => {
+  // 슬라이드 안 <video>를 카드 호버 시 재생
+  slides.forEach(sl => {
     const vids = sl.querySelectorAll('video');
     if (!vids.length) return;
     sl.addEventListener('mouseenter', () => vids.forEach(v => v.play()));
     sl.addEventListener('mouseleave', () => vids.forEach(v => { v.pause(); v.currentTime = 0; }));
   });
-}
+});
+/* Use Cases 탭 (parasta) — 탭바 버튼으로 패널(캐러셀) 전환 */
+document.querySelectorAll('.uc-tabbar').forEach(bar => {
+  const btns = [...bar.querySelectorAll('.uc-tabbtn')];
+  const scope = bar.closest('.sec') || document;
+  const panels = [...scope.querySelectorAll('.uc-tabpanel')];
+  btns.forEach((b, i) => b.addEventListener('click', () => {
+    btns.forEach((x, n) => x.classList.toggle('is-active', n === i));
+    panels.forEach((p, n) => p.classList.toggle('is-active', n === i));
+  }));
+});
 
 /* global click routing — 메인(parameta.html)과 동일 */
 document.addEventListener('click', (e) => {
@@ -3956,6 +3989,7 @@ PAGES['parasta.html'] = dict(
     title='ParaSta · 디지털자산 금융 인프라 | PARAMETA',
     desc='ParaSta — 스테이블코인·디지털자산 사업을 위한 모듈형 인프라. 발행·오케스트레이션·지갑·온체인 KYC를 골라 조립하세요. Compliant-Ready · Zero-Ops.',
     eyebrow='Digital Asset Platform',
+    body_class='hero-dark parasta',   # parasta 식별 클래스(히어로 CTA 새 버튼 노출)
     h1_lines=['ParaSta'],
     lead='스테이블코인, 디지털자산 비즈니스를 위한 모듈형 인프라입니다.<br>필요한 기능을 선택해 구성하고, 발행부터 운영까지 하나로 연결합니다.',
     crumb='Products — ParaSta',
@@ -3992,7 +4026,7 @@ PAGES['parasta.html'] = dict(
       </div>
     </div>
     <div class="whatis-text rvl" style="--rvl-delay:120ms">
-      {sec_head('What is ParaSta', '발행부터 운영까지 연결하는<br>디지털자산 인프라', 'ParaSta는 스테이블코인, 예금토큰 등 다양한 디지털자산의 발행과 운영을 하나의 플랫폼에서 지원하고, 기존 은행, 결제망과 유기적으로 연결합니다. 신원 확인부터 지갑, 정산, 감사까지 디지털자산 운영 전반을 함께합니다.', body=True)}
+      {sec_head('What is ParaSta', '발행부터 운영까지 연결하는<br>디지털자산 인프라', 'ParaSta는 스테이블코인, 예금토큰 등 다양한 디지털자산의 발행과 운영을 하나의 플랫폼에서 지원하고, 기존 은행, 결제망과 바로 연결합니다. 신원 확인부터 지갑, 정산, 감사까지 디지털자산 운영 전반을 지원합니다.', body=True)}
     </div>
   </div>
 </div></section>
@@ -4004,19 +4038,18 @@ PAGES['parasta.html'] = dict(
     </div>
     <div class="why-table">
       {compare_table(
-        ['', 'ParaSta', '글로벌 인프라 SaaS', '국내 커스터디', '자체 구축 · SI'],
+        ['', 'ParaSta', '해외 커스터디·지갑 SaaS', '국내 커스터디', '자체 구축 · SI'],
         [
           dict(label='국내 규제 대응', cells=[cell('on','AML, 트래블룰, 감사 로그 내장'), cell('off','도입사 직접 대응'), cell('mid','수탁·보관 중심'), cell('off','규제 검토부터 직접 대응')]),
           dict(label='신원관리', cells=[cell('on','발행 레이어에 KYC, DID 기능 내장'), cell('mid','외부 KYC 솔루션 연동'), cell('off','신원 인증 기능 제한적'), cell('off','KYC, DID 직접 개발')]),
           dict(label='구축 방식', cells=[cell('on','검증된 모듈을 SDK로 유연하게 구성'), cell('mid','정해진 기능 범위 내 구성'), cell('mid','커스터디 기능 중심'), cell('off','처음부터 직접 개발')]),
           dict(label='도입·운영', cells=[cell('on','키 관리, 가스비, 노드 운영 대행'), cell('on','글로벌 시장에 빠르게 도입'), cell('on','검증된 수탁 운영'), cell('off','개발, 운영 직접 관리')]),
-          dict(label='글로벌 확장', cells=[cell('mid','국내 환경 최적화, 멀티체인 지원'), cell('on','글로벌 네트워크 보유'), cell('off','국내 시장 중심'), cell('mid','구축 범위에 따라 상이')]),
         ], hl=1, tabs=True)}
     </div>
   </div>
 </div></section>
 <section><div class="shell sec">
-  {sec_head('Advantages', '실제 금융 서비스로 이어지는<br>하나의 인프라')}
+  {sec_head('Advantages', '필요한 것만 골라 도입하고,<br>운영은 맡기는 인프라')}
   {cards_wrap([
     dark_card('MODULAR', '모듈형 API', '발행 엔진부터 온체인 KYC, 멀티체인 브릿지까지, 필요한 코어 모듈을 선택해 유연하게 구성할 수 있습니다. 처음부터 새로 개발할 필요 없이, 실제 현장에서 검증된 기술을 빠르게 적용할 수 있습니다.', grouped=True),
     dark_card('COMPLIANT', '규제 대응이 준비된 인프라', 'AML, 트래블룰, 감사 로그를 인프라에 통합해 규제 대응 부담을 줄입니다. 금융권과 함께 검증한 규제 기술을 그대로 적용할 수 있습니다.', grouped=True),
@@ -4034,66 +4067,47 @@ PAGES['parasta.html'] = dict(
       </div>
     </div>
   <ul class="cm-cards core-mods">
-    <li>{dark_card('Issuance', 'Mint with Compliance, Scale Across Chains', '기업 고유의 스테이블코인과 토큰화 자산을 발행하고 관리합니다. Multi-sig, PoR 기반 준비자산 증빙, Whitelist, Blacklist, 자금 동결 기능을 포함한 6-Layer 구조로 발행부터 사후 검증까지 전 과정을 통제합니다.', ['발행, 소각, 준비자산 운용','PoR 기반 준비자산 증빙','자산 수명주기 실시간 모니터링'], grouped=True)}</li>
-    <li>{dark_card('Wallet', 'Enterprise Control, Frictionless UX', '계정 추상화, ERC-4337을 기반으로 가스비 부담 없는 사용자 경험을 제공합니다. 여러 체인을 하나의 인터페이스로 통합하고, Stealth Address로 프라이버시를 보호합니다. 온체인 KYC 모듈과 연동해 신원이 확인된 지갑만 거래할 수 있도록 통제합니다.', ['가스비 없는 사용자 경험','멀티체인 통합 인터페이스','Stealth Address 기반 프라이버시 보호'], grouped=True)}</li>
-    <li>{dark_card('Orchestration', 'Bridge Worlds, Settle Instantly', '은행 계좌와 온체인 지갑을 하나의 API로 연결합니다. Fiat, Crypto 자동 전환부터 예약 정산, 조건부 정산, 이벤트 기반 시스템 연동까지, 거래 전 과정을 하나의 흐름으로 관리합니다.', ['Fiat ↔ Crypto 자동 전환','예약, 조건부 정산','실시간 AML 스크리닝'], grouped=True)}</li>
-    <li>{dark_card('On-chain KYC', 'Verify Once, Use Everywhere', '공인기관의 KYC 결과를 검증 가능한 크레덴셜, VC와 VP 형태로 발급하고, 검증된 지갑 주소를 온체인 신원 레지스트리, KYW에 등록합니다. 토큰 컨트랙트는 이체 시점에 레지스트리를 조회해 자격을 갖춘 지갑만 거래하도록 통제하며, 개인정보는 온체인에 저장하지 않습니다.', ['DID 기반 VC, VP 발급','KYW 온체인 화이트리스트','ERC-3643, T-REX 기반 이체 검증'], grouped=True)}</li>
-    <li>{dark_card('Unified Admin', 'See Everything, Control Everything', '발행, 지갑, 오케스트레이션, 온체인 KYC 등 4개 모듈을 하나의 통합 관제 환경에서 관리합니다. Mint, Burn 통제부터 MPC 기반 키 관리, 다단계 승인, 자금 흐름 모니터링까지 모든 운영 현황을 한 화면에서 확인할 수 있습니다.', ['Mint, Burn 라이프사이클 통제','MPC 기반 키 관리, 다단계 승인','통합 감사 리포팅'], grouped=True)}</li>
+    <li>{dark_card('Issuance', 'Mint with Compliance, Scale Across Chains', '기업 고유의 스테이블코인과 토큰화 자산을 발행하고 관리합니다. 다중 서명, 준비자산 증빙(PoR), 화이트리스트, 블랙리스트, 자금 동결을 포함한 6단계 통제 구조로 발행부터 사후 검증까지 전 과정을 통제합니다.', ['발행, 소각, 준비자산 운용','PoR 기반 준비자산 증빙','자산 수명주기 실시간 모니터링'], grouped=True)}</li>
+    <li>{dark_card('Wallet', 'Enterprise Control, Frictionless UX', '계정 추상화(ERC-4337)를 기반으로 가스비 부담 없는 사용자 경험을 제공합니다. 여러 체인을 하나의 인터페이스로 통합하고, 일회용 수신 주소(Stealth Address)로 프라이버시를 보호합니다. 온체인 KYC 모듈과 연동해 신원이 확인된 지갑만 거래할 수 있도록 통제합니다.', ['가스비 없는 사용자 경험','멀티체인 통합 인터페이스','Stealth Address 기반 프라이버시 보호'], grouped=True)}</li>
+    <li>{dark_card('Orchestration', 'Bridge Worlds, Settle Instantly', '은행 계좌와 온체인 지갑을 하나의 API로 연결합니다. 법정화폐↔가상자산 자동 전환부터 예약 정산, 조건부 정산, 이벤트 기반 시스템 연동까지, 거래 전 과정을 하나의 흐름으로 관리합니다.', ['법정화폐↔가상자산 자동 전환','예약, 조건부 정산','실시간 AML 스크리닝'], grouped=True)}</li>
+    <li>{dark_card('On-chain KYC', 'Verify Once, Use Everywhere', '공인기관의 KYC 결과를 검증 가능한 크레덴셜(VC, VP) 형태로 발급하고, 검증된 지갑 주소를 온체인 신원 레지스트리(KYW)에 등록합니다. 토큰 컨트랙트는 이체 시점에 레지스트리를 조회해 자격을 갖춘 지갑만 거래하도록 통제하며, 개인정보는 온체인에 저장하지 않습니다.', ['DID 기반 VC, VP 발급','KYW 온체인 화이트리스트','표준 규격(ERC-3643) 기반 이체 검증'], grouped=True)}</li>
+    <li>{dark_card('Unified Admin', 'See Everything, Control Everything', '발행, 지갑, 오케스트레이션, 온체인 KYC 등 4개 모듈을 하나의 통합 관제 환경에서 관리합니다. Mint, Burn 통제부터 MPC 기반 키 관리, 다단계 승인, 자금 흐름 모니터링까지 모든 운영 현황을 한 화면에서 확인할 수 있습니다.', ['발행, 소각 전 과정 통제','MPC 기반 키 관리, 다단계 승인','통합 감사 리포팅'], grouped=True)}</li>
   </ul>
   </div>
 </div></section>
 <section><div class="shell sec">
-  {sec_head('Core Technology', '엔터프라이즈급 기술을 인프라에 내재화')}
+  {sec_head('Core Technology', '엔터프라이즈가 디지털자산을 다루는 데 필요한 기술이 인프라에 담겨 있습니다')}
   <div class="ct-rows">{rows([
-    dict(title='계정 추상화 (AA)', desc='복잡한 지갑 기능을 Web2 서비스처럼 간편하게 제공합니다. 기관이 자사 서비스에 지갑을 도입할 때 사용자 진입장벽을 낮춥니다.'),
-    dict(title='선택적 공개 (ZKP, Selective Disclosure)', desc='영지식증명을 기반으로 KYC를 수행하되, 개인정보 원문은 공유하지 않고 필요한 정보만 선택적으로 증명합니다.'),
-    dict(title='스텔스 주소 (Stealth Address)', desc='거래마다 새로운 수신 주소를 생성해, 사용자와 거래 내역 간의 연결을 어렵게 하는 프라이버시 보호 기술입니다.'),
-    dict(title='단일 인터페이스 멀티체인 (Multi-chain)', desc='체인별로 지갑, SDK, 연동 기능을 각각 개발할 필요 없이, 하나의 인터페이스에서 여러 체인의 자산과 거래를 통합 관리합니다. 새로운 체인이 필요할 때도 동일한 API로 확장할 수 있어 특정 체인에 종속되지 않습니다.'),
-    dict(title='MPC 키 분할, 복구 (Key Share)', desc='개인키를 여러 개의 키셰어로 나누어 분산 보관하고, 정해진 임계값 이상의 키셰어가 모일 때만 서명하거나 복구합니다. 개인키를 한곳에 보관하지 않아 분실과 탈취 위험을 줄입니다.'),
+    dict(title='계정 추상화 (AA)', desc='지갑 설치, 시드 문구 보관, 가스비 결제 같은 절차 없이 기존 앱과 동일한 사용 경험을 제공합니다. 가스비는 기업이 대신 부담하는 구조로, 사용자 진입 장벽을 낮춥니다.'),
+    dict(title='선택적 공개 (ZKP, Selective Disclosure)', desc="검증에 필요한 사실만 골라 증명합니다. 생년월일 전체 대신 '성인 여부'만, 주소 전체 대신 '거주 국가'만 확인하는 식입니다. 개인정보 원문을 수집, 보관하지 않아 기업의 유출 리스크와 관리 부담을 줄입니다."),
+    dict(title='스텔스 주소 (Stealth Address)', desc='블록체인은 주소만 알면 누구나 거래 내역을 볼 수 있는 공개 장부입니다. 거래마다 새로운 수신 주소를 생성해, 고객의 자산 규모와 거래 흐름이 외부에 추적, 노출되지 않도록 보호합니다.'),
+    dict(title='단일 인터페이스 멀티체인 (Multi-chain)', desc='메인체인이 바뀌거나 추가돼도 시스템을 다시 구축할 필요가 없습니다. 한 번의 연동으로 여러 체인의 자산과 거래를 통합 관리하고, 새로운 체인도 같은 방식으로 확장합니다.'),
+    dict(title='MPC 키 분할, 복구 (Key Share)', desc='개인키를 하나로 보관하지 않고 여러 개의 키 셰어로 나눠 분산 보관합니다. 일부가 유출돼도 자산을 옮길 수 없고, 일부를 분실해도 나머지 키 셰어로 복구할 수 있습니다.'),
   ])}</div>
 </div></section>
-<!-- Proven Core: 메인 Why Parameta 스타일 다크 스탯 패널 -->
-<section><div class="shell stats-shell">
-  <div class="stats-panel rvl" style="--rvl-y:40px; --rvl-s:.99">
-    <div class="eyebrow light"><span class="dot"></span>Proven Core</div>
-    <h2 class="stats-h2" data-line-reveal><span class="rvl-line"><span>금융, 공공, Web3 현장에서<br>검증된 코어 기술</span></span></h2>
-    <ul class="stats-grid pv-stats">
-      <li class="rvl" style="--rvl-y:20px"><div class="stat-num"><span class="pv-val" data-val="29">0</span>+</div><div class="stat-label">금융기관</div></li>
-      <li class="rvl" style="--rvl-y:20px; --rvl-delay:90ms"><div class="stat-num"><span class="pv-val" data-val="8">0</span>+</div><div class="stat-label">공공기관</div></li>
-      <li class="rvl" style="--rvl-y:20px; --rvl-delay:180ms"><div class="stat-num"><span class="pv-val" data-val="4">0</span>+</div><div class="stat-label">Web3 프로젝트</div></li>
-    </ul>
+<!-- 파트너 로고 마퀴: 섹션 밖 풀블리드 밴드 -->
+<section><div class="pt-marquee rvl" aria-label="함께한 파트너 로고" style="margin:0"><div class="pt-track">{partner_logos()}{partner_logos()}</div></div></section>
+<section><div class="shell sec uc-tail">
+  {sec_head('Partners', '함께한 파트너', layout='center')}
+  <div class="uc-tabbar" role="tablist">
+    <button class="uc-tabbtn is-active" type="button">금융권</button>
+    <button class="uc-tabbtn" type="button">퍼블릭, 멀티체인</button>
   </div>
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('Partners', '함께한 파트너', 'ParaSta는 금융, 공공, 민간기관부터 Web3 블록체인 프로젝트까지,<br>다양한 현장에서 검증된 코어 기술을 기반으로 합니다.')}
-  <div class="pt-marquee rvl" aria-label="함께한 파트너 로고">
-    <div class="pt-track">{partner_logos()}{partner_logos()}</div>
+  <div class="uc-tabpanel is-active">
+    {usecase_carousel([
+      dict(title='신한은행', desc='금융권 DID 실명인증 상용화'),
+      dict(title='NH농협은행', desc='올원뱅크 실명인증 적용'),
+      dict(title='한국투자증권 외 25개 증권사', desc='증권업권을 하나의 온체인 신원 체계로 연결한 공동인증 서비스. 여러 금융기관의 신원과 인증을 연동한 경험으로, 스테이블코인 인프라에 필요한 규제 대응과 기관 간 연결 역량을 검증했습니다.'),
+    ], label='금융권 사례')}
   </div>
-  <div class="pn-grid">
-    <article class="pn-card rvl" style="--rvl-y:24px">
-      <div class="pn-head">
-        <p class="pn-kick">규제 산업에서 검증된 기술</p>
-        <h3>금융권</h3>
-      </div>
-      <ul class="pn-list">
-        <li><h4>신한은행</h4><p>금융권 DID 실명인증 상용화</p></li>
-        <li><h4>NH농협은행</h4><p>올원뱅크 실명인증 적용</p></li>
-        <li><h4>한국투자증권 외 25개 증권사</h4><p>증권업권을 하나의 온체인 신원 체계로 연결한 공동인증 서비스. 여러 금융기관의 신원과 인증을 연동한 경험으로, 스테이블코인 인프라에 필요한 규제 대응과 기관 간 연결 역량을 검증.</p></li>
-      </ul>
-    </article>
-    <article class="pn-card rvl" style="--rvl-y:24px; --rvl-delay:90ms">
-      <div class="pn-head">
-        <p class="pn-kick">스테이블코인이 발행되고 유통되는 환경</p>
-        <h3>퍼블릭, 멀티체인</h3>
-      </div>
-      <ul class="pn-list">
-        <li><h4>자체 블록체인 코어 엔진 개발, 운영</h4><p>PBFT 합의와 인터체인 프로토콜을 자체 기술로 구현한 퍼블릭 메인넷. 다국가 밸리데이터 환경에서 축적한 구축, 운영 경험.</p></li>
-        <li><h4>멀티체인 오케스트레이션, 크로스체인 연동</h4><p>CEX, DEX 통합 유동성, 스마트 오더 라우팅, 체인 간 자산 이동을 처리하는 WalletFi 오케스트레이션 솔루션, PortX와 SuperCycl의 직접 개발, 운영 경험.</p></li>
-        <li><h4>규제 친화형 DeFi, 유동성 인프라 기술</h4><p>통합 유동성 집계와 규제 준수형 거래 실행 등, 제도권 환경에 맞춘 DeFi 인프라 기술.</p></li>
-      </ul>
-      <p class="pn-note">퍼블릭 체인에서 축적한 코어 엔진과 오케스트레이션 경험,<br>스테이블코인 발행 이후를 뒷받침하는 기반.</p>
-    </article>
+  <div class="uc-tabpanel">
+    {usecase_carousel([
+      dict(title='자체 블록체인 코어 엔진 개발, 운영', desc='PBFT 합의와 인터체인 프로토콜을 자체 기술로 구현한 퍼블릭 메인넷. 다국가 밸리데이터 환경에서 축적한 구축, 운영 경험.'),
+      dict(title='멀티체인 오케스트레이션, 크로스체인 연동', desc='거래소 간 유동성 통합, 자동 주문 배분, 체인 간 자산 이동을 처리하는 WalletFi 솔루션 PortX, SuperCycl을 직접 개발, 운영한 경험.'),
+      dict(title='규제 친화형 DeFi, 유동성 인프라 기술', desc='통합 유동성 집계와 규제 준수형 거래 실행 등, 제도권 환경에 맞춘 DeFi 인프라 기술.'),
+    ], label='퍼블릭·멀티체인 사례')}
   </div>
+  <p class="uc-tabnote">퍼블릭 체인에서 축적한 코어 엔진과 오케스트레이션 경험, 스테이블코인 발행 이후를 뒷받침합니다.</p>
 </div></section>
 ''')
 
@@ -4370,13 +4384,13 @@ PAGES['myid.html'] = dict(
 """)
 
 # ---------------- broof.html ----------------
-_broof_orgs = ['서울특별시','POSTECH','한국생산성본부','사람인','인천','한경닷컴','한빛미디어','스터디파이','아트앤가이드','심플로우','해시넷','서울시민청']
+_broof_orgs = ['서울특별시','POSTECH','한국생산성본부','사람인','인천','한경닷컴','한빛미디어','스터디파이','아트앤가이드','호서대','해시넷','서울시민청']
 _broof_chips = ''.join(f'<span class="tag on-light">{o}</span>' for o in _broof_orgs)
 # 기관별 근사 브랜드 컬러(실제 브랜드값은 추후 교체). 호버 시 카드 배경으로 사용.
 _broof_brand = {
     '서울특별시':'#1f4e9c', 'POSTECH':'#86192b', '한국생산성본부':'#0b4da2', '사람인':'#0e5ee6',
     '인천':'#00a3a5', '한경닷컴':'#e60012', '한빛미디어':'#d81f26', '스터디파이':'#5b47e0',
-    '아트앤가이드':'#b8863b', '심플로우':'#2bb6a4', '해시넷':'#2f6df6', '서울시민청':'#e5673b',
+    '아트앤가이드':'#b8863b', '호서대':'#2bb6a4', '해시넷':'#2f6df6', '서울시민청':'#e5673b',
 }
 _broof_logo_cards = ''.join(
     f'<li class="rvl" style="--rvl-y:20px; --rvl-delay:{i*40}ms">'
@@ -4386,10 +4400,14 @@ PAGES['broof.html'] = dict(
     title='Broof · 블록체인 증명서 발급 | PARAMETA',
     desc='Broof — 블록체인 기반 증명서 발급·검증 서비스. 위·변조를 방지하는 디지털 증명서를 발급하고, 누구나 즉시 진위를 확인합니다.',
     eyebrow='Digital Credentials',
+    body_class='hero-dark broof',   # broof 식별 클래스(히어로 새 버튼)
     h1_lines=['Broof'],
     lead='별도 시스템 구축 없이 증명서를 간편하게 발급하고, QR 코드 하나로 진위를 즉시 검증합니다. 블록체인으로 증명서의 위조와 분실 위험까지 낮춥니다.',
     crumb='Products — Broof',
     hero_visual='<img class="fit-contain" src="assets/broof/hero-test.avif" alt="" loading="eager" fetchpriority="high">',
+    hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
+      <a class="pill light with-arrow arw-right hs-scale cta-talk" href="contact.html"><span class="hspring">Go to Broof<span class="pill-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></a>
+    </div>''',
     content=f"""
 <section><div class="shell sec" style="padding-bottom:0">
   <ul class="stats-grid pv-stats on-light">
@@ -4442,18 +4460,39 @@ PAGES['broof.html'] = dict(
     <div class="uc-slides rvl" style="--rvl-y:40px">
       <article class="uc-slide is-active">
         <div class="uc-thumb" aria-hidden="true"></div>
-        <h3>포스텍 (POSTECH)</h3>
+        <h3>POSTECH</h3>
         <p>블록체인 전문가과정 수료증을 Broof로 정기 발급합니다. 수료자는 QR 코드 하나로 어디서나 수료 사실을 증명하고, 대학은 재발급·진위 확인 업무 부담을 덜었습니다.</p>
+        <div class="uc-testimonial">
+          <div class="uc-avatar" aria-hidden="true"></div>
+          <div class="uc-qbody">
+            <p class="uc-quote">&ldquo;코로나19로 졸업식 대신 카카오톡으로 디지털 졸업장을 전달했어요.&rdquo;</p>
+            <p class="uc-name">POSTECH 담당자</p>
+          </div>
+        </div>
       </article>
       <article class="uc-slide">
         <div class="uc-thumb" aria-hidden="true"></div>
-        <h3>미래에셋</h3>
-        <p>장학증서에 QR 코드를 넣어 학생에게 전달하며, 매년 정기적으로 발급합니다. 증서의 진위를 즉시 확인할 수 있어 종이 증서의 위조·분실 우려를 줄였습니다.</p>
+        <h3>아트앤가이드</h3>
+        <p>미술품 공동구매의 소유권을 블록체인 증명서로 발급합니다. 구매자는 QR 코드로 소유권을 즉시 확인하고, 소유 이력의 신뢰를 높였습니다.</p>
+        <div class="uc-testimonial">
+          <div class="uc-avatar" aria-hidden="true"></div>
+          <div class="uc-qbody">
+            <p class="uc-quote">&ldquo;블록체인으로 작품 소유권을 등록하니 소유권의 신뢰도가 높아졌어요.&rdquo;</p>
+            <p class="uc-name">아트앤가이드 담당자</p>
+          </div>
+        </div>
       </article>
       <article class="uc-slide">
         <div class="uc-thumb" aria-hidden="true"></div>
-        <h3>다양한 교육 · 자격 기관</h3>
-        <p>아트앤가이드, 패스트캠퍼스 등 여러 교육·자격 기관이 수료증과 인증서 발급에 Broof를 사용합니다. 별도 시스템 구축 없이 필요한 시점에 바로 발급합니다.</p>
+        <h3>패스트캠퍼스</h3>
+        <p>온라인 강의 수료증을 Broof로 발급합니다. 수료자는 QR 코드 하나로 수료 사실을 증명하고, 기관은 발급, 재발급 업무 부담을 덜었습니다.</p>
+        <div class="uc-testimonial">
+          <div class="uc-avatar" aria-hidden="true"></div>
+          <div class="uc-qbody">
+            <p class="uc-quote">&ldquo;broof 이용으로 증명서 발급에 들던 시간이 매우 줄어들었어요.&rdquo;</p>
+            <p class="uc-name">패스트캠퍼스 담당자</p>
+          </div>
+        </div>
       </article>
     </div>
     <div class="uc-dots" aria-label="사례 선택"></div>
