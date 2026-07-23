@@ -751,6 +751,7 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .cards-3 .work-card.grouped[style*="--media"]::before, .cards-2 .work-card.grouped[style*="--media"]::before{ background:var(--media) center/cover no-repeat }
 /* PortX Key Features — 타이틀 위 간격 확보 */
 .kf-media .work-card.grouped .work-bottom{ padding-top:var(--space-16) }
+.kf-media .work-card.grouped::before{ height:20rem }   /* 이미지 영역 높이 (기본 16rem → 20rem) */
 /* 짧은 콘텐츠 카드도 과하지 않게: grouped 최소높이는 콘텐츠 기준 */
 .cards-3 .work-card.grouped, .cards-2 .work-card.grouped{ min-height:0 }
 /* 세로형 이미지 카드 변형: 이미지 영역을 카드의 약 2/3로 (기본 16rem → 24rem) */
