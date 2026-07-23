@@ -747,6 +747,10 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
   background:url('assets/parasta/body-test.avif') center/cover no-repeat }
 @media (min-width:640px){
   .cards-3 .work-card.grouped::before, .cards-2 .work-card.grouped::before{ margin:-2rem -2rem 1.75rem } }
+/* 개별 이미지 지정 카드(card media=경로) — 공용 placeholder 대신 해당 이미지 */
+.cards-3 .work-card.grouped[style*="--media"]::before, .cards-2 .work-card.grouped[style*="--media"]::before{ background:var(--media) center/cover no-repeat }
+/* PortX Key Features — 타이틀 위 간격 확보 */
+.kf-media .work-card.grouped .work-bottom{ padding-top:var(--space-16) }
 /* 짧은 콘텐츠 카드도 과하지 않게: grouped 최소높이는 콘텐츠 기준 */
 .cards-3 .work-card.grouped, .cards-2 .work-card.grouped{ min-height:0 }
 /* 세로형 이미지 카드 변형: 이미지 영역을 카드의 약 2/3로 (기본 16rem → 24rem) */
@@ -950,6 +954,29 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .ex-card h3{ margin-bottom:0 }
 .ex-card .ex-num{ display:block; font-size:var(--text-14); font-weight:500; color:rgba(var(--white-rgb),.5); margin-bottom:.5rem }  /* 기능 카드 번호 */
 .ex-card h3 + p{ margin-top:.75rem; font-size:var(--text-18) }  /* 서브카피 달릴 때만 간격 + 한 단계 업 */
+
+/* DID 신뢰 도식 (Platform): Issuer → Holder → Verifier + MyID 블록체인 토대 */
+.did-flow{ margin-top:var(--space-32) }
+.did-actors{ display:flex; align-items:stretch; gap:var(--space-16) }
+.did-actor{ flex:1; border:1px solid var(--line); border-radius:var(--radius-card-sm); padding:var(--space-20) var(--space-16); background:var(--white) }
+.did-actor.is-holder{ border:2px solid var(--accent); background:rgba(97,0,255,.05) }
+.did-role{ font-size:var(--text-14); font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:var(--accent) }
+.did-actor b{ display:block; font-size:var(--text-18); font-weight:600; margin-top:var(--space-8) }
+.did-actor p{ font-size:var(--text-14); color:rgba(var(--ink-rgb),.55); margin-top:.35rem; line-height:var(--leading-body) }
+.did-arw{ flex:none; width:4.5rem; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.35rem; color:var(--purple-300) }
+.did-arw span{ font-size:var(--text-12); color:rgba(var(--ink-rgb),.5); white-space:nowrap }
+.did-arw svg{ width:100%; height:14px }
+.did-connect{ display:flex; justify-content:space-around; padding:var(--space-8) 2.2rem 0 }
+.did-connect i{ width:1px; height:1.4rem; background:repeating-linear-gradient(to bottom, rgba(var(--ink-rgb),.25) 0 3px, transparent 3px 6px) }
+.did-base{ margin-top:var(--space-8); border-radius:var(--radius-card-sm); background:var(--ink); padding:var(--space-20) var(--space-24); display:flex; align-items:center; justify-content:center; gap:.75rem; flex-wrap:wrap; text-align:center }
+.did-base b{ font-size:var(--text-16); font-weight:600; color:var(--purple-300) }
+.did-base > span:last-child{ font-size:var(--text-14); color:rgba(var(--white-rgb),.72); line-height:var(--leading-body) }
+.did-dot{ width:4px; height:4px; border-radius:var(--radius-pill); background:rgba(var(--white-rgb),.3); flex:none }
+@media (max-width:767px){
+  .did-actors{ flex-direction:column }
+  .did-arw{ width:100%; flex-direction:row; gap:.5rem; padding:.35rem 0 }
+  .did-arw svg{ width:2.5rem; transform:rotate(90deg) }
+  .did-connect{ display:none } }
 /* ex-card 그레이 변형: 라이트 그레이 채움 + 잉크 텍스트 (호버 스케일만 유지) */
 .ex-card.ex-gray{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); color:var(--ink); box-shadow:none }
 .ex-card.ex-gray h3{ color:var(--ink) }
@@ -2888,12 +2915,13 @@ def card(title, desc='', kicker='', tags=None, tone='dark', media=False, quote=N
     kicker/tags/quote+cite : 옵션 요소
     """
     cls = 'work-card static' + (' sm' if sm else '') + (' grouped' if media else '') + (' t-gray' if tone == 'gray' else '')
+    mstyle = f' style="--media:url({chr(39)}{media}{chr(39)})"' if isinstance(media, str) else ''
     t = ''.join(f'<span class="tag">{x}</span>' for x in (tags or []))
     q = f'<blockquote class="work-quote">&ldquo;{quote}&rdquo;<cite>{cite}</cite></blockquote>' if quote else ''
     meta = f'<div class="work-meta"><span>{kicker}</span></div>' if kicker else ''
     if media:
         # 키커를 하단 텍스트 블록에 붙여 상단은 이미지 영역으로 비움
-        return (f'<article class="{cls}">'
+        return (f'<article class="{cls}"{mstyle}>'
                 f'<div class="work-bottom">{meta}<h3>{title}</h3><p>{desc}</p>{q}'
                 f'{f"<div class=work-tags>{t}</div>" if t else ""}</div></article>')
     return (f'<article class="{cls}">'
@@ -4163,12 +4191,12 @@ PAGES['portx.html'] = dict(
 </div></section>
 <section><div class="shell sec">
   {sec_head('Key Features', '거래 경험을 연결하는 핵심 기능')}
-  {card_grid([
-    card('Aggregation Engine', '주요 글로벌 거래소의 호가와 유동성을 한 화면에서 보고, 연동된 거래소를 통해 바로 주문합니다.', kicker='Feature 01', tags=['멀티 거래소 유동성 연결','단일 진입점 주문 연결'], media=True),
-    card('Smart Access', 'QR 코드로 외부 거래소 계정을 간편하게 연결해, API 키 입력 없이 빠르게 연동합니다.', kicker='Feature 02', tags=['QR 계정 연결','API 키 없는 연동'], media=True),
-    card('전문 거래 화면', '트레이더용 대시보드와 고급 차트(TradingView), 거래 UI/UX를 기본 제공합니다.', kicker='Feature 03', tags=['전문 대시보드','TradingView 차트'], media=True),
-    card('통합 성과관리', '여러 거래소의 성과를 한 대시보드에서 보고, 손익(PnL)을 정밀하게 분석합니다.', kicker='Feature 04', tags=['통합 대시보드','PnL 분석'], media=True),
-  ], cols=2)}
+  <div class="kf-media">{card_grid([
+    card('Aggregation Engine', '주요 글로벌 거래소의 호가와 유동성을 한 화면에서 보고, 연동된 거래소를 통해 바로 주문합니다.', tags=['멀티 거래소 유동성 연결','단일 진입점 주문 연결'], media='assets/portx/feature-01.png'),
+    card('Smart Access', 'QR 코드로 외부 거래소 계정을 간편하게 연결해, API 키 입력 없이 빠르게 연동합니다.', tags=['QR 계정 연결','API 키 없는 연동'], media='assets/portx/feature-02.png'),
+    card('전문 거래 화면', '트레이더용 대시보드와 고급 차트(TradingView), 거래 UI/UX를 기본 제공합니다.', tags=['전문 대시보드','TradingView 차트'], media='assets/portx/feature-03.png'),
+    card('통합 성과관리', '여러 거래소의 성과를 한 대시보드에서 보고, 손익(PnL)을 정밀하게 분석합니다.', tags=['통합 대시보드','PnL 분석'], media='assets/portx/feature-04.png'),
+  ], cols=2)}</div>
 </div></section>
 <section><div class="shell sec">
   {sec_head('Use Cases', '디지털자산 비즈니스의<br>시작부터 운영까지', layout='center')}
@@ -4286,17 +4314,30 @@ PAGES['myid.html'] = dict(
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
   {sec_head('Platform', '개인정보는 쌓지 않고, 신원은 사용자가 통제합니다', 'MyID는 블록체인 기반 DID 플랫폼입니다. 신원증명(VC)을 사용자 지갑에 보관하고 필요한 정보만 선택 제출하며, W3C 표준 기반으로 발급·검증·연동을 제공합니다. 아래 4가지 구성으로 서비스에 바로 붙일 수 있습니다.')}
-  {rows([
-    dict(idx='Issuer', title='신원인증기관 — VC 발급'),
-    dict(idx='Holder', title='사용자 — 지갑 보관 · 필요한 정보만 제출'),
-    dict(idx='Verifier', title='서비스제공자 — 검증'),
-  ], sm=True, meta=True)}
-  {note('세 주체 모두 MyID 위에서 DID 등록 · 블록체인으로 무결성 검증')}
+  <div class="did-flow rvl" style="--rvl-y:24px">
+    <div class="did-actors">
+      <div class="did-actor">
+        <span class="did-role">Issuer</span><b>신원인증기관</b><p>VC 발급</p>
+      </div>
+      <div class="did-arw"><span>VC 발급</span><svg viewBox="0 0 70 14" fill="none" aria-hidden="true"><path d="M2 7h60M56 2l7 5-7 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="did-actor is-holder">
+        <span class="did-role">Holder</span><b>사용자 · DID 지갑</b><p>지갑에 보관, 필요한 정보만 제출</p>
+      </div>
+      <div class="did-arw"><span>선택 제출</span><svg viewBox="0 0 70 14" fill="none" aria-hidden="true"><path d="M2 7h60M56 2l7 5-7 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="did-actor">
+        <span class="did-role">Verifier</span><b>서비스제공자</b><p>검증</p>
+      </div>
+    </div>
+    <div class="did-connect" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="did-base">
+      <b>MyID 블록체인</b><span class="did-dot" aria-hidden="true"></span><span>세 주체 모두 MyID 위에서 DID 등록, 블록체인으로 무결성 검증</span>
+    </div>
+  </div>
   <ul class="cards-2">
-    <li class="rvl" style="--rvl-y:40px">{dark_card('Console', 'MyID 파트너센터', '코드 없이 DID·VC를 생성하고, 검증 항목을 구성할 수 있는 관리자 콘솔입니다. 발급·검증 이력과 인증 절차를 대시보드에서 통합 관리합니다.', ['DID·VC 생성','검증 항목 설정','이력 대시보드'], grouped=True)}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms">{dark_card('Wallet', 'DID 지갑', '사용자가 자신의 DID와 VC를 직접 관리하는 신원 지갑입니다. Wallet SDK로 서비스 앱에 지갑 기능을 연동하고, 외부 발급 VC도 보관·이용할 수 있습니다.', ['Wallet SDK','외부 VC 보관','PDS 암호화'], grouped=True)}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms">{dark_card('API', 'MyID API', 'DID 관리, VC 발급과 유효성 검증, VP 검증 등 신원 인증에 필요한 기능을 API로 제공합니다. 여러 블록체인과 연결된 통합 API로 외부 VC 연계도 지원합니다.', ['VC 발급','VC·VP 검증','외부 VC 연계'], grouped=True)}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms">{dark_card('BaaS', '블록체인 BaaS', 'MyID 서비스에 필요한 퍼블릭·프라이빗 블록체인 환경을 서비스 형태로 제공합니다. loopchain core2 기반으로 안정적인 DID 서비스 운영을 지원합니다.', ['퍼블릭·프라이빗','loopchain core2'], grouped=True)}</li>
+    <li class="rvl" style="--rvl-y:40px">{dark_card('Console', 'MyID 파트너센터', '코드 없이 DID·VC를 생성하고, 검증 항목을 구성할 수 있는 관리자 콘솔입니다. 발급·검증 이력과 인증 절차를 대시보드에서 통합 관리합니다.', ['DID·VC 생성','검증 항목 설정','이력 대시보드'], grouped=False)}</li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms">{dark_card('Wallet', 'DID 지갑', '사용자가 자신의 DID와 VC를 직접 관리하는 신원 지갑입니다. Wallet SDK로 서비스 앱에 지갑 기능을 연동하고, 외부 발급 VC도 보관·이용할 수 있습니다.', ['Wallet SDK','외부 VC 보관','PDS 암호화'], grouped=False)}</li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms">{dark_card('API', 'MyID API', 'DID 관리, VC 발급과 유효성 검증, VP 검증 등 신원 인증에 필요한 기능을 API로 제공합니다. 여러 블록체인과 연결된 통합 API로 외부 VC 연계도 지원합니다.', ['VC 발급','VC·VP 검증','외부 VC 연계'], grouped=False)}</li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms">{dark_card('BaaS', '블록체인 BaaS', 'MyID 서비스에 필요한 퍼블릭·프라이빗 블록체인 환경을 서비스 형태로 제공합니다. loopchain core2 기반으로 안정적인 DID 서비스 운영을 지원합니다.', ['퍼블릭·프라이빗','loopchain core2'], grouped=False)}</li>
   </ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
