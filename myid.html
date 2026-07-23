@@ -1791,7 +1791,7 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .ex-card h3 + p{ margin-top:.75rem; font-size:var(--text-18) }  /* 서브카피 달릴 때만 간격 + 한 단계 업 */
 
 /* DID 신뢰 도식 (Platform): Issuer → Holder → Verifier + MyID 블록체인 토대 */
-.did-flow{ margin-top:var(--space-32) }
+.did-flow{ margin-top:var(--space-32); margin-bottom:var(--space-48) }
 .did-actors{ display:flex; align-items:stretch; gap:var(--space-16) }
 .did-actor{ flex:1; border:1px solid var(--line); border-radius:var(--radius-card-sm); padding:var(--space-20) var(--space-16); background:var(--white) }
 .did-actor.is-holder{ border:2px solid var(--accent); background:rgba(97,0,255,.05) }
@@ -2833,10 +2833,10 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
     </div>
   </div>
   <ul class="cards-2">
-    <li class="rvl" style="--rvl-y:40px"><article class="work-card static sm"><div class="work-meta"><span>Console</span></div><div class="work-bottom"><h3>MyID 파트너센터</h3><p>코드 없이 DID·VC를 생성하고, 검증 항목을 구성할 수 있는 관리자 콘솔입니다. 발급·검증 이력과 인증 절차를 대시보드에서 통합 관리합니다.</p><div class=work-tags><span class="tag">DID·VC 생성</span><span class="tag">검증 항목 설정</span><span class="tag">이력 대시보드</span></div></div></article></li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm"><div class="work-meta"><span>Wallet</span></div><div class="work-bottom"><h3>DID 지갑</h3><p>사용자가 자신의 DID와 VC를 직접 관리하는 신원 지갑입니다. Wallet SDK로 서비스 앱에 지갑 기능을 연동하고, 외부 발급 VC도 보관·이용할 수 있습니다.</p><div class=work-tags><span class="tag">Wallet SDK</span><span class="tag">외부 VC 보관</span><span class="tag">PDS 암호화</span></div></div></article></li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm"><div class="work-meta"><span>API</span></div><div class="work-bottom"><h3>MyID API</h3><p>DID 관리, VC 발급과 유효성 검증, VP 검증 등 신원 인증에 필요한 기능을 API로 제공합니다. 여러 블록체인과 연결된 통합 API로 외부 VC 연계도 지원합니다.</p><div class=work-tags><span class="tag">VC 발급</span><span class="tag">VC·VP 검증</span><span class="tag">외부 VC 연계</span></div></div></article></li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms"><article class="work-card static sm"><div class="work-meta"><span>BaaS</span></div><div class="work-bottom"><h3>블록체인 BaaS</h3><p>MyID 서비스에 필요한 퍼블릭·프라이빗 블록체인 환경을 서비스 형태로 제공합니다. loopchain core2 기반으로 안정적인 DID 서비스 운영을 지원합니다.</p><div class=work-tags><span class="tag">퍼블릭·프라이빗</span><span class="tag">loopchain core2</span></div></div></article></li>
+    <li class="rvl" style="--rvl-y:40px"><article class="work-card static sm t-gray"><div class="work-meta"><span>Console</span></div><div class="work-bottom"><h3>MyID 파트너센터</h3><p>코드 없이 DID·VC를 생성하고, 검증 항목을 구성할 수 있는 관리자 콘솔입니다. 발급·검증 이력과 인증 절차를 대시보드에서 통합 관리합니다.</p><div class=work-tags><span class="tag">DID·VC 생성</span><span class="tag">검증 항목 설정</span><span class="tag">이력 대시보드</span></div></div></article></li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm t-gray"><div class="work-meta"><span>Wallet</span></div><div class="work-bottom"><h3>DID 지갑</h3><p>사용자가 자신의 DID와 VC를 직접 관리하는 신원 지갑입니다. Wallet SDK로 서비스 앱에 지갑 기능을 연동하고, 외부 발급 VC도 보관·이용할 수 있습니다.</p><div class=work-tags><span class="tag">Wallet SDK</span><span class="tag">외부 VC 보관</span><span class="tag">PDS 암호화</span></div></div></article></li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="work-card static sm t-gray"><div class="work-meta"><span>API</span></div><div class="work-bottom"><h3>MyID API</h3><p>DID 관리, VC 발급과 유효성 검증, VP 검증 등 신원 인증에 필요한 기능을 API로 제공합니다. 여러 블록체인과 연결된 통합 API로 외부 VC 연계도 지원합니다.</p><div class=work-tags><span class="tag">VC 발급</span><span class="tag">VC·VP 검증</span><span class="tag">외부 VC 연계</span></div></div></article></li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms"><article class="work-card static sm t-gray"><div class="work-meta"><span>BaaS</span></div><div class="work-bottom"><h3>블록체인 BaaS</h3><p>MyID 서비스에 필요한 퍼블릭·프라이빗 블록체인 환경을 서비스 형태로 제공합니다. loopchain core2 기반으로 안정적인 DID 서비스 운영을 지원합니다.</p><div class=work-tags><span class="tag">퍼블릭·프라이빗</span><span class="tag">loopchain core2</span></div></div></article></li>
   </ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">

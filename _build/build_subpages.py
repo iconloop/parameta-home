@@ -956,7 +956,7 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .ex-card h3 + p{ margin-top:.75rem; font-size:var(--text-18) }  /* 서브카피 달릴 때만 간격 + 한 단계 업 */
 
 /* DID 신뢰 도식 (Platform): Issuer → Holder → Verifier + MyID 블록체인 토대 */
-.did-flow{ margin-top:var(--space-32) }
+.did-flow{ margin-top:var(--space-32); margin-bottom:var(--space-48) }
 .did-actors{ display:flex; align-items:stretch; gap:var(--space-16) }
 .did-actor{ flex:1; border:1px solid var(--line); border-radius:var(--radius-card-sm); padding:var(--space-20) var(--space-16); background:var(--white) }
 .did-actor.is-holder{ border:2px solid var(--accent); background:rgba(97,0,255,.05) }
@@ -3798,7 +3798,7 @@ PAGES['blog.html'] = dict(
 # ---------------- resources.html (자료실) ----------------
 PAGES['resources.html'] = dict(
     title='Resources | PARAMETA',
-    desc='블록체인 용어정리, 자주 묻는 질문, 로고 등 브랜드 자료를 한곳에서 확인할 수 있습니다.',
+    desc='파라메타 로고 등 브랜드 자료를 한곳에서 확인할 수 있습니다.',
     eyebrow='',
     h1_lines=['Resources'],
     lead='',
@@ -3809,43 +3809,22 @@ PAGES['resources.html'] = dict(
   {sec_head('Logo', '로고 다운로드')}
   <div class="res-logo rvl" style="--rvl-y:24px">
     <article class="work-card static grouped t-gray rl-card">
-      <div class="work-bottom"><h3>AI (인쇄·출판용)</h3>
+      <div class="work-bottom"><h3>인쇄·출판용</h3>
         <div class="rl-actions">
+          <button class="rl-btn" type="button" disabled>PNG 다운로드</button>
           <button class="rl-btn" type="button" disabled>AI 다운로드</button>
         </div>
       </div>
     </article>
     <article class="work-card static grouped t-gray rl-card">
-      <div class="work-bottom"><h3>PNG (웹·화면용)</h3>
+      <div class="work-bottom"><h3>웹·화면용</h3>
         <div class="rl-actions">
           <button class="rl-btn" type="button" disabled>PNG 다운로드</button>
+          <button class="rl-btn" type="button" disabled>AI 다운로드</button>
         </div>
       </div>
     </article>
   </div>
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('Glossary', '용어정리')}
-  {faq([
-    dict(q='DID (Decentralized Identifier, 분산아이디)', a='외부 인증기관 없이 사용자가 자신의 디지털 서명으로 신원을 직접 증명하는 분산형 신원 체계. 필요한 정보만 선택적으로 공개할 수 있고, W3C 표준을 따릅니다. 자기주권신원(SSI)을 구현하는 핵심 기술입니다.'),
-    dict(q='SSI (Self-Sovereign Identity, 자기주권신원)', a='개인이 자신의 신원 정보를 스스로 소유·관리하는 신원 모델. 중앙 발급기관이 아닌 사용자가 인증·공개 범위·이력을 직접 제어합니다. DID 기술이 SSI를 가능하게 합니다.'),
-    dict(q='Stable Coin (스테이블 코인)', a='법정통화나 자산에 가치를 연동(Peg)해 가격 변동성을 최소화한 디지털 자산. 결제·송금·정산처럼 안정적인 가치 이동이 필요한 환경에서 활용됩니다.'),
-    dict(q='DeFi (Decentralized Finance, 탈중앙화 금융)', a='은행 등 중앙 기관 없이 블록체인 위에서 자동으로 거래되는 금융 메커니즘. 스마트 컨트랙트로 송금·예치·대출·환전을 처리하며, 누구나 참여할 수 있습니다.'),
-    dict(q='NFT (Non-Fungible Token, 대체 불가능 토큰)', a='교환·복제가 불가능한 고유 식별자를 가진 블록체인 기반 토큰. 작품·콘텐츠·자산을 유일한 형태로 표현하며 스마트 컨트랙트로 발행·이전됩니다. FT(대체 가능 토큰)의 상대 개념.'),
-    dict(q='BTP (Blockchain Transmission Protocol)', a='서로 다른 블록체인 간에 자산과 메시지를 안전하게 이동시키는 인터체인 프로토콜. 검증·중계·릴레이 메커니즘으로 체인 간 신뢰 가능한 통신을 제공합니다. 파라메타가 직접 개발했습니다.'),
-    dict(q='loopchain (루프체인)', a='파라메타가 자체 개발한 엔터프라이즈 블록체인 엔진. PBFT 계열 LFT 합의 알고리즘으로 즉시 확정(Finality)과 운영 안정성을 제공합니다. 금융·공공 환경의 요구사항을 충족하도록 설계되었습니다.'),
-    dict(q='SCORE (Smart Contract on Reliable Environment)', a='파라메타의 자체 코어 엔진 루프체인 위에서 동작하는 스마트 컨트랙트 실행 환경. Java·Python 등 익숙한 언어로 컨트랙트를 작성할 수 있게 합니다.'),
-  ])}
-</div></section>
-<section><div class="shell sec" style="padding-top:0">
-  {sec_head('FAQ', '자주 묻는 질문')}
-  {faq([
-    dict(q='파라메타는 어떤 회사인가요?', a='파라메타는 블록체인 기반 디지털자산 인프라를 만드는 Web3 기술 기업입니다.<br>금융·기업·공공 서비스에 필요한 지갑, 토큰 발행, 신원인증, 온체인 KYC, 상호운용 기술을 제공합니다.'),
-    dict(q='ParaSta 솔루션으로 무엇을 할 수 있나요?', a='ParaSta는 지갑, 토큰 발행, RWA, 온체인 KYC, 거래 관리 등 디지털자산 서비스의 핵심 기능을 하나의 플랫폼으로 제공합니다.<br>개발 부담을 줄이고, SaaS 또는 온프레미스 환경에서 빠르게 서비스를 구축할 수 있습니다.'),
-    dict(q='MyID와 K-BTF는 무엇이 다른가요?', a='MyID는 DID 기반 신원인증 서비스이며, K-BTF는 이를 공공·기업 환경에서 안정적으로 활용할 수 있도록 지원하는 공동 인프라입니다.<br>기관은 별도 인프라 구축 부담을 줄이고, 보안 기준에 맞는 디지털 신원 인증을 빠르게 도입할 수 있습니다.'),
-    dict(q='파라메타는 자체 블록체인 엔진을 보유하고 있나요?', a='네. 파라메타는 금융·공공 환경에 필요한 거래 확정성과 운영 안정성을 제공하는 자체 블록체인 엔진을 보유하고 있습니다.<br>PBFT 계열 합의 구조와 LFT 알고리즘을 기반으로, 디지털자산 인프라 구축에 필요한 안정적인 블록체인 기반을 제공합니다.'),
-    dict(q='PortX는 어떤 서비스인가요?', a='PortX는 기존 서비스에 디지털자산 거래 기능을 빠르게 도입할 수 있도록 지원하는 화이트라벨 거래소 솔루션입니다.<br>개발 부담을 줄이고, 자체 브랜드 환경에서 거래 서비스를 제공할 수 있습니다.'),
-  ])}
 </div></section>
 ''')
 
@@ -4334,10 +4313,10 @@ PAGES['myid.html'] = dict(
     </div>
   </div>
   <ul class="cards-2">
-    <li class="rvl" style="--rvl-y:40px">{dark_card('Console', 'MyID 파트너센터', '코드 없이 DID·VC를 생성하고, 검증 항목을 구성할 수 있는 관리자 콘솔입니다. 발급·검증 이력과 인증 절차를 대시보드에서 통합 관리합니다.', ['DID·VC 생성','검증 항목 설정','이력 대시보드'], grouped=False)}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms">{dark_card('Wallet', 'DID 지갑', '사용자가 자신의 DID와 VC를 직접 관리하는 신원 지갑입니다. Wallet SDK로 서비스 앱에 지갑 기능을 연동하고, 외부 발급 VC도 보관·이용할 수 있습니다.', ['Wallet SDK','외부 VC 보관','PDS 암호화'], grouped=False)}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms">{dark_card('API', 'MyID API', 'DID 관리, VC 발급과 유효성 검증, VP 검증 등 신원 인증에 필요한 기능을 API로 제공합니다. 여러 블록체인과 연결된 통합 API로 외부 VC 연계도 지원합니다.', ['VC 발급','VC·VP 검증','외부 VC 연계'], grouped=False)}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms">{dark_card('BaaS', '블록체인 BaaS', 'MyID 서비스에 필요한 퍼블릭·프라이빗 블록체인 환경을 서비스 형태로 제공합니다. loopchain core2 기반으로 안정적인 DID 서비스 운영을 지원합니다.', ['퍼블릭·프라이빗','loopchain core2'], grouped=False)}</li>
+    <li class="rvl" style="--rvl-y:40px">{card('MyID 파트너센터', '코드 없이 DID·VC를 생성하고, 검증 항목을 구성할 수 있는 관리자 콘솔입니다. 발급·검증 이력과 인증 절차를 대시보드에서 통합 관리합니다.', kicker='Console', tags=['DID·VC 생성','검증 항목 설정','이력 대시보드'], tone='gray')}</li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms">{card('DID 지갑', '사용자가 자신의 DID와 VC를 직접 관리하는 신원 지갑입니다. Wallet SDK로 서비스 앱에 지갑 기능을 연동하고, 외부 발급 VC도 보관·이용할 수 있습니다.', kicker='Wallet', tags=['Wallet SDK','외부 VC 보관','PDS 암호화'], tone='gray')}</li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms">{card('MyID API', 'DID 관리, VC 발급과 유효성 검증, VP 검증 등 신원 인증에 필요한 기능을 API로 제공합니다. 여러 블록체인과 연결된 통합 API로 외부 VC 연계도 지원합니다.', kicker='API', tags=['VC 발급','VC·VP 검증','외부 VC 연계'], tone='gray')}</li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms">{card('블록체인 BaaS', 'MyID 서비스에 필요한 퍼블릭·프라이빗 블록체인 환경을 서비스 형태로 제공합니다. loopchain core2 기반으로 안정적인 DID 서비스 운영을 지원합니다.', kicker='BaaS', tags=['퍼블릭·프라이빗','loopchain core2'], tone='gray')}</li>
   </ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
