@@ -1425,11 +1425,13 @@ function casesUpdate(){
   casesProgThumb.style.left = (max > 0 ? (sl / max) * (100 - thumbW) : 0) + '%';
   casesPrev.disabled = sl <= 2;
   casesNext.disabled = sl >= max - 2;
-  /* 가로 네비게이션(화살표·드래그·인디케이터)으로 뷰에 들어온 카드 등장 — 세로 진입 옵저버와 병행, 아래-폴드일 땐 미발동 */
+  /* 가로 네비게이션(화살표·드래그·인디케이터)으로 뷰에 들어온 카드 등장 — 50% 이상 보일 때만(살짝 걸친 카드는 숨김 유지) */
   const vw = innerWidth, vh = innerHeight;
   casesRail.querySelectorAll('.case-slot:not(.is-in)').forEach(s => {
     const r = s.getBoundingClientRect();
-    if (r.left < vw - 40 && r.right > 0 && r.top < vh && r.bottom > 0) s.classList.add('is-in');
+    if (r.width <= 0 || r.top >= vh || r.bottom <= 0) return;
+    const vis = Math.min(r.right, vw) - Math.max(r.left, 0);
+    if (vis / r.width >= 0.5) s.classList.add('is-in');
   });
 }
 function casesStep(dir){
