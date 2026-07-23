@@ -1763,17 +1763,22 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .uc-tabpanel.is-active{ display:block }
 .uc-tabsub{ text-align:center; font-size:var(--text-16); color:rgba(var(--ink-rgb),.5); margin-bottom:var(--space-32) }
 .uc-tabnote{ text-align:center; font-size:var(--text-16); color:rgba(var(--ink-rgb),.6); line-height:var(--leading-body); margin-top:var(--space-32) }
-/* Broof Applied Cases — 2단 슬라이드(증명서 이미지 + 인용/로고) */
-.bc-cases .uc-slide{ display:grid; grid-template-columns:minmax(0,40%) 1fr; gap:var(--space-48); align-items:center }
-.bc-cert{ border-radius:var(--radius-card-sm); overflow:hidden; background:color-mix(in srgb, var(--ink) 5%, var(--white)) }
-.bc-cert img{ width:100%; height:auto; display:block }
-.bc-body{ display:flex; flex-direction:column; gap:var(--space-48) }
-.bc-quote{ font-size:var(--text-30); font-weight:500; line-height:var(--leading-heading); letter-spacing:-.01em; color:var(--ink); word-break:keep-all }
-@media (min-width:768px){ .bc-quote{ font-size:var(--text-36) } }
-.bc-org{ display:flex; flex-direction:column; gap:var(--space-12) }
-.bc-lead{ font-size:var(--text-16); color:rgba(var(--ink-rgb),.5) }
-.bc-logo{ font-size:var(--text-20); font-weight:700; letter-spacing:-.01em; color:var(--ink) }
-@media (max-width:767px){ .bc-cases .uc-slide{ grid-template-columns:1fr; gap:var(--space-32) } .bc-quote{ font-size:var(--text-24) } }
+/* Broof Applied Cases — 좌측 인증서 풀영역 + 우측 글·후기(PortX 포멧) */
+.bc-cases .uc-slide{ display:grid; grid-template-columns:minmax(0,42%) 1fr; gap:0; align-items:stretch; padding:0; overflow:hidden }   /* 패딩 0 → 인증서 full-bleed, overflow로 카드 라운드에 맞춰 클립 */
+.bc-cert{ background:color-mix(in srgb, var(--ink) 12%, var(--white)); display:grid; place-items:center; min-height:30rem }
+.bc-cert img{ width:100%; height:100%; object-fit:cover; display:block }
+.bc-body{ display:flex; flex-direction:column; justify-content:flex-start; padding:var(--space-48) }   /* 텍스트만 패딩 */
+.bc-cases .bc-body h3{ margin-bottom:var(--space-12) }
+.bc-cases .bc-body > p{ font-size:var(--text-18); color:rgba(var(--ink-rgb),.6); line-height:var(--leading-body); word-break:keep-all }
+.bc-cases .uc-testimonial{ margin-top:auto }   /* 후기를 하단 고정 → 슬라이드마다 위치 동일 */
+/* 좌우 폭 0.5칸 더 차지 — 24분할 그리드(데스크톱). 화살표는 공통(width:100% stretch) 유지 */
+@media (min-width:1024px){
+  .bc-cases.uc-carousel{ grid-template-columns:repeat(24, minmax(0,1fr)) }
+  .bc-cases .uc-prev{ grid-column:1 / 3 }
+  .bc-cases .uc-slides{ grid-column:4 / 22 }
+  .bc-cases .uc-next{ grid-column:23 / 25 }
+}
+@media (max-width:767px){ .bc-cases .uc-slide{ grid-template-columns:1fr; gap:0 } .bc-cert{ min-height:16rem } }
 /* 탭(640~1023): 카드 패딩을 위 grouped 카드(2rem)와 통일 — 하단은 유지 */
 @media (min-width:640px) and (max-width:1023px){ .uc-slide{ padding:2rem 2rem 3rem } }
 .uc-dots{ display:none }
@@ -2861,42 +2866,48 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
 </div></section>
 <section><div class="shell sec" style="padding-top:9rem">
   <div class="sh-center"><div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Applied Cases</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>대학, 공공기관, 기업이<br>선택한 디지털 증명서</span></span></h2></div>
-  <div class="uc-carousel uc-tall">
+  <div class="uc-carousel bc-cases">
     <button class="uc-arrow uc-prev rvl rvl-op" type="button" aria-label="이전 사례"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5L8 12l7 7"/></svg></button>
     <div class="uc-slides rvl" style="--rvl-y:40px">
       <article class="uc-slide is-active">
-        <div class="uc-thumb" aria-hidden="true"></div>
-        <h3>POSTECH</h3>
-        <p>블록체인 전문가과정 수료증을 Broof로 정기 발급합니다. 수료자는 QR 코드 하나로 어디서나 수료 사실을 증명하고, 대학은 재발급·진위 확인 업무 부담을 덜었습니다.</p>
-        <div class="uc-testimonial">
-          <div class="uc-avatar" aria-hidden="true"></div>
-          <div class="uc-qbody">
-            <p class="uc-quote">&ldquo;코로나19로 졸업식 대신 카카오톡으로 디지털 졸업장을 전달했어요.&rdquo;</p>
-            <p class="uc-name">POSTECH 담당자</p>
+        <div class="bc-cert" aria-hidden="true"></div>
+        <div class="bc-body">
+          <h3>POSTECH</h3>
+          <p>블록체인 전문가과정 수료증을 Broof로 정기 발급합니다. 수료자는 QR 코드 하나로 어디서나 수료 사실을 증명하고, 대학은 재발급·진위 확인 업무 부담을 덜었습니다.</p>
+          <div class="uc-testimonial">
+            <div class="uc-avatar" aria-hidden="true"></div>
+            <div class="uc-qbody">
+              <p class="uc-quote">&ldquo;코로나19로 졸업식 대신 카카오톡으로 디지털 졸업장을 전달했어요.&rdquo;</p>
+              <p class="uc-name">POSTECH 담당자</p>
+            </div>
           </div>
         </div>
       </article>
       <article class="uc-slide">
-        <div class="uc-thumb" aria-hidden="true"></div>
-        <h3>아트앤가이드</h3>
-        <p>미술품 공동구매의 소유권을 블록체인 증명서로 발급합니다. 구매자는 QR 코드로 소유권을 즉시 확인하고, 소유 이력의 신뢰를 높였습니다.</p>
-        <div class="uc-testimonial">
-          <div class="uc-avatar" aria-hidden="true"></div>
-          <div class="uc-qbody">
-            <p class="uc-quote">&ldquo;블록체인으로 작품 소유권을 등록하니 소유권의 신뢰도가 높아졌어요.&rdquo;</p>
-            <p class="uc-name">아트앤가이드 담당자</p>
+        <div class="bc-cert" aria-hidden="true"></div>
+        <div class="bc-body">
+          <h3>아트앤가이드</h3>
+          <p>미술품 공동구매의 소유권을 블록체인 증명서로 발급합니다. 구매자는 QR 코드로 소유권을 즉시 확인하고, 소유 이력의 신뢰를 높였습니다.</p>
+          <div class="uc-testimonial">
+            <div class="uc-avatar" aria-hidden="true"></div>
+            <div class="uc-qbody">
+              <p class="uc-quote">&ldquo;블록체인으로 작품 소유권을 등록하니 소유권의 신뢰도가 높아졌어요.&rdquo;</p>
+              <p class="uc-name">아트앤가이드 담당자</p>
+            </div>
           </div>
         </div>
       </article>
       <article class="uc-slide">
-        <div class="uc-thumb" aria-hidden="true"></div>
-        <h3>패스트캠퍼스</h3>
-        <p>온라인 강의 수료증을 Broof로 발급합니다. 수료자는 QR 코드 하나로 수료 사실을 증명하고, 기관은 발급, 재발급 업무 부담을 덜었습니다.</p>
-        <div class="uc-testimonial">
-          <div class="uc-avatar" aria-hidden="true"></div>
-          <div class="uc-qbody">
-            <p class="uc-quote">&ldquo;broof 이용으로 증명서 발급에 들던 시간이 매우 줄어들었어요.&rdquo;</p>
-            <p class="uc-name">패스트캠퍼스 담당자</p>
+        <div class="bc-cert" aria-hidden="true"></div>
+        <div class="bc-body">
+          <h3>패스트캠퍼스</h3>
+          <p>온라인 강의 수료증을 Broof로 발급합니다. 수료자는 QR 코드 하나로 수료 사실을 증명하고, 기관은 발급, 재발급 업무 부담을 덜었습니다.</p>
+          <div class="uc-testimonial">
+            <div class="uc-avatar" aria-hidden="true"></div>
+            <div class="uc-qbody">
+              <p class="uc-quote">&ldquo;broof 이용으로 증명서 발급에 들던 시간이 매우 줄어들었어요.&rdquo;</p>
+              <p class="uc-name">패스트캠퍼스 담당자</p>
+            </div>
           </div>
         </div>
       </article>
