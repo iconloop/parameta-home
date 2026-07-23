@@ -520,7 +520,7 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 @media (min-width:1024px){ .stats-shell{ padding-bottom:7rem } .stats-grid{ grid-template-columns:repeat(4,1fr) } }
 
 /* ============ FAQ (roll-open motion, 원본 reasons 아코디언 참고) ============ */
-#faq{ background:var(--white); padding-bottom:var(--space-64) }
+#faq{ background:var(--white); padding-bottom:var(--space-80) }
 .faq-shell{ padding:0 1.25rem 5rem }
 .faq-h2{ margin:1.25rem 0 3rem; max-width:16ch; font-size:var(--text-32); font-weight:600; letter-spacing:-.02em }
 .faq-li{ border-top:1px solid var(--line) }
@@ -547,11 +547,14 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 #faq .faq-h2{ margin-bottom:var(--space-40) }   /* 타이틀→카드 간격 works와 동일(40) */
 @media (min-width:640px){ .cases-head{ padding-inline:2rem } }
 @media (min-width:1024px){ .cases-head{ padding-top:7rem } }
-#faq .cases-rail{ overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch; padding-bottom:var(--space-32) }
+#faq .cases-rail{ overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch; padding-top:var(--space-16); margin-top:calc(-1 * var(--space-16)); padding-bottom:var(--space-32) }
 #faq .cases-rail::-webkit-scrollbar{ display:none }
 #faq .cases-track{ display:flex; gap:var(--space-24); width:max-content; padding-inline:calc((100% - min(100%, var(--container-shell)))/2 + var(--shell-pad)) }
 @media (min-width:640px){ #faq .cases-track{ padding-inline:calc((100% - min(100%, var(--container-shell)))/2 + 2rem) } }
-#faq .case-card{ flex:0 0 clamp(17rem, 80vw, 22rem); display:flex; flex-direction:column; border-radius:var(--radius-card-sm); background:var(--surface); overflow:hidden; transform-origin:center top; transition:transform .35s cubic-bezier(.2,.8,.2,1) }
+#faq .case-slot{ flex:0 0 clamp(17rem, 80vw, 22rem); display:flex }
+#faq .case-slot.rvl{ opacity:0; transform:translateX(2.5rem); transition:opacity .55s cubic-bezier(.16,1,.3,1), transform .55s cubic-bezier(.16,1,.3,1); transition-delay:var(--rvl-delay,0ms) }   /* 오른쪽에서 슬라이드 인 */
+#faq .case-slot.rvl.is-in{ opacity:1; transform:none }
+#faq .case-card{ flex:1 1 auto; min-width:0; display:flex; flex-direction:column; border-radius:var(--radius-card-sm); background:var(--surface); overflow:hidden; transition:transform .35s cubic-bezier(.2,.8,.2,1) }
 @media (hover:hover){ #faq .case-card:hover{ transform:scale(1.03) } }
 #faq .case-shot{ height:14rem; background:var(--ink); display:grid; place-items:center }   /* 블로그 디폴트 썸네일과 동일 — 남색 + 흰 심볼 */
 #faq .case-mark{ width:16%; max-width:2.75rem; height:auto }
@@ -751,7 +754,6 @@ body.show-grid #dev-grid{ display:block }
 #clients .mq-logo{ flex:none; height:5rem; display:flex; align-items:center }
 @media (max-width:639px){ #clients .mq-logo{ height:3.5rem } #clients .mq-track{ gap:var(--space-40) } }
 #clients .mq-logo img{ height:100%; width:auto; object-fit:contain }
-@media (hover:hover){ #clients .mq:hover .mq-track{ animation-play-state:paused } }
 @media (prefers-reduced-motion:reduce){ #clients .mq-track{ animation:none; flex-wrap:wrap; justify-content:center; row-gap:var(--space-24) } }
 
 #footer{ position:relative; overflow:hidden; border-radius:var(--radius-card) var(--radius-card) 0 0; background:var(--ink); color:var(--white) }
@@ -998,6 +1000,10 @@ body.hero-dark.hero-sol .phero-h1 .rvl-line + .rvl-line{ margin-top:.2em }  /* �
 body.hero-dark .phero-text .phero-lead{ color:rgba(var(--white-rgb),.7); font-size:var(--text-20) }
 /* 히어로 CTA: 폰트 text-16 (높이는 base .pill.no-arrow 토큰 min-height:3rem = with-arrow와 동일) */
 .phero-cta .pill .hspring{ font-size:var(--text-16) }
+/* 히어로 CTA 스왑(공통): 새 Talk to Sales(cta-talk)는 기본 숨김 → PortX만 노출, 기존(cta-legacy)은 PortX에서 숨김. 나머지 페이지는 부활 전까지 기존 유지 */
+.phero-cta .cta-talk{ display:none }
+body.portx .phero-cta .cta-talk{ display:inline-block }
+body.portx .phero-cta .cta-legacy{ display:none }
 /* light 버튼(View Demo) 호버: 텍스트 purple-500 */
 .phero-cta .pill.light .hspring{ transition:color .25s ease, transform .3s cubic-bezier(.2,.8,.2,1) }
 @media (hover:hover){ .phero-cta .pill.light:hover .hspring{ color:var(--purple-500) } }
@@ -1518,6 +1524,7 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .sec{ padding:5rem 1.25rem }
 @media (min-width:640px){ .sec{ padding-left:2rem; padding-right:2rem } }
 @media (min-width:1024px){ .sec{ padding-block:6rem } }
+.sec.uc-tail{ padding-bottom:var(--space-120) }   /* 마지막 Use Cases 섹션: 푸터 전 여백 확대 */
 /* 섹션 서브카피·바디카피 = text-20 (2026-07-13 통일), 컨테이너 풀폭 */
 .sec .phero-lead{ font-size:var(--text-20); max-width:none }
 /* 타이틀 변형: 서브카피 있는 버전은 하단 0.25rem, 없는 버전은 기본 2rem */
@@ -1588,6 +1595,12 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 /* PortX Key Features — 타이틀 위 간격 확보 */
 .kf-media .work-card.grouped .work-bottom{ padding-top:var(--space-16) }
 .kf-media .work-card.grouped::before{ height:20rem; opacity:.9 }   /* 이미지 영역 높이(기본 16rem→20rem) + 투명도 90% */
+/* 호버 크로스페이드: 호버 이미지 레이어(::after)를 이미지 영역에 겹쳐 opacity 교차 */
+.kf-media .work-card.grouped[style*="--media-hover"]::after{
+  content:''; position:absolute; top:0; left:0; right:0; height:20rem;
+  background:var(--media-hover) center/cover no-repeat; opacity:0; pointer-events:none;
+  transition:opacity .4s ease; z-index:1 }
+@media (hover:hover){ .kf-media .work-card.grouped[style*="--media-hover"]:hover::after{ opacity:.9 } }
 /* 짧은 콘텐츠 카드도 과하지 않게: grouped 최소높이는 콘텐츠 기준 */
 .cards-3 .work-card.grouped, .cards-2 .work-card.grouped{ min-height:0 }
 /* 세로형 이미지 카드 변형: 이미지 영역을 카드의 약 2/3로 (기본 16rem → 24rem) */
@@ -2823,12 +2836,12 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
     <button class="uc-arrow uc-prev rvl rvl-op" type="button" aria-label="이전 사례"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5L8 12l7 7"/></svg></button>
     <div class="uc-slides rvl" style="--rvl-y:40px">
       <article class="uc-slide is-active">
-        <div class="uc-thumb" aria-hidden="true"></div>
+        <div class="uc-thumb"><img src="assets/portx/uc-supercycl.png" alt="Supercycl"></div>
         <h3>Supercycl</h3>
         <div class="uc-rows"><div class="uc-row"><span class="uc-flag">과제</span><span>자사 서비스 안에 거래 기능을 빠르게 붙여 시장 반응을 확인해야 합니다.</span></div><div class="uc-row"><span class="uc-flag">해결</span><span>PortX의 거래소 연동과 QR 연결(Smart Access)에 전문 거래 화면, 손익(PnL) 분석까지 더해, 짧은 기간에 자사 브랜드 거래 서비스를 구축하고 초기 사용자를 확보했습니다.</span></div></div>
       </article>
       <article class="uc-slide">
-        <div class="uc-thumb" aria-hidden="true"></div>
+        <div class="uc-thumb"><img src="assets/portx/uc-tass.png" alt="TaaS"></div>
         <h3>TaaS · 디지털자산 세금정산</h3>
         <div class="uc-rows"><div class="uc-row"><span class="uc-flag">과제</span><span>여러 거래소에 흩어진 거래 내역을 모아 예상 세금을 계산해야 합니다.</span></div><div class="uc-row"><span class="uc-flag">해결</span><span>PortX Smart Access로 외부 거래소 계정 연결을 간소화해, 세금 계산에 필요한 거래 정보를 서비스 안에서 바로 활용했습니다.</span></div></div>
       </article>
