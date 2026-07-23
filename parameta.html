@@ -1398,6 +1398,7 @@ const casesTrack = document.getElementById('casesTrack');
 CASES.forEach((c, i) => {
   const slot = document.createElement('div');   /* reveal(슬라이드 인) 담당 래퍼 — 호버 scale과 transform 충돌 방지 */
   slot.className = 'case-slot rvl';
+  slot.dataset.gated = '1';   /* 공용 옵저버 제외 — 아래 레일 전용 로직으로만 reveal(뷰 밖 카드는 숨김 유지) */
   slot.style.setProperty('--rvl-delay', '0ms');   /* 도도도독(순차) 대신 한 번에 두둑 그룹 슬라이드 */
   const a = document.createElement('a');
   a.className = 'case-card';   /* 호버 scale 전담 */
@@ -1424,6 +1425,12 @@ function casesUpdate(){
   casesProgThumb.style.left = (max > 0 ? (sl / max) * (100 - thumbW) : 0) + '%';
   casesPrev.disabled = sl <= 2;
   casesNext.disabled = sl >= max - 2;
+  /* 가로 네비게이션(화살표·드래그·인디케이터)으로 뷰에 들어온 카드 등장 — 세로 진입 옵저버와 병행, 아래-폴드일 땐 미발동 */
+  const vw = innerWidth, vh = innerHeight;
+  casesRail.querySelectorAll('.case-slot:not(.is-in)').forEach(s => {
+    const r = s.getBoundingClientRect();
+    if (r.left < vw - 40 && r.right > 0 && r.top < vh && r.bottom > 0) s.classList.add('is-in');
+  });
 }
 function casesStep(dir){
   const card = casesRail.querySelector('.case-card');
@@ -1436,6 +1443,10 @@ casesRail.addEventListener('scroll', casesUpdate, { passive: true });
 addEventListener('resize', casesUpdate);
 casesRail.scrollLeft = 0;   /* 항상 1번 카드부터 시작 */
 casesUpdate();
+/* 레일이 화면에 들어오면 뷰 안의 카드만 등장(나머지는 가로 네비 시 casesUpdate에서 reveal) */
+new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) casesUpdate(); });
+}, { threshold: 0.1 }).observe(casesRail);
 /* 스크롤바 드래그 (NAVER swiper-scrollbar 방식) */
 const casesProg = document.querySelector('#faq .cases-prog');
 let cDrag = false, cX0 = 0, cL0 = 0;
