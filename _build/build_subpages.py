@@ -935,12 +935,18 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
   .ex-card[style*="--brand"]:hover{ background:var(--brand); color:var(--brand-txt) }
   .ex-card[style*="--brand"]:hover .ex-ico{ background:rgba(255,255,255,.4) } }
 .ex-card .ex-ico{ display:block; width:3.5rem; height:3.5rem; margin-bottom:2rem; background:rgba(var(--white-rgb),.08) }
-/* 로고: 논호버=연보라 단색 실루엣(mask), 호버=잉크(남색). OKX(ex-logo-inv)만 호버 시 흰색. 로고별 URL은 --logo 인라인 변수 */
-.ex-card .ex-ico.ex-logo{ background:var(--purple-300); padding:0;
-  -webkit-mask:var(--logo) center/contain no-repeat; mask:var(--logo) center/contain no-repeat;
-  transition:background .35s ease }
+/* 거래소 로고 카드 — 논호버: 남색+연보라 로고(mask)+흰 이름 / 호버: 흰 라인카드+총천연색 로고(img)+회색 이름, 살짝 커짐 */
+.ex-card:has(.ex-ico.ex-logo){ border:1px solid transparent }   /* 호버 전환용 투명 보더 */
+.ex-card .ex-ico.ex-logo{ position:relative; background:transparent; padding:0 }
+.ex-card .ex-ico.ex-logo::before{ content:''; position:absolute; inset:0; background:var(--purple-300);
+  -webkit-mask:var(--logo) center/contain no-repeat; mask:var(--logo) center/contain no-repeat; transition:opacity .35s ease }
+.ex-card .ex-ico.ex-logo img{ position:relative; width:100%; height:100%; display:block; opacity:0; transition:opacity .35s ease }
 @media (hover:hover){
-  .ex-card[style*="--brand"]:hover .ex-ico.ex-logo{ background:var(--white) } }   /* 호버 시 로고 흰색 100% (반투명 흰색 .ex-ico 룰 덮음) */
+  .ex-card:has(.ex-ico.ex-logo):hover{ background:var(--white); border-color:var(--line); color:var(--ink); transform:scale(1.03) }
+  .ex-card:has(.ex-ico.ex-logo):hover h3{ color:rgba(var(--ink-rgb),.4); font-weight:500 }
+  .ex-card:has(.ex-ico.ex-logo):hover .ex-ico.ex-logo{ background:transparent }   /* 옛 936 룰의 호버 흰 원 제거 */
+  .ex-card:has(.ex-ico.ex-logo):hover .ex-ico.ex-logo::before{ opacity:0 }
+  .ex-card:has(.ex-ico.ex-logo):hover .ex-ico.ex-logo img{ opacity:1 } }
 .ex-card h3{ margin-bottom:0 }
 .ex-card .ex-num{ display:block; font-size:var(--text-14); font-weight:500; color:rgba(var(--white-rgb),.5); margin-bottom:.5rem }  /* 기능 카드 번호 */
 .ex-card h3 + p{ margin-top:.75rem; font-size:var(--text-18) }  /* 서브카피 달릴 때만 간격 + 한 단계 업 */
@@ -3012,7 +3018,7 @@ def exchange_card(name, logo=None, brand=None, dark_text=False, desc=None, num=N
     # desc=타이틀 아래 서브카피, num=타이틀 위 번호 (기능 카드 겸용), gray=라이트 그레이 채움 변형
     # logo_dark=어두운 심볼(기본 상태에서 반대색=흰색으로 반전, 다크 카드에서 보이게)
     cls_ico = 'ex-ico' + (' ex-logo' if logo else '') + (' ex-logo-inv' if (logo and logo_dark) else '')
-    ico = f'<span class="{cls_ico}"{f" style={chr(34)}--logo:url({chr(39)}{logo}{chr(39)}){chr(34)}" if logo else ""}></span>'
+    ico = f'<span class="{cls_ico}"{f" style={chr(34)}--logo:url({chr(39)}{logo}{chr(39)}){chr(34)}" if logo else ""}>{f"<img src={chr(34)}{logo}{chr(34)} alt={chr(34)}{chr(34)} loading={chr(34)}lazy{chr(34)}>" if logo else ""}</span>'
     style = f' style="--brand:{brand}; --brand-txt:{"var(--ink)" if dark_text else "var(--white)"}"' if (brand and not gray) else ''
     cls = 'ico-card ex-card' + (' ex-gray' if gray else '')
     n = f'<span class="ex-num">{num}</span>' if num else ''
