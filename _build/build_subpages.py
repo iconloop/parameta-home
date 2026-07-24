@@ -153,6 +153,10 @@ body.hero-dark .phero-h1{ color:var(--white); max-width:18ch; font-size:var(--te
 @media (min-width:640px){ body.hero-dark .phero-h1{ font-size:var(--text-48) } }
 @media (min-width:768px){ body.hero-dark .phero-h1{ font-size:var(--text-60) } }
 @media (min-width:1024px){ body.hero-dark .phero-h1{ font-size:var(--text-72) } }
+/* 타이틀 옆 작은 배지 (MyID K-BTF 등) */
+.phero-h1 .h1-badge{ display:inline-block; vertical-align:middle; margin-left:.45rem; font-size:.26em; font-weight:600;
+  letter-spacing:.02em; line-height:1; padding:.5em .8em; border-radius:var(--radius-pill);
+  border:1px solid rgba(var(--white-rgb),.35); color:rgba(var(--white-rgb),.85); white-space:nowrap; transform:translateY(-.15em) }
 /* ---- 솔루션형 히어로 토큰: 타이틀 한 사이즈 다운 (36/48/60/72 → 32/40/48/60) ---- */
 body.hero-dark.hero-sol .phero-h1{ font-size:var(--text-28); max-width:24ch }   /* 히어로 h1 한 단계 축소(32→28) */
 @media (min-width:640px){ body.hero-dark.hero-sol .phero-h1{ font-size:var(--text-36) } }
@@ -1179,6 +1183,7 @@ body.parasta .pt-set img, body.myid .pt-set img{ height:3.5rem; filter:brightnes
 @media (min-width:768px) and (max-width:1023px){ .pv-stats.on-light .stat-num{ font-size:var(--text-28) } }
 @media (min-width:1024px){ .pv-stats.on-light .stat-num{ font-size:var(--text-48) } }
 .pv-stats.on-light .stat-num .pv-hl{ color:var(--purple-500) }
+body.myid .pv-stats.on-light .stat-num .pv-hl{ color:var(--ink) }   /* MyID 상단 스탯: 강조 숫자도 검정으로 통일 */
 .pv-stats.on-light .stat-label{ color:rgba(var(--ink-rgb),.55) }
 @media (min-width:1024px){ .pv-stats.on-light .stat-label{ font-size:var(--text-20) } }
 .pv-stats.on-light .stat-kicker{ font-size:var(--text-14); font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:rgba(var(--ink-rgb),.4); margin-bottom:.75rem }   /* 스탯 상단 킥커(Users·Verifications) */
@@ -4319,7 +4324,7 @@ PAGES['myid.html'] = dict(
     desc='MyID — 블록체인 기술로 신뢰는 그대로 유지하면서, 신원확인 단계를 줄이고 개인정보는 사용자가 직접 관리합니다. 구축형부터 공공 SaaS까지.',
     eyebrow='MY DATA · MY CHOICE · MY ID',
     h1_lines=['MyID'],
-    lead='블록체인 기술로 신뢰는 그대로 유지하면서, 신원확인 단계를 줄이고 개인정보는 사용자가 직접 관리합니다. 수많은 적용 사례와 검증된 보안성을 바탕으로 구축형부터 공공 SaaS까지 제공합니다.',
+    lead='블록체인 기술로 신뢰는 그대로 유지하면서, 신원확인 단계를 줄이고 개인정보는 사용자가 직접 관리합니다. 수많은 적용 사례와 검증된 보안성을 바탕으로 구축형부터 공공 SaaS(K-BTF)까지 제공합니다.',
     crumb='Products — MyID',
     body_class='hero-dark myid',   # myid 식별 클래스(마퀴 스타일 스코핑)
     hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">

@@ -462,8 +462,8 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 .work-bottom h3{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em; line-height:var(--leading-heading) }
 .work-bottom p{ margin-top:.5rem; max-width:28rem; font-size:var(--text-14); color:rgba(var(--white-rgb),.55); line-height:var(--leading-body) }
 #works .work-bottom p{ font-size:var(--text-16) }   /* 메인 제품카드 본문만 키움 (서브 work-card 영향 없음) */
-#works .work-card{ min-height:30rem }   /* 이미지영역 확대 (메인 한정) */
-@media (min-width:640px){ #works .work-card{ min-height:40rem } }
+#works .work-card{ min-height:26rem }   /* 이미지영역 (메인 한정) */
+@media (min-width:640px){ #works .work-card{ min-height:32rem } }
 .work-tags{ margin-top:1.25rem; display:flex; flex-wrap:wrap; gap:.5rem }
 .tag{ display:inline-flex; border:1px solid rgba(var(--white-rgb),.25); color:var(--white); border-radius:var(--radius-pill);
   padding:.5rem 1rem; font-size:var(--text-14) }
@@ -675,11 +675,11 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 .mega.on-dark .nd-ico{ background:rgba(var(--white-rgb),.08); color:var(--white) }
 @media (hover:hover){ .mega.on-dark .nav-drop-panel a:hover .nd-ico{ background:rgba(var(--white-rgb),.22) } }
 .mega.on-dark .nav-drop-panel a:hover b::after{ background:var(--purple-300) }
-.nav-drop-panel{ width:19rem; border-radius:var(--radius-card-sm); background:rgba(var(--white-rgb),.97);
+.nav-drop-panel{ width:21rem; border-radius:var(--radius-card-sm); background:rgba(var(--white-rgb),.97);
   backdrop-filter:blur(12px); box-shadow:0 16px 40px rgba(0,0,0,.12), 0 0 0 1px rgba(var(--line-rgb),.9);
   padding:1rem .75rem; display:flex; flex-direction:column; gap:.25rem }
 .nav-drop-panel.duo{ width:auto; flex-direction:row; gap:0; padding:0 .75rem; align-items:stretch }
-.nd-col{ display:flex; flex-direction:column; gap:.25rem; width:17.5rem; padding:1.25rem .625rem }
+.nd-col{ display:flex; flex-direction:column; gap:.25rem; width:19rem; padding:1.25rem .625rem }
 .nd-col + .nd-col{ border-left:1px solid rgba(var(--line-rgb),.9) }
 .nd-col-head{ padding:.375rem .75rem .375rem; font-size:11px; font-weight:600; letter-spacing:.08em;
   text-transform:uppercase; color:rgba(var(--ink-rgb),.4) }
@@ -695,6 +695,9 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 .mega:not(.on-dark) .nd-ico::before{ background:linear-gradient(180deg, transparent 58%, var(--purple-300)) }
 @media (hover:hover){ .mega.on-dark .nav-drop-panel a:hover .nd-ico{ color:var(--white) } }
 .nd-txt{ display:flex; flex-direction:column; gap:.375rem }
+.nav-drop-panel .nd-txt span{ white-space:nowrap }   /* 드롭다운 서브 한 줄 고정 (단일·duo 공통) */
+.nd-kbtf{ color:var(--accent); font-weight:600 }   /* MyID 드롭다운 서브 +K-BTF 강조 */
+.mega.on-dark .nd-kbtf{ color:var(--purple-300) }
 .nav-drop-panel b{ position:relative; display:inline-block; align-self:flex-start; padding-bottom:2px }
 .nav-drop-panel b::after{ content:''; position:absolute; left:0; bottom:0; width:100%; height:1px;
   background:var(--accent); transform:scaleX(0); transform-origin:left;
