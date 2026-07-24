@@ -2069,7 +2069,7 @@ body.parasta .pt-set img, body.myid .pt-set img{ height:3.5rem; filter:brightnes
 @media (min-width:768px) and (max-width:1023px){ .pv-stats.on-light .stat-num{ font-size:var(--text-28) } }
 @media (min-width:1024px){ .pv-stats.on-light .stat-num{ font-size:var(--text-48) } }
 .pv-stats.on-light .stat-num .pv-hl{ color:var(--purple-500) }
-body.myid .pv-stats.on-light .stat-num, body.myid .pv-stats.on-light .stat-num .pv-hl{ color:var(--purple-500) }   /* MyID 상단 스탯: 전체 보라로 통일 */
+body.myid .pv-stats.on-light .stat-num, body.myid .pv-stats.on-light .stat-num .pv-hl{ color:var(--ink) }   /* MyID 상단 스탯: 전체 검정 */
 .pv-stats.on-light .stat-label{ color:rgba(var(--ink-rgb),.55) }
 @media (min-width:1024px){ .pv-stats.on-light .stat-label{ font-size:var(--text-20) } }
 .pv-stats.on-light .stat-kicker{ font-size:var(--text-14); font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:rgba(var(--ink-rgb),.4); margin-bottom:.75rem }   /* 스탯 상단 킥커(Users·Verifications) */
@@ -2143,28 +2143,31 @@ body.company .about-grid{ padding-bottom:var(--space-32) }   /* 지도와의 간
 .num-card .n{ font-size:var(--text-40); font-weight:600; letter-spacing:-.02em; line-height:1.1; margin-bottom:.5rem }
 .num-card .n small{ font-size:var(--text-20); font-weight:500 }
 /* With/Without 좌우 비교 (Problem 문제→해결, PR#1 기획) — 좌: 라이트(지금·문제) / 우: 다크(도입 후·해결) */
-.ww{ display:grid; grid-template-columns:1fr 1fr; gap:var(--grid-gap); align-items:stretch }
-@media (max-width:767px){ .ww{ grid-template-columns:1fr } }
-.ww-col{ border-radius:var(--radius-card); padding:var(--space-32) }
-@media (min-width:1024px){ .ww-col{ padding:var(--space-40) } }
+/* Problem 대조: 원래 2카드(가운데 여백·라운드) 유지 + subgrid로 좌우 행 높이만 1:1 정렬 (데스크톱) */
+.ww{ display:grid; grid-template-columns:1fr 1fr; column-gap:var(--grid-gap); grid-template-rows:auto repeat(var(--ww-n,4), auto); align-items:start }
+.ww-col{ display:grid; grid-template-rows:subgrid; grid-row:1 / -1; border-radius:var(--radius-card); overflow:hidden }
+@media (max-width:767px){ .ww{ grid-template-columns:1fr; grid-template-rows:none; row-gap:var(--grid-gap) } .ww-col{ display:block; grid-row:auto } }
 .ww-now{ background:color-mix(in srgb, var(--ink) 6%, var(--white)) }
 .ww-after{ background:var(--ink); color:var(--white); box-shadow:0 0 0 1px rgba(var(--white-rgb),.05) }
-.ww-col .ww-cap{ display:block; font-size:var(--text-14); font-weight:500; text-transform:uppercase; letter-spacing:.05em; margin-bottom:var(--space-12) }
+.ww-head{ padding:var(--space-32) var(--space-32) var(--space-24) }
+@media (min-width:1024px){ .ww-head{ padding:var(--space-40) var(--space-40) var(--space-24) } }
+.ww-cap{ display:block; font-size:var(--text-14); font-weight:500; text-transform:uppercase; letter-spacing:.05em; margin-bottom:var(--space-12) }
 .ww-now .ww-cap{ color:rgba(var(--ink-rgb),.45) }
 .ww-after .ww-cap{ color:var(--purple-300) }
-.ww-col .ww-t{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em; margin-bottom:var(--space-24); line-height:var(--leading-heading) }
+.ww-t{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em; line-height:var(--leading-heading); margin:0 }
 .ww-after .ww-t{ color:var(--white) }
-.ww-col ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column }
-.ww-col li{ display:flex; gap:var(--space-12); padding-block:var(--space-16); align-items:flex-start }
-.ww-now li + li{ border-top:1px solid var(--line) }
-.ww-after li + li{ border-top:1px solid rgba(var(--white-rgb),.1) }
+.ww-item{ display:flex; gap:var(--space-12); align-items:flex-start; padding:var(--space-16) var(--space-32) }
+@media (min-width:1024px){ .ww-item{ padding-inline:var(--space-40) } }
+.ww-item:last-child{ padding-bottom:var(--space-40) }   /* 최하단 여백 */
+.ww-now .ww-item{ border-top:1px solid var(--line) }
+.ww-after .ww-item{ border-top:1px solid rgba(var(--white-rgb),.1) }
 .ww-mk{ flex:none; font-weight:700; font-size:var(--text-16); line-height:var(--leading-heading); margin-top:.125rem }
 .ww-now .ww-mk{ color:rgba(var(--ink-rgb),.3) }
 .ww-after .ww-mk{ color:var(--purple-300) }
-.ww-col li b{ display:block; font-size:var(--text-18); font-weight:600; letter-spacing:-.01em; margin-bottom:.375rem; line-height:var(--leading-heading) }
-.ww-col li p{ font-size:var(--text-16); line-height:var(--leading-body); margin:0 }
-.ww-now li p{ color:rgba(var(--ink-rgb),.6) }
-.ww-after li p{ color:rgba(var(--white-rgb),.62) }
+.ww-item b{ display:block; font-size:var(--text-18); font-weight:600; letter-spacing:-.01em; margin-bottom:.375rem; line-height:var(--leading-heading) }
+.ww-item p{ font-size:var(--text-16); line-height:var(--leading-body); margin:0 }
+.ww-now p{ color:rgba(var(--ink-rgb),.6) }
+.ww-after p{ color:rgba(var(--white-rgb),.62) }
 /* 증명서 Why Now 2컬럼: 좌 스탯박스(한 박스·3줄) / 우 (콘텐츠 대기) — cert 전용, 타 페이지 영향 없음 */
 .cert-wn-duo{ display:grid; grid-template-columns:7fr 5fr; gap:var(--grid-gap); align-items:stretch }
 @media (max-width:767px){ .cert-wn-duo{ grid-template-columns:1fr; row-gap:var(--space-48) } }
@@ -3792,9 +3795,12 @@ if(pdDl){
           document.head.appendChild(sc);
         });
       }
+      const padX = 32, padY = 48;   /* 2rem · 3rem */
+      const cw = bodyEl.offsetWidth, ch = bodyEl.scrollHeight;
       const blob = await htmlToImage.toBlob(bodyEl, {
         backgroundColor: '#ffffff', pixelRatio: 2,
-        style: { padding: '3rem 2rem' }
+        width: cw + padX * 2, height: ch + padY * 2,   /* 패딩만큼 출력 크기 확장 → 우측 잘림 방지 */
+        style: { boxSizing: 'content-box', width: cw + 'px', height: ch + 'px', margin: '0', padding: padY + 'px ' + padX + 'px' }
       });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);

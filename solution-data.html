@@ -2069,7 +2069,7 @@ body.parasta .pt-set img, body.myid .pt-set img{ height:3.5rem; filter:brightnes
 @media (min-width:768px) and (max-width:1023px){ .pv-stats.on-light .stat-num{ font-size:var(--text-28) } }
 @media (min-width:1024px){ .pv-stats.on-light .stat-num{ font-size:var(--text-48) } }
 .pv-stats.on-light .stat-num .pv-hl{ color:var(--purple-500) }
-body.myid .pv-stats.on-light .stat-num, body.myid .pv-stats.on-light .stat-num .pv-hl{ color:var(--purple-500) }   /* MyID 상단 스탯: 전체 보라로 통일 */
+body.myid .pv-stats.on-light .stat-num, body.myid .pv-stats.on-light .stat-num .pv-hl{ color:var(--ink) }   /* MyID 상단 스탯: 전체 검정 */
 .pv-stats.on-light .stat-label{ color:rgba(var(--ink-rgb),.55) }
 @media (min-width:1024px){ .pv-stats.on-light .stat-label{ font-size:var(--text-20) } }
 .pv-stats.on-light .stat-kicker{ font-size:var(--text-14); font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:rgba(var(--ink-rgb),.4); margin-bottom:.75rem }   /* 스탯 상단 킥커(Users·Verifications) */
@@ -2143,28 +2143,31 @@ body.company .about-grid{ padding-bottom:var(--space-32) }   /* 지도와의 간
 .num-card .n{ font-size:var(--text-40); font-weight:600; letter-spacing:-.02em; line-height:1.1; margin-bottom:.5rem }
 .num-card .n small{ font-size:var(--text-20); font-weight:500 }
 /* With/Without 좌우 비교 (Problem 문제→해결, PR#1 기획) — 좌: 라이트(지금·문제) / 우: 다크(도입 후·해결) */
-.ww{ display:grid; grid-template-columns:1fr 1fr; gap:var(--grid-gap); align-items:stretch }
-@media (max-width:767px){ .ww{ grid-template-columns:1fr } }
-.ww-col{ border-radius:var(--radius-card); padding:var(--space-32) }
-@media (min-width:1024px){ .ww-col{ padding:var(--space-40) } }
+/* Problem 대조: 원래 2카드(가운데 여백·라운드) 유지 + subgrid로 좌우 행 높이만 1:1 정렬 (데스크톱) */
+.ww{ display:grid; grid-template-columns:1fr 1fr; column-gap:var(--grid-gap); grid-template-rows:auto repeat(var(--ww-n,4), auto); align-items:start }
+.ww-col{ display:grid; grid-template-rows:subgrid; grid-row:1 / -1; border-radius:var(--radius-card); overflow:hidden }
+@media (max-width:767px){ .ww{ grid-template-columns:1fr; grid-template-rows:none; row-gap:var(--grid-gap) } .ww-col{ display:block; grid-row:auto } }
 .ww-now{ background:color-mix(in srgb, var(--ink) 6%, var(--white)) }
 .ww-after{ background:var(--ink); color:var(--white); box-shadow:0 0 0 1px rgba(var(--white-rgb),.05) }
-.ww-col .ww-cap{ display:block; font-size:var(--text-14); font-weight:500; text-transform:uppercase; letter-spacing:.05em; margin-bottom:var(--space-12) }
+.ww-head{ padding:var(--space-32) var(--space-32) var(--space-24) }
+@media (min-width:1024px){ .ww-head{ padding:var(--space-40) var(--space-40) var(--space-24) } }
+.ww-cap{ display:block; font-size:var(--text-14); font-weight:500; text-transform:uppercase; letter-spacing:.05em; margin-bottom:var(--space-12) }
 .ww-now .ww-cap{ color:rgba(var(--ink-rgb),.45) }
 .ww-after .ww-cap{ color:var(--purple-300) }
-.ww-col .ww-t{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em; margin-bottom:var(--space-24); line-height:var(--leading-heading) }
+.ww-t{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em; line-height:var(--leading-heading); margin:0 }
 .ww-after .ww-t{ color:var(--white) }
-.ww-col ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column }
-.ww-col li{ display:flex; gap:var(--space-12); padding-block:var(--space-16); align-items:flex-start }
-.ww-now li + li{ border-top:1px solid var(--line) }
-.ww-after li + li{ border-top:1px solid rgba(var(--white-rgb),.1) }
+.ww-item{ display:flex; gap:var(--space-12); align-items:flex-start; padding:var(--space-16) var(--space-32) }
+@media (min-width:1024px){ .ww-item{ padding-inline:var(--space-40) } }
+.ww-item:last-child{ padding-bottom:var(--space-40) }   /* 최하단 여백 */
+.ww-now .ww-item{ border-top:1px solid var(--line) }
+.ww-after .ww-item{ border-top:1px solid rgba(var(--white-rgb),.1) }
 .ww-mk{ flex:none; font-weight:700; font-size:var(--text-16); line-height:var(--leading-heading); margin-top:.125rem }
 .ww-now .ww-mk{ color:rgba(var(--ink-rgb),.3) }
 .ww-after .ww-mk{ color:var(--purple-300) }
-.ww-col li b{ display:block; font-size:var(--text-18); font-weight:600; letter-spacing:-.01em; margin-bottom:.375rem; line-height:var(--leading-heading) }
-.ww-col li p{ font-size:var(--text-16); line-height:var(--leading-body); margin:0 }
-.ww-now li p{ color:rgba(var(--ink-rgb),.6) }
-.ww-after li p{ color:rgba(var(--white-rgb),.62) }
+.ww-item b{ display:block; font-size:var(--text-18); font-weight:600; letter-spacing:-.01em; margin-bottom:.375rem; line-height:var(--leading-heading) }
+.ww-item p{ font-size:var(--text-16); line-height:var(--leading-body); margin:0 }
+.ww-now p{ color:rgba(var(--ink-rgb),.6) }
+.ww-after p{ color:rgba(var(--white-rgb),.62) }
 /* 증명서 Why Now 2컬럼: 좌 스탯박스(한 박스·3줄) / 우 (콘텐츠 대기) — cert 전용, 타 페이지 영향 없음 */
 .cert-wn-duo{ display:grid; grid-template-columns:7fr 5fr; gap:var(--grid-gap); align-items:stretch }
 @media (max-width:767px){ .cert-wn-duo{ grid-template-columns:1fr; row-gap:var(--space-48) } }
@@ -2932,7 +2935,7 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
 </div></section>
 <section><div class="shell sec">
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Problem</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>개인정보를 다루는 부담, 이렇게 해결합니다</span></span></h2>
-  <div class="ww rvl" style="--rvl-y:40px"><div class="ww-col ww-now"><span class="ww-cap">지금</span><div class="ww-t">개인정보 리스크 발생</div><ul><li><span class="ww-mk">✕</span><div><b>보관 리스크</b><p>개인정보를 직접 쌓아둘수록 유출 사고와 과징금, 신뢰 하락 부담이 커집니다.</p></div></li><li><span class="ww-mk">✕</span><div><b>반복 수집과 동의 관리</b><p>서비스마다 같은 정보를 다시 받고 동의를 관리하는 비용이 쌓입니다.</p></div></li><li><span class="ww-mk">✕</span><div><b>사용자 통제 요구</b><p>전송요구권 등 사용자가 자기 데이터를 옮기거나 지워 달라는 요구에 대응해야 합니다.</p></div></li><li><span class="ww-mk">✕</span><div><b>위·변조 검증</b><p>받은 데이터가 진짜인지, 바뀌지 않았는지 확인해야 합니다.</p></div></li></ul></div><div class="ww-col ww-after"><span class="ww-cap">도입 후</span><div class="ww-t">리스크 없는 데이터 활용</div><ul><li><span class="ww-mk">✓</span><div><b>개인정보 유출 리스크 원천 차단</b><p>개인정보를 기업 서버가 아닌 사용자 저장소(PDS)에 보관하여, 유출 사고와 과징금 부담을 근본적으로 해소합니다.</p></div></li><li><span class="ww-mk">✓</span><div><b>한 번 발급해 다시 사용</b><p>한 번 검증한 정보를 여러 서비스에서 다시 사용해, 매번 새로 받지 않아도 됩니다.</p></div></li><li><span class="ww-mk">✓</span><div><b>필요한 것만 골라 제출</b><p>사용자가 필요한 항목만 골라 제출하고, 옮기거나 지워 달라는 요구도 바로 처리합니다.</p></div></li><li><span class="ww-mk">✓</span><div><b>진짜인지 바로 확인</b><p>데이터가 원본 그대로인지 블록체인으로 바로 확인합니다.</p></div></li></ul></div></div>
+  <div class="ww rvl" style="--rvl-y:40px; --ww-n:4"><div class="ww-col ww-now"><div class="ww-head"><span class="ww-cap">문제</span><div class="ww-t">개인정보 리스크 발생</div></div><div class="ww-item"><span class="ww-mk">✕</span><div><b>보관 리스크</b><p>개인정보를 직접 쌓아둘수록 유출 사고와 과징금, 신뢰 하락 부담이 커집니다.</p></div></div><div class="ww-item"><span class="ww-mk">✕</span><div><b>반복 수집과 동의 관리</b><p>서비스마다 같은 정보를 다시 받고 동의를 관리하는 비용이 쌓입니다.</p></div></div><div class="ww-item"><span class="ww-mk">✕</span><div><b>사용자 통제 요구</b><p>전송요구권 등 사용자가 자기 데이터를 옮기거나 지워 달라는 요구에 대응해야 합니다.</p></div></div><div class="ww-item"><span class="ww-mk">✕</span><div><b>위·변조 검증</b><p>받은 데이터가 진짜인지, 바뀌지 않았는지 확인해야 합니다.</p></div></div></div><div class="ww-col ww-after"><div class="ww-head"><span class="ww-cap">도입 후</span><div class="ww-t">리스크 없는 데이터 활용</div></div><div class="ww-item"><span class="ww-mk">✓</span><div><b>개인정보 유출 리스크 원천 차단</b><p>개인정보를 기업 서버가 아닌 사용자 저장소(PDS)에 보관하여, 유출 사고와 과징금 부담을 근본적으로 해소합니다.</p></div></div><div class="ww-item"><span class="ww-mk">✓</span><div><b>한 번 발급해 다시 사용</b><p>한 번 검증한 정보를 여러 서비스에서 다시 사용해, 매번 새로 받지 않아도 됩니다.</p></div></div><div class="ww-item"><span class="ww-mk">✓</span><div><b>필요한 것만 골라 제출</b><p>사용자가 필요한 항목만 골라 제출하고, 옮기거나 지워 달라는 요구도 바로 처리합니다.</p></div></div><div class="ww-item"><span class="ww-mk">✓</span><div><b>진짜인지 바로 확인</b><p>데이터가 원본 그대로인지 블록체인으로 바로 확인합니다.</p></div></div></div></div>
 </div></section>
 <section><div class="shell sec">
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Features</div><h2 class="sec-h2 has-lead" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>개인정보를 떠안지 않는 구조</span></span></h2><p class="phero-lead sec-lead rvl">데이터를 사용자 통제 아래 두고, 서비스는 필요한 사실만 검증합니다.</p>
@@ -3804,9 +3807,12 @@ if(pdDl){
           document.head.appendChild(sc);
         });
       }
+      const padX = 32, padY = 48;   /* 2rem · 3rem */
+      const cw = bodyEl.offsetWidth, ch = bodyEl.scrollHeight;
       const blob = await htmlToImage.toBlob(bodyEl, {
         backgroundColor: '#ffffff', pixelRatio: 2,
-        style: { padding: '3rem 2rem' }
+        width: cw + padX * 2, height: ch + padY * 2,   /* 패딩만큼 출력 크기 확장 → 우측 잘림 방지 */
+        style: { boxSizing: 'content-box', width: cw + 'px', height: ch + 'px', margin: '0', padding: padY + 'px ' + padX + 'px' }
       });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
