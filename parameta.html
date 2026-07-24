@@ -578,18 +578,24 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 #faq .cases-rail::-webkit-scrollbar{ display:none }
 #faq .cases-track{ display:flex; gap:var(--space-24); width:max-content; padding-inline:calc((100% - min(100%, var(--container-shell)))/2 + var(--shell-pad)) }
 @media (min-width:640px){ #faq .cases-track{ padding-inline:calc((100% - min(100%, var(--container-shell)))/2 + 2rem) } }
-#faq .case-slot{ flex:0 0 clamp(17rem, 80vw, 22rem); display:flex }
+#faq .case-slot{ flex:0 0 clamp(17rem, 78vw, 24rem); display:flex }
+/* 데스크톱: 카드 한 장 = 그리드 4칸(12칼럼 중 4칸 span). 콘텐츠폭/3 - gap 1개 = 4칼럼+3갭 폭 */
+@media (min-width:1024px){ #faq .case-slot{ flex:0 0 calc((min(100vw, var(--container-shell)) - 4rem) / 3 - var(--grid-gap)) } }
 #faq .case-slot.rvl{ opacity:0; transform:translateX(2.5rem); transition:opacity .55s cubic-bezier(.16,1,.3,1), transform .55s cubic-bezier(.16,1,.3,1); transition-delay:var(--rvl-delay,0ms) }   /* 오른쪽에서 슬라이드 인 */
 #faq .case-slot.rvl.is-in{ opacity:1; transform:none }
-#faq .case-card{ flex:1 1 auto; min-width:0; display:flex; flex-direction:column; border-radius:var(--radius-card-sm); background:var(--white); overflow:hidden; transition:transform .35s cubic-bezier(.2,.8,.2,1) }
-@media (hover:hover){ #faq .case-card:hover{ transform:scale(1.03) } }
-#faq .case-shot{ height:14rem; background:var(--ink); display:grid; place-items:center }   /* 블로그 디폴트 썸네일과 동일 — 남색 + 흰 심볼 */
-#faq .case-mark{ width:16%; max-width:2.75rem; height:auto }
-#faq .case-body{ display:flex; flex-direction:column; gap:.75rem; padding:var(--space-24) }
-#faq .case-top{ display:flex; align-items:center; gap:.6rem; flex-wrap:wrap }
-#faq .case-org{ font-size:var(--text-20); font-weight:600; letter-spacing:-.01em }
-#faq .case-cat{ flex:none; display:inline-flex; align-items:center; border-radius:var(--radius-pill); padding:.3rem .75rem; font-size:var(--text-14); font-weight:500; background:rgba(97,0,255,.08); color:var(--accent) }
-#faq .case-desc{ font-size:var(--text-16); line-height:var(--leading-body); color:rgba(var(--ink-rgb),.6) }
+/* 솔리드 잉크 카드(그라데이션 없음) + 상단 로고 영역 + 하단 텍스트 오버레이, 호버 시 설명 노출 */
+#faq .case-card{ position:relative; flex:1 1 auto; min-width:0; height:26rem; display:flex; flex-direction:column; border-radius:var(--radius-card); overflow:hidden; background:var(--ink); color:var(--white); transition:transform .4s cubic-bezier(.2,.8,.2,1) }
+@media (min-width:1024px){ #faq .case-card{ height:30rem } }
+@media (hover:hover){ #faq .case-card:hover{ transform:translateY(-6px) } }
+#faq .case-cat{ position:absolute; z-index:2; top:var(--space-24); left:var(--space-24); display:inline-flex; align-items:center; border-radius:var(--radius-pill); padding:.3rem .75rem; font-size:var(--text-14); font-weight:500; background:rgba(var(--white-rgb),.14); color:var(--white) }
+#faq .case-logo{ flex:1 1 auto; min-height:0; display:grid; place-items:center; padding:var(--space-40) var(--space-32) }   /* 파트너 로고 자리 (추후 img 삽입) */
+#faq .case-logo img{ max-width:64%; max-height:5rem; width:auto; height:auto; object-fit:contain }
+#faq .case-overlay{ flex:none; display:flex; flex-direction:column; align-items:flex-start; gap:.4rem; padding:var(--space-32) }
+#faq .case-org{ font-size:var(--text-24); font-weight:600; letter-spacing:-.01em; line-height:var(--leading-heading) }
+#faq .case-desc{ font-size:var(--text-16); line-height:var(--leading-body); color:rgba(var(--white-rgb),.75);
+  max-height:0; opacity:0; overflow:hidden; transition:max-height .5s cubic-bezier(.2,.8,.2,1), opacity .4s ease }
+@media (hover:hover){ #faq .case-card:hover .case-desc{ max-height:12rem; opacity:1 } }
+@media (hover:none){ #faq .case-desc{ max-height:12rem; opacity:1 } }
 .cases-ctrl{ display:flex; align-items:center; gap:1.5rem; margin-top:0; padding-inline:var(--shell-pad) }
 @media (min-width:640px){ .cases-ctrl{ padding-inline:2rem } }
 #faq .cases-prog{ flex:1; position:relative; height:2px; background:rgba(var(--ink-rgb),.12); border-radius:var(--radius-pill) }
@@ -1422,9 +1428,10 @@ CASES.forEach((c, i) => {
   a.className = 'case-card';   /* 호버 scale 전담 */
   a.href = c.href;
   a.innerHTML =
-    '<div class="case-shot" aria-hidden="true"><img class="case-mark" src="assets/brand/logo-symbol-white.svg" alt=""></div>' +
-    '<div class="case-body">' +
-      '<div class="case-top"><b class="case-org">' + c.org + '</b><span class="case-cat">' + c.cat + '</span></div>' +
+    '<span class="case-cat">' + c.cat + '</span>' +
+    '<div class="case-logo" aria-hidden="true"></div>' +   /* 파트너 로고 들어갈 자리 */
+    '<div class="case-overlay">' +
+      '<b class="case-org">' + c.org + '</b>' +
       '<p class="case-desc">' + c.desc + '</p>' +
     '</div>';
   slot.appendChild(a);

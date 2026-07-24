@@ -219,10 +219,10 @@ body.hero-dark .phero-visual{ grid-column:7 / 13; display:block; align-self:stre
   border-radius:var(--radius-card); border:1px solid rgba(var(--white-rgb),.12);
   background:radial-gradient(120% 90% at 70% 18%, rgba(var(--accent-rgb),.2), transparent 60%), rgba(var(--white-rgb),.03) }
 /* 이미지가 들어간 비주얼: 아웃라인·그라 제거, 영역만 + cover */
-body.hero-dark .phero-visual:has(img){ border:none; background:none }
-body.hero-dark .phero-visual img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block }
+body.hero-dark .phero-visual:has(img), body.hero-dark .phero-visual:has(video){ border:none; background:none }
+body.hero-dark .phero-visual :is(img,video){ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block }
 /* 투명 배경 목업류: 크롭 없이 통짜로 보여주기 */
-body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
+body.hero-dark .phero-visual :is(img,video).fit-contain{ object-fit:contain }
 @media (max-width:1023px){
   body.hero-dark .phero, body.hero-dark .phero-inner{ min-height:auto }
   body.hero-dark .phero-inner{ grid-template-columns:1fr; padding-top:6.25rem; padding-bottom:3rem; row-gap:2rem }
@@ -231,7 +231,7 @@ body.hero-dark .phero-visual img.fit-contain{ object-fit:contain }
 /* 태블릿 전용(640~1023): 이미지 우측 걸침 크롭 + full-bleed. 모바일(≤639)은 위 기본 유지 */
 @media (min-width:640px) and (max-width:1023px){
   body.hero-dark .phero-visual{ min-height:52vh; margin-inline:-2rem; margin-bottom:-3rem; border-top-left-radius:0; border-top-right-radius:0 }
-  body.hero-dark .phero-visual img.fit-contain{ inset:auto; right:-20px; bottom:-50%; width:auto; height:156%; max-width:none; object-fit:contain } }
+  body.hero-dark .phero-visual :is(img,video).fit-contain{ inset:auto; right:-20px; bottom:-50%; width:auto; height:156%; max-width:none; object-fit:contain } }
 /* ---- 콘텐츠형 히어로(hero-center): 이미지 영역 없음 + 텍스트 중앙정렬 ---- */
 body.hero-center .phero-inner{ grid-template-columns:1fr; place-items:center; text-align:center }
 body.hero-center .phero-visual{ display:none }
@@ -4013,7 +4013,7 @@ PAGES['parasta.html'] = dict(
     h1_lines=['ParaSta'],
     lead='스테이블코인, 디지털자산 비즈니스를 위한 모듈형 인프라입니다.<br>필요한 기능을 선택해 구성하고, 발행부터 운영까지 하나로 연결합니다.',
     crumb='Products — ParaSta',
-    hero_visual='<img class="fit-contain" src="assets/parasta/hero-test.avif" alt="" loading="eager" fetchpriority="high">',
+    hero_visual='<video class="fit-contain" src="assets/parasta/hero-parasta.mp4" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>',
     content=f'''
 <section><div class="shell sec">
   <div class="whatis-grid">
@@ -4137,7 +4137,7 @@ PAGES['portx.html'] = dict(
     eyebrow='Exchange Solution',
     body_class='hero-dark portx',   # portx 식별 클래스(히어로 CTA 버튼 스왑용)
     h1_lines=['PortX'],
-    lead='PortX는 여러 거래소(CEX, DEX)를 API로 연동해, 자사 브랜드의 디지털자산 거래 서비스를 만들 수 있게 하는 화이트라벨 솔루션입니다. 필요한 기능만 모듈로 골라 도입하고, 거래부터 운영까지 하나로 연결합니다.',
+    lead='PortX는 여러 거래소(CEX, DEX)를 API로 연동해, 자사 브랜드의 디지털자산 거래 서비스를 만들 수 있게 하는 디지털자산 거래 솔루션입니다. 필요한 기능만 모듈로 골라 도입하고, 거래부터 운영까지 하나로 연결합니다.',
     crumb='Products — Port X',
     hero_visual='<img class="fit-contain" src="assets/portx/portx-hero.png" alt="" loading="eager" fetchpriority="high">',
     content=f'''
