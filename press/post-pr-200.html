@@ -448,7 +448,7 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 .work-card{ position:relative; min-height:22rem; overflow:hidden; border-radius:var(--radius-card); background:var(--ink);
   padding:1.5rem; color:var(--white); box-shadow:0 0 0 1px rgba(var(--white-rgb),.05);
   transition:transform .4s cubic-bezier(.2,.8,.2,1); display:block }
-@media (hover:hover){ .work-link:hover .work-card{ transform:translateY(-8px) scale(1.012) } }
+@media (hover:hover){ .work-link:hover .work-card{ transform:scale(1.03) } }
 .work-meta{ display:flex; justify-content:space-between; font-size:var(--text-14); text-transform:uppercase;
   letter-spacing:.025em; color:rgba(var(--white-rgb),.45) }
 .work-badge{ width:2.75rem; height:2.75rem; display:grid; place-items:center; border-radius:var(--radius-pill);
@@ -491,7 +491,7 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
   border:1px solid var(--line); border-radius:var(--radius-card-sm); padding:var(--space-32); background:var(--white);
   transition:transform .4s cubic-bezier(.2,.8,.2,1), background .4s ease, border-color .4s ease }
 @media (hover:hover){
-  .svc-card-link:hover .svc-card{ transform:translateY(-6px); background:var(--ink); border-color:transparent }
+  .svc-card-link:hover .svc-card{ transform:scale(1.03); background:var(--ink); border-color:transparent }
   .svc-card-link:hover .svc-card h3{ color:var(--white) }
   .svc-card-link:hover .svc-card p{ color:rgba(var(--white-rgb),.7) }
   .svc-card-link:hover .svc-icn-wrap{ background:var(--white); color:var(--ink) }
@@ -597,7 +597,7 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 /* 솔리드 잉크 카드(그라데이션 없음) + 상단 로고 영역 + 하단 텍스트 오버레이, 호버 시 설명 노출 */
 #faq .case-card{ position:relative; flex:1 1 auto; min-width:0; height:26rem; display:flex; flex-direction:column; border-radius:var(--radius-card); overflow:hidden; background:var(--ink); color:var(--white); transition:transform .4s cubic-bezier(.2,.8,.2,1) }
 @media (min-width:1024px){ #faq .case-card{ height:30rem } }
-@media (hover:hover){ #faq .case-card:hover{ transform:translateY(-6px) } }
+@media (hover:hover){ #faq .case-card:hover{ transform:scale(1.02) } }
 #faq .case-cat{ position:absolute; z-index:2; top:var(--space-24); left:var(--space-24); display:inline-flex; align-items:center; border-radius:var(--radius-pill); padding:.3rem .75rem; font-size:var(--text-14); font-weight:500; background:rgba(var(--white-rgb),.14); color:var(--white) }
 #faq .case-logo{ flex:1 1 auto; min-height:0; display:grid; place-items:center; padding:var(--space-40) var(--space-32) }   /* 파트너 로고 자리 (추후 img 삽입) */
 #faq .case-logo img{ max-width:64%; max-height:5rem; width:auto; height:auto; object-fit:contain }
