@@ -4435,7 +4435,7 @@ PAGES['broof.html'] = dict(
     h1_lines=['broof'],
     lead='별도 시스템 구축 없이 증명서를 간편하게 발급하고, QR 코드 하나로 진위를 즉시 검증합니다. 블록체인으로 증명서의 위조와 분실 위험까지 낮춥니다.',
     crumb='Products — broof',
-    hero_visual='',   # Broof 이미지 추후 삽입 예정 (엑박 방지로 비활성)
+    hero_visual='',   # broof 이미지 추후 삽입 예정 (엑박 방지로 비활성)
     hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
       <a class="pill light with-arrow arw-right hs-scale cta-talk" href="contact.html"><span class="hspring">Go to broof<span class="pill-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></a>
     </div>''',
