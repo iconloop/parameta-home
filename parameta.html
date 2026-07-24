@@ -462,6 +462,8 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 .work-bottom h3{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em; line-height:var(--leading-heading) }
 .work-bottom p{ margin-top:.5rem; max-width:28rem; font-size:var(--text-14); color:rgba(var(--white-rgb),.55); line-height:var(--leading-body) }
 #works .work-bottom p{ font-size:var(--text-16) }   /* 메인 제품카드 본문만 키움 (서브 work-card 영향 없음) */
+#works .work-card{ min-height:30rem }   /* 이미지영역 확대 (메인 한정) */
+@media (min-width:640px){ #works .work-card{ min-height:40rem } }
 .work-tags{ margin-top:1.25rem; display:flex; flex-wrap:wrap; gap:.5rem }
 .tag{ display:inline-flex; border:1px solid rgba(var(--white-rgb),.25); color:var(--white); border-radius:var(--radius-pill);
   padding:.5rem 1rem; font-size:var(--text-14) }
@@ -488,17 +490,17 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 .svc-card{ position:relative; height:100%; display:flex; flex-direction:column; align-items:flex-start;
   border:1px solid var(--line); border-radius:var(--radius-card-sm); padding:var(--space-32); background:var(--white);
   transition:transform .4s cubic-bezier(.2,.8,.2,1), background .4s ease, border-color .4s ease }
-@media (hover:hover){ .svc-card-link:hover .svc-card{ transform:translateY(-6px); background:var(--surface); border-color:transparent } }
+@media (hover:hover){
+  .svc-card-link:hover .svc-card{ transform:translateY(-6px); background:var(--ink); border-color:transparent }
+  .svc-card-link:hover .svc-card h3{ color:var(--white) }
+  .svc-card-link:hover .svc-card p{ color:rgba(var(--white-rgb),.7) }
+  .svc-card-link:hover .svc-icn-wrap{ background:var(--white); color:var(--ink) }
+}
 .svc-icn-wrap{ width:3rem; height:3rem; display:grid; place-items:center; border-radius:var(--radius-pill);
   background:var(--ink); color:var(--white); margin-bottom:var(--space-24) }
 .svc-icn{ width:1.5rem; height:1.5rem }
-.svc-card h3{ font-size:var(--text-20); font-weight:500; letter-spacing:-.01em; line-height:var(--leading-heading); padding-right:3rem }
+.svc-card h3{ font-size:var(--text-20); font-weight:500; letter-spacing:-.01em; line-height:var(--leading-heading) }
 .svc-card p{ margin-top:.75rem; font-size:var(--text-16); color:rgba(var(--ink-rgb),.6); line-height:var(--leading-body) }
-.svc-arrow{ position:absolute; top:var(--space-32); right:var(--space-32); width:2.5rem; height:2.5rem;
-  display:grid; place-items:center; border-radius:var(--radius-pill); background:var(--surface); color:var(--ink);
-  transition:transform .35s cubic-bezier(.2,.8,.2,1), background .35s ease, color .35s ease }
-.svc-arrow .icn{ font-size:var(--text-20) }
-@media (hover:hover){ .svc-card-link:hover .svc-arrow{ transform:rotate(45deg); background:var(--ink); color:var(--white) } }
 @media (min-width:640px){ .services-shell{ padding-left:2rem; padding-right:2rem }
   .services-h2{ margin-bottom:3.5rem; font-size:var(--text-48) }
   .services-cards{ grid-template-columns:repeat(2,1fr); gap:1.25rem } }
@@ -533,7 +535,8 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 /* ============ WHY / STATS (히어로 바로 아래 · 다크 밴드로 이어짐) ============ */
 #home{ z-index:1 }   /* 히어로 라운드 하단이 아래 다크밴드 위에 얹히도록 */
 #why{ position:relative; background:var(--black); color:var(--white);
-  margin-top:calc(-1 * var(--radius-card)); padding-top:var(--radius-card) }
+  margin-top:calc(-1 * var(--radius-card)); padding-top:var(--radius-card);
+  border-radius:0 0 var(--radius-card) var(--radius-card) }
 .stats-shell{ padding:var(--space-48) 1.25rem var(--space-64) }
 .stats-grid{ display:grid; grid-template-columns:repeat(2,1fr); column-gap:2rem; row-gap:var(--space-40); text-align:center }
 .stat-num{ font-size:var(--text-48); font-weight:600; letter-spacing:-.02em; color:var(--white) }
@@ -543,16 +546,8 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 @media (min-width:768px){ .stat-num{ font-size:var(--text-72) } }
 @media (min-width:1024px){ .stats-shell{ padding-top:var(--space-64); padding-bottom:var(--space-80) } .stats-grid{ grid-template-columns:repeat(4,1fr); column-gap:var(--space-40) } }
 
-/* ============ BRIDGE / 풀어주는 영역 ============ */
-#bridge{ background:var(--white) }
-.bridge-shell{ padding:var(--space-64) 1.25rem; text-align:center }
-.bridge-h2{ margin:0 auto; max-width:22ch; font-size:var(--text-32); font-weight:600; letter-spacing:-.02em; line-height:var(--leading-heading) }
-.bridge-lead{ margin:1.25rem auto 0; max-width:44ch; font-size:var(--text-18); color:rgba(var(--ink-rgb),.55); line-height:var(--leading-body) }
-@media (min-width:640px){ .bridge-shell{ padding-left:2rem; padding-right:2rem } .bridge-h2{ font-size:var(--text-48) } }
-@media (min-width:1024px){ .bridge-shell{ padding-block:var(--space-80) } .bridge-lead{ font-size:var(--text-20) } }
-
 /* ============ FAQ (roll-open motion, 원본 reasons 아코디언 참고) ============ */
-#faq{ background:var(--white); padding-bottom:var(--space-80) }
+#faq{ background:var(--surface); padding-bottom:var(--space-120) }
 .faq-shell{ padding:0 1.25rem 5rem }
 .faq-h2{ margin:1.25rem 0 3rem; max-width:16ch; font-size:var(--text-32); font-weight:600; letter-spacing:-.02em }
 .faq-li{ border-top:1px solid var(--line) }
@@ -586,7 +581,7 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
 #faq .case-slot{ flex:0 0 clamp(17rem, 80vw, 22rem); display:flex }
 #faq .case-slot.rvl{ opacity:0; transform:translateX(2.5rem); transition:opacity .55s cubic-bezier(.16,1,.3,1), transform .55s cubic-bezier(.16,1,.3,1); transition-delay:var(--rvl-delay,0ms) }   /* 오른쪽에서 슬라이드 인 */
 #faq .case-slot.rvl.is-in{ opacity:1; transform:none }
-#faq .case-card{ flex:1 1 auto; min-width:0; display:flex; flex-direction:column; border-radius:var(--radius-card-sm); background:var(--surface); overflow:hidden; transition:transform .35s cubic-bezier(.2,.8,.2,1) }
+#faq .case-card{ flex:1 1 auto; min-width:0; display:flex; flex-direction:column; border-radius:var(--radius-card-sm); background:var(--white); overflow:hidden; transition:transform .35s cubic-bezier(.2,.8,.2,1) }
 @media (hover:hover){ #faq .case-card:hover{ transform:scale(1.03) } }
 #faq .case-shot{ height:14rem; background:var(--ink); display:grid; place-items:center }   /* 블로그 디폴트 썸네일과 동일 — 남색 + 흰 심볼 */
 #faq .case-mark{ width:16%; max-width:2.75rem; height:auto }
@@ -970,35 +965,27 @@ body.show-grid #dev-grid{ display:block }
   <section id="clients" aria-label="함께한 기관·기업">
     <div class="mq rvl" style="--rvl-y:24px">
       <div class="mq-track">
-        <span class="mq-logo"><img src="assets/partners/logo-shinhan.svg" alt="신한은행"></span>
-        <span class="mq-logo"><img src="assets/partners/logo-nh.svg" alt="NH농협은행"></span>
-        <span class="mq-logo"><img src="assets/partners/logo-kb.svg" alt="KB금융"></span>
-        <span class="mq-logo"><img src="assets/partners/logo-ibk.svg" alt="IBK기업은행"></span>
-        <span class="mq-logo"><img src="assets/partners/logo-nh-securities.svg" alt="NH투자증권"></span>
-        <span class="mq-logo"><img src="assets/partners/logo-samsung.svg" alt="삼성"></span>
-        <span class="mq-logo"><img src="assets/partners/logo-samsung-securities.svg" alt="삼성증권"></span>
-        <span class="mq-logo"><img src="assets/partners/logo-mirae.svg" alt="미래에셋"></span>
-        <span class="mq-logo"><img src="assets/partners/logo-hyundai.svg" alt="현대"></span>
-        <span class="mq-logo"><img src="assets/partners/logo-hanwha.svg" alt="한화"></span>
-        <span class="mq-logo" aria-hidden="true"><img src="assets/partners/logo-shinhan.svg" alt=""></span>
-        <span class="mq-logo" aria-hidden="true"><img src="assets/partners/logo-nh.svg" alt=""></span>
-        <span class="mq-logo" aria-hidden="true"><img src="assets/partners/logo-kb.svg" alt=""></span>
-        <span class="mq-logo" aria-hidden="true"><img src="assets/partners/logo-ibk.svg" alt=""></span>
-        <span class="mq-logo" aria-hidden="true"><img src="assets/partners/logo-nh-securities.svg" alt=""></span>
-        <span class="mq-logo" aria-hidden="true"><img src="assets/partners/logo-samsung.svg" alt=""></span>
-        <span class="mq-logo" aria-hidden="true"><img src="assets/partners/logo-samsung-securities.svg" alt=""></span>
-        <span class="mq-logo" aria-hidden="true"><img src="assets/partners/logo-mirae.svg" alt=""></span>
-        <span class="mq-logo" aria-hidden="true"><img src="assets/partners/logo-hyundai.svg" alt=""></span>
-        <span class="mq-logo" aria-hidden="true"><img src="assets/partners/logo-hanwha.svg" alt=""></span>
+        <span class="mq-logo"><img src="assets/logo-shinhan.svg" alt="신한은행"></span>
+        <span class="mq-logo"><img src="assets/logo-nh.svg" alt="NH농협은행"></span>
+        <span class="mq-logo"><img src="assets/logo-kb.svg" alt="KB금융"></span>
+        <span class="mq-logo"><img src="assets/logo-ibk.svg" alt="IBK기업은행"></span>
+        <span class="mq-logo"><img src="assets/logo-nh-securities.svg" alt="NH투자증권"></span>
+        <span class="mq-logo"><img src="assets/logo-samsung.svg" alt="삼성"></span>
+        <span class="mq-logo"><img src="assets/logo-samsung-securities.svg" alt="삼성증권"></span>
+        <span class="mq-logo"><img src="assets/logo-mirae.svg" alt="미래에셋"></span>
+        <span class="mq-logo"><img src="assets/logo-hyundai.svg" alt="현대"></span>
+        <span class="mq-logo"><img src="assets/logo-hanwha.svg" alt="한화"></span>
+        <span class="mq-logo" aria-hidden="true"><img src="assets/logo-shinhan.svg" alt=""></span>
+        <span class="mq-logo" aria-hidden="true"><img src="assets/logo-nh.svg" alt=""></span>
+        <span class="mq-logo" aria-hidden="true"><img src="assets/logo-kb.svg" alt=""></span>
+        <span class="mq-logo" aria-hidden="true"><img src="assets/logo-ibk.svg" alt=""></span>
+        <span class="mq-logo" aria-hidden="true"><img src="assets/logo-nh-securities.svg" alt=""></span>
+        <span class="mq-logo" aria-hidden="true"><img src="assets/logo-samsung.svg" alt=""></span>
+        <span class="mq-logo" aria-hidden="true"><img src="assets/logo-samsung-securities.svg" alt=""></span>
+        <span class="mq-logo" aria-hidden="true"><img src="assets/logo-mirae.svg" alt=""></span>
+        <span class="mq-logo" aria-hidden="true"><img src="assets/logo-hyundai.svg" alt=""></span>
+        <span class="mq-logo" aria-hidden="true"><img src="assets/logo-hanwha.svg" alt=""></span>
       </div>
-    </div>
-  </section>
-
-  <!-- ============ BRIDGE / 풀어주는 영역 ============ -->
-  <section id="bridge">
-    <div class="shell bridge-shell">
-      <h2 class="bridge-h2" id="bridgeH2" data-line-stagger="90"><span class="rvl-line"><span>무엇을 만들든,</span></span><span class="rvl-line"><span>인프라는 이미 준비되어 있습니다</span></span></h2>
-      <p class="bridge-lead rvl" style="--rvl-y:20px; --rvl-delay:180ms">발행, 지갑, 신원, 정산까지. 10년간 쌓은 것을 그대로 가져다 쓰세요.</p>
     </div>
   </section>
 
@@ -1007,7 +994,7 @@ body.show-grid #dev-grid{ display:block }
     <div class="shell works-shell">
       <div class="works-head">
         <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Products</div>
-        <h2 class="works-h2" id="worksH2" data-line-stagger="90"><span class="rvl-line"><span>무엇을 만드시나요?</span></span><span class="rvl-line"><span>서비스에 필요한 제품을 도입해 사업을 확장하세요.</span></span></h2>
+        <h2 class="works-h2" id="worksH2" data-line-stagger="90"><span class="rvl-line"><span>서비스에 필요한 제품을 도입해 사업을 확장하세요.</span></span></h2>
       </div>
       <ul class="works-grid" id="worksGrid"></ul>
     </div>
@@ -1323,7 +1310,6 @@ WORKS.forEach((w, i) => {
       '<article class="work-card">' +
         '<div class="work-meta"><span></span>' +
           '<span class="work-badge">' + arrowUpRight + '</span></div>' +
-        '<div class="work-wm">' + logoMark + '<sup>®</sup></div>' +
         '<div class="work-bottom"><h3>' + w.name + '</h3><p>' + w.desc + '</p>' +
           '<div class="work-tags">' + tags + '</div></div>' +
       '</article>' +
@@ -1360,7 +1346,6 @@ SERVICES.forEach((s, i) => {
         '<span class="svc-icn-wrap">' + SVC_ICONS[i] + '</span>' +
         '<h3>' + s.title + '</h3>' +
         '<p>' + s.desc + '</p>' +
-        '<span class="svc-arrow">' + arrowUpRight + '</span>' +
       '</article>' +
     '</a>';
   servicesList.appendChild(li);
@@ -1797,13 +1782,11 @@ function gateHeroReveals(){
 
 initLineReveal(document.getElementById('worksH2'));
 initLineReveal(document.getElementById('servicesH2'));
-initLineReveal(document.getElementById('bridgeH2'));
 initLineReveal(document.getElementById('faqH2'));
 initLineReveal(document.getElementById('footerH2'));
 
 lineObserver.observe(document.getElementById('worksH2'));
 lineObserver.observe(document.getElementById('servicesH2'));
-lineObserver.observe(document.getElementById('bridgeH2'));
 lineObserver.observe(document.getElementById('faqH2'));
 lineObserver.observe(document.getElementById('footerH2'));
 
