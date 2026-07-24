@@ -1666,6 +1666,25 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 /* MyID grouped 카드: 태그(알약) 바텀 스냅 — 본문 길이 달라도 좌우 카드 알약이 같은 위치 */
 body.myid .cards-2 .work-card.grouped .work-bottom{ flex:1 1 auto; display:flex; flex-direction:column }
 body.myid .cards-2 .work-card.grouped .work-tags{ margin-top:auto }
+/* MyID Lineup — 플랜 카드(그레이): 카드가 스펙 행 + CTA까지 품음, 스펙은 바텀 스냅으로 좌우 행 정렬 */
+body.myid .lu-card{ display:flex; flex-direction:column; min-height:0; height:100% }
+@media (min-width:1024px){ body.myid .lu-card{ padding:var(--space-64) var(--space-48) } }
+body.myid .cards-2 li:has(.lu-card){ display:flex }
+body.myid .cards-2 li:has(.lu-card) > .lu-card{ flex:1 1 auto }
+body.myid .lu-card .work-bottom{ position:static; inset:auto; flex:none; margin-top:0 }
+body.myid .lu-card .work-bottom h3{ font-size:var(--text-32); font-weight:var(--w-strong) }
+body.myid .lu-card .work-bottom p{ max-width:28rem; font-size:var(--text-body); color:rgba(var(--ink-rgb),.6) }   /* 우측 이미지 자리 확보 */
+body.myid .lu-spec{ margin-top:auto; padding-top:var(--space-32) }
+body.myid .lu-row{ display:flex; justify-content:space-between; gap:var(--space-16); padding:var(--space-20) 0;
+  border-top:1px solid rgba(var(--ink-rgb),.1); font-size:var(--text-body); line-height:var(--leading-body) }
+body.myid .lu-k{ flex:none; color:rgba(var(--ink-rgb),.45) }
+body.myid .lu-v{ text-align:right; color:var(--ink); font-weight:var(--w-title) }
+body.myid .lu-note{ display:block; color:rgba(var(--ink-rgb),.45); font-size:var(--text-body-sm) }
+body.myid .lu-cta{ display:block; text-align:center; font-size:var(--text-body); font-weight:var(--w-strong);
+  padding:var(--space-16); border-radius:var(--radius-card-sm); background:var(--ink); color:var(--white);
+  text-decoration:none; margin-top:var(--space-20); transition:background .2s ease }
+body.myid .lu-cta:hover{ background:var(--accent) }
+@media (max-width:639px){ body.myid .lu-row{ flex-direction:column; gap:0 } body.myid .lu-v{ text-align:left } }
 @media (max-width:639px){ .media-tall .work-card.grouped::before{ height:14rem } }
 .work-card.grouped .work-bottom{ position:static; inset:auto }
 .work-card.grouped .work-meta{ margin-bottom:.875rem; color:var(--purple-300) }
@@ -2156,13 +2175,15 @@ body.company .about-grid{ padding-bottom:var(--space-32) }   /* 지도와의 간
 .ww-after .ww-cap{ color:var(--purple-300) }
 .ww-t{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em; line-height:var(--leading-heading); margin:0 }
 .ww-after .ww-t{ color:var(--white) }
-.ww-item{ display:flex; gap:var(--space-12); align-items:flex-start; padding:var(--space-16) var(--space-32) }
+.ww-item{ position:relative; display:flex; gap:var(--space-12); align-items:flex-start; padding:var(--space-16) var(--space-32) }
 @media (min-width:1024px){ .ww-item{ padding-inline:var(--space-40) } }
 .ww-item:last-child{ padding-bottom:var(--space-40) }   /* 최하단 여백 */
-.ww-now .ww-item{ border-top:1px solid var(--line) }
-.ww-after .ww-item{ border-top:1px solid rgba(var(--white-rgb),.1) }
-.ww-mk{ flex:none; font-weight:700; font-size:var(--text-16); line-height:var(--leading-heading); margin-top:.125rem }
-.ww-now .ww-mk{ color:rgba(var(--ink-rgb),.3) }
+.ww-item::before{ content:''; position:absolute; top:0; left:var(--space-32); right:var(--space-32); border-top:1px solid var(--line) }   /* inner 디바이더 */
+@media (min-width:1024px){ .ww-item::before{ left:var(--space-40); right:var(--space-40) } }
+.ww-after .ww-item::before{ border-top-color:rgba(var(--white-rgb),.1) }
+.ww-mk{ flex:none; width:1.25rem; height:1.25rem; margin-top:.25rem }
+.ww-mk svg{ display:block; width:100%; height:100% }
+.ww-now .ww-mk{ color:rgba(var(--ink-rgb),.4) }
 .ww-after .ww-mk{ color:var(--purple-300) }
 .ww-item b{ display:block; font-size:var(--text-18); font-weight:600; letter-spacing:-.01em; margin-bottom:.375rem; line-height:var(--leading-heading) }
 .ww-item p{ font-size:var(--text-16); line-height:var(--leading-body); margin:0 }
@@ -2245,12 +2266,6 @@ table.cmp{ width:100%; min-width:46rem; border-collapse:separate; border-spacing
 table.cmp th, table.cmp td{ padding:1.25rem 1.125rem; text-align:left; vertical-align:top; border-bottom:1px solid var(--line) }
 table.cmp thead th{ font-weight:600; font-size:var(--text-18); letter-spacing:.01em; padding-top:1.75rem;
   text-align:center; color:rgba(var(--ink-rgb),.55); border-bottom:1px solid var(--line) }
-/* MyID Lineup: 비교표 hl(MyID 2.0) 열을 위쪽 cards-2 오른쪽 카드 폭과 동일하게 정렬 (gap 1.5rem 기준) */
-@media (min-width:768px){
-  #lineup .why-table table.cmp{ table-layout:fixed }
-  #lineup .why-table table.cmp th:first-child, #lineup .why-table table.cmp td:first-child{ width:16% }
-  #lineup .why-table table.cmp th:last-child, #lineup .why-table table.cmp td:last-child{ width:49% }
-}
 table.cmp thead th.hl{ color:var(--accent) }
 table.cmp thead th.hl, table.cmp td.hl{ background:color-mix(in srgb, var(--purple-300) 22%, var(--white)) }
 table.cmp thead th.hl, table.cmp td.hl{ border-bottom-color:rgba(var(--ink-rgb),.16) }
@@ -2928,7 +2943,7 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
 </div></section>
 <section><div class="shell sec">
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Problem</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>디지털자산 사업의 과제, 이렇게 해결합니다</span></span></h2>
-  <div class="ww rvl" style="--rvl-y:40px; --ww-n:4"><div class="ww-col ww-now"><div class="ww-head"><span class="ww-cap">문제</span><div class="ww-t">발행 이후의 운영을 각자 감당해야 합니다</div></div><div class="ww-item"><span class="ww-mk">✕</span><div><b>발행보다 복잡한 운영</b><p>디지털자산은 발행 이후 KYC, 상환, 유통 통제, 사후 검증까지 지속적인 운영이 필요합니다.</p></div></div><div class="ww-item"><span class="ww-mk">✕</span><div><b>계좌 따로, 온체인 지갑 따로</b><p>은행 계좌와 온체인 지갑이 분리되어 있어 자산 관리와 정산이 복잡합니다.</p></div></div><div class="ww-item"><span class="ww-mk">✕</span><div><b>규제 대응 부담</b><p>서비스마다 자금세탁방지(AML)와 트래블룰 준수 체계를 별도로 설계해야 합니다.</p></div></div><div class="ww-item"><span class="ww-mk">✕</span><div><b>범용 SaaS의 한계</b><p>글로벌 지갑 SaaS만으로는 국내 규제와 금융기관의 운영 요건에 대응하기 어렵습니다.</p></div></div></div><div class="ww-col ww-after"><div class="ww-head"><span class="ww-cap">ParaSta 도입 후</span><div class="ww-t">발행부터 운영까지 하나로 연결합니다</div></div><div class="ww-item"><span class="ww-mk">✓</span><div><b>발행부터 운영까지 한 곳에서</b><p>발행, KYC, 상환, 유통 통제를 하나로 연결해 관리합니다.</p></div></div><div class="ww-item"><span class="ww-mk">✓</span><div><b>계좌와 지갑을 연결</b><p>은행 계좌와 온체인 지갑을 이어, 자산 관리와 정산을 한 흐름으로 처리합니다.</p></div></div><div class="ww-item"><span class="ww-mk">✓</span><div><b>규제 대응을 기본 제공</b><p>AML, 트래블룰 대응을 기본으로 갖춰, 서비스마다 따로 설계하지 않아도 됩니다.</p></div></div><div class="ww-item"><span class="ww-mk">✓</span><div><b>국내 규제에 맞춘 설계</b><p>국내 규제와 금융기관 운영 요건에 맞춰 설계했습니다.</p></div></div></div></div>
+  <div class="ww rvl" style="--rvl-y:40px; --ww-n:4"><div class="ww-col ww-now"><div class="ww-head"><span class="ww-cap">문제</span><div class="ww-t">발행 이후의 운영을 각자 감당해야 합니다</div></div><div class="ww-item"><span class="ww-mk"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"/></svg></span><div><b>발행보다 복잡한 운영</b><p>디지털자산은 발행 이후 KYC, 상환, 유통 통제, 사후 검증까지 지속적인 운영이 필요합니다.</p></div></div><div class="ww-item"><span class="ww-mk"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"/></svg></span><div><b>계좌 따로, 온체인 지갑 따로</b><p>은행 계좌와 온체인 지갑이 분리되어 있어 자산 관리와 정산이 복잡합니다.</p></div></div><div class="ww-item"><span class="ww-mk"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"/></svg></span><div><b>규제 대응 부담</b><p>서비스마다 자금세탁방지(AML)와 트래블룰 준수 체계를 별도로 설계해야 합니다.</p></div></div><div class="ww-item"><span class="ww-mk"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"/></svg></span><div><b>범용 SaaS의 한계</b><p>글로벌 지갑 SaaS만으로는 국내 규제와 금융기관의 운영 요건에 대응하기 어렵습니다.</p></div></div></div><div class="ww-col ww-after"><div class="ww-head"><span class="ww-cap">ParaSta 도입 후</span><div class="ww-t">발행부터 운영까지 하나로 연결합니다</div></div><div class="ww-item"><span class="ww-mk"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5L6.5 12 13 4.5"/></svg></span><div><b>발행부터 운영까지 한 곳에서</b><p>발행, KYC, 상환, 유통 통제를 하나로 연결해 관리합니다.</p></div></div><div class="ww-item"><span class="ww-mk"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5L6.5 12 13 4.5"/></svg></span><div><b>계좌와 지갑을 연결</b><p>은행 계좌와 온체인 지갑을 이어, 자산 관리와 정산을 한 흐름으로 처리합니다.</p></div></div><div class="ww-item"><span class="ww-mk"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5L6.5 12 13 4.5"/></svg></span><div><b>규제 대응을 기본 제공</b><p>AML, 트래블룰 대응을 기본으로 갖춰, 서비스마다 따로 설계하지 않아도 됩니다.</p></div></div><div class="ww-item"><span class="ww-mk"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5L6.5 12 13 4.5"/></svg></span><div><b>국내 규제에 맞춘 설계</b><p>국내 규제와 금융기관 운영 요건에 맞춰 설계했습니다.</p></div></div></div></div>
 </div></section>
 <section><div class="shell sec">
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Features</div><h2 class="sec-h2 has-lead" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>발행부터 상환·사후 검증까지 연결하는<br>6-Layer 통제 구조</span></span></h2><p class="phero-lead sec-lead rvl">디지털자산의 발행·유통·상환·사후 검증 전 과정을 6개의 통제 계층으로 연결해 안정적으로 관리합니다.</p>

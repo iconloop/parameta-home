@@ -780,6 +780,25 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 /* MyID grouped 카드: 태그(알약) 바텀 스냅 — 본문 길이 달라도 좌우 카드 알약이 같은 위치 */
 body.myid .cards-2 .work-card.grouped .work-bottom{ flex:1 1 auto; display:flex; flex-direction:column }
 body.myid .cards-2 .work-card.grouped .work-tags{ margin-top:auto }
+/* MyID Lineup — 플랜 카드(그레이): 카드가 스펙 행 + CTA까지 품음, 스펙은 바텀 스냅으로 좌우 행 정렬 */
+body.myid .lu-card{ display:flex; flex-direction:column; min-height:0; height:100% }
+@media (min-width:1024px){ body.myid .lu-card{ padding:var(--space-64) var(--space-48) } }
+body.myid .cards-2 li:has(.lu-card){ display:flex }
+body.myid .cards-2 li:has(.lu-card) > .lu-card{ flex:1 1 auto }
+body.myid .lu-card .work-bottom{ position:static; inset:auto; flex:none; margin-top:0 }
+body.myid .lu-card .work-bottom h3{ font-size:var(--text-32); font-weight:var(--w-strong) }
+body.myid .lu-card .work-bottom p{ max-width:28rem; font-size:var(--text-body); color:rgba(var(--ink-rgb),.6) }   /* 우측 이미지 자리 확보 */
+body.myid .lu-spec{ margin-top:auto; padding-top:var(--space-32) }
+body.myid .lu-row{ display:flex; justify-content:space-between; gap:var(--space-16); padding:var(--space-20) 0;
+  border-top:1px solid rgba(var(--ink-rgb),.1); font-size:var(--text-body); line-height:var(--leading-body) }
+body.myid .lu-k{ flex:none; color:rgba(var(--ink-rgb),.45) }
+body.myid .lu-v{ text-align:right; color:var(--ink); font-weight:var(--w-title) }
+body.myid .lu-note{ display:block; color:rgba(var(--ink-rgb),.45); font-size:var(--text-body-sm) }
+body.myid .lu-cta{ display:block; text-align:center; font-size:var(--text-body); font-weight:var(--w-strong);
+  padding:var(--space-16); border-radius:var(--radius-card-sm); background:var(--ink); color:var(--white);
+  text-decoration:none; margin-top:var(--space-20); transition:background .2s ease }
+body.myid .lu-cta:hover{ background:var(--accent) }
+@media (max-width:639px){ body.myid .lu-row{ flex-direction:column; gap:0 } body.myid .lu-v{ text-align:left } }
 @media (max-width:639px){ .media-tall .work-card.grouped::before{ height:14rem } }
 .work-card.grouped .work-bottom{ position:static; inset:auto }
 .work-card.grouped .work-meta{ margin-bottom:.875rem; color:var(--purple-300) }
@@ -1270,13 +1289,15 @@ body.company .about-grid{ padding-bottom:var(--space-32) }   /* 지도와의 간
 .ww-after .ww-cap{ color:var(--purple-300) }
 .ww-t{ font-size:var(--text-24); font-weight:500; letter-spacing:-.01em; line-height:var(--leading-heading); margin:0 }
 .ww-after .ww-t{ color:var(--white) }
-.ww-item{ display:flex; gap:var(--space-12); align-items:flex-start; padding:var(--space-16) var(--space-32) }
+.ww-item{ position:relative; display:flex; gap:var(--space-12); align-items:flex-start; padding:var(--space-16) var(--space-32) }
 @media (min-width:1024px){ .ww-item{ padding-inline:var(--space-40) } }
 .ww-item:last-child{ padding-bottom:var(--space-40) }   /* 최하단 여백 */
-.ww-now .ww-item{ border-top:1px solid var(--line) }
-.ww-after .ww-item{ border-top:1px solid rgba(var(--white-rgb),.1) }
-.ww-mk{ flex:none; font-weight:700; font-size:var(--text-16); line-height:var(--leading-heading); margin-top:.125rem }
-.ww-now .ww-mk{ color:rgba(var(--ink-rgb),.3) }
+.ww-item::before{ content:''; position:absolute; top:0; left:var(--space-32); right:var(--space-32); border-top:1px solid var(--line) }   /* inner 디바이더 */
+@media (min-width:1024px){ .ww-item::before{ left:var(--space-40); right:var(--space-40) } }
+.ww-after .ww-item::before{ border-top-color:rgba(var(--white-rgb),.1) }
+.ww-mk{ flex:none; width:1.25rem; height:1.25rem; margin-top:.25rem }
+.ww-mk svg{ display:block; width:100%; height:100% }
+.ww-now .ww-mk{ color:rgba(var(--ink-rgb),.4) }
 .ww-after .ww-mk{ color:var(--purple-300) }
 .ww-item b{ display:block; font-size:var(--text-18); font-weight:600; letter-spacing:-.01em; margin-bottom:.375rem; line-height:var(--leading-heading) }
 .ww-item p{ font-size:var(--text-16); line-height:var(--leading-body); margin:0 }
@@ -1359,12 +1380,6 @@ table.cmp{ width:100%; min-width:46rem; border-collapse:separate; border-spacing
 table.cmp th, table.cmp td{ padding:1.25rem 1.125rem; text-align:left; vertical-align:top; border-bottom:1px solid var(--line) }
 table.cmp thead th{ font-weight:600; font-size:var(--text-18); letter-spacing:.01em; padding-top:1.75rem;
   text-align:center; color:rgba(var(--ink-rgb),.55); border-bottom:1px solid var(--line) }
-/* MyID Lineup: 비교표 hl(MyID 2.0) 열을 위쪽 cards-2 오른쪽 카드 폭과 동일하게 정렬 (gap 1.5rem 기준) */
-@media (min-width:768px){
-  #lineup .why-table table.cmp{ table-layout:fixed }
-  #lineup .why-table table.cmp th:first-child, #lineup .why-table table.cmp td:first-child{ width:16% }
-  #lineup .why-table table.cmp th:last-child, #lineup .why-table table.cmp td:last-child{ width:49% }
-}
 table.cmp thead th.hl{ color:var(--accent) }
 table.cmp thead th.hl, table.cmp td.hl{ background:color-mix(in srgb, var(--purple-300) 22%, var(--white)) }
 table.cmp thead th.hl, table.cmp td.hl{ border-bottom-color:rgba(var(--ink-rgb),.16) }
@@ -3085,9 +3100,11 @@ def nums(items, cols=3):
 
 def ww_compare(now_title, after_title, items, now_cap='문제', after_cap='도입 후'):
     """With/Without 2카드 + subgrid: 각 카드는 헤더 + 항목들, subgrid로 좌우 행 높이 1:1 정렬. items:(문제제목,문제설명,해결제목,해결설명)"""
-    nows = ''.join(f'<div class="ww-item"><span class="ww-mk">✕</span><div><b>{pt}</b><p>{pd}</p></div></div>'
+    mk_x = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"/></svg>'
+    mk_ok = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5L6.5 12 13 4.5"/></svg>'
+    nows = ''.join(f'<div class="ww-item"><span class="ww-mk">{mk_x}</span><div><b>{pt}</b><p>{pd}</p></div></div>'
                    for pt, pd, _, _ in items)
-    afters = ''.join(f'<div class="ww-item"><span class="ww-mk">✓</span><div><b>{st}</b><p>{sd}</p></div></div>'
+    afters = ''.join(f'<div class="ww-item"><span class="ww-mk">{mk_ok}</span><div><b>{st}</b><p>{sd}</p></div></div>'
                      for _, _, st, sd in items)
     return (f'<div class="ww rvl" style="--rvl-y:40px; --ww-n:{len(items)}">'
             f'<div class="ww-col ww-now"><div class="ww-head"><span class="ww-cap">{now_cap}</span><div class="ww-t">{now_title}</div></div>{nows}</div>'
@@ -4360,19 +4377,33 @@ PAGES['myid.html'] = dict(
   </div>
 </div></section>
 <section id="lineup"><div class="shell sec" style="padding-top:0">
-  {sec_head('Lineup', 'MyID vs MyID 2.0', '같은 DID 플랫폼을 대상에 맞게 두 갈래로 제공합니다. 민간은 MyID, 공공기관은 K-BTF 공동 인프라 기반 MyID 2.0으로 도입합니다.')}
+  {sec_head('Lineup', 'MyID vs MyID 2.0', '같은 DID 플랫폼을 대상에 맞게 두 갈래로 제공합니다.<br>민간은 MyID, 공공기관은 K-BTF 공동 인프라 기반 MyID 2.0으로 도입합니다.', layout='center')}
   <ul class="cards-2">
-    <li class="rvl" style="--rvl-y:40px">{dark_card('민간 · 기업 · 금융', 'MyID', '기업·금융·민간 서비스가 자체 신원인증을 구축합니다. 도입 방식은 구축형과 서비스형 두 가지 중에서 선택합니다.', ['구축형 (On-Premise)','서비스형 (SaaS)'], grouped=True)}</li>
-    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms">{dark_card('공공기관 전용', 'MyID 2.0 (K-BTF)', '공공기관은 CSAP 보안인증을 받은 서비스만 이용할 수 있습니다. MyID 2.0은 블록체인 서비스 최초 CSAP 인증 SaaS로, 과기정통부·KISA 주관 K-BTF 공동 인프라 위에서 별도 구축 없이 도입합니다.', ['공동 인프라 구독형 SaaS','CSAP 인증'], grouped=True)}</li>
+    <li class="rvl" style="--rvl-y:40px"><article class="work-card static sm t-gray lu-card">
+      <div class="work-bottom"><h3>MyID</h3><p>기업·금융·민간 서비스가 자체 신원인증을 구축합니다. 도입 방식은 구축형과 서비스형 두 가지 중에서 선택합니다.</p></div>
+      <div class="lu-spec">
+        <div class="lu-row"><span class="lu-k">대상</span><span class="lu-v">기업 · 금융 · 민간 서비스</span></div>
+        <div class="lu-row"><span class="lu-k">도입 방식</span><span class="lu-v">구축형(On-Premise) · 서비스형(SaaS)</span></div>
+        <div class="lu-row"><span class="lu-k">인증</span><span class="lu-v">W3C 표준 DID · 금융권 KYC 상용화</span></div>
+        <div class="lu-row"><span class="lu-k">도입 기간</span><span class="lu-v">규모·방식에 따라 협의</span></div>
+        <div class="lu-row"><span class="lu-k">예상 비용</span><span class="lu-v">도입 방식·규모별 협의</span></div>
+        <div class="lu-row lu-note">&nbsp;</div>
+      </div>
+      <a class="lu-cta" href="contact.html">도입·요금 상담 신청</a>
+    </article></li>
+    <li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="work-card static sm t-gray lu-card">
+      <div class="work-bottom"><h3>MyID 2.0 (K-BTF)</h3><p>MyID 2.0은 블록체인 서비스 최초 CSAP 인증 SaaS로, 과기정통부와 KISA가 주관하는 K-BTF 공동 인프라 위에서 별도 구축 없이 도입합니다.</p></div>
+      <div class="lu-spec">
+        <div class="lu-row"><span class="lu-k">대상</span><span class="lu-v">공공기관 · 지자체</span></div>
+        <div class="lu-row"><span class="lu-k">도입 방식</span><span class="lu-v">K-BTF 공동 인프라 구독형 SaaS</span></div>
+        <div class="lu-row"><span class="lu-k">인증</span><span class="lu-v">블록체인 서비스 최초 CSAP 인증</span></div>
+        <div class="lu-row"><span class="lu-k">도입 기간</span><span class="lu-v">최대 1주일</span></div>
+        <div class="lu-row"><span class="lu-k">예상 비용</span><span class="lu-v">월 200만원~ + 건당 과금</span></div>
+        <div class="lu-row lu-note">공공기관은 CSAP 보안인증을 받은 서비스만 이용할 수 있습니다.</div>
+      </div>
+      <a class="lu-cta" href="https://zzeung.kr/" target="_blank" rel="noopener">K-BTF 홈페이지 →</a>
+    </article></li>
   </ul>
-  <div class="why-table" style="margin-top:var(--space-40)">{compare_table(['', 'MyID', 'MyID 2.0 (K-BTF)'], [
-    dict(label='대상', cells=['기업 · 금융 · 민간 서비스', '공공기관 · 지자체']),
-    dict(label='도입 방식', cells=['구축형(On-Premise) · 서비스형(SaaS)', 'K-BTF 공동 인프라 구독형 SaaS']),
-    dict(label='인증', cells=['W3C 표준 DID · 금융권 KYC 상용화', '블록체인 서비스 최초 CSAP 인증 — 공공기관 도입 요건 충족']),
-    dict(label='도입 기간', cells=['규모·방식에 따라 협의', '최대 1주일']),
-    dict(label='예상 비용', cells=['도입 방식·규모별 협의', '월 200만원~ + 건당 과금']),
-    dict(label='', cells=['<a href="contact.html">도입·요금 상담 신청</a>', '<a href="https://zzeung.kr/" target="_blank" rel="noopener">K-BTF 홈페이지 →</a>']),
-  ], hl=2, tabs=True)}</div>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
   <div class="did-hub rvl" style="--rvl-y:24px">
