@@ -4310,15 +4310,16 @@ PAGES['myid.html'] = dict(
     hero_visual='<img class="fit-contain" src="assets/myid/hero-test.avif" alt="" loading="eager" fetchpriority="high">',
     content=f"""
 <section><div class="shell sec">
-  <ul class="stats-grid pv-stats on-light pv-2">
-    <li class="rvl" style="--rvl-y:20px"><div class="stat-num">약 <span class="pv-hl"><span class="pv-val" data-val="370" data-from="360">360</span>만</span></div><div class="stat-label">MyID, DID 누적 이용자 수</div></li>
-    <li class="rvl" style="--rvl-y:20px; --rvl-delay:90ms"><div class="stat-num">인증 <span class="pv-hl"><span class="pv-val" data-val="9100" data-from="9090">9,090</span>만+</span></div><div class="stat-label">제주안심코드 누적 인증 건수</div></li>
+  <ul class="stats-grid pv-stats on-light">
+    <li class="rvl" style="--rvl-y:20px"><div class="stat-num">약 <span class="pv-hl"><span class="pv-val" data-val="370" data-from="360">360</span>만</span></div><div class="stat-label">MyID·DID 누적 이용자</div></li>
+    <li class="rvl" style="--rvl-y:20px; --rvl-delay:90ms"><div class="stat-num"><span class="pv-hl"><span class="pv-val" data-val="9100" data-from="9090">9,090</span>만+</span></div><div class="stat-label">제주안심코드 누적 인증</div></li>
+    <li class="rvl" style="--rvl-y:20px; --rvl-delay:180ms"><div class="stat-num">CSAP</div><div class="stat-label">MyID 2.0 · 블록체인 서비스 최초 인증</div></li>
   </ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
   {sec_head('Milestones', '국내외 최초 기록을 만들어온 DID')}
   <div class="firsts-hero rvl">
-    <div class="fh-big" aria-hidden="true"><span class="fh-num">5<span class="st">건</span></span><span class="fh-cap">국내외 DID 최초</span></div>
+    <div class="fh-big" aria-hidden="true"><span class="fh-num">1st</span><span class="fh-cap">국내외 DID 최초 기록</span></div>
     <ul class="fh-list">
       <li><span class="fh-chip world">세계 최초</span>블록체인 공동인증, 증권사 26개사</li>
       <li><span class="fh-chip">블록체인 최초</span>블록체인 서비스 최초 CSAP 인증</li>
