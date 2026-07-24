@@ -532,19 +532,30 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
   .services-shell .service-desc{ display:block; flex-basis:100%; max-width:none; margin:0 0 0 2.75rem } }
 @media (min-width:640px) and (max-width:1023px){ .services-shell .service-desc{ margin-left:4rem } }
 
-/* ============ WHY / STATS (히어로 바로 아래 · 다크 밴드로 이어짐) ============ */
+/* ============ WHY / STATS — 메인 전용 다크 밴드 (독립 네임스페이스 hstat-*, 공용 .stats-*와 분리) ============ */
 #home{ z-index:1 }   /* 히어로 라운드 하단이 아래 다크밴드 위에 얹히도록 */
 #why{ position:relative; background:var(--black); color:var(--white);
   margin-top:calc(-1 * var(--radius-card)); padding-top:var(--radius-card);
   border-radius:0 0 var(--radius-card) var(--radius-card) }
-.stats-shell{ padding:var(--space-48) 1.25rem var(--space-64) }
-.stats-grid{ display:grid; grid-template-columns:repeat(2,1fr); column-gap:2rem; row-gap:var(--space-40); text-align:center }
-.stat-num{ font-size:var(--text-48); font-weight:600; letter-spacing:-.02em; color:var(--white) }
-#why .stat-num small{ font-size:1em; font-weight:600; letter-spacing:-.02em }   /* 단위(년+·만+) 숫자와 동일 웨이트·크기 */
-.stat-label{ margin-top:.75rem; font-size:var(--text-18); color:rgba(var(--white-rgb),.55) }
-@media (min-width:640px){ .stats-shell{ padding-left:2rem; padding-right:2rem } .stat-num{ font-size:var(--text-60) } }
-@media (min-width:768px){ .stat-num{ font-size:var(--text-72) } }
-@media (min-width:1024px){ .stats-shell{ padding-top:var(--space-64); padding-bottom:var(--space-80) } .stats-grid{ grid-template-columns:repeat(4,1fr); column-gap:var(--space-40) } }
+.hstat-shell{ padding:var(--space-48) 1.25rem var(--space-64) }
+.hstat-grid{ display:grid; grid-template-columns:repeat(2,1fr); column-gap:2rem; row-gap:var(--space-40); text-align:center }
+.hstat-num{ font-size:var(--text-48); font-weight:600; letter-spacing:-.02em; color:var(--white) }
+.hstat-num small{ font-size:1em; font-weight:600; letter-spacing:-.02em }   /* 단위(년+·만+) 숫자와 동일 웨이트·크기 */
+.hstat-label{ margin-top:.75rem; font-size:var(--text-18); color:rgba(var(--white-rgb),.55) }
+@media (min-width:640px){ .hstat-shell{ padding-left:2rem; padding-right:2rem } .hstat-num{ font-size:var(--text-60) } }
+@media (min-width:768px){ .hstat-num{ font-size:var(--text-72) } }
+@media (min-width:1024px){ .hstat-shell{ padding-top:var(--space-64); padding-bottom:var(--space-80) } .hstat-grid{ grid-template-columns:repeat(4,1fr); column-gap:var(--space-40) } }
+
+/* ===== 서브페이지 공용 스탯/패널 (solution By-the-Numbers 다크 패널 · portx · MyID 라이트 스탯) — parameta.html <style> 전체가 서브에 인라인되므로 유지. build EXTRA_CSS의 .sg-2x2/.pv-stats 오버라이드가 이 위에 얹힘 ===== */
+.stats-shell{ padding:0 1.25rem 5rem }
+.stats-panel{ border-radius:var(--radius-card); background:var(--ink); padding:3rem 1.5rem; color:var(--white) }
+.stats-h2{ margin-top:1rem; max-width:20ch; font-size:var(--text-30); font-weight:500; letter-spacing:-.01em }
+.stats-grid{ margin-top:3.5rem; display:grid; grid-template-columns:repeat(2,1fr); column-gap:2rem; row-gap:3rem }
+.stat-num{ font-size:var(--text-48); font-weight:600; letter-spacing:-.02em }
+.stat-label{ margin-top:.75rem; font-size:var(--text-14); color:rgba(var(--white-rgb),.55) }
+@media (min-width:640px){ .stats-shell{ padding-left:2rem; padding-right:2rem } .stats-panel{ padding:4rem 2rem } .stat-num{ font-size:var(--text-60) } }
+@media (min-width:768px){ .stats-panel{ padding-inline:4rem } .stats-h2{ font-size:var(--text-36) } .stat-num{ font-size:var(--text-72) } }
+@media (min-width:1024px){ .stats-shell{ padding-bottom:7rem } .stats-grid{ grid-template-columns:repeat(4,1fr) } }
 
 /* ============ FAQ (roll-open motion, 원본 reasons 아코디언 참고) ============ */
 #faq{ background:var(--surface); padding-bottom:var(--space-120) }
@@ -962,8 +973,8 @@ body.show-grid #dev-grid{ display:block }
 
   <!-- ============ WHY / STATS (히어로 바로 아래 · 다크 밴드) ============ -->
   <section id="why">
-    <div class="shell stats-shell">
-      <ul class="stats-grid rvl" id="statsGrid" style="--rvl-y:24px"></ul>
+    <div class="shell hstat-shell">
+      <ul class="hstat-grid rvl" id="statsGrid" style="--rvl-y:24px"></ul>
     </div>
   </section>
 
@@ -971,26 +982,26 @@ body.show-grid #dev-grid{ display:block }
   <section id="clients" aria-label="함께한 기관·기업">
     <div class="mq rvl" style="--rvl-y:24px">
       <div class="mq-track">
-        <span class="mq-logo"><img src="assets/logo-shinhan.svg" alt="신한은행"></span>
-        <span class="mq-logo"><img src="assets/logo-nh.svg" alt="NH농협은행"></span>
-        <span class="mq-logo"><img src="assets/logo-kb.svg" alt="KB금융"></span>
-        <span class="mq-logo"><img src="assets/logo-ibk.svg" alt="IBK기업은행"></span>
-        <span class="mq-logo"><img src="assets/logo-nh-securities.svg" alt="NH투자증권"></span>
-        <span class="mq-logo"><img src="assets/logo-samsung.svg" alt="삼성"></span>
-        <span class="mq-logo"><img src="assets/logo-samsung-securities.svg" alt="삼성증권"></span>
-        <span class="mq-logo"><img src="assets/logo-mirae.svg" alt="미래에셋"></span>
-        <span class="mq-logo"><img src="assets/logo-hyundai.svg" alt="현대"></span>
-        <span class="mq-logo"><img src="assets/logo-hanwha.svg" alt="한화"></span>
-        <span class="mq-logo" aria-hidden="true"><img src="assets/logo-shinhan.svg" alt=""></span>
-        <span class="mq-logo" aria-hidden="true"><img src="assets/logo-nh.svg" alt=""></span>
-        <span class="mq-logo" aria-hidden="true"><img src="assets/logo-kb.svg" alt=""></span>
-        <span class="mq-logo" aria-hidden="true"><img src="assets/logo-ibk.svg" alt=""></span>
-        <span class="mq-logo" aria-hidden="true"><img src="assets/logo-nh-securities.svg" alt=""></span>
-        <span class="mq-logo" aria-hidden="true"><img src="assets/logo-samsung.svg" alt=""></span>
-        <span class="mq-logo" aria-hidden="true"><img src="assets/logo-samsung-securities.svg" alt=""></span>
-        <span class="mq-logo" aria-hidden="true"><img src="assets/logo-mirae.svg" alt=""></span>
-        <span class="mq-logo" aria-hidden="true"><img src="assets/logo-hyundai.svg" alt=""></span>
-        <span class="mq-logo" aria-hidden="true"><img src="assets/logo-hanwha.svg" alt=""></span>
+        <span class="mq-logo"><img src="assets/partners/logo-shinhan.svg" alt="신한은행"></span>
+        <span class="mq-logo"><img src="assets/partners/logo-nh.svg" alt="NH농협은행"></span>
+        <span class="mq-logo"><img src="assets/partners/logo-kb.svg" alt="KB금융"></span>
+        <span class="mq-logo"><img src="assets/partners/logo-ibk.svg" alt="IBK기업은행"></span>
+        <span class="mq-logo"><img src="assets/partners/logo-nh-securities.svg" alt="NH투자증권"></span>
+        <span class="mq-logo"><img src="assets/partners/logo-samsung.svg" alt="삼성"></span>
+        <span class="mq-logo"><img src="assets/partners/logo-samsung-securities.svg" alt="삼성증권"></span>
+        <span class="mq-logo"><img src="assets/partners/logo-mirae.svg" alt="미래에셋"></span>
+        <span class="mq-logo"><img src="assets/partners/logo-hyundai.svg" alt="현대"></span>
+        <span class="mq-logo"><img src="assets/partners/logo-hanwha.svg" alt="한화"></span>
+        <span class="mq-logo" aria-hidden="true"><img src="assets/partners/logo-shinhan.svg" alt=""></span>
+        <span class="mq-logo" aria-hidden="true"><img src="assets/partners/logo-nh.svg" alt=""></span>
+        <span class="mq-logo" aria-hidden="true"><img src="assets/partners/logo-kb.svg" alt=""></span>
+        <span class="mq-logo" aria-hidden="true"><img src="assets/partners/logo-ibk.svg" alt=""></span>
+        <span class="mq-logo" aria-hidden="true"><img src="assets/partners/logo-nh-securities.svg" alt=""></span>
+        <span class="mq-logo" aria-hidden="true"><img src="assets/partners/logo-samsung.svg" alt=""></span>
+        <span class="mq-logo" aria-hidden="true"><img src="assets/partners/logo-samsung-securities.svg" alt=""></span>
+        <span class="mq-logo" aria-hidden="true"><img src="assets/partners/logo-mirae.svg" alt=""></span>
+        <span class="mq-logo" aria-hidden="true"><img src="assets/partners/logo-hyundai.svg" alt=""></span>
+        <span class="mq-logo" aria-hidden="true"><img src="assets/partners/logo-hanwha.svg" alt=""></span>
       </div>
     </div>
   </section>
@@ -1372,10 +1383,10 @@ STATS.forEach((s, i) => {
   li.style.setProperty('--rvl-y', '20px');
   li.style.setProperty('--rvl-delay', (i * 90) + 'ms');
   if (s.text){
-    li.innerHTML = '<div class="stat-num">' + s.text + '</div><div class="stat-label">' + s.label + '</div>';
+    li.innerHTML = '<div class="hstat-num">' + s.text + '</div><div class="hstat-label">' + s.label + '</div>';
   } else {
-    li.innerHTML = '<div class="stat-num"><span class="stat-val">0</span><small>' + s.suffix + '</small></div><div class="stat-label">' + s.label + '</div>';
-    statNumEls.push({ el: li.querySelector('.stat-val'), value: s.value });
+    li.innerHTML = '<div class="hstat-num"><span class="hstat-val">0</span><small>' + s.suffix + '</small></div><div class="hstat-label">' + s.label + '</div>';
+    statNumEls.push({ el: li.querySelector('.hstat-val'), value: s.value });
   }
   statsGrid.appendChild(li);
 });

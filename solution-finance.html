@@ -532,19 +532,30 @@ body.hero-dark .hc-nav{ background:rgba(var(--white-rgb),.1); color:rgba(var(--w
   .services-shell .service-desc{ display:block; flex-basis:100%; max-width:none; margin:0 0 0 2.75rem } }
 @media (min-width:640px) and (max-width:1023px){ .services-shell .service-desc{ margin-left:4rem } }
 
-/* ============ WHY / STATS (히어로 바로 아래 · 다크 밴드로 이어짐) ============ */
+/* ============ WHY / STATS — 메인 전용 다크 밴드 (독립 네임스페이스 hstat-*, 공용 .stats-*와 분리) ============ */
 #home{ z-index:1 }   /* 히어로 라운드 하단이 아래 다크밴드 위에 얹히도록 */
 #why{ position:relative; background:var(--black); color:var(--white);
   margin-top:calc(-1 * var(--radius-card)); padding-top:var(--radius-card);
   border-radius:0 0 var(--radius-card) var(--radius-card) }
-.stats-shell{ padding:var(--space-48) 1.25rem var(--space-64) }
-.stats-grid{ display:grid; grid-template-columns:repeat(2,1fr); column-gap:2rem; row-gap:var(--space-40); text-align:center }
-.stat-num{ font-size:var(--text-48); font-weight:600; letter-spacing:-.02em; color:var(--white) }
-#why .stat-num small{ font-size:1em; font-weight:600; letter-spacing:-.02em }   /* 단위(년+·만+) 숫자와 동일 웨이트·크기 */
-.stat-label{ margin-top:.75rem; font-size:var(--text-18); color:rgba(var(--white-rgb),.55) }
-@media (min-width:640px){ .stats-shell{ padding-left:2rem; padding-right:2rem } .stat-num{ font-size:var(--text-60) } }
-@media (min-width:768px){ .stat-num{ font-size:var(--text-72) } }
-@media (min-width:1024px){ .stats-shell{ padding-top:var(--space-64); padding-bottom:var(--space-80) } .stats-grid{ grid-template-columns:repeat(4,1fr); column-gap:var(--space-40) } }
+.hstat-shell{ padding:var(--space-48) 1.25rem var(--space-64) }
+.hstat-grid{ display:grid; grid-template-columns:repeat(2,1fr); column-gap:2rem; row-gap:var(--space-40); text-align:center }
+.hstat-num{ font-size:var(--text-48); font-weight:600; letter-spacing:-.02em; color:var(--white) }
+.hstat-num small{ font-size:1em; font-weight:600; letter-spacing:-.02em }   /* 단위(년+·만+) 숫자와 동일 웨이트·크기 */
+.hstat-label{ margin-top:.75rem; font-size:var(--text-18); color:rgba(var(--white-rgb),.55) }
+@media (min-width:640px){ .hstat-shell{ padding-left:2rem; padding-right:2rem } .hstat-num{ font-size:var(--text-60) } }
+@media (min-width:768px){ .hstat-num{ font-size:var(--text-72) } }
+@media (min-width:1024px){ .hstat-shell{ padding-top:var(--space-64); padding-bottom:var(--space-80) } .hstat-grid{ grid-template-columns:repeat(4,1fr); column-gap:var(--space-40) } }
+
+/* ===== 서브페이지 공용 스탯/패널 (solution By-the-Numbers 다크 패널 · portx · MyID 라이트 스탯) — parameta.html <style> 전체가 서브에 인라인되므로 유지. build EXTRA_CSS의 .sg-2x2/.pv-stats 오버라이드가 이 위에 얹힘 ===== */
+.stats-shell{ padding:0 1.25rem 5rem }
+.stats-panel{ border-radius:var(--radius-card); background:var(--ink); padding:3rem 1.5rem; color:var(--white) }
+.stats-h2{ margin-top:1rem; max-width:20ch; font-size:var(--text-30); font-weight:500; letter-spacing:-.01em }
+.stats-grid{ margin-top:3.5rem; display:grid; grid-template-columns:repeat(2,1fr); column-gap:2rem; row-gap:3rem }
+.stat-num{ font-size:var(--text-48); font-weight:600; letter-spacing:-.02em }
+.stat-label{ margin-top:.75rem; font-size:var(--text-14); color:rgba(var(--white-rgb),.55) }
+@media (min-width:640px){ .stats-shell{ padding-left:2rem; padding-right:2rem } .stats-panel{ padding:4rem 2rem } .stat-num{ font-size:var(--text-60) } }
+@media (min-width:768px){ .stats-panel{ padding-inline:4rem } .stats-h2{ font-size:var(--text-36) } .stat-num{ font-size:var(--text-72) } }
+@media (min-width:1024px){ .stats-shell{ padding-bottom:7rem } .stats-grid{ grid-template-columns:repeat(4,1fr) } }
 
 /* ============ FAQ (roll-open motion, 원본 reasons 아코디언 참고) ============ */
 #faq{ background:var(--surface); padding-bottom:var(--space-120) }
@@ -1026,10 +1037,10 @@ body.hero-dark .phero-h1{ color:var(--white); max-width:18ch; font-size:var(--te
 @media (min-width:768px){ body.hero-dark .phero-h1{ font-size:var(--text-60) } }
 @media (min-width:1024px){ body.hero-dark .phero-h1{ font-size:var(--text-72) } }
 /* ---- 솔루션형 히어로 토큰: 타이틀 한 사이즈 다운 (36/48/60/72 → 32/40/48/60) ---- */
-body.hero-dark.hero-sol .phero-h1{ font-size:var(--text-32); max-width:24ch }
-@media (min-width:640px){ body.hero-dark.hero-sol .phero-h1{ font-size:var(--text-40) } }
-@media (min-width:768px){ body.hero-dark.hero-sol .phero-h1{ font-size:var(--text-48) } }
-@media (min-width:1024px){ body.hero-dark.hero-sol .phero-h1{ font-size:var(--text-60) } }
+body.hero-dark.hero-sol .phero-h1{ font-size:var(--text-28); max-width:24ch }   /* 히어로 h1 한 단계 축소(32→28) */
+@media (min-width:640px){ body.hero-dark.hero-sol .phero-h1{ font-size:var(--text-36) } }
+@media (min-width:768px){ body.hero-dark.hero-sol .phero-h1{ font-size:var(--text-40) } }
+@media (min-width:1024px){ body.hero-dark.hero-sol .phero-h1{ font-size:var(--text-48) } }
 body.hero-dark.hero-sol .phero-h1 .rvl-line + .rvl-line{ margin-top:.2em }  /* 문장형 다중 줄: 줄 블록 사이만 벌림 (행간 .98 유지) */
 body.hero-dark .phero-text .phero-lead{ color:rgba(var(--white-rgb),.7); font-size:var(--text-20) }
 /* 히어로 CTA: 폰트 text-16 (높이는 base .pill.no-arrow 토큰 min-height:3rem = with-arrow와 동일) */
@@ -1050,10 +1061,10 @@ body.hero-dark .phero-cta .pill.outline .pill-badge{ background:var(--white); co
 /* outline 버튼 호버: 보라 채움 (uc-arrow와 동일 언어) */
 @media (hover:hover){ body.hero-dark .phero-cta .pill.outline:hover .hspring{ background:var(--accent); border-color:transparent; color:var(--white) } }
 /* 관련 제품 바로가기: 리드 아래 좌측, 디바이더 + 캡션 타이틀 + 제품 플래그 (아이브로우 없음) */
-.phero-rel{ display:flex; flex-direction:column; align-items:flex-start; gap:.75rem;
+.phero-rel{ display:flex; flex-direction:row; flex-wrap:wrap; align-items:center; gap:.75rem;
   margin-top:var(--space-64);  /* 리드↔디바이더: 컬럼 gap 1rem + 64 = 5rem (기존 2rem의 2.5배) */
   border-top:1px solid var(--line); padding-top:1.25rem }
-.phero-rel-t{ font-size:var(--text-18); font-weight:600; line-height:var(--leading-body); color:var(--accent) }
+.phero-rel-t{ flex-basis:100%; font-size:var(--text-18); font-weight:600; line-height:var(--leading-body); color:var(--accent) }   /* 타이틀 한 줄 차지 → 플래그는 아래 한 행에 나란히 */
 .phero-rel-flag{ display:inline-flex; align-items:center; border:1px solid var(--line); border-radius:var(--radius-pill);
   padding:.625rem 1.25rem; font-size:var(--text-18); font-weight:600; color:rgba(var(--ink-rgb),.7); text-decoration:none;
   transition:background .25s ease, color .25s ease, border-color .25s ease, transform .35s cubic-bezier(.2,.8,.2,1) }
@@ -1082,9 +1093,9 @@ body.hero-dark .phero-wm{ display:none }
 /* 100vh · 12칼럼 그리드 스냅: 텍스트 1~6칸 / 비주얼 7~12칸 */
 body.hero-dark .phero-inner{ min-height:100vh; display:grid; grid-template-columns:repeat(12,1fr);
   align-items:center; column-gap:var(--grid-gap); padding-top:6rem; padding-bottom:3rem }
-body.hero-dark .phero-text{ grid-column:1 / 6; align-self:center; gap:1rem }
+body.hero-dark .phero-text{ grid-column:1 / 8; align-self:center; gap:1rem }   /* 텍스트 영역 2칸 확장(1/6→1/8) */
 body.hero-dark .phero-cta{ margin-top:var(--space-16) }  /* 리드↔버튼 간격 (8→16) */
-body.hero-dark .phero-visual{ grid-column:7 / 13; display:block; align-self:stretch; min-height:56vh;
+body.hero-dark .phero-visual{ grid-column:8 / 13; display:block; align-self:stretch; min-height:56vh;
   width:calc(100% + (100% - 5 * var(--grid-gap)) / 12 + var(--grid-gap) / 2);
   margin-left:calc(-1 * ((100% - 5 * var(--grid-gap)) / 12 + var(--grid-gap) / 2));  /* 왼쪽으로 반칸만 확장 */
   position:relative; overflow:hidden;
@@ -1092,6 +1103,7 @@ body.hero-dark .phero-visual{ grid-column:7 / 13; display:block; align-self:stre
   background:radial-gradient(120% 90% at 70% 18%, rgba(var(--accent-rgb),.2), transparent 60%), rgba(var(--white-rgb),.03) }
 /* 이미지가 들어간 비주얼: 아웃라인·그라 제거, 영역만 + cover */
 body.hero-dark .phero-visual:has(img), body.hero-dark .phero-visual:has(video){ border:none; background:none }
+body.hero-dark .phero-visual:empty{ border:none; background:none }   /* 이미지 없을 때: 보라 글로우·테두리 제거(투명 박스) */
 body.hero-dark .phero-visual :is(img,video){ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block }
 /* 투명 배경 목업류: 크롭 없이 통짜로 보여주기 */
 body.hero-dark .phero-visual :is(img,video).fit-contain{ object-fit:contain }
@@ -1768,6 +1780,7 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 /* uc-lg 변형(금융): 본문 한 단계 업 + 라벨 플래그 행 구조 */
 .uc-carousel.uc-lg .uc-slide > p{ font-size:var(--text-20) }
 .uc-carousel.uc-lg .uc-slide h3{ margin-bottom:1rem }  /* 타이틀↔플래그 행 간격 */
+body.myid .uc-slide{ min-height:26rem }   /* MyID References 카드 높이 확대 */
 .uc-rows{ display:flex; flex-direction:column; gap:.6rem }  /* 상단 정렬 + 컨테이너는 최장 슬라이드에 고정 */
 .uc-row{ display:flex; align-items:center; gap:.75rem; font-size:var(--text-20);
   color:rgba(var(--ink-rgb),.6); line-height:var(--leading-body); word-break:keep-all }
@@ -1799,7 +1812,7 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .uc-tabpanel .uc-slide{ min-height:26rem; padding:3.5rem }
 .uc-tabsub{ text-align:center; font-size:var(--text-16); color:rgba(var(--ink-rgb),.5); margin-bottom:var(--space-32) }
 .uc-tabnote{ text-align:center; font-size:var(--text-16); color:rgba(var(--ink-rgb),.6); line-height:var(--leading-body); margin-top:var(--space-32) }
-/* Broof Applied Cases — 좌측 인증서 풀영역 + 우측 글·후기(PortX 포멧) */
+/* broof Applied Cases — 좌측 인증서 풀영역 + 우측 글·후기(PortX 포멧) */
 .bc-cases .uc-slide{ display:grid; grid-template-columns:minmax(0,42%) 1fr; gap:0; align-items:stretch; padding:0; overflow:hidden }   /* 패딩 0 → 인증서 full-bleed, overflow로 카드 라운드에 맞춰 클립 */
 .bc-cert{ background:color-mix(in srgb, var(--ink) 12%, var(--white)); display:grid; place-items:center; min-height:30rem }
 .bc-cert img{ width:100%; height:100%; object-fit:cover; display:block }
@@ -1930,7 +1943,10 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .pt-track{ display:flex; width:max-content; animation:ptScroll 32s linear infinite }
 .pt-set{ display:flex; align-items:center; gap:0; padding-right:0 }
 .pt-set img{ height:7.5rem; width:auto; flex:none }  /* ≈120px, 로고 여백만으로 간격 (svg 원본 컬러) */
-body.parasta .pt-set img{ height:5rem }   /* parasta 마퀴 로고 축소(120→80px) */
+/* parasta·myid 마퀴: 메인과 동일 — 높이 3.5rem, 은은 모노 그레이 컬러필, gap */
+body.parasta .pt-set, body.myid .pt-set{ gap:var(--space-64); align-items:center }
+body.parasta .pt-set img, body.myid .pt-set img{ height:3.5rem; filter:brightness(0); opacity:.42 }
+@media (max-width:639px){ body.parasta .pt-set, body.myid .pt-set{ gap:var(--space-40) } body.parasta .pt-set img, body.myid .pt-set img{ height:2.75rem } }
 @keyframes ptScroll{ to{ transform:translateX(-50%) } }
 @media (max-width:639px){ .pt-set img{ height:5.5rem } }
 /* 인증·수상 마퀴: 로고(위) + 텍스트(아래) 아이템 순환 */
@@ -1975,6 +1991,8 @@ body.parasta .pt-set img{ height:5rem }   /* parasta 마퀴 로고 축소(120→
 .ally-logos, .ally-marquee-wrap .pt-marquee{ margin:0 }
 .ally-logos .pt-track{ animation-duration:42s }   /* 인증수상 마퀴와 동일 속도 */
 .ally-logos:hover .pt-track{ animation-play-state:paused }   /* 호버 시 정지 */
+.ally-logos .pt-set img{ height:6rem }   /* 파트너 로고 조금 축소 (7.5→6rem) */
+@media (max-width:639px){ .ally-logos .pt-set img{ height:4.5rem } }
 /* 시안 D 마퀴 문법: 좌우 페이드 */
 .ally-logos{ padding-block:var(--space-24);
   -webkit-mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
@@ -2472,10 +2490,10 @@ body.blog .pd-hero-meta .post-cat{ background:rgba(var(--white-rgb),.14); color:
 .aw-set{ display:flex; align-items:flex-start; gap:0; padding-right:0 }
 .aw-item{ display:flex; flex-direction:column; align-items:center; gap:1rem;
   width:12.5rem; margin:0 1rem; text-align:center }   /* 아이템 사이 간격 (24→32px) */
-.aw-logo{ position:relative; width:4.75rem; height:4.75rem;
-  display:flex; align-items:center; justify-content:center }  /* 박스 제거 — 로고 SVG가 자체 완결형 */
+.aw-logo{ position:relative; width:4rem; height:4rem;
+  display:flex; align-items:center; justify-content:center }  /* 박스 제거 — 로고 SVG가 자체 완결형 (4.75→4rem 축소) */
 .aw-logo img{ max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain }  /* 68%→100% */
-@media (max-width:639px){ .aw-logo{ width:3.5rem; height:3.5rem } }   /* 모바일: 로고 축소 (4.75→3.5rem) — base 뒤 */
+@media (max-width:639px){ .aw-logo{ width:3rem; height:3rem } }   /* 모바일: 로고 축소 (3.5→3rem) */
 .aw-logo img:not([style*="none"]) + i{ display:none } /* 로고 파일 있으면 약칭 숨김 */
 .aw-logo i{ font-style:normal; font-family:'Departure Mono',monospace; font-size:var(--text-14);
   font-weight:400; color:var(--gray-400); letter-spacing:.02em }
@@ -2868,7 +2886,7 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
       <a class="phero-rel-flag" href="parasta.html">ParaSta</a>
     </div>
       </div>
-      <div class="phero-visual" aria-hidden="true"><img src="assets/solutions/hero-test-1.webp" alt="" loading="eager" fetchpriority="high"></div>
+      <div class="phero-visual" aria-hidden="true"></div>
       
     </div>
     
