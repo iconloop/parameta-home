@@ -927,7 +927,7 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .uc-tabpanel .uc-slide{ min-height:26rem; padding:3.5rem }
 .uc-tabsub{ text-align:center; font-size:var(--text-16); color:rgba(var(--ink-rgb),.5); margin-bottom:var(--space-32) }
 .uc-tabnote{ text-align:center; font-size:var(--text-16); color:rgba(var(--ink-rgb),.6); line-height:var(--leading-body); margin-top:var(--space-32) }
-/* Broof Applied Cases — 좌측 인증서 풀영역 + 우측 글·후기(PortX 포멧) */
+/* broof Applied Cases — 좌측 인증서 풀영역 + 우측 글·후기(PortX 포멧) */
 .bc-cases .uc-slide{ display:grid; grid-template-columns:minmax(0,42%) 1fr; gap:0; align-items:stretch; padding:0; overflow:hidden }   /* 패딩 0 → 인증서 full-bleed, overflow로 카드 라운드에 맞춰 클립 */
 .bc-cert{ background:color-mix(in srgb, var(--ink) 12%, var(--white)); display:grid; place-items:center; min-height:30rem }
 .bc-cert img{ width:100%; height:100%; object-fit:cover; display:block }
@@ -4132,13 +4132,13 @@ PAGES['parasta.html'] = dict(
 
 # ---------------- portx.html ----------------
 PAGES['portx.html'] = dict(
-    title='PortX · 화이트라벨 거래소 솔루션 | PARAMETA',
+    title='PortX · 디지털자산 거래 솔루션 | PARAMETA',
     desc='PortX — 직접 구축 없이 자체 디지털자산 거래 플랫폼을 소유하는 가장 빠른 길. 화이트라벨 하이브리드 거래소 솔루션. 애그리게이션 엔진·Smart Access·논커스터디.',
     eyebrow='Exchange Solution',
     body_class='hero-dark portx',   # portx 식별 클래스(히어로 CTA 버튼 스왑용)
     h1_lines=['PortX'],
-    lead='PortX는 여러 거래소(CEX, DEX)를 API로 연동해, 자사 브랜드의 디지털자산 거래 서비스를 만들 수 있게 하는 디지털자산 거래 솔루션입니다. 필요한 기능만 모듈로 골라 도입하고, 거래부터 운영까지 하나로 연결합니다.',
-    crumb='Products — Port X',
+    lead='PortX는 여러 거래소(CEX·DEX)를 API로 연동해, 자사 브랜드의 디지털자산 거래 서비스를 만들 수 있게 하는 디지털자산 거래 솔루션입니다. 필요한 기능만 모듈로 골라 도입하고, 거래부터 운영까지 하나로 연결합니다.',
+    crumb='Products — PortX',
     hero_visual='<img class="fit-contain" src="assets/portx/portx-hero.png" alt="" loading="eager" fetchpriority="high">',
     content=f'''
 <section><div class="shell sec">
@@ -4163,7 +4163,7 @@ PAGES['portx.html'] = dict(
         <div class="px-duo">
           <div class="px-mini">
             <div class="mi-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5"/><path d="M3 16.5l9 5 9-5"/></svg>Aggregation Engine</div>
-            <p class="pm-break">글로벌 CEX, DEX를 연동해, 여러 거래소의 유동성을 자사 서비스에 연결</p>
+            <p class="pm-break">글로벌 CEX·DEX를 연동해, 여러 거래소의 유동성을 자사 서비스에 연결</p>
           </div>
           <div class="px-mini">
             <div class="mi-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="6.5" height="6.5" rx="1"/><rect x="14" y="3.5" width="6.5" height="6.5" rx="1"/><rect x="3.5" y="14" width="6.5" height="6.5" rx="1"/><path d="M14 14h3v3h-3z"/><path d="M20.5 14v2M14 20.5h2M18.5 18.5h2v2"/></svg>Smart Access</div>
@@ -4210,6 +4210,7 @@ PAGES['portx.html'] = dict(
       dict(label='구축 부담', cells=['연동만으로 시작', '매칭엔진, 백오피스 등 전체 스택', '연동은 간편']),
       dict(label='자산, 보안 책임', cells=['비수탁 (민감정보 미보관)', '커스터디 운영, 보안 책임 전부 부담', '해당 없음']),
     ], hl=1, tabs=True)}</div>
+  <p class="sec-note rvl" style="margin-top:2rem">PortX는 기본적으로 SaaS형으로 제공합니다. 필요 시 구축형(온프레미스) 도입과 운영 대행(옵션)도 지원합니다. 도입 형태는 문의해 주세요.</p>
 </div></section>
 <section><div class="shell sec">
   {sec_head('Why Now', '이미 일어나는 거래를, 내 서비스 안으로', '사용자는 정보를 내 서비스에서 찾고, 거래는 외부에서 실행합니다.<br>이제 그 거래 흐름과 수익 기회를 자사 서비스 안으로 가져올 차례입니다.')}
@@ -4241,7 +4242,7 @@ PAGES['portx.html'] = dict(
           <div class="uc-avatar"><img src="assets/portx/uc-supercycl-pp.png" alt=""></div>
           <div class="uc-qbody">
             <p class="uc-quote">&ldquo;PortX 덕분에 자체 선물거래 서비스를 더 빠르게 시작할 수 있었습니다.&rdquo;</p>
-            <p class="uc-name">Supercycl 헤드 개발자</p>
+            <p class="uc-name">Supercycl 개발 총괄</p>
           </div>
         </div>
       </article>
@@ -4422,16 +4423,16 @@ _broof_logo_cards = ''.join(
     f'<article class="logo-card" style="--brand:{_broof_brand.get(o, "var(--purple-500)")}"><span class="logo-ico"></span>{o}</article></li>'
     for i, o in enumerate(_broof_orgs))
 PAGES['broof.html'] = dict(
-    title='Broof · 블록체인 증명서 발급 | PARAMETA',
-    desc='Broof — 블록체인 기반 증명서 발급·검증 서비스. 위·변조를 방지하는 디지털 증명서를 발급하고, 누구나 즉시 진위를 확인합니다.',
+    title='broof · 블록체인 증명서 발급 | PARAMETA',
+    desc='broof — 블록체인 기반 증명서 발급·검증 서비스. 위·변조를 방지하는 디지털 증명서를 발급하고, 누구나 즉시 진위를 확인합니다.',
     eyebrow='Digital Credentials',
     body_class='hero-dark broof',   # broof 식별 클래스(히어로 새 버튼)
-    h1_lines=['Broof'],
+    h1_lines=['broof'],
     lead='별도 시스템 구축 없이 증명서를 간편하게 발급하고, QR 코드 하나로 진위를 즉시 검증합니다. 블록체인으로 증명서의 위조와 분실 위험까지 낮춥니다.',
-    crumb='Products — Broof',
+    crumb='Products — broof',
     hero_visual='<img class="fit-contain" src="assets/broof/hero-test.avif" alt="" loading="eager" fetchpriority="high">',
     hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
-      <a class="pill light with-arrow arw-right hs-scale cta-talk" href="contact.html"><span class="hspring">Go to Broof<span class="pill-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></a>
+      <a class="pill light with-arrow arw-right hs-scale cta-talk" href="contact.html"><span class="hspring">Go to broof<span class="pill-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></a>
     </div>''',
     content=f"""
 <section><div class="shell sec" style="padding-bottom:0">
@@ -4475,7 +4476,7 @@ PAGES['broof.html'] = dict(
   </div>
 </div></section>
 <section><div class="shell sec">
-  {sec_head('Trusted By', '공공기관, 대학, 기업이 선택한 Broof', '공공기관·대학부터 기업까지, 다양한 현장에서 Broof로 증명서를 발급하고 진위를 검증합니다.')}
+  {sec_head('Trusted By', '공공기관, 대학, 기업이 선택한 broof', '공공기관·대학부터 기업까지, 다양한 현장에서 broof로 증명서를 발급하고 진위를 검증합니다.')}
   <ul class="logo-grid">{_broof_logo_cards}</ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:9rem">
@@ -4487,7 +4488,7 @@ PAGES['broof.html'] = dict(
         <div class="bc-cert" aria-hidden="true"></div>
         <div class="bc-body">
           <h3>POSTECH</h3>
-          <p>블록체인 전문가과정 수료증을 Broof로 정기 발급합니다. 수료자는 QR 코드 하나로 어디서나 수료 사실을 증명하고, 대학은 재발급·진위 확인 업무 부담을 덜었습니다.</p>
+          <p>블록체인 전문가과정 수료증을 broof로 정기 발급합니다. 수료자는 QR 코드 하나로 어디서나 수료 사실을 증명하고, 대학은 재발급·진위 확인 업무 부담을 덜었습니다.</p>
           <div class="uc-testimonial">
             <div class="uc-avatar" aria-hidden="true"></div>
             <div class="uc-qbody">
@@ -4515,7 +4516,7 @@ PAGES['broof.html'] = dict(
         <div class="bc-cert" aria-hidden="true"></div>
         <div class="bc-body">
           <h3>패스트캠퍼스</h3>
-          <p>온라인 강의 수료증을 Broof로 발급합니다. 수료자는 QR 코드 하나로 수료 사실을 증명하고, 기관은 발급, 재발급 업무 부담을 덜었습니다.</p>
+          <p>온라인 강의 수료증을 broof로 발급합니다. 수료자는 QR 코드 하나로 수료 사실을 증명하고, 기관은 발급, 재발급 업무 부담을 덜었습니다.</p>
           <div class="uc-testimonial">
             <div class="uc-avatar" aria-hidden="true"></div>
             <div class="uc-qbody">
