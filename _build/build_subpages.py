@@ -4410,13 +4410,13 @@ PAGES['myid.html'] = dict(
 """)
 
 # ---------------- broof.html ----------------
-_broof_orgs = ['서울특별시','POSTECH','한국생산성본부','사람인','인천','한경닷컴','한빛미디어','스터디파이','아트앤가이드','호서대','해시넷','서울시민청']
+_broof_orgs = ['서울특별시','POSTECH','한국생산성본부','사람인','미래에셋','삼성인재개발원','경찰청','국가AI전략위원회','스터디파이','아트앤가이드','호서대','서울시민청']
 _broof_chips = ''.join(f'<span class="tag on-light">{o}</span>' for o in _broof_orgs)
 # 기관별 근사 브랜드 컬러(실제 브랜드값은 추후 교체). 호버 시 카드 배경으로 사용.
 _broof_brand = {
     '서울특별시':'#1f4e9c', 'POSTECH':'#86192b', '한국생산성본부':'#0b4da2', '사람인':'#0e5ee6',
-    '인천':'#00a3a5', '한경닷컴':'#e60012', '한빛미디어':'#d81f26', '스터디파이':'#5b47e0',
-    '아트앤가이드':'#b8863b', '호서대':'#2bb6a4', '해시넷':'#2f6df6', '서울시민청':'#e5673b',
+    '미래에셋':'#f58220', '삼성인재개발원':'#1428a0', '경찰청':'#14448c', '국가AI전략위원회':'#3b5ba5',
+    '스터디파이':'#5b47e0', '아트앤가이드':'#b8863b', '호서대':'#2bb6a4', '서울시민청':'#e5673b',
 }
 _broof_logo_cards = ''.join(
     f'<li class="rvl" style="--rvl-y:20px; --rvl-delay:{i*40}ms">'
@@ -4437,7 +4437,7 @@ PAGES['broof.html'] = dict(
     content=f"""
 <section><div class="shell sec" style="padding-bottom:0">
   <ul class="stats-grid pv-stats on-light">
-    <li class="rvl" style="--rvl-y:20px"><div class="stat-num">정부 위원회 <span class="pv-hl">최초</span></div><div class="stat-label">블록체인 위촉장 발급</div></li>
+    
     <li class="rvl" style="--rvl-y:20px; --rvl-delay:90ms"><div class="stat-num">누적 <span class="pv-hl"><span class="pv-val" data-val="90000" data-from="89991">89,991</span>건+</span></div><div class="stat-label">증명서 발급</div></li>
     <li class="rvl" style="--rvl-y:20px; --rvl-delay:180ms"><div class="stat-num">누적 <span class="pv-hl"><span class="pv-val" data-val="20" data-from="11">11</span>개 기관+</span></div><div class="stat-label">대학, 공공기관, 기업 도입</div></li>
   </ul>
