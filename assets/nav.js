@@ -60,21 +60,21 @@
     <div class="mega-inner">\
       <div class="mega-panel" data-for="solutions"><div class="nav-drop-panel duo">\
         <div class="nd-col">\
-          <a href="solution-finance.html"><span class="nd-ico"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="12" r="5"/><path d="M14 7a5 5 0 0 1 0 10"/></svg></span><span class="nd-txt"><b>금융</b><span>디지털자산 금융 플랫폼</span></span></a>\
+          <a href="solution-finance.html"><span class="nd-ico"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="12" r="5"/><path d="M14 7a5 5 0 0 1 0 10"/></svg></span><span class="nd-txt"><b>금융</b><span>금융기관용 디지털자산 인프라</span></span></a>\
           <a href="solution-settlement.html"><span class="nd-ico"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg></span><span class="nd-txt"><b>결제·정산</b><span>정산 자동화·자금 통제</span></span></a>\
-          <a href="solution-exchange.html"><span class="nd-ico"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13l-3-3"/><path d="M20 16H7l3 3"/></svg></span><span class="nd-txt"><b>화이트라벨 거래소</b><span>서비스 안에 거래 기능</span></span></a>\
+          <a href="solution-exchange.html"><span class="nd-ico"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13l-3-3"/><path d="M20 16H7l3 3"/></svg></span><span class="nd-txt"><b>디지털자산 거래</b><span>자사 서비스 안 거래 기능</span></span></a>\
         </div>\
         <div class="nd-col">\
           <a href="solution-gov.html"><span class="nd-ico"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V8l7-4 7 4v13"/><path d="M9.5 21v-4h5v4"/></svg></span><span class="nd-txt"><b>공공</b><span>CSAP 인증 블록체인 SaaS</span></span></a>\
-          <a href="solution-cert.html"><span class="nd-ico"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M9 15l2 2 4-4"/></svg></span><span class="nd-txt"><b>증명서</b><span>블록체인 디지털 증명</span></span></a>\
+          <a href="solution-cert.html"><span class="nd-ico"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M9 15l2 2 4-4"/></svg></span><span class="nd-txt"><b>증명서</b><span>블록체인 기반 디지털 증명</span></span></a>\
           <a href="solution-data.html"><span class="nd-ico"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg></span><span class="nd-txt"><b>데이터주권</b><span>사용자 통제 데이터 인프라</span></span></a>\
         </div>\
       </div></div>\
       <div class="mega-panel" data-for="products"><div class="nav-drop-panel">\
-        <a href="parasta.html"><span class="nd-ico"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5"/><path d="M3 16.5l9 5 9-5"/></svg></span><span class="nd-txt"><b>ParaSta</b><span>디지털자산 인프라 솔루션</span></span></a>\
-        <a href="portx.html"><span class="nd-ico"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13l-3-3"/><path d="M20 16H7l3 3"/></svg></span><span class="nd-txt"><b>Port X</b><span>디지털자산 거래 솔루션</span></span></a>\
+        <a href="parasta.html"><span class="nd-ico"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5"/><path d="M3 16.5l9 5 9-5"/></svg></span><span class="nd-txt"><b>ParaSta</b><span>디지털자산 금융 인프라</span></span></a>\
+        <a href="portx.html"><span class="nd-ico"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13l-3-3"/><path d="M20 16H7l3 3"/></svg></span><span class="nd-txt"><b>PortX</b><span>디지털자산 거래 솔루션</span></span></a>\
         <a href="myid.html"><span class="nd-ico"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-6 8-6s8 2 8 6"/></svg></span><span class="nd-txt"><b>MyID</b><span>분산신원(DID) 솔루션</span></span></a>\
-        <a href="broof.html"><span class="nd-ico"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M9 15l2 2 4-4"/></svg></span><span class="nd-txt"><b>Broof</b><span>블록체인 증명서 발급·검증</span></span></a>\
+        <a href="broof.html"><span class="nd-ico"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M9 15l2 2 4-4"/></svg></span><span class="nd-txt"><b>broof</b><span>블록체인 증명서 발급·검증</span></span></a>\
       </div></div>\
       <div class="mega-panel" data-for="insights"><div class="nav-drop-panel">\
         <a href="insights.html"><span class="nd-ico"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h13a2 2 0 0 1 2 2v11a2 2 0 0 0 2-2V8"/><rect x="4" y="5" width="13" height="14" rx="2"/><path d="M8 9h5M8 13h5M8 17h3"/></svg></span><span class="nd-txt"><b>Newsroom</b><span>파라메타 소식, 보도자료</span></span></a>\
@@ -142,9 +142,9 @@
         <button class="navmenu-back" data-back>' + ARR_L + 'Products</button>\
         <ul>\
           <li><a href="parasta.html">ParaSta</a></li>\
-          <li><a href="portx.html">Port X</a></li>\
+          <li><a href="portx.html">PortX</a></li>\
           <li><a href="myid.html">MyID</a></li>\
-          <li><a href="broof.html">Broof</a></li>\
+          <li><a href="broof.html">broof</a></li>\
         </ul>\
       </nav>\
       <nav class="navmenu-l2" data-panel="solutions" aria-label="Solutions">\
@@ -153,7 +153,7 @@
           <li><a href="solution-finance.html">금융</a></li>\
           <li><a href="solution-gov.html">공공</a></li>\
           <li><a href="solution-cert.html">증명서</a></li>\
-          <li><a href="solution-exchange.html">화이트라벨 거래소</a></li>\
+          <li><a href="solution-exchange.html">디지털자산 거래</a></li>\
           <li><a href="solution-data.html">데이터주권</a></li>\
           <li><a href="solution-settlement.html">결제·정산</a></li>\
         </ul>\
