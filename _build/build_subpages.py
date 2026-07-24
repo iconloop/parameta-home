@@ -1996,7 +1996,7 @@ CHROME_FOOTER = """
     <div class="footer-cols">
       <div class="footer-col">
         <div class="footer-brand"><img class="brand-logo" src="assets/brand/logo-horizontal-color-dark.svg" alt="PARAMETA"></div>
-        <p class="footer-tagline">서비스 환경에 맞는 디지털자산 인프라, 파라메타와 함께 시작해보세요.</p>
+        <p class="footer-tagline">서비스 환경에 맞는 __FTAG__ 인프라, 파라메타와 함께 시작해보세요.</p>
         <p class="footer-addr">서울특별시 서초구 강남대로 311 드림플러스 8F<br>02-2138-7026 · info@parametacorp.com</p>
       </div>
     </div>
@@ -4609,7 +4609,7 @@ PAGES['solution-finance.html'] = dict(
     title='금융 디지털자산 솔루션 | PARAMETA',
     desc='규제 환경에 맞춘 엔터프라이즈 디지털자산 금융 플랫폼. 발행·지갑·오케스트레이션·온체인 KYC·통합관제를 하나로. 스테이블코인·예금토큰·RWA·토큰증권까지 단계적 확장.',
     eyebrow='Solutions — 금융',
-    h1_lines=['규제 대응부터 정산, 상환까지,', '금융기관의 디지털자산 인프라'],
+    h1_lines=['디지털자산 발행부터 상환까지', '한곳에서 관리합니다'],
     lead='발행, 지갑, 계좌·지갑 연동, 온체인 KYC, 통합 관리를 하나로 연결합니다. 스테이블코인부터 예금토큰, RWA, 토큰증권까지 규제와 사업 환경에 맞춰 단계적으로 확장할 수 있습니다.',
     crumb='Solutions — 금융',
     hero_cta='''<div class="phero-rel rvl" style="--rvl-delay:600ms">
@@ -5344,6 +5344,7 @@ for fname, p in PAGES.items():
         .replace('__HERO_EXTRA__', p.get('hero_extra', ''))
         .replace('__CONTENT__', p['content'])
         .replace('__FOOTER__', CHROME_FOOTER)
+        .replace('__FTAG__', {'solution-cert.html':'증명', 'solution-data.html':'신원·데이터', 'solution-gov.html':'공공 블록체인'}.get(fname, '디지털자산'))
         .replace('__JS__', JS))
     if '/' in fname:
         # 하위 폴더 페이지: <base>로 상대경로(에셋·nav 링크·챗봇 로딩)를 루트 기준으로 해석
