@@ -4768,12 +4768,12 @@ PAGES['solution-gov.html'] = dict(
   ], cols=4)}
 </div></section>
 <section><div class="shell sec">
-  {sec_head('Platform', '기본 제공 기능', '사용자는 필요한 정보만 선택 공개(Selective Disclosure)로 제출합니다. 개인 데이터는 사용자 단말과 분산 환경에 저장해 기관의 보관 부담을 줄입니다. 발급·보유·검증이 하나의 흐름으로 이어집니다.')}
+  {sec_head('Platform', '기본 제공 기능', '신원 증명의 발급·검증부터 보관·제출을 위한 지갑, 개인 데이터 저장소, 대용량 분산 저장까지 기본으로 제공합니다. 사용자는 필요한 정보만 선택 공개(Selective Disclosure)로 제출하고, 기관은 개인정보 보관 부담을 덜 수 있습니다.')}
   {cards_wrap([
-    exchange_card('신원 DID / VC / VP', gray=True),
-    exchange_card('지갑', gray=True),
-    exchange_card('개인데이터저장소 PDS', gray=True),
-    exchange_card('분산저장 BFS', gray=True),
+    exchange_card('DID·VC·VP · 신원 증명', gray=True, desc='위·변조를 확인할 수 있는 디지털 신원·자격 증명을 발급하고 검증합니다.'),
+    exchange_card('Wallet · 지갑', gray=True, desc='사용자가 증명을 보관하고, 필요한 곳에 필요한 만큼만 제출합니다.'),
+    exchange_card('PDS · 개인데이터저장소', gray=True, desc='데이터를 사용자 통제 아래 두고, 기관 보관 부담을 줄입니다.'),
+    exchange_card('BFS · 분산 저장', gray=True, desc='대용량 데이터를 여러 곳에 나눠 저장해, 위·변조 없이 언제든 꺼내 쓸 수 있습니다.'),
   ], cols=4)}
 </div></section>
 <section><div class="shell sec">
