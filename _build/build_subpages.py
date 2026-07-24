@@ -5073,7 +5073,7 @@ PAGES['solution-data.html'] = dict(
 </div></section>
 <section><div class="shell sec">
   {sec_head('Problem', '개인정보를 다루는 부담, 이렇게 해결합니다')}
-  {ww_compare('개인정보를 직접 떠안아야 합니다', '개인정보를 떠안지 않는 구조로 바꿉니다', [
+  {ww_compare('개인정보 리스크 발생', '리스크 없는 데이터 활용', [
     ('보관 리스크', '개인정보를 직접 쌓아둘수록 유출 사고와 과징금, 신뢰 하락 부담이 커집니다.',
      '개인정보 유출 리스크 원천 차단', '개인정보를 기업 서버가 아닌 사용자 저장소(PDS)에 보관하여, 유출 사고와 과징금 부담을 근본적으로 해소합니다.'),
     ('반복 수집과 동의 관리', '서비스마다 같은 정보를 다시 받고 동의를 관리하는 비용이 쌓입니다.',
@@ -5097,7 +5097,7 @@ PAGES['solution-data.html'] = dict(
 <section><div class="shell stats-shell">
   <div class="stats-panel rvl" style="--rvl-y:40px; --rvl-s:.99">
     <div class="eyebrow light"><span class="dot"></span>By the Numbers</div>
-    <h2 class="stats-h2" data-line-reveal style="max-width:none"><span class="rvl-line"><span>국책 R&D로 검증된<br>분산 저장 인프라</span></span></h2>
+    <h2 class="stats-h2" data-line-reveal style="max-width:none"><span class="rvl-line"><span>시장에서 검증된<br>데이터 주권 솔루션</span></span></h2>
     <ul class="stats-grid sg-2x2">
       <li class="rvl" style="--rvl-y:20px"><div class="stat-num">2021~2025</div><div class="stat-label">국책 R&D 기반 BFS (IITP·ETRI 공동)</div></li>
       <li class="rvl" style="--rvl-y:20px; --rvl-delay:90ms"><div class="stat-num"><span class="pv-val" data-val="218">0</span>만 명</div><div class="stat-label">제주안심코드 누적 이용자</div></li>
