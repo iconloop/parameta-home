@@ -1761,6 +1761,8 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .uc-tabbtn.is-active{ background:var(--ink); border-color:transparent; color:var(--white) }
 .uc-tabpanel{ display:none }
 .uc-tabpanel.is-active{ display:block }
+/* ParaSta Use Cases 카드 크게 (탭 캐러셀 전용) — 높이만 키움, 폭은 기본(3/11) */
+.uc-tabpanel .uc-slide{ min-height:26rem; padding:3.5rem }
 .uc-tabsub{ text-align:center; font-size:var(--text-16); color:rgba(var(--ink-rgb),.5); margin-bottom:var(--space-32) }
 .uc-tabnote{ text-align:center; font-size:var(--text-16); color:rgba(var(--ink-rgb),.6); line-height:var(--leading-body); margin-top:var(--space-32) }
 /* Broof Applied Cases — 좌측 인증서 풀영역 + 우측 글·후기(PortX 포멧) */
@@ -1833,28 +1835,41 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .ex-card .ex-num{ display:block; font-size:var(--text-14); font-weight:500; color:rgba(var(--white-rgb),.5); margin-bottom:.5rem }  /* 기능 카드 번호 */
 .ex-card h3 + p{ margin-top:.75rem; font-size:var(--text-18) }  /* 서브카피 달릴 때만 간격 + 한 단계 업 */
 
-/* DID 신뢰 도식 (Platform): Issuer → Holder → Verifier + MyID 블록체인 토대 */
-.did-flow{ margin-top:var(--space-32); margin-bottom:var(--space-48) }
-.did-actors{ display:flex; align-items:stretch; gap:var(--space-16) }
-.did-actor{ flex:1; border:1px solid var(--line); border-radius:var(--radius-card-sm); padding:var(--space-20) var(--space-16); background:var(--white) }
-.did-actor.is-holder{ border:2px solid var(--accent); background:rgba(97,0,255,.05) }
-.did-role{ font-size:var(--text-14); font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:var(--accent) }
-.did-actor b{ display:block; font-size:var(--text-18); font-weight:600; margin-top:var(--space-8) }
-.did-actor p{ font-size:var(--text-14); color:rgba(var(--ink-rgb),.55); margin-top:.35rem; line-height:var(--leading-body) }
-.did-arw{ flex:none; width:4.5rem; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.35rem; color:var(--purple-300) }
-.did-arw span{ font-size:var(--text-12); color:rgba(var(--ink-rgb),.5); white-space:nowrap }
-.did-arw svg{ width:100%; height:14px }
-.did-connect{ display:flex; justify-content:space-around; padding:var(--space-8) 2.2rem 0 }
-.did-connect i{ width:1px; height:1.4rem; background:repeating-linear-gradient(to bottom, rgba(var(--ink-rgb),.25) 0 3px, transparent 3px 6px) }
-.did-base{ margin-top:var(--space-8); border-radius:var(--radius-card-sm); background:var(--ink); padding:var(--space-20) var(--space-24); display:flex; align-items:center; justify-content:center; gap:.75rem; flex-wrap:wrap; text-align:center }
-.did-base b{ font-size:var(--text-16); font-weight:600; color:var(--purple-300) }
-.did-base > span:last-child{ font-size:var(--text-14); color:rgba(var(--white-rgb),.72); line-height:var(--leading-body) }
-.did-dot{ width:4px; height:4px; border-radius:var(--radius-pill); background:rgba(var(--white-rgb),.3); flex:none }
+/* DID 신뢰 도식 (Platform): VISION식 다크 패널 + 원 3개 + 점선·닷 커넥터 + MyID 블록체인 인프라 바 */
+.did-hub{ margin-top:var(--space-32); margin-bottom:var(--space-48); background:var(--ink); border-radius:var(--radius-card); padding:3rem 1.5rem; color:var(--white) }
+@media (min-width:640px){ .did-hub{ padding:3.5rem 3rem } }
+@media (min-width:1024px){ .did-hub{ padding:4.5rem 4.5rem } }
+/* did-hub 헤더(sec_head) 타이포·간격 = About VISION 패널과 동일 */
+.did-hub .eyebrow{ color:rgba(var(--white-rgb),.9) }
+.did-hub .eyebrow::before, .did-hub .eyebrow::after{ color:rgba(var(--white-rgb),.4) }
+.did-hub .sec-h2{ color:var(--white); font-size:var(--text-30); font-weight:500; letter-spacing:-.01em }
+@media (min-width:768px){ .did-hub .sec-h2{ font-size:var(--text-36) } }
+.did-hub .phero-lead, .did-hub .sec-lead{ color:rgba(var(--white-rgb),.68); font-size:var(--text-20) }
+@media (max-width:1023px){ .did-hub .phero-lead, .did-hub .sec-lead{ font-size:var(--text-18) } }
+.did-ring{ display:flex; align-items:center; justify-content:center; margin-top:5.5rem }
+.did-node{ flex:0 0 auto; width:min(30%, 15rem); aspect-ratio:1; border-radius:50%; background:var(--purple-400);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:var(--space-24); gap:.4rem }
+.did-node .did-role{ font-size:var(--text-14); font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:rgba(var(--white-rgb),.85) }
+.did-node b{ font-size:var(--text-20); font-weight:600; color:var(--white) }
+.did-node .did-sub{ font-size:var(--text-14); color:rgba(var(--white-rgb),.72); line-height:var(--leading-body); max-width:11rem }
+.did-node.is-core{ width:min(34%, 17rem); background:var(--white) }
+.did-node.is-core .did-role{ color:var(--purple-500) }
+.did-node.is-core b{ color:var(--purple-500); font-size:var(--text-24) }
+.did-node.is-core .did-sub{ color:rgba(var(--ink-rgb),.6) }
+.did-link{ flex:1 1 0; align-self:center; position:relative; height:2.25rem; display:flex; align-items:center; justify-content:center }
+.did-link::before{ content:''; position:absolute; left:0; right:0; top:50%; border-top:1.5px dashed rgba(var(--white-rgb),.28) }
+.did-link::after{ content:''; position:absolute; left:50%; top:50%; width:.5rem; height:.5rem; border-radius:50%; background:rgba(var(--white-rgb),.5); transform:translate(-50%,-50%) }
+.did-link span{ position:absolute; bottom:calc(50% + .5rem); font-size:var(--text-14); color:rgba(var(--white-rgb),.65); white-space:nowrap }
+.did-infra{ margin-top:var(--space-40); border:1px solid rgba(var(--white-rgb),.15); border-radius:var(--radius-card-sm); padding:var(--space-24); text-align:center }
+.did-infra-t{ font-size:var(--text-16); font-weight:700; letter-spacing:.04em; color:var(--purple-300); margin-bottom:.5rem }
+.did-infra p{ font-size:var(--text-14); color:rgba(var(--white-rgb),.7); line-height:var(--leading-body) }
 @media (max-width:767px){
-  .did-actors{ flex-direction:column }
-  .did-arw{ width:100%; flex-direction:row; gap:.5rem; padding:.35rem 0 }
-  .did-arw svg{ width:2.5rem; transform:rotate(90deg) }
-  .did-connect{ display:none } }
+  .did-hub{ padding:var(--space-32) var(--space-24) }
+  .did-ring{ flex-direction:column }
+  .did-node, .did-node.is-core{ width:min(100%, 13rem) }
+  .did-link{ flex:none; width:auto; height:2.5rem }
+  .did-link::before{ left:50%; right:auto; top:0; bottom:0; border-top:none; border-left:1.5px dashed rgba(var(--white-rgb),.28) }
+  .did-link span{ bottom:auto; left:calc(50% + .75rem); white-space:nowrap } }
 /* ex-card 그레이 변형: 라이트 그레이 채움 + 잉크 텍스트 (호버 스케일만 유지) */
 .ex-card.ex-gray{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); color:var(--ink); box-shadow:none }
 .ex-card.ex-gray h3{ color:var(--ink) }
@@ -2836,11 +2851,11 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
 </div></section>
 <section><div class="shell sec">
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Problem</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>거래소 사업의 고민, 이렇게 해결합니다</span></span></h2>
-  <div class="ww rvl" style="--rvl-y:40px"><div class="ww-col ww-now"><span class="ww-cap">지금</span><div class="ww-t">사용자가 외부 거래소로 빠져나갑니다</div><ul><li><span class="ww-mk">✕</span><div><b>사용자 외부 이탈</b><p>거래하려는 사용자가 외부 거래소로 빠져 수수료와 관계를 잃습니다.</p></div></li><li><span class="ww-mk">✕</span><div><b>직접 구축 부담</b><p>거래소 자체 구축 시 유동성, API, 지갑, 보안을 전부 직접 감당해야 합니다.</p></div></li><li><span class="ww-mk">✕</span><div><b>온보딩 마찰</b><p>API 키 발급과 입력 과정에서 사용자가 이탈합니다.</p></div></li><li><span class="ww-mk">✕</span><div><b>체인, 거래소 파편화</b><p>여러 체인과 거래소를 각각 연동하고 유지해야 합니다.</p></div></li></ul></div><div class="ww-col ww-after"><span class="ww-cap">PortX 도입 후</span><div class="ww-t">자사 서비스 안에서 바로 거래를 시작합니다</div><ul><li><span class="ww-mk">✓</span><div><b>자사 서비스 안에서 거래</b><p>외부 거래소의 시세와 유동성을 서비스 안에 연결해, 사용자가 자사 서비스 안에서 계속 거래하고 활동합니다.</p></div></li><li><span class="ww-mk">✓</span><div><b>개발 대신 연결</b><p>매칭엔진, 유동성, 지갑, 보안을 직접 개발할 것 없이, 검증된 API 연결로 바로 시작합니다.</p></div></li><li><span class="ww-mk">✓</span><div><b>QR 한 번으로 연결</b><p>API 키 입력 없이 QR 한 번으로 거래소가 연결됩니다.</p></div></li><li><span class="ww-mk">✓</span><div><b>여러 곳을 한 번에 연결</b><p>여러 체인과 거래소를 하나로 연결해 따로 관리할 필요가 없습니다.</p></div></li></ul></div></div>
+  <div class="ww rvl" style="--rvl-y:40px"><div class="ww-col ww-now"><span class="ww-cap">지금</span><div class="ww-t">사용자가 외부 거래소로 빠져나갑니다</div><ul><li><span class="ww-mk">✕</span><div><b>사용자 외부 이탈</b><p>거래하려는 사용자가 외부 거래소로 빠져 수수료와 관계를 잃습니다.</p></div></li><li><span class="ww-mk">✕</span><div><b>직접 구축 부담</b><p>거래소 자체 구축 시 유동성, API, 지갑, 보안을 전부 직접 감당해야 합니다.</p></div></li><li><span class="ww-mk">✕</span><div><b>연결 과정 이탈</b><p>API 키 발급과 입력 과정에서 사용자가 이탈합니다.</p></div></li><li><span class="ww-mk">✕</span><div><b>체인, 거래소 파편화</b><p>여러 체인과 거래소를 각각 연동하고 유지해야 합니다.</p></div></li></ul></div><div class="ww-col ww-after"><span class="ww-cap">PortX 도입 후</span><div class="ww-t">자사 서비스 안에서 바로 거래를 시작합니다</div><ul><li><span class="ww-mk">✓</span><div><b>자사 서비스 안에서 거래</b><p>외부 거래소의 시세와 유동성을 서비스 안에 연결해, 사용자가 자사 서비스 안에서 계속 거래하고 활동합니다.</p></div></li><li><span class="ww-mk">✓</span><div><b>개발 대신 연결</b><p>매칭엔진, 유동성, 지갑, 보안을 직접 개발할 것 없이, 검증된 API 연결로 바로 시작합니다.</p></div></li><li><span class="ww-mk">✓</span><div><b>QR 한 번으로 연결</b><p>API 키 입력 없이 QR 한 번으로 거래소를 연결합니다.</p></div></li><li><span class="ww-mk">✓</span><div><b>여러 곳을 한 번에 연결</b><p>여러 체인과 거래소를 하나로 연결해 따로 관리할 필요가 없습니다.</p></div></li></ul></div></div>
 </div></section>
 <section><div class="shell sec">
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Features</div><h2 class="sec-h2 has-lead" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>거래 경험을 서비스 안으로</span></span></h2><p class="phero-lead sec-lead rvl">외부 거래소의 유동성과 거래 기능을 자사 브랜드 안에 연결합니다. 전체 도입이 아니라, 필요한 기능만 모듈로 골라 도입할 수 있습니다.</p>
-  <ul class="cards-3"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="ico-card ex-card ex-gray"><span class="ex-ico"></span><h3>거래소 연동</h3><p>외부 CEX·DEX 유동성을 자사 서비스에 연결합니다.</p></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="ico-card ex-card ex-gray"><span class="ex-ico"></span><h3>Smart Access · QR</h3><p>API 키 입력 없이 QR 한 번으로 거래소를 연결합니다.</p></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="ico-card ex-card ex-gray"><span class="ex-ico"></span><h3>Pro-Level Interface · 전문 거래 화면</h3><p>트레이더용 전문 대시보드와 TradingView를 기본 제공하고, 여러 거래소 포트폴리오를 한눈에 관리합니다.</p></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms"><article class="ico-card ex-card ex-gray"><span class="ex-ico"></span><h3>Performance Analytics · 성과 분석</h3><p>여러 거래소의 성과를 한 대시보드에서 보고, 손익(PnL)을 정밀하게 분석합니다.</p></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:360ms"><article class="ico-card ex-card ex-gray"><span class="ex-ico"></span><h3>Non-Custodial Security · 비수탁 보안</h3><p>서버에 민감 정보를 저장하지 않는 비수탁 방식으로 자산을 안전하게 지킵니다.</p></article></li></ul>
+  <ul class="cards-3"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="ico-card ex-card ex-gray"><span class="ex-ico"></span><h3>거래소 연동</h3><p>외부 중앙화·탈중앙화 거래소(CEX·DEX)의 유동성을 자사 서비스에 연결합니다.</p></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="ico-card ex-card ex-gray"><span class="ex-ico"></span><h3>Smart Access · QR</h3><p>API 키 입력 없이 QR 한 번으로 거래소를 연결합니다.</p></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="ico-card ex-card ex-gray"><span class="ex-ico"></span><h3>Pro-Level Interface · 전문 거래 화면</h3><p>트레이더용 대시보드와 TradingView를 기본 제공합니다. 여러 거래소 포트폴리오를 한눈에 관리합니다.</p></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms"><article class="ico-card ex-card ex-gray"><span class="ex-ico"></span><h3>Performance Analytics · 성과 분석</h3><p>여러 거래소의 성과를 한 대시보드에서 보고, 손익(PnL)을 정밀하게 분석합니다.</p></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:360ms"><article class="ico-card ex-card ex-gray"><span class="ex-ico"></span><h3>Non-Custodial Security · 비수탁 보안</h3><p>서버에 민감 정보를 저장하지 않는 비수탁 방식입니다.</p></article></li></ul>
 </div></section>
 <!-- By the Numbers: 다크 스탯 패널 -->
 <section><div class="shell stats-shell">
@@ -2867,7 +2882,7 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
       <article class="uc-slide is-active">
         <div class="uc-thumb"><img src="assets/portx/uc-supercycl.png" alt="Supercycl"></div>
         <h3>Supercycl</h3>
-        <div class="uc-rows"><div class="uc-row"><span class="uc-flag">과제</span><span>자사 서비스 안에 거래 기능을 빠르게 붙여 시장 반응을 확인해야 합니다.</span></div><div class="uc-row"><span class="uc-flag">해결</span><span>PortX의 거래소 연동과 QR 연결(Smart Access)에 전문 거래 화면, 손익(PnL) 분석까지 더해, 짧은 기간에 자사 브랜드 거래 서비스를 구축하고 초기 사용자를 확보했습니다.</span></div></div>
+        <div class="uc-rows"><div class="uc-row"><span class="uc-flag">과제</span><span>자사 서비스 안에 거래 기능을 빠르게 붙여 시장 반응을 확인해야 합니다.</span></div><div class="uc-row"><span class="uc-flag">해결</span><span>거래소 연동, QR 연결(Smart Access), 전문 거래 화면, 손익(PnL) 분석을 붙여 짧은 기간에 자사 브랜드 거래 서비스를 열고 초기 사용자를 확보했습니다.</span></div></div>
       </article>
       <article class="uc-slide">
         <div class="uc-thumb"><img src="assets/portx/uc-tass.png" alt="TaaS"></div>

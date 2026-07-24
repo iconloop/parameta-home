@@ -1761,6 +1761,8 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .uc-tabbtn.is-active{ background:var(--ink); border-color:transparent; color:var(--white) }
 .uc-tabpanel{ display:none }
 .uc-tabpanel.is-active{ display:block }
+/* ParaSta Use Cases 카드 크게 (탭 캐러셀 전용) — 높이만 키움, 폭은 기본(3/11) */
+.uc-tabpanel .uc-slide{ min-height:26rem; padding:3.5rem }
 .uc-tabsub{ text-align:center; font-size:var(--text-16); color:rgba(var(--ink-rgb),.5); margin-bottom:var(--space-32) }
 .uc-tabnote{ text-align:center; font-size:var(--text-16); color:rgba(var(--ink-rgb),.6); line-height:var(--leading-body); margin-top:var(--space-32) }
 /* Broof Applied Cases — 좌측 인증서 풀영역 + 우측 글·후기(PortX 포멧) */
@@ -1833,28 +1835,41 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .ex-card .ex-num{ display:block; font-size:var(--text-14); font-weight:500; color:rgba(var(--white-rgb),.5); margin-bottom:.5rem }  /* 기능 카드 번호 */
 .ex-card h3 + p{ margin-top:.75rem; font-size:var(--text-18) }  /* 서브카피 달릴 때만 간격 + 한 단계 업 */
 
-/* DID 신뢰 도식 (Platform): Issuer → Holder → Verifier + MyID 블록체인 토대 */
-.did-flow{ margin-top:var(--space-32); margin-bottom:var(--space-48) }
-.did-actors{ display:flex; align-items:stretch; gap:var(--space-16) }
-.did-actor{ flex:1; border:1px solid var(--line); border-radius:var(--radius-card-sm); padding:var(--space-20) var(--space-16); background:var(--white) }
-.did-actor.is-holder{ border:2px solid var(--accent); background:rgba(97,0,255,.05) }
-.did-role{ font-size:var(--text-14); font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:var(--accent) }
-.did-actor b{ display:block; font-size:var(--text-18); font-weight:600; margin-top:var(--space-8) }
-.did-actor p{ font-size:var(--text-14); color:rgba(var(--ink-rgb),.55); margin-top:.35rem; line-height:var(--leading-body) }
-.did-arw{ flex:none; width:4.5rem; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.35rem; color:var(--purple-300) }
-.did-arw span{ font-size:var(--text-12); color:rgba(var(--ink-rgb),.5); white-space:nowrap }
-.did-arw svg{ width:100%; height:14px }
-.did-connect{ display:flex; justify-content:space-around; padding:var(--space-8) 2.2rem 0 }
-.did-connect i{ width:1px; height:1.4rem; background:repeating-linear-gradient(to bottom, rgba(var(--ink-rgb),.25) 0 3px, transparent 3px 6px) }
-.did-base{ margin-top:var(--space-8); border-radius:var(--radius-card-sm); background:var(--ink); padding:var(--space-20) var(--space-24); display:flex; align-items:center; justify-content:center; gap:.75rem; flex-wrap:wrap; text-align:center }
-.did-base b{ font-size:var(--text-16); font-weight:600; color:var(--purple-300) }
-.did-base > span:last-child{ font-size:var(--text-14); color:rgba(var(--white-rgb),.72); line-height:var(--leading-body) }
-.did-dot{ width:4px; height:4px; border-radius:var(--radius-pill); background:rgba(var(--white-rgb),.3); flex:none }
+/* DID 신뢰 도식 (Platform): VISION식 다크 패널 + 원 3개 + 점선·닷 커넥터 + MyID 블록체인 인프라 바 */
+.did-hub{ margin-top:var(--space-32); margin-bottom:var(--space-48); background:var(--ink); border-radius:var(--radius-card); padding:3rem 1.5rem; color:var(--white) }
+@media (min-width:640px){ .did-hub{ padding:3.5rem 3rem } }
+@media (min-width:1024px){ .did-hub{ padding:4.5rem 4.5rem } }
+/* did-hub 헤더(sec_head) 타이포·간격 = About VISION 패널과 동일 */
+.did-hub .eyebrow{ color:rgba(var(--white-rgb),.9) }
+.did-hub .eyebrow::before, .did-hub .eyebrow::after{ color:rgba(var(--white-rgb),.4) }
+.did-hub .sec-h2{ color:var(--white); font-size:var(--text-30); font-weight:500; letter-spacing:-.01em }
+@media (min-width:768px){ .did-hub .sec-h2{ font-size:var(--text-36) } }
+.did-hub .phero-lead, .did-hub .sec-lead{ color:rgba(var(--white-rgb),.68); font-size:var(--text-20) }
+@media (max-width:1023px){ .did-hub .phero-lead, .did-hub .sec-lead{ font-size:var(--text-18) } }
+.did-ring{ display:flex; align-items:center; justify-content:center; margin-top:5.5rem }
+.did-node{ flex:0 0 auto; width:min(30%, 15rem); aspect-ratio:1; border-radius:50%; background:var(--purple-400);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:var(--space-24); gap:.4rem }
+.did-node .did-role{ font-size:var(--text-14); font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:rgba(var(--white-rgb),.85) }
+.did-node b{ font-size:var(--text-20); font-weight:600; color:var(--white) }
+.did-node .did-sub{ font-size:var(--text-14); color:rgba(var(--white-rgb),.72); line-height:var(--leading-body); max-width:11rem }
+.did-node.is-core{ width:min(34%, 17rem); background:var(--white) }
+.did-node.is-core .did-role{ color:var(--purple-500) }
+.did-node.is-core b{ color:var(--purple-500); font-size:var(--text-24) }
+.did-node.is-core .did-sub{ color:rgba(var(--ink-rgb),.6) }
+.did-link{ flex:1 1 0; align-self:center; position:relative; height:2.25rem; display:flex; align-items:center; justify-content:center }
+.did-link::before{ content:''; position:absolute; left:0; right:0; top:50%; border-top:1.5px dashed rgba(var(--white-rgb),.28) }
+.did-link::after{ content:''; position:absolute; left:50%; top:50%; width:.5rem; height:.5rem; border-radius:50%; background:rgba(var(--white-rgb),.5); transform:translate(-50%,-50%) }
+.did-link span{ position:absolute; bottom:calc(50% + .5rem); font-size:var(--text-14); color:rgba(var(--white-rgb),.65); white-space:nowrap }
+.did-infra{ margin-top:var(--space-40); border:1px solid rgba(var(--white-rgb),.15); border-radius:var(--radius-card-sm); padding:var(--space-24); text-align:center }
+.did-infra-t{ font-size:var(--text-16); font-weight:700; letter-spacing:.04em; color:var(--purple-300); margin-bottom:.5rem }
+.did-infra p{ font-size:var(--text-14); color:rgba(var(--white-rgb),.7); line-height:var(--leading-body) }
 @media (max-width:767px){
-  .did-actors{ flex-direction:column }
-  .did-arw{ width:100%; flex-direction:row; gap:.5rem; padding:.35rem 0 }
-  .did-arw svg{ width:2.5rem; transform:rotate(90deg) }
-  .did-connect{ display:none } }
+  .did-hub{ padding:var(--space-32) var(--space-24) }
+  .did-ring{ flex-direction:column }
+  .did-node, .did-node.is-core{ width:min(100%, 13rem) }
+  .did-link{ flex:none; width:auto; height:2.5rem }
+  .did-link::before{ left:50%; right:auto; top:0; bottom:0; border-top:none; border-left:1.5px dashed rgba(var(--white-rgb),.28) }
+  .did-link span{ bottom:auto; left:calc(50% + .75rem); white-space:nowrap } }
 /* ex-card 그레이 변형: 라이트 그레이 채움 + 잉크 텍스트 (호버 스케일만 유지) */
 .ex-card.ex-gray{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); color:var(--ink); box-shadow:none }
 .ex-card.ex-gray h3{ color:var(--ink) }
@@ -2917,7 +2932,6 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
   <div class="uc-tabpanel">
     <div class="uc-carousel"><button class="uc-arrow uc-prev rvl rvl-op" type="button" aria-label="이전 사례"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5L8 12l7 7"/></svg></button><div class="uc-slides rvl" style="--rvl-y:40px"><article class="uc-slide is-active"><div class="uc-thumb" aria-hidden="true"></div><div class="uc-title"><h3>자체 블록체인 코어 엔진 개발, 운영</h3></div><p>PBFT 합의와 인터체인 프로토콜을 자체 기술로 구현한 퍼블릭 메인넷. 다국가 밸리데이터 환경에서 축적한 구축, 운영 경험.</p><span class="uc-num"><b>01</b> / 03</span></article><article class="uc-slide"><div class="uc-thumb" aria-hidden="true"></div><div class="uc-title"><h3>멀티체인 오케스트레이션, 크로스체인 연동</h3></div><p>거래소 간 유동성 통합, 자동 주문 배분, 체인 간 자산 이동을 처리하는 WalletFi 솔루션 PortX, SuperCycl을 직접 개발, 운영한 경험.</p><span class="uc-num"><b>02</b> / 03</span></article><article class="uc-slide"><div class="uc-thumb" aria-hidden="true"></div><div class="uc-title"><h3>규제 친화형 DeFi, 유동성 인프라 기술</h3></div><p>통합 유동성 집계와 규제 준수형 거래 실행 등, 제도권 환경에 맞춘 DeFi 인프라 기술.</p><span class="uc-num"><b>03</b> / 03</span></article></div><div class="uc-dots" aria-label="퍼블릭·멀티체인 사례"></div><button class="uc-arrow uc-next rvl rvl-op" type="button" aria-label="다음 사례"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button></div>
   </div>
-  <p class="uc-tabnote">퍼블릭 체인에서 축적한 코어 엔진과 오케스트레이션 경험, 스테이블코인 발행 이후를 뒷받침합니다.</p>
 </div></section>
 
 </main>

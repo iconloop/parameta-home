@@ -1761,6 +1761,8 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .uc-tabbtn.is-active{ background:var(--ink); border-color:transparent; color:var(--white) }
 .uc-tabpanel{ display:none }
 .uc-tabpanel.is-active{ display:block }
+/* ParaSta Use Cases 카드 크게 (탭 캐러셀 전용) — 높이만 키움, 폭은 기본(3/11) */
+.uc-tabpanel .uc-slide{ min-height:26rem; padding:3.5rem }
 .uc-tabsub{ text-align:center; font-size:var(--text-16); color:rgba(var(--ink-rgb),.5); margin-bottom:var(--space-32) }
 .uc-tabnote{ text-align:center; font-size:var(--text-16); color:rgba(var(--ink-rgb),.6); line-height:var(--leading-body); margin-top:var(--space-32) }
 /* Broof Applied Cases — 좌측 인증서 풀영역 + 우측 글·후기(PortX 포멧) */
@@ -1833,28 +1835,41 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .ex-card .ex-num{ display:block; font-size:var(--text-14); font-weight:500; color:rgba(var(--white-rgb),.5); margin-bottom:.5rem }  /* 기능 카드 번호 */
 .ex-card h3 + p{ margin-top:.75rem; font-size:var(--text-18) }  /* 서브카피 달릴 때만 간격 + 한 단계 업 */
 
-/* DID 신뢰 도식 (Platform): Issuer → Holder → Verifier + MyID 블록체인 토대 */
-.did-flow{ margin-top:var(--space-32); margin-bottom:var(--space-48) }
-.did-actors{ display:flex; align-items:stretch; gap:var(--space-16) }
-.did-actor{ flex:1; border:1px solid var(--line); border-radius:var(--radius-card-sm); padding:var(--space-20) var(--space-16); background:var(--white) }
-.did-actor.is-holder{ border:2px solid var(--accent); background:rgba(97,0,255,.05) }
-.did-role{ font-size:var(--text-14); font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:var(--accent) }
-.did-actor b{ display:block; font-size:var(--text-18); font-weight:600; margin-top:var(--space-8) }
-.did-actor p{ font-size:var(--text-14); color:rgba(var(--ink-rgb),.55); margin-top:.35rem; line-height:var(--leading-body) }
-.did-arw{ flex:none; width:4.5rem; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.35rem; color:var(--purple-300) }
-.did-arw span{ font-size:var(--text-12); color:rgba(var(--ink-rgb),.5); white-space:nowrap }
-.did-arw svg{ width:100%; height:14px }
-.did-connect{ display:flex; justify-content:space-around; padding:var(--space-8) 2.2rem 0 }
-.did-connect i{ width:1px; height:1.4rem; background:repeating-linear-gradient(to bottom, rgba(var(--ink-rgb),.25) 0 3px, transparent 3px 6px) }
-.did-base{ margin-top:var(--space-8); border-radius:var(--radius-card-sm); background:var(--ink); padding:var(--space-20) var(--space-24); display:flex; align-items:center; justify-content:center; gap:.75rem; flex-wrap:wrap; text-align:center }
-.did-base b{ font-size:var(--text-16); font-weight:600; color:var(--purple-300) }
-.did-base > span:last-child{ font-size:var(--text-14); color:rgba(var(--white-rgb),.72); line-height:var(--leading-body) }
-.did-dot{ width:4px; height:4px; border-radius:var(--radius-pill); background:rgba(var(--white-rgb),.3); flex:none }
+/* DID 신뢰 도식 (Platform): VISION식 다크 패널 + 원 3개 + 점선·닷 커넥터 + MyID 블록체인 인프라 바 */
+.did-hub{ margin-top:var(--space-32); margin-bottom:var(--space-48); background:var(--ink); border-radius:var(--radius-card); padding:3rem 1.5rem; color:var(--white) }
+@media (min-width:640px){ .did-hub{ padding:3.5rem 3rem } }
+@media (min-width:1024px){ .did-hub{ padding:4.5rem 4.5rem } }
+/* did-hub 헤더(sec_head) 타이포·간격 = About VISION 패널과 동일 */
+.did-hub .eyebrow{ color:rgba(var(--white-rgb),.9) }
+.did-hub .eyebrow::before, .did-hub .eyebrow::after{ color:rgba(var(--white-rgb),.4) }
+.did-hub .sec-h2{ color:var(--white); font-size:var(--text-30); font-weight:500; letter-spacing:-.01em }
+@media (min-width:768px){ .did-hub .sec-h2{ font-size:var(--text-36) } }
+.did-hub .phero-lead, .did-hub .sec-lead{ color:rgba(var(--white-rgb),.68); font-size:var(--text-20) }
+@media (max-width:1023px){ .did-hub .phero-lead, .did-hub .sec-lead{ font-size:var(--text-18) } }
+.did-ring{ display:flex; align-items:center; justify-content:center; margin-top:5.5rem }
+.did-node{ flex:0 0 auto; width:min(30%, 15rem); aspect-ratio:1; border-radius:50%; background:var(--purple-400);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:var(--space-24); gap:.4rem }
+.did-node .did-role{ font-size:var(--text-14); font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:rgba(var(--white-rgb),.85) }
+.did-node b{ font-size:var(--text-20); font-weight:600; color:var(--white) }
+.did-node .did-sub{ font-size:var(--text-14); color:rgba(var(--white-rgb),.72); line-height:var(--leading-body); max-width:11rem }
+.did-node.is-core{ width:min(34%, 17rem); background:var(--white) }
+.did-node.is-core .did-role{ color:var(--purple-500) }
+.did-node.is-core b{ color:var(--purple-500); font-size:var(--text-24) }
+.did-node.is-core .did-sub{ color:rgba(var(--ink-rgb),.6) }
+.did-link{ flex:1 1 0; align-self:center; position:relative; height:2.25rem; display:flex; align-items:center; justify-content:center }
+.did-link::before{ content:''; position:absolute; left:0; right:0; top:50%; border-top:1.5px dashed rgba(var(--white-rgb),.28) }
+.did-link::after{ content:''; position:absolute; left:50%; top:50%; width:.5rem; height:.5rem; border-radius:50%; background:rgba(var(--white-rgb),.5); transform:translate(-50%,-50%) }
+.did-link span{ position:absolute; bottom:calc(50% + .5rem); font-size:var(--text-14); color:rgba(var(--white-rgb),.65); white-space:nowrap }
+.did-infra{ margin-top:var(--space-40); border:1px solid rgba(var(--white-rgb),.15); border-radius:var(--radius-card-sm); padding:var(--space-24); text-align:center }
+.did-infra-t{ font-size:var(--text-16); font-weight:700; letter-spacing:.04em; color:var(--purple-300); margin-bottom:.5rem }
+.did-infra p{ font-size:var(--text-14); color:rgba(var(--white-rgb),.7); line-height:var(--leading-body) }
 @media (max-width:767px){
-  .did-actors{ flex-direction:column }
-  .did-arw{ width:100%; flex-direction:row; gap:.5rem; padding:.35rem 0 }
-  .did-arw svg{ width:2.5rem; transform:rotate(90deg) }
-  .did-connect{ display:none } }
+  .did-hub{ padding:var(--space-32) var(--space-24) }
+  .did-ring{ flex-direction:column }
+  .did-node, .did-node.is-core{ width:min(100%, 13rem) }
+  .did-link{ flex:none; width:auto; height:2.5rem }
+  .did-link::before{ left:50%; right:auto; top:0; bottom:0; border-top:none; border-left:1.5px dashed rgba(var(--white-rgb),.28) }
+  .did-link span{ bottom:auto; left:calc(50% + .75rem); white-space:nowrap } }
 /* ex-card 그레이 변형: 라이트 그레이 채움 + 잉크 텍스트 (호버 스케일만 유지) */
 .ex-card.ex-gray{ background:color-mix(in srgb, var(--ink) 6%, var(--white)); color:var(--ink); box-shadow:none }
 .ex-card.ex-gray h3{ color:var(--ink) }
@@ -2830,19 +2845,19 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
   </section>
 
 <section><div class="shell sec sec-top-lg sec-stagger">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Why Now</div><h2 class="sec-h2 has-lead" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>공공 블록체인은 기관마다<br>새로 구축해야 했습니다</span></span></h2><p class="phero-lead sec-lead rvl">공공기관이 SaaS형 서비스를 도입하려면 CSAP 같은 엄격한 보안인증을 통과한 제품이어야 합니다. 그런데 블록체인 분야에는 CSAP 인증을 받은 SaaS가 사실상 없어, 기관마다 예산 산정부터 자체 구축까지 최소 1년, 초기 구축비 수억원을 들여 직접 만들어야 했습니다.<br>그사이 정부의 블록체인 공공서비스 투자는 계속 늘어, 2024년 지원사업은 총 200억원·14개 규모로 확대됐습니다. 블록체인 활용 수요가 가장 큰 분야 역시 정부·공공입니다.</p>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Why Now</div><h2 class="sec-h2 has-lead" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>공공 블록체인은 기관마다<br>새로 구축해야 했습니다</span></span></h2><p class="phero-lead sec-lead rvl">공공기관이 SaaS형 서비스를 도입하려면 CSAP 같은 엄격한 보안인증을 통과한 제품이어야 합니다. 블록체인 분야에는 CSAP 인증을 받은 SaaS가 사실상 없었습니다. 기관마다 최소 1년, 초기 구축비 수억원을 들여 직접 만들어야 했습니다.<br>그사이 정부는 2024년 블록체인 지원사업을 총 200억원·14개 규모로 늘렸습니다. 블록체인 활용 수요가 가장 큰 분야 역시 정부·공공입니다.</p>
   <div class="colc rvl"><p class="barc-title">블록체인 활용 분야 (공급기업 기준)</p><div class="colc-panel"><div class="colc-plot" style="grid-template-columns:repeat(5,1fr)"><div class="colc-stack hi"><span class="colc-v">47.9%</span><div class="colc-bar" style="height:calc(100*var(--colc-h)/100)"></div></div><div class="colc-stack"><span class="colc-v">36.5%</span><div class="colc-bar" style="height:calc(76*var(--colc-h)/100)"></div></div><div class="colc-stack"><span class="colc-v">24.0%</span><div class="colc-bar" style="height:calc(50*var(--colc-h)/100)"></div></div><div class="colc-stack"><span class="colc-v">20.8%</span><div class="colc-bar" style="height:calc(43*var(--colc-h)/100)"></div></div><div class="colc-stack"><span class="colc-v">14.6%</span><div class="colc-bar" style="height:calc(30*var(--colc-h)/100)"></div></div></div><div class="colc-labels" style="grid-template-columns:repeat(5,1fr)"><span class="colc-l">정부·공공</span><span class="colc-l">출판·방송</span><span class="colc-l">금융</span><span class="colc-l">전문·과학</span><span class="colc-l">교통·물류</span></div><p class="sec-note"><strong>출처: KISA 2024년도 블록체인 산업 실태조사 결과보고서(국가승인통계 제127017호)</strong><br>복수응답 기준.</p></div></div>
 </div></section>
 <section><div class="shell sec">
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Problem</div><h2 class="sec-h2" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>공공기관의 반복 문제, 이렇게 해결합니다</span></span></h2>
-  <div class="ww rvl" style="--rvl-y:40px"><div class="ww-col ww-now"><span class="ww-cap">지금</span><div class="ww-t">기관마다 새로 구축해야 합니다</div><ul><li><span class="ww-mk">✕</span><div><b>중복 인프라 투자</b><p>기관마다 같은 블록체인, DID를 따로 구축하고 유지보수합니다.</p></div></li><li><span class="ww-mk">✕</span><div><b>분절된 앱 경험</b><p>기관, 서비스마다 앱과 인증이 흩어져 사용자 경험이 끊깁니다.</p></div></li><li><span class="ww-mk">✕</span><div><b>개인정보 보관 부담</b><p>신원 데이터를 직접 보관해야 하고, 반복 인증 부담도 큽니다.</p></div></li><li><span class="ww-mk">✕</span><div><b>조달, 보안인증 문턱</b><p>CSAP 없는 서비스는 공공 조달 검토를 통과하기 어렵습니다.</p></div></li></ul></div><div class="ww-col ww-after"><span class="ww-cap">K-BTF 도입 후</span><div class="ww-t">직접 구축 없이 도입합니다</div><ul><li><span class="ww-mk">✓</span><div><b>공동 인프라로 한 번에</b><p>기관마다 따로 짓지 않고, 공동 인프라를 구독형으로 함께 씁니다.</p></div></li><li><span class="ww-mk">✓</span><div><b>하나의 인증으로 연결</b><p>흩어진 앱, 인증을 하나로 이어, 사용자 경험이 끊기지 않습니다.</p></div></li><li><span class="ww-mk">✓</span><div><b>직접 보관하지 않음</b><p>신원 데이터를 직접 쌓아두지 않아, 반복 인증 부담이 줄어듭니다.</p></div></li><li><span class="ww-mk">✓</span><div><b>보안인증 갖추고 조달 등록</b><p>클라우드 보안인증(CSAP)을 갖추고 조달에 등록돼 있어, 보안과 조달 요건을 바로 충족합니다.</p></div></li></ul></div></div>
+  <div class="ww rvl" style="--rvl-y:40px"><div class="ww-col ww-now"><span class="ww-cap">지금</span><div class="ww-t">기관마다 새로 구축해야 합니다</div><ul><li><span class="ww-mk">✕</span><div><b>중복 인프라 투자</b><p>기관마다 같은 블록체인, DID를 따로 구축하고 유지보수합니다.</p></div></li><li><span class="ww-mk">✕</span><div><b>분절된 앱 경험</b><p>기관, 서비스마다 앱과 인증이 흩어져 사용자 경험이 끊깁니다.</p></div></li><li><span class="ww-mk">✕</span><div><b>개인정보 보관 부담</b><p>신원 데이터를 직접 보관해야 하고, 반복 인증 부담도 큽니다.</p></div></li><li><span class="ww-mk">✕</span><div><b>조달, 보안인증 문턱</b><p>CSAP 없는 서비스는 공공 조달 검토를 통과하기 어렵습니다.</p></div></li></ul></div><div class="ww-col ww-after"><span class="ww-cap">MyID 2.0 도입 후</span><div class="ww-t">직접 구축 없이 도입합니다</div><ul><li><span class="ww-mk">✓</span><div><b>공동 인프라로 한 번에</b><p>기관마다 따로 짓지 않고, 공동 인프라를 구독형으로 함께 씁니다.</p></div></li><li><span class="ww-mk">✓</span><div><b>하나의 인증으로 연결</b><p>흩어진 앱, 인증을 하나로 이어, 사용자 경험이 끊기지 않습니다.</p></div></li><li><span class="ww-mk">✓</span><div><b>직접 보관하지 않음</b><p>신원 데이터를 직접 쌓아두지 않아, 반복 인증 부담이 줄어듭니다.</p></div></li><li><span class="ww-mk">✓</span><div><b>보안인증 갖추고 조달 등록</b><p>클라우드 보안인증(CSAP)을 갖추고 조달에 등록돼 있어, 보안과 조달 요건을 바로 충족합니다.</p></div></li></ul></div></div>
 </div></section>
 <section><div class="shell sec">
   <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Features</div><h2 class="sec-h2 has-lead" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>직접 구축 없이 도입합니다</span></span></h2><p class="phero-lead sec-lead rvl">CSAP 인증을 받은 공동 인프라를 구독형으로 도입해, 예산·기간·운영 부담을 덜고 시작합니다.</p>
   <ul class="cards-4"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="ico-card ex-card ex-gray"><span class="ex-ico"></span><h3>서비스형(SaaS) 도입</h3><p>수억 원대 초기 개발비와 긴 구축 기간 없이, 구독형으로 즉시 시작합니다.</p></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="ico-card ex-card ex-gray"><span class="ex-ico"></span><h3>블록체인 서비스 최초 CSAP</h3><p>클라우드 보안인증을 획득하고 조달에 등록돼 있습니다.</p></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="ico-card ex-card ex-gray"><span class="ex-ico"></span><h3>최대 1주일 내 적용</h3><p>신청 4단계를 거쳐 최대 1주일 안에 서비스를 적용합니다.</p></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms"><article class="ico-card ex-card ex-gray"><span class="ex-ico"></span><h3>반복 구축 축소</h3><p>기관마다 흩어진 앱·인프라를 공통 인프라로 통합합니다.</p></article></li></ul>
 </div></section>
 <section><div class="shell sec">
-  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Platform</div><h2 class="sec-h2 has-lead" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>기본 제공 기능</span></span></h2><p class="phero-lead sec-lead rvl">사용자는 필요한 정보만 선택 공개(Selective Disclosure)로 제출할 수 있으며, 개인 데이터는 사용자 단말과 분산 환경에 저장해 기관의 보관 부담을 줄입니다. 이를 바탕으로 발급·보유·검증으로 이어지는 표준화된 신원 흐름을 구현합니다.</p>
+  <div class="eyebrow dark rvl rvl-op"><span class="dot"></span>Platform</div><h2 class="sec-h2 has-lead" data-line-reveal style="max-width:24ch"><span class="rvl-line"><span>기본 제공 기능</span></span></h2><p class="phero-lead sec-lead rvl">사용자는 필요한 정보만 선택 공개(Selective Disclosure)로 제출합니다. 개인 데이터는 사용자 단말과 분산 환경에 저장해 기관의 보관 부담을 줄입니다. 발급·보유·검증이 하나의 흐름으로 이어집니다.</p>
   <ul class="cards-4"><li class="rvl" style="--rvl-y:40px; --rvl-delay:0ms"><article class="ico-card ex-card ex-gray"><span class="ex-ico"></span><h3>신원 DID / VC / VP</h3></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:90ms"><article class="ico-card ex-card ex-gray"><span class="ex-ico"></span><h3>지갑</h3></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:180ms"><article class="ico-card ex-card ex-gray"><span class="ex-ico"></span><h3>개인데이터저장소 PDS</h3></article></li><li class="rvl" style="--rvl-y:40px; --rvl-delay:270ms"><article class="ico-card ex-card ex-gray"><span class="ex-ico"></span><h3>분산저장 BFS</h3></article></li></ul>
 </div></section>
 <section><div class="shell sec">
@@ -2874,7 +2889,7 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
       <article class="uc-slide is-active">
         <div class="uc-thumb" aria-hidden="true"></div>
         <h3>부산시 · 배터리 여권 플랫폼</h3>
-        <div class="uc-rows"><div class="uc-row"><span class="uc-flag">과제</span><span>배터리 제조·운행·정비·사용후 데이터가 흩어져 있고, EU DPP 규정에 맞춰 신뢰할 수 있게 연결·검증해야 합니다.</span></div><div class="uc-row"><span class="uc-flag">해결</span><span>K-BTF(Korea Blockchain Trust Framework) 기반 DID·데이터 인프라로 각 단계 데이터를 연결하고 발급·검증 흐름을 표준화했습니다.</span></div></div>
+        <div class="uc-rows"><div class="uc-row"><span class="uc-flag">과제</span><span>배터리 제조·운행·정비·사용후 데이터가 흩어져 있고, EU DPP 규정에 맞춰 신뢰할 수 있게 연결·검증해야 합니다.</span></div><div class="uc-row"><span class="uc-flag">해결</span><span>K-BTF(Korea Blockchain Trust Framework) 기반으로 배터리 데이터를 단계별로 연결하고, 증명 발급·검증 절차를 하나의 방식으로 정리했습니다.</span></div></div>
       </article>
       <article class="uc-slide">
         <div class="uc-thumb" aria-hidden="true"></div>
@@ -2889,7 +2904,7 @@ body.press .phero-text .phero-lead{ color:rgba(var(--white-rgb),.6) }
       <article class="uc-slide">
         <div class="uc-thumb" aria-hidden="true"></div>
         <h3>제주도 · 제주안심코드</h3>
-        <div class="uc-rows"><div class="uc-row"><span class="uc-flag">과제</span><span>대규모 방문 인증을 빠르게 처리하면서 개인정보 노출을 줄여야 합니다.</span></div><div class="uc-row"><span class="uc-flag">해결</span><span>QR 기반 인증으로 6만 업장·218만 이용자·누적 9,100만 건 인증을 운영했습니다.</span></div></div>
+        <div class="uc-rows"><div class="uc-row"><span class="uc-flag">과제</span><span>대규모 방문 인증을 빠르게 처리하면서 개인정보 노출을 줄여야 합니다.</span></div><div class="uc-row"><span class="uc-flag">해결</span><span>QR 기반 인증으로 6만 업장·218만 이용자, 누적 9,100만 건을 처리했습니다.</span></div></div>
       </article>
     </div>
     <button class="uc-arrow uc-next rvl rvl-op" type="button" aria-label="다음 사례"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
