@@ -1183,7 +1183,7 @@ body.parasta .pt-set img, body.myid .pt-set img{ height:3.5rem; filter:brightnes
 @media (min-width:768px) and (max-width:1023px){ .pv-stats.on-light .stat-num{ font-size:var(--text-28) } }
 @media (min-width:1024px){ .pv-stats.on-light .stat-num{ font-size:var(--text-48) } }
 .pv-stats.on-light .stat-num .pv-hl{ color:var(--purple-500) }
-body.myid .pv-stats.on-light .stat-num .pv-hl{ color:var(--ink) }   /* MyID 상단 스탯: 강조 숫자도 검정으로 통일 */
+body.myid .pv-stats.on-light .stat-num, body.myid .pv-stats.on-light .stat-num .pv-hl{ color:var(--purple-500) }   /* MyID 상단 스탯: 전체 보라로 통일 */
 .pv-stats.on-light .stat-label{ color:rgba(var(--ink-rgb),.55) }
 @media (min-width:1024px){ .pv-stats.on-light .stat-label{ font-size:var(--text-20) } }
 .pv-stats.on-light .stat-kicker{ font-size:var(--text-14); font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:rgba(var(--ink-rgb),.4); margin-bottom:.75rem }   /* 스탯 상단 킥커(Users·Verifications) */
@@ -3639,15 +3639,14 @@ PAGES['company.html'] = dict(
     var idx=[].indexOf.call(groups, g);
     layers.forEach(function(l,i){ l.classList.toggle('on', i===idx); });
     groups.forEach(function(x){ x.classList.toggle('ht2-on', x===g); });
-    if(idx!==curIdx){
-      curIdx=idx;
-      var first=g.querySelector('.faq-item');
-      if(first && !first.classList.contains('open')){
-        var row=first.querySelector('.faq-row'); if(row) row.click();   /* 공유 FAQ 핸들러 재사용 */
-      }
-    }
+    curIdx=idx;
   }
-  if(groups[0]){ groups[0].classList.add('ht2-on'); window.addEventListener('load', function(){ setEra(groups[0]); }); }   /* 모든 스크립트 바인딩 후 초기 오픈 */
+  /* 맨 위 항목만 기본 열림, 스크롤 자동열림 없음 (열기는 클릭으로만) */
+  if(groups[0]){ groups[0].classList.add('ht2-on'); window.addEventListener('load', function(){
+    setEra(groups[0]);
+    var first=groups[0].querySelector('.faq-item');
+    if(first && !first.classList.contains('open')){ var row=first.querySelector('.faq-row'); if(row) row.click(); }
+  }); }
   var io=new IntersectionObserver(function(es){
     es.forEach(function(e){ if(e.isIntersecting) setEra(e.target); });
   }, { rootMargin:'-40% 0px -55% 0px' });
@@ -4457,7 +4456,7 @@ PAGES['broof.html'] = dict(
     </div>''',
     content=f"""
 <section><div class="shell sec" style="padding-bottom:0">
-  <ul class="stats-grid pv-stats on-light">
+  <ul class="stats-grid pv-stats on-light pv-2">
     <li class="rvl" style="--rvl-y:20px; --rvl-delay:90ms"><div class="stat-num">누적 <span class="pv-hl"><span class="pv-val" data-val="90000" data-from="89991">89,991</span>건+</span></div><div class="stat-label">증명서 발급</div></li>
     <li class="rvl" style="--rvl-y:20px; --rvl-delay:180ms"><div class="stat-num">누적 <span class="pv-hl"><span class="pv-val" data-val="20" data-from="11">11</span>개 기관+</span></div><div class="stat-label">대학, 공공기관, 기업 도입</div></li>
   </ul>
