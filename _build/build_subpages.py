@@ -927,7 +927,7 @@ body.company .vision-panel .wfd-band{ transition:transform .35s cubic-bezier(.2,
 .uc-tabpanel .uc-slide{ min-height:26rem; padding:3.5rem }
 .uc-tabsub{ text-align:center; font-size:var(--text-16); color:rgba(var(--ink-rgb),.5); margin-bottom:var(--space-32) }
 .uc-tabnote{ text-align:center; font-size:var(--text-16); color:rgba(var(--ink-rgb),.6); line-height:var(--leading-body); margin-top:var(--space-32) }
-/* Broof Applied Cases — 좌측 인증서 풀영역 + 우측 글·후기(PortX 포멧) */
+/* broof Applied Cases — 좌측 인증서 풀영역 + 우측 글·후기(PortX 포멧) */
 .bc-cases .uc-slide{ display:grid; grid-template-columns:minmax(0,42%) 1fr; gap:0; align-items:stretch; padding:0; overflow:hidden }   /* 패딩 0 → 인증서 full-bleed, overflow로 카드 라운드에 맞춰 클립 */
 .bc-cert{ background:color-mix(in srgb, var(--ink) 12%, var(--white)); display:grid; place-items:center; min-height:30rem }
 .bc-cert img{ width:100%; height:100%; object-fit:cover; display:block }
@@ -4087,11 +4087,11 @@ PAGES['parasta.html'] = dict(
       </div>
     </div>
   <ul class="cm-cards core-mods">
-    <li>{dark_card('Issuance', 'Mint with Compliance, Scale Across Chains', '기업 고유의 스테이블코인과 토큰화 자산을 발행하고 관리합니다. 다중 서명, 준비자산 증빙(PoR), 화이트리스트, 블랙리스트, 자금 동결을 포함한 6단계 통제 구조로 발행부터 사후 검증까지 전 과정을 통제합니다.', ['발행, 소각, 준비자산 운용','PoR 기반 준비자산 증빙','자산 수명주기 실시간 모니터링'], grouped=True)}</li>
-    <li>{dark_card('Wallet', 'Enterprise Control, Frictionless UX', '계정 추상화(ERC-4337)를 기반으로 가스비 부담 없는 사용자 경험을 제공합니다. 여러 체인을 하나의 인터페이스로 통합하고, 일회용 수신 주소(Stealth Address)로 프라이버시를 보호합니다. 온체인 KYC 모듈과 연동해 신원이 확인된 지갑만 거래할 수 있도록 통제합니다.', ['가스비 없는 사용자 경험','멀티체인 통합 인터페이스','Stealth Address 기반 프라이버시 보호'], grouped=True)}</li>
-    <li>{dark_card('Orchestration', 'Bridge Worlds, Settle Instantly', '은행 계좌와 온체인 지갑을 하나의 API로 연결합니다. 법정화폐↔가상자산 자동 전환부터 예약 정산, 조건부 정산, 이벤트 기반 시스템 연동까지, 거래 전 과정을 하나의 흐름으로 관리합니다.', ['법정화폐↔가상자산 자동 전환','예약, 조건부 정산','실시간 AML 스크리닝'], grouped=True)}</li>
-    <li>{dark_card('On-chain KYC', 'Verify Once, Use Everywhere', '공인기관의 KYC 결과를 검증 가능한 크레덴셜(VC, VP) 형태로 발급하고, 검증된 지갑 주소를 온체인 신원 레지스트리(KYW)에 등록합니다. 토큰 컨트랙트는 이체 시점에 레지스트리를 조회해 자격을 갖춘 지갑만 거래하도록 통제하며, 개인정보는 온체인에 저장하지 않습니다.', ['DID 기반 VC, VP 발급','KYW 온체인 화이트리스트','표준 규격(ERC-3643) 기반 이체 검증'], grouped=True)}</li>
-    <li>{dark_card('Unified Admin', 'See Everything, Control Everything', '발행, 지갑, 오케스트레이션, 온체인 KYC 등 4개 모듈을 하나의 통합 관제 환경에서 관리합니다. Mint, Burn 통제부터 MPC 기반 키 관리, 다단계 승인, 자금 흐름 모니터링까지 모든 운영 현황을 한 화면에서 확인할 수 있습니다.', ['발행, 소각 전 과정 통제','MPC 기반 키 관리, 다단계 승인','통합 감사 리포팅'], grouped=True)}</li>
+    <li>{dark_card('Issuance · 발행', '발행부터 사후 검증까지, 멀티체인 확장', '기업 고유의 스테이블코인과 토큰화 자산을 발행하고 관리합니다. 다중 서명, 준비자산 증빙(PoR), 화이트리스트, 블랙리스트, 자금 동결을 포함한 6단계 통제 구조로 발행부터 사후 검증까지 전 과정을 통제합니다.', ['발행, 소각, 준비자산 운용','PoR 기반 준비자산 증빙','자산 수명주기 실시간 모니터링'], grouped=True)}</li>
+    <li>{dark_card('Wallet · 지갑', '일반 앱처럼 쓰는 디지털자산 지갑', '계정 추상화(ERC-4337)를 기반으로 가스비 부담 없는 사용자 경험을 제공합니다. 여러 체인을 하나의 인터페이스로 통합하고, 일회용 수신 주소(Stealth Address)로 프라이버시를 보호합니다. 온체인 KYC 모듈과 연동해 신원이 확인된 지갑만 거래할 수 있도록 통제합니다.', ['가스비 없는 사용자 경험','멀티체인 통합 인터페이스','Stealth Address 기반 프라이버시 보호'], grouped=True)}</li>
+    <li>{dark_card('Orchestration · 오케스트레이션', '은행망과 온체인을 잇는 즉시 정산', '은행 계좌와 온체인 지갑을 하나의 API로 연결합니다. 법정화폐↔가상자산 자동 전환부터 예약 정산, 조건부 정산, 이벤트 기반 시스템 연동까지, 거래 전 과정을 하나의 흐름으로 관리합니다.', ['법정화폐↔가상자산 자동 전환','예약, 조건부 정산','실시간 AML 스크리닝'], grouped=True)}</li>
+    <li>{dark_card('On-chain KYC · 온체인 KYC', '한 번 검증으로 어디서나 사용하는 인증', '공인기관의 KYC 결과를 검증 가능한 크레덴셜(VC, VP) 형태로 발급하고, 검증된 지갑 주소를 온체인 신원 레지스트리(KYW)에 등록합니다. 토큰 컨트랙트는 이체 시점에 레지스트리를 조회해 자격을 갖춘 지갑만 거래하도록 통제하며, 개인정보는 온체인에 저장하지 않습니다.', ['DID 기반 VC, VP 발급','KYW 온체인 화이트리스트','표준 규격(ERC-3643) 기반 이체 검증'], grouped=True)}</li>
+    <li>{dark_card('Unified Admin · 통합 관리', '모든 운영을 한 화면에서 통제', '발행, 지갑, 오케스트레이션, 온체인 KYC 등 4개 모듈을 하나의 통합 관리 환경에서 운영합니다. Mint, Burn 통제부터 MPC 기반 키 관리, 다단계 승인, 자금 흐름 모니터링까지 모든 운영 현황을 한 화면에서 확인할 수 있습니다.', ['발행, 소각 전 과정 통제','MPC 기반 키 관리, 다단계 승인','통합 감사 리포팅'], grouped=True)}</li>
   </ul>
   </div>
 </div></section>
@@ -4115,16 +4115,16 @@ PAGES['parasta.html'] = dict(
   </div>
   <div class="uc-tabpanel is-active">
     {usecase_carousel([
-      dict(title='신한은행', desc='금융권 DID 실명인증 상용화'),
-      dict(title='NH농협은행', desc='올원뱅크 실명인증 적용'),
-      dict(title='한국투자증권 외 25개 증권사', desc='증권업권을 하나의 온체인 신원 체계로 연결한 공동인증 서비스. 여러 금융기관의 신원과 인증을 연동한 경험으로, 스테이블코인 인프라에 필요한 규제 대응과 기관 간 연결 역량을 검증했습니다.'),
+      dict(title='신한은행', desc='국내 최초로 금융권 DID 실명인증을 상용화했습니다. 시중은행의 보안 심사와 규제 검토를 통과해 실제 고객 인증에 적용했습니다.'),
+      dict(title='NH농협은행', desc='NH농협은행 올원뱅크에 DID 실명인증을 적용했습니다. 대형 은행의 실서비스 환경에서 인증을 운영하며 은행 시스템·보안 요건과의 연동을 검증했습니다.'),
+      dict(title='한국투자증권 외 25개 증권사', desc='증권업권을 하나의 온체인 신원 체계로 연결한 공동인증 서비스. 여러 금융기관의 신원과 인증을 연동하며, 스테이블코인 인프라에 필요한 규제 대응과 기관 간 연결 역량을 검증했습니다.'),
     ], label='금융권 사례')}
   </div>
   <div class="uc-tabpanel">
     {usecase_carousel([
-      dict(title='자체 블록체인 코어 엔진 개발, 운영', desc='PBFT 합의와 인터체인 프로토콜을 자체 기술로 구현한 퍼블릭 메인넷. 다국가 밸리데이터 환경에서 축적한 구축, 운영 경험.'),
-      dict(title='멀티체인 오케스트레이션, 크로스체인 연동', desc='거래소 간 유동성 통합, 자동 주문 배분, 체인 간 자산 이동을 처리하는 WalletFi 솔루션 PortX, SuperCycl을 직접 개발, 운영한 경험.'),
-      dict(title='규제 친화형 DeFi, 유동성 인프라 기술', desc='통합 유동성 집계와 규제 준수형 거래 실행 등, 제도권 환경에 맞춘 DeFi 인프라 기술.'),
+      dict(title='자체 블록체인 코어 엔진 개발, 운영', desc='PBFT 합의와 인터체인 프로토콜을 자체 기술로 구현해 퍼블릭 메인넷을 구축·운영했습니다. 다국가 밸리데이터 환경에서 기관급 인프라 운영을 검증했습니다.'),
+      dict(title='멀티체인 오케스트레이션, 크로스체인 연동', desc='여러 거래소 유동성 연결, 자동 주문 배분, 체인 간 자산 이동을 처리하는 WalletFi 솔루션 PortX를 직접 개발했습니다.'),
+      dict(title='규제 친화형 DeFi, 유동성 인프라 기술', desc='여러 거래소 유동성 연결과 규제 준수형 거래 실행 등, 제도권 환경에 맞춘 DeFi 인프라 기술을 확보했습니다.'),
     ], label='퍼블릭·멀티체인 사례')}
   </div>
 </div></section>
@@ -4132,13 +4132,13 @@ PAGES['parasta.html'] = dict(
 
 # ---------------- portx.html ----------------
 PAGES['portx.html'] = dict(
-    title='PortX · 화이트라벨 거래소 솔루션 | PARAMETA',
+    title='PortX · 디지털자산 거래 솔루션 | PARAMETA',
     desc='PortX — 직접 구축 없이 자체 디지털자산 거래 플랫폼을 소유하는 가장 빠른 길. 화이트라벨 하이브리드 거래소 솔루션. 애그리게이션 엔진·Smart Access·논커스터디.',
     eyebrow='Exchange Solution',
     body_class='hero-dark portx',   # portx 식별 클래스(히어로 CTA 버튼 스왑용)
     h1_lines=['PortX'],
-    lead='PortX는 여러 거래소(CEX, DEX)를 API로 연동해, 자사 브랜드의 디지털자산 거래 서비스를 만들 수 있게 하는 디지털자산 거래 솔루션입니다. 필요한 기능만 모듈로 골라 도입하고, 거래부터 운영까지 하나로 연결합니다.',
-    crumb='Products — Port X',
+    lead='PortX는 여러 거래소(CEX·DEX)를 API로 연동해, 자사 브랜드의 디지털자산 거래 서비스를 만들 수 있게 하는 디지털자산 거래 솔루션입니다. 필요한 기능만 모듈로 골라 도입하고, 거래부터 운영까지 하나로 연결합니다.',
+    crumb='Products — PortX',
     hero_visual='<img class="fit-contain" src="assets/portx/portx-hero.png" alt="" loading="eager" fetchpriority="high">',
     content=f'''
 <section><div class="shell sec">
@@ -4163,7 +4163,7 @@ PAGES['portx.html'] = dict(
         <div class="px-duo">
           <div class="px-mini">
             <div class="mi-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5"/><path d="M3 16.5l9 5 9-5"/></svg>Aggregation Engine</div>
-            <p class="pm-break">글로벌 CEX, DEX를 연동해, 여러 거래소의 유동성을 자사 서비스에 연결</p>
+            <p class="pm-break">글로벌 CEX·DEX를 연동해, 여러 거래소의 유동성을 자사 서비스에 연결</p>
           </div>
           <div class="px-mini">
             <div class="mi-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="6.5" height="6.5" rx="1"/><rect x="14" y="3.5" width="6.5" height="6.5" rx="1"/><rect x="3.5" y="14" width="6.5" height="6.5" rx="1"/><path d="M14 14h3v3h-3z"/><path d="M20.5 14v2M14 20.5h2M18.5 18.5h2v2"/></svg>Smart Access</div>
@@ -4210,6 +4210,7 @@ PAGES['portx.html'] = dict(
       dict(label='구축 부담', cells=['연동만으로 시작', '매칭엔진, 백오피스 등 전체 스택', '연동은 간편']),
       dict(label='자산, 보안 책임', cells=['비수탁 (민감정보 미보관)', '커스터디 운영, 보안 책임 전부 부담', '해당 없음']),
     ], hl=1, tabs=True)}</div>
+  <p class="sec-note rvl" style="margin-top:2rem">PortX는 기본적으로 SaaS형으로 제공합니다. 필요 시 구축형(온프레미스) 도입과 운영 대행(옵션)도 지원합니다. 도입 형태는 문의해 주세요.</p>
 </div></section>
 <section><div class="shell sec">
   {sec_head('Why Now', '이미 일어나는 거래를, 내 서비스 안으로', '사용자는 정보를 내 서비스에서 찾고, 거래는 외부에서 실행합니다.<br>이제 그 거래 흐름과 수익 기회를 자사 서비스 안으로 가져올 차례입니다.')}
@@ -4241,7 +4242,7 @@ PAGES['portx.html'] = dict(
           <div class="uc-avatar"><img src="assets/portx/uc-supercycl-pp.png" alt=""></div>
           <div class="uc-qbody">
             <p class="uc-quote">&ldquo;PortX 덕분에 자체 선물거래 서비스를 더 빠르게 시작할 수 있었습니다.&rdquo;</p>
-            <p class="uc-name">Supercycl 헤드 개발자</p>
+            <p class="uc-name">Supercycl 개발 총괄</p>
           </div>
         </div>
       </article>
@@ -4309,15 +4310,16 @@ PAGES['myid.html'] = dict(
     hero_visual='<img class="fit-contain" src="assets/myid/hero-test.avif" alt="" loading="eager" fetchpriority="high">',
     content=f"""
 <section><div class="shell sec">
-  <ul class="stats-grid pv-stats on-light pv-2">
-    <li class="rvl" style="--rvl-y:20px"><div class="stat-num">약 <span class="pv-hl"><span class="pv-val" data-val="370" data-from="360">360</span>만</span></div><div class="stat-label">MyID, DID 누적 이용자 수</div></li>
-    <li class="rvl" style="--rvl-y:20px; --rvl-delay:90ms"><div class="stat-num">인증 <span class="pv-hl"><span class="pv-val" data-val="9100" data-from="9090">9,090</span>만+</span></div><div class="stat-label">제주안심코드 누적 인증 건수</div></li>
+  <ul class="stats-grid pv-stats on-light">
+    <li class="rvl" style="--rvl-y:20px"><div class="stat-num">약 <span class="pv-hl"><span class="pv-val" data-val="370" data-from="360">360</span>만</span></div><div class="stat-label">MyID·DID 누적 이용자</div></li>
+    <li class="rvl" style="--rvl-y:20px; --rvl-delay:90ms"><div class="stat-num"><span class="pv-hl"><span class="pv-val" data-val="9100" data-from="9090">9,090</span>만+</span></div><div class="stat-label">제주안심코드 누적 인증</div></li>
+    <li class="rvl" style="--rvl-y:20px; --rvl-delay:180ms"><div class="stat-num">CSAP</div><div class="stat-label">MyID 2.0 · 블록체인 서비스 최초 인증</div></li>
   </ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:0">
   {sec_head('Milestones', '국내외 최초 기록을 만들어온 DID')}
   <div class="firsts-hero rvl">
-    <div class="fh-big" aria-hidden="true"><span class="fh-num">5<span class="st">건</span></span><span class="fh-cap">국내외 DID 최초</span></div>
+    <div class="fh-big" aria-hidden="true"><span class="fh-num">1st</span><span class="fh-cap">국내외 DID 최초 기록</span></div>
     <ul class="fh-list">
       <li><span class="fh-chip world">세계 최초</span>블록체인 공동인증, 증권사 26개사</li>
       <li><span class="fh-chip">블록체인 최초</span>블록체인 서비스 최초 CSAP 인증</li>
@@ -4409,34 +4411,34 @@ PAGES['myid.html'] = dict(
 """)
 
 # ---------------- broof.html ----------------
-_broof_orgs = ['서울특별시','POSTECH','한국생산성본부','사람인','인천','한경닷컴','한빛미디어','스터디파이','아트앤가이드','호서대','해시넷','서울시민청']
+_broof_orgs = ['서울특별시','POSTECH','한국생산성본부','사람인','미래에셋','삼성인재개발원','경찰청','국가AI전략위원회','스터디파이','아트앤가이드','호서대','서울시민청']
 _broof_chips = ''.join(f'<span class="tag on-light">{o}</span>' for o in _broof_orgs)
 # 기관별 근사 브랜드 컬러(실제 브랜드값은 추후 교체). 호버 시 카드 배경으로 사용.
 _broof_brand = {
     '서울특별시':'#1f4e9c', 'POSTECH':'#86192b', '한국생산성본부':'#0b4da2', '사람인':'#0e5ee6',
-    '인천':'#00a3a5', '한경닷컴':'#e60012', '한빛미디어':'#d81f26', '스터디파이':'#5b47e0',
-    '아트앤가이드':'#b8863b', '호서대':'#2bb6a4', '해시넷':'#2f6df6', '서울시민청':'#e5673b',
+    '미래에셋':'#f58220', '삼성인재개발원':'#1428a0', '경찰청':'#14448c', '국가AI전략위원회':'#3b5ba5',
+    '스터디파이':'#5b47e0', '아트앤가이드':'#b8863b', '호서대':'#2bb6a4', '서울시민청':'#e5673b',
 }
 _broof_logo_cards = ''.join(
     f'<li class="rvl" style="--rvl-y:20px; --rvl-delay:{i*40}ms">'
     f'<article class="logo-card" style="--brand:{_broof_brand.get(o, "var(--purple-500)")}"><span class="logo-ico"></span>{o}</article></li>'
     for i, o in enumerate(_broof_orgs))
 PAGES['broof.html'] = dict(
-    title='Broof · 블록체인 증명서 발급 | PARAMETA',
-    desc='Broof — 블록체인 기반 증명서 발급·검증 서비스. 위·변조를 방지하는 디지털 증명서를 발급하고, 누구나 즉시 진위를 확인합니다.',
+    title='broof · 블록체인 증명서 발급 | PARAMETA',
+    desc='broof — 블록체인 기반 증명서 발급·검증 서비스. 위·변조를 방지하는 디지털 증명서를 발급하고, 누구나 즉시 진위를 확인합니다.',
     eyebrow='Digital Credentials',
     body_class='hero-dark broof',   # broof 식별 클래스(히어로 새 버튼)
-    h1_lines=['Broof'],
+    h1_lines=['broof'],
     lead='별도 시스템 구축 없이 증명서를 간편하게 발급하고, QR 코드 하나로 진위를 즉시 검증합니다. 블록체인으로 증명서의 위조와 분실 위험까지 낮춥니다.',
-    crumb='Products — Broof',
+    crumb='Products — broof',
     hero_visual='<img class="fit-contain" src="assets/broof/hero-test.avif" alt="" loading="eager" fetchpriority="high">',
     hero_cta='''<div class="phero-cta rvl" style="--rvl-delay:340ms">
-      <a class="pill light with-arrow arw-right hs-scale cta-talk" href="contact.html"><span class="hspring">Go to Broof<span class="pill-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></a>
+      <a class="pill light with-arrow arw-right hs-scale cta-talk" href="contact.html"><span class="hspring">Go to broof<span class="pill-badge"><svg class="icn" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></a>
     </div>''',
     content=f"""
 <section><div class="shell sec" style="padding-bottom:0">
   <ul class="stats-grid pv-stats on-light">
-    <li class="rvl" style="--rvl-y:20px"><div class="stat-num">정부 위원회 <span class="pv-hl">최초</span></div><div class="stat-label">블록체인 위촉장 발급</div></li>
+    
     <li class="rvl" style="--rvl-y:20px; --rvl-delay:90ms"><div class="stat-num">누적 <span class="pv-hl"><span class="pv-val" data-val="90000" data-from="89991">89,991</span>건+</span></div><div class="stat-label">증명서 발급</div></li>
     <li class="rvl" style="--rvl-y:20px; --rvl-delay:180ms"><div class="stat-num">누적 <span class="pv-hl"><span class="pv-val" data-val="20" data-from="11">11</span>개 기관+</span></div><div class="stat-label">대학, 공공기관, 기업 도입</div></li>
   </ul>
@@ -4475,7 +4477,7 @@ PAGES['broof.html'] = dict(
   </div>
 </div></section>
 <section><div class="shell sec">
-  {sec_head('Trusted By', '공공기관, 대학, 기업이 선택한 Broof', '공공기관·대학부터 기업까지, 다양한 현장에서 Broof로 증명서를 발급하고 진위를 검증합니다.')}
+  {sec_head('Trusted By', '공공기관, 대학, 기업이 선택한 broof', '공공기관·대학부터 기업까지, 다양한 현장에서 broof로 증명서를 발급하고 진위를 검증합니다.')}
   <ul class="logo-grid">{_broof_logo_cards}</ul>
 </div></section>
 <section><div class="shell sec" style="padding-top:9rem">
@@ -4487,7 +4489,7 @@ PAGES['broof.html'] = dict(
         <div class="bc-cert" aria-hidden="true"></div>
         <div class="bc-body">
           <h3>POSTECH</h3>
-          <p>블록체인 전문가과정 수료증을 Broof로 정기 발급합니다. 수료자는 QR 코드 하나로 어디서나 수료 사실을 증명하고, 대학은 재발급·진위 확인 업무 부담을 덜었습니다.</p>
+          <p>블록체인 전문가과정 수료증을 broof로 정기 발급합니다. 수료자는 QR 코드 하나로 어디서나 수료 사실을 증명하고, 대학은 재발급·진위 확인 업무 부담을 덜었습니다.</p>
           <div class="uc-testimonial">
             <div class="uc-avatar" aria-hidden="true"></div>
             <div class="uc-qbody">
@@ -4515,7 +4517,7 @@ PAGES['broof.html'] = dict(
         <div class="bc-cert" aria-hidden="true"></div>
         <div class="bc-body">
           <h3>패스트캠퍼스</h3>
-          <p>온라인 강의 수료증을 Broof로 발급합니다. 수료자는 QR 코드 하나로 수료 사실을 증명하고, 기관은 발급, 재발급 업무 부담을 덜었습니다.</p>
+          <p>온라인 강의 수료증을 broof로 발급합니다. 수료자는 QR 코드 하나로 수료 사실을 증명하고, 기관은 발급, 재발급 업무 부담을 덜었습니다.</p>
           <div class="uc-testimonial">
             <div class="uc-avatar" aria-hidden="true"></div>
             <div class="uc-qbody">
@@ -4766,12 +4768,12 @@ PAGES['solution-gov.html'] = dict(
   ], cols=4)}
 </div></section>
 <section><div class="shell sec">
-  {sec_head('Platform', '기본 제공 기능', '사용자는 필요한 정보만 선택 공개(Selective Disclosure)로 제출합니다. 개인 데이터는 사용자 단말과 분산 환경에 저장해 기관의 보관 부담을 줄입니다. 발급·보유·검증이 하나의 흐름으로 이어집니다.')}
+  {sec_head('Platform', '기본 제공 기능', '신원 증명의 발급·검증부터 보관·제출을 위한 지갑, 개인 데이터 저장소, 대용량 분산 저장까지 기본으로 제공합니다. 사용자는 필요한 정보만 선택 공개(Selective Disclosure)로 제출하고, 기관은 개인정보 보관 부담을 덜 수 있습니다.')}
   {cards_wrap([
-    exchange_card('신원 DID / VC / VP', gray=True),
-    exchange_card('지갑', gray=True),
-    exchange_card('개인데이터저장소 PDS', gray=True),
-    exchange_card('분산저장 BFS', gray=True),
+    exchange_card('DID·VC·VP · 신원 증명', gray=True, desc='위·변조를 확인할 수 있는 디지털 신원·자격 증명을 발급하고 검증합니다.'),
+    exchange_card('Wallet · 지갑', gray=True, desc='사용자가 증명을 보관하고, 필요한 곳에 필요한 만큼만 제출합니다.'),
+    exchange_card('PDS · 개인데이터저장소', gray=True, desc='데이터를 사용자 통제 아래 두고, 기관 보관 부담을 줄입니다.'),
+    exchange_card('BFS · 분산 저장', gray=True, desc='대용량 데이터를 여러 곳에 나눠 저장해, 위·변조 없이 언제든 꺼내 쓸 수 있습니다.'),
   ], cols=4)}
 </div></section>
 <section><div class="shell sec">
@@ -5071,7 +5073,7 @@ PAGES['solution-data.html'] = dict(
 </div></section>
 <section><div class="shell sec">
   {sec_head('Problem', '개인정보를 다루는 부담, 이렇게 해결합니다')}
-  {ww_compare('개인정보를 직접 떠안아야 합니다', '개인정보를 떠안지 않는 구조로 바꿉니다', [
+  {ww_compare('개인정보 리스크 발생', '리스크 없는 데이터 활용', [
     ('보관 리스크', '개인정보를 직접 쌓아둘수록 유출 사고와 과징금, 신뢰 하락 부담이 커집니다.',
      '개인정보 유출 리스크 원천 차단', '개인정보를 기업 서버가 아닌 사용자 저장소(PDS)에 보관하여, 유출 사고와 과징금 부담을 근본적으로 해소합니다.'),
     ('반복 수집과 동의 관리', '서비스마다 같은 정보를 다시 받고 동의를 관리하는 비용이 쌓입니다.',
@@ -5095,7 +5097,7 @@ PAGES['solution-data.html'] = dict(
 <section><div class="shell stats-shell">
   <div class="stats-panel rvl" style="--rvl-y:40px; --rvl-s:.99">
     <div class="eyebrow light"><span class="dot"></span>By the Numbers</div>
-    <h2 class="stats-h2" data-line-reveal style="max-width:none"><span class="rvl-line"><span>국책 R&D로 검증된<br>분산 저장 인프라</span></span></h2>
+    <h2 class="stats-h2" data-line-reveal style="max-width:none"><span class="rvl-line"><span>시장에서 검증된<br>데이터 주권 솔루션</span></span></h2>
     <ul class="stats-grid sg-2x2">
       <li class="rvl" style="--rvl-y:20px"><div class="stat-num">2021~2025</div><div class="stat-label">국책 R&D 기반 BFS (IITP·ETRI 공동)</div></li>
       <li class="rvl" style="--rvl-y:20px; --rvl-delay:90ms"><div class="stat-num"><span class="pv-val" data-val="218">0</span>만 명</div><div class="stat-label">제주안심코드 누적 이용자</div></li>
